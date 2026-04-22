@@ -1,0 +1,26 @@
+﻿==========
+RADAR_LITE.ACTIVE
+==========
+
+TIMESTAMP.........: 2026-02-26 19:19:02 (America/Santiago)
+ROOT..............: C:\Users\aazcl\OneDrive - KUMQUAT\02- TI\Skills
+TOTAL_FILES.......: 20
+DIFF_BASE.........: C:\Users\aazcl\OneDrive - KUMQUAT\02- TI\Skills\Radar\old\20260226_191902\RADAR_INDEX.ACTIVE.txt
+
+NOTA..............: MODIFIED_FILES (MVP) no se calcula en esta versión; solo NEW/DELETED por paths.
+POINTER_INDEX......: C:\Users\aazcl\OneDrive - KUMQUAT\02- TI\Skills\Radar\RADAR_INDEX.ACTIVE.txt
+POINTER_CORE.......: C:\Users\aazcl\OneDrive - KUMQUAT\02- TI\Skills\Radar\RADAR_CORE.ACTIVE.txt
+POINTER_FULL.......: C:\Users\aazcl\OneDrive - KUMQUAT\02- TI\Skills\Radar\RADAR_FULL.ACTIVE.txt
+
+----------
+NEW_FILES
+----------
+
+----------
+MODIFIED_FILES
+----------
+
+----------
+DELETED_FILES
+----------
+

@@ -1,0 +1,231 @@
+WBS — SKILL CAE.C1.EXAM v1.0
+
+Nombre: CAE.OPERATOR
+Propósito: Aprobar Cambridge C1 Advanced (CAE) con nivel C o superior
+Modo: ejecución + evaluación continua (no estudio pasivo)
+
+00.00 PRINCIPIO RECTOR
+El examen mide performance bajo presión, no conocimiento teórico
+La preparación es simulación + corrección + iteración
+Writing y Speaking definen el resultado final (alto impacto)
+01.00 INPUT CONTRACT
+01.01 Objetivo
+aprobar CAE ≥ nivel C
+score target: 180+
+01.02 Restricciones
+tiempo: 60–90 min diarios
+duración: 6–8 semanas
+herramientas: GPT + material oficial
+01.03 Nivel inicial (autoevaluación)
+Writing: bajo / medio / alto
+Speaking: bajo / medio / alto
+Grammar: bajo / medio / alto
+
+👉 Si no haces este diagnóstico, el plan queda mal calibrado.
+
+02.00 MAPA DEL EXAMEN
+02.01 Módulos
+M1 Reading (L3)
+M2 Use of English (L3)
+M3 Writing (L4)
+M4 Listening (L3)
+M5 Speaking (L4)
+02.02 Priorización real
+CORE: Writing + Use of English
+SOPORTE: Reading + Listening
+DIFERENCIAL: Speaking
+
+👉 Error común: estudiar todo igual → bajo rendimiento.
+
+03.00 CICLO OPERATIVO (DIARIO)
+
+Duración: 60–90 min
+
+03.01 BLOQUE A — USE OF ENGLISH (15–20 min)
+
+Objetivo: precisión gramatical
+
+Prompt GPT
+
+“Generate 10 CAE Use of English questions (mixed parts 1–4). Include answers separately.”
+
+Ejecución
+responder sin ayuda
+revisar respuestas
+Feedback
+
+“Explain only my incorrect answers and patterns of error.”
+
+03.02 BLOQUE B — WRITING (20–25 min)
+
+Objetivo: scoring alto
+
+Prompt GPT
+
+“Give me a CAE Writing task (Part 1 or 2). After I answer, correct it strictly using Cambridge criteria: content, communicative achievement, organization, language. Assign a band score.”
+
+Output obligatorio
+texto corregido
+lista de errores
+versión mejorada
+03.03 BLOQUE C — SPEAKING (10–15 min)
+
+Objetivo: fluidez + coherencia
+
+Prompt GPT
+
+“Act as a CAE examiner. Run Speaking Part 2. Ask me to compare two situations. Then give feedback on fluency, grammar, and vocabulary.”
+
+Ejecución
+hablar en voz alta (no mental)
+grabarse (ideal)
+03.04 BLOQUE D — INPUT CONTROLADO (10–15 min)
+
+Objetivo: vocabulario + comprensión
+
+Acción
+leer/listening material C1
+Prompt GPT
+
+“Extract advanced vocabulary and typical CAE expressions from this text, with examples.”
+
+03.05 BLOQUE E — ERROR LOG (5 min)
+
+Archivo obligatorio:
+
+/CAE_C1/04_errors.txt
+- error
+- tipo (grammar / vocab / structure)
+- corrección
+- ejemplo correcto
+04.00 CICLO SEMANAL
+04.01 MOCK TEST
+Prompt GPT
+
+“Simulate a full CAE test section by section (Reading, Use of English, Writing).”
+
+Output
+score estimado
+debilidades
+04.02 ANÁLISIS
+identificar errores repetidos
+clasificar por tipo:
+grammar
+vocabulary
+coherence
+tone
+04.03 AJUSTE
+reforzar solo lo débil
+no repetir lo que ya dominas
+05.00 OUTPUT OBLIGATORIO
+
+Cada semana debe existir:
+
+3–5 writings corregidos
+1 mock test
+1 lista de errores consolidada
+evidencia speaking (audio o práctica real)
+06.00 MÉTRICAS
+06.01 KPIs
+Use of English ≥ 70%
+Writing score consistente ≥ C
+Speaking: sin pausas largas + coherente
+errores repetidos ↓
+07.00 GATES DE AVANCE
+
+No avanzas si:
+
+Writing no alcanza nivel C
+errores básicos persisten
+no puedes hablar 1 minuto fluido
+08.00 PROMPTS CRÍTICOS
+08.01 Diagnóstico
+
+“Based on my last 3 writings, identify my top 5 weaknesses and give targeted exercises.”
+
+08.02 Mejora de texto
+
+“Rewrite my text to achieve a higher CAE band, explaining improvements.”
+
+08.03 Speaking avanzado
+
+“Challenge me with high-level CAE speaking questions and interrupt me if I hesitate.”
+
+08.04 Simulación presión
+
+“Give me a CAE writing task and enforce a 40-minute limit. Then evaluate strictly.”
+
+09.00 ERRORES CRÍTICOS
+09.01 No escribir suficiente
+
+→ fallo seguro
+
+09.02 No hablar en voz alta
+
+→ falsa sensación de nivel
+
+09.03 No medir tiempo
+
+→ mala gestión en examen
+
+09.04 No registrar errores
+
+→ repites fallas
+
+10.00 ESTRATEGIA DE PROFUNDIDAD
+10.01 Nivel objetivo
+Writing → L4
+Speaking → L4
+Grammar → L3
+Reading/Listening → L2–L3
+11.00 PLAN MÍNIMO (6–8 SEMANAS)
+Semanas 1–2
+diagnóstico + fundamentos
+writing básico
+grammar core
+Semanas 3–5
+práctica intensiva
+feedback continuo
+speaking frecuente
+Semanas 6–8
+simulación completa
+optimización
+control de tiempo
+12.00 FEEDBACK DIRECTO
+Lo sólido del skill
+enfocado en output real
+centrado en scoring
+evita teoría innecesaria
+Lo débil
+depende 100% de disciplina
+requiere incomodidad (writing + speaking constante)
+puede volverse repetitivo
+Riesgo principal
+
+Quedarte en:
+
+leer
+ver videos
+“entender”
+
+y no hacer:
+
+escribir
+hablar
+fallar
+13.00 EXTENSIÓN (RECOMENDADO)
+
+Agregar:
+
+partner real de speaking (1–2 veces/semana)
+simuladores externos
+corrección humana ocasional
+14.00 CIERRE
+
+Este skill funciona si:
+
+produces todos los días
+te corriges sin suavizar
+mides progreso real
+
+Si no haces eso, no es un skill. Es otro documento más.

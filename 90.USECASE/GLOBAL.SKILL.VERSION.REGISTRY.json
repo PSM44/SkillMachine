@@ -1,0 +1,19 @@
+{
+  "version": "v1.0-CANON",
+  "generated_at": "2026-04-21 18:10:00",
+  "source_root": "C:\\01. GitHub\\Skills",
+  "skills": [
+    { "file": "00.SKILL.MENU.ACTIVE.txt", "version": "v1.0-CANON" },
+    { "file": "06.SKILL.WBS.txt", "version": "v1.2-DRAFT" },
+    { "file": "07.SKILL.FILE_CONTENT.txt", "version": "v1.3-DRAFT" },
+    { "file": "08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt", "version": "UNKNOWN" },
+    { "file": "09.STANDAR.RADAR.txt", "version": "UNKNOWN" },
+    { "file": "10.STANDAR.BATON.txt", "version": "UNKNOWN" },
+    { "file": "11.STANDAR.HUMAN_README.txt", "version": "UNKNOWN" },
+    { "file": "12.STANDAR.DRAG_AND_DROP.txt", "version": "UNKNOWN" },
+    { "file": "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt", "version": "v1.0-CANON" },
+    { "file": "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "version": "v1.0-DRAFT" },
+    { "file": "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "version": "v1.0-CANON" },
+    { "file": "23.SKILL.WHOAMI_POLICY.txt", "version": "v1.0-CANON" }
+  ]
+}

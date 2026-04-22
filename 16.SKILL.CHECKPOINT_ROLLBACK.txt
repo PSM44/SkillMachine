@@ -1,0 +1,159 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.CHKRB.01.00
+NOMBRE_SUGERIDO...: 16.SKILL.CHECKPOINT_ROLLBACK.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Contrato de checkpoints y rollback:
+- Git como estándar preferido,
+- snapshots como fallback,
+- cómo validar que rollback fue exitoso,
+- evidencia obligatoria.
+NO_CUBRE..........:
+- No define sandbox (ver 03.SKILL.SANDBOX_BOUNDARY.txt).
+DEPENDENCIAS......:
+02.SKILL.AGENT_EXECUTION_POLICY.txt
+15.SKILL.LOGGING_AUDIT.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto
+
+01.00 Principios
+02.00 Modo Git (preferido)
+03.00 Modo Snapshot (fallback)
+04.00 Protocolo de rollback
+05.00 Validación post-rollback
+06.00 Evidencia y logging
+07.00 Antipatrones
+08.00 Checklist rápido
+09.00 CHANGELOG
+
+==========
+00.20_CONTEXTO
+==========
+
+Ejecución frecuente sin rollback:
+- es suicidio operativo.
+Objetivo:
+- rollback determinístico y auditable.
+
+==========
+01.00_PRINCIPIOS
+==========
+
+- Antes de cualquier APPLY:
+  checkpoint obligatorio.
+- Si FAIL:
+  rollback automático salvo orden humana distinta.
+- Rollback se valida (no se asume).
+
+==========
+02.00_MODO_GIT_(PREFERIDO)
+==========
+
+02.10_PRECHECK
+- Repo debe estar inicializado.
+- working tree limpio o se crea stash controlado.
+
+02.20_CHECKPOINT
+- Crear branch:
+  ai/<PROJ_ID>/<TASK_ID>
+- Crear commit checkpoint:
+  "AI_ORCH CHECKPOINT <TASK_ID>"
+
+02.30_APPLY
+- Aplicar cambios.
+- Commit final:
+  "AI_ORCH APPLY <TASK_ID>"
+
+==========
+03.00_MODO_SNAPSHOT_(FALLBACK)
+==========
+
+03.10_CUANDO
+- Git no disponible o repo no inicializado.
+
+03.20_DONDE
+- \03_ARTIFACTS\SNAPSHOTS\SNAP-YYYYMMDD-HHMM-SEQ\
+
+03.30_CONTENIDO_MINIMO
+- manifest.txt (lista archivos tocados)
+- before\ (copias previas)
+- after\ (copias posteriores opcional)
+- hashes.txt
+
+==========
+04.00_PROTOCOLO_DE_ROLLBACK
+==========
+
+04.10_EN_FAIL
+- Git: reset --hard al checkpoint commit
+- Snapshot: restaurar before\ sobre paths originales
+
+04.20_EN OK
+- No rollback.
+- Mantener checkpoint para auditoría.
+
+04.30_OVERRIDE_HUMANO
+- El humano puede pedir “no rollback”.
+- Debe quedar log.
+
+==========
+05.00_VALIDACION_POST_ROLLBACK
+==========
+
+- Confirmar:
+  - hashes vuelven al estado previo (o al commit)
+  - proyecto compila/abre (smoke test)
+  - no quedan archivos huérfanos fuera de quarantine
+
+Si no pasa:
+- INCIDENT mínimo MEDIA.
+
+==========
+06.00_EVIDENCIA_Y_LOGGING
+==========
+
+Registrar:
+- checkpoint_id
+- comando exacto de rollback
+- resultado (OK/FAIL)
+- paths afectados
+
+==========
+07.00_ANTIPATRONES
+==========
+
+- “rollback” sin evidencia.
+- “rollback” parcial y declarar OK.
+- borrar snapshots para “limpiar”.
+
+==========
+08.00_CHECKLIST_RAPIDO
+==========
+
+[ ] checkpoint antes de APPLY
+[ ] rollback automático en FAIL
+[ ] validación post-rollback
+[ ] evidencia en logs
+
+==========
+09.00_CHANGELOG
+==========
+
+2026-02-26, v1.0-DRAFT
+- Creación inicial: contrato de checkpoint/rollback.

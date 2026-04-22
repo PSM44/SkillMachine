@@ -1,0 +1,58 @@
+{
+  "version": "v2.0-CANON",
+  "root_skills_path": "C:\\01. GitHub\\Skills",
+  "excluded_roots": [
+    "C:\\01. GitHub\\Skills\\old",
+    "C:\\01. GitHub\\Skills\\SyS",
+    "C:\\01. GitHub\\Skills\\90.USECASE"
+  ],
+  "build_policy": {
+    "clean_generated_files_first": true,
+    "preserve_prompt_files": true,
+    "generate_manifest": true,
+    "fail_on_missing_file": true,
+    "fail_on_duplicate_file": true
+  },
+  "usecases": [
+    {
+      "name": "01.NEW_PROJECT",
+      "version": "v1.0-CANON",
+      "description": "Bootstrap de proyecto nuevo con continuidad humana e IA desde el día 0.",
+      "prompt_files": [
+        "PROMPT.NEW_PROJECT.txt"
+      ],
+      "required_files": [
+        "00.SKILL.MENU.ACTIVE.txt",
+        "06.SKILL.WBS.txt",
+        "07.SKILL.FILE_CONTENT.txt",
+        "09.STANDAR.RADAR.txt",
+        "10.STANDAR.BATON.txt",
+        "11.STANDAR.HUMAN_README.txt",
+        "12.STANDAR.DRAG_AND_DROP.txt",
+        "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+        "23.SKILL.WHOAMI_POLICY.txt"
+      ]
+    },
+    {
+      "name": "02.SESSION_CLOSE",
+      "version": "v1.0-CANON",
+      "description": "Cierre de sesión, continuidad humana operacional y actualización de artefactos.",
+      "prompt_files": [
+        "PROMPT.SESSION_CLOSE.txt"
+      ],
+      "required_files": [
+        "06.SKILL.WBS.txt",
+        "07.SKILL.FILE_CONTENT.txt",
+        "09.STANDAR.RADAR.txt",
+        "10.STANDAR.BATON.txt",
+        "11.STANDAR.HUMAN_README.txt",
+        "12.STANDAR.DRAG_AND_DROP.txt",
+        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+        "23.SKILL.WHOAMI_POLICY.txt"
+      ]
+    }
+  ]
+}

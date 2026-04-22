@@ -1,0 +1,49 @@
+﻿==============================
+RADAR LITE
+==============================
+RADAR_SCRIPT_VERSION: v0.6.1
+RADAR_OUTPUT_SCHEMA : v1.3
+OUTPUT_TYPE         : LITE
+GENERATED_AT        : 2026-04-21 15:50:55
+ROOT_SCANNED        : C:\01. GitHub\Skills
+OUTPUT_PATH         : C:\01. GitHub\Skills\A_Tools\Radar
+OLD_PATH            : C:\01. GitHub\Skills\old\radar
+EXCLUDED_PATHS      :
+ - C:\01. GitHub\Skills\old
+ - C:\01. GitHub\Skills\A_Tools\Radar
+SHA256_ENABLED      : False
+CORE_MAX_FILE_SIZE  : 2097152
+SEGMENT_MAX_BYTES   : 8388608
+
+TOTAL_FILES: 26
+CORE_FILES : 26
+SKIPPED_TOO_LARGE_COUNT : 0
+NEW_FILES_COUNT      : 0
+MODIFIED_FILES_COUNT : 1
+DELETED_FILES_COUNT  : 1
+
+INDEX_PATH   : C:\01. GitHub\Skills\A_Tools\Radar\radar.index.txt
+CORE_PATH    : C:\01. GitHub\Skills\A_Tools\Radar\radar.core.txt
+FULL_PATH    : C:\01. GitHub\Skills\A_Tools\Radar\radar.full.txt
+MANIFEST_PATH: C:\01. GitHub\Skills\A_Tools\Radar\radar.manifest.json
+
+++++++++++
+NEW_FILES
+++++++++++
+[NONE]
+
+++++++++++
+MODIFIED_FILES
+++++++++++
+05.SKILL.ROUTING_POLICY.txt
+
+++++++++++
+DELETED_FILES
+++++++++++
+05.20260226.2_SKILL.ROUTING_POLICY.txt
+
+++++++++++
+SKIPPED_TOO_LARGE
+++++++++++
+[NONE]
+

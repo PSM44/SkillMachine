@@ -1,0 +1,357 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.ARCH.01.10
+NOMBRE_SUGERIDO...: 01.ARCH.AI_ORCHESTRATION.CORE.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Arquitectura definitiva (por capas) del sistema AI_ORCH:
+- 1 interfaz (IDE), 1 orquestador local, multi-model cloud, ejecución frecuente,
+- agentes con permisos encapsulados al proyecto (sandbox real),
+- control automático de costos y routing por tipo de tarea,
+- trazabilidad: RADAR + BATON + TROUBLE/INCIDENT.
+NO_CUBRE..........:
+- No define el negocio de PF/EVA/WINGS ni sus reglas internas.
+- No define diseño UI propia (más allá de IDE).
+- No impone proveedor único; define contratos y opciones.
+DEPENDENCIAS......:
+06.STANDAR.WBS_ID.txt
+07.STANDAR.FILE_CONTENT.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+12.STANDAR.DRAG_AND_DROP.txt
+02.SKILL.AGENT_EXECUTION_POLICY.txt
+03.SKILL.SANDBOX_BOUNDARY.txt
+04.SKILL.COST_CONTROL.txt
+05.SKILL.ROUTING_POLICY.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto, objetivo, y restricciones
+
+01.00 Principios no negociables
+02.00 Capas del sistema (visión definitiva)
+03.00 Contratos duros (interfaces entre capas)
+04.00 Estructura de carpetas mínima (pocas carpetas, muchos archivos)
+05.00 Flujo operativo (día a día) — sin web, desde IDE
+06.00 Trazabilidad y continuidad (RADAR + BATON + TROUBLE)
+07.00 Modelo de seguridad (sandbox) — boundaries
+08.00 Modelo de costos (budgets + hard stop + logs)
+09.00 Modelo de routing (tareas -> modelo -> costo)
+10.00 Plan de escalamiento (sin explotar carpetas)
+11.00 Antipatrones (lo que NO se hace)
+12.00 Checklist rápido
+13.00 CHANGELOG
+
+==========
+00.20_CONTEXTO_OBJETIVO_Y_RESTRICCIONES
+==========
+
+00.20.01_OBJETIVO_PRINCIPAL
+- Diseñar un sistema estable para “ejecución frecuente” donde una IA:
+  - entienda el proyecto,
+  - proponga cambios,
+  - cree/edite/elimine archivos SOLO dentro del proyecto,
+  - haga rollback,
+  - y controle costos automáticamente.
+
+00.20.02_RESTRICCIONES_HUMANAS_Y_OPERATIVAS
+- Prioridad: SIMPLICIDAD + ESTABILIDAD (no Frankenstein).
+- Preferencia: CLOUD (modelos locales solo opcional / futuro).
+- No usar web para trabajar: todo desde IDE + orquestador local.
+- IA NO toca el OS “a voluntad”: solo FS dentro de sandbox.
+- Pocas carpetas; muchos archivos; tamaño de archivos puede ser alto,
+  con plan de segmentación (RADAR segs) cuando aplique.
+
+00.20.03_SUPUESTOS
+- Trabajo típico: proyectos propios (tamaño mediano).
+- Windows 11.
+- Git disponible (obligatorio para rollback real).
+
+==========
+01.00_PRINCIPIOS_NO_NEGOCIABLES
+==========
+
+01.10_1_INTERFAZ_UNICA
+- Un solo “front” para el trabajo diario (IDE principal).
+- El chat web puede existir para diseño conceptual, pero NO es canal operativo.
+
+01.20_1_ORQUESTADOR_LOCAL
+- Un único proceso local “AI_ORCHD” que:
+  - aplica sandbox,
+  - aplica routing,
+  - controla costos,
+  - ejecuta agentes,
+  - registra logs.
+
+01.30_EJECUCION_ENCAPSULADA
+- Agentes con capacidad de escribir/borrar SOLO dentro del PROJECT_ROOT.
+- Cualquier intento fuera del root => FAIL + log (TROUBLE).
+
+01.40_ROLLBACK_OBLIGATORIO
+- Cada ejecución que modifique FS crea checkpoint:
+  - Git commit (preferido) o snapshot interno (fallback).
+- Sin rollback, no hay “ejecución frecuente segura”.
+
+01.50_CONTRATO_DE_OK_VS_FAIL
+- Todo runner/script/agente debe terminar con:
+  - OK solo si outputs y validaciones mínimas se cumplieron.
+  - FAIL si hubo error o violación de boundary.
+- Ver skill PROBLEM_TROUBLE_INCIDENTS.
+
+01.60_RADAR_ES_MAPA
+- RADAR describe el FS, no decide.
+- AI_ORCH consume RADAR para contexto controlado (INDEX default).
+
+01.70_BATON_PARA_CONTINUIDAD
+- BATON.STATE por proyecto: snapshot operativo para IA en blanco.
+- BATON deriva de HUMAN + SKILLS + RADAR (no al revés).
+
+==========
+02.00_CAPAS_DEL_SISTEMA_(VISION_DEFINITIVA)
+==========
+
+02.10_CAPA_0_HUMAN_LAYER_(INTENCION)
+- HUMAN.README.*: propósito, principios, límites, decisiones clave.
+- No se tecnifica en exceso; no se resume agresivo.
+
+02.20_CAPA_1_IDE_LAYER_(INTERFAZ)
+- IDE principal: VS Code (o Cursor si se elige).
+- Plugins mínimos; el IDE no “orquesta”, solo envía tareas y aplica patches.
+
+02.30_CAPA_2_ORCH_LAYER_(AI_ORCHD)
+- Servicio local (daemon) que expone API local:
+  - /task/plan
+  - /task/apply
+  - /task/rollback
+  - /cost/status
+  - /policy/*
+- Responsabilidades:
+  - routing modelo,
+  - budgets,
+  - sandbox enforcement,
+  - logs,
+  - ejecución de agentes.
+
+02.40_CAPA_3_MODEL_LAYER_(CLOUD)
+- Proveedores cloud (directo o vía gateway tipo OpenRouter).
+- El orquestador decide el modelo según ROUTING_POLICY.
+
+02.50_CAPA_4_EXECUTOR_LAYER_(AGENTES)
+- Agentes de ejecución de FS:
+  - crean/editen/eliminan archivos,
+  - ejecutan scripts allowlisted,
+  - generan PR/patch,
+  - validan outputs.
+- Operan bajo AGENT_EXECUTION_POLICY + SANDBOX_BOUNDARY.
+
+02.60_CAPA_5_AUDIT_LAYER_(TRAZA)
+- RADAR outputs + logs del orquestador + TROUBLE_LOG + Git history.
+- Permite reproducibilidad y postmortems.
+
+==========
+03.00_CONTRATOS_DUROS_(INTERFACES)
+==========
+
+03.10_CONTRATO_IDE___ORCH
+Entrada:
+- TASK_REQUEST (JSON conceptual, no código):
+  - objetivo
+  - scope (módulos/paths)
+  - constraints (no tocar X)
+  - budget_hint (opcional)
+Salida:
+- TASK_PLAN (plan + estimate costo + riesgos)
+- TASK_PATCH (diff/patch) o FILE_BUNDLE (archivos completos)
+- TASK_RESULT (OK/FAIL + evidencia)
+
+03.20_CONTRATO_ORCH___MODEL
+- El orquestador manda:
+  - contexto limitado (RADAR_INDEX por defecto)
+  - snippets necesarios (selectivo)
+- Recibe:
+  - plan o patch
+  - decisión de “needs more context”
+Regla:
+- “pedir más contexto” es válido; “asumir” no.
+
+03.30_CONTRATO_ORCH___EXECUTOR
+- Executor recibe instrucciones concretas:
+  - crear archivo X con contenido Y
+  - aplicar patch a archivo Z
+- Executor valida:
+  - path dentro sandbox
+  - size/encoding
+  - policy de delete (soft-delete)
+- Executor reporta:
+  - cambios (lista)
+  - evidencias (paths + hashes)
+  - OK/FAIL
+
+03.40_CONTRATO_EXECUTOR___ROLLBACK
+- Siempre existe rollback plan:
+  - Git reset/checkout (preferido)
+  - Snapshot restore (fallback)
+- Rollback debe dejar evidencia.
+
+==========
+04.00_ESTRUCTURA_DE_CARPETAS_MINIMA
+==========
+
+04.10_PRINCIPIO
+- Pocas carpetas, muchos archivos.
+- Escalamiento se hace por “segmentación lógica” (IDs + RADAR segs), no por árbol profundo.
+
+04.20_CARPETAS_CANONICAS_(MINIMO)
+- \AI_ORCH\
+  - 00_DOCS\        (documentos grandes, guías)
+  - 01_SKILLS\      (skills canónicos del orquestador)
+  - 02_TOOLS\       (scripts/runner; ejecutables allowlisted)
+  - 03_ARTIFACTS\   (logs, RADAR outputs, costos, snapshots)
+  - 04_PROJECTS\    (tus proyectos; cada uno con su BATON)
+
+04.30_POR_PROYECTO_(DENTRO_DE_04_PROJECTS)
+- \04_PROJECTS\PROJ_<ID_FS>\  (raíz)
+  - 00.0_BATON_<PROJ>.txt
+  - 01_HUMAN\ (pocos archivos, grandes)
+  - 02_CODE\  (repo)
+  - 03_ARTIFACTS\ (RADAR, logs, costo, snapshots)
+
+Regla:
+- Sin subárboles profundos. Si crece, se segmenta por archivos grandes y RADAR.
+
+==========
+05.00_FLUJO_OPERATIVO_(DIA_A_DIA)
+==========
+
+05.10_CICLO_BASE
+(1) IDE -> enviar tarea al ORCH (plan)
+(2) ORCH -> preflight (costo + riesgo + scope)
+(3) HUMANO aprueba plan (o ajusta)
+(4) ORCH ejecuta:
+    - llama modelo
+    - genera patch
+    - executor aplica dentro sandbox
+(5) ORCH valida:
+    - tests mínimos / lint / script checks
+(6) ORCH cierra:
+    - OK con evidencia
+    - FAIL con rollback (si aplica)
+(7) ORCH registra:
+    - logs
+    - costo
+    - TROUBLE si hubo issues
+
+05.20_REGLA_DE_CONTEXT
+- Default: RADAR_INDEX
+- CORE solo por módulo
+- FULL solo auditoría puntual (no para “trabajo diario”)
+
+==========
+06.00_TRAZABILIDAD_Y_CONTINUIDAD
+==========
+
+06.10_RADAR
+- INDEX: inventario y navegación
+- CORE: contenido legible selectivo
+- FULL: auditoría
+
+06.20_BATON
+- Snapshot operativo del proyecto.
+- Lista HUMAN + SKILLS aplicables + objetivos activos.
+
+06.30_TROUBLE_LOG
+- Cualquier FAIL o boundary violation crea TROUBLE mínimo.
+
+==========
+07.00_MODELO_DE_SEGURIDAD_(SANDBOX)
+==========
+
+- Ver 03.SKILL.SANDBOX_BOUNDARY.txt
+- Reglas duras:
+  - allowlist de root + subpaths
+  - denylist de carpetas sensibles (.git opcional: lectura permitida, escritura controlada)
+  - soft-delete a carpeta QUARANTINE dentro del proyecto
+  - bloqueo de comandos OS arbitrarios
+
+==========
+08.00_MODELO_DE_COSTOS
+==========
+
+- Ver 04.SKILL.COST_CONTROL.txt
+- Reglas:
+  - budgets diarios/semana/mes
+  - hard stop
+  - preflight estimación tokens/costo
+  - logs a SQLite + export txt
+
+==========
+09.00_MODELO_DE_ROUTING
+==========
+
+- Ver 05.SKILL.ROUTING_POLICY.txt
+- Default:
+  - 1 modelo “principal” (calidad)
+  - 1 modelo “económico” (tareas mecánicas)
+  - fallback manual (MVP)
+
+==========
+10.00_PLAN_DE_ESCALAMIENTO_(SIN EXPLOTAR CARPETAS)
+==========
+
+10.10_CUANDO_CRECE
+- Se agregan archivos grandes canónicos, no carpetas.
+- Se segmenta por:
+  - IDs
+  - RADAR segs
+  - “bundles” en 03_ARTIFACTS
+
+10.20_CUANDO_SEPARAR
+- Solo si un archivo supera el umbral operable humano (criterio humano),
+  se parte en 1–3 archivos hijos, manteniendo root estable (HUMAN policy).
+
+==========
+11.00_ANTIPATRONES
+==========
+
+- IDE con 5 extensiones IA compitiendo.
+- FULL context para todo.
+- Agente con permisos OS (sin boundary).
+- “OK” sin validar outputs.
+- No Git / no rollback.
+- Logs dispersos sin ID_UNICO.
+
+==========
+12.00_CHECKLIST_RAPIDO
+==========
+
+[ ] ¿Hay 1 IDE principal?
+[ ] ¿AI_ORCHD corre local?
+[ ] ¿Sandbox enforceado (deny outside root)?
+[ ] ¿Budgets + hard stop activos?
+[ ] ¿Routing definido (principal + económico)?
+[ ] ¿Rollback por Git listo?
+[ ] ¿RADAR INDEX disponible?
+[ ] ¿BATON por proyecto actualizado?
+
+==========
+13.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Consolidación “definitiva por capas”: IDE único + ORCH local + cloud + executor + audit.
+- Alineado a: sandbox real, ejecución frecuente, control de costos, routing.
+- Enfoque: pocas carpetas, archivos grandes, escalamiento planificado.

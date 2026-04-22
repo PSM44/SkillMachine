@@ -1,0 +1,182 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: AIORCH.STACKS.COST.01.10
+NOMBRE_SUGERIDO...: 13.STACKS.COST_MONTHLY.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\00_DOCS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Tabla comparativa de stacks IA para desarrollo (IDE + orquestación + modelos),
+con costo mensual estimado (rangos) y tradeoffs.
+NO_CUBRE..........:
+- No reemplaza pricing oficial (volátil).
+- No incluye costo de hardware.
+DEPENDENCIAS......:
+04.SKILL.COST_CONTROL.txt
+05.SKILL.ROUTING_POLICY.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Supuestos y método
+
+01.00 Stacks candidatos (2026)
+02.00 Tabla comparativa (costo y tradeoffs)
+03.00 Recomendación (por perfiles)
+04.00 Contras y riesgos
+05.00 Opciones de optimización de costo
+06.00 Checklist rápido
+07.00 CHANGELOG
+
+==========
+00.20_SUPUESTOS_Y_METODO
+==========
+
+00.20.01_SUPUESTOS_DE_USO
+- Uso profesional fuerte:
+  - 2–3 h/día promedio, 5 días/semana (≈40–60 h/mes)
+  - ejecución frecuente (agentes) + refactor + documentación canónica
+- Se asume que ChatGPT Plus (web) NO cubre API.
+- Costos de API pueden variar según:
+  - tamaño contexto,
+  - cantidad iteraciones,
+  - modelo principal elegido.
+
+00.20.02_METODO_DE_ESTIMACION
+- Se entregan rangos:
+  - BAJO = disciplinado (L0/L1, poco CORE, buen prompt)
+  - MEDIO = normal (algo de CORE)
+  - ALTO = indisciplinado (mucho CORE/FULL, muchas iteraciones)
+
+==========
+01.00_STACKS_CANDIDATOS_(2026)
+==========
+
+01.10_STACK_A_VSCODE_MINIMO_2_MODELOS
+- IDE: VS Code limpio
+- Orquestador: AI_ORCHD local
+- Modelos: principal + económico (cloud)
+- Agentes: executor sandbox
+
+01.20_STACK_B_CURSOR_IDE_AI
+- IDE: Cursor
+- Modelos: plan del vendor
+- Agentes: limitados a lo que el IDE soporta
+
+01.30_STACK_C_VSCODE_SOLO_COPILOT
+- IDE: VS Code + GitHub Copilot Chat
+- Modelos: del vendor
+- Sin orquestador real
+
+01.40_STACK_D_VSCODE_PLUS_API_DIRECTA_(SIN_ORCH)
+- IDE: VS Code
+- Llamadas directas a API en extensiones
+- Alto riesgo de drift/costos
+
+01.50_STACK_E_HIBRIDO_LOCAL_(FUTURO)
+- IDE: VS Code
+- Orquestador: AI_ORCHD
+- Modelos: principal cloud + local para tareas mecánicas
+
+==========
+02.00_TABLA_COMPARATIVA_(COSTO_Y_TRADEOFFS)
+==========
+
+02.10_TABLA
+- Costos en USD/mes (rango).
+- Nota: “Plus” es adicional si lo mantienes.
+
+STACK_A_VSCODE_MINIMO_2_MODELOS
+- Costo BAJO : 40–80
+- Costo MEDIO: 80–160
+- Costo ALTO : 160–300
+- Pros: control, sandbox, budgets, routing, rollback real
+- Contras: hay que operar AI_ORCHD
+
+STACK_B_CURSOR_IDE_AI
+- Costo BAJO : 50–90
+- Costo MEDIO: 90–180
+- Costo ALTO : 180–300
+- Pros: UX fuerte multi-file
+- Contras: vendor lock, menos control de sandbox/costos
+
+STACK_C_VSCODE_SOLO_COPILOT
+- Costo BAJO : 10–20
+- Costo MEDIO: 20–40
+- Costo ALTO : 40–80
+- Pros: barato, estable, simple
+- Contras: no hay orquestación real; menor control de ejecución
+
+STACK_D_VSCODE_PLUS_API_DIRECTA
+- Costo BAJO : 30–70
+- Costo MEDIO: 70–180
+- Costo ALTO : 180–400
+- Pros: flexible
+- Contras: costos tienden a dispararse; sin governance
+
+STACK_E_HIBRIDO_LOCAL_(FUTURO)
+- Costo BAJO : 20–60
+- Costo MEDIO: 60–140
+- Costo ALTO : 140–260
+- Pros: reduce gasto con local
+- Contras: mayor complejidad; calidad local menor
+
+==========
+03.00_RECOMENDACION_(POR_PERFILES)
+==========
+
+03.10_PERFIL_SIMPLICIDAD_ESTABILIDAD_(TU_CASO)
+- Recomendado: STACK_A
+- Alternativa: STACK_C si costo es la prioridad #1 y aceptas menos automatización.
+
+03.20_PERFIL_UX_MAXIMA
+- Recomendado: STACK_B (Cursor)
+- Pero requiere aceptar vendor lock.
+
+==========
+04.00_CONTRAS_Y_RIESGOS
+==========
+
+- Costo variable: sin budgets, se dispara.
+- Agentes: sin sandbox, riesgo alto.
+- Multi-model sin routing: desperdicio.
+- FULL context frecuente: caro.
+
+==========
+05.00_OPTIMIZACION_DE_COSTO
+==========
+
+- Routing: navegación -> económico.
+- Context: default RADAR_INDEX (L0).
+- CORE solo por módulo (L2 selectivo).
+- Hard stop diario/semanal.
+- Cache de contexto: reutilizar RADAR_INDEX y snippets.
+- Reducir reintentos: policy anti-shotgun.
+
+==========
+06.00_CHECKLIST_RAPIDO
+==========
+
+[ ] Elegí stack base
+[ ] Definí budgets
+[ ] Definí modelo principal + económico
+[ ] Definí L0/L1 por defecto
+[ ] Sandbox activo
+[ ] Rollback activo
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Tabla de stacks 2026 con rangos de costo.
+- Recomendación para perfil estabilidad.

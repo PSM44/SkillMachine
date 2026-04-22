@@ -1,0 +1,368 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROBLEM_TROUBLE_INCIDENT.01.00
+NOMBRE_SUGERIDO...: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-24
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile (actualizar si aplica)
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Define cómo pensar y atacar problemas.
+Define cómo registrar problemas en TROUBLE_LOG.
+Define cuándo un problema se eleva a INCIDENTE y cómo gestionarlo.
+Define cómo registrar y tratar PROBLEMS, TROUBLE e INCIDENTS en el ecosistema
+(scripts, modelos, procesos, datos, etc.).
+
+Aplica a cualquier dominio: código, entorno, procesos de negocio, datos, etc.
+
+DEPENDENCIAS......:
+
+07.STANDAR.FILE_CONTENT.txt (estructura de archivos).
+06.STANDAR.WBS_ID.txt (si se usan códigos numéricos internos).
+04.STANDAR.DEV_ENVIRONMENT.txt (problemas de entorno).
+02.STANDAR.CODE.md o equivalente (problemas de código).
+HUMAN de dominio (definiciones de negocio / proceso).
+09.STANDAR.RADARL.txt (mapa de archivos/proyectos).
+10.STANDAR.BATON.txt (estado consolidado del proyecto).
+
+NOTA_IMPORTANTE...:
+
+Este skill es conceptual y operativo, no técnico de código.
+TROUBLE_LOG puede implementarse como archivo, planilla o tabla; aquí se define el contrato lógico mínimo.
+Este skill es el “contrato mínimo” de cómo se documentan errores,
+cómo se aprende de ellos y cuándo se tocan BATON/RADAR.
+
+==========
+01.00_PROPOSITO_Y_ALCANCE
+==========
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Evitar que cada problema se aborde “desde cero” sin método.
+
+Evitar shotgun debugging (cambiar todo a la vez).
+
+Asegurar que los problemas relevantes queden registrados y reaprovechados como conocimiento.
+
+Diferenciar entre:
+
+- Problema puntual.
+- Problema recurrente.
+- Incidente serio con impacto alto.
+
+----------
+01.20_A_QUE_ESCENARIOS_APLICA
+----------
+
+Escenarios típicos:
+
+- Errores técnicos (scripts, Excel, BD, entornos, permisos).
+- Descalces de datos (roles, flujos financieros, reportes).
+- Problemas de procesos operativos (administración, documentación).
+- Problemas de diseño (criterio equivocado, supuestos mal definidos).
+
+Si hay algo que “no anda bien” y merece más de 5 minutos de atención, este skill aplica.
+
+==========
+02.00_DEFINICIONES_BASICAS
+==========
+
+----------
+02.10_PROBLEM
+----------
+
+Situación detectada que no necesariamente ha impactado nada aún, pero podría.
+
+Es un desvío entre lo que debería pasar y lo que está pasando, observado al menos una vez.
+
+Puede ser técnico, de negocio, de proceso o de datos.
+
+Ejemplos:
+
+- Duda de coherencia en un modelo.
+- Sospecha de dato desactualizado.
+- Script que falla con cierto input.
+- Descalce entre flujo proyectado y flujo real.
+- Documento que genera siempre la misma confusión.
+
+----------
+02.20_TROUBLE
+----------
+
+Problema concreto que afecta la operación de forma acotada y se registra en TROUBLE_LOG.
+
+Una entrada TROUBLE_LOG es un registro estructurado de un problema lo suficientemente relevante como para:
+
+- No querer olvidarlo.
+- Posiblemente necesitar revisarlo más adelante.
+
+No es un correo suelto.
+No es un chat.
+Es la unidad mínima de memoria de problemas del ecosistema.
+
+Ejemplos:
+
+- Script que falla en un caso específico, con contexto claro.
+- Error en un Excel que sólo afecta un reporte interno, pero se repite.
+
+----------
+02.30_INCIDENT
+----------
+
+Evento con impacto relevante en operación, dinero, reputación o riesgo.
+
+Ejemplos:
+
+- Error de cálculo usado en decisiones de inversión.
+- Falla que genera información incorrecta hacia terceros.
+- Exposición de información sensible o riesgo reputacional serio.
+
+==========
+03.00_REGISTRO_MINIMO_Y_SEVERIDAD
+==========
+
+++++++++++
+03.10_CAMPOS_OBLIGATORIOS
+++++++++++
+
+Cada PROBLEM/TROUBLE/INCIDENT debe registrar, como mínimo:
+
+- ID (conforme WBS_ID/ID_FS/ID_DB según implementación).
+- Tipo: PROBLEM / TROUBLE / INCIDENT.
+- Fecha y hora de detección.
+- Sistema/proyecto afectado.
+- Descripción clara (qué debería pasar vs qué está pasando).
+- Sospecha inicial (datos, código, proceso, humano).
+- Severidad estimada.
+
+++++++++++
+03.20_SEVERIDAD_(EJEMPLOS)
+++++++++++
+
+Severidad BAJA:
+
+- Bug en script auxiliar sin impacto en dinero ni decisión.
+- Error de copia en un Excel de trabajo interno.
+
+Severidad MEDIA:
+
+- Error que puede retrasar un análisis o entregar datos incompletos.
+- Necesidad de intervención manual recurrente.
+
+Severidad ALTA:
+
+- Error en un flujo financiero que puede alterar un resultado de negocio.
+- Falla en automatización que paraliza parte del trabajo.
+
+Severidad CRITICA:
+
+- Cálculos erróneos usados en decisiones de inversión de terceros.
+- Exposición de información sensible o riesgo reputacional serio.
+
+==========
+04.00_FLUJO_DE_TRATAMIENTO
+==========
+
+++++++++++
+04.10_DE_PROBLEM_A_TROUBLE
+++++++++++
+
+Si un PROBLEM se confirma como real y reproducible:
+
+- Se convierte en TROUBLE con ID claro.
+- Se adjunta evidencia (logs, capturas, archivos implicados).
+- Se registra en TROUBLE_LOG con todos los campos mínimos.
+- Se asigna prioridad y responsable de resolución.
+
+++++++++++
+04.20_CUANDO_ES_INCIDENT
+++++++++++
+
+Un TROUBLE se eleva a INCIDENT cuando:
+
+- Tiene impacto alto o riesgo real (dinero, reputación, cumplimiento).
+- Bloquea trabajo importante.
+- Afecta más de un sistema/proceso o a terceros.
+
+En ese caso:
+
+- Se crea ID_INCIDENTE específico (según WBS_ID/ID_DB).
+- Se vincula a uno o más TROUBLE relacionados.
+- Se documenta claramente el impacto y el alcance.
+
+++++++++++
+04.30_CIERRE
+++++++++++
+
+Para cerrar un TROUBLE/INCIDENT:
+
+- Se documenta:
+  - Causa raíz (al nivel de detalle realista posible).
+  - Cambios aplicados (código, proceso, datos).
+  - Lessons learned.
+
+- Se evalúa:
+  - ¿Debemos actualizar HUMAN o SKILLS?
+  - ¿Debemos regenerar BATON.STATE?
+  - ¿Debemos regenerar RADAR?
+
+Si nada de esto se hace cuando corresponde, el ciclo de aprendizaje queda incompleto.
+
+==========
+05.00_RELACION_CON_BATON_Y_RADAR
+==========
+
+----------
+05.10_CUANDO_TOCAR_BATON
+----------
+
+Si un INCIDENT implica:
+
+- Cambio en reglas globales.
+- Cambio en la forma en que se usa IA o se ejecutan procesos clave.
+
+Entonces:
+
+- Se debe evaluar regenerar el BATON.STATE del proyecto afectado,
+  para que cualquier IA en blanco levante el nuevo estado correcto.
+
+----------
+05.20_CUANDO_TOCAR_RADAR
+----------
+
+Si un TROUBLE/INCIDENT implica:
+
+- Movimientos de carpetas.
+- Cambios masivos de nombres de archivos.
+- Alta/baja de proyectos completos.
+
+Entonces:
+
+- Se debe regenerar RADAR (al menos en modo INDEX/CORE)
+  para que los mapas reflejen la nueva realidad.
+
+----------
+05.30_REFERENCIAS_EN_TROUBLE_LOG
+----------
+
+Cada entrada relevante puede incluir:
+
+- Nombre de BATON.STATE implicado (si se regenera).
+- Nombre de archivo RADAR_INDEX/CORE/FULL usado como base.
+
+==========
+06.00_INTERACCION_HUMANO_IA
+==========
+
+----------
+06.10_PAPEL_DE_LA_IA
+----------
+
+La IA debe:
+
+- Ayudar a clasificar el problema (ENTORNO / CODIGO / CRITERIO / CONTEXTO).
+- Sugerir posibles causas y experimentos para aislarlas.
+- Proponer el texto de entradas TROUBLE_LOG e INCIDENTE (campos completos).
+- Proponer qué SKILLS/HUMAN deberían actualizarse a partir del caso.
+
+La IA no:
+
+- Decide sola si algo es incidente; eso lo decide el humano.
+- Cierra problemas sin validación del humano.
+
+----------
+06.20_REGLAS_DE_CONTENIDO_PARA_LA_IA
+----------
+
+Cuando la IA redacte o modifique contenido de:
+
+- TROUBLE_LOG.
+- INCIDENTE.
+- SKILLS/HUMAN relacionados.
+
+Debe seguir el skill STANDAR.FILE_CONTENT, es decir:
+
+- Metadatos claros si crea archivos nuevos.
+- Introducción breve cuando el artefacto lo amerita.
+- Cuerpo ordenado en títulos 1–4.
+- Si modifica un bloque existente, entregar siempre BLOQUE_ORIGINAL + BLOQUE_CORREGIDO para facilitar replace.
+
+==========
+07.00_CHECKLIST_RAPIDO
+==========
+
+----------
+07.10_ANTES_DE_REGISTRAR_UN_PROBLEMA
+----------
+
+- ¿Sé describir qué debería pasar y qué está pasando?
+- ¿Puedo clasificar el problema en ENTORNO / CODIGO / CRITERIO / CONTEXTO?
+- ¿Vale la pena registrarlo en TROUBLE_LOG (impacto, repetibilidad, dolor)?
+
+Si las respuestas son “sí” → crear entrada TROUBLE_LOG.
+
+----------
+07.20_ANTES_DE_DECLARAR_UN_INCIDENTE
+----------
+
+- ¿El problema tiene impacto alto o riesgo real?
+- ¿Bloquea trabajo importante?
+- ¿Afecta más de un sistema/proceso o a terceros?
+
+Si sí, crear ID_INCIDENTE y vincularlo a uno o más TROUBLE.
+
+----------
+07.30_AL_CERRAR_UN_TROUBLE_O_INCIDENTE
+----------
+
+- ¿Está claro qué lo causó (aunque sea a nivel “light”)?
+- ¿Se documentó la solución o workaround en el lugar correcto?
+- ¿Se actualizó al menos un SKILL/HUMAN si el aprendizaje es generalizable?
+- ¿La entrada TROUBLE_LOG quedó con estado y severidad final actualizados?
+
+Si algo de esto es “no”, el ciclo de aprendizaje está incompleto.
+
+----------
+07.40_CHECKLIST_RESUMIDO
+----------
+
+- ¿Este evento tiene impacto operativo real o potencial?
+  → Si sí, al menos PROBLEM.
+
+- ¿Se reproduce y afecta resultados/cálculos?
+  → TROUBLE.
+
+- ¿Tiene impacto en decisiones, dinero o terceros?
+  → INCIDENT.
+
+- ¿Después de resolverlo, se actualizaron HUMAN/SKILLS/BATON/RADAR donde correspondía?
+  → Si no, hay deuda de aprendizaje.
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-02-24, v1.0-DRAFT
+
+- Creación inicial de 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt.
+- Define método de resolución de problemas, TROUBLE_LOG e INCIDENTE en un solo skill.
+- Define campos mínimos para TROUBLE e INCIDENTE y un flujo end-to-end desde problema detectado hasta aprendizaje consolidado.
+
+2026-02-24, v1.1-DRAFT
+
+- Se integran reglas de regeneración de BATON.STATE y RADAR.
+- Se añaden ejemplos explícitos de severidad.
+- Se refuerza integración con WBS_ID y FILE_CONTENT.
+- Se consolidan definiciones PROBLEM/TROUBLE/INCIDENT y propósito del skill.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

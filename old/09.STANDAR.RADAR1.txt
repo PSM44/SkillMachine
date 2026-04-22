@@ -1,0 +1,338 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.RADAR.01.00
+NOMBRE_SUGERIDO...: 09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-24
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile (actualizar si aplica)
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\RADAR)
+AUTOR_HUMANO......: ADMIN
+
+ALCANCE...........:
+
+Define el estándar de uso lógico de RADAR en el ecosistema.
+
+RADAR describe el mapa de archivos/directorios por proyecto/sistema
+en tres niveles: INDEX, CORE y FULL.
+
+RADAR es descriptivo: refleja el estado del FS en un momento dado.
+No define rutas físicas ni scripts específicos; define el contrato funcional.
+
+DEPENDENCIAS......:
+
+06.STANDAR.WBS_ID.txt
+07.STANDAR.FILE_CONTENT.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+
+NOTA_IMPORTANTE...:
+
+RADAR nunca decide qué es canon.
+Solo lista e indexa para que humano/IA decidan.
+
+==========
+01.00_PROPOSITO_Y_ALCANCE
+==========
+
+----------
+01.10_POR_QUE_EXISTE_RADAR
+----------
+
+- Proveer una vista estructurada de carpetas y archivos de trabajo.
+- Generar artefactos de texto (INDEX, CORE, FULL) usables por IA y humanos como mapa.
+- Evitar depender de memoria humana para rutas y estructura.
+- Facilitar auditorías, refactors y troubleshooting a nivel de FS.
+
+----------
+01.20_QUE_NO_HACE_RADAR
+----------
+
+- No reemplaza sistemas de backup ni control de versiones.
+- No interpreta contenido de negocio (eso es de HUMAN/SKILLS).
+- No decide qué archivos son canon; solo lista lo que existe en el barrido.
+- No garantiza que todo lo que existe sea “bueno”; solo lo muestra.
+
+==========
+02.00_MODOS_DE_RADAR
+==========
+
+++++++++++
+02.10_MODO_INDEX
+++++++++++
+
+Objetivo:
+
+Listado ligero de qué archivos existen y dónde, sin contenido interno.
+
+Características:
+
+- Registra: ruta, nombre de archivo, tamaño y fechas básicas (creación/modificación).
+- No trae contenido textual (salvo línea de ejemplo si se define explícitamente).
+- Ideal para:
+
+  - Buscar rápidamente “dónde vive” algo.
+  - Ver estructura de un proyecto sin sobrecargar a la IA.
+
+Uso recomendado:
+
+- Primera pasada cuando solo quieres ubicar archivos y entender la estructura.
+
+++++++++++
+02.20_MODO_CORE
+++++++++++
+
+Objetivo:
+
+Vista operativa del contenido relevante de trabajo.
+
+Características:
+
+- Contiene todo lo de INDEX.
+- Añade fragmentos de contenido de archivos “vivos” (no históricos), por ejemplo:
+  - Primera(s) líneas de HUMAN.
+  - Cabeceras de scripts.
+  - Definiciones clave en SKILLS.
+- Respeta tamaño máximo de salida por tanda, pensado para IA.
+- Excluye por defecto tipos pesados y basura histórica, salvo decisión explícita.
+
+Uso recomendado:
+
+- Contexto de trabajo para IA y humanos sobre un proyecto activo.
+- Preparar a la IA para navegar el proyecto sin abrir todo el FS.
+
+++++++++++
+02.30_MODO_FULL
+++++++++++
+
+Objetivo:
+
+Vista lo más completa posible del contenido, incluyendo históricos si se decide.
+
+Características:
+
+- Puede incluir carpetas de histórico/DEAD/LEGACY si se habilita explícitamente.
+- Puede intentar leer contenido de más tipos de archivo (según tooling).
+- Genera salidas grandes, potencialmente por tandas.
+
+Uso recomendado:
+
+- Auditoría profunda.
+- Refactors grandes de estructura de archivos.
+- Casos puntuales donde se necesita máxima visibilidad (no para uso diario).
+
+==========
+03.00_INCLUSION_Y_EXCLUSION_DE_CONTENIDO
+==========
+
+++++++++++
+03.10_QUE_INCLUIR_POR_DEFECTO
+++++++++++
+
+En INDEX/CORE típicamente se incluyen:
+
+- Carpetas de trabajo activas (proyectos en curso).
+- Archivos HUMAN, SKILLS, scripts, configuraciones.
+- Archivos .txt/.md relevantes (BATON, RADAR previos, estándares).
+- Contratos, modelos, flujos, documentación clave del sistema.
+
+En FULL se puede ampliar a:
+
+- Carpetas históricas/DEAD/LEGACY.
+- Artefactos adicionales que normalmente se excluyen en CORE.
+
+++++++++++
+03.20_QUE_EXCLUIR_POR_DEFECTO
+++++++++++
+
+Por defecto, RADAR no debería intentar leer internamente:
+
+- Binarios grandes salvo auditoría explícita.
+- Logs masivos, dumps, caches.
+- Carpetas técnicas (ej.: .git, node_modules, dist, build, .venv, etc.).
+- Carpeta temporales o de sistema.
+
+Se asume que:
+
+- Estas rutas pueden listarse (INDEX), pero no es obligatorio traer contenido.
+
+++++++++++
+03.30_LISTA_DE_TIPOS_EXCLUIDOS_(EJEMPLOS)
+++++++++++
+
+Por defecto, no se intenta leer contenido interno de:
+
+- Comprimidos: zip, rar, 7z, etc.
+- Ejecutables: exe, dll, so, bin, etc.
+- Media pesada: mp3, mp4, mkv, jpg, png, etc.
+- Documentos binarios pesados: xls, xlsx, doc, docx, ppt, pptx, etc.
+- Cualquier otro formato no tratable como texto sin tooling adicional.
+
+Si se necesita incluir alguno de estos:
+
+- Debe ser decisión explícita del humano.
+- Debe documentarse por qué se incluye (ej.: auditoría específica).
+
+==========
+04.00_ARTEFACTOS_DE_SALIDA_Y_HISTORICOS
+==========
+
+++++++++++
+04.10_FORMATO_DE_SALIDA
+++++++++++
+
+Cada salida RADAR (INDEX/CORE/FULL) debe seguir FILE_CONTENT:
+
+- Metadatos claros (tipo de salida, fecha/hora, proyecto, alcance).
+- Introducción breve (qué se barrió, con qué parámetros).
+- Cuerpo ordenado por secciones (rutas, tipos de archivo, etc.).
+- NOTAS si hubo exclusiones o errores relevantes.
+- CHANGELOG si el archivo se reutiliza de forma incremental.
+
+++++++++++
+04.20_GESTION_DE_OUTPUTS_ACTIVOS_E_HISTORICOS
+++++++++++
+
+Reglas:
+
+- Siempre debe existir la noción de “output activo” por proyecto y modo (INDEX/CORE/FULL).
+- Todos los outputs RADAR anteriores deben moverse a una ubicación de históricos.
+- Se conservan todos los históricos (no hay borrado automático por este estándar).
+
+Para cada ejecución RADAR se deben definir (y la IA debe preguntarlo si no está claro):
+
+- Ruta del script/tool RADAR que se ejecuta.
+- Ruta donde se guardará el output activo.
+- Ruta donde se guardarán los históricos.
+
+Flujo típico:
+
+1) Ejecutar RADAR y generar nuevo output (ej.: RADAR_INDEX_YYYYMMDD-HHMM.txt).
+2) Si existe un output activo previo:
+   - Moverlo a la carpeta de históricos.
+   - Opcional: renombrarlo para reflejar fecha/hora si no lo tenía.
+3) Declarar el nuevo output como activo (ej.: symlink, nombre estable, o convención acordada).
+
+Checklist mínimo:
+
+- ¿Sé dónde se guardará el output activo y los históricos?
+- ¿El activo previo fue movido a históricos?
+- ¿Hay trazabilidad razonable (fecha/hora/ID en el nombre o en metadatos)?
+
+++++++++++
+04.30_RELACION_CON_BATON_Y_HUMAN
+++++++++++
+
+- BATON.STATE referencia explícitamente qué RADAR_INDEX/CORE/FULL usar como mapa.
+- HUMAN puede describir criterios de qué entra y qué no en RADAR para un proyecto.
+- RADAR no sobre-escribe HUMAN ni BATON; solo los complementa como “vista del FS”.
+
+Cuando se hace un cambio fuerte de estructura (mover carpetas, renombrar, consolidar):
+
+- Regenerar RADAR.
+- Evaluar si BATON.STATE debe actualizarse.
+- Evaluar si HUMAN debe ajustarse para reflejar la nueva estructura.
+
+==========
+05.00_ERROR_HANDLING_Y_PROBLEM_SOLVING
+==========
+
+++++++++++
+05.10_ERRORES_TIPICOS_EN_RADAR
+++++++++++
+
+Ejemplos:
+
+- Rutas sin permiso de lectura.
+- Archivos bloqueados por otros procesos.
+- Problemas de encoding al leer texto.
+- Rutas excesivamente largas (limitaciones del sistema).
+- Timeouts o fallos parciales del script.
+
+Para cada error, el output RADAR debería:
+
+- Registrar al menos un mensaje breve (ruta, tipo de error, comentario).
+- No abortar todo si no es estrictamente necesario; avanzar lo máximo posible.
+
+++++++++++
+05.20_CUANDO_REGISTRAR_TROUBLE_O_INCIDENT
+++++++++++
+
+Aplicar STANDAR.PROBLEM_TROUBLE_INCIDENTS cuando:
+
+- Fallos de RADAR impiden ver la estructura de un proyecto relevante.
+- Se detectan rutas imposibles, loops, o estructuras que rompen tooling.
+- Un INCIDENT de datos/estructura obliga a revisar el mapa de archivos.
+
+Ejemplos de TROUBLE:
+
+- Script RADAR falla siempre en cierta carpeta.
+- Encoding rompe al leer cierto tipo de archivo.
+
+Ejemplos de INCIDENT:
+
+- Estructura corrupta que confunde reports críticos.
+- Errores de ruta que causan pérdida aparente de información.
+
+++++++++++
+05.30_CUANDO_REGENERAR_RADAR
+++++++++++
+
+Regenerar (al menos INDEX/CORE) cuando:
+
+- Se mueven proyectos o carpetas raíz relevantes.
+- Cambia masivamente la estructura de nombres o WBS_ID.
+- Se eliminan o crean grandes volúmenes de archivos.
+- Después de un INCIDENT que afecte rutas, permisos o tooling.
+- Se hace un refactor de carpetas/FS importante.
+
+RADAR_FULL solo se recomienda regenerarlo cuando haya:
+
+- Auditorías profundas.
+- Necesidad real de ver históricos y contenido extendido.
+
+==========
+06.00_CHECKLIST_RAPIDO
+==========
+
+++++++++++
+06.10_ANTES_DE_EJECUTAR_RADAR
+++++++++++
+
+- ¿Está claro qué proyecto/sistema se va a barrer?
+- ¿Están definidas ruta del script, ruta de output activo y ruta de históricos?
+- ¿Se sabe qué modo se ejecutará (INDEX, CORE, FULL)?
+- ¿Se tiene claro qué carpetas/tipos excluir por defecto?
+- ¿Hay espacio suficiente en disco para la salida?
+
+++++++++++
+06.20_DESPUES_DE_EJECUTAR_RADAR
+++++++++++
+
+- ¿El output se generó sin errores críticos?
+- ¿El activo previo fue movido a históricos?
+- ¿El archivo resultante incluye metadatos e introducción mínima?
+- ¿La estructura listada tiene sentido (no hay rutas obviamente erróneas)?
+- ¿Hace falta registrar algún TROUBLE por errores vistos?
+- ¿Hace falta actualizar BATON.STATE o HUMAN a raíz del nuevo mapa?
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-02-24, v1.0-DRAFT
+- Definición inicial de RADAR como INDEX/CORE/FULL.
+- Enfoque en contrato funcional, sin detalles de implementación del script.
+
+2026-02-24, v1.1-DRAFT
+- Se formaliza la gestión de outputs activos e históricos.
+- Se explicita la relación con BATON, HUMAN y PROBLEM_TROUBLE_INCIDENTS.
+- Se detallan inclusiones/exclusiones y tipos de archivo ignorados por defecto.
+- Se añade checklist antes y después de ejecutar RADAR.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

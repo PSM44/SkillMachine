@@ -1,0 +1,143 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: AIORCH.SIM.100H.01.10
+NOMBRE_SUGERIDO...: 14.SIMULATION.PROJECT_100H.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\00_DOCS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Simulación de proyecto 100 horas: desglose por tipo de actividad, tokens estimados,
+y costo aproximado bajo 3 escenarios (disciplinado/normal/indisciplinado).
+NO_CUBRE..........:
+- No es contabilidad exacta; es modelo de control (MVP).
+DEPENDENCIAS......:
+04.SKILL.COST_CONTROL.txt
+05.SKILL.ROUTING_POLICY.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Supuestos
+
+01.00 Tipos de actividad (portfolio 100h)
+02.00 Escenario A (disciplinado)
+03.00 Escenario B (normal)
+04.00 Escenario C (indisciplinado)
+05.00 Cost drivers (qué dispara costo)
+06.00 Recomendaciones de control
+07.00 CHANGELOG
+
+==========
+00.20_SUPUESTOS
+==========
+
+- 100 horas “de trabajo humano” con IA asistiendo en distinto grado.
+- No incluye tiempo muerto.
+- Se asume routing:
+  - principal para arquitectura/refactor/debug,
+  - económico para navegación/docs mecánicas.
+- Tokens estimados por hora:
+  - disciplina alta: 15k–30k tokens/hora (promedio)
+  - normal: 30k–60k tokens/hora
+  - indisciplinado: 60k–120k tokens/hora
+Notas:
+- Estos rangos son estimaciones; varían por tamaño de contexto.
+
+==========
+01.00_TIPOS_DE_ACTIVIDAD_(100H)
+==========
+
+Distribución base (editable):
+- 25h PLAN_ARCH (diseño/decisiones)
+- 25h CODEGEN (boilerplate + features)
+- 20h REFACTOR (multi-file)
+- 15h DEBUG_TROUBLE (errores + fixes)
+- 10h DOC_CANON (skills/docs)
+- 5h  RADAR_NAV (navegación, inventario)
+
+==========
+02.00_ESCENARIO_A_DISCIPLINADO
+==========
+
+02.10_TOKENS_PROMEDIO
+- 25k tokens/hora promedio
+- Total tokens: 100h * 25k = 2,500,000
+
+02.20_REPARTO_INPUT_OUTPUT_(MVP)
+- input 60% = 1,500,000
+- output 40% = 1,000,000
+
+02.30_COSTO_APROX
+- Si modelo principal “caro” se usa 50% del tiempo y económico 50%:
+  - costo total estimado: 35–70 USD
+- Más ChatGPT Plus si lo mantienes aparte.
+
+==========
+03.00_ESCENARIO_B_NORMAL
+==========
+
+03.10_TOKENS_PROMEDIO
+- 45k tokens/hora promedio
+- Total tokens: 4,500,000
+
+03.20_REPARTO_INPUT_OUTPUT
+- input 60% = 2,700,000
+- output 40% = 1,800,000
+
+03.30_COSTO_APROX
+- mix principal/económico:
+  - costo total estimado: 60–140 USD
+
+==========
+04.00_ESCENARIO_C_INDISCIPLINADO
+==========
+
+04.10_TOKENS_PROMEDIO
+- 90k tokens/hora promedio
+- Total tokens: 9,000,000
+
+04.20_REPARTO_INPUT_OUTPUT
+- input 60% = 5,400,000
+- output 40% = 3,600,000
+
+04.30_COSTO_APROX
+- FULL context frecuente + reintentos:
+  - costo total estimado: 140–320 USD
+
+==========
+05.00_COST_DRIVERS
+==========
+
+- Subir RADAR_CORE/FULL repetidamente.
+- Contexto gigante (sin chunk).
+- Reintentos por prompts malos.
+- No routing (modelo caro para todo).
+- Apply sin plan (más iteraciones).
+
+==========
+06.00_RECOMENDACIONES_DE_CONTROL
+==========
+
+- Default L0/L1.
+- L2 solo por módulo.
+- FULL solo auditoría puntual.
+- Budgets diarios y hard stop.
+- Cache de RADAR_INDEX.
+- Plan-only por defecto.
+- Anti-shotgun debugging.
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Simulación 100h con 3 escenarios y drivers de costo.

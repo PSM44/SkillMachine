@@ -1,0 +1,195 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.LOGAUDIT.01.00
+NOMBRE_SUGERIDO...: 15.SKILL.LOGGING_AUDIT.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Contrato único de logging y auditoría para AI_ORCH:
+- qué se loggea, dónde, en qué formato,
+- IDs correlacionables (task_id, proj_id, checkpoint_id),
+- export TXT para lectura humana,
+- SQLite para query.
+NO_CUBRE..........:
+- No define budgets (ver 04.SKILL.COST_CONTROL.txt).
+- No define sandbox (ver 03.SKILL.SANDBOX_BOUNDARY.txt).
+DEPENDENCIAS......:
+07.STANDAR.FILE_CONTENT.txt
+06.STANDAR.WBS_ID.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto
+
+01.00 Definiciones (task_id, run_id, proj_id, checkpoint_id)
+02.00 Carpeta y naming de logs (pocas carpetas)
+03.00 Formato de log TXT (humano-friendly)
+04.00 Esquema SQLite (query-friendly)
+05.00 Niveles (INFO/WARN/ERROR) y severidad
+06.00 Evidencia mínima por evento
+07.00 Retención y rotación
+08.00 Exportes (diario/mensual) y reportes
+09.00 Antipatrones
+10.00 Checklist rápido
+11.00 CHANGELOG
+
+==========
+00.20_CONTEXTO
+==========
+
+Sin logging correlacionable:
+- no hay rollback confiable,
+- no hay control de costos,
+- no hay auditoría,
+- se repiten INCIDENTS.
+
+==========
+01.00_DEFINICIONES
+==========
+
+01.10_TASK_ID
+- Identificador único por “intención”.
+Ejemplo: TASK-20260226-1420-PROJ0001-0007
+
+01.20_RUN_ID
+- Identificador único por ejecución concreta (reintentos cuentan).
+Ejemplo: RUN-20260226-1421-0001
+
+01.30_PROJ_ID
+- ID del proyecto (compatible con WBS/ID).
+
+01.40_CHECKPOINT_ID
+- Git commit SHA (preferido) o SNAP-YYYYMMDD-HHMM-SEQ (fallback).
+
+==========
+02.00_CARPETA_Y_NAMING_DE_LOGS
+==========
+
+02.10_ROOT
+- \03_ARTIFACTS\LOGS\
+
+02.20_SUBCARPETAS_MINIMAS
+- \LOGS\RUNS\        (1 archivo por RUN_ID)
+- \LOGS\DAILY\       (agregados diarios)
+- \LOGS\MONTHLY\     (agregados mensuales)
+
+02.30_NAMING
+- RUN: LOG.RUN.<RUN_ID>.txt
+- DAILY: LOG.DAILY.YYYYMMDD.ACTIVE.txt
+- MONTHLY: LOG.MONTHLY.YYYYMM.ACTIVE.txt
+
+==========
+03.00_FORMATO_DE_LOG_TXT
+==========
+
+03.10_BLOQUE_EVENTO
+Cada evento:
+- TIMESTAMP
+- LEVEL
+- PROJ_ID
+- TASK_ID
+- RUN_ID
+- STAGE (plan/apply/validate/rollback)
+- ACTION (create/edit/move/quarantine/script/model_call)
+- PATHS (si aplica)
+- RESULT (OK/FAIL)
+- COST (si aplica)
+
+03.20_EJEMPLO_MINIMO
+TIMESTAMP.........: 2026-02-26 14:21:33
+LEVEL.............: INFO
+PROJ_ID...........: PROJ_0001
+TASK_ID...........: TASK-20260226-1420-PROJ0001-0007
+RUN_ID............: RUN-20260226-1421-0001
+STAGE.............: APPLY
+ACTION............: PATCH_APPLIED
+PATHS.............: \02_CODE\src\core.ts
+RESULT............: OK
+CHECKPOINT_ID.....: a1b2c3d (git)
+NOTES.............: Patch aplicado; lint pendiente.
+
+==========
+04.00_ESQUEMA_SQLITE_(MVP)
+==========
+
+04.10_DB_PATH
+- \03_ARTIFACTS\LOGS\orch_logs.db
+
+04.20_TABLAS_MINIMAS
+- runs
+  - run_id, task_id, proj_id, start_ts, end_ts, status, checkpoint_id, notes
+- events
+  - ts, level, proj_id, task_id, run_id, stage, action, path_before, path_after, result, notes
+- cost
+  - ts, proj_id, task_id, run_id, provider, model, in_tokens, out_tokens, cost_usd, status
+
+==========
+05.00_NIVELES_Y_SEVERIDAD
+==========
+
+- INFO: normal
+- WARN: anomalía recuperable
+- ERROR: FAIL
+- Si ERROR por boundary o secrets => elevar a TROUBLE/INCIDENT según skill.
+
+==========
+06.00_EVIDENCIA_MINIMA
+==========
+
+- Lista de archivos tocados
+- Checkpoint_id
+- Si hubo script: comando + output
+- Si hubo modelo: tokens + costo
+
+==========
+07.00_RETENCION_Y_ROTACION
+==========
+
+- RUN logs: mantener 60 días (default)
+- DAILY: mantener 90 días
+- MONTHLY: mantener 24 meses
+- SQLite: compact mensual
+
+==========
+08.00_EXPORTES_Y_REPORTES
+==========
+
+- Reporte diario: top tasks por costo
+- Reporte mensual: costo por proyecto + por tipo de tarea
+
+==========
+09.00_ANTIPATRONES
+==========
+
+- Logs sin IDs correlacionables.
+- Logs dispersos por carpetas.
+- Logs que incluyen secretos.
+
+==========
+10.00_CHECKLIST_RAPIDO
+==========
+
+[ ] task_id/run_id/proj_id definidos
+[ ] RUN log por ejecución
+[ ] SQLite con events + cost
+[ ] Retención definida
+[ ] No secretos en logs
+
+==========
+11.00_CHANGELOG
+==========
+
+2026-02-26, v1.0-DRAFT
+- Creación inicial: logging + audit para AI_ORCH.

@@ -1,0 +1,383 @@
+﻿{
+    "radar_script_version":  "v0.6.2",
+    "radar_output_schema":  "v1.4",
+    "generated_at":  "2026-04-21T16:42:24",
+    "root_scanned":  "C:\\01. GitHub\\Skills",
+    "output_path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar",
+    "old_path":  "C:\\01. GitHub\\Skills\\old\\radar",
+    "excluded_paths":  [
+                           "C:\\01. GitHub\\Skills\\old",
+                           "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar"
+                       ],
+    "core_extensions":  [
+                            ".txt",
+                            ".md",
+                            ".ps1",
+                            ".json",
+                            ".yml",
+                            ".yaml",
+                            ".xml",
+                            ".csv",
+                            ".js",
+                            ".ts",
+                            ".sql",
+                            ".py"
+                        ],
+    "sha256_enabled":  false,
+    "core_max_file_size":  2097152,
+    "segment_max_bytes":  8388608,
+    "total_file_count":  28,
+    "core_file_count":  28,
+    "skipped_too_large_count":  0,
+    "diff_summary":  {
+                         "new_count":  2,
+                         "modified_count":  0,
+                         "deleted_count":  0
+                     },
+    "output_files":  [
+                         {
+                             "type":  "INDEX",
+                             "path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar\\radar.index.txt",
+                             "segments":  [
+
+                                          ]
+                         },
+                         {
+                             "type":  "CORE",
+                             "path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar\\radar.core.txt",
+                             "segments":  [
+
+                                          ]
+                         },
+                         {
+                             "type":  "FULL",
+                             "path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar\\radar.full.txt",
+                             "segments":  [
+
+                                          ]
+                         },
+                         {
+                             "type":  "LITE",
+                             "path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar\\radar.lite.txt",
+                             "segments":  [
+
+                                          ]
+                         },
+                         {
+                             "type":  "MANIFEST",
+                             "path":  "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Radar\\radar.manifest.json",
+                             "segments":  [
+
+                                          ]
+                         }
+                     ],
+    "archived_files":  "C:\\01. GitHub\\Skills\\old\\radar\\radar.core.20260421_164224.txt C:\\01. GitHub\\Skills\\old\\radar\\radar.full.20260421_164224.txt C:\\01. GitHub\\Skills\\old\\radar\\radar.index.20260421_164224.txt C:\\01. GitHub\\Skills\\old\\radar\\radar.lite.20260421_164224.txt C:\\01. GitHub\\Skills\\old\\radar\\radar.manifest.20260421_164224.json",
+    "generated_segments":  "",
+    "new_files":  "21.SKILL.PROJECT_LIFECYCLE_POLICY.txt 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+    "modified_files":  "",
+    "deleted_files":  "",
+    "skipped_too_large":  [
+                              {
+                                  "relative_path":  "",
+                                  "full_path":  "",
+                                  "size_bytes":  0,
+                                  "max_allowed_bytes":  0
+                              }
+                          ],
+    "tree_size":  [
+                      {
+                          "folder":  ".",
+                          "size_bytes":  188073,
+                          "size_kb":  183.67
+                      },
+                      {
+                          "folder":  "00.SkillSys",
+                          "size_bytes":  1400,
+                          "size_kb":  1.37
+                      },
+                      {
+                          "folder":  "19.CIS",
+                          "size_bytes":  4712,
+                          "size_kb":  4.6
+                      },
+                      {
+                          "folder":  "21.0.LearnAnything",
+                          "size_bytes":  4269,
+                          "size_kb":  4.17
+                      },
+                      {
+                          "folder":  "21.1.LearnCAE",
+                          "size_bytes":  5172,
+                          "size_kb":  5.05
+                      },
+                      {
+                          "folder":  "21.2.COMPITAScurity",
+                          "size_bytes":  4703,
+                          "size_kb":  4.59
+                      },
+                      {
+                          "folder":  "21.3.IAAuto",
+                          "size_bytes":  5065,
+                          "size_kb":  4.95
+                      },
+                      {
+                          "folder":  "21.WhoAmI",
+                          "size_bytes":  4411,
+                          "size_kb":  4.31
+                      }
+                  ],
+    "scanned_files":  [
+                          {
+                              "relative_path":  "00.SkillSys\\\\20260421.SkillSys.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\00.SkillSys\\20260421.SkillSys.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  1400,
+                              "modified_at":  "2026-04-21T10:28:51",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "01.ARCH.AI_ORCHESTRATION.CORE.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\01.ARCH.AI_ORCHESTRATION.CORE.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  10733,
+                              "modified_at":  "2026-02-26T18:36:12",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "02.SKILL.AGENT_EXECUTION_POLICY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\02.SKILL.AGENT_EXECUTION_POLICY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  7052,
+                              "modified_at":  "2026-02-26T18:36:42",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "03.SKILL.SANDBOX_BOUNDARY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\03.SKILL.SANDBOX_BOUNDARY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4951,
+                              "modified_at":  "2026-02-26T18:37:36",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "04.SKILL.COST_CONTROL.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\04.SKILL.COST_CONTROL.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  5926,
+                              "modified_at":  "2026-02-26T18:39:39",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "05.SKILL.ROUTING_POLICY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\05.SKILL.ROUTING_POLICY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  6333,
+                              "modified_at":  "2026-04-21T15:50:17",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "06.SKILL.WBS.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\06.SKILL.WBS.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  13449,
+                              "modified_at":  "2026-02-26T18:51:37",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "07.SKILL.FILE_CONTENT.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\07.SKILL.FILE_CONTENT.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  15777,
+                              "modified_at":  "2026-02-26T17:10:27",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  17053,
+                              "modified_at":  "2026-02-26T19:28:38",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "09.STANDAR.RADAR.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  15372,
+                              "modified_at":  "2026-02-26T18:53:27",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "10.STANDAR.BATON.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  14125,
+                              "modified_at":  "2026-02-26T18:49:00",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "11.STANDAR.HUMAN_README.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  10958,
+                              "modified_at":  "2026-02-26T18:50:17",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "12.STANDAR.DRAG_AND_DROP.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  8106,
+                              "modified_at":  "2026-02-26T16:41:39",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "13.STACKS.COST_MONTHLY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\13.STACKS.COST_MONTHLY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4812,
+                              "modified_at":  "2026-02-26T18:42:38",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "14.SIMULATION.PROJECT_100H.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\14.SIMULATION.PROJECT_100H.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  3581,
+                              "modified_at":  "2026-02-26T18:43:06",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "15.SKILL.LOGGING_AUDIT.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\15.SKILL.LOGGING_AUDIT.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4747,
+                              "modified_at":  "2026-02-26T18:45:21",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "16.SKILL.CHECKPOINT_ROLLBACK.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\16.SKILL.CHECKPOINT_ROLLBACK.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  3434,
+                              "modified_at":  "2026-02-26T18:46:01",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "17.SKILL.SECRETS_HANDLING.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\17.SKILL.SECRETS_HANDLING.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  2749,
+                              "modified_at":  "2026-02-26T18:46:36",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "18.SKILL.DEV_ENV_MINIMAL.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\18.SKILL.DEV_ENV_MINIMAL.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  2562,
+                              "modified_at":  "2026-02-26T18:47:17",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "19.CIS\\\\20260421.CIS.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\19.CIS\\20260421.CIS.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4712,
+                              "modified_at":  "2026-04-21T09:35:11",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  2812,
+                              "modified_at":  "2026-04-21T15:57:05",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "20260416.1_IASKILLS.GIT.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\20260416.1_IASKILLS.GIT.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  3809,
+                              "modified_at":  "2026-04-16T11:38:40",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.0.LearnAnything\\\\20260421SkillLearnAnything.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.0.LearnAnything\\20260421SkillLearnAnything.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4269,
+                              "modified_at":  "2026-04-21T10:06:56",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.1.LearnCAE\\\\20260421.SkillCAEC1.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.1.LearnCAE\\20260421.SkillCAEC1.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  5172,
+                              "modified_at":  "2026-04-21T10:09:19",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.2.COMPITAScurity\\\\20260421Comptia.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.2.COMPITAScurity\\20260421Comptia.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4703,
+                              "modified_at":  "2026-04-21T10:10:44",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.3.IAAuto\\\\20260421.SkillLearnAuto.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.3.IAAuto\\20260421.SkillLearnAuto.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  5065,
+                              "modified_at":  "2026-04-21T10:15:10",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  0,
+                              "modified_at":  "2026-04-21T15:58:04",
+                              "sha256":  ""
+                          },
+                          {
+                              "relative_path":  "21.WhoAmI\\\\20260421_WhoAmI.txt",
+                              "full_path":  "C:\\01. GitHub\\Skills\\21.WhoAmI\\20260421_WhoAmI.txt",
+                              "extension":  ".txt",
+                              "logical_type":  "text",
+                              "size_bytes":  4411,
+                              "modified_at":  "2026-04-21T10:56:39",
+                              "sha256":  ""
+                          }
+                      ]
+}

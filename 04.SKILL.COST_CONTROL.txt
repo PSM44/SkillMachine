@@ -1,0 +1,232 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.COST.01.10
+NOMBRE_SUGERIDO...: 04.SKILL.COST_CONTROL.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Control automático de costos (tokens y USD) para AI_ORCH:
+- budgets por día/semana/mes,
+- preflight de estimación,
+- hard stop,
+- logs auditables,
+- cálculo de “costo por tarea” y “costo por proyecto”.
+NO_CUBRE..........:
+- No define sandbox (ver 03.SKILL.SANDBOX_BOUNDARY.txt).
+- No define routing (ver 05.SKILL.ROUTING_POLICY.txt).
+DEPENDENCIAS......:
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+07.STANDAR.FILE_CONTENT.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto y principios
+
+01.00 Definiciones (Budget, Hard Stop, Preflight)
+02.00 Unidades de costo (tokens, USD, “costo por tarea”)
+03.00 Budgets (diario/semanal/mensual)
+04.00 Preflight (estimación antes de ejecutar)
+05.00 Hard Stop (corte automático)
+06.00 Alertas y umbrales
+07.00 Logs y auditoría (SQLite + export TXT)
+08.00 Modelo de estimación (MVP)
+09.00 Antipatrones
+10.00 Checklist rápido
+11.00 CHANGELOG
+
+==========
+00.20_CONTEXTO_Y_PRINCIPIOS
+==========
+
+00.20.01_CONTEXTO
+- ChatGPT Plus NO cubre API.
+- AI_ORCH usa cloud vía API, por lo tanto hay gasto variable.
+- Si no se controla, el costo se dispara en ejecución frecuente.
+
+00.20.02_PRINCIPIOS
+- Control por DEFAULT: budgets + hard stop.
+- “Preflight” siempre antes de ejecutar (si hay escritura en FS).
+- Logging y auditoría obligatorios.
+- Estimación MVP: suficiente para no volarse la tarjeta, no para precisión contable.
+
+==========
+01.00_DEFINICIONES
+==========
+
+01.10_BUDGET
+- Límite de gasto permitido para un periodo (día/semana/mes).
+
+01.20_PREFLIGHT
+- Estimación de tokens y costo ANTES de llamar al modelo.
+
+01.30_HARD_STOP
+- Bloqueo automático: si budget excedido, se rechaza la tarea.
+
+01.40_TASK_ID
+- ID único por tarea (preferible: timestamp + secuencia + id proyecto).
+
+==========
+02.00_UNIDADES_DE_COSTO
+==========
+
+02.10_TOKENS
+- input_tokens: tokens enviados al modelo.
+- output_tokens: tokens generados por el modelo.
+
+02.20_USD
+- costo_usd = (input_tokens * rate_in) + (output_tokens * rate_out)
+
+02.30_COSTO_POR_TAREA
+- Suma de todas las llamadas a modelos para un TASK_ID.
+
+02.40_COSTO_POR_PROYECTO
+- Suma de todas las tareas asociadas a PROJ_ID en un periodo.
+
+==========
+03.00_BUDGETS
+==========
+
+03.10_BUDGET_DIARIO
+- default recomendado: 5–15 USD/día (MVP)
+- regla: si budget diario agotado => hard stop, salvo override humano.
+
+03.20_BUDGET_SEMANAL
+- default recomendado: 30–80 USD/semana (MVP)
+- objetivo: suavizar picos diarios.
+
+03.30_BUDGET_MENSUAL
+- default recomendado: 120–300 USD/mes (uso fuerte)
+- nota: depende de cuánta automatización estés corriendo.
+
+03.40_OVERRIDES
+- Solo HUMANO puede aumentar budget.
+- Override debe quedar loggeado.
+
+==========
+04.00_PREFLIGHT
+==========
+
+04.10_CUANDO_APLICA
+- Siempre antes de:
+  - “task/apply” que modifique FS
+  - “task/plan” que pida contexto grande (RADAR_CORE o FULL)
+
+04.20_METODO_MVP_DE_ESTIMACION
+- Estimación rápida:
+  - input_tokens_est = tamaño_contexto_chars / 4 (aprox)
+  - output_tokens_est = default según tipo de tarea (ver 05.ROUTING_POLICY)
+- Riesgo: aproximación. Aceptable para budgets.
+
+04.30_PREFLIGHT_OUTPUT
+Debe retornar:
+- tokens_est_in
+- tokens_est_out
+- costo_est_usd (por modelo)
+- riesgo (ALTO/MEDIO/BAJO)
+- recomendación: usar modelo económico / reducir contexto / chunk.
+
+==========
+05.00_HARD_STOP
+==========
+
+05.10_REGLA
+- Si costo_actual_periodo + costo_est_tarea > budget_periodo:
+  - rechazar ejecución (FAIL controlado)
+  - sugerir alternativa (reducir contexto / modelo económico / esperar próximo periodo)
+
+05.20_FALLBACK_SI_RECHAZA
+- “plan-only” permitido sin ejecución
+- “dry-run patch” permitido sin aplicar FS
+
+==========
+06.00_ALERTAS_Y_UMBRALES
+==========
+
+06.10_UMBRALES_RECOMENDADOS
+- 50% budget: aviso
+- 80% budget: aviso fuerte
+- 100% budget: hard stop
+
+06.20_CANAL
+- Output local en logs
+- Notificación en IDE (si existe integración)
+- Resumen diario opcional
+
+==========
+07.00_LOGS_Y_AUDITORIA
+==========
+
+07.10_SQLITE_CANON
+- Guardar en: \03_ARTIFACTS\COST\cost.db
+
+Tabla mínima:
+- task_id
+- proj_id
+- timestamp
+- provider
+- model
+- input_tokens
+- output_tokens
+- cost_usd
+- endpoint (plan/apply/etc)
+- status (OK/FAIL)
+- notes
+
+07.20_EXPORT_TXT
+- Export diario: COST_YYYYMMDD.ACTIVE.txt
+- Export mensual: COST_YYYYMM.ACTIVE.txt
+
+==========
+08.00_MODELO_DE_ESTIMACION_(MVP)
+==========
+
+08.10_BASELINES_POR_TIPO_DE_TAREA
+- PLAN: output_tokens_est 400–1200
+- CODEGEN: 800–2500
+- REFACTOR: 1500–5000
+- DOC_CANON: 1200–4000
+- RADAR_SUMMARY: 600–2000
+
+08.20_AJUSTES
+- Si contexto = RADAR_CORE: multiplicar input_est x2
+- Si contexto = RADAR_FULL: multiplicar input_est x4 (desaconsejado para MVP)
+
+==========
+09.00_ANTIPATRONES
+==========
+
+- No budgets.
+- FULL context por defecto.
+- No preflight.
+- Override sin log.
+- Mezclar costos de múltiples proyectos sin PROJ_ID.
+
+==========
+10.00_CHECKLIST_RAPIDO
+==========
+
+[ ] budgets definidos (día/semana/mes)
+[ ] preflight antes de apply
+[ ] hard stop activo
+[ ] logs a SQLite
+[ ] export txt diario/mensual
+[ ] override humano loggeado
+
+==========
+11.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Modelo completo: budgets + preflight + hard stop + logs SQLite + export TXT.
+- Estimación MVP por tipo de tarea.

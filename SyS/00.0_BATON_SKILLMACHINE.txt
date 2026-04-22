@@ -1,0 +1,160 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: BATON.SKILLMACHINE.01.00
+NOMBRE_SUGERIDO...: 00.0_BATON_SKILLMACHINE.txt
+VERSION...........: v1.0-ACTIVE
+FECHA.............: 2026-04-21
+HORA..............: 21:00
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \SkillMachine\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Snapshot operativo del sistema SkillMachine.
+Permite continuidad inmediata para IA y humano sin reconstruir contexto.
+
+NO_CUBRE..........:
+No reemplaza HUMAN.
+No define reglas (eso es SKILLS).
+No describe filesystem completo (eso es RADAR).
+
+DEPENDENCIAS......:
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+23.SKILL.WHOAMI_POLICY.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, BATON_STATE
+
+==========
+00.10_RESUMEN_EJECUTIVO
+==========
+
+Estado del sistema:
+OPERATIVO_MVP
+
+El sistema ya permite:
+- construir paquetes de casos de uso
+- validar integridad de archivos
+- generar manifiestos
+- asegurar consistencia por hash
+
+==========
+01.00_ESTADO_ACTUAL
+==========
+
+FASE_ACTUAL.......: USECASE_AUTOMATION_MVP
+
+CAPACIDADES_ACTIVAS:
+
+- BUILD.ps1 funcional
+- validación de required_files
+- validación de versiones (registry)
+- copia determinística de archivos
+- generación USECASE.MANIFEST.json
+- verificación SHA256 source vs dest
+- FAIL automático ante inconsistencias
+
+USECASES_ACTIVOS:
+
+- 01.NEW_PROJECT
+- 02.SESSION_CLOSE
+
+==========
+02.00_EVIDENCIA_OPERATIVA
+==========
+
+El use case SESSION_CLOSE:
+
+- manifest generado
+- validation.status = OK
+- sin missing_files
+- hashes coincidentes en todos los archivos
+
+Esto confirma:
+
+- consistencia del sistema de copias
+- integridad de paquetes
+- trazabilidad mínima operativa
+
+==========
+03.00_RIESGOS_Y_DEUDA_TECNICA
+==========
+
+RIESGOS_ACTUALES:
+
+- no existe BUILD.HISTORY
+- no existe diff entre builds
+- registry de versiones es manual
+- RADAR no está integrado como backend del builder
+
+RIESGO_ESTRUCTURAL:
+
+El sistema funciona, pero no tiene trazabilidad histórica.
+Esto limita auditoría y debugging futuro.
+
+==========
+04.00_LIMITES_OPERATIVOS
+==========
+
+PROJECT_ROOT:
+C:\01. GitHub\Skills
+
+PERMITIDO:
+
+- crear/modificar archivos dentro de:
+  - 90.USECASE
+  - SKILLS base
+
+PROHIBIDO:
+
+- modificar fuera del root
+- alterar históricos manualmente
+- editar outputs RADAR
+
+==========
+05.00_PRIORIDADES_ACTUALES
+==========
+
+P0:
+- implementar BUILD.HISTORY
+
+P1:
+- diff entre manifests
+- trazabilidad temporal
+
+P2:
+- integración RADAR como índice del builder
+
+==========
+06.00_NEXT_ACTION
+==========
+
+Crear BUILD.HISTORY:
+
+- carpeta de históricos
+- guardar manifests por timestamp
+- permitir comparar builds
+- detectar cambios estructurales
+
+==========
+07.00_COMO_INICIAR_PROXIMA_SESION
+==========
+
+1. Leer este BATON
+2. Validar estado de 90.USECASE
+3. Revisar último USECASE.MANIFEST.json
+4. Confirmar que BUILD.ps1 sigue estable
+5. Avanzar en BUILD.HISTORY
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-ACTIVE
+- Primer BATON operativo del sistema SkillMachine
+- Registro de estado MVP funcional
+- Definición de siguiente acción estructural

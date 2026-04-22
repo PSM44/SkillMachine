@@ -1,0 +1,27 @@
+PROYECTO: New Project Bootstrap
+
+OBJETIVO:
+Crear el set mínimo correcto para iniciar un proyecto nuevo de cualquier índole.
+
+INPUT:
+- requerimiento del usuario
+- SKILL.MENU
+- skills adjuntos
+- policies de bootstrap, lifecycle, artifacts, WhoAmI
+- standards base de BATON, HUMAN y RADAR
+
+DEBES:
+1. evaluar si el set adjunto es suficiente
+2. pedir skills adicionales si faltan
+3. crear propuesta para:
+   - WhoAmI
+   - BATON
+   - HUMAN
+4. definir siguiente acción
+5. mantener consistencia con policies y standards
+
+OUTPUT:
+- evaluación de suficiencia del set
+- skills faltantes
+- propuesta de artefactos iniciales
+- siguiente acción recomendada

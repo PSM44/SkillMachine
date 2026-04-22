@@ -1,0 +1,194 @@
+WBS — SKILL: SECPLUS.OS v1.0
+
+Propósito: aprobar SY0-701 con score objetivo ≥ 780
+Horizonte sugerido: 8–10 semanas
+Carga: 60–90 min/día
+
+00.00 PRINCIPIO RECTOR
+Examen = escenarios + decisiones, no teoría aislada
+Regla 60/30/10 → 60% práctica / 30% corrección / 10% teoría
+Sin simuladores no hay transferencia
+01.00 INPUT CONTRACT (OBLIGATORIO)
+01.01 Objetivo
+aprobar SY0-701 ≥ 780 (margen sobre 750)
+01.02 Restricciones
+horas/semana: ___
+fecha examen: ___
+entorno: PC + simuladores
+01.03 Nivel actual
+L0–L3 (declara sin optimismo)
+01.04 Profundidad por dominio
+Threats/Attacks → L3
+Architecture → L2
+Implementation → L3
+Operations → L2
+Governance → L2
+02.00 MAPA DEL EXAMEN
+02.01 Dominios
+D1: Threats, Attacks & Vulnerabilities (L3)
+D2: Architecture & Design (L2)
+D3: Implementation (L3)
+D4: Operations & Incident Response (L2)
+D5: Governance, Risk & Compliance (L2)
+02.02 CORE (lo que más cae en práctica)
+tipos de ataque (phishing, MITM, ransomware)
+controles (MFA, segmentation, least privilege)
+protocolos (TLS, IPSec, SSH)
+hardening
+incident response (NIST flow)
+logging/monitoring
+03.00 CICLO OPERATIVO (POR MÓDULO)
+03.01 INPUT (máx 10 min)
+concepto puntual (no binge)
+03.02 PROCESAMIENTO
+5–10 bullets + 1 ejemplo
+03.03 RECUPERACIÓN
+explicar sin mirar:
+“qué es / para qué sirve / cuándo usar”
+03.04 APLICACIÓN (CRÍTICO)
+10–20 preguntas tipo examen
+03.05 FEEDBACK
+revisar solo errores
+03.06 ITERACIÓN
+repetir tema débil
+04.00 OUTPUT OBLIGATORIO
+
+Por módulo:
+
+% acierto quiz
+lista de errores
+mini mapa (ataque → control → detección)
+1 caso aplicado
+05.00 ERROR LOG (CORE)
+
+Archivo:
+
+/SECPLUS/ERROR_LOG.txt
+
+- pregunta
+- tu respuesta
+- correcta
+- por qué fallaste
+- regla correcta
+- patrón (concepto/lectura/tiempo)
+
+👉 Si no haces esto, repites errores.
+
+06.00 RITUAL DIARIO (60–90 min)
+Bloque A — Quizzes (30–40 min)
+
+Prompt:
+“Generate 15 Security+ SY0-701 scenario-based questions. Mix domains. No answers yet.”
+
+Luego:
+“Here are my answers: [X]. Show correct answers and explain only my mistakes.”
+
+Bloque B — Conceptos débiles (15–20 min)
+
+Prompt:
+“Explain [concept] at practical level for Security+. Include when to use it and common traps.”
+
+Bloque C — Escenarios (15–20 min)
+
+Prompt:
+“Give me 3 real-world security scenarios. Ask what is the BEST action.”
+
+Bloque D — Error Log (5–10 min)
+
+Actualizar archivo
+
+07.00 RITUAL SEMANAL
+07.01 Mock Test (1–2 veces)
+
+Prompt:
+“Simulate a 50-question Security+ exam with mixed domains and scenario questions.”
+
+Objetivo:
+
+≥ 75% antes de agendar examen
+07.02 Análisis
+top 5 errores recurrentes
+dominio más débil
+tiempo promedio por pregunta
+08.00 ESTRATEGIA DE EXAMEN
+08.01 Regla BEST ANSWER
+elimina distractores
+busca control más adecuado, no cualquiera válido
+08.02 Keywords críticas
+FIRST / BEST / MOST secure
+NEXT step
+MOST cost-effective
+08.03 Gestión de tiempo
+no más de 90 seg/pregunta
+marcar y seguir
+09.00 PROMPTS BASE
+09.01 Quiz avanzado
+
+“Create difficult Security+ questions focused on [domain], with tricky distractors.”
+
+09.02 Diagnóstico
+
+“Based on my last answers, identify my weakest domain and give targeted drills.”
+
+09.03 Comparación
+
+“Compare [control A] vs [control B] and when each is the BEST choice.”
+
+09.04 Escenarios
+
+“Give me incident response scenarios and ask for next step according to best practices.”
+
+10.00 MÉTRICAS
+quizzes diarios ≥ 70%
+mocks ≥ 80% (consistente)
+errores repetidos ↓ semana a semana
+tiempo por pregunta ↓
+11.00 ANTI-PATRONES
+leer sin practicar
+memorizar definiciones
+ignorar simuladores
+no revisar errores
+estudiar todo con misma profundidad
+12.00 GATE DE EXAMEN
+
+Agenda solo si:
+
+3 mocks ≥ 80%
+dominios críticos ≥ 75%
+puedes explicar controles sin mirar
+error log estabilizado
+13.00 STACK
+ChatGPT → quizzes, explicación, evaluación
+NotebookLM → material oficial (opcional pero recomendado)
+simuladores externos → obligatorio
+14.00 FEEDBACK DURO
+Lo que funciona
+enfoque en práctica
+error log
+escenarios
+Lo que te puede fallar
+subestimar dificultad real
+confiar en “sentir que sabes”
+no medir tiempos
+no usar simuladores reales
+15.00 EXTENSIÓN (SI QUIERES NIVEL PRO)
+mini lab: hardening básico (VM)
+mapas ataque→control→detección
+playbooks de incident response
+16.00 CIERRE
+
+Este skill no es cómodo, es efectivo.
+
+Si haces:
+
+quizzes diarios
+error log disciplinado
+mocks semanales
+
+→ apruebas.
+
+Si haces:
+
+videos + apuntes
+
+→ repites intento.

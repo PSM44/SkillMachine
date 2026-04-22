@@ -1,0 +1,137 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: WHOAMI.SKILLMACHINE.01.00
+NOMBRE_SUGERIDO...: 01_WHOAMI_SKILLMACHINE.txt
+VERSION...........: v1.0-ACTIVE
+FECHA.............: 2026-04-21
+HORA..............: 21:00
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \SkillMachine\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Resumen humano operacional del proyecto SkillMachine.
+Permite retomar trabajo sin contexto previo.
+
+NO_CUBRE..........:
+No reemplaza HUMAN.
+No reemplaza BATON.
+No incluye detalle técnico profundo.
+
+DEPENDENCIAS......:
+23.SKILL.WHOAMI_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+
+TAGS_OPERATIVOS...: CONTINUITY, HUMAN_ONBOARDING
+
+==========
+01.00_QUE_ES_ESTE_PROYECTO
+==========
+
+SkillMachine es un sistema para:
+
+- crear
+- mantener
+- versionar
+- aplicar
+
+skills reutilizables de forma estructurada.
+
+No es HIA.
+Es un sistema independiente enfocado en gobernanza de conocimiento operativo.
+
+==========
+02.00_EN_QUE_ESTAMOS
+==========
+
+El sistema ya está en estado funcional inicial (MVP).
+
+Actualmente permite:
+
+- construir paquetes de uso (UseCases)
+- copiar skills automáticamente
+- validar integridad
+- generar manifests
+- asegurar consistencia por hash
+
+==========
+03.00_QUE_SE_LOGRO
+==========
+
+Se logró:
+
+- crear carpeta 90.USECASE
+- definir casos de uso:
+  - NEW_PROJECT
+  - SESSION_CLOSE
+- implementar BUILD.ps1 funcional
+- validar paquete SESSION_CLOSE con resultado OK
+
+También:
+
+- se creó repo público SkillMachine (estado inicial)
+
+==========
+04.00_QUE_FALTA
+==========
+
+Faltan piezas clave para madurez:
+
+- historial de builds
+- trazabilidad entre versiones
+- diff entre manifests
+- automatización del registry
+- integración con RADAR
+
+Además:
+
+El repo GitHub está demasiado básico:
+- sin descripción
+- sin releases
+- sin estructura visible
+
+==========
+05.00_ESTADO_ACTUAL
+==========
+
+Estado general:
+
+OPERATIVO PERO INMADURO
+
+Traducción:
+
+- funciona
+- es útil
+- pero no es audit-able ni escalable aún
+
+==========
+06.00_SIGUIENTE_PASO
+==========
+
+Crear BUILD.HISTORY:
+
+- guardar builds históricos
+- comparar manifests
+- detectar cambios
+
+Esto habilita:
+
+- trazabilidad real
+- debugging
+- evolución controlada
+
+==========
+07.00_FECHA_ACTUALIZACION
+==========
+
+2026-04-21
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-ACTIVE
+- Creación inicial de WhoAmI del sistema SkillMachine
+- Registro de estado MVP y siguientes pasos
