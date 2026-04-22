@@ -1,0 +1,203 @@
+WBS — SKILL BASE UNIVERSAL v1.0
+
+Nombre: LEARN.OS
+Propósito: Sistema operativo para aprender cualquier cosa con output real
+
+00.00 PRINCIPIO RECTOR
+Aprender = producir + fallar + corregir
+Todo módulo debe generar evidencia
+Sin output → no hay aprendizaje
+01.00 INPUT CONTRACT (OBLIGATORIO)
+
+Antes de empezar cualquier tema:
+
+01.01 Objetivo real
+tipo: certificación / ejecución / comprensión / creación
+output final: (ej: aprobar examen / construir X / presentar Y)
+01.02 Restricciones
+tiempo disponible (horas/semana)
+plazo (fecha límite)
+herramientas disponibles
+01.03 Nivel actual
+L0: nulo
+L1: básico
+L2: intermedio
+L3: avanzado
+01.04 Nivel objetivo por módulo
+L1: reconocer
+L2: explicar
+L3: aplicar
+L4: dominar / optimizar
+02.00 MAPA DEL CONOCIMIENTO
+02.01 Descomposición
+Módulos principales
+Submódulos
+02.02 Priorización
+CORE (20%) → obligatorio
+SOPORTE (30%)
+EXPANSIÓN (50%)
+02.03 Dependencias
+qué necesitas antes de qué
+03.00 CICLO OPERATIVO (POR MÓDULO)
+
+Se ejecuta SIEMPRE así:
+
+03.01 INPUT
+consumir contenido (video, texto, clase)
+03.02 PROCESAMIENTO
+resumen propio (máx 10 líneas)
+esquema o bullets
+03.03 RECUPERACIÓN
+explicar sin mirar
+responder preguntas sin apoyo
+03.04 APLICACIÓN
+ejercicio / caso / proyecto
+03.05 FEEDBACK
+corrección IA / test / validación externa
+03.06 ITERACIÓN
+repetir solo lo que falló
+04.00 OUTPUT OBLIGATORIO
+
+Cada módulo debe generar:
+
+resumen propio
+evidencia práctica (ejercicio/proyecto)
+lista de errores
+mini evaluación
+
+Si no existe esto → módulo inválido
+
+05.00 CONTROL DE CALIDAD
+05.01 Gate de avance
+
+NO avanzas si:
+
+no puedes explicarlo simple
+no puedes aplicarlo
+tienes >30% error
+05.02 Métricas
+% avance módulos
+% acierto ejercicios
+tiempo por tarea
+errores repetidos
+06.00 ERROR LOG (CRÍTICO)
+
+Archivo obligatorio:
+
+ERROR_LOG
+- error
+- tipo
+- causa
+- corrección
+- ejemplo correcto
+
+👉 Este archivo vale más que tus apuntes.
+
+07.00 RITMO OPERATIVO
+Diario
+ejecutar 1–2 módulos
+registrar errores
+Semanal
+evaluación global
+detectar patrones de error
+ajustar plan
+08.00 STACK IA
+08.01 GPT
+roadmap
+explicación
+evaluación
+feedback
+08.02 NotebookLM
+fuentes reales
+síntesis sobre material
+09.00 PROMPTS BASE
+09.01 Roadmap
+
+“Create a structured roadmap to achieve [objective], considering my level [X], time [Y], and desired output [Z]. Prioritize core concepts and define deliverables per module.”
+
+09.02 Explicación
+
+“Explain [concept] at level [L2/L3], with examples and common mistakes.”
+
+09.03 Evaluación
+
+“Test me on [topic] with real-world or exam-level questions.”
+
+09.04 Corrección
+
+“Review this output critically. Identify errors, explain why, and improve it.”
+
+09.05 Diagnóstico
+
+“Based on my last outputs, identify my top weaknesses and propose targeted exercises.”
+
+10.00 NIVELES DE PROFUNDIDAD (GOBERNANZA)
+
+No todo va a L4.
+
+Define por tema:
+
+L1 → awareness rápido
+L2 → comprensión funcional
+L3 → ejecución práctica
+L4 → dominio profesional
+
+👉 Si no defines esto, pierdes tiempo.
+
+11.00 ANTI-PATRONES
+
+Evitar:
+
+consumir sin producir
+acumular contenido
+no medir progreso
+no cerrar módulos
+estudiar sin objetivo claro
+12.00 CRITERIO DE ÉXITO
+
+Aprendiste si puedes:
+
+explicarlo simple
+aplicarlo sin ayuda
+detectar errores
+adaptarlo a otro contexto
+13.00 USO DEL SKILL
+
+Flujo real:
+
+defines objetivo
+generas roadmap con IA
+ejecutas módulos con ciclo 03.00
+registras errores
+evalúas semanalmente
+iteras
+14.00 FEEDBACK DURO
+Lo bueno de este skill
+estructurado
+reusable
+medible
+orientado a output
+Lo débil
+requiere disciplina real
+no es “rápido”
+si no haces el error log, pierde potencia
+puede sentirse pesado al inicio
+15.00 MEJORA PROPUESTA (TU ESTILO)
+
+Dado tu perfil (sistema + IA + proyectos):
+
+Agrega:
+
+15.01 “OUTPUT REAL”
+cada 2 semanas: mini proyecto o entrega
+15.02 “EVIDENCIA”
+carpeta con resultados tangibles
+16.00 CIERRE
+
+Este skill funciona si haces esto:
+
+ejecutas (no solo diseñas)
+produces (no solo consumes)
+corriges (no solo avanzas)
+
+Si no, se convierte en otro framework más que no usas.

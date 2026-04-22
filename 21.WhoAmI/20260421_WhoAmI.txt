@@ -1,0 +1,184 @@
+00.00 SKILL — WHOAMI.MANAGER
+00.01 Nombre del Skill
+WHOAMI.MANAGER
+00.02 Propósito
+
+Crear, actualizar y mantener el archivo:
+
+01_WhoAmI.txt
+Asegurar que el archivo:
+sea entendible por cualquier humano externo
+permita retomar el proyecto sin contexto previo
+refleje SOLO el estado vigente del proyecto
+01.00 INPUT ESPERADO
+01.01 Input mínimo requerido
+Descripción del proyecto (puede ser desordenada)
+Estado actual (aunque sea incompleto)
+Última sesión (opcional)
+Cambios realizados (si aplica)
+01.02 Input opcional
+Archivos relevantes
+Decisiones recientes
+Problemas detectados
+02.00 OUTPUT ESPERADO
+02.01 Archivo objetivo
+Archivo: 01_WhoAmI.txt
+Formato: .txt
+Lenguaje: Español
+Estilo:
+didáctico
+explícito
+sin abreviaciones
+sin asumir conocimiento previo
+03.00 ESTRUCTURA OBLIGATORIA DEL ARCHIVO
+03.01 Plantilla base (NO MODIFICAR ESTRUCTURA)
+========== 
+01_WHOAMI — ESTADO VIGENTE DEL PROYECTO
+========== 
+
+00.00 IDENTIFICACIÓN
+----------
+- Nombre del proyecto:
+- Fecha última actualización:
+- Ubicación última sesión:
+- Responsable:
+
+01.00 PROPÓSITO DEL PROYECTO
+----------
+Explicación completa del problema que se busca resolver, para quién existe el proyecto y cuál es el resultado esperado.
+
+02.00 ALCANCE ACTUAL
+----------
+Descripción clara de lo que el proyecto incluye actualmente y lo que explícitamente no forma parte del alcance.
+
+03.00 ESTADO ACTUAL DEL PROYECTO
+----------
+Descripción detallada del estado real:
+- Qué ya está completamente funcional
+- Qué está parcialmente desarrollado
+- Qué aún no existe
+
+04.00 DECISIONES CLAVE VIGENTES
+----------
+Listado de decisiones actuales que afectan el diseño o desarrollo del proyecto.
+
+05.00 PRÓXIMOS PASOS OPERATIVOS
+----------
+Lista ordenada de acciones concretas que deben ejecutarse en la siguiente sesión.
+
+06.00 RIESGOS Y PROBLEMAS ABIERTOS
+----------
+Listado de bloqueos, problemas técnicos, dudas y riesgos actuales.
+
+07.00 CONTEXTO NECESARIO PARA RETOMAR
+----------
+- Archivos clave:
+- Rutas relevantes:
+- Herramientas necesarias:
+04.00 REGLAS DE GENERACIÓN (NO NEGOCIABLES)
+04.01 Claridad extrema
+No usar:
+siglas sin explicar
+términos ambiguos
+referencias internas
+
+Explicar como si:
+
+la persona no sabe nada del proyecto
+
+04.02 Prohibiciones
+NO incluir:
+historial antiguo
+versiones anteriores
+comentarios irrelevantes
+NO mencionar:
+BATON
+RADAR
+HUMAN
+IA
+04.03 Estado real (no ideal)
+NO inventar avance
+NO suavizar problemas
+Declarar explícitamente:
+lo que no funciona
+lo que falta
+lo que es incierto
+04.04 Próximos pasos obligatorios
+Siempre deben ser:
+ejecutables
+ordenados
+específicos
+Prohibido:
+“seguir avanzando”
+“revisar”
+“mejorar”
+(Son basura operativa)
+04.05 Consistencia total
+El contenido debe:
+no contradecirse
+reflejar una única versión de la verdad
+Si hay conflicto en el input:
+→ el skill debe señalarlo
+05.00 REGLAS DE ACTUALIZACIÓN
+05.01 Modo actualización
+
+Cuando el archivo ya existe:
+
+NO reescribir todo
+SOLO:
+actualizar estado
+ajustar próximos pasos
+actualizar fecha
+integrar nuevos avances
+05.02 Validación obligatoria antes de actualizar
+
+El sistema debe verificar:
+
+¿Cambió el estado del proyecto?
+¿Se completó algún paso?
+¿Hay nuevos bloqueos?
+¿Cambian los próximos pasos?
+
+Si NO hay cambios reales:
+→ NO actualizar el archivo
+
+05.03 Cierre de sesión obligatorio
+
+Cada actualización debe reflejar:
+
+fecha y hora
+ubicación
+avance concreto
+06.00 ERRORES COMUNES A EVITAR
+06.01 Error: Documento narrativo largo
+Problema: se vuelve ilegible
+Corrección: estructura WBS estricta
+06.02 Error: Próximos pasos vagos
+Problema: no permite retomar
+Corrección: acciones atómicas
+06.03 Error: Estado inflado
+Problema: falsa percepción de avance
+Corrección: declarar incompletitud
+06.04 Error: No actualizar
+Problema: documento muerto
+Corrección: disciplina de cierre
+07.00 OUTPUT ADICIONAL DEL SKILL
+07.01 Validación crítica
+
+El skill debe entregar además:
+
+inconsistencias detectadas
+vacíos de información
+supuestos realizados (si aplica)
+08.00 VEREDICTO DEL SKILL
+
+Este skill:
+
+✔ Es operativo
+✔ Evita degradación del documento
+✔ Permite continuidad humana real
+
+Pero:
+
+✖ Depende 100% de disciplina de uso
+✖ Si no se usa en cada sesión → pierde valor

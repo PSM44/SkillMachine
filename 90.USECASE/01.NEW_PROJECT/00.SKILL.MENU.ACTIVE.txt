@@ -1,0 +1,269 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.MENU.ACTIVE.01.00
+NOMBRE_SUGERIDO...: 00.SKILL.MENU.ACTIVE.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-04-21
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Catálogo curado de skills vigentes del ecosistema.
+Sirve para que una IA evalúe qué skills existentes son suficientes,
+cuáles faltan, cuáles sobran y cuáles conviene pedir al usuario que suba.
+
+NO_CUBRE..........:
+No reemplaza RADAR.
+No reemplaza un futuro SKILLS.REGISTRY.
+No interpreta el contenido completo de los skills si no fueron adjuntados.
+No autoriza inventar skills inexistentes.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+09.STANDAR.RADAR.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+00.20 Objetivo y reglas base
+
+01.00 Reglas de uso del menú
+02.00 Taxonomía de categorías
+03.00 Skills operativos recomendados por defecto
+04.00 Catálogo activo
+05.00 Reglas para recomendar skills adicionales
+06.00 Reglas para detectar redundancia
+07.00 Reglas para detectar gaps
+08.00 Checklist rápido
+09.00 Changelog
+
+==========
+00.20_OBJETIVO_Y_REGLAS_BASE
+==========
+
+Objetivo:
+Permitir que una IA seleccione el set mínimo correcto de skills
+para resolver un requerimiento usando este menú como catálogo de referencia.
+
+Reglas base:
+- La IA solo puede recomendar skills existentes en este menú.
+- La IA no debe inventar skills inexistentes.
+- La IA debe priorizar el set mínimo suficiente.
+- La IA debe detectar skills innecesarios o redundantes.
+- Si no existe skill suficiente, debe declararlo explícitamente.
+
+==========
+01.00_REGLAS_DE_USO_DEL_MENU
+==========
+
+- Este archivo se adjunta junto al prompt del usuario.
+- El usuario puede adjuntar además 0..N skills concretos.
+- La IA debe evaluar cobertura del set adjunto contra el requerimiento.
+- Si faltan skills, debe pedirlos explícitamente desde este menú.
+- Si el menú no cubre el gap, debe indicarlo como candidato a mejora del sistema.
+
+==========
+02.00_TAXONOMIA_DE_CATEGORIAS
+==========
+
+FORMAT
+SYSTEM
+REVIEW
+LIFECYCLE
+CONTINUITY
+USECASE
+GOVERNANCE
+
+==========
+03.00_SKILLS_OPERATIVOS_RECOMENDADOS_POR_DEFECTO
+==========
+
+Por defecto, la IA debería considerar como críticos, salvo que el caso no aplique:
+
+- 06.SKILL.WBS.txt
+- 07.SKILL.FILE_CONTENT.txt
+- 09.STANDAR.RADAR.txt
+- 10.STANDAR.BATON.txt
+- 11.STANDAR.HUMAN_README.txt
+- 23.SKILL.WHOAMI_POLICY.txt
+
+==========
+04.00_CATALOGO_ACTIVO
+==========
+
+----------
+04.10
+----------
+
+SKILL_ID..........: SKILL_MENU_ACTIVE
+FILE..............: 00.SKILL.MENU.ACTIVE.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Catálogo curado de selección de skills.
+
+----------
+04.20
+----------
+
+SKILL_ID..........: SKILL_WBS
+FILE..............: 06.SKILL.WBS.txt
+STATUS............: ACTIVE
+CATEGORY..........: FORMAT
+PURPOSE...........: Estandariza estructura WBS e IDs.
+
+----------
+04.30
+----------
+
+SKILL_ID..........: SKILL_FILE_CONTENT
+FILE..............: 07.SKILL.FILE_CONTENT.txt
+STATUS............: ACTIVE
+CATEGORY..........: FORMAT
+PURPOSE...........: Define estructura interna de archivos serios.
+
+----------
+04.40
+----------
+
+SKILL_ID..........: SKILL_PROBLEM_TROUBLE
+FILE..............: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+STATUS............: ACTIVE
+CATEGORY..........: REVIEW
+PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
+
+----------
+04.50
+----------
+
+SKILL_ID..........: SKILL_RADAR
+FILE..............: 09.STANDAR.RADAR.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Describe el filesystem de forma determinista.
+
+----------
+04.60
+----------
+
+SKILL_ID..........: SKILL_BATON
+FILE..............: 10.STANDAR.BATON.txt
+STATUS............: ACTIVE
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Define continuidad operativa orientada a IA.
+
+----------
+04.70
+----------
+
+SKILL_ID..........: SKILL_HUMAN_README
+FILE..............: 11.STANDAR.HUMAN_README.txt
+STATUS............: ACTIVE
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Define documentación profunda y explicativa.
+
+----------
+04.80
+----------
+
+SKILL_ID..........: SKILL_DRAG_AND_DROP
+FILE..............: 12.STANDAR.DRAG_AND_DROP.txt
+STATUS............: ACTIVE
+CATEGORY..........: USECASE
+PURPOSE...........: Estandariza mecánica de adjuntar y operar por arrastre.
+
+----------
+04.90
+----------
+
+SKILL_ID..........: SKILL_PROJECT_BOOTSTRAP_POLICY
+FILE..............: 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: LIFECYCLE
+PURPOSE...........: Define creación inicial de artefactos base.
+
+----------
+05.00
+----------
+
+SKILL_ID..........: SKILL_OPERATIONAL_ARTIFACTS_POLICY
+FILE..............: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Define precedencia y relación entre artefactos.
+
+----------
+05.10
+----------
+
+SKILL_ID..........: SKILL_PROJECT_LIFECYCLE_POLICY
+FILE..............: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: LIFECYCLE
+PURPOSE...........: Define inicio, ejecución y cierre de sesión.
+
+----------
+05.20
+----------
+
+SKILL_ID..........: SKILL_WHOAMI_POLICY
+FILE..............: 23.SKILL.WHOAMI_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Define continuidad humana operacional resumida.
+
+==========
+05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
+==========
+
+La IA debe recomendar skills adicionales solo si:
+- mejoran cobertura de forma clara
+- reducen riesgo de error
+- evitan interpretación ambigua
+- el skill adjunto por el usuario es insuficiente o incorrecto
+
+La IA no debe recomendar skills por mera afinidad temática.
+
+==========
+06.00_REGLAS_PARA_DETECTAR_REDUNDANCIA
+==========
+
+La IA debe marcar skills como innecesarios si:
+- no aportan al caso
+- duplican función de otro skill ya adjunto
+- agregan ruido sin aumentar precisión operativa
+
+==========
+07.00_REGLAS_PARA_DETECTAR_GAPS
+==========
+
+Si el requerimiento exige una capacidad que no está cubierta por skills existentes:
+- la IA debe decirlo explícitamente
+- no debe inventar skill nuevo
+- debe proponer que el caso sea revisado posteriormente
+
+==========
+08.00_CHECKLIST_RAPIDO
+==========
+
+- ¿El prompt fue entendido?
+- ¿Los skills adjuntos cubren el caso?
+- ¿Falta otro skill del menú?
+- ¿Sobra alguno?
+- ¿Hay gap no cubierto por el menú?
+- ¿Se recomendó el set mínimo suficiente?
+
+==========
+09.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-CANON
+- Creación inicial del SKILL.MENU canónico
+- Inclusión de artefactos operativos base

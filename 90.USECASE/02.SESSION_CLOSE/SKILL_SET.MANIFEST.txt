@@ -1,0 +1,43 @@
+==========
+00.00_METADATA
+==========
+
+USECASE_ID........: SESSION_CLOSE
+VERSION...........: v1.0-MANUAL
+FECHA.............: 2026-04-21
+AUTOR.............: PABLO
+
+DESCRIPCION.......:
+Set mínimo de skills requeridos para cerrar sesión,
+actualizar continuidad y dejar trazabilidad consistente.
+
+========== 
+01.00_REQUIRED_FILES
+==========
+
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+12.STANDAR.DRAG_AND_DROP.txt
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+23.SKILL.WHOAMI_POLICY.txt
+
+========== 
+02.00_USAGE
+==========
+
+1. Adjuntar PROMPT.SESSION_CLOSE.txt
+2. Adjuntar TODOS los archivos listados
+3. Ejecutar en IA en blanco
+4. Validar salida antes de guardar cambios
+
+========== 
+03.00_NOTES
+==========
+
+- BATON es obligatorio
+- WHOAMI debe quedar actualizado
+- RADAR debe ejecutarse después del cierre

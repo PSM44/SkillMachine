@@ -1,0 +1,288 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.HUMAN.README.01.00
+NOMBRE_SUGERIDO...: 11.STANDAR.HUMAN_README.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-24
+HORA..............: HH:MM
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\HUMAN)
+AUTOR_HUMANO......: ADMIN
+
+ALCANCE...........:
+
+Define cómo deben escribirse y mantenerse los archivos HUMAN.README.*.
+
+Establece:
+
+- Qué es un HUMAN root y qué es un HUMAN hijo.
+- Cómo se resuelven conflictos entre HUMAN de distinto nivel.
+- Cómo se referencian entre sí HUMAN, SKILLS, BATON y RADAR.
+- Cómo evitar que HUMAN se convierta en basura inservible.
+
+Aplica a cualquier sistema/proyecto que use archivos HUMAN.README.*
+
+NOTA_IMPORTANTE...:
+
+HUMAN.README está por sobre cualquier otro archivo a nivel explicativo,
+pero debe respetar la jerarquía entre HUMAN de distinto nivel.
+
+DEPENDENCIAS......:
+
+07.STANDAR.FILE_CONTENT.txt
+06.STANDAR.WBS_ID.txt
+10.STANDAR.BATON.txt
+
+==========
+01.00_ROL_DE_HUMAN_README
+==========
+
+----------
+01.10_PARA_QUIEN
+----------
+
+HUMAN.README está escrito para:
+
+- Tu yo del futuro.
+- Un humano nuevo que se sube al proyecto.
+- Una IA en blanco que debe entender el proyecto a nivel conceptual.
+
+No está pensado como comentario al margen; es el “contrato humano” del sistema.
+
+----------
+01.20_QUE_ES_HUMAN_README
+----------
+
+HUMAN.README es:
+
+- El documento que explica el “por qué” y el “cómo” a nivel conceptual.
+- La fuente de intención, contexto, supuestos y criterios.
+- El lugar donde se registran decisiones de diseño relevantes.
+
+HUMAN.README no:
+
+- Expone cada detalle de implementación (eso vive en código / SKILLS específicos).
+- Reemplaza manuales de usuario externos, salvo que se decida explícitamente.
+
+==========
+02.00_HUMAN_ROOT_VS_HUMAN_HIJO
+==========
+
+++++++++++
+02.10_HUMAN_ROOT
+++++++++++
+
+HUMAN root:
+
+- Es el HUMAN principal de un sistema/proyecto.
+- Define el alcance, objetivos, principios y lenguaje común.
+- Es la referencia superior en caso de conflicto de interpretación.
+
+Solo debería haber un HUMAN root por sistema/proyecto.
+
+++++++++++
+02.20_HUMAN_HIJO
+++++++++++
+
+HUMAN hijo:
+
+- Es un HUMAN derivado, más específico.
+- Puede concentrarse en un subdominio, módulo, fase o vista particular.
+- No puede contradecir al HUMAN root.
+
+Ejemplos:
+
+- HUMAN.PFUNDATIONS.README (root).
+- HUMAN.PFUNDATIONS.CAPAS (hijo focalizado en arquitectura).
+- HUMAN.PROYECTO_X.FINANZAS (hijo de un HUMAN root del proyecto X).
+
+++++++++++
+02.30_CUANDO_PARTIR_UN_HUMAN
+++++++++++
+
+Un HUMAN root se parte en HUMAN hijos cuando:
+
+- Es demasiado largo para ser operable.
+- Mezcla dominios que podrían vivir separados.
+- Hay lectores/usuarios claramente distintos (ej.: negocio vs técnico).
+
+Regla práctica:
+
+- Si un HUMAN supera el punto en que nadie quiere leerlo completo,
+  se evalúa partir en HUMAN hijos, manteniendo un HUMAN root más estable.
+
+==========
+03.00_JERARQUIA_Y_RESOLUCION_DE_CONFLICTOS
+==========
+
+----------
+03.10_PRECEDENCIA_ENTRE_HUMAN
+----------
+
+Orden de precedencia cuando HUMAN chocan entre sí:
+
+1) HUMAN root de nivel más alto (ej.: HUMAN.PFUNDATIONS.README).
+2) HUMAN root del proyecto específico.
+3) HUMAN hijos de ese proyecto/sistema.
+
+Si dos HUMAN root de nivel similar chocan, se debe resolver explícitamente
+en una siguiente versión (no se “deja pasar”).
+
+----------
+03.20_RELACION_HUMAN_CON_SKILLS_Y_BATON
+----------
+
+Precedencia global:
+
+1) HUMAN (root e hijos, respetando jerarquía entre ellos).
+2) SKILLS/estándares técnicos.
+3) BATON.STATE (snapshot operativo por proyecto).
+4) Código/scripts/configuración.
+
+Si un SKILL contradice HUMAN, hay dos opciones:
+
+- El SKILL está desactualizado → se actualiza.
+- HUMAN está desactualizado → se actualiza, dejando claro el cambio.
+
+BATON.STATE solo empaqueta el estado que HUMAN y SKILLS ya definieron.
+
+==========
+04.00_CONTENIDO_MINIMO_DE_UN_HUMAN
+==========
+
+++++++++++
+04.10_BLOQUES_OBLIGATORIOS
+++++++++++
+
+Todo HUMAN debe tener:
+
+- Metadatos estándar (FILE_CONTENT).
+- Introducción clara: de qué trata y para quién es.
+- Cuerpo organizado con títulos 1–4.
+- Sección de decisiones clave (aunque sea breve).
+- Sección de límites: qué NO cubre este HUMAN.
+- CHANGELOG con fechas y cambios relevantes.
+
+++++++++++
+04.20_NIVEL_DE_DETALLE
+++++++++++
+
+Reglas:
+
+- No se resume en exceso; se prefiere mantener contexto.
+- No se tecnifica tanto que un lector razonable no pueda seguirlo.
+- No se convierte en un manual frío de procesos sin explicar el “por qué”.
+
+Si algo parece demasiado detallado para HUMAN, puede migrar a:
+
+- Un SKILL específico.
+- Un documento técnico paralelo, referenciado desde HUMAN.
+
+Pero HUMAN debe seguir explicando las piezas clave y cómo se conectan.
+
+++++++++++
+04.30_REGLA_DE_NO_PERDIDA_DE_CONTEXTO
+++++++++++
+
+Por defecto:
+
+- Evolucionar un HUMAN significa complementar, ordenar y aclarar.
+- No significa recortar agresivamente contenido conceptual útil.
+
+Si se decide eliminar secciones enteras:
+
+- Se debe registrar en CHANGELOG por qué se hizo.
+- Idealmente, se mueven a un archivo histórico si el contexto podría ser útil después.
+
+==========
+05.00_INTERACCION_HUMANO_IA_EN_HUMAN
+==========
+
+----------
+05.10_QUE_PUEDE_HACER_LA_IA
+----------
+
+La IA puede:
+
+- Proponer reordenamiento de secciones.
+- Mejorar redacción y claridad.
+- Sugerir nuevas secciones cuando detecta huecos.
+- Detectar contradicciones internas o con SKILLS/BATON.
+
+La IA no debería, por defecto:
+
+- Eliminar secciones completas sin instrucción expresa.
+- Reducir un HUMAN a un resumen corto.
+- Cambiar el sentido de decisiones clave sin destacarlo.
+
+----------
+05.20_FORMATO_DE_PROPUESTAS_DE_CAMBIO
+----------
+
+Cuando la IA proponga cambios en HUMAN:
+
+- Debe indicar el título/sección afectada.
+- Debe entregar BLOQUE_ORIGINAL y BLOQUE_CORREGIDO para facilitar replace.
+- Si propone eliminación, debe copiar la sección a eliminar y explicar por qué.
+
+El humano decide qué se acepta y qué no.
+
+==========
+06.00_USO_DE_HUMAN_EN_EL_DIA_A_DIA
+==========
+
+++++++++++
+06.10_CUANDO_LEER_HUMAN
+++++++++++
+
+Casos típicos:
+
+- Inicio de trabajo en un proyecto/sistema.
+- Antes de diseñar o refactorizar procesos importantes.
+- Cuando hay INCIDENTES repetidos en el mismo área.
+- Cuando un SKILL parece estar en conflicto con la realidad.
+
+++++++++++
+06.20_CUANDO_ACTUALIZAR_HUMAN
+++++++++++
+
+HUMAN debe actualizarse cuando:
+
+- Cambian objetivos o alcance del sistema/proyecto.
+- Cambian criterios o principios de diseño.
+- Ocurre un INCIDENTE que revela un error conceptual.
+- Se parte en HUMAN hijos y el root debe recontraerse a un rol más estable.
+
+En todos los casos:
+
+- El CHANGELOG debe reflejar el cambio.
+- Si un HUMAN hijo se crea o se corrige, debe referenciar claramente al HUMAN root.
+
+++++++++++
+06.30_QUE_NO_DEBE_HACERSE_CON_HUMAN
+++++++++++
+
+No debe:
+
+- Usarse como basurero de notas inconexas.
+- Convertirse en un “dump” de decisiones sin estructura.
+- Cambiarse de forma masiva sin registrar razones en CHANGELOG.
+- Cambiar sentido de decisiones clave sin marcarlo de forma evidente.
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-02-24, v1.0-DRAFT
+- Versión inicial de STANDAR.HUMAN_README.
+
+2026-02-24, v1.1-DRAFT
+- Se formaliza HUMAN root vs HUMAN hijo.
+- Se documenta jerarquía entre HUMAN y su relación con la precedencia global.
+- Se definen criterios para partir HUMAN y cómo referenciarlos entre sí.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

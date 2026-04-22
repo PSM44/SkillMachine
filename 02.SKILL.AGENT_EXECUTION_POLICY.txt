@@ -1,0 +1,259 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.EXEC_POLICY.01.10
+NOMBRE_SUGERIDO...: 02.SKILL.AGENT_EXECUTION_POLICY.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Política operativa para agentes ejecutores: crear/editar/eliminar archivos y carpetas
+SOLO dentro del sandbox del proyecto, con rollback obligatorio, validación y evidencia.
+NO_CUBRE..........:
+- No define routing ni costos (ver skills respectivos).
+- No define estructura del repo (solo reglas de ejecución).
+DEPENDENCIAS......:
+03.SKILL.SANDBOX_BOUNDARY.txt
+04.SKILL.COST_CONTROL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+07.STANDAR.FILE_CONTENT.txt
+06.STANDAR.WBS_ID.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto
+
+01.00 Roles del agente (Planner vs Executor)
+02.00 Permisos y límites (FS)
+03.00 Operaciones permitidas (Create/Edit/Delete/Rename/Move)
+04.00 Operaciones prohibidas
+05.00 Contrato de rollback (Git + snapshot)
+06.00 Contrato de evidencia (OK vs FAIL)
+07.00 Protocolo de cambios (patch vs archivo completo)
+08.00 Validaciones mínimas (pre y post)
+09.00 Manejo de deletes (soft-delete/quarantine)
+10.00 Manejo de incidentes (TROUBLE/INCIDENT)
+11.00 Checklist rápido
+12.00 CHANGELOG
+
+==========
+00.20_CONTEXTO
+==========
+
+Problema real:
+- “Agente que ejecuta frecuente” sin policy termina rompiendo cosas o gastando de más.
+Objetivo:
+- Reglas simples para que el agente sea útil, seguro y auditable.
+
+==========
+01.00_ROLES_DEL_AGENTE
+==========
+
+01.10_PLANNER
+- Produce plan + lista de cambios propuesta.
+- No escribe FS (solo lectura), salvo outputs temporales del orquestador.
+
+01.20_EXECUTOR
+- Aplica cambios en FS, pero solo con:
+  - sandbox validado,
+  - rollback listo,
+  - budget autorizado,
+  - instrucciones concretas.
+
+Regla:
+- En MVP: el humano aprueba el plan antes del executor.
+
+==========
+02.00_PERMISOS_Y_LIMITES_(FS)
+==========
+
+02.10_SCOPE_DURO
+- El executor solo puede operar en PROJECT_ROOT (definido por SANDBOX_BOUNDARY).
+- Cualquier path fuera => FAIL inmediato + TROUBLE.
+
+02.20_ALLOWLIST_Y_DENYLIST
+- Allowlist: PROJECT_ROOT y subpaths autorizados.
+- Denylist: secretos, llaves, .env, y “zona de sistema” del proyecto si aplica.
+
+Nota:
+- .git:
+  - lectura permitida,
+  - escritura solo vía Git CLI controlado por orquestador (no edits directos a objetos).
+
+==========
+03.00_OPERACIONES_PERMITIDAS
+==========
+
+03.10_CREATE
+- Crear archivos y carpetas dentro del root.
+- Debe respetar:
+  - WBS/ID si aplica,
+  - FILE_CONTENT si es “archivo serio”.
+
+03.20_EDIT
+- Modificar archivos existentes:
+  - preferir patch/diff,
+  - si archivo es “canónico grande”, permitir reemplazo por secciones.
+
+03.30_MOVE_RENAME
+- Permitido solo si:
+  - el plan lo declara explícito,
+  - se actualiza RADAR si aplica,
+  - se considera riesgo de path-length (WBS/ID).
+
+03.40_DELETE
+- Prohibido el delete “hard” por defecto.
+- Default: SOFT_DELETE (ver sección 09.00).
+
+==========
+04.00_OPERACIONES_PROHIBIDAS
+==========
+
+04.10_OS_COMMAND_ARBITRARIO
+- El agente NO puede ejecutar comandos arbitrarios del OS.
+- Solo puede ejecutar scripts allowlisted desde \02_TOOLS (ver 08.20).
+
+04.20_NETWORK_CALLS
+- El executor no hace llamadas de red directas (download/curl/etc.) salvo allowlist explícita.
+
+04.30_INSTALLS
+- Prohibido instalar software, modificar PATH, registry, servicios.
+
+04.40_SECRET_EXFILTRATION
+- Prohibido copiar llaves/secretos fuera del root.
+- Prohibido imprimir secretos en logs.
+
+==========
+05.00_CONTRATO_DE_ROLLBACK
+==========
+
+05.10_GIT_ES_OBLIGATORIO_(PREFERIDO)
+- Antes de aplicar cambios:
+  - crear branch de trabajo o commit checkpoint.
+- Después:
+  - commit con mensaje estándar.
+
+05.20_SNAPSHOT_FALLBACK
+Si Git no está disponible:
+- crear snapshot en \03_ARTIFACTS\SNAPSHOTS\ con:
+  - lista de archivos tocados,
+  - copias previas,
+  - hash.
+
+05.30_ROLLBACK_ACTION
+- Si FAIL:
+  - auto rollback al checkpoint más reciente.
+- Si OK:
+  - mantener checkpoint (auditoría).
+
+==========
+06.00_CONTRATO_DE_EVIDENCIA_(OK_VS_FAIL)
+==========
+
+06.10_OK_SOLO_SI
+- No hubo excepción.
+- Todos los outputs esperados existen.
+- Validaciones mínimas pasaron (ver 08.00).
+- Logs guardados con ID.
+
+06.20_FAIL_SI
+- Boundary violation.
+- Error de escritura/lectura.
+- Script allowlisted falla.
+- Validaciones mínimas no pasan.
+
+06.30_EVIDENCIA_MINIMA
+En OK/FAIL, registrar:
+- Lista de archivos tocados (paths)
+- Hash pre/post (si aplica)
+- Checkpoint ID (git commit o snapshot id)
+- Comando de scripts ejecutados + output
+- Tiempo + costo estimado (si aplica)
+
+==========
+07.00_PROTOCOLO_DE_CAMBIOS
+==========
+
+07.10_PREFERENCIA
+- Preferir PATCH (diff) sobre reemplazos masivos.
+- Reemplazo completo solo si:
+  - archivo nuevo,
+  - o refactor mayor aprobado.
+
+07.20_CAMBIOS_EN_ARCHIVOS_CANONICOS_(TXT)
+- Para skills/HUMAN/BATON:
+  - usar BLOQUE_ORIGINAL + BLOQUE_CORREGIDO cuando se corrige una sección.
+  - no resumir ni recortar conceptual (HUMAN policy).
+
+==========
+08.00_VALIDACIONES_MINIMAS
+==========
+
+08.10_PRE_VALIDATION
+- Preflight:
+  - costo estimado dentro budget,
+  - rollback listo,
+  - paths dentro sandbox.
+
+08.20_POST_VALIDATION
+- Si proyecto tiene tests/lint:
+  - ejecutar allowlisted runner (ej: Test suite / lint / build).
+- Si no:
+  - smoke test mínimo: parse/compile según lenguaje.
+- Scripts deben usar verbos aprobados en PowerShell:
+  - Usar Test-* en vez de Validate-* (evitar “unapproved verb”).
+
+==========
+09.00_MANEJO_DE_DELETES_(SOFT_DELETE)
+==========
+
+09.10_REGLA
+- Delete por defecto => mover a:
+  \03_ARTIFACTS\QUARANTINE\YYYYMMDD_HHMM\<path_rel>\
+- Mantener metadata:
+  - motivo,
+  - task id,
+  - checkpoint id.
+
+09.20_HARD_DELETE
+- Solo permitido si:
+  - humano lo ordena explícitamente,
+  - y existe snapshot/commit anterior.
+
+==========
+10.00_MANEJO_DE_INCIDENTES
+==========
+
+- Cualquier FAIL repetido o daño relevante:
+  - registrar TROUBLE o INCIDENT según severidad.
+  - evaluar actualizar SKILL/ARCH/BATON si cambió forma de operar.
+
+==========
+11.00_CHECKLIST_RAPIDO
+==========
+
+[ ] Scope = PROJECT_ROOT
+[ ] Budget aprobado
+[ ] Rollback listo (git commit/snapshot)
+[ ] Cambios como patch por defecto
+[ ] Delete = quarantine por defecto
+[ ] Scripts allowlisted (sin OS arbitrary)
+[ ] OK/FAIL con evidencia
+
+==========
+12.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Refuerzo: ejecución frecuente segura = rollback + quarantine + no OS arbitrary.
+- Refuerzo: Test-* verbos aprobados (evitar Validate-*).
+- Contrato: evidencia mínima obligatoria OK/FAIL.

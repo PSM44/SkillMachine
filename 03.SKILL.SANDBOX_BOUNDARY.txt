@@ -1,0 +1,190 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.SANDBOX.01.10
+NOMBRE_SUGERIDO...: 03.SKILL.SANDBOX_BOUNDARY.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Definir un sandbox “a toda prueba” a nivel de orquestador:
+- allowlist/denylist de paths,
+- bloqueo de operaciones fuera de PROJECT_ROOT,
+- política de soft-delete,
+- límites de ejecución de scripts.
+NO_CUBRE..........:
+- No define costos/routing.
+- No define permisos del OS/ACL (opcional; se recomienda pero no es requisito).
+DEPENDENCIAS......:
+02.SKILL.AGENT_EXECUTION_POLICY.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+06.STANDAR.WBS_ID.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto
+
+01.00 Definiciones (PROJECT_ROOT, ALLOWLIST, DENYLIST)
+02.00 Contrato duro de boundary (deny outside)
+03.00 Allowlist (lectura/escritura)
+04.00 Denylist (secrets/zonas prohibidas)
+05.00 Política de scripts (allowlisted runner)
+06.00 Política de deletes (quarantine)
+07.00 Evidencia y logging
+08.00 Casos de fallo (TROUBLE)
+09.00 Checklist rápido
+10.00 CHANGELOG
+
+==========
+00.20_CONTEXTO
+==========
+
+Objetivo:
+- La IA debe poder “hacer de todo” dentro del proyecto,
+  pero debe quedar imposibilitada de salir de ese perímetro.
+
+==========
+01.00_DEFINICIONES
+==========
+
+01.10_PROJECT_ROOT
+- Carpeta raíz canónica de un proyecto.
+- Todas las operaciones del executor deben resolverse a paths bajo este root.
+
+01.20_ALLOWLIST
+- Lista de subpaths permitidos para escritura (y opcionalmente lectura).
+
+01.30_DENYLIST
+- Subpaths o patrones prohibidos incluso dentro del root (ej: secrets).
+
+==========
+02.00_CONTRATO_DURO_DE_BOUNDARY
+==========
+
+02.10_REGLA_CENTRAL
+- Toda operación FS debe pasar por una función:
+  ResolveAndVerifyPath(path)
+- Si ResolveAndVerifyPath detecta que el path resuelto NO está bajo PROJECT_ROOT:
+  - FAIL inmediato,
+  - no se realiza ninguna acción,
+  - se registra TROUBLE.
+
+02.20_NORMALIZACION
+- Resolver:
+  - .. , symlinks (si aplica), junctions,
+  - case normalization (Windows),
+  - path canonical.
+- Evitar bypasses por paths relativos o enlaces.
+
+==========
+03.00_ALLOWLIST
+==========
+
+03.10_DEFAULT
+- Escritura permitida en:
+  - \01_HUMAN\
+  - \02_CODE\
+  - \03_ARTIFACTS\
+  - \AI_ORCH\ (si está dentro del proyecto)
+- Lectura permitida en todo el root EXCEPTO denylist.
+
+03.20_MODO_RESTRICTIVO_(OPCIONAL)
+- Escritura solo en:
+  - \02_CODE\
+  - \03_ARTIFACTS\
+- HUMAN/SKILLS solo se escriben con aprobación explícita (modo governance).
+
+==========
+04.00_DENYLIST
+==========
+
+04.10_SECRET_PATTERNS
+Bloquear lectura/escritura:
+- **\*.key
+- **\*.pem
+- **\*.pfx
+- **\*.kdbx
+- **\.env
+- **\secrets\**
+- **\credentials\**
+
+04.20_ZONAS_SENSIBLES_DEL_PROYECTO
+- \03_ARTIFACTS\SNAPSHOTS\  (escritura solo por el orquestador)
+- \.git\objects\            (no tocar directo)
+
+==========
+05.00_POLITICA_DE_SCRIPTS_(RUNNER_ALLOWLIST)
+==========
+
+05.10_REGLA
+- Executor no ejecuta comandos OS arbitrarios.
+- Solo ejecuta scripts allowlisted desde:
+  \AI_ORCH\02_TOOLS\ o \03_ARTIFACTS\RUNNERS\
+
+05.20_ALLOWLIST_EJEMPLO
+- RADAR.ps1 (si aplica)
+- Test suite (ej: pytest, npm test) pero invocado por runner controlado.
+
+05.30_PARAMETROS_CONTROLADOS
+- Los parámetros de scripts son validados:
+  - paths deben estar dentro del PROJECT_ROOT,
+  - no se aceptan strings que permitan “escape” (ej: ; & |).
+
+==========
+06.00_POLITICA_DE_DELETES_(QUARANTINE)
+==========
+
+- Todo delete => move a QUARANTINE dentro del root (ver EXEC_POLICY).
+- Mantener meta:
+  - timestamp,
+  - motivo,
+  - task id,
+  - checkpoint id.
+
+==========
+07.00_EVIDENCIA_Y_LOGGING
+==========
+
+Registrar por cada acción:
+- actor (executor)
+- operation (create/edit/move/quarantine)
+- path_before / path_after
+- hash_before / hash_after (si aplica)
+- resultado OK/FAIL
+
+==========
+08.00_CASOS_DE_FALLO_(TROUBLE)
+==========
+
+- Boundary violation => TROUBLE severidad MEDIA mínimo.
+- Attempt secret access => TROUBLE severidad ALTA (riesgo).
+- Script runner intento no allowlisted => FAIL + TROUBLE.
+
+==========
+09.00_CHECKLIST_RAPIDO
+==========
+
+[ ] ResolveAndVerifyPath para toda operación
+[ ] Normalización anti-bypass activa
+[ ] Allowlist definida
+[ ] Denylist secrets activa
+[ ] Runner allowlist activa
+[ ] Delete = quarantine por defecto
+
+==========
+10.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Refuerzo: contrato duro “deny outside root” + normalización anti-bypass.
+- Denylist de secretos/patrones.
+- Runner allowlist (no OS arbitrary).

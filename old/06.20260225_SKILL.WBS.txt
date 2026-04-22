@@ -1,0 +1,574 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+
+ID_UNICO..........: SKILL.WBS_ID.01.01
+NOMBRE_SUGERIDO...: 06.STANDAR.WBS_ID.txt
+VERSION...........: v1.1-CANON
+FECHA.............: 2026-02-20
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Santiago, Chile (actualizar si aplica)
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
+
+ALCANCE...........:
+
+Define cómo se construyen:
+
+WBS internos (estructura dentro de los archivos).
+
+IDs cortos de archivos/carpetas (ID_FS, compatibles con Windows y tooling).
+
+IDs de BD (ID_DB, compatibles con modelos relacionales / catálogos).
+
+Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
+
+Este SKILL es transversal: ningún frame (PFUNDATIONS, EVA, WINGS, etc.)
+debe redefinir por su cuenta el formato de WBS e IDs.
+
+Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
+
+DEPENDENCIAS......:
+
+07.STANDAR.FILE_CONTENT.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt (si existe en el ecosistema; no es requisito para usar WBS/ID)
+
+NOTA_IMPORTANTE...:
+
+Este skill define la “gramática” de IDs.
+No obliga a una ruta física ni a una estructura de carpetas específica.
+
+==========
+00.10_INDICE_GENERAL_WBS
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Definiciones básicas
+02.00 Problemas históricos que este SKILL ataca
+03.00 Principios de diseño para WBS e IDs
+
+04.00 Estándar de WBS interno (dentro de los archivos)
+05.00 Estándar de IDs cortos para archivos y carpetas (FS)
+05.00.08 Excepciones controladas a ID_FS (nuevo)
+
+06.00 Estándar de IDs para BD (claves amigables)
+
+07.00 Relación IDs ↔ SKILLS ↔ HUMAN ↔ RADAR
+08.00 Ejemplos prácticos
+09.00 Antipatrones (qué no hacer)
+10.00 Implementación progresiva (cómo migrar)
+11.00 Checklist rápido
+12.00 Historial de cambios del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_ESTE_SKILL
+
+a) Rutas demasiado largas en Windows (≈260 caracteres) que rompen copias, zips,
+sincronización (OneDrive, etc.) y tooling.
+
+b) Nombres extremadamente verbosos y heterogéneos que dificultan la lectura y
+el parseo automático.
+
+c) Falta de compatibilidad entre nombres de FS (File System) y claves para BD
+(Base de Datos).
+
+d) Refactors costosos porque versión, WBS, título y demás se mezclan en el nombre
+del archivo.
+
+e) Inconsistencia entre proyectos y sistemas: cada uno inventa su propio esquema
+de nombres, obligando a RADAR y a la IA a “adivinar” patrones en vez de seguir
+reglas.
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar único y simple para:
+
+a) WBS interno (estructura dentro de los archivos).
+b) IDs cortos de archivos y carpetas (FS-friendly).
+c) IDs para BD (DB-friendly).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Permitir que los nombres “humanos” puedan ser largos y explicativos sin romper:
+
+a) Límites de Windows.
+b) Esquemas de BD.
+c) Scripts y tooling que dependan de los IDs.
+
+==========
+01.00_DEFINICIONES_BASICAS
+01.00.01_WBS_INTERNO
+
+Estructura jerárquica dentro de un documento (por ejemplo: 01.00, 01.10, 01.20, etc.).
+
+Función:
+
+Ordenar ideas y secciones de forma estable.
+
+Permitir referencias internas tipo “ver 03.20 de este documento”.
+
+No tiene obligación de coincidir con estructura de carpetas.
+
+01.00.02_ID_FS_(ID_DE_FILE_SYSTEM)
+
+Identificador corto y estable que se usa en nombres de archivos y carpetas.
+
+Reglas mínimas:
+
+ASCII básico, sin espacios, sin tildes, sin caracteres raros.
+
+Amigable para Windows (ruta total razonable).
+
+Se compone normalmente de:
+
+Prefijo de frame o proyecto (FRM).
+
+Tipo lógico (TIPO).
+
+Secuencia numérica (NNNN).
+
+Opcional: sufijo humano corto ASCII.
+
+Ejemplo:
+
+PF_HUM_0005
+
+EVA_SKL_0101
+
+WNG_TL_0200_REGENALL
+
+01.00.03_ID_DB_(ID_DE_BASE_DE_DATOS)
+
+Clave para BD:
+
+Lo más corta posible.
+
+Sin dependencias directas de rutas físicas.
+
+Idealmente unívoca para cada elemento lógico relevante.
+
+Puede reutilizar el patrón ID_FS o derivarlo, pero siempre con mapping claro ID_DB ↔ ID_FS.
+
+01.00.04_FRAME
+
+Conjunto coherente de reglas y artefactos:
+
+PFUNDATIONS, EVA.EOL, WINGS, proyectos, etc.
+
+01.00.05_SKILL
+
+Estándar transversal basado en errores reales que define “cómo se trabaja”.
+Los frames deben respetar los SKILLS, salvo excepciones justificadas.
+
+==========
+02.00_PROBLEMAS_HISTORICOS_QUE_ESTE_SKILL_ATACA
+02.00.01_PROBLEMA_1_RUTAS_LARGAS_EN_WINDOWS
+
+Árboles profundos + nombres largos + sincronización = riesgo de superar límite de ruta.
+
+Síntomas:
+
+Errores al copiar/mover/eliminar.
+
+Imposibilidad de zippear.
+
+Fallos de scripts.
+
+02.00.02_PROBLEMA_2_NOMBRES_BONITOS_PERO_INESCALABLES
+
+Espacios, tildes, ñ, caracteres especiales.
+
+Mezcla de WBS, título, versión en el mismo string.
+
+Resultado:
+
+Keys poco confiables en BD.
+
+Dificultad para queries limpias.
+
+Dificultad de parseo automático.
+
+02.00.03_PROBLEMA_3_REFACTORS_CAROS
+
+Cambias versión/título y el nombre de archivo cambia → cascada de roturas.
+
+02.00.04_PROBLEMA_4_INCONSISTENCIA_ENTRE_SISTEMAS
+
+Cada proyecto inventa su lógica.
+RADAR y tooling deben “adivinar” patrones.
+
+==========
+03.00_PRINCIPIOS_DE_DISENO_PARA_WBS_E_IDS
+03.00.01_PRINCIPIO_1_SEPARAR_CAPAS
+
+WBS interno → organización conceptual dentro del archivo.
+
+ID_FS → integración con filesystem.
+
+ID_DB → integración con BD/catálogos.
+
+No mezclar todo en el mismo string.
+
+03.00.02_PRINCIPIO_2_ID_CORTO_SEMANTICA_LARGA
+
+El ID debe ser mecánico, corto y estable.
+
+La semántica va en:
+
+títulos de sección,
+
+cabecera/metadatos,
+
+campos descriptivos de BD.
+
+03.00.03_PRINCIPIO_3_ASCII_ONLY_EN_IDS
+
+En IDs FS y BD:
+
+Letras A–Z (mayúsculas recomendadas).
+
+Dígitos 0–9.
+
+Separadores: _ y .
+
+No se permiten:
+
+tildes, ñ, espacios, símbolos raros.
+
+03.00.04_PRINCIPIO_4_ESTABILIDAD_DE_IDS
+
+Una vez asignado un ID:
+
+No se cambia salvo rediseño estructural mayor.
+
+Versiones van en metadatos, no en el ID.
+
+03.00.05_PRINCIPIO_5_LONGITUD_CONTROLADA
+
+Recomendaciones:
+
+ID_FS ≤ 16 caracteres (sin sufijo).
+
+ID_FS + sufijo ≤ 40 caracteres.
+
+Nombre archivo (ID_FS + sufijo + ext) ≤ 80 caracteres.
+
+Ruta objetivo < 200 caracteres.
+
+==========
+04.00_ESTANDAR_DE_WBS_INTERNO_(DENTRO_DE_LOS_ARCHIVOS)
+04.00.01_FORMATO_BASICO
+
+Formato sugerido:
+NN.MM_TITULO_EN_MAYUSCULAS_SIN_TILDES
+
+Ejemplo:
+01.30_RELACION_CON_LOS_SKILLS_Y_ESTANDARES_DEL_SISTEMA
+
+Características:
+
+NN = bloque principal (00, 01, 02, …).
+
+MM = subbloque (00, 10, 20, 30, etc.).
+
+Título en mayúsculas, sin tildes ni caracteres especiales.
+
+Guion bajo _ como separador.
+
+04.00.02_USO_RECOMENDADO
+
+Ordenar contenido y facilitar referencia (“ver 03.20”).
+
+No se usa como nombre de archivo ni como clave de BD.
+
+04.00.03_REGLAS_DE_ESTABILIDAD
+
+Evitar renumerar WBS internos salvo rediseño profundo.
+
+Si agregas un bloque intermedio, usar 01.15, 01.25, etc.
+
+==========
+05.00_ESTANDAR_DE_IDS_CORTOS_PARA_ARCHIVOS_Y_CARPETAS_(FS)
+
+++++++++++
+05.00.01_OBJETIVO_DE_ID_FS
+++++++++++
+
+Ser clave corta, estable y legible:
+
+unívoca dentro de un frame/proyecto,
+
+parseable por scripts,
+
+amigable con Windows.
+
+++++++++++
+05.00.02_PATRON_GENERAL_FRM_TIPO_NNNN
+++++++++++
+
+Patrón:
+FRM_TIPO_NNNN[_SUFIJO]
+
+FRM = código corto frame/proyecto
+TIPO = tipo lógico (HUM, SKL, RAD, TL, CFG, SCRP, etc.)
+NNNN = secuencia numérica
+SUFIJO = opcional, corto ASCII
+
+++++++++++
+05.00.03_FRM_OFICIALES_(EJEMPLOS)
+++++++++++
+
+Ejemplos (no exhaustivos):
+
+PF = PFUNDATIONS
+
+EVA = EVA.EOL
+
+WNG = WINGS
+
+KLAB = Kumquat Lab
+
+PROJ = Proyecto puntual
+
+Nota:
+
+Los FRM son ejemplos; el catálogo real depende del proyecto.
+
+++++++++++
+05.00.04_TIPOS_OFICIALES_(EJEMPLOS)
+++++++++++
+
+Ejemplos:
+
+HUM = documentos HUMAN
+
+SKL = skills/standards
+
+RAD = outputs RADAR
+
+TL = tools/logs
+
+CFG = configuraciones
+
+SCRP = scripts
+
+++++++++++
+05.00.05_EJEMPLOS_DE_ID_FS
+++++++++++
+
+PF_HUM_0005_OPERATIONS.txt
+
+PF_TL_0101_REGENALL.ps1
+
+WNG_RAD_0001_INDEX.txt
+
+++++++++++
+05.00.06_REGLAS_DE_CARACTERES_Y_LONGITUD
+++++++++++
+
+Permitido:
+
+A–Z, 0–9, _ y .
+
+No permitido:
+
+espacios, tildes, ñ, símbolos raros.
+
+Longitud:
+
+ID_FS recomendado ≤ 16 (sin sufijo).
+
+Nombre archivo completo ≤ 80.
+
+++++++++++
+05.00.07_IDS_PARA_CARPETAS
+++++++++++
+
+Mismo patrón, sin extensión.
+
+Ejemplos:
+
+PF_HUM
+
+WNG_RAD
+
+PROJ_CFG
+
+++++++++++
+05.00.08_EXCEPCIONES_CONTROLADAS_A_ID_FS
+++++++++++
+
+Regla:
+
+El estándar ID_FS es recomendado para consistencia y tooling.
+
+Se permiten excepciones cuando el HUMANO define un contrato operativo explícito.
+
+Ejemplo (real):
+
+Script con nombre fijo: RADAR.ps1
+
+Condiciones para permitir la excepción:
+
+Documentar en metadatos del archivo:
+
+“EXCEPCION_ID_FS...: SI (justificada)”
+
+Motivo: contrato operativo humano / compatibilidad con tooling.
+
+Objetivo:
+
+Evitar drift silencioso.
+
+==========
+06.00_ESTANDAR_DE_IDS_PARA_BD_(DB-FRIENDLY)
+
+++++++++++
+06.00.01_OBJETIVO_DE_ID_DB
+++++++++++
+
+Clave estable y portátil que no dependa de:
+
+ruta en disco,
+
+nombre de archivo,
+
+ubicación relativa.
+
+++++++++++
+06.00.02_FORMATO_SUGERIDO
+++++++++++
+
+Formato:
+FRM.DOC.SECC
+
+FRM = frame/proyecto
+DOC = número documento (alineado a NNNN si aplica)
+SECC = WBS interno normalizado (ej 0130)
+
+Ejemplos:
+
+PFOP.0005.0000 (documento completo)
+
+PFOP.0005.0130 (sección 01.30)
+
+++++++++++
+06.00.03_CAMPOS_SUGERIDOS_EN_BD
+++++++++++
+
+id_db
+
+id_fs
+
+id_unico
+
+title_humano
+
+wbs_interno
+
+fs_path_rel
+
+frame
+
+tipo_elemento
+
+==========
+07.00_RELACION_IDS_CON_SKILLS_Y_HUMAN_Y_RADAR
+07.10_ID_UNICO
+
+Cada archivo serio lleva ID_UNICO lógico, estable.
+
+07.20_ID_FS
+
+ID_FS es el nombre corto (si se adopta).
+Si se usa excepción (ej RADAR.ps1), se documenta.
+
+07.30_RADAR
+
+RADAR usa rutas del FS para describir y puede incluir hashes.
+RADAR no decide IDs, pero se beneficia cuando IDs son estables.
+
+==========
+08.00_EJEMPLOS_PRACTICOS
+08.10_EJEMPLO_WBS_INTERNO
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+01.10_SECCION
+
+++++++++++
+02.10_SUBSECCION
+++++++++++
+
+08.20_EJEMPLO_EXCEPCION_ID_FS
+
+Archivo: RADAR.ps1
+Metadatos incluyen:
+EXCEPCION_ID_FS...: SI (justificada)
+
+==========
+09.00_ANTIPATRONES
+09.10_METER_TODO_EN_EL_NOMBRE_DE_ARCHIVO
+
+Ejemplo malo:
+00.05_HUMAN.README.OPERATIONS_v0.3_definitivo_ahora_si.txt
+
+09.20_USAR_IDS_DISTINTOS_SIN_MAPPING
+
+FS y BD sin tabla mapping = trazabilidad rota.
+
+09.30_CAMBIAR_IDS_POR_CAMBIAR_TITULOS
+
+El ID debe ser estable; versión va en metadatos.
+
+09.40_MEZCLAR_IDIOMAS_Y_ACENTOS_EN_IDS
+
+IDs deben ser ASCII.
+
+==========
+10.00_IMPLEMENTACION_PROGRESIVA
+10.10_REGLA_GENERAL
+
+No migrar todo de golpe.
+Migrar cuando:
+
+creas nuevos artefactos,
+
+refactorizas tooling,
+
+incidentes obligan.
+
+10.20_ESTRATEGIA
+
+Nuevos archivos: siempre estándar.
+
+Antiguos: migrar solo si tocas fuerte o si serán indexados/BD.
+
+==========
+11.00_CHECKLIST_RAPIDO
+
+¿WBS interno con NN.MM estable?
+
+¿IDs ASCII?
+
+¿Nombre archivo razonable?
+
+¿Excepciones documentadas?
+
+¿IDs no cambian con versiones?
+
+==========
+12.00_HISTORIAL_DE_CAMBIOS
+
+2026-02-20, v1.1-CANON
+
+Incorpora “05.00.08 Excepciones controladas a ID_FS”.
+
+Aclara que FRM son ejemplos, no dependencia.
+
+Mantiene contenido previo y lo complementa sin perder puntos.
+
+==========
+FIN_DEL_DOCUMENTO

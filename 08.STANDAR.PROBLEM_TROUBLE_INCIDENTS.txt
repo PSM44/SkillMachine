@@ -1,0 +1,605 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROBLEM_TROUBLE_INCIDENT.01.00
+NOMBRE_SUGERIDO...: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+VERSION...........: v1.4-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\TROUBLE)
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Define cómo pensar y atacar problemas.
+Define cómo registrar problemas en TROUBLE_LOG.
+Define cuándo un problema se eleva a INCIDENTE y cómo gestionarlo.
+Define cómo registrar y tratar PROBLEMS, TROUBLE e INCIDENTS en el ecosistema
+(scripts, modelos, procesos, datos, costos de IA, ejecución de agentes, sandbox, etc.).
+
+Aplica a cualquier dominio: código, entorno, procesos de negocio, datos, costos de IA.
+
+DEPENDENCIAS......:
+
+07.STANDAR.FILE_CONTENT.txt (estructura y delivery de archivos).
+06.STANDAR.WBS_ID.txt (IDs y WBS).
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt (mapa de archivos/proyectos).
+10.STANDAR.BATON.txt (estado consolidado del proyecto, si aplica).
+
+MEJORA_CLAVE_v1.4:
+
+- Refuerza el playbook anti-shotgun con “pitfalls PowerShell reales”:
+  Count/Length, HashSet ctor con arrays, errores de parser por paréntesis, etc.
+- Refuerza que estos pitfalls, cuando bloquean tooling operacional (RADAR/ORCH),
+  se registran como TROUBLE y se resuelven con cambios mínimos + evidencia.
+- Refuerza que “OK” sin validar outputs y estado final es FAIL (no negociable).
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Propósito y alcance
+02.00 Definiciones básicas
+
+03.00 Registro mínimo y severidad
+04.00 Flujo de tratamiento
+
+04.40 Contrato de salida para scripts (OK vs FAIL)
+04.50 PowerShell verbos aprobados (evitar warnings)
+04.60 PowerShell pitfalls operacionales (NUEVO)
+
+05.00 Relación con BATON y RADAR
+06.00 Interacción humano IA
+
+06.30 Playbook técnico anti-shotgun
+06.35 Playbook anti-runaway (IA/costos)
+06.40 Template TROUBLE_LOG (copy/paste)
+
+07.00 Checklist rápido
+08.00 Changelog
+FIN del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMA_REAL_QUE_ESTE_SKILL_ATACA
+
+Cuando un problema se maneja “en caliente” sin método:
+
+- Se pierde contexto.
+- Se aplican cambios múltiples (“shotgun debugging”).
+- Se declaran cosas como “OK” aunque hubo error.
+- Se vuelve imposible reproducir y aprender.
+
+Resultado típico:
+La misma clase de error se repite (porque no hubo aprendizaje consolidado).
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Dar un método simple, repetible y auditable para:
+Detectar → Registrar → Diagnosticar → Corregir → Validar → Aprender.
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Estandarizar el “contrato mínimo” de evidencia y cierre:
+Si alguien más (o una IA en blanco) lee el TROUBLE/INCIDENT después,
+puede entender qué pasó, por qué, y cómo se evitó repetirlo.
+
+==========
+01.00_PROPOSITO_Y_ALCANCE
+==========
+
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+
+Evitar que cada problema se aborde “desde cero” sin método.
+Evitar shotgun debugging (cambiar todo a la vez).
+Asegurar que los problemas relevantes queden registrados y reaprovechados como conocimiento.
+
+Diferenciar entre:
+- Problema puntual.
+- Problema recurrente.
+- Incidente serio con impacto alto.
+
+01.20_A_QUE_ESCENARIOS_APLICA
+
+Escenarios típicos:
+
+- Errores técnicos (scripts, Excel, BD, entornos, permisos).
+- Descalces de datos (flujos financieros, reportes).
+- Problemas de procesos operativos (administración, documentación).
+- Problemas de diseño (criterio equivocado, supuestos mal definidos).
+- Problemas de IA: costos inesperados, loops, ejecución errónea, sandbox violado.
+- Problemas de tooling operacional: RADAR, ORCH, auditorías, scripts de gobierno.
+
+Si hay algo que “no anda bien” y merece más de 5 minutos de atención, este skill aplica.
+
+==========
+02.00_DEFINICIONES_BASICAS
+==========
+
+02.10_PROBLEM
+
+Situación detectada que no necesariamente ha impactado nada aún, pero podría.
+Es un desvío entre lo que debería pasar y lo que está pasando, observado al menos una vez.
+
+02.20_TROUBLE
+
+Problema concreto que afecta la operación de forma acotada y se registra en TROUBLE_LOG.
+
+Una entrada TROUBLE_LOG es la unidad mínima de memoria de problemas del ecosistema.
+
+02.30_INCIDENT
+
+Evento con impacto relevante en operación, dinero, reputación o riesgo.
+
+02.40_COST_INCIDENT
+
+Subtipo de INCIDENT cuando:
+- Se dispara el costo cloud (runaway tokens).
+- Se ejecutan loops de IA que consumen presupuesto.
+- Se usa contexto excesivo (ej.: RADAR_FULL) sin necesidad.
+- Un agente ejecutor intenta acciones fuera de política (aunque se bloqueen).
+
+Severidad típica: MEDIA a CRITICA según monto y riesgo.
+
+==========
+03.00_REGISTRO_MINIMO_Y_SEVERIDAD
+==========
+
+++++++++++
+03.10_CAMPOS_OBLIGATORIOS
+++++++++++
+
+Cada PROBLEM/TROUBLE/INCIDENT debe registrar, como mínimo:
+
+ID................: (conforme WBS_ID / ID_DB si aplica)
+TIPO..............: PROBLEM / TROUBLE / INCIDENT
+SUBTIPO...........: (opcional) COST_INCIDENT / SECURITY / DATA / ENV / CODE / CRITERIO / TOOLING
+SEVERIDAD.........: BAJA / MEDIA / ALTA / CRITICA
+FECHA_HORA........:
+SISTEMA_PROYECTO...:
+AMBITO............: ENTORNO / CODIGO / CRITERIO / CONTEXTO / COSTO / TOOLING
+
+QUE_DEBERIA_PASAR.:
+QUE_ESTA_PASANDO..:
+
+REPRODUCIBLE......: SI / NO
+PASOS_REPRODUCIR..:
+
+EVIDENCIA.........: (comandos, logs, stacktrace, capturas, paths)
+HIPOTESIS_INICIAL.:
+EXPERIMENTOS......:
+CAUSA_RAIZ........:
+CAMBIO_APLICADO...:
+VALIDACION........:
+ESTADO............: ABIERTO / MITIGADO / RESUELTO / CERRADO
+
+++++++++++
+03.20_SEVERIDAD_(EJEMPLOS)
+++++++++++
+
+BAJA:
+- Bug menor sin impacto en dinero/decisiones, workaround fácil.
+
+MEDIA:
+- “OK con error” (falso positivo) en scripts operativos (mínimo MEDIA).
+- Loop leve de IA que sube costo pero se detecta rápido.
+- Tooling fallando por supuestos de tipo (ej.: Count inexistente) con workaround simple.
+
+ALTA:
+- Error en flujo financiero o automatización que bloquea trabajo relevante.
+- Violación de sandbox (aunque haya sido DENY) con riesgo de configuración/política.
+- Tooling crítico (RADAR/ORCH) roto por bug que requiere parche y validación extendida.
+
+CRITICA:
+- Error usado en decisiones de inversión de terceros.
+- Exposición de secreto.
+- Runaway cost que quema presupuesto significativo.
+
+++++++++++
+03.30_SEVERIDAD_A_ACCIONES_MINIMAS_(CONTRATO_OPERATIVO)
+++++++++++
+
+BAJA:
+- Registrar TROUBLE_LOG mínimo.
+- Workaround aceptable.
+
+MEDIA:
+- Parche mínimo (cambio único y localizado).
+- Evidencia antes/después.
+- Smoke test.
+- Changelog en artefacto afectado (si aplica).
+
+ALTA:
+- Parche + validación extendida.
+- Evaluar rollback plan.
+- Evaluar regenerar RADAR.
+- Actualizar al menos 1 SKILL/HUMAN si el aprendizaje es generalizable.
+
+CRITICA:
+- Freeze temporal del flujo afectado.
+- Postmortem breve (causa raíz + prevención).
+- Revisión humana obligatoria.
+- Regenerar RADAR y evaluar actualizar BATON.STATE si aplica.
+
+++++++++++
+03.20.10_EJEMPLOS_AI_ORCH_(BOUNDARY_Y_SECRETOS)
+++++++++++
+
+Ejemplo A: Boundary violation (sandbox)
+
+- TIPO: TROUBLE
+- SEVERIDAD: MEDIA (mínimo)
+- Evento: agente intentó escribir fuera de PROJECT_ROOT.
+- Acción: FAIL inmediato + log + revisar SANDBOX_BOUNDARY.
+
+Ejemplo B: Exposición de secreto
+
+- TIPO: INCIDENT
+- SEVERIDAD: ALTA (mínimo)
+- Evento: API key/secret aparece en repo o logs.
+- Acción: rotar key, limpiar evidencia, bloquear apply, postmortem breve.
+
+==========
+04.00_FLUJO_DE_TRATAMIENTO
+==========
+
+++++++++++
+04.10_DE_PROBLEM_A_TROUBLE
+++++++++++
+
+Si un PROBLEM se confirma como real y reproducible:
+- se convierte en TROUBLE con ID claro
+- se adjunta evidencia
+- se registra prioridad y responsable
+
+++++++++++
+04.20_CUANDO_ES_INCIDENT
+++++++++++
+
+Un TROUBLE se eleva a INCIDENT cuando:
+- tiene impacto alto o riesgo real (dinero, reputación, cumplimiento)
+- bloquea trabajo importante
+- afecta más de un sistema/proceso o a terceros
+- implica COST_INCIDENT por gasto real o runaway
+
+++++++++++
+04.30_CIERRE
+++++++++++
+
+Para cerrar:
+- documentar causa raíz
+- cambios aplicados (qué y dónde)
+- validación (comando + evidencia)
+- lessons learned
+- evaluar: ¿actualizar HUMAN/SKILLS? ¿regenerar RADAR? ¿regenerar BATON?
+
+==========
+04.40_CONTRATO_DE_SALIDA_PARA_SCRIPTS
+==========
+
+++++++++++
+04.40.01_REGLA_BINARIA_OK_VS_FAIL
+++++++++++
+
+Para scripts ejecutables (ps1, py, sh, sql runners, etc.):
+
+Si ocurre una excepción NO controlada, o estado inválido:
+- el script termina en FAIL
+- imprime FAIL (no OK)
+- retorna exit code != 0 (idealmente 1)
+
+Solo se permite imprimir OK si:
+- no hubo excepciones
+- outputs esperados existen
+- validación mínima pasa (existencia + tamaño > 0 + checks simples)
+
+++++++++++
+04.40.02_EVIDENCIA_MINIMA_OBLIGATORIA_EN_FAIL
+++++++++++
+
+Un FAIL debe registrar al menos:
+- comando exacto ejecutado (copy/paste)
+- path del script ejecutado
+- versión del script (VERSION en metadatos)
+- error completo (mensaje y stacktrace)
+- outputs parciales creados (si existen) y rutas exactas
+
+++++++++++
+04.40.03_VALIDACION_MINIMA_EN_OK
+++++++++++
+
+Un OK debe verificar:
+- outputs esperados existen
+- tamaño > 0
+- logs escritos
+- DONE binario (si aplica)
+
+==========
+04.50_POWERSHELL_VERBOS_APROBADOS_(EVITAR_WARNINGS)
+==========
+
+Regla:
+
+Evitar verbos no aprobados en funciones/cmdlets PowerShell
+(ej: "Validate-*") para prevenir warnings tipo:
+
+"The cmdlet 'Validate-CISMetadata' uses an unapproved verb."
+
+Preferir verbos aprobados:
+
+Test-*
+Get-*
+Set-*
+New-*
+Remove-*
+Invoke-*
+Export-*
+Import-*
+Measure-*
+
+Ejemplo:
+
+- En vez de Validate-CISMetadata -> Test-CISMetadata
+- En vez de Validate-ProjectPaths -> Test-ProjectPaths
+
+Objetivo:
+
+Evitar warnings, mejorar compatibilidad con tooling y políticas corporativas.
+
+==========
+04.60_POWERSHELL_PITFALLS_OPERACIONALES_(NUEVO)
+==========
+
+Objetivo:
+Evitar fallas recurrentes en tooling operativo por supuestos de PowerShell/.NET.
+
+Casos reales (ej.: RADAR.ps1):
+
+04.60.01_SINGLE_OBJECT_NO_TIENE_.COUNT
+- Síntoma: “The property 'Count' cannot be found on this object”
+- Causa: pipeline devuelve 1 solo objeto (no array), por lo tanto no hay .Count
+- Fix:
+  - Forzar array: @(...)
+  - Usar .Length en vez de .Count en arrays
+
+04.60.02_NEW-OBJECT_HASHSET_CON_ARRAY_SE_EXPANDE
+- Síntoma: “Cannot find an overload for HashSet`1 and the argument count: X”
+- Causa: PowerShell expande el array como múltiples argumentos al constructor.
+- Fix:
+  - Instanciar vacío y Add() en loop:
+    $set = [System.Collections.Generic.HashSet[string]]::new()
+    foreach ($p in @($arr)) { [void]$set.Add([string]$p) }
+
+04.60.03_PARSER_ERROR_PARENTHESIS
+- Síntoma: “Missing closing ')' in subexpression”
+- Causa: @(... sin cerrar, o paréntesis desbalanceados.
+- Fix:
+  - Validar bloque completo antes de ejecutar:
+    pwsh -NoProfile -File .\script.ps1
+  - Mantener patches mínimos (bloques completos) y no edits parciales a ojo.
+
+Regla operativa:
+Si cualquiera de estos pitfalls rompe ejecución:
+- Registrar TROUBLE (AMBITO=CODIGO o TOOLING)
+- Aplicar patch mínimo
+- Validar (smoke test) y dejar evidencia.
+
+==========
+05.00_RELACION_CON_BATON_Y_RADAR
+==========
+
+05.10_CUANDO_TOCAR_BATON
+
+Si un INCIDENT implica:
+- cambio en reglas globales
+- cambio en forma de usar IA o ejecutar procesos clave
+Entonces:
+- evaluar regenerar BATON.STATE del proyecto afectado
+
+05.20_CUANDO_TOCAR_RADAR
+
+Si un TROUBLE/INCIDENT implica:
+- movimientos de carpetas
+- cambios masivos de nombres
+- alta/baja de proyectos completos
+Entonces:
+- regenerar RADAR (al menos INDEX/CORE)
+
+05.30_REFERENCIAS_EN_TROUBLE_LOG
+
+Cada entrada relevante puede incluir:
+- nombre de BATON.STATE implicado (si se regenera)
+- RADAR_INDEX/CORE/FULL usado como base
+
+==========
+06.00_INTERACCION_HUMANO_IA
+==========
+
+06.10_PAPEL_DE_LA_IA
+
+La IA debe:
+- clasificar problema (ENTORNO / CODIGO / CRITERIO / CONTEXTO / COSTO / TOOLING)
+- sugerir causas y experimentos para aislarlas
+- proponer texto de TROUBLE_LOG / INCIDENTE
+- proponer qué SKILLS/HUMAN actualizar
+
+La IA no:
+- decide sola si algo es incidente (humano decide)
+- cierra problemas sin validación humana
+
+06.20_REGLAS_DE_CONTENIDO_PARA_LA_IA
+
+Cuando la IA redacte/modifique:
+- TROUBLE_LOG
+- INCIDENTE
+- SKILLS/HUMAN relacionados
+
+Debe seguir FILE_CONTENT:
+- metadatos claros si crea artefactos nuevos
+- títulos 10x
+- si modifica un bloque: BLOQUE_ORIGINAL + BLOQUE_CORREGIDO
+
+==========
+06.30_PLAYBOOK_TECNICO_ANTI_SHOTGUN
+==========
+
+06.30.01_REGLA_1_UN_CAMBIO_POR_ITERACION
+- una hipótesis única
+- un cambio mínimo
+- prueba antes/después
+- evidencia
+
+06.30.02_REGLA_2_REPRODUCIR_ANTES_DE_TOCAR
+- reproducir con comando exacto
+- capturar output/stacktrace
+- registrar entorno (OS, path, permisos, versiones)
+
+06.30.03_REGLA_3_VALIDAR_TIPOS_Y_SUPUESTOS
+- confirmar tipo real (string vs list/dict)
+- normalizar antes de operar
+- no llamar métodos “asumidos” sin check
+
+06.30.04_REGLA_4_PATCH_POR_BLOQUES
+- entregar BLOQUE_ORIGINAL y BLOQUE_CORREGIDO
+- parche local (no reescritura total) salvo necesidad
+
+06.30.05_REGLA_5_NO_DECLARAR_OK_SI_HUBO_ERROR
+- “OK con error” = severidad MEDIA mínimo
+
+06.30.06_REGLA_6_SMOKE_TEST_MINIMO
+- correr 1 caso feliz (happy path)
+- correr 1 caso que antes fallaba
+- validar outputs (existencia + tamaño > 0)
+
+==========
+06.35_PLAYBOOK_ANTI_RUNAWAY_(IA/COSTO)
+==========
+
+Objetivo:
+Evitar loops de IA que consumen presupuesto o generan drift.
+
+Reglas:
+- Limitar iteraciones: max 5 reintentos por tarea sin intervención humana.
+- Si 3 reintentos fallan: elevar a TROUBLE (MEDIA) y parar.
+- Si el costo del día excede umbral: HARD_STOP para tareas no P0.
+- Preferir RADAR_INDEX por defecto; CORE solo por módulo; FULL ocasional.
+
+Evidencia mínima en COST_INCIDENT:
+- estimación vs real
+- tokens (input/output)
+- task_type
+- qué contexto se usó (INDEX/CORE/FULL)
+- por qué se disparó (loop, prompts, bug)
+
+==========
+06.40_TEMPLATE_TROUBLE_LOG_(COPY_PASTE)
+==========
+
+ID_TROUBLE.........:
+TIPO...............: PROBLEM / TROUBLE / INCIDENT
+SUBTIPO............: (opcional) COST_INCIDENT / SECURITY / DATA / ENV / CODE / CRITERIO / TOOLING
+SEVERIDAD..........: BAJA / MEDIA / ALTA / CRITICA
+FECHA_HORA.........:
+SISTEMA_PROYECTO....:
+AMBITO.............: ENTORNO / CODIGO / CRITERIO / CONTEXTO / COSTO / TOOLING
+
+QUE_DEBERIA_PASAR..:
+QUE_ESTA_PASANDO...:
+
+REPRODUCIBLE........: SI / NO
+PASOS_REPRODUCIR....:
+
+(1) ...
+(2) ...
+(3) ...
+
+EVIDENCIA...........:
+
+Comando ejecutado (copy/paste):
+
+Output / error / stacktrace (copy/paste):
+
+Archivos implicados (rutas):
+
+Version artefacto/script (VERSION + path):
+
+COSTO_IMPACTO......: (si aplica)
+- estimado USD:
+- real USD:
+- tokens in/out:
+- modelo:
+- contexto: INDEX / CORE / FULL
+
+HIPOTESIS_INICIAL...:
+
+(1) ...
+(2) ...
+
+EXPERIMENTOS........:
+
+(A) Qué se probó:
+Resultado:
+
+(B) Qué se probó:
+Resultado:
+
+CAUSA_RAIZ..........:
+CAMBIO_APLICADO.....:
+
+(1) Archivo/ruta:
+Cambio:
+
+(2) Archivo/ruta:
+Cambio:
+
+VALIDACION..........:
+
+Smoke test (comando + resultado):
+
+Outputs esperados (rutas + verificación):
+
+WORKAROUND..........: (si aplica)
+
+FOLLOW_UP...........:
+
+¿Actualizar HUMAN? (SI/NO) -> cuál:
+¿Actualizar SKILL? (SI/NO) -> cuál:
+¿Regenerar RADAR? (SI/NO) -> cuál:
+¿Regenerar BATON? (SI/NO) -> cuál:
+
+ESTADO..............: ABIERTO / MITIGADO / RESUELTO / CERRADO
+NOTAS...............:
+
+==========
+07.00_CHECKLIST_RAPIDO
+==========
+
+- ¿Sé describir qué debería pasar y qué está pasando?
+- ¿Puedo clasificar ámbito (ENTORNO/CODIGO/CRITERIO/CONTEXTO/COSTO/TOOLING)?
+- ¿Hay evidencia reproducible?
+- ¿Estoy aplicando un cambio por iteración (anti-shotgun)?
+- ¿Evité OK falso? (OK/FAIL binario)
+- Si es costo: ¿registré tokens/modelo/contexto?
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-02-26, v1.4-DRAFT
+- Agregado: 04.60 PowerShell pitfalls operacionales (Count/Length, HashSet ctor, parser parentheses).
+- Refuerzo: tooling operacional (RADAR/ORCH) como AMBITO=TOOLING + subtipos.
+- Refuerzo: “OK” sin outputs/validación es FAIL (no negociable).
+2026-02-26, v1.3-DRAFT
+- Agregado: COST_INCIDENT y playbook anti-runaway.
+- Refuerzo: integración con ejecución IA (evidencia + límite de iteraciones).
+- Refuerzo: costos como ámbito (COSTO) y campo COSTO_IMPACTO.
+2026-02-20, v1.2-CANON
+- Versión base del skill PROBLEM/TROUBLE/INCIDENTS.

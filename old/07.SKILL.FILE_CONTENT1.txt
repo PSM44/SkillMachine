@@ -1,0 +1,348 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.FILE_CONTENT.01.01
+NOMBRE_SUGERIDO...: 07.STANDAR.FILE_CONTENT.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-24
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile (actualizar si aplica)
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Regla transversal para crear y evolucionar el contenido de cualquier archivo
+(HUMAN, SYSTEM, scripts, configuraciones, prompts, informes, etc.).
+
+Aplica tanto a contenido creado por humano como por IA.
+Define estructura mínima, metadatos, forma de documentar cambios y nivel académico.
+
+DEPENDENCIAS......:
+
+Skill de WBS/ID para numeración y códigos internos.
+Estándar de DELIVERY (entrega copiable).
+Estándar de CODE (estilo de código y comentarios).
+Estándar de IA_INTERACTION (forma de trabajar con IA).
+10.STANDAR.BATON.txt (precedencia y estado del sistema).
+11.STANDAR.HUMAN_README.txt (contrato de uso general).
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt (aprendizaje desde problemas/incidentes).
+
+NOTA_IMPORTANTE...:
+
+Este skill define cómo debe verse y construirse el contenido de un archivo.
+La numeración detallada (WBS, IDs) vive en el skill de WBS/ID.
+No decide arquitectura de carpetas ni de BD, solo el contenido interno del archivo.
+
+==========
+01.00_PROPOSITO_Y_PRINCIPIOS
+==========
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Evitar archivos “vacíos” o caóticos sin metadatos, sin contexto ni estructura.
+
+Asegurar que cualquier archivo pueda ser entendido por:
+
+- Tu yo del futuro.
+- Un tercero razonablemente competente.
+- Una IA en blanco que no recuerda nada previo.
+
+Estandarizar cómo IA y humano construyen y mejoran archivos sin romper nada.
+
+----------
+01.20_A_QUE_TIPOS_DE_ARCHIVO_APLICA
+----------
+
+Aplica a:
+
+- HUMAN (conceptuales, manuales, guías).
+- SYSTEM / OPERATIONS (reglas, flujos, contratos operativos).
+- Scripts ejecutables (.ps1, .py, .sh, .sql, etc.).
+- Archivos de configuración y prompts persistentes.
+- Informes y salidas “serias” del ecosistema.
+
+No distingue por carpeta ni sistema (PF, WINGS, EVA, proyectos).
+Regla simple: si es un archivo “serio” del ecosistema, este skill aplica.
+
+----------
+01.30_PRECEDENCIA_DE_FUENTES
+----------
+
+Todo archivo que use este skill asume la precedencia:
+
+HUMAN (general y específico) > SKILLS > BATON.STATE > código.
+
+Si el contenido de un archivo choca con un HUMAN de nivel superior o un SKILL,
+el archivo está mal y debe corregirse.
+
+Si el archivo es HUMAN:
+
+- Debe mencionar si es HUMAN root o HUMAN hijo.
+- Debe indicar a qué HUMAN de nivel superior responde, si aplica.
+
+Si es script/código, se asume que implementa lo que dicen HUMAN + SKILLS.
+Si hay conflicto, se corrige primero el código, luego se revisa si HUMAN/SKILLS quedaron obsoletos.
+
+==========
+02.00_BLOQUES_MINIMOS_DE_CONTENIDO
+==========
+
+++++++++++
+02.10_METADATOS_INICIALES
+++++++++++
+
+Todo archivo relevante debe comenzar con un bloque de metadatos que incluya, como mínimo:
+
+- ID_UNICO o FILE_ID.
+- NOMBRE_SUGERIDO de archivo.
+- VERSION.
+- FECHA y, si aporta valor, HORA.
+- CIUDAD o UBICACION.
+- UBICACION_SISTEMA (carpeta lógica).
+- AUTOR_HUMANO (o rol, si no aplica nombre).
+- ALCANCE resumido (2–3 líneas máximo).
+- DEPENDENCIAS clave (otros archivos/skills que condicionan el uso).
+
+La IA puede proponer este bloque, pero la versión final siempre la valida el humano.
+
+++++++++++
+02.20_INTRODUCCION_CORTA
+++++++++++
+
+Después de los metadatos, debe existir una introducción breve que responda, en pocas líneas:
+
+- ¿Para qué existe este archivo?
+- ¿Qué problema resuelve?
+- ¿Qué cosas explícitamente NO cubre?
+- ¿Quién debería leerlo y en qué momento (inicio, operación, troubleshooting)?
+
+La introducción no reemplaza el resto, solo enmarca el contenido.
+
+++++++++++
+02.30_CUERPO_DEL_ARCHIVO
+++++++++++
+
+Reglas generales para el cuerpo:
+
+- Debe estar organizado con títulos 1–4 (los separadores de =, -, +, *) cuando sea .txt/.md.
+- Los títulos deben ser descriptivos: que se pueda escanear el archivo rápido.
+- Evitar párrafos gigantes: usar listas cuando haya más de 3–4 ítems.
+- No duplicar bloques enteros de texto; si algo ya está en otro archivo, referenciarlo.
+- No necesitas detallar la lógica de WBS aquí; usa el skill de WBS/ID para decidir la numeración.
+
+++++++++++
+02.40_SECCION_DE_CAMBIOS_(CHANGELOG)
+++++++++++
+
+En archivos que ya pasan de “borrador inicial” a algo estable:
+
+- Añadir una sección final de CHANGELOG (o HISTORIAL) con entradas tipo:
+  - FECHA, VERSION, RESUMEN de cambio (1–2 líneas).
+
+La IA puede proponer la entrada, pero el humano decide qué queda como canon.
+
+++++++++++
+02.50_FORMATO_DE_PRESENTACION
+++++++++++
+
+Recomendado:
+
+- Separador de título nivel 1 con “==========” antes de 00.00_METADATOS_DEL_DOCUMENTO.
+- Campos alineados con puntos (“......:”) para lectura rápida.
+- Texto explicativo en bloques separados por líneas en blanco.
+
+==========
+03.00_ARCHIVOS_NO_EJECUTABLES_(HUMAN_Y_DOCS)
+==========
+
+----------
+03.10_REGLAS_PARA_HUMAN_Y_DOCS
+----------
+
+Para HUMAN, manuales y documentación conceptual:
+
+- Usar títulos 1–4 para secciones y subsecciones.
+- Mantener un tono explicativo y académico, no telegráfico.
+- Incluir siempre:
+  - Metadatos.
+  - Introducción.
+  - Cuerpo organizado por temas (no por “vomitar ideas”).
+  - Changelog cuando tenga sentido.
+
+Regla por defecto:
+
+- Un HUMAN no se resume agresivamente salvo decisión explícita.
+- La evolución normal es complementar, ordenar, aclarar, no recortar.
+
+----------
+03.20_DOCS_OPERATIVOS_MAS_LIVIANOS
+----------
+
+Para documentos más operativos (ej.: pequeñas guías, notas de implementación):
+
+- Se permite menor profundidad, pero deben conservar:
+  - Metadatos básicos.
+  - Introducción mínima.
+  - Títulos claros (aunque sean menos niveles).
+
+La idea es que, incluso siendo cortos, sigan un patrón que la IA pueda entender y extender sin romper.
+
+==========
+04.00_ARCHIVOS_EJECUTABLES_(SCRIPTS_Y_CODIGO)
+==========
+
+----------
+04.10_CABECERA_DE_SCRIPTS
+----------
+
+Todo script relevante debería empezar con comentarios de cabecera con:
+
+- Nombre lógico del script.
+- Propósito (1–3 líneas).
+- Uso típico.
+- Referencia a HUMAN/SKILL que define el contrato funcional.
+
+Aunque el skill de CODE detalla el estilo, este skill de contenido define que esa cabecera debe existir.
+
+----------
+04.20_SECCION_COMO_EJECUTAR
+----------
+
+Todo script o proceso ejecutable debe tener una sección explícita de “Cómo ejecutar”:
+
+- Puede ir en el propio archivo (comentarios) o en un HUMAN asociado,
+  pero debe existir en algún sitio claramente referenciado.
+
+Contenido mínimo:
+
+- Prerrequisitos (versiones, módulos, rutas, permisos).
+- Comandos de ejemplo (casos típicos).
+- Parámetros obligatorios y opcionales.
+
+Sin esto, el archivo está “incompleto” para efectos del estándar.
+
+----------
+04.30_COMENTARIOS_POR_BLOQUE_DE_CODIGO
+----------
+
+En código ejecutable:
+
+- Cada bloque lógico (función, región, sección de main) debe ir acompañado de un comentario que explique:
+  - Qué hace.
+  - Por qué existe así.
+  - Qué supuestos tiene (inputs esperados, contexto).
+
+No es necesario saturar cada línea, pero sí dejar claro el sentido de cada bloque.
+El detalle fino de estilo está en el skill de CODE; este skill solo exige que el contenido explique lo suficiente.
+
+==========
+05.00_INTERACCION_HUMANO_IA_SOBRE_EL_CONTENIDO
+==========
+
+----------
+05.10_CUANDO_LA_IA_PROPONE_CAMBIOS
+----------
+
+Siempre que la IA cambie algo que no sea un typo trivial:
+
+- Debe indicar qué sección o título toca.
+- Debe entregar, para cada cambio relevante:
+
+  - BLOQUE_ORIGINAL (tal como está hoy en el archivo).
+  - BLOQUE_CORREGIDO (propuesta completa).
+
+El objetivo es que el humano pueda usar fácilmente replace en el editor sin ambigüedades.
+
+----------
+05.20_ELIMINAR_VS_RESUMIR_VS_EXTENDER
+----------
+
+Regla por defecto:
+
+- La IA no elimina secciones completas ni resume agresivamente contenido conceptual
+  sin que el humano lo pida explícitamente.
+
+Cambios aceptables por defecto:
+
+- Ordenar mejor.
+- Clarificar redacción.
+- Agregar contexto, ejemplos, notas de riesgo.
+
+Si se propone eliminar algo, la IA debe:
+
+- Indicar el bloque exacto.
+- Explicar por qué se sugiere eliminación (duplicado, obsoleto, contradictorio).
+
+----------
+05.30_AGREGAR_NUEVAS_SECCIONES
+----------
+
+Cuando la IA cree contenido nuevo:
+
+- Debe proponer el título y subtítulo (texto) de la sección nueva.
+- Debe indicar dónde insertarla:
+  - Texto/título superior inmediato.
+  - Texto/título inferior inmediato (si aplica).
+- Debe entregar el contenido completo de la nueva sección en un solo bloque.
+- La numeración interna (WBS, códigos) se ajusta siguiendo el skill de WBS/ID;
+  este skill solo define el comportamiento general.
+
+==========
+06.00_CHECKLIST_RAPIDO_PARA_CREAR_O_ACTUALIZAR_UN_ARCHIVO
+==========
+
+----------
+06.10_PARA_CREAR_DESDE_CERO
+----------
+
+Antes de considerar un archivo “aceptable”:
+
+- ¿Tiene bloque de metadatos al inicio?
+- ¿Tiene una introducción clara (para qué existe)?
+- ¿El cuerpo está organizado con títulos que un humano y una IA puedan entender?
+- Si es ejecutable, ¿existe una sección clara de “cómo ejecutar” en algún sitio?
+- ¿Hay al menos una nota de qué no hace el archivo (límites)?
+
+Si alguna respuesta es “no”, el archivo está en estado preliminar y debería pulirse.
+
+----------
+06.20_PARA_ACTUALIZAR_UN_ARCHIVO_EXISTENTE
+----------
+
+Antes de cerrar cambios:
+
+- ¿La IA te entregó BLOQUE_ORIGINAL y BLOQUE_CORREGIDO para lo que tocó?
+- ¿No se perdió contexto útil (el nuevo contenido no es más pobre que el anterior)?
+- ¿La introducción sigue alineada con lo que ahora hace el archivo?
+- ¿El cambio amerita una entrada nueva en el CHANGELOG?
+
+Si algo de esto falla, hay que ajustar antes de dar la versión como “estable”.
+
+==========
+07.00_RESUMEN_DE_USO_DEL_SKILL
+==========
+
+Usa este skill siempre que vayas a crear o rediseñar contenido de un archivo.
+
+Apóyate en otros skills (WBS/ID, DELIVERY, CODE, IA_INTERACTION) para los detalles específicos.
+
+Piensa este skill como la “plantilla mental” mínima:
+
+Metadatos → Introducción → Cuerpo ordenado → Cómo ejecutar (si aplica) → Changelog.
+
+Aplica a:
+
+- Archivos HUMAN.
+- SKILLS.
+- Scripts que requieran documentación académica.
+- Archivos de salida importantes (informes, etc.).
+
+Si un archivo no encaja al menos en ese esquema, todavía no está a la altura del ecosistema.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

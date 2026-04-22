@@ -1,0 +1,41 @@
+﻿==============================
+RADAR INDEX
+==============================
+RADAR_SCRIPT_VERSION: v0.5.0
+RADAR_OUTPUT_SCHEMA : v1.2
+OUTPUT_TYPE         : INDEX
+GENERATED_AT        : 2026-04-21 14:31:18
+ROOT_SCANNED        : C:\01. GitHub\Skills
+OUTPUT_PATH         : C:\01. GitHub\Skills\A_Tools\Radar
+OLD_PATH            : C:\01. GitHub\Skills\old\radar
+EXCLUDED_PATHS      :
+ - C:\01. GitHub\Skills\old
+ - C:\01. GitHub\Skills\A_Tools\Radar
+
+00.SkillSys\20260421.SkillSys.txt | 1400 bytes | 2026-04-21T10:28:51 | .txt | text
+01.ARCH.AI_ORCHESTRATION.CORE.txt | 10733 bytes | 2026-02-26T18:36:12 | .txt | text
+02.SKILL.AGENT_EXECUTION_POLICY.txt | 7052 bytes | 2026-02-26T18:36:42 | .txt | text
+03.SKILL.SANDBOX_BOUNDARY.txt | 4951 bytes | 2026-02-26T18:37:36 | .txt | text
+04.SKILL.COST_CONTROL.txt | 5926 bytes | 2026-02-26T18:39:39 | .txt | text
+05.20260226.2_SKILL.ROUTING_POLICY.txt | 6584 bytes | 2026-02-26T16:58:50 | .txt | text
+05.SKILL.ROUTING_POLICY.txt | 4880 bytes | 2026-02-26T18:41:50 | .txt | text
+06.SKILL.WBS.txt | 13449 bytes | 2026-02-26T18:51:37 | .txt | text
+07.SKILL.FILE_CONTENT.txt | 15777 bytes | 2026-02-26T17:10:27 | .txt | text
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt | 17053 bytes | 2026-02-26T19:28:38 | .txt | text
+09.STANDAR.RADAR.txt | 15372 bytes | 2026-02-26T18:53:27 | .txt | text
+10.STANDAR.BATON.txt | 14125 bytes | 2026-02-26T18:49:00 | .txt | text
+11.STANDAR.HUMAN_README.txt | 10958 bytes | 2026-02-26T18:50:17 | .txt | text
+12.STANDAR.DRAG_AND_DROP.txt | 8106 bytes | 2026-02-26T16:41:39 | .txt | text
+13.STACKS.COST_MONTHLY.txt | 4812 bytes | 2026-02-26T18:42:38 | .txt | text
+14.SIMULATION.PROJECT_100H.txt | 3581 bytes | 2026-02-26T18:43:06 | .txt | text
+15.SKILL.LOGGING_AUDIT.txt | 4747 bytes | 2026-02-26T18:45:21 | .txt | text
+16.SKILL.CHECKPOINT_ROLLBACK.txt | 3434 bytes | 2026-02-26T18:46:01 | .txt | text
+17.SKILL.SECRETS_HANDLING.txt | 2749 bytes | 2026-02-26T18:46:36 | .txt | text
+18.SKILL.DEV_ENV_MINIMAL.txt | 2562 bytes | 2026-02-26T18:47:17 | .txt | text
+19.CIS\20260421.CIS.txt | 4712 bytes | 2026-04-21T09:35:11 | .txt | text
+20260416.1_IASKILLS.GIT.txt | 3809 bytes | 2026-04-16T11:38:40 | .txt | text
+21.0.LearnAnything\20260421SkillLearnAnything.txt | 4269 bytes | 2026-04-21T10:06:56 | .txt | text
+21.1.LearnCAE\20260421.SkillCAEC1.txt | 5172 bytes | 2026-04-21T10:09:19 | .txt | text
+21.2.COMPITAScurity\20260421Comptia.txt | 4703 bytes | 2026-04-21T10:10:44 | .txt | text
+21.3.IAAuto\20260421.SkillLearnAuto.txt | 5065 bytes | 2026-04-21T10:15:10 | .txt | text
+21.WhoAmI\20260421_WhoAmI.txt | 4411 bytes | 2026-04-21T10:56:39 | .txt | text

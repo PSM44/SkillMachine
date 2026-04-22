@@ -1,0 +1,206 @@
+WBS — SKILL IA/AUTOMATIZACIÓN v1.0
+
+Nombre: AUTO.AI.OPERATOR
+Propósito: pasar de usuario a operador que diseña, integra y entrega automatizaciones con impacto
+
+00.00 PRINCIPIO RECTOR
+IA sin integración = juguete
+Automatización sin medición = irrelevante
+Cada módulo termina con un flujo funcionando (aunque sea pequeño)
+01.00 INPUT CONTRACT
+01.01 Objetivo
+diseñar y ejecutar automatizaciones reales (personal o negocio)
+output: 3–5 flujos productivos + documentación + métricas
+01.02 Restricciones
+6–8 semanas
+5–8 hrs/semana
+entorno: Windows + PowerShell (tu caso), APIs públicas
+01.03 Nivel
+base técnica media (scripts/CLI asistidos por IA)
+01.04 Nivel objetivo por módulo
+M1–M2 → L2
+M3–M4 → L3
+M5 → L4
+02.00 MAPA DEL CONOCIMIENTO
+M1 Fundamentos IA aplicada (L2)
+qué puede / no puede hacer
+tipos de tareas (texto, clasificación, extracción)
+M2 Prompt Engineering operativo (L3)
+inputs estructurados
+control de output
+validación
+M3 Automatización (scripts + APIs) (L3)
+requests a APIs
+manejo de archivos
+flujos CLI
+M4 Integración (L3)
+conectar servicios (correo, archivos, APIs)
+orquestación simple
+M5 Casos reales (L4)
+diseñar soluciones completas
+optimizar
+documentar
+03.00 CICLO OPERATIVO (POR MÓDULO)
+03.01 INPUT
+documentación breve / ejemplos
+03.02 PROCESAMIENTO
+esquema + resumen propio
+03.03 RECUPERACIÓN
+explicar sin mirar: “qué hace y cuándo usarlo”
+03.04 APLICACIÓN
+construir micro-flujo funcional
+03.05 FEEDBACK
+testear con casos reales
+03.06 ITERACIÓN
+mejorar robustez
+04.00 OUTPUT OBLIGATORIO
+
+Cada módulo debe dejar:
+
+script / flujo funcionando
+prompt reutilizable
+input/output ejemplo
+error log
+05.00 MÓDULOS EJECUTABLES
+05.01 M1 — FUNDAMENTOS IA
+Output
+documento: “cuándo usar IA vs no usar IA”
+5 ejemplos reales de uso
+Prompt GPT
+
+“Explain practical use cases of AI for automation in business operations. Include limitations and failure cases.”
+
+05.02 M2 — PROMPT ENGINEERING
+Output
+5 prompts reutilizables (clasificación, resumen, extracción, decisión, generación)
+Estructura estándar
+contexto
+instrucción
+formato de salida
+restricciones
+Prompt GPT
+
+“Design a robust prompt for [task] including structured input, strict output format, and validation rules.”
+
+05.03 M3 — AUTOMATIZACIÓN (CORE)
+Output
+
+3 scripts mínimos:
+
+Script 1
+input: archivo texto
+output: resumen estructurado
+Script 2
+input: lista de datos
+output: clasificación automática
+Script 3
+input: carpeta
+output: procesamiento batch
+Prompt GPT
+
+“Generate a PowerShell script that takes [input], sends it to an AI API, and returns structured output.”
+
+05.04 M4 — INTEGRACIÓN
+Output
+
+2 flujos reales:
+
+Flujo 1
+correo → IA → resumen → guardar
+Flujo 2
+archivo → IA → decisión → acción
+Prompt GPT
+
+“Design an automation flow connecting [input source] → AI processing → [output action]. Include error handling.”
+
+05.05 M5 — CASO REAL (CRÍTICO)
+Output (mínimo 2 proyectos)
+
+Ejemplos:
+
+análisis automático de documentos legales
+clasificación de correos
+generación de reportes
+extracción de datos de PDFs
+Requisitos
+input real
+output útil
+métrica (tiempo ahorrado, precisión)
+06.00 ERROR LOG
+
+Archivo obligatorio:
+
+/ERROR_LOG
+- error
+- causa (prompt / lógica / integración)
+- solución
+- mejora aplicada
+07.00 MÉTRICAS
+automatizaciones funcionales
+tiempo ahorrado por flujo
+% errores
+% outputs válidos
+08.00 STACK
+CORE
+ChatGPT → diseño + debugging
+NotebookLM → documentación
+OPCIONAL
+APIs (OpenAI, etc.)
+PowerShell / Python
+archivos locales
+09.00 PROMPTS BASE
+09.01 Diseño flujo
+
+“Design a real-world automation using AI for [problem]. Include input, processing, output, and failure cases.”
+
+09.02 Generación script
+
+“Generate a script in [PowerShell/Python] that automates [task] using an AI API. Include comments and error handling.”
+
+09.03 Validación
+
+“Evaluate this automation. Identify weaknesses, edge cases, and improvements.”
+
+09.04 Optimización
+
+“Improve this workflow to reduce errors and increase reliability.”
+
+10.00 ANTI-PATRONES
+solo hacer prompts → sin integración
+solo teoría → sin scripts
+automatizar cosas inútiles
+no medir impacto
+depender 100% de IA sin validar
+11.00 RITMO SEMANAL
+Semana 1–2
+M1 + M2
+Semana 3–4
+M3 (scripts)
+Semana 5–6
+M4 (integraciones)
+Semana 7–8
+M5 (proyectos reales)
+12.00 CRITERIO DE ÉXITO
+
+Cumples si puedes:
+
+diseñar un flujo desde cero
+implementarlo
+corregir errores
+explicar decisiones
+demostrar valor
+13.00 FEEDBACK DURO
+Lo bueno
+alineado a tu perfil (IA + automatización)
+orientado a ejecución
+reusable en tu trabajo (Kumquat)
+Lo débil
+requiere tocar código (aunque sea asistido)
+sin casos reales → no sirve
+puede volverse complejo si no priorizas
+14.00 RECOMENDACIÓN
+
+No lo conviertas en laboratorio infinito.
+
+Regla:
+👉 cada semana = 1 output funcional mínimo

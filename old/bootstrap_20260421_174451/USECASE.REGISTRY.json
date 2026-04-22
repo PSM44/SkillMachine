@@ -1,0 +1,43 @@
+{
+  "version": "v1.0-DRAFT",
+  "generated_policy": "manual",
+  "root_skills_path": "C:\\01. GitHub\\Skills",
+  "excluded_roots": [
+    "C:\\01. GitHub\\Skills\\old",
+    "C:\\01. GitHub\\Skills\\SyS",
+    "C:\\01. GitHub\\Skills\\90.USECASE"
+  ],
+  "usecases": [
+    {
+      "name": "01.NEW_PROJECT",
+      "description": "Paquete base para crear un proyecto nuevo de cualquier índole con continuidad humana e IA desde el día 0.",
+      "required_files": [
+        "00.SKILL.MENU.ACTIVE.txt",
+        "09.STANDAR.RADAR.txt",
+        "10.STANDAR.BATON.txt",
+        "11.STANDAR.HUMAN_README.txt",
+        "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+        "23.SKILL.WHOAMI_POLICY.txt",
+        "12.STANDAR.DRAG_AND_DROP.txt",
+        "PROMPT.NEW_PROJECT.txt"
+      ]
+    },
+    {
+      "name": "02.SESSION_CLOSE",
+      "description": "Paquete para cierre de sesión, actualización de BATON, WhoAmI y validación de continuidad operativa futura.",
+      "required_files": [
+        "00.SKILL.MENU.ACTIVE.txt",
+        "09.STANDAR.RADAR.txt",
+        "10.STANDAR.BATON.txt",
+        "11.STANDAR.HUMAN_README.txt",
+        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+        "23.SKILL.WHOAMI_POLICY.txt",
+        "12.STANDAR.DRAG_AND_DROP.txt",
+        "PROMPT.SESSION_CLOSE.txt"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.ROUTING.01.00
+NOMBRE_SUGERIDO...: 05.SKILL.ROUTING_POLICY.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \SKILLS\AI_ORCH\
+AUTOR_HUMANO......: ADMIN
+AUTOR_IA..........: GPT-5.2 Thinking
+
+ALCANCE...........:
+Define routing por tipo de tarea (selección de modelo) orientado a:
+simplicidad/estabilidad (MVP) y escalamiento posterior.
+Incluye fallback conceptual (no automático en MVP).
+
+DEPENDENCIAS......:
+04.SKILL.COST_CONTROL.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+00.00 Metadatos
+00.10 Índice
+00.20 Objetivo
+
+01.00 Task taxonomy
+02.00 Routing MVP (simple)
+03.00 Routing escalable (opcional)
+04.00 Fallback (definición y límites)
+05.00 Checklist
+06.00 Changelog
+
+==========
+00.20_OBJETIVO
+==========
+
+Elegir modelo correcto sin caos:
+- MVP: 1 modelo principal + 1 secundario manual
+- Escala: routing por task_type + límites por costo
+
+==========
+01.00_TASK_TAXONOMY
+==========
+
+Tipos mínimos:
+- ARCH_DESIGN (arquitectura/filosofía/decisiones)
+- CODE_GEN (crear código)
+- REFACTOR (cambios multi-file)
+- DEBUG (errores, logs, troubleshooting)
+- DOC_CANON (documentos con FILE_CONTENT)
+- DATA_XFORM (transformaciones simples)
+- TOOLING (scripts, pipelines, automation)
+
+==========
+02.00_ROUTING_MVP_(SIMPLE)
+==========
+
+Modelo principal (cloud, alta calidad):
+- M_MAIN = CLAUDE (o GPT-4o si decides)
+
+Modelo secundario (manual):
+- M_SECOND = GPT-4o (o Claude)
+
+Regla:
+- Todo va a M_MAIN.
+- Solo usar M_SECOND cuando:
+  - M_MAIN falla
+  - o la tarea es CODE_GEN con requerimientos específicos
+
+==========
+03.00_ROUTING_ESCALABLE_(OPCIONAL)
+==========
+
+- ARCH_DESIGN -> M_MAIN
+- REFACTOR -> M_MAIN
+- DEBUG -> M_MAIN
+- CODE_GEN -> M_SECOND si el costo lo permite
+- DOC_CANON -> M_MAIN con contexto reducido
+- DATA_XFORM -> modelo barato (si decides agregarlo)
+
+==========
+04.00_FALLBACK_(DEFINICION_Y_LIMITES)
+==========
+
+Fallback = cambio de modelo por error/latencia/calidad.
+
+En MVP:
+- fallback NO automático (para estabilidad).
+- se registra recomendación: “usar M_SECOND” y el humano ejecuta.
+
+En fase avanzada:
+- fallback automático solo si:
+  - logging + budgets + trazabilidad ya están maduros
+
+==========
+05.00_CHECKLIST
+==========
+[ ] taxonomy definida
+[ ] M_MAIN y M_SECOND definidos
+[ ] task_type se registra en cada request
+[ ] fallback manual documentado
+
+==========
+06.00_CHANGELOG
+==========
+2026-02-26 v1.0-DRAFT
+- Creación inicial.

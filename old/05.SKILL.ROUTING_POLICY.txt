@@ -1,0 +1,195 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.ROUTING.01.10
+NOMBRE_SUGERIDO...: 05.SKILL.ROUTING_POLICY.txt
+VERSION...........: v1.1-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Política de routing por tipo de tarea para AI_ORCH:
+- asignar modelo principal y modelo económico,
+- decidir contexto (RADAR_INDEX/CORE/FULL),
+- decidir “plan-only” vs “apply”.
+NO_CUBRE..........:
+- No define budgets (ver 04.SKILL.COST_CONTROL.txt).
+- No define sandbox (ver 03.SKILL.SANDBOX_BOUNDARY.txt).
+DEPENDENCIAS......:
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+04.SKILL.COST_CONTROL.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto y objetivo
+
+01.00 Definiciones (TaskType, ContextLevel)
+02.00 Modelos (principal, económico)
+03.00 Matriz routing (TaskType -> modelo -> contexto)
+04.00 Reglas de escalamiento de contexto
+05.00 Reglas de fallback (MVP = manual)
+06.00 Reglas de “apply” vs “plan-only”
+07.00 Antipatrones
+08.00 Checklist rápido
+09.00 CHANGELOG
+
+==========
+00.20_CONTEXTO_Y_OBJETIVO
+==========
+
+- Objetivo: estabilidad + costo controlado + ejecución frecuente.
+- MVP: NO comparación multi-model.
+- Preferencia: cloud.
+- Fallback automático se pospone: fallback manual en MVP.
+
+==========
+01.00_DEFINICIONES
+==========
+
+01.10_TASK_TYPE
+Tipos mínimos:
+- PLAN_ARCH
+- CODEGEN
+- REFACTOR
+- DEBUG_TROUBLE
+- DOC_CANON
+- RADAR_NAV
+- COST_REPORT
+
+01.20_CONTEXT_LEVEL
+- L0: HUMAN/BATON + RADAR_INDEX (default)
+- L1: + snippets selectivos (archivos objetivo)
+- L2: RADAR_CORE por módulo
+- L3: RADAR_FULL (auditoría; evitar en MVP)
+
+==========
+02.00_MODELOS
+==========
+
+02.10_MODELO_PRINCIPAL_(CALIDAD)
+- Recomendación: Claude-class o GPT-4-class (según proveedor elegido)
+
+02.20_MODELO_ECONOMICO_(COSTO)
+- Recomendación: modelo barato cloud (ej: DeepSeek-class) para tareas mecánicas.
+
+02.30_REGLA
+- No más de 2 modelos en MVP para estabilidad:
+  - principal
+  - económico
+
+==========
+03.00_MATRIZ_ROUTING
+==========
+
+03.10_PLAN_ARCH
+- modelo: principal
+- contexto: L0 -> L1 (si necesita)
+- salida: plan + riesgos + estimate
+
+03.20_CODEGEN
+- modelo: principal si afecta núcleo; económico si es boilerplate
+- contexto: L1
+- salida: patch + archivos nuevos
+
+03.30_REFACTOR
+- modelo: principal
+- contexto: L1 -> L2 (si el repo lo exige)
+- salida: patch + pasos de validación
+
+03.40_DEBUG_TROUBLE
+- modelo: principal (mejor razonamiento)
+- contexto: L1 (logs + snippet)
+- salida: hipótesis única + cambio mínimo + prueba (anti-shotgun)
+
+03.50_DOC_CANON
+- modelo: económico para docs mecánicas; principal si es doctrina/arquitectura
+- contexto: L0/L1
+- salida: secciones completas con FILE_CONTENT
+
+03.60_RADAR_NAV
+- modelo: económico
+- contexto: L0 (RADAR_INDEX)
+- salida: “dónde está X” + paths
+
+03.70_COST_REPORT
+- modelo: económico
+- contexto: logs sqlite/txt
+- salida: reporte.
+
+==========
+04.00_ESCALAMIENTO_DE_CONTEXTO
+==========
+
+04.10_REGLA_DE_ESCALAMIENTO
+- Iniciar siempre en L0 o L1.
+- Subir a L2 solo si:
+  - el modelo lo pide explícitamente,
+  - o falló el intento anterior por falta de contexto.
+- L3 solo por auditoría, nunca por defecto.
+
+04.20_REDUCCION_DE_CONTEXTO
+- Si costo/tiempo sube:
+  - reducir a L1 (snippets),
+  - o usar “chunking” del CORE.
+
+==========
+05.00_FALLBACK_(MVP_MANUAL)
+==========
+
+- Si el modelo principal falla:
+  - se registra FAIL + TROUBLE
+  - el humano decide reintentar con:
+    - el económico
+    - o el principal con más contexto
+- No fallback automático en MVP.
+
+==========
+06.00_APPLY_VS_PLAN_ONLY
+==========
+
+06.10_PLAN_ONLY_DEFAULT
+- Toda tarea parte en plan-only.
+- Apply solo si el plan fue aprobado por humano.
+
+06.20_APPLY_AUTOMATICO_(OPCIONAL_FUTURO)
+- Se habilita solo cuando:
+  - budgets y sandbox están maduros,
+  - tests mínimos existen,
+  - incident rate es bajo.
+
+==========
+07.00_ANTIPATRONES
+==========
+
+- FULL context para todo.
+- Usar modelo caro para navegación trivial.
+- Apply sin plan aprobado.
+- Más de 2 modelos en MVP.
+
+==========
+08.00_CHECKLIST_RAPIDO
+==========
+
+[ ] 2 modelos definidos (principal + económico)
+[ ] Context default L0/L1
+[ ] L2/L3 solo por escalamiento
+[ ] Plan-only default
+[ ] Apply tras aprobación
+[ ] Logs y TROUBLE en fallos
+
+==========
+09.00_CHANGELOG
+==========
+
+2026-02-26, v1.1-DRAFT
+- Matriz routing mínima por TaskType.
+- Context levels L0-L3 con escalamiento controlado.
+- MVP con fallback manual y plan-only default.

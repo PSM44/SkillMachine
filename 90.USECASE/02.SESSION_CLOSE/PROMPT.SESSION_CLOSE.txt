@@ -1,0 +1,29 @@
+PROYECTO: Session Close
+
+OBJETIVO:
+Cerrar sesión dejando continuidad humana e IA consistente para la próxima ocasión.
+
+INPUT:
+- requerimiento del usuario
+- estado actual
+- BATON vigente
+- WhoAmI vigente
+- HUMAN si aplica
+- RADAR before/after
+- SKILL.MENU
+- lifecycle y artifacts policy
+
+DEBES:
+1. revisar el estado actual
+2. actualizar BATON
+3. actualizar WhoAmI si cambió el estado humano operacional
+4. actualizar HUMAN solo si cambió el entendimiento profundo
+5. validar coherencia con RADAR
+6. identificar si algo aprendido amerita actualizar o crear skills
+
+OUTPUT:
+- BATON actualizado
+- WhoAmI actualizado si aplica
+- observación sobre HUMAN
+- siguiente acción exacta
+- observación sobre mejoras de skills si corresponde

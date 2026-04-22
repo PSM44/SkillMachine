@@ -1,0 +1,123 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.AI.ORCH.DEVENV.01.00
+NOMBRE_SUGERIDO...: 18.SKILL.DEV_ENV_MINIMAL.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (America/Santiago)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
+AUTOR_HUMANO......: ADMIN (PABLO)
+AUTOR_IA..........: GPT-5.2 Thinking
+ALCANCE...........:
+Entorno mínimo estable para AI_ORCH en Windows 11:
+- carpetas recomendadas (evitar OneDrive runtime),
+- Git obligatorio,
+- VS Code perfil limpio,
+- convenciones.
+NO_CUBRE..........:
+- No instala nada automáticamente.
+- No define stacks cloud.
+DEPENDENCIAS......:
+06.STANDAR.WBS_ID.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto
+
+01.00 Principios
+02.00 Layout recomendado de carpetas (pocas carpetas)
+03.00 VS Code perfil estable
+04.00 Git y hooks mínimos
+05.00 OneDrive: política
+06.00 Checklist rápido
+07.00 CHANGELOG
+
+==========
+00.20_CONTEXTO
+==========
+
+Problema real:
+- OneDrive + tooling + extensiones => corrupción y drift.
+Objetivo:
+- entorno estable para ejecución frecuente.
+
+==========
+01.00_PRINCIPIOS
+==========
+
+- Runtime fuera de OneDrive.
+- Backups en OneDrive sí, pero no ejecución.
+- Un perfil VS Code “CORE_DEV” mínimo.
+- Git obligatorio para rollback.
+
+==========
+02.00_LAYOUT_RECOMENDADO
+==========
+
+- C:\Dev\
+  - AI_ORCH\
+  - Projects\
+  - .secrets\   (fuera de repos)
+
+Regla:
+- PROJECT_ROOT vive en C:\Dev\Projects\...
+
+==========
+03.00_VS_CODE_PERFIL_ESTABLE
+==========
+
+- Perfil: CORE_DEV
+- Extensiones mínimas:
+  - GitLens
+  - Python
+  - PowerShell
+  - YAML
+  - Prettier/ESLint (si aplica)
+  - 1 cliente IA (máximo 1–2)
+
+==========
+04.00_GIT_Y_HOOKS_MINIMOS
+==========
+
+- pre-commit:
+  - bloquear secrets
+  - validar naming básico
+- pre-push (opcional):
+  - smoke test
+
+==========
+05.00_ONEDRIVE_POLITICA
+==========
+
+- Permitido:
+  - \Backups\ snapshots exportados
+  - docs
+- Prohibido:
+  - \Projects\ runtime
+  - \.vscode\extensions
+
+==========
+06.00_CHECKLIST_RAPIDO
+==========
+
+[ ] C:\Dev existe
+[ ] proyectos fuera de OneDrive
+[ ] Git inicializado
+[ ] perfil VS Code CORE_DEV
+[ ] secrets fuera del repo
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-02-26, v1.0-DRAFT
+- Creación inicial: dev env mínimo estable.

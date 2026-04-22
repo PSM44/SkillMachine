@@ -1,0 +1,177 @@
+SKILL.CIS.EXPLAINER.txt
+
+CÓDIGO
+SKILL.CIS.01
+
+NOMBRE
+Skill – Explicación Universal del Context Injection System (CIS) para IA en Blanco
+
+PROPÓSITO
+Permitir que cualquier IA sin contexto previo comprenda correctamente qué es CIS, cuál es su rol y cuáles son sus límites.
+
+APLICACIÓN
+Este skill debe entregarse completo a una IA nueva antes de cualquier interacción relacionada con edición estructural del sistema.
+
+======================================================================
+0. DEFINICIÓN EJECUTIVA
+
+CIS significa:
+
+Context Injection System.
+
+CIS es un sistema formal y determinista diseñado para ejecutar decisiones humanas explícitas sobre un conjunto documental gobernado.
+
+CIS NO es un asistente creativo.
+CIS NO toma decisiones.
+CIS NO interpreta intención implícita.
+
+CIS ejecuta exactamente lo que se declara.
+
+======================================================================
+
+PROBLEMA QUE CIS RESUELVE
+======================================================================
+
+CIS existe porque los sistemas documentales fallan por:
+
+Ediciones manuales no trazables
+Mezcla de roles humanos
+Pérdida de estructura
+Resúmenes no autorizados
+Dependencia del contexto conversacional
+Regresiones no detectadas
+
+CIS elimina estos riesgos mediante:
+
+Formalización obligatoria de cambios
+Separación decisión / ejecución
+Trazabilidad estructural
+Validación previa y posterior
+======================================================================
+2. ARQUITECTURA CONCEPTUAL
+
+CIS está compuesto por:
+
+injection.txt
+Documento que contiene decisiones humanas explícitas.
+Es un contrato formal, no un input informal.
+BLOCK_ID
+Identificador único de cada cambio.
+Permite trazabilidad histórica.
+CIS.CORE
+Motor determinista que ejecuta las instrucciones declaradas.
+SYSTEM.STATE
+Archivo que registra estado previo y posterior a cada ejecución.
+======================================================================
+3. PRINCIPIOS OPERATIVOS
+
+3.1 Separación de roles
+
+Humano decide.
+Sistema ejecuta.
+
+La IA no decide qué es mejor.
+La IA no optimiza sin permiso.
+
+3.2 Determinismo
+
+Si injection.txt es válido estructuralmente, CIS ejecutará exactamente lo indicado.
+
+3.3 Trazabilidad
+
+Cada cambio debe poder vincularse a:
+
+Un humano decisor
+Un BLOCK_ID
+Un injection específico
+Un estado registrado
+
+Sin trazabilidad, el cambio es inválido.
+
+======================================================================
+4. LÍMITES EXPLÍCITOS PARA LA IA
+
+Si eres una IA que recibe este skill:
+
+NO debes:
+
+Resumir archivos sin autorización explícita
+Fusionar secciones
+Reducir estructura
+Interpretar intención implícita
+“Mejorar” contenido reduciendo detalle
+Editar archivos directamente
+
+Solo puedes:
+
+Explicar
+Analizar
+Proponer cambios
+Generar injection.txt conforme a reglas declaradas
+
+La ejecución real solo ocurre vía CIS.
+
+======================================================================
+5. PRINCIPIO CRÍTICO
+
+Injection válido ≠ Injection correcto.
+
+La validez estructural no implica coherencia conceptual.
+
+La IA puede ayudar a detectar incoherencias,
+pero no puede modificar decisiones sin instrucción explícita.
+
+======================================================================
+6. CIS ES AGNÓSTICO DEL MEDIO
+
+CIS puede operar con:
+
+Scripts
+IAs
+Sistemas automatizados
+Operadores humanos
+
+El medio no importa.
+
+Lo único válido es la decisión explícita formalizada.
+
+======================================================================
+7. CUÁNDO USAR CIS
+
+CIS debe usarse cuando:
+
+Se modifica estructura documental
+Se agregan secciones permanentes
+Se altera jerarquía
+Se versiona contenido
+Se ejecutan cambios persistentes
+
+CIS no es necesario para conversación exploratoria.
+
+======================================================================
+8. CONSECUENCIA DE IGNORAR CIS
+
+Ignorar CIS provoca:
+
+Pérdida de trazabilidad
+Regresión estructural
+Errores silenciosos
+Dependencia del contexto del chat
+Corrupción progresiva del sistema
+======================================================================
+9. RESUMEN FINAL PARA IA EN BLANCO
+
+CIS es un sistema formal que:
+
+Obliga a declarar decisiones
+Ejecuta cambios de forma determinista
+Separa decisión humana de ejecución técnica
+Protege contra pérdida estructural
+Preserva conocimiento acumulativo
+
+Si interactúas con un sistema que usa CIS,
+tu función es apoyar el análisis,
+no alterar el sistema directamente.
+
+======================================================================
+FIN DEL SKILL

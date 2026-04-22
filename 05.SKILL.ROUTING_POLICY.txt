@@ -1,0 +1,327 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.ROUTING_POLICY.01.00
+NOMBRE_SUGERIDO...: 05.SKILL.ROUTING_POLICY.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-04-21
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define cómo seleccionar modelos, niveles de contexto y modo de ejecución (PLAN/APPLY)
+para resolver tareas de forma eficiente, controlando costo, complejidad y riesgo operativo.
+
+NO_CUBRE..........:
+No ejecuta tareas.
+No reemplaza RADAR.
+No reemplaza PROBLEM_TROUBLE.
+No decide contenido final, solo cómo abordarlo.
+
+DEPENDENCIAS......:
+09.STANDAR.RADAR.txt
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+
+01.00 Principios y objetivo
+02.00 Taxonomía de tareas
+03.00 Modelos y roles
+
+04.00 Matriz de routing
+05.00 Niveles de contexto
+06.00 Plan vs Apply
+
+07.00 Control de costo y runaway
+08.00 Fallback
+
+09.00 Reglas para agentes
+10.00 Antipatrones
+
+11.00 Checklist operativo
+12.00 Changelog
+
+==========
+01.00_PRINCIPIOS_Y_OBJETIVO
+==========
+
+Objetivo:
+Definir reglas claras para enrutar tareas hacia el modelo correcto, con el nivel de contexto adecuado,
+y bajo un modo de ejecución controlado.
+
+Principios:
+
+- Estabilidad > complejidad
+- 1 modelo principal (M_MAIN) + 1 secundario (M_SECOND)
+- No fallback automático en MVP
+- Default context = RADAR_INDEX
+- Separación estricta: PLAN vs APPLY
+- Minimizar tokens y tiempo sin perder precisión
+- No usar contexto profundo sin justificación explícita
+
+==========
+02.00_TAXONOMIA_DE_TAREAS
+==========
+
+Tipos de tareas canónicos:
+
+- ARCH_DESIGN
+  Diseño de arquitectura, estructura, frameworks, sistemas.
+
+- CODE_GEN
+  Generación de código nuevo.
+
+- REFACTOR
+  Mejora o reorganización de código existente.
+
+- DEBUG
+  Diagnóstico y corrección de errores.
+
+- DOC_CANON
+  Creación de documentación estructurada y formal.
+
+- TOOLING
+  Scripts, CLI, automatizaciones, integración de herramientas.
+
+- DATA_XFORM
+  Transformación, parsing o estructuración de datos.
+
+- OPS_GOV
+  Gobernanza, control de procesos, reglas operativas.
+
+==========
+03.00_MODELOS_Y_ROLES
+==========
+
+M_MAIN:
+Modelo principal de razonamiento.
+Se usa para tareas críticas, estructurales o complejas.
+
+M_SECOND:
+Modelo secundario para tareas simples, repetitivas o de bajo riesgo.
+
+Roles:
+
+- PLANNER
+  Genera el plan de ejecución.
+
+- EXECUTOR
+  Aplica cambios (no es IA, es capa de ejecución).
+
+- VALIDATOR
+  Verifica consistencia y cumplimiento de reglas.
+
+Regla clave:
+El modelo NO ejecuta. Solo genera PLAN.
+
+==========
+04.00_MATRIZ_DE_ROUTING
+==========
+
+Asignación base:
+
+ARCH_DESIGN
+→ Modelo: M_MAIN
+→ Contexto: L0 / L1
+
+CODE_GEN
+→ Modelo: M_MAIN (lógica core)
+→ Modelo: M_SECOND (boilerplate)
+→ Contexto: L1
+
+REFACTOR
+→ Modelo: M_MAIN
+→ Contexto: L1 / L2
+
+DEBUG
+→ Modelo: M_MAIN
+→ Contexto: L1
+
+DOC_CANON
+→ Modelo: M_MAIN / M_SECOND
+→ Contexto: L0 / L1
+
+TOOLING
+→ Modelo: M_MAIN / M_SECOND
+→ Contexto: L1
+
+DATA_XFORM
+→ Modelo: M_SECOND
+→ Contexto: L0
+
+OPS_GOV
+→ Modelo: M_MAIN
+→ Contexto: L0
+
+Notas:
+
+- L2 solo si el problema no se resuelve con L1.
+- L3 prohibido salvo auditoría o análisis profundo.
+
+==========
+05.00_NIVELES_DE_CONTEXTO
+==========
+
+L0 (mínimo)
+- HUMAN
+- BATON
+- RADAR_INDEX
+
+Uso:
+- diseño conceptual
+- decisiones
+- planificación
+
+---
+
+L1 (operativo ligero)
+- L0 +
+- snippets relevantes
+
+Uso:
+- implementación parcial
+- debugging básico
+
+---
+
+L2 (profundo selectivo)
+- RADAR_CORE parcial
+
+Uso:
+- refactor complejo
+- debugging difícil
+
+---
+
+L3 (full)
+- RADAR_FULL
+
+Uso:
+- auditoría completa
+- análisis estructural profundo
+
+Regla:
+L3 está prohibido por defecto.
+
+==========
+06.00_PLAN_VS_APPLY
+==========
+
+PLAN_ONLY:
+
+- El modelo propone solución
+- No se ejecuta nada
+- Se valida antes de aplicar
+
+APPLY:
+
+- Se ejecuta lo definido en el plan
+- Requiere validación previa
+
+Regla:
+
+- Default = PLAN_ONLY
+- APPLY solo con confirmación explícita
+
+==========
+07.00_CONTROL_DE_COSTO_Y_RUNAWAY
+==========
+
+Reglas:
+
+- Preflight obligatorio antes de ejecutar
+- Máximo 5 iteraciones por tarea
+- Si hay 3 fallas consecutivas → activar PROBLEM_TROUBLE
+- Evitar loops de refinamiento sin avance real
+
+Prohibido:
+
+- Escalar contexto automáticamente
+- Usar L3 como fallback
+- Reintentos sin cambio de estrategia
+
+==========
+08.00_FALLBACK
+==========
+
+Fallback permitido:
+
+- Manual
+- Registrado explícitamente
+
+Ejemplo:
+
+TRY_M_SECOND → FAIL → TRY_M_MAIN
+
+Reglas:
+
+- No fallback automático en MVP
+- Cada fallback debe justificar:
+  - motivo
+  - cambio de estrategia
+
+==========
+09.00_REGLAS_PARA_AGENTES
+==========
+
+- El modelo NO ejecuta
+- El modelo NO modifica archivos directamente
+- El modelo genera PLAN estructurado
+
+Flujo:
+
+1. Input → análisis
+2. PLAN → estructurado
+3. Validación
+4. Ejecución externa
+
+Prohibido:
+
+- inventar contexto sin RADAR_CORE
+- ejecutar sin PLAN
+- saltarse validación
+
+==========
+10.00_ANTIPATRONES
+==========
+
+- Usar L3 por defecto
+- Fallback automático
+- Mezclar PLAN y APPLY
+- Ejecutar sin validación
+- Usar modelo secundario para tareas críticas
+- Refinar infinitamente sin criterio de salida
+- Ignorar PROBLEM_TROUBLE en fallos repetidos
+
+==========
+11.00_CHECKLIST_OPERATIVO
+==========
+
+- ¿Se identificó correctamente el tipo de tarea?
+- ¿Se eligió el modelo correcto?
+- ¿Se definió nivel de contexto adecuado?
+- ¿Se mantiene PLAN_ONLY?
+- ¿Se evitó uso innecesario de contexto profundo?
+- ¿Se controló número de iteraciones?
+- ¿Se evitó fallback automático?
+- ¿Se mantiene trazabilidad?
+
+==========
+12.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-CANON
+- Fusión de versiones duplicadas de routing policy.
+- Separación explícita entre estrategia y operación.
+- Incorporación de control de costo y runaway.
+- Definición formal de PLAN vs APPLY.
