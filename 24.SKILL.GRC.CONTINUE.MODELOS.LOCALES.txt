@@ -1,0 +1,219 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.GRC.CONTINUE.LOCAL.01.00
+NOMBRE_SUGERIDO...: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-04-23
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define cómo retomar continuidad operativa en modelos locales
+(Ollama, OpenCode, Claude local, etc.) bajo enforcement estricto de GRC.
+
+Garantiza:
+- continuidad de contexto
+- cumplimiento de Guardrails
+- disciplina en entornos con menor control
+
+NO_CUBRE..........:
+No reemplaza BATON
+No reemplaza RADAR
+No define arquitectura del sistema
+
+DEPENDENCIAS......:
+26.SKILL.GRC.CORE.txt
+26.1_PROMPT.GRC.BASE.txt
+10.STANDAR.BATON.txt
+09.STANDAR.RADAR.txt
+
+TAGS_OPERATIVOS...:
+CONTINUITY, LOCAL_AI, GRC_ENFORCED
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+00.20 Objetivo
+
+01.00 Problema en modelos locales
+02.00 Principios de continuidad con GRC
+03.00 Protocolo de inicio de sesión
+04.00 Protocolo de carga de contexto
+05.00 Activación obligatoria GRC
+06.00 Secuencia de arranque recomendada
+07.00 Reglas de operación en sesión
+08.00 Manejo de pérdida de contexto
+09.00 Antipatrones
+10.00 Checklist
+11.00 CHANGELOG
+
+==========
+00.20_OBJETIVO
+==========
+
+Permitir retomar trabajo en modelos locales SIN perder:
+
+- contexto
+- disciplina
+- control de calidad
+
+Y forzar:
+
+- cumplimiento GRC
+- eliminación de respuestas débiles
+- control de alucinaciones
+
+==========
+01.00_PROBLEMA_EN_MODELOS_LOCALES
+==========
+
+Los modelos locales presentan:
+
+- menor adherencia a instrucciones
+- pérdida rápida de contexto
+- tendencia a responder directo
+- mayor riesgo de alucinación
+
+Conclusión:
+→ GRC es obligatorio, no opcional
+
+==========
+02.00_PRINCIPIOS_DE_CONTINUIDAD_CON_GRC
+==========
+
+02.10_GRC_SIEMPRE_ON
+En modelos locales:
+→ GRC no se desactiva
+
+02.20_CONTEXTO_MINIMO_CONTROLADO
+Solo cargar:
+- BATON
+- RADAR_INDEX
+- SKILLS críticos
+
+02.30_NO_CONFIAR_EN_MEMORIA_DEL_MODELO
+Todo debe ser explícito en cada sesión
+
+==========
+03.00_PROTOCOLO_DE_INICIO_DE_SESION
+==========
+
+El humano debe declarar:
+
+- fecha
+- contexto actual
+- objetivo de la sesión
+
+Ejemplo:
+
+"Inicio sesión:
+Fecha: YYYY-MM-DD HH:MM
+Contexto: <resumen breve>
+Objetivo: <qué se quiere lograr>"
+
+==========
+04.00_PROTOCOLO_DE_CARGA_DE_CONTEXTO
+==========
+
+Orden obligatorio:
+
+1. BATON (estado actual)
+2. WhoAmI (opcional)
+3. RADAR_INDEX
+4. SKILL.GRC.CORE
+5. PROMPT.GRC.BASE
+
+Regla:
+→ sin GRC cargado, no se continúa
+
+==========
+05.00_ACTIVACION_OBLIGATORIA_GRC
+==========
+
+Siempre ejecutar:
+
+- GRC_ON
+
+Nunca asumir que está activo:
+→ debe declararse explícitamente
+
+==========
+06.00_SECUENCIA_DE_ARRANQUE_RECOMENDADA
+==========
+
+1. Abrir IA local
+2. Pegar PROMPT.GRC.BASE
+3. Cargar BATON
+4. Cargar RADAR_INDEX
+5. Declarar inicio de sesión
+6. Definir objetivo
+
+==========
+07.00_REGLAS_DE_OPERACION_EN_SESION
+==========
+
+07.10_NO_RESPUESTA_DIRECTA
+La IA debe seguir protocolo GRC siempre
+
+07.20_REVALIDAR_CONTEXTO
+Cada N interacciones:
+→ validar que el contexto sigue vigente
+
+07.30_FRAGMENTAR_TAREAS
+Evitar prompts largos:
+→ dividir en tareas pequeñas
+
+07.40_REPETIR_GRC_SI_ES_NECESARIO
+Si la IA pierde disciplina:
+→ reinyectar PROMPT.GRC.BASE
+
+==========
+08.00_MANEJO_DE_PERDIDA_DE_CONTEXTO
+==========
+
+Síntomas:
+
+- respuestas genéricas
+- omisión de análisis
+- pérdida de estructura
+
+Acción:
+
+1. detener interacción
+2. recargar BATON
+3. recargar PROMPT.GRC.BASE
+4. reiniciar flujo
+
+==========
+09.00_ANTIPATRONES
+==========
+
+- confiar en memoria de modelo local
+- no cargar BATON
+- no activar GRC
+- prompts largos sin control
+- aceptar respuestas sin análisis
+
+==========
+10.00_CHECKLIST
+==========
+
+[ ] ¿Se cargó BATON?
+[ ] ¿Se cargó RADAR?
+[ ] ¿Se activó GRC?
+[ ] ¿Se definió objetivo?
+[ ] ¿La IA está siguiendo protocolo GRC?
+
+==========
+11.00_CHANGELOG
+==========
+
+2026-04-23, v1.0-CANON
+- Creación del modelo de continuidad para IA local con GRC obligatorio

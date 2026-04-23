@@ -16,7 +16,7 @@ $VersionRegistryPath = Join-Path $UseCaseRoot "GLOBAL.SKILL.VERSION.REGISTRY.jso
 # 01.00 HELPERS
 # ==========================================================
 
-function Read-JsonFile {
+function Read-JsonFileSafe {
     param(
         [Parameter(Mandatory = $true)][string]$Path
     )
@@ -31,6 +31,14 @@ function Read-JsonFile {
     catch {
         throw "JSON inválido: $Path | $($_.Exception.Message)"
     }
+}
+
+function Read-JsonFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path
+    )
+
+    return (Read-JsonFileSafe -Path $Path)
 }
 
 function Normalize-ToArray {
@@ -93,7 +101,7 @@ function Find-CanonicalFile {
             $full = $_.FullName
             $isExcluded = $false
 
-            foreach ($ex in @($ExcludedRoots)) {
+            foreach ($ex in @(Normalize-ToArray $ExcludedRoots)) {
                 if (Test-PathUnderRoot -Path $full -Root ([string]$ex)) {
                     $isExcluded = $true
                     break
@@ -140,10 +148,10 @@ function Get-TrackedSourceInfo {
 function Clear-GeneratedFiles {
     param(
         [Parameter(Mandatory = $true)][string]$FolderPath,
-        [Parameter(Mandatory = $true)]$PromptFiles
+        [Parameter(Mandatory = $true)]$PreserveFiles
     )
 
-    $preserve = @(@($PromptFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt"))
+    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt"))
 
     $toRemove = @(
         Get-ChildItem -Path $FolderPath -File -ErrorAction SilentlyContinue | Where-Object {
@@ -162,31 +170,66 @@ function Validate-UseCaseOutput {
     param(
         [Parameter(Mandatory = $true)][string]$TargetDir,
         [Parameter(Mandatory = $true)]$PromptFiles,
-        [Parameter(Mandatory = $true)]$RequiredFiles
+        [Parameter(Mandatory = $true)]$DeliveryFiles
     )
 
     $missing = @()
 
-    foreach ($p in @($PromptFiles)) {
+    foreach ($p in @(Normalize-ToArray $PromptFiles)) {
         if (!(Test-Path -LiteralPath (Join-Path $TargetDir $p) -PathType Leaf)) {
             $missing += $p
         }
     }
 
-    foreach ($r in @($RequiredFiles)) {
-        if (!(Test-Path -LiteralPath (Join-Path $TargetDir $r) -PathType Leaf)) {
-            $missing += $r
+    foreach ($d in @(Normalize-ToArray $DeliveryFiles)) {
+        if (!(Test-Path -LiteralPath (Join-Path $TargetDir $d) -PathType Leaf)) {
+            $missing += $d
         }
     }
 
     return @($missing)
 }
 
+function New-BundleFile {
+    param(
+        [Parameter(Mandatory = $true)][string]$BundlePath,
+        [Parameter(Mandatory = $true)][string]$BundleName,
+        [Parameter(Mandatory = $true)]$SourceEntries
+    )
+
+    $lines = [System.Collections.Generic.List[string]]::new()
+    $generatedAt = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
+
+    [void]$lines.Add("==============================")
+    [void]$lines.Add("BUNDLE: $BundleName")
+    [void]$lines.Add("GENERATED_AT: $generatedAt")
+    [void]$lines.Add("==============================")
+    [void]$lines.Add("")
+
+    foreach ($entry in @(Normalize-ToArray $SourceEntries)) {
+        [void]$lines.Add("--------------------------------------------------")
+        [void]$lines.Add("SOURCE_FILE: $($entry.name)")
+        [void]$lines.Add("SOURCE_PATH: $($entry.source_path)")
+        [void]$lines.Add("VERSION    : $($entry.version)")
+        [void]$lines.Add("SHA256     : $($entry.source_sha256)")
+        [void]$lines.Add("--------------------------------------------------")
+
+        $contentLines = @(Get-Content -LiteralPath $entry.source_path -Encoding utf8 -ErrorAction Stop)
+        foreach ($line in $contentLines) {
+            [void]$lines.Add([string]$line)
+        }
+
+        [void]$lines.Add("")
+    }
+
+    [System.IO.File]::WriteAllLines($BundlePath, $lines, [System.Text.UTF8Encoding]::new($false))
+}
+
 function Validate-ManifestIntegrity {
     param(
         [Parameter(Mandatory = $true)][string]$ManifestPath,
         [Parameter(Mandatory = $true)]$ManifestObject,
-        [Parameter(Mandatory = $true)]$RequiredFiles,
+        [Parameter(Mandatory = $true)]$DeliveryFiles,
         [Parameter(Mandatory = $true)][string]$TargetDir
     )
 
@@ -204,27 +247,27 @@ function Validate-ManifestIntegrity {
         throw "Manifest inválido: $ManifestPath"
     }
 
-    $requiredNames = @($RequiredFiles | ForEach-Object { [string]$_ })
-    $manifestNames = @($ManifestObject.files | ForEach-Object { [string]$_.name })
-
-    foreach ($name in $requiredNames) {
-        if ($name -notin $manifestNames) {
-            throw "Manifest incompleto, falta archivo requerido: $name"
-        }
-
-        $destPath = Join-Path $TargetDir $name
-        if (!(Test-Path -LiteralPath $destPath -PathType Leaf)) {
-            throw "Archivo requerido no existe en destino durante validación final: $destPath"
+    foreach ($name in @(Normalize-ToArray $DeliveryFiles)) {
+        $path = Join-Path $TargetDir $name
+        if (!(Test-Path -LiteralPath $path -PathType Leaf)) {
+            throw "Delivery file faltante en validación final: $name"
         }
     }
 
-    foreach ($entry in @($ManifestObject.files)) {
-        if ([string]::IsNullOrWhiteSpace([string]$entry.source_sha256) -or [string]::IsNullOrWhiteSpace([string]$entry.dest_sha256)) {
-            throw "Manifest con hash faltante para archivo: $($entry.name)"
+    foreach ($bundle in @(Normalize-ToArray $ManifestObject.bundles)) {
+        if (!(Test-Path -LiteralPath $bundle.delivery_path -PathType Leaf)) {
+            throw "Bundle declarado no existe: $($bundle.delivery_path)"
         }
 
-        if ([string]$entry.source_sha256 -ne [string]$entry.dest_sha256) {
-            throw "Integridad FAIL por hash mismatch en archivo: $($entry.name)"
+        $actualHash = Get-Sha256Safe -Path $bundle.delivery_path
+        if ([string]$bundle.delivery_sha256 -ne [string]$actualHash) {
+            throw "Hash delivery no coincide para bundle: $($bundle.bundle_name)"
+        }
+
+        foreach ($sourceEntry in @(Normalize-ToArray $bundle.source_files)) {
+            if ([string]::IsNullOrWhiteSpace([string]$sourceEntry.source_sha256)) {
+                throw "Source hash faltante en bundle '$($bundle.bundle_name)' archivo '$($sourceEntry.name)'"
+            }
         }
     }
 }
@@ -233,8 +276,8 @@ function Validate-ManifestIntegrity {
 # 02.00 LOAD CONFIG
 # ==========================================================
 
-$registry = Read-JsonFile -Path $RegistryPath
-$versionRegistry = Read-JsonFile -Path $VersionRegistryPath
+$registry = Read-JsonFileSafe -Path $RegistryPath
+$versionRegistry = Read-JsonFileSafe -Path $VersionRegistryPath
 
 if (-not $registry.usecases) {
     throw "USECASE.REGISTRY.json no contiene 'usecases'"
@@ -258,15 +301,11 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
     $UseCaseVersion = [string]$uc.version
     $TargetDir = Join-Path $UseCaseRoot $UseCaseName
     $PromptFiles = @(Normalize-ToArray $uc.prompt_files)
-    $RequiredFiles = @(Normalize-ToArray $uc.required_files)
+    $MenuFiles = @(Normalize-ToArray $uc.menu_files)
+    $BundleDefinitions = @(Normalize-ToArray $uc.bundle_definitions)
 
-    if ($PromptFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$PromptFiles[0])) {
-        $PromptFiles = @()
-    }
-
-    if ($RequiredFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$RequiredFiles[0])) {
-        $RequiredFiles = @()
-    }
+    if ($PromptFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$PromptFiles[0])) { $PromptFiles = @() }
+    if ($MenuFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$MenuFiles[0])) { $MenuFiles = @() }
 
     Write-Host ""
     Write-Host "=============================="
@@ -278,8 +317,12 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             throw "Carpeta de use case no existe: $TargetDir"
         }
 
-        if (@($RequiredFiles).Count -eq 0) {
-            throw "Use case '$UseCaseName' no define required_files válidos"
+        if ($registry.build_policy.generate_bundles -ne $true) {
+            throw "build_policy.generate_bundles debe ser true en BUILD v3"
+        }
+
+        if (@($BundleDefinitions).Count -eq 0) {
+            throw "Use case '$UseCaseName' no define bundle_definitions"
         }
 
         foreach ($p in @($PromptFiles)) {
@@ -288,92 +331,137 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             }
         }
 
+        $preserveFiles = @($PromptFiles)
+
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
-            $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PromptFiles $PromptFiles)
+            $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
             Write-Host "LIMPIEZA: archivos eliminados = $(@($removed).Count)"
             foreach ($f in @($removed)) {
                 Write-Host ("  - removed: {0}" -f $f.Name)
             }
         }
 
-        $manifestFiles = @()
-        $missingFiles = @()
+        $deliveryFiles = @()
+        $bundleManifest = @()
 
-        foreach ($file in @($RequiredFiles)) {
-            $sourceMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName $file -ExcludedRoots $ExcludedRoots)
-            $source = $sourceMatches[0]
-            $dest = Join-Path $TargetDir $file
+        foreach ($menuFile in @($MenuFiles)) {
+            $menuMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName $menuFile -ExcludedRoots $ExcludedRoots)
+            $menuSource = $menuMatches[0]
+            $menuDest = Join-Path $TargetDir $menuFile
+            Copy-Item -Path $menuSource.FullName -Destination $menuDest -Force
 
-            Copy-Item -Path $source.FullName -Destination $dest -Force
-
-            if (!(Test-Path -LiteralPath $dest -PathType Leaf)) {
-                throw "Copy-Item no dejó archivo destino: $file -> $dest"
+            if (!(Test-Path -LiteralPath $menuDest -PathType Leaf)) {
+                throw "No se pudo copiar menu_file '$menuFile' a '$menuDest'"
             }
 
-            $tracked = Get-TrackedSourceInfo -VersionRegistry $versionRegistry -FileName $file
-
-            $sourceHash = Get-Sha256Safe -Path $source.FullName
-            $destHash = Get-Sha256Safe -Path $dest
-
-            if ($sourceHash -ne $destHash) {
-                throw "Hash mismatch post-copy para '$file'"
-            }
-
-            Write-Host ("COPIED: {0}" -f $file)
-
-            $manifestFiles += [ordered]@{
-                name = $file
-                source_path = $source.FullName
-                dest_path = $dest
-                size_bytes = $source.Length
-                modified_at = $source.LastWriteTime.ToString("yyyy-MM-ddTHH:mm:ss")
-                version = [string]$tracked.version
-                source_sha256 = [string]$sourceHash
-                dest_sha256 = [string]$destHash
-            }
+            Write-Host ("COPIED MENU: {0}" -f $menuFile)
+            $deliveryFiles += $menuFile
         }
 
-        $validationMissing = @(Validate-UseCaseOutput -TargetDir $TargetDir -PromptFiles $PromptFiles -RequiredFiles $RequiredFiles)
+        foreach ($bundleDef in @($BundleDefinitions)) {
+            $bundleName = [string]$bundleDef.name
+            $bundleOutput = [string]$bundleDef.output_file
+            $bundleSourceFiles = @(Normalize-ToArray $bundleDef.source_files)
 
+            if ([string]::IsNullOrWhiteSpace($bundleName) -or [string]::IsNullOrWhiteSpace($bundleOutput)) {
+                throw "bundle_definitions inválido en '$UseCaseName' (name/output_file requeridos)"
+            }
+
+            if (@($bundleSourceFiles).Count -eq 0) {
+                throw "Bundle '$bundleName' en '$UseCaseName' no define source_files"
+            }
+
+            $sourceEntries = @()
+
+            foreach ($sourceFile in @($bundleSourceFiles)) {
+                $sourceMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
+                $source = $sourceMatches[0]
+                $tracked = Get-TrackedSourceInfo -VersionRegistry $versionRegistry -FileName ([string]$sourceFile)
+                $sourceHash = Get-Sha256Safe -Path $source.FullName
+
+                $sourceEntries += [ordered]@{
+                    name = [string]$sourceFile
+                    source_path = $source.FullName
+                    version = [string]$tracked.version
+                    source_sha256 = [string]$sourceHash
+                }
+            }
+
+            $bundlePath = Join-Path $TargetDir $bundleOutput
+            New-BundleFile -BundlePath $bundlePath -BundleName $bundleName -SourceEntries $sourceEntries
+
+            if (!(Test-Path -LiteralPath $bundlePath -PathType Leaf)) {
+                throw "Bundle no fue generado: $bundlePath"
+            }
+
+            $bundleInfo = Get-Item -LiteralPath $bundlePath
+            $bundleSizeKb = [math]::Round(([double]$bundleInfo.Length / 1KB), 2)
+
+            if ($bundleSizeKb -gt [double]$registry.build_policy.max_bundle_size_kb) {
+                throw "Bundle '$bundleOutput' excede max_bundle_size_kb ($bundleSizeKb KB > $($registry.build_policy.max_bundle_size_kb) KB)"
+            }
+
+            $bundleHash = Get-Sha256Safe -Path $bundlePath
+
+            Write-Host ("BUNDLE GENERATED: {0} ({1} KB)" -f $bundleOutput, $bundleSizeKb)
+
+            $bundleManifest += [ordered]@{
+                bundle_name = $bundleName
+                delivery_file = $bundleOutput
+                delivery_path = $bundlePath
+                delivery_size_bytes = [int64]$bundleInfo.Length
+                delivery_size_kb = [double]$bundleSizeKb
+                delivery_sha256 = [string]$bundleHash
+                source_files = @($sourceEntries)
+            }
+
+            $deliveryFiles += $bundleOutput
+        }
+
+        foreach ($p in @($PromptFiles)) {
+            $deliveryFiles += $p
+        }
+
+        $deliveryFiles = @($deliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+
+        if (@($deliveryFiles).Count -gt [int]$registry.build_policy.max_delivery_files_per_usecase) {
+            throw "Use case '$UseCaseName' excede max_delivery_files_per_usecase ($(@($deliveryFiles).Count) > $($registry.build_policy.max_delivery_files_per_usecase))"
+        }
+
+        $validationMissing = @(Validate-UseCaseOutput -TargetDir $TargetDir -PromptFiles $PromptFiles -DeliveryFiles $deliveryFiles)
         if (@($validationMissing).Count -gt 0) {
-            $missingFiles = @($missingFiles + $validationMissing)
+            throw "Validación de salida falló en '$UseCaseName'. Faltantes: $($validationMissing -join ', ')"
         }
-
-        $missingFiles = @($missingFiles)
-        $manifestFiles = @($manifestFiles)
-
-        $status = if ($missingFiles.Count -eq 0) { "OK" } else { "FAIL" }
 
         $manifest = [ordered]@{
             usecase = $UseCaseName
             usecase_version = $UseCaseVersion
             generated_at = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
             source_root = $SkillsRoot
-            files = $manifestFiles
+            delivery_files = @($deliveryFiles)
+            bundles = @($bundleManifest)
             validation = [ordered]@{
-                missing_files = @($missingFiles)
-                status = $status
+                missing_files = @($validationMissing)
+                delivery_file_count = @($deliveryFiles).Count
+                max_delivery_files_allowed = [int]$registry.build_policy.max_delivery_files_per_usecase
+                status = "OK"
             }
         }
 
         $manifestPath = Join-Path $TargetDir "USECASE.MANIFEST.json"
-        $manifest | ConvertTo-Json -Depth 10 | Set-Content -Path $manifestPath -Encoding utf8
+        $manifest | ConvertTo-Json -Depth 12 | Set-Content -Path $manifestPath -Encoding utf8
 
-        Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -RequiredFiles $RequiredFiles -TargetDir $TargetDir
-
-        if ($status -ne "OK") {
-            throw "Validación final FAIL en $UseCaseName"
-        }
+        Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -DeliveryFiles $deliveryFiles -TargetDir $TargetDir
 
         $results += [pscustomobject]@{
             usecase = $UseCaseName
             status = "OK"
-            copied = @($RequiredFiles).Count
+            copied = @($deliveryFiles).Count
             error = ""
         }
         $results = @($results)
 
-        Write-Host "OK - archivos copiados: $(@($RequiredFiles).Count)"
+        Write-Host "OK - delivery files: $(@($deliveryFiles).Count)"
     }
     catch {
         $errMsg = $_.Exception.Message
@@ -405,7 +493,7 @@ $okCount = @($results | Where-Object { $_.status -eq "OK" }).Count
 $failCount = @($results | Where-Object { $_.status -eq "FAIL" }).Count
 
 foreach ($r in @($results)) {
-    Write-Host ("{0} | {1} | copied={2} | error={3}" -f $r.usecase, $r.status, $r.copied, $r.error)
+    Write-Host ("{0} | {1} | delivery={2} | error={3}" -f $r.usecase, $r.status, $r.copied, $r.error)
 }
 
 Write-Host ""

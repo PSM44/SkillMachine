@@ -219,6 +219,46 @@ STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define continuidad humana operacional resumida.
 
+----------
+05.30
+----------
+
+SKILL_ID..........: SKILL_GRC_CONTINUE_MODELOS_LOCALES
+FILE..............: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
+STATUS............: ACTIVE
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Continuidad operativa para modelos locales y cierre seguro.
+
+----------
+05.40
+----------
+
+SKILL_ID..........: SKILL_GRC_HUMAN_AI_COLLAB
+FILE..............: 25.SKILL.GRC.HUMAN_AI_COLLAB.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Colaboracion humano-IA con trazabilidad de decisiones.
+
+----------
+05.50
+----------
+
+SKILL_ID..........: SKILL_GRC_CORE
+FILE..............: 26.SKILL.GRC.CORE.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Marco GRC base para controles y cumplimiento operativo.
+
+----------
+05.60
+----------
+
+SKILL_ID..........: SKILL_GRC_BASE_PROMPT
+FILE..............: 26.1_PROMPT.GRC.BASE.txt
+STATUS............: ACTIVE
+CATEGORY..........: USECASE
+PURPOSE...........: Prompt base GRC para inicializar sesiones con control explicito.
+
 ==========
 05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
 ==========

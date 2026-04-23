@@ -1,0 +1,240 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.MODEL.ROUTING.01.00
+NOMBRE_SUGERIDO...: 27.SKILL.MODEL_ROUTING_POLICY.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-04-23
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define qué modelo usar, en qué herramienta y en qué modo (PLAN/ACT/VALIDATE),
+con GRC obligatorio. Optimiza costo, latencia y calidad para tareas grandes.
+
+DEPENDENCIAS......:
+26.SKILL.GRC.CORE.txt
+26.1_PROMPT.GRC.BASE.txt
+25.SKILL.GRC.HUMAN_AI_COLLAB.txt
+
+TAGS_OPERATIVOS...:
+MODEL_ROUTING, ORCHESTRATION, COST_CONTROL, GRC
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+00.20 Objetivo
+
+01.00 Principios de routing
+02.00 Inventario de modelos
+03.00 Modo operativo (PLAN/ACT/VALIDATE)
+04.00 Matriz de decisión
+05.00 Configuración por herramienta
+06.00 Reglas de costo y tokens
+07.00 Escalamiento a cloud
+08.00 Antipatrones
+09.00 Checklist
+10.00 CHANGELOG
+
+==========
+00.20_OBJETIVO
+==========
+
+Estandarizar el uso de modelos para:
+- evitar improvisación
+- reducir costo
+- maximizar ejecución local
+- asegurar calidad mediante GRC
+
+==========
+01.00_PRINCIPIOS_DE_ROUTING
+==========
+
+01.10_SEPARACION_DE_ROLES
+- PLAN: modelo fuerte (razonamiento)
+- ACT: modelo rápido (ejecución)
+- VALIDATE: modelo confiable (verificación)
+
+01.20_LOCAL_FIRST
+Priorizar modelos locales (Ollama) para ejecución.
+
+01.30_GRC_ALWAYS_ON
+GRC obligatorio en todas las fases.
+
+01.40_COSTO_CONTROLADO
+Cloud solo cuando local no cumple.
+
+==========
+02.00_INVENTARIO_DE_MODELOS
+==========
+
+02.10_LOCALES (OLLAMA)
+
+PRIMARY_PLAN:
+- qwen3-coder:30b
+
+PRIMARY_ACT:
+- qwen2.5-coder:7b
+
+SECONDARY_ACT:
+- deepseek-coder:6.7b
+
+02.20_CLOUD
+
+PLAN_CRITICO:
+- Claude Code (modelo más fuerte disponible)
+
+ACT_PRECISO:
+- Codex Desktop
+
+VALIDATION:
+- Claude Code
+
+==========
+03.00_MODO_OPERATIVO
+==========
+
+03.10_PLAN
+
+Objetivo:
+- diseñar solución
+- detectar riesgos
+- definir cambios
+
+Modelo:
+- qwen3-coder:30b (local)
+- Claude (si falla local)
+
+Output:
+- corto, estructurado
+- sin código completo
+
+03.20_ACT
+
+Objetivo:
+- ejecutar cambios
+- generar código
+- modificar archivos
+
+Modelo:
+- qwen2.5-coder:7b
+- deepseek-coder:6.7b
+
+Output:
+- diff exacto
+- comandos ejecutables
+
+03.30_VALIDATE
+
+Objetivo:
+- verificar consistencia
+- detectar errores
+- confirmar cumplimiento
+
+Modelo:
+- Claude Code
+
+==========
+04.00_MATRIZ_DE_DECISION
+==========
+
+TAREA                         | MODELO
+-----------------------------|------------------------
+Refactor pequeño              | 7B
+Refactor mediano              | 30B → 7B
+Refactor grande               | Claude → 7B
+Arquitectura                  | Claude / 30B
+Debug complejo                | Claude
+Script rápido                 | 7B
+Validación final              | Claude
+
+==========
+05.00_CONFIGURACION_POR_HERRAMIENTA
+==========
+
+05.10_CLINE (PRINCIPAL)
+
+Plan:
+- qwen3-coder:30b
+
+Act:
+- qwen2.5-coder:7b
+
+Modo:
+- Plan → obligatorio
+- Act → manual
+
+05.20_CONTINUE
+
+Chat:
+- qwen3-coder:30b
+
+Agent:
+- qwen2.5-coder:7b
+
+05.30_CODEX_DESKTOP
+
+Uso:
+- parches específicos
+
+Modo:
+- Plan corto
+- Act directo
+
+05.40_CLAUDE_CODE
+
+Uso:
+- tareas críticas
+
+Modo:
+- Plan + Execute
+
+==========
+06.00_REGLAS_DE_COSTO
+==========
+
+- No usar Claude para tareas simples
+- No usar 30B para cambios triviales
+- No usar cloud sin justificación
+
+==========
+07.00_ESCALAMIENTO
+==========
+
+Escalar a cloud cuando:
+
+- modelo local falla 2 veces
+- output inconsistente
+- tarea crítica
+
+==========
+08.00_ANTIPATRONES
+==========
+
+- usar siempre el modelo más grande
+- ejecutar sin PLAN
+- no validar
+- mezclar modelos sin control
+
+==========
+09.00_CHECKLIST
+==========
+
+[ ] ¿Se eligió modelo correcto?
+[ ] ¿Se ejecutó PLAN?
+[ ] ¿Se usó ACT adecuado?
+[ ] ¿Se validó resultado?
+[ ] ¿Se evitó costo innecesario?
+
+==========
+10.00_CHANGELOG
+==========
+
+2026-04-23, v1.0-CANON
+- Definición inicial de routing de modelos

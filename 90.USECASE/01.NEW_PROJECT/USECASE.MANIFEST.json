@@ -1,124 +1,113 @@
 ﻿{
     "usecase":  "01.NEW_PROJECT",
-    "usecase_version":  "v1.0-CANON",
-    "generated_at":  "2026-04-22 14:20:43",
+    "usecase_version":  "v3.0-BUNDLES",
+    "generated_at":  "2026-04-23 14:43:59",
     "source_root":  "C:\\01. GitHub\\Skills",
-    "files":  [
-                  {
-                      "name":  "00.SKILL.MENU.ACTIVE.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\00.SKILL.MENU.ACTIVE.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.SKILL.MENU.ACTIVE.txt",
-                      "size_bytes":  6745,
-                      "modified_at":  "2026-04-21T17:44:53",
-                      "version":  "v1.0-CANON",
-                      "source_sha256":  "880B33A09FAC22EBD617032BA546A97AB852B71B045D5B89F5558C97D68A3D6D",
-                      "dest_sha256":  "880B33A09FAC22EBD617032BA546A97AB852B71B045D5B89F5558C97D68A3D6D"
-                  },
-                  {
-                      "name":  "06.SKILL.WBS.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\06.SKILL.WBS.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\06.SKILL.WBS.txt",
-                      "size_bytes":  13449,
-                      "modified_at":  "2026-02-26T18:51:37",
-                      "version":  "v1.2-DRAFT",
-                      "source_sha256":  "4D7F102C723BF9C342A162261915B2C9D71BABB43930AB6A6BCF2CCC144BC03B",
-                      "dest_sha256":  "4D7F102C723BF9C342A162261915B2C9D71BABB43930AB6A6BCF2CCC144BC03B"
-                  },
-                  {
-                      "name":  "07.SKILL.FILE_CONTENT.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\07.SKILL.FILE_CONTENT.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\07.SKILL.FILE_CONTENT.txt",
-                      "size_bytes":  15777,
-                      "modified_at":  "2026-02-26T17:10:27",
-                      "version":  "v1.3-DRAFT",
-                      "source_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674",
-                      "dest_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674"
-                  },
-                  {
-                      "name":  "09.STANDAR.RADAR.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\09.STANDAR.RADAR.txt",
-                      "size_bytes":  15372,
-                      "modified_at":  "2026-02-26T18:53:27",
-                      "version":  "UNKNOWN",
-                      "source_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D",
-                      "dest_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D"
-                  },
-                  {
-                      "name":  "10.STANDAR.BATON.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\10.STANDAR.BATON.txt",
-                      "size_bytes":  14125,
-                      "modified_at":  "2026-02-26T18:49:00",
-                      "version":  "UNKNOWN",
-                      "source_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B",
-                      "dest_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B"
-                  },
-                  {
-                      "name":  "11.STANDAR.HUMAN_README.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\11.STANDAR.HUMAN_README.txt",
-                      "size_bytes":  10958,
-                      "modified_at":  "2026-02-26T18:50:17",
-                      "version":  "UNKNOWN",
-                      "source_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15",
-                      "dest_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15"
-                  },
-                  {
-                      "name":  "12.STANDAR.DRAG_AND_DROP.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\12.STANDAR.DRAG_AND_DROP.txt",
-                      "size_bytes":  8106,
-                      "modified_at":  "2026-02-26T16:41:39",
-                      "version":  "UNKNOWN",
-                      "source_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8",
-                      "dest_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8"
-                  },
-                  {
-                      "name":  "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-                      "size_bytes":  2812,
-                      "modified_at":  "2026-04-21T15:57:05",
-                      "version":  "v1.0-CANON",
-                      "source_sha256":  "61B40D4A62CE21867301C1C417BFE523737143348F2FF0E9EBE6948E29C4A4A9",
-                      "dest_sha256":  "61B40D4A62CE21867301C1C417BFE523737143348F2FF0E9EBE6948E29C4A4A9"
-                  },
-                  {
-                      "name":  "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-                      "size_bytes":  5456,
-                      "modified_at":  "2026-04-21T16:57:34",
-                      "version":  "v1.0-DRAFT",
-                      "source_sha256":  "06ABC1F6390BED345A37A9626BC4C6DEA609F426B40F30590D2299F59F9743BF",
-                      "dest_sha256":  "06ABC1F6390BED345A37A9626BC4C6DEA609F426B40F30590D2299F59F9743BF"
-                  },
-                  {
-                      "name":  "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-                      "size_bytes":  5450,
-                      "modified_at":  "2026-04-21T17:44:52",
-                      "version":  "v1.0-CANON",
-                      "source_sha256":  "4B4A6FD4DD56BC3170377207006974FDE1C0D0243DDC1AD0CF41218F19256E79",
-                      "dest_sha256":  "4B4A6FD4DD56BC3170377207006974FDE1C0D0243DDC1AD0CF41218F19256E79"
-                  },
-                  {
-                      "name":  "23.SKILL.WHOAMI_POLICY.txt",
-                      "source_path":  "C:\\01. GitHub\\Skills\\23.SKILL.WHOAMI_POLICY.txt",
-                      "dest_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\23.SKILL.WHOAMI_POLICY.txt",
-                      "size_bytes":  3285,
-                      "modified_at":  "2026-04-21T17:44:53",
-                      "version":  "v1.0-CANON",
-                      "source_sha256":  "488EC8B0FD00F910915D3A7A797349D4A78CE28DFA7D6C5AB04B5D7595EC34D4",
-                      "dest_sha256":  "488EC8B0FD00F910915D3A7A797349D4A78CE28DFA7D6C5AB04B5D7595EC34D4"
-                  }
-              ],
+    "delivery_files":  [
+                           "00.BUNDLE.CORE.txt",
+                           "00.SKILL.MENU.ACTIVE.txt",
+                           "01.BUNDLE.CONTINUITY.txt",
+                           "02.BUNDLE.GOVERNANCE.txt",
+                           "PROMPT.NEW_PROJECT.txt"
+                       ],
+    "bundles":  [
+                    {
+                        "bundle_name":  "CORE",
+                        "delivery_file":  "00.BUNDLE.CORE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
+                        "delivery_size_bytes":  38371,
+                        "delivery_size_kb":  37.47,
+                        "delivery_sha256":  "6324628317ED5FE94A9AEC1478C6897835680379F4C23E283BFE39634497C595",
+                        "source_files":  [
+                                             {
+                                                 "name":  "06.SKILL.WBS.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\06.SKILL.WBS.txt",
+                                                 "version":  "v1.2-DRAFT",
+                                                 "source_sha256":  "4D7F102C723BF9C342A162261915B2C9D71BABB43930AB6A6BCF2CCC144BC03B"
+                                             },
+                                             {
+                                                 "name":  "07.SKILL.FILE_CONTENT.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\07.SKILL.FILE_CONTENT.txt",
+                                                 "version":  "v1.3-DRAFT",
+                                                 "source_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674"
+                                             },
+                                             {
+                                                 "name":  "12.STANDAR.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "CONTINUITY",
+                        "delivery_file":  "01.BUNDLE.CONTINUITY.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
+                        "delivery_size_bytes":  29582,
+                        "delivery_size_kb":  28.89,
+                        "delivery_sha256":  "D5C5E6F284D875F610DFC5FE1CDBEFD6B9A22FD44F1AA02BB4CFFA0AD38260B4",
+                        "source_files":  [
+                                             {
+                                                 "name":  "10.STANDAR.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B"
+                                             },
+                                             {
+                                                 "name":  "11.STANDAR.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15"
+                                             },
+                                             {
+                                                 "name":  "23.SKILL.WHOAMI_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\23.SKILL.WHOAMI_POLICY.txt",
+                                                 "version":  "v1.0-CANON",
+                                                 "source_sha256":  "726895E6DDF3444C13046973D66E528DC248FC2C87DA5D0B1B1A4573F83AF552"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "GOVERNANCE",
+                        "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_size_bytes":  30855,
+                        "delivery_size_kb":  30.13,
+                        "delivery_sha256":  "285E37741EB53C55B785268C3A0C4FABBBAC6A5F6AAB54E8FABA8E90F2D1399C",
+                        "source_files":  [
+                                             {
+                                                 "name":  "09.STANDAR.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D"
+                                             },
+                                             {
+                                                 "name":  "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                                                 "version":  "v1.0-CANON",
+                                                 "source_sha256":  "61B40D4A62CE21867301C1C417BFE523737143348F2FF0E9EBE6948E29C4A4A9"
+                                             },
+                                             {
+                                                 "name":  "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "version":  "v1.0-DRAFT",
+                                                 "source_sha256":  "06ABC1F6390BED345A37A9626BC4C6DEA609F426B40F30590D2299F59F9743BF"
+                                             },
+                                             {
+                                                 "name":  "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "version":  "v1.0-CANON",
+                                                 "source_sha256":  "BF8762A38F22EA77E66B48D4B0946DD0EC5756FD91AED76AED70E2964F84A512"
+                                             }
+                                         ]
+                    }
+                ],
     "validation":  {
                        "missing_files":  [
 
                                          ],
+                       "delivery_file_count":  5,
+                       "max_delivery_files_allowed":  5,
                        "status":  "OK"
                    }
 }

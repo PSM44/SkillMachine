@@ -4,7 +4,7 @@ RADAR INDEX
 RADAR_SCRIPT_VERSION: v0.6.2
 RADAR_OUTPUT_SCHEMA : v1.4
 OUTPUT_TYPE         : INDEX
-GENERATED_AT        : 2026-04-23 16:14:01
+GENERATED_AT        : 2026-04-23 16:10:55
 ROOT_SCANNED        : C:\01. GitHub\Skills
 OUTPUT_PATH         : C:\01. GitHub\Skills\SyS\A_Tools\Radar
 OLD_PATH            : C:\01. GitHub\Skills\old\radar
@@ -36,6 +36,7 @@ SEGMENT_MAX_BYTES   : 8388608
 18.SKILL.DEV_ENV_MINIMAL.txt | 2562 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 19.CIS\\20260421.CIS.txt | 4712 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt | 2812 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
+20260416.1_IASKILLS.GIT.txt | 3809 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt | 5456 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt | 5777 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 23.SKILL.WHOAMI_POLICY.txt | 3451 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
@@ -70,7 +71,6 @@ LICENSE | 11558 bytes | 2026-04-23T10:44:34 |  | no_extension | SHA256: [DISABLE
 README.md | 14 bytes | 2026-04-23T10:44:34 | .md | markdown | SHA256: [DISABLED]
 SyS\\00.0_BATON_SKILLMACHINE.txt | 4466 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 SyS\\01_WHOAMI_SKILLMACHINE.txt | 3037 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-SyS\\Git\\20260416.1_IASKILLS.GIT.txt | 3809 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
 SyS\\IADevelopHistory\\20260421.1_Desarrollo de Skills IA.pdf | 2584752 bytes | 2026-04-23T10:44:34 | .pdf | pdf | SHA256: [DISABLED]
 SyS\\IADevelopHistory\\20260422.1_Desarrollo de Skills IA.pdf | 513320 bytes | 2026-04-23T10:50:57 | .pdf | pdf | SHA256: [DISABLED]
 SyS\\SkillSystem\\20260421.SkillSys.txt | 1400 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]

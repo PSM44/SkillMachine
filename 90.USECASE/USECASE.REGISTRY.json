@@ -1,5 +1,5 @@
 {
-  "version": "v2.0-CANON",
+  "version": "v3.0-BUNDLES",
   "root_skills_path": "C:\\01. GitHub\\Skills",
   "excluded_roots": [
     "C:\\01. GitHub\\Skills\\old",
@@ -11,47 +11,91 @@
     "preserve_prompt_files": true,
     "generate_manifest": true,
     "fail_on_missing_file": true,
-    "fail_on_duplicate_file": true
+    "fail_on_duplicate_file": true,
+    "generate_bundles": true,
+    "max_delivery_files_per_usecase": 5,
+    "max_bundle_size_kb": 1024
   },
   "usecases": [
     {
       "name": "01.NEW_PROJECT",
-      "version": "v1.0-CANON",
+      "version": "v3.0-BUNDLES",
       "description": "Bootstrap de proyecto nuevo con continuidad humana e IA desde el día 0.",
       "prompt_files": [
         "PROMPT.NEW_PROJECT.txt"
       ],
-      "required_files": [
-        "00.SKILL.MENU.ACTIVE.txt",
-        "06.SKILL.WBS.txt",
-        "07.SKILL.FILE_CONTENT.txt",
-        "09.STANDAR.RADAR.txt",
-        "10.STANDAR.BATON.txt",
-        "11.STANDAR.HUMAN_README.txt",
-        "12.STANDAR.DRAG_AND_DROP.txt",
-        "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-        "23.SKILL.WHOAMI_POLICY.txt"
+      "menu_files": [
+        "00.SKILL.MENU.ACTIVE.txt"
+      ],
+      "bundle_definitions": [
+        {
+          "name": "CORE",
+          "output_file": "00.BUNDLE.CORE.txt",
+          "source_files": [
+            "06.SKILL.WBS.txt",
+            "07.SKILL.FILE_CONTENT.txt",
+            "12.STANDAR.DRAG_AND_DROP.txt"
+          ]
+        },
+        {
+          "name": "CONTINUITY",
+          "output_file": "01.BUNDLE.CONTINUITY.txt",
+          "source_files": [
+            "10.STANDAR.BATON.txt",
+            "11.STANDAR.HUMAN_README.txt",
+            "23.SKILL.WHOAMI_POLICY.txt"
+          ]
+        },
+        {
+          "name": "GOVERNANCE",
+          "output_file": "02.BUNDLE.GOVERNANCE.txt",
+          "source_files": [
+            "09.STANDAR.RADAR.txt",
+            "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+          ]
+        }
       ]
     },
     {
       "name": "02.SESSION_CLOSE",
-      "version": "v1.0-CANON",
+      "version": "v3.0-BUNDLES",
       "description": "Cierre de sesión, continuidad humana operacional y actualización de artefactos.",
       "prompt_files": [
         "PROMPT.SESSION_CLOSE.txt"
       ],
-      "required_files": [
-        "06.SKILL.WBS.txt",
-        "07.SKILL.FILE_CONTENT.txt",
-        "09.STANDAR.RADAR.txt",
-        "10.STANDAR.BATON.txt",
-        "11.STANDAR.HUMAN_README.txt",
-        "12.STANDAR.DRAG_AND_DROP.txt",
-        "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-        "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-        "23.SKILL.WHOAMI_POLICY.txt"
+      "menu_files": [
+        "00.SKILL.MENU.ACTIVE.txt"
+      ],
+      "bundle_definitions": [
+        {
+          "name": "CORE",
+          "output_file": "00.BUNDLE.CORE.txt",
+          "source_files": [
+            "06.SKILL.WBS.txt",
+            "07.SKILL.FILE_CONTENT.txt",
+            "12.STANDAR.DRAG_AND_DROP.txt"
+          ]
+        },
+        {
+          "name": "CONTINUITY",
+          "output_file": "01.BUNDLE.CONTINUITY.txt",
+          "source_files": [
+            "10.STANDAR.BATON.txt",
+            "11.STANDAR.HUMAN_README.txt",
+            "23.SKILL.WHOAMI_POLICY.txt"
+          ]
+        },
+        {
+          "name": "GOVERNANCE",
+          "output_file": "02.BUNDLE.GOVERNANCE.txt",
+          "source_files": [
+            "09.STANDAR.RADAR.txt",
+            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+          ]
+        }
       ]
     }
   ]
