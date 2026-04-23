@@ -2,136 +2,127 @@
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
-ID_UNICO..........: WHOAMI.SKILLMACHINE.01.00
+ID_UNICO..........: WHOAMI.SKILLMACHINE.01.10
 NOMBRE_SUGERIDO...: 01_WHOAMI_SKILLMACHINE.txt
-VERSION...........: v1.0-ACTIVE
-FECHA.............: 2026-04-21
-HORA..............: 21:00
+VERSION...........: v1.1-ACTIVE
+FECHA.............: 2026-04-22
+HORA..............: 12:30
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \SkillMachine\
 AUTOR_HUMANO......: PABLO
 
 ALCANCE...........:
 Resumen humano operacional del proyecto SkillMachine.
-Permite retomar trabajo sin contexto previo.
+Sirve para entender rápido qué es, en qué está y cómo retomarlo.
 
 NO_CUBRE..........:
 No reemplaza HUMAN.
 No reemplaza BATON.
-No incluye detalle técnico profundo.
+No describe el filesystem completo.
 
 DEPENDENCIAS......:
 23.SKILL.WHOAMI_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-
-TAGS_OPERATIVOS...: CONTINUITY, HUMAN_ONBOARDING
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 
 ==========
 01.00_QUE_ES_ESTE_PROYECTO
 ==========
 
-SkillMachine es un sistema para:
+SkillMachine es un sistema para construir, organizar y operar skills reutilizables,
+más use cases empaquetables, con trazabilidad, validación y continuidad entre sesiones.
 
-- crear
-- mantener
-- versionar
-- aplicar
-
-skills reutilizables de forma estructurada.
-
-No es HIA.
-Es un sistema independiente enfocado en gobernanza de conocimiento operativo.
-
-==========
-02.00_EN_QUE_ESTAMOS
-==========
-
-El sistema ya está en estado funcional inicial (MVP).
-
-Actualmente permite:
-
-- construir paquetes de uso (UseCases)
-- copiar skills automáticamente
-- validar integridad
-- generar manifests
-- asegurar consistencia por hash
+No es solo un repositorio de prompts.
+Busca convertirse en un sistema operativo de skills:
+- con gobernanza
+- con empaquetado
+- con manifiestos
+- con validación de integridad
+- con continuidad humana e IA
 
 ==========
-03.00_QUE_SE_LOGRO
+02.00_QUE_SE_HA_LOGRADO
 ==========
 
-Se logró:
+Hasta ahora ya existe:
 
-- crear carpeta 90.USECASE
-- definir casos de uso:
-  - NEW_PROJECT
-  - SESSION_CLOSE
-- implementar BUILD.ps1 funcional
-- validar paquete SESSION_CLOSE con resultado OK
+- estructura base del sistema
+- menú de skills activo
+- políticas operativas de artefactos
+- policy de ciclo de vida de sesión
+- policy de WhoAmI
+- use case 01.NEW_PROJECT
+- use case 02.SESSION_CLOSE
+- validación por manifest
+- verificación SHA256 source vs dest
+- BATON y WhoAmI del proyecto
+- RADAR operativo
 
-También:
+==========
+03.00_EN_QUE_ESTADO_ESTA
+==========
 
-- se creó repo público SkillMachine (estado inicial)
+Estado actual:
+MVP funcional parcial
+
+Eso significa:
+
+- la idea base ya bajó a sistema real
+- ya hay artefactos y flujo mínimos
+- pero el pipeline crítico todavía no es estable
+
+Bloqueo vigente:
+
+- BUILD.ps1 falla en 01.NEW_PROJECT
+- error actual:
+  The property 'Count' cannot be found on this object
 
 ==========
 04.00_QUE_FALTA
 ==========
 
-Faltan piezas clave para madurez:
+Falta principalmente:
 
-- historial de builds
-- trazabilidad entre versiones
-- diff entre manifests
-- automatización del registry
-- integración con RADAR
-
-Además:
-
-El repo GitHub está demasiado básico:
-- sin descripción
-- sin releases
-- sin estructura visible
+- reparar BUILD.ps1
+- endurecer el builder ante drift de tipos
+- validar flujo completo de NEW_PROJECT
+- agregar BUILD.HISTORY
+- incorporar comparación entre builds
+- seguir profesionalizando trazabilidad
 
 ==========
-05.00_ESTADO_ACTUAL
+05.00_SIGUIENTE_PASO
 ==========
 
-Estado general:
+Siguiente acción sugerida:
 
-OPERATIVO PERO INMADURO
+Trabajar directamente sobre:
+C:\01. GitHub\Skills\90.USECASE\BUILD.ps1
 
-Traducción:
-
-- funciona
-- es útil
-- pero no es audit-able ni escalable aún
+Objetivo:
+corregir la causa raíz del error .Count y dejar 01.NEW_PROJECT estable.
 
 ==========
-06.00_SIGUIENTE_PASO
+06.00_NOTAS_OPERATIVAS
 ==========
 
-Crear BUILD.HISTORY:
+Repositorio remoto de referencia:
+https://github.com/PSM44/SkillMachine.git
 
-- guardar builds históricos
-- comparar manifests
-- detectar cambios
+Regla práctica actual:
 
-Esto habilita:
-
-- trazabilidad real
-- debugging
-- evolución controlada
+No seguir agregando nuevas capacidades hasta estabilizar BUILD.
+Hoy el cuello de botella no es conceptual.
+Es de robustez operativa.
 
 ==========
-07.00_FECHA_ACTUALIZACION
+07.00_CHANGELOG
 ==========
 
-2026-04-21
-
-==========
-08.00_CHANGELOG
-==========
+2026-04-22, v1.1-ACTIVE
+- Se actualiza estado humano operacional
+- Se registra bloqueo actual en BUILD.ps1
+- Se define siguiente paso exacto
 
 2026-04-21, v1.0-ACTIVE
-- Creación inicial de WhoAmI del sistema SkillMachine
-- Registro de estado MVP y siguientes pasos
+- Creación inicial de WhoAmI para SkillMachine
