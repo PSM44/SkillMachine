@@ -2,11 +2,11 @@
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
-ID_UNICO..........: BATON.SKILLMACHINE.01.00
+ID_UNICO..........: BATON.SKILLMACHINE.01.10
 NOMBRE_SUGERIDO...: 00.0_BATON_SKILLMACHINE.txt
-VERSION...........: v1.0-ACTIVE
-FECHA.............: 2026-04-21
-HORA..............: 21:00
+VERSION...........: v1.1-ACTIVE
+FECHA.............: 2026-04-22
+HORA..............: 12:30
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \SkillMachine\
 AUTOR_HUMANO......: PABLO
@@ -34,29 +34,35 @@ TAGS_OPERATIVOS...: RUNTIME_CRITICAL, BATON_STATE
 ==========
 
 Estado del sistema:
-OPERATIVO_MVP
+OPERATIVO_MVP_CON_BLOQUEO_EN_BUILD
 
 El sistema ya permite:
 - construir paquetes de casos de uso
 - validar integridad de archivos
 - generar manifiestos
 - asegurar consistencia por hash
+- mantener use case de cierre de sesión operativo
+
+Bloqueo actual:
+- BUILD.ps1 falla en 01.NEW_PROJECT
+- error observado: propiedad .Count no disponible sobre objeto no normalizado
 
 ==========
 01.00_ESTADO_ACTUAL
 ==========
 
-FASE_ACTUAL.......: USECASE_AUTOMATION_MVP
+FASE_ACTUAL.......: HARDENING_DEL_BUILDER_MVP
 
 CAPACIDADES_ACTIVAS:
 
-- BUILD.ps1 funcional
+- BUILD.ps1 existente
 - validación de required_files
 - validación de versiones (registry)
 - copia determinística de archivos
 - generación USECASE.MANIFEST.json
 - verificación SHA256 source vs dest
 - FAIL automático ante inconsistencias
+- SESSION_CLOSE operativo y utilizable
 
 USECASES_ACTIVOS:
 
@@ -67,18 +73,18 @@ USECASES_ACTIVOS:
 02.00_EVIDENCIA_OPERATIVA
 ==========
 
-El use case SESSION_CLOSE:
+Estado confirmado:
 
-- manifest generado
-- validation.status = OK
-- sin missing_files
-- hashes coincidentes en todos los archivos
+- 02.SESSION_CLOSE empaquetado con validation.status = OK
+- skill set mínimo de cierre disponible
+- RADAR operativo y actualizado
+- BATON y WhoAmI ya existen para SkillMachine
 
-Esto confirma:
+Problema pendiente:
 
-- consistencia del sistema de copias
-- integridad de paquetes
-- trazabilidad mínima operativa
+- 01.NEW_PROJECT no queda estable por falla en BUILD.ps1
+- error técnico actual:
+  The property 'Count' cannot be found on this object
 
 ==========
 03.00_RIESGOS_Y_DEUDA_TECNICA
@@ -86,15 +92,17 @@ Esto confirma:
 
 RIESGOS_ACTUALES:
 
-- no existe BUILD.HISTORY
-- no existe diff entre builds
-- registry de versiones es manual
-- RADAR no está integrado como backend del builder
+- BUILD.ps1 no es robusto ante drift de tipos
+- posible manejo débil de null/string/array/PSCustomObject
+- falta hardening general del builder
+- el pipeline end-to-end aún no es confiable
+- seguir agregando features antes del fix aumentaría deuda
 
 RIESGO_ESTRUCTURAL:
 
-El sistema funciona, pero no tiene trazabilidad histórica.
-Esto limita auditoría y debugging futuro.
+El sistema tiene buena base conceptual y de gobernanza,
+pero todavía depende de tooling frágil en el punto más crítico:
+la construcción de use cases.
 
 ==========
 04.00_LIMITES_OPERATIVOS
@@ -103,56 +111,75 @@ Esto limita auditoría y debugging futuro.
 PROJECT_ROOT:
 C:\01. GitHub\Skills
 
+REPO_REMOTO:
+https://github.com/PSM44/SkillMachine.git
+
 PERMITIDO:
 
 - crear/modificar archivos dentro de:
   - 90.USECASE
   - SKILLS base
+  - SyS
 
 PROHIBIDO:
 
 - modificar fuera del root
 - alterar históricos manualmente
-- editar outputs RADAR
+- editar outputs RADAR manualmente
 
 ==========
 05.00_PRIORIDADES_ACTUALES
 ==========
 
 P0:
-- implementar BUILD.HISTORY
+- reparar BUILD.ps1
+- eliminar falla por .Count
+- normalizar manejo de tipos en builder
 
 P1:
-- diff entre manifests
-- trazabilidad temporal
+- validar flujo completo de 01.NEW_PROJECT
+- mejorar logging y mensajes de error
 
 P2:
+- BUILD.HISTORY
+- diff entre manifests
+- trazabilidad temporal
 - integración RADAR como índice del builder
 
 ==========
 06.00_NEXT_ACTION
 ==========
 
-Crear BUILD.HISTORY:
+Ejecutar fix técnico sobre:
+C:\01. GitHub\Skills\90.USECASE\BUILD.ps1
 
-- carpeta de históricos
-- guardar manifests por timestamp
-- permitir comparar builds
-- detectar cambios estructurales
+Objetivo exacto:
+- identificar el punto donde se usa .Count sobre objeto no normalizado
+- corregir causa raíz
+- endurecer null/string/array/PSCustomObject
+- validar nuevamente 01.NEW_PROJECT
 
 ==========
 07.00_COMO_INICIAR_PROXIMA_SESION
 ==========
 
 1. Leer este BATON
-2. Validar estado de 90.USECASE
-3. Revisar último USECASE.MANIFEST.json
-4. Confirmar que BUILD.ps1 sigue estable
-5. Avanzar en BUILD.HISTORY
+2. Leer WhoAmI de SkillMachine
+3. Revisar BUILD.ps1
+4. Revisar error actual del builder
+5. Aplicar prompt de fix para Codex
+6. Validar 01.NEW_PROJECT
+7. Si queda estable, recién avanzar a BUILD.HISTORY
 
 ==========
 08.00_CHANGELOG
 ==========
+
+2026-04-22, v1.1-ACTIVE
+- Cierre de sesión del 22 de abril
+- Se registra bloqueo actual en BUILD.ps1
+- Se define fix de BUILD como siguiente acción exacta
+- Se agrega referencia operativa al repositorio remoto
 
 2026-04-21, v1.0-ACTIVE
 - Primer BATON operativo del sistema SkillMachine

@@ -33,6 +33,17 @@ function Read-JsonFile {
     }
 }
 
+function Normalize-ToArray {
+    param(
+        [AllowNull()]$Value
+    )
+
+    if ($null -eq $Value) { return @() }
+    if ($Value -is [System.Array]) { return @($Value) }
+    if ($Value -is [string]) { return @([string]$Value) }
+    return @($Value)
+}
+
 function Get-NormalizedDirectoryPath {
     param(
         [Parameter(Mandatory = $true)][string]$Path
@@ -113,7 +124,7 @@ function Get-TrackedSourceInfo {
         [Parameter(Mandatory = $true)][string]$FileName
     )
 
-    $items = @($VersionRegistry.skills | Where-Object { $_.file -eq $FileName })
+    $items = @(Normalize-ToArray $VersionRegistry.skills | Where-Object { $_.file -eq $FileName })
 
     if ($items.Count -eq 0) {
         throw "Archivo requerido no registrado en GLOBAL.SKILL.VERSION.REGISTRY.json: $FileName"
@@ -233,7 +244,7 @@ if (-not $registry.build_policy) {
     throw "USECASE.REGISTRY.json no contiene 'build_policy'"
 }
 
-$ExcludedRoots = @($registry.excluded_roots)
+$ExcludedRoots = @(Normalize-ToArray $registry.excluded_roots)
 
 # ==========================================================
 # 03.00 BUILD LOOP
@@ -241,13 +252,13 @@ $ExcludedRoots = @($registry.excluded_roots)
 
 $results = @()
 
-foreach ($uc in @($registry.usecases)) {
+foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
 
     $UseCaseName = [string]$uc.name
     $UseCaseVersion = [string]$uc.version
     $TargetDir = Join-Path $UseCaseRoot $UseCaseName
-    $PromptFiles = @($uc.prompt_files)
-    $RequiredFiles = @($uc.required_files)
+    $PromptFiles = @(Normalize-ToArray $uc.prompt_files)
+    $RequiredFiles = @(Normalize-ToArray $uc.required_files)
 
     if ($PromptFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$PromptFiles[0])) {
         $PromptFiles = @()
