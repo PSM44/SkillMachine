@@ -22,7 +22,7 @@ NO_CUBRE..........:
 - No define permisos del OS/ACL (opcional; se recomienda pero no es requisito).
 DEPENDENCIAS......:
 02.SKILL.AGENT_EXECUTION_POLICY.txt
-08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
 06.STANDAR.WBS_ID.txt
 
 ==========

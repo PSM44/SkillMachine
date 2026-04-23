@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
-NOMBRE_SUGERIDO...: 12.STANDAR.DRAG_AND_DROP.txt
+NOMBRE_SUGERIDO...: 12.STANDARD.DRAG_AND_DROP.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -38,9 +38,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-09.STANDAR.RADAR_INDEX_CORE_FULL.txt
-10.STANDAR.BATON.txt
-08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+09.STANDARD.RADAR_INDEX_CORE_FULL.txt
+10.STANDARD.BATON.txt
+08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
 
 MEJORA_CLAVE_v1.2:
 
@@ -194,7 +194,7 @@ Encabezado:
 
 Ejemplo:
 TANDA 2/3
-ARCHIVO: 09.STANDAR.RADAR.txt
+ARCHIVO: 09.STANDARD.RADAR.txt
 ACCION: CONCATENAR AL FINAL (orden estricto)
 
 ++++++++++

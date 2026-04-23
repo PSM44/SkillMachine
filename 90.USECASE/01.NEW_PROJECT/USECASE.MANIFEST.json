@@ -1,4 +1,4 @@
-﻿{
+{
     "usecase":  "01.NEW_PROJECT",
     "usecase_version":  "v3.0-BUNDLES",
     "generated_at":  "2026-04-23 14:43:59",
@@ -32,8 +32,8 @@
                                                  "source_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674"
                                              },
                                              {
-                                                 "name":  "12.STANDAR.DRAG_AND_DROP.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
+                                                 "name":  "12.STANDARD.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDARD.DRAG_AND_DROP.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8"
                                              }
@@ -48,14 +48,14 @@
                         "delivery_sha256":  "D5C5E6F284D875F610DFC5FE1CDBEFD6B9A22FD44F1AA02BB4CFFA0AD38260B4",
                         "source_files":  [
                                              {
-                                                 "name":  "10.STANDAR.BATON.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
+                                                 "name":  "10.STANDARD.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDARD.BATON.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B"
                                              },
                                              {
-                                                 "name":  "11.STANDAR.HUMAN_README.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
+                                                 "name":  "11.STANDARD.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDARD.HUMAN_README.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15"
                                              },
@@ -76,8 +76,8 @@
                         "delivery_sha256":  "285E37741EB53C55B785268C3A0C4FABBBAC6A5F6AAB54E8FABA8E90F2D1399C",
                         "source_files":  [
                                              {
-                                                 "name":  "09.STANDAR.RADAR.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
+                                                 "name":  "09.STANDARD.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDARD.RADAR.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D"
                                              },

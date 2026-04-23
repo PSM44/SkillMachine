@@ -1,114 +1,10 @@
 ==============================
-RADAR FULL
-==============================
-RADAR_SCRIPT_VERSION: v0.6.2
-RADAR_OUTPUT_SCHEMA : v1.4
-OUTPUT_TYPE         : FULL
-GENERATED_AT        : 2026-04-23 16:33:16
-ROOT_SCANNED        : C:\01. GitHub\Skills
-OUTPUT_PATH         : C:\01. GitHub\Skills\SyS\A_Tools\Radar
-OLD_PATH            : C:\01. GitHub\Skills\old\radar
-EXCLUDED_PATHS      :
- - C:\01. GitHub\Skills\old
- - C:\01. GitHub\Skills\SyS\A_Tools\Radar
-SHA256_ENABLED      : False
-CORE_MAX_FILE_SIZE  : 2097152
-SEGMENT_MAX_BYTES   : 8388608
-
-++++++++++
-FULL SECTION: INDEX
-++++++++++
-
-==============================
-RADAR INDEX
-==============================
-RADAR_SCRIPT_VERSION: v0.6.2
-RADAR_OUTPUT_SCHEMA : v1.4
-OUTPUT_TYPE         : INDEX
-GENERATED_AT        : 2026-04-23 16:33:14
-ROOT_SCANNED        : C:\01. GitHub\Skills
-OUTPUT_PATH         : C:\01. GitHub\Skills\SyS\A_Tools\Radar
-OLD_PATH            : C:\01. GitHub\Skills\old\radar
-EXCLUDED_PATHS      :
- - C:\01. GitHub\Skills\old
- - C:\01. GitHub\Skills\SyS\A_Tools\Radar
-SHA256_ENABLED      : False
-CORE_MAX_FILE_SIZE  : 2097152
-SEGMENT_MAX_BYTES   : 8388608
-
-00.SKILL.MENU.ACTIVE.txt | 8063 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-01.ARCH.AI_ORCHESTRATION.CORE.txt | 10738 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-02.SKILL.AGENT_EXECUTION_POLICY.txt | 7053 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-03.SKILL.SANDBOX_BOUNDARY.txt | 4952 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-04.SKILL.COST_CONTROL.txt | 5927 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-05.SKILL.ROUTING_POLICY.txt | 6335 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-06.SKILL.WBS.txt | 13451 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-07.SKILL.FILE_CONTENT.txt | 15777 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt | 17056 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-09.STANDARD.RADAR.txt | 15374 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-10.STANDARD.BATON.txt | 14129 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-11.STANDARD.HUMAN_README.txt | 10960 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-12.STANDARD.DRAG_AND_DROP.txt | 8111 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-13.STACKS.COST_MONTHLY.txt | 4812 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-14.SIMULATION.PROJECT_100H.txt | 3581 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-15.SKILL.LOGGING_AUDIT.txt | 4748 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-16.SKILL.CHECKPOINT_ROLLBACK.txt | 3435 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-17.SKILL.SECRETS_HANDLING.txt | 2749 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-18.SKILL.DEV_ENV_MINIMAL.txt | 2564 bytes | 2026-04-23T16:31:06 | .txt | text | SHA256: [DISABLED]
-20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt | 2815 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt | 5460 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-22.SKILL.PROJECT_LIFECYCLE_POLICY.txt | 5781 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-23.SKILL.WHOAMI_POLICY.txt | 3453 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt | 4288 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-25.SKILL.GRC.HUMAN_AI_COLLAB.txt | 5203 bytes | 2026-04-23T12:07:27 | .txt | text | SHA256: [DISABLED]
-26.1_PROMPT.GRC.BASE.txt | 3639 bytes | 2026-04-23T12:01:18 | .txt | text | SHA256: [DISABLED]
-26.SKILL.GRC.CORE.txt | 5811 bytes | 2026-04-23T11:58:57 | .txt | text | SHA256: [DISABLED]
-27.SKILL.MODEL_ROUTING_POLICY.txt | 4247 bytes | 2026-04-23T15:34:31 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt | 38380 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\00.SKILL.MENU.ACTIVE.txt | 8063 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt | 29594 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt | 30870 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\PROMPT.NEW_PROJECT.txt | 675 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\SKILL_SET.MANIFEST.txt | 1097 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\01.NEW_PROJECT\\USECASE.MANIFEST.json | 7817 bytes | 2026-04-23T16:31:07 | .json | json | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\00.BUNDLE.CORE.txt | 38380 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\00.SKILL.MENU.ACTIVE.txt | 8063 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt | 29594 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt | 27718 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\PROMPT.SESSION_CLOSE.txt | 764 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\SKILL_SET.MANIFEST.txt | 955 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-90.USECASE\\02.SESSION_CLOSE\\USECASE.MANIFEST.json | 7288 bytes | 2026-04-23T16:31:07 | .json | json | SHA256: [DISABLED]
-90.USECASE\\BUILD.ps1 | 17045 bytes | 2026-04-23T14:42:30 | .ps1 | powershell | SHA256: [DISABLED]
-90.USECASE\\GLOBAL.SKILL.VERSION.REGISTRY.json | 1020 bytes | 2026-04-23T16:31:07 | .json | json | SHA256: [DISABLED]
-90.USECASE\\USECASE.REGISTRY.json | 2919 bytes | 2026-04-23T16:31:07 | .json | json | SHA256: [DISABLED]
-desktop.ini | 114 bytes | 2026-04-23T10:44:34 | .ini | other | SHA256: [DISABLED]
-LEARNING\\CERTS\\21.1.LearnCAE\\20260421.SkillCAEC1.txt | 5172 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-LEARNING\\CERTS\\21.2.COMPITAScurity\\20260421Comptia.txt | 4703 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-LEARNING\\IA\\21.0.LearnAnything\\20260421SkillLearnAnything.txt | 4269 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-LEARNING\\IA\\21.3.IAAuto\\20260421.SkillLearnAuto.txt | 5065 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-LICENSE | 11558 bytes | 2026-04-23T10:44:34 |  | no_extension | SHA256: [DISABLED]
-README.md | 14 bytes | 2026-04-23T10:44:34 | .md | markdown | SHA256: [DISABLED]
-SyS\\00.0_BATON_SKILLMACHINE.txt | 4468 bytes | 2026-04-23T16:31:07 | .txt | text | SHA256: [DISABLED]
-SyS\\01_WHOAMI_SKILLMACHINE.txt | 3037 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-SyS\\A_Tools\\Logs\\Normalize-Filesystem-v2.20260423_162444.log | 875 bytes | 2026-04-23T16:24:44 | .log | other | SHA256: [DISABLED]
-SyS\\CIS\\20260421.CIS.txt | 4712 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-SyS\\Git\\20260416.1_IASKILLS.GIT.txt | 3809 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-SyS\\IADevelopHistory\\20260421.1_Desarrollo de Skills IA.pdf | 2584752 bytes | 2026-04-23T10:44:34 | .pdf | pdf | SHA256: [DISABLED]
-SyS\\IADevelopHistory\\20260422.1_Desarrollo de Skills IA.pdf | 513320 bytes | 2026-04-23T10:50:57 | .pdf | pdf | SHA256: [DISABLED]
-SyS\\SkillSystem\\20260421.SkillSys.txt | 1400 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-SyS\\WhoAmI\\20260421_WhoAmI.txt | 4411 bytes | 2026-04-23T10:44:34 | .txt | text | SHA256: [DISABLED]
-
-++++++++++
-FULL SECTION: CORE
-++++++++++
-
-==============================
 RADAR CORE
 ==============================
 RADAR_SCRIPT_VERSION: v0.6.2
 RADAR_OUTPUT_SCHEMA : v1.4
 OUTPUT_TYPE         : CORE
-GENERATED_AT        : 2026-04-23 16:33:14
+GENERATED_AT        : 2026-04-23 16:14:01
 ROOT_SCANNED        : C:\01. GitHub\Skills
 OUTPUT_PATH         : C:\01. GitHub\Skills\SyS\A_Tools\Radar
 OLD_PATH            : C:\01. GitHub\Skills\old\radar
@@ -122,8 +18,8 @@ SEGMENT_MAX_BYTES   : 8388608
 --------------------------------------------------
 FILE: 00.SKILL.MENU.ACTIVE.txt
 FULL_PATH: C:\01. GitHub\Skills\00.SKILL.MENU.ACTIVE.txt
-SIZE: 8063 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 8048 bytes
+MODIFIED: 2026-04-23 14:43:03
 TYPE: text
 --------------------------------------------------
 ==========
@@ -153,7 +49,7 @@ No autoriza inventar skills inexistentes.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
+09.STANDAR.RADAR.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -218,9 +114,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 
 - 06.SKILL.WBS.txt
 - 07.SKILL.FILE_CONTENT.txt
-- 09.STANDARD.RADAR.txt
-- 10.STANDARD.BATON.txt
-- 11.STANDARD.HUMAN_README.txt
+- 09.STANDAR.RADAR.txt
+- 10.STANDAR.BATON.txt
+- 11.STANDAR.HUMAN_README.txt
 - 23.SKILL.WHOAMI_POLICY.txt
 
 ==========
@@ -262,7 +158,7 @@ PURPOSE...........: Define estructura interna de archivos serios.
 ----------
 
 SKILL_ID..........: SKILL_PROBLEM_TROUBLE
-FILE..............: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+FILE..............: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 STATUS............: ACTIVE
 CATEGORY..........: REVIEW
 PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
@@ -272,7 +168,7 @@ PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
 ----------
 
 SKILL_ID..........: SKILL_RADAR
-FILE..............: 09.STANDARD.RADAR.txt
+FILE..............: 09.STANDAR.RADAR.txt
 STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Describe el filesystem de forma determinista.
@@ -282,7 +178,7 @@ PURPOSE...........: Describe el filesystem de forma determinista.
 ----------
 
 SKILL_ID..........: SKILL_BATON
-FILE..............: 10.STANDARD.BATON.txt
+FILE..............: 10.STANDAR.BATON.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define continuidad operativa orientada a IA.
@@ -292,7 +188,7 @@ PURPOSE...........: Define continuidad operativa orientada a IA.
 ----------
 
 SKILL_ID..........: SKILL_HUMAN_README
-FILE..............: 11.STANDARD.HUMAN_README.txt
+FILE..............: 11.STANDAR.HUMAN_README.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define documentación profunda y explicativa.
@@ -302,7 +198,7 @@ PURPOSE...........: Define documentación profunda y explicativa.
 ----------
 
 SKILL_ID..........: SKILL_DRAG_AND_DROP
-FILE..............: 12.STANDARD.DRAG_AND_DROP.txt
+FILE..............: 12.STANDAR.DRAG_AND_DROP.txt
 STATUS............: ACTIVE
 CATEGORY..........: USECASE
 PURPOSE...........: Estandariza mecánica de adjuntar y operar por arrastre.
@@ -352,7 +248,7 @@ PURPOSE...........: Define continuidad humana operacional resumida.
 ----------
 
 SKILL_ID..........: SKILL_GRC_CONTINUE_MODELOS_LOCALES
-FILE..............: 24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
+FILE..............: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Continuidad operativa para modelos locales y cierre seguro.
@@ -439,8 +335,8 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 --------------------------------------------------
 FILE: 01.ARCH.AI_ORCHESTRATION.CORE.txt
 FULL_PATH: C:\01. GitHub\Skills\01.ARCH.AI_ORCHESTRATION.CORE.txt
-SIZE: 10738 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 10733 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -469,11 +365,11 @@ NO_CUBRE..........:
 DEPENDENCIAS......:
 06.STANDAR.WBS_ID.txt
 07.STANDAR.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
-12.STANDARD.DRAG_AND_DROP.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+12.STANDAR.DRAG_AND_DROP.txt
 02.SKILL.AGENT_EXECUTION_POLICY.txt
 03.SKILL.SANDBOX_BOUNDARY.txt
 04.SKILL.COST_CONTROL.txt
@@ -804,8 +700,8 @@ Regla:
 --------------------------------------------------
 FILE: 02.SKILL.AGENT_EXECUTION_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\02.SKILL.AGENT_EXECUTION_POLICY.txt
-SIZE: 7053 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 7052 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -830,7 +726,7 @@ NO_CUBRE..........:
 DEPENDENCIAS......:
 03.SKILL.SANDBOX_BOUNDARY.txt
 04.SKILL.COST_CONTROL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
 
@@ -1071,8 +967,8 @@ En OK/FAIL, registrar:
 --------------------------------------------------
 FILE: 03.SKILL.SANDBOX_BOUNDARY.txt
 FULL_PATH: C:\01. GitHub\Skills\03.SKILL.SANDBOX_BOUNDARY.txt
-SIZE: 4952 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 4951 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -1099,7 +995,7 @@ NO_CUBRE..........:
 - No define permisos del OS/ACL (opcional; se recomienda pero no es requisito).
 DEPENDENCIAS......:
 02.SKILL.AGENT_EXECUTION_POLICY.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 06.STANDAR.WBS_ID.txt
 
 ==========
@@ -1269,8 +1165,8 @@ Registrar por cada acción:
 --------------------------------------------------
 FILE: 04.SKILL.COST_CONTROL.txt
 FULL_PATH: C:\01. GitHub\Skills\04.SKILL.COST_CONTROL.txt
-SIZE: 5927 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 5926 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -1297,7 +1193,7 @@ NO_CUBRE..........:
 - No define sandbox (ver 03.SKILL.SANDBOX_BOUNDARY.txt).
 - No define routing (ver 05.SKILL.ROUTING_POLICY.txt).
 DEPENDENCIAS......:
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 07.STANDAR.FILE_CONTENT.txt
 
 ==========
@@ -1509,8 +1405,8 @@ Tabla mínima:
 --------------------------------------------------
 FILE: 05.SKILL.ROUTING_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\05.SKILL.ROUTING_POLICY.txt
-SIZE: 6335 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 6333 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -1537,10 +1433,10 @@ No reemplaza PROBLEM_TROUBLE.
 No decide contenido final, solo cómo abordarlo.
 
 DEPENDENCIAS......:
-09.STANDARD.RADAR.txt
+09.STANDAR.RADAR.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -1844,8 +1740,8 @@ Prohibido:
 --------------------------------------------------
 FILE: 06.SKILL.WBS.txt
 FULL_PATH: C:\01. GitHub\Skills\06.SKILL.WBS.txt
-SIZE: 13451 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 13449 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -1887,8 +1783,8 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (recomendado)
-10.STANDARD.BATON.txt (recomendado)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt (recomendado)
+10.STANDAR.BATON.txt (recomendado)
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -3094,10 +2990,10 @@ FIN_DEL_DOCUMENTO
 ==========
 
 --------------------------------------------------
-FILE: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-FULL_PATH: C:\01. GitHub\Skills\08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-SIZE: 17056 bytes
-MODIFIED: 2026-04-23 16:31:06
+FILE: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+FULL_PATH: C:\01. GitHub\Skills\08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+SIZE: 17053 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -3105,7 +3001,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.PROBLEM_TROUBLE_INCIDENT.01.00
-NOMBRE_SUGERIDO...: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+NOMBRE_SUGERIDO...: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 VERSION...........: v1.4-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (America/Santiago)
@@ -3127,8 +3023,8 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt (estructura y delivery de archivos).
 06.STANDAR.WBS_ID.txt (IDs y WBS).
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (mapa de archivos/proyectos).
-10.STANDARD.BATON.txt (estado consolidado del proyecto, si aplica).
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt (mapa de archivos/proyectos).
+10.STANDAR.BATON.txt (estado consolidado del proyecto, si aplica).
 
 MEJORA_CLAVE_v1.4:
 
@@ -3707,10 +3603,10 @@ NOTAS...............:
 - Versión base del skill PROBLEM/TROUBLE/INCIDENTS.
 
 --------------------------------------------------
-FILE: 09.STANDARD.RADAR.txt
-FULL_PATH: C:\01. GitHub\Skills\09.STANDARD.RADAR.txt
-SIZE: 15374 bytes
-MODIFIED: 2026-04-23 16:31:06
+FILE: 09.STANDAR.RADAR.txt
+FULL_PATH: C:\01. GitHub\Skills\09.STANDAR.RADAR.txt
+SIZE: 15372 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -3718,7 +3614,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
-NOMBRE_SUGERIDO...: 09.STANDARD.RADAR_INDEX_CORE_FULL.txt
+NOMBRE_SUGERIDO...: 09.STANDAR.RADAR_INDEX_CORE_FULL.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -3753,7 +3649,7 @@ DEPENDENCIAS......:
 
 06.STANDAR.WBS_ID.txt
 07.STANDAR.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 NOTA_IMPORTANTE...:
 
@@ -4390,10 +4286,10 @@ FIN_DEL_DOCUMENTO
 ==========
 
 --------------------------------------------------
-FILE: 10.STANDARD.BATON.txt
-FULL_PATH: C:\01. GitHub\Skills\10.STANDARD.BATON.txt
-SIZE: 14129 bytes
-MODIFIED: 2026-04-23 16:31:06
+FILE: 10.STANDAR.BATON.txt
+FULL_PATH: C:\01. GitHub\Skills\10.STANDAR.BATON.txt
+SIZE: 14125 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -4401,7 +4297,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.BATON.01.00
-NOMBRE_SUGERIDO...: 10.STANDARD.BATON.txt
+NOMBRE_SUGERIDO...: 10.STANDAR.BATON.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -4435,9 +4331,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-11.STANDARD.HUMAN_README.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+11.STANDAR.HUMAN_README.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)
@@ -4858,10 +4754,10 @@ Si no, la actualización es incompleta.
 - Creación inicial del skill BATON.
 
 --------------------------------------------------
-FILE: 11.STANDARD.HUMAN_README.txt
-FULL_PATH: C:\01. GitHub\Skills\11.STANDARD.HUMAN_README.txt
-SIZE: 10960 bytes
-MODIFIED: 2026-04-23 16:31:06
+FILE: 11.STANDAR.HUMAN_README.txt
+FULL_PATH: C:\01. GitHub\Skills\11.STANDAR.HUMAN_README.txt
+SIZE: 10958 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -4869,7 +4765,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.HUMAN.README.01.00
-NOMBRE_SUGERIDO...: 11.STANDARD.HUMAN_README.txt
+NOMBRE_SUGERIDO...: 11.STANDAR.HUMAN_README.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM
@@ -4906,7 +4802,7 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-10.STANDARD.BATON.txt
+10.STANDAR.BATON.txt
 
 (DEPENDENCIAS_RECOMENDADAS si el proyecto usa ejecución IA)
 - SKILL.AI.ORCH.ARCH (si existe)
@@ -5244,10 +5140,10 @@ No debe:
 - Versión base del skill HUMAN.README.
 
 --------------------------------------------------
-FILE: 12.STANDARD.DRAG_AND_DROP.txt
-FULL_PATH: C:\01. GitHub\Skills\12.STANDARD.DRAG_AND_DROP.txt
-SIZE: 8111 bytes
-MODIFIED: 2026-04-23 16:31:06
+FILE: 12.STANDAR.DRAG_AND_DROP.txt
+FULL_PATH: C:\01. GitHub\Skills\12.STANDAR.DRAG_AND_DROP.txt
+SIZE: 8106 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -5255,7 +5151,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
-NOMBRE_SUGERIDO...: 12.STANDARD.DRAG_AND_DROP.txt
+NOMBRE_SUGERIDO...: 12.STANDAR.DRAG_AND_DROP.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -5290,9 +5186,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-10.STANDARD.BATON.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
 
 MEJORA_CLAVE_v1.2:
 
@@ -5446,7 +5342,7 @@ Encabezado:
 
 Ejemplo:
 TANDA 2/3
-ARCHIVO: 09.STANDARD.RADAR.txt
+ARCHIVO: 09.STANDAR.RADAR.txt
 ACCION: CONCATENAR AL FINAL (orden estricto)
 
 ++++++++++
@@ -5882,8 +5778,8 @@ Distribución base (editable):
 --------------------------------------------------
 FILE: 15.SKILL.LOGGING_AUDIT.txt
 FULL_PATH: C:\01. GitHub\Skills\15.SKILL.LOGGING_AUDIT.txt
-SIZE: 4748 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 4747 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -5911,7 +5807,7 @@ NO_CUBRE..........:
 DEPENDENCIAS......:
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -6085,8 +5981,8 @@ NOTES.............: Patch aplicado; lint pendiente.
 --------------------------------------------------
 FILE: 16.SKILL.CHECKPOINT_ROLLBACK.txt
 FULL_PATH: C:\01. GitHub\Skills\16.SKILL.CHECKPOINT_ROLLBACK.txt
-SIZE: 3435 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 3434 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -6113,7 +6009,7 @@ NO_CUBRE..........:
 DEPENDENCIAS......:
 02.SKILL.AGENT_EXECUTION_POLICY.txt
 15.SKILL.LOGGING_AUDIT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -6382,8 +6278,8 @@ Acción:
 --------------------------------------------------
 FILE: 18.SKILL.DEV_ENV_MINIMAL.txt
 FULL_PATH: C:\01. GitHub\Skills\18.SKILL.DEV_ENV_MINIMAL.txt
-SIZE: 2564 bytes
-MODIFIED: 2026-04-23 16:31:06
+SIZE: 2562 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -6410,8 +6306,8 @@ NO_CUBRE..........:
 - No define stacks cloud.
 DEPENDENCIAS......:
 06.STANDAR.WBS_ID.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -6511,10 +6407,195 @@ Regla:
 - Creación inicial: dev env mínimo estable.
 
 --------------------------------------------------
+FILE: 19.CIS\\20260421.CIS.txt
+FULL_PATH: C:\01. GitHub\Skills\19.CIS\20260421.CIS.txt
+SIZE: 4712 bytes
+MODIFIED: 2026-04-23 10:44:34
+TYPE: text
+--------------------------------------------------
+SKILL.CIS.EXPLAINER.txt
+
+CÓDIGO
+SKILL.CIS.01
+
+NOMBRE
+Skill – Explicación Universal del Context Injection System (CIS) para IA en Blanco
+
+PROPÓSITO
+Permitir que cualquier IA sin contexto previo comprenda correctamente qué es CIS, cuál es su rol y cuáles son sus límites.
+
+APLICACIÓN
+Este skill debe entregarse completo a una IA nueva antes de cualquier interacción relacionada con edición estructural del sistema.
+
+======================================================================
+0. DEFINICIÓN EJECUTIVA
+
+CIS significa:
+
+Context Injection System.
+
+CIS es un sistema formal y determinista diseñado para ejecutar decisiones humanas explícitas sobre un conjunto documental gobernado.
+
+CIS NO es un asistente creativo.
+CIS NO toma decisiones.
+CIS NO interpreta intención implícita.
+
+CIS ejecuta exactamente lo que se declara.
+
+======================================================================
+
+PROBLEMA QUE CIS RESUELVE
+======================================================================
+
+CIS existe porque los sistemas documentales fallan por:
+
+Ediciones manuales no trazables
+Mezcla de roles humanos
+Pérdida de estructura
+Resúmenes no autorizados
+Dependencia del contexto conversacional
+Regresiones no detectadas
+
+CIS elimina estos riesgos mediante:
+
+Formalización obligatoria de cambios
+Separación decisión / ejecución
+Trazabilidad estructural
+Validación previa y posterior
+======================================================================
+2. ARQUITECTURA CONCEPTUAL
+
+CIS está compuesto por:
+
+injection.txt
+Documento que contiene decisiones humanas explícitas.
+Es un contrato formal, no un input informal.
+BLOCK_ID
+Identificador único de cada cambio.
+Permite trazabilidad histórica.
+CIS.CORE
+Motor determinista que ejecuta las instrucciones declaradas.
+SYSTEM.STATE
+Archivo que registra estado previo y posterior a cada ejecución.
+======================================================================
+3. PRINCIPIOS OPERATIVOS
+
+3.1 Separación de roles
+
+Humano decide.
+Sistema ejecuta.
+
+La IA no decide qué es mejor.
+La IA no optimiza sin permiso.
+
+3.2 Determinismo
+
+Si injection.txt es válido estructuralmente, CIS ejecutará exactamente lo indicado.
+
+3.3 Trazabilidad
+
+Cada cambio debe poder vincularse a:
+
+Un humano decisor
+Un BLOCK_ID
+Un injection específico
+Un estado registrado
+
+Sin trazabilidad, el cambio es inválido.
+
+======================================================================
+4. LÍMITES EXPLÍCITOS PARA LA IA
+
+Si eres una IA que recibe este skill:
+
+NO debes:
+
+Resumir archivos sin autorización explícita
+Fusionar secciones
+Reducir estructura
+Interpretar intención implícita
+“Mejorar” contenido reduciendo detalle
+Editar archivos directamente
+
+Solo puedes:
+
+Explicar
+Analizar
+Proponer cambios
+Generar injection.txt conforme a reglas declaradas
+
+La ejecución real solo ocurre vía CIS.
+
+======================================================================
+5. PRINCIPIO CRÍTICO
+
+Injection válido ≠ Injection correcto.
+
+La validez estructural no implica coherencia conceptual.
+
+La IA puede ayudar a detectar incoherencias,
+pero no puede modificar decisiones sin instrucción explícita.
+
+======================================================================
+6. CIS ES AGNÓSTICO DEL MEDIO
+
+CIS puede operar con:
+
+Scripts
+IAs
+Sistemas automatizados
+Operadores humanos
+
+El medio no importa.
+
+Lo único válido es la decisión explícita formalizada.
+
+======================================================================
+7. CUÁNDO USAR CIS
+
+CIS debe usarse cuando:
+
+Se modifica estructura documental
+Se agregan secciones permanentes
+Se altera jerarquía
+Se versiona contenido
+Se ejecutan cambios persistentes
+
+CIS no es necesario para conversación exploratoria.
+
+======================================================================
+8. CONSECUENCIA DE IGNORAR CIS
+
+Ignorar CIS provoca:
+
+Pérdida de trazabilidad
+Regresión estructural
+Errores silenciosos
+Dependencia del contexto del chat
+Corrupción progresiva del sistema
+======================================================================
+9. RESUMEN FINAL PARA IA EN BLANCO
+
+CIS es un sistema formal que:
+
+Obliga a declarar decisiones
+Ejecuta cambios de forma determinista
+Separa decisión humana de ejecución técnica
+Protege contra pérdida estructural
+Preserva conocimiento acumulativo
+
+Si interactúas con un sistema que usa CIS,
+tu función es apoyar el análisis,
+no alterar el sistema directamente.
+
+======================================================================
+FIN DEL SKILL
+
+--------------------------------------------------
 FILE: 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
-SIZE: 2815 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 2812 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -6539,9 +6620,9 @@ No define contenido interno detallado de cada artefacto.
 No reemplaza skills específicos de cada componente.
 
 DEPENDENCIAS......:
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 05.SKILL.ROUTING_POLICY.txt
 
 ==========
@@ -6681,8 +6762,8 @@ Si falta alguno:
 --------------------------------------------------
 FILE: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-SIZE: 5460 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 5456 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -6711,10 +6792,10 @@ No define lógica de negocio de proyectos.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
 
@@ -6980,8 +7061,8 @@ IA propone acción que viola SKILL
 --------------------------------------------------
 FILE: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-SIZE: 5781 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 5777 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -7010,10 +7091,10 @@ DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 23.SKILL.WHOAMI_POLICY.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
@@ -7316,8 +7397,8 @@ CIERRE:
 --------------------------------------------------
 FILE: 23.SKILL.WHOAMI_POLICY.txt
 FULL_PATH: C:\01. GitHub\Skills\23.SKILL.WHOAMI_POLICY.txt
-SIZE: 3453 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 3451 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -7345,8 +7426,8 @@ No define gobernanza global completa del sistema.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-11.STANDARD.HUMAN_README.txt
-10.STANDARD.BATON.txt
+11.STANDAR.HUMAN_README.txt
+10.STANDAR.BATON.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 
@@ -7491,8 +7572,8 @@ WhoAmI no reemplaza HUMAN.
 --------------------------------------------------
 FILE: 24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
 FULL_PATH: C:\01. GitHub\Skills\24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
-SIZE: 4288 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 4280 bytes
+MODIFIED: 2026-04-23 12:04:15
 TYPE: text
 --------------------------------------------------
 ==========
@@ -7500,7 +7581,7 @@ TYPE: text
 ==========
 
 ID_UNICO..........: SKILL.GRC.CONTINUE.LOCAL.01.00
-NOMBRE_SUGERIDO...: 24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
+NOMBRE_SUGERIDO...: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
 VERSION...........: v1.0-CANON
 FECHA.............: 2026-04-23
 HORA..............: HH:MM
@@ -7525,8 +7606,8 @@ No define arquitectura del sistema
 DEPENDENCIAS......:
 26.SKILL.GRC.CORE.txt
 26.1_PROMPT.GRC.BASE.txt
-10.STANDARD.BATON.txt
-09.STANDARD.RADAR.txt
+10.STANDAR.BATON.txt
+09.STANDAR.RADAR.txt
 
 TAGS_OPERATIVOS...:
 CONTINUITY, LOCAL_AI, GRC_ENFORCED
@@ -8730,8 +8811,8 @@ Escalar a cloud cuando:
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\00.BUNDLE.CORE.txt
-SIZE: 38380 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 38371 bytes
+MODIFIED: 2026-04-23 14:43:58
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -8784,8 +8865,8 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (recomendado)
-10.STANDARD.BATON.txt (recomendado)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt (recomendado)
+10.STANDAR.BATON.txt (recomendado)
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -9990,8 +10071,8 @@ FIN_DEL_DOCUMENTO
 ==========
 
 --------------------------------------------------
-SOURCE_FILE: 12.STANDARD.DRAG_AND_DROP.txt
-SOURCE_PATH: C:\01. GitHub\Skills\12.STANDARD.DRAG_AND_DROP.txt
+SOURCE_FILE: 12.STANDAR.DRAG_AND_DROP.txt
+SOURCE_PATH: C:\01. GitHub\Skills\12.STANDAR.DRAG_AND_DROP.txt
 VERSION    : UNKNOWN
 SHA256     : F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8
 --------------------------------------------------
@@ -10000,7 +10081,7 @@ SHA256     : F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8
 ==========
 
 ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
-NOMBRE_SUGERIDO...: 12.STANDARD.DRAG_AND_DROP.txt
+NOMBRE_SUGERIDO...: 12.STANDAR.DRAG_AND_DROP.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -10035,9 +10116,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-10.STANDARD.BATON.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
 
 MEJORA_CLAVE_v1.2:
 
@@ -10191,7 +10272,7 @@ Encabezado:
 
 Ejemplo:
 TANDA 2/3
-ARCHIVO: 09.STANDARD.RADAR.txt
+ARCHIVO: 09.STANDAR.RADAR.txt
 ACCION: CONCATENAR AL FINAL (orden estricto)
 
 ++++++++++
@@ -10287,8 +10368,8 @@ E4) Tandas desordenadas:
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\00.SKILL.MENU.ACTIVE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\00.SKILL.MENU.ACTIVE.txt
-SIZE: 8063 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 8048 bytes
+MODIFIED: 2026-04-23 14:43:03
 TYPE: text
 --------------------------------------------------
 ==========
@@ -10318,7 +10399,7 @@ No autoriza inventar skills inexistentes.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
+09.STANDAR.RADAR.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -10383,9 +10464,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 
 - 06.SKILL.WBS.txt
 - 07.SKILL.FILE_CONTENT.txt
-- 09.STANDARD.RADAR.txt
-- 10.STANDARD.BATON.txt
-- 11.STANDARD.HUMAN_README.txt
+- 09.STANDAR.RADAR.txt
+- 10.STANDAR.BATON.txt
+- 11.STANDAR.HUMAN_README.txt
 - 23.SKILL.WHOAMI_POLICY.txt
 
 ==========
@@ -10427,7 +10508,7 @@ PURPOSE...........: Define estructura interna de archivos serios.
 ----------
 
 SKILL_ID..........: SKILL_PROBLEM_TROUBLE
-FILE..............: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+FILE..............: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 STATUS............: ACTIVE
 CATEGORY..........: REVIEW
 PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
@@ -10437,7 +10518,7 @@ PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
 ----------
 
 SKILL_ID..........: SKILL_RADAR
-FILE..............: 09.STANDARD.RADAR.txt
+FILE..............: 09.STANDAR.RADAR.txt
 STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Describe el filesystem de forma determinista.
@@ -10447,7 +10528,7 @@ PURPOSE...........: Describe el filesystem de forma determinista.
 ----------
 
 SKILL_ID..........: SKILL_BATON
-FILE..............: 10.STANDARD.BATON.txt
+FILE..............: 10.STANDAR.BATON.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define continuidad operativa orientada a IA.
@@ -10457,7 +10538,7 @@ PURPOSE...........: Define continuidad operativa orientada a IA.
 ----------
 
 SKILL_ID..........: SKILL_HUMAN_README
-FILE..............: 11.STANDARD.HUMAN_README.txt
+FILE..............: 11.STANDAR.HUMAN_README.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define documentación profunda y explicativa.
@@ -10467,7 +10548,7 @@ PURPOSE...........: Define documentación profunda y explicativa.
 ----------
 
 SKILL_ID..........: SKILL_DRAG_AND_DROP
-FILE..............: 12.STANDARD.DRAG_AND_DROP.txt
+FILE..............: 12.STANDAR.DRAG_AND_DROP.txt
 STATUS............: ACTIVE
 CATEGORY..........: USECASE
 PURPOSE...........: Estandariza mecánica de adjuntar y operar por arrastre.
@@ -10517,7 +10598,7 @@ PURPOSE...........: Define continuidad humana operacional resumida.
 ----------
 
 SKILL_ID..........: SKILL_GRC_CONTINUE_MODELOS_LOCALES
-FILE..............: 24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
+FILE..............: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Continuidad operativa para modelos locales y cierre seguro.
@@ -10604,8 +10685,8 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\01.BUNDLE.CONTINUITY.txt
-SIZE: 29594 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 29582 bytes
+MODIFIED: 2026-04-23 14:43:58
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -10614,8 +10695,8 @@ GENERATED_AT: 2026-04-23 14:43:58
 ==============================
 
 --------------------------------------------------
-SOURCE_FILE: 10.STANDARD.BATON.txt
-SOURCE_PATH: C:\01. GitHub\Skills\10.STANDARD.BATON.txt
+SOURCE_FILE: 10.STANDAR.BATON.txt
+SOURCE_PATH: C:\01. GitHub\Skills\10.STANDAR.BATON.txt
 VERSION    : UNKNOWN
 SHA256     : 7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B
 --------------------------------------------------
@@ -10624,7 +10705,7 @@ SHA256     : 7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B
 ==========
 
 ID_UNICO..........: SKILL.BATON.01.00
-NOMBRE_SUGERIDO...: 10.STANDARD.BATON.txt
+NOMBRE_SUGERIDO...: 10.STANDAR.BATON.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -10658,9 +10739,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-11.STANDARD.HUMAN_README.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+11.STANDAR.HUMAN_README.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)
@@ -11081,8 +11162,8 @@ Si no, la actualización es incompleta.
 - Creación inicial del skill BATON.
 
 --------------------------------------------------
-SOURCE_FILE: 11.STANDARD.HUMAN_README.txt
-SOURCE_PATH: C:\01. GitHub\Skills\11.STANDARD.HUMAN_README.txt
+SOURCE_FILE: 11.STANDAR.HUMAN_README.txt
+SOURCE_PATH: C:\01. GitHub\Skills\11.STANDAR.HUMAN_README.txt
 VERSION    : UNKNOWN
 SHA256     : DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15
 --------------------------------------------------
@@ -11091,7 +11172,7 @@ SHA256     : DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15
 ==========
 
 ID_UNICO..........: SKILL.HUMAN.README.01.00
-NOMBRE_SUGERIDO...: 11.STANDARD.HUMAN_README.txt
+NOMBRE_SUGERIDO...: 11.STANDAR.HUMAN_README.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM
@@ -11128,7 +11209,7 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-10.STANDARD.BATON.txt
+10.STANDAR.BATON.txt
 
 (DEPENDENCIAS_RECOMENDADAS si el proyecto usa ejecución IA)
 - SKILL.AI.ORCH.ARCH (si existe)
@@ -11496,8 +11577,8 @@ No define gobernanza global completa del sistema.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-11.STANDARD.HUMAN_README.txt
-10.STANDARD.BATON.txt
+11.STANDAR.HUMAN_README.txt
+10.STANDAR.BATON.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 
@@ -11643,8 +11724,8 @@ WhoAmI no reemplaza HUMAN.
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\02.BUNDLE.GOVERNANCE.txt
-SIZE: 30870 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 30855 bytes
+MODIFIED: 2026-04-23 14:43:59
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -11653,8 +11734,8 @@ GENERATED_AT: 2026-04-23 14:43:59
 ==============================
 
 --------------------------------------------------
-SOURCE_FILE: 09.STANDARD.RADAR.txt
-SOURCE_PATH: C:\01. GitHub\Skills\09.STANDARD.RADAR.txt
+SOURCE_FILE: 09.STANDAR.RADAR.txt
+SOURCE_PATH: C:\01. GitHub\Skills\09.STANDAR.RADAR.txt
 VERSION    : UNKNOWN
 SHA256     : A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D
 --------------------------------------------------
@@ -11663,7 +11744,7 @@ SHA256     : A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D
 ==========
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
-NOMBRE_SUGERIDO...: 09.STANDARD.RADAR_INDEX_CORE_FULL.txt
+NOMBRE_SUGERIDO...: 09.STANDAR.RADAR_INDEX_CORE_FULL.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -11698,7 +11779,7 @@ DEPENDENCIAS......:
 
 06.STANDAR.WBS_ID.txt
 07.STANDAR.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 NOTA_IMPORTANTE...:
 
@@ -12362,9 +12443,9 @@ No define contenido interno detallado de cada artefacto.
 No reemplaza skills específicos de cada componente.
 
 DEPENDENCIAS......:
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 05.SKILL.ROUTING_POLICY.txt
 
 ==========
@@ -12533,10 +12614,10 @@ No define lógica de negocio de proyectos.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
 
@@ -12831,10 +12912,10 @@ DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 23.SKILL.WHOAMI_POLICY.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
@@ -13173,8 +13254,8 @@ OUTPUT:
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\SKILL_SET.MANIFEST.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\SKILL_SET.MANIFEST.txt
-SIZE: 1097 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 1093 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -13197,10 +13278,10 @@ incluyendo estructura base, continuidad y gobierno operativo.
 00.SKILL.MENU.ACTIVE.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
-12.STANDARD.DRAG_AND_DROP.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+12.STANDAR.DRAG_AND_DROP.txt
 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
@@ -13226,8 +13307,8 @@ incluyendo estructura base, continuidad y gobierno operativo.
 --------------------------------------------------
 FILE: 90.USECASE\\01.NEW_PROJECT\\USECASE.MANIFEST.json
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\USECASE.MANIFEST.json
-SIZE: 7817 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 7812 bytes
+MODIFIED: 2026-04-23 14:43:59
 TYPE: json
 --------------------------------------------------
 {
@@ -13264,8 +13345,8 @@ TYPE: json
                                                  "source_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674"
                                              },
                                              {
-                                                 "name":  "12.STANDARD.DRAG_AND_DROP.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDARD.DRAG_AND_DROP.txt",
+                                                 "name":  "12.STANDAR.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8"
                                              }
@@ -13280,14 +13361,14 @@ TYPE: json
                         "delivery_sha256":  "D5C5E6F284D875F610DFC5FE1CDBEFD6B9A22FD44F1AA02BB4CFFA0AD38260B4",
                         "source_files":  [
                                              {
-                                                 "name":  "10.STANDARD.BATON.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDARD.BATON.txt",
+                                                 "name":  "10.STANDAR.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B"
                                              },
                                              {
-                                                 "name":  "11.STANDARD.HUMAN_README.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDARD.HUMAN_README.txt",
+                                                 "name":  "11.STANDAR.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15"
                                              },
@@ -13308,8 +13389,8 @@ TYPE: json
                         "delivery_sha256":  "285E37741EB53C55B785268C3A0C4FABBBAC6A5F6AAB54E8FABA8E90F2D1399C",
                         "source_files":  [
                                              {
-                                                 "name":  "09.STANDARD.RADAR.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDARD.RADAR.txt",
+                                                 "name":  "09.STANDAR.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D"
                                              },
@@ -13347,8 +13428,8 @@ TYPE: json
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\00.BUNDLE.CORE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\00.BUNDLE.CORE.txt
-SIZE: 38380 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 38371 bytes
+MODIFIED: 2026-04-23 14:43:59
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -13401,8 +13482,8 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (recomendado)
-10.STANDARD.BATON.txt (recomendado)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt (recomendado)
+10.STANDAR.BATON.txt (recomendado)
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -14607,8 +14688,8 @@ FIN_DEL_DOCUMENTO
 ==========
 
 --------------------------------------------------
-SOURCE_FILE: 12.STANDARD.DRAG_AND_DROP.txt
-SOURCE_PATH: C:\01. GitHub\Skills\12.STANDARD.DRAG_AND_DROP.txt
+SOURCE_FILE: 12.STANDAR.DRAG_AND_DROP.txt
+SOURCE_PATH: C:\01. GitHub\Skills\12.STANDAR.DRAG_AND_DROP.txt
 VERSION    : UNKNOWN
 SHA256     : F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8
 --------------------------------------------------
@@ -14617,7 +14698,7 @@ SHA256     : F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8
 ==========
 
 ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
-NOMBRE_SUGERIDO...: 12.STANDARD.DRAG_AND_DROP.txt
+NOMBRE_SUGERIDO...: 12.STANDAR.DRAG_AND_DROP.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -14652,9 +14733,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-10.STANDARD.BATON.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+10.STANDAR.BATON.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
 
 MEJORA_CLAVE_v1.2:
 
@@ -14808,7 +14889,7 @@ Encabezado:
 
 Ejemplo:
 TANDA 2/3
-ARCHIVO: 09.STANDARD.RADAR.txt
+ARCHIVO: 09.STANDAR.RADAR.txt
 ACCION: CONCATENAR AL FINAL (orden estricto)
 
 ++++++++++
@@ -14904,8 +14985,8 @@ E4) Tandas desordenadas:
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\00.SKILL.MENU.ACTIVE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\00.SKILL.MENU.ACTIVE.txt
-SIZE: 8063 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 8048 bytes
+MODIFIED: 2026-04-23 14:43:03
 TYPE: text
 --------------------------------------------------
 ==========
@@ -14935,7 +15016,7 @@ No autoriza inventar skills inexistentes.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
+09.STANDAR.RADAR.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -15000,9 +15081,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 
 - 06.SKILL.WBS.txt
 - 07.SKILL.FILE_CONTENT.txt
-- 09.STANDARD.RADAR.txt
-- 10.STANDARD.BATON.txt
-- 11.STANDARD.HUMAN_README.txt
+- 09.STANDAR.RADAR.txt
+- 10.STANDAR.BATON.txt
+- 11.STANDAR.HUMAN_README.txt
 - 23.SKILL.WHOAMI_POLICY.txt
 
 ==========
@@ -15044,7 +15125,7 @@ PURPOSE...........: Define estructura interna de archivos serios.
 ----------
 
 SKILL_ID..........: SKILL_PROBLEM_TROUBLE
-FILE..............: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+FILE..............: 08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 STATUS............: ACTIVE
 CATEGORY..........: REVIEW
 PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
@@ -15054,7 +15135,7 @@ PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
 ----------
 
 SKILL_ID..........: SKILL_RADAR
-FILE..............: 09.STANDARD.RADAR.txt
+FILE..............: 09.STANDAR.RADAR.txt
 STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Describe el filesystem de forma determinista.
@@ -15064,7 +15145,7 @@ PURPOSE...........: Describe el filesystem de forma determinista.
 ----------
 
 SKILL_ID..........: SKILL_BATON
-FILE..............: 10.STANDARD.BATON.txt
+FILE..............: 10.STANDAR.BATON.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define continuidad operativa orientada a IA.
@@ -15074,7 +15155,7 @@ PURPOSE...........: Define continuidad operativa orientada a IA.
 ----------
 
 SKILL_ID..........: SKILL_HUMAN_README
-FILE..............: 11.STANDARD.HUMAN_README.txt
+FILE..............: 11.STANDAR.HUMAN_README.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define documentación profunda y explicativa.
@@ -15084,7 +15165,7 @@ PURPOSE...........: Define documentación profunda y explicativa.
 ----------
 
 SKILL_ID..........: SKILL_DRAG_AND_DROP
-FILE..............: 12.STANDARD.DRAG_AND_DROP.txt
+FILE..............: 12.STANDAR.DRAG_AND_DROP.txt
 STATUS............: ACTIVE
 CATEGORY..........: USECASE
 PURPOSE...........: Estandariza mecánica de adjuntar y operar por arrastre.
@@ -15134,7 +15215,7 @@ PURPOSE...........: Define continuidad humana operacional resumida.
 ----------
 
 SKILL_ID..........: SKILL_GRC_CONTINUE_MODELOS_LOCALES
-FILE..............: 24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt
+FILE..............: 24.GRC.CONTINUE.MODELOS.LOCALES.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Continuidad operativa para modelos locales y cierre seguro.
@@ -15221,8 +15302,8 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\01.BUNDLE.CONTINUITY.txt
-SIZE: 29594 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 29582 bytes
+MODIFIED: 2026-04-23 14:43:59
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -15231,8 +15312,8 @@ GENERATED_AT: 2026-04-23 14:43:59
 ==============================
 
 --------------------------------------------------
-SOURCE_FILE: 10.STANDARD.BATON.txt
-SOURCE_PATH: C:\01. GitHub\Skills\10.STANDARD.BATON.txt
+SOURCE_FILE: 10.STANDAR.BATON.txt
+SOURCE_PATH: C:\01. GitHub\Skills\10.STANDAR.BATON.txt
 VERSION    : UNKNOWN
 SHA256     : 7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B
 --------------------------------------------------
@@ -15241,7 +15322,7 @@ SHA256     : 7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B
 ==========
 
 ID_UNICO..........: SKILL.BATON.01.00
-NOMBRE_SUGERIDO...: 10.STANDARD.BATON.txt
+NOMBRE_SUGERIDO...: 10.STANDAR.BATON.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -15275,9 +15356,9 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-11.STANDARD.HUMAN_README.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+11.STANDAR.HUMAN_README.txt
+09.STANDAR.RADAR_INDEX_CORE_FULL.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)
@@ -15698,8 +15779,8 @@ Si no, la actualización es incompleta.
 - Creación inicial del skill BATON.
 
 --------------------------------------------------
-SOURCE_FILE: 11.STANDARD.HUMAN_README.txt
-SOURCE_PATH: C:\01. GitHub\Skills\11.STANDARD.HUMAN_README.txt
+SOURCE_FILE: 11.STANDAR.HUMAN_README.txt
+SOURCE_PATH: C:\01. GitHub\Skills\11.STANDAR.HUMAN_README.txt
 VERSION    : UNKNOWN
 SHA256     : DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15
 --------------------------------------------------
@@ -15708,7 +15789,7 @@ SHA256     : DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15
 ==========
 
 ID_UNICO..........: SKILL.HUMAN.README.01.00
-NOMBRE_SUGERIDO...: 11.STANDARD.HUMAN_README.txt
+NOMBRE_SUGERIDO...: 11.STANDAR.HUMAN_README.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM
@@ -15745,7 +15826,7 @@ DEPENDENCIAS......:
 
 07.STANDAR.FILE_CONTENT.txt
 06.STANDAR.WBS_ID.txt
-10.STANDARD.BATON.txt
+10.STANDAR.BATON.txt
 
 (DEPENDENCIAS_RECOMENDADAS si el proyecto usa ejecución IA)
 - SKILL.AI.ORCH.ARCH (si existe)
@@ -16113,8 +16194,8 @@ No define gobernanza global completa del sistema.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-11.STANDARD.HUMAN_README.txt
-10.STANDARD.BATON.txt
+11.STANDAR.HUMAN_README.txt
+10.STANDAR.BATON.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 
@@ -16260,8 +16341,8 @@ WhoAmI no reemplaza HUMAN.
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\02.BUNDLE.GOVERNANCE.txt
-SIZE: 27718 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 27706 bytes
+MODIFIED: 2026-04-23 14:43:59
 TYPE: text
 --------------------------------------------------
 ==============================
@@ -16270,8 +16351,8 @@ GENERATED_AT: 2026-04-23 14:43:59
 ==============================
 
 --------------------------------------------------
-SOURCE_FILE: 09.STANDARD.RADAR.txt
-SOURCE_PATH: C:\01. GitHub\Skills\09.STANDARD.RADAR.txt
+SOURCE_FILE: 09.STANDAR.RADAR.txt
+SOURCE_PATH: C:\01. GitHub\Skills\09.STANDAR.RADAR.txt
 VERSION    : UNKNOWN
 SHA256     : A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D
 --------------------------------------------------
@@ -16280,7 +16361,7 @@ SHA256     : A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D
 ==========
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
-NOMBRE_SUGERIDO...: 09.STANDARD.RADAR_INDEX_CORE_FULL.txt
+NOMBRE_SUGERIDO...: 09.STANDAR.RADAR_INDEX_CORE_FULL.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -16315,7 +16396,7 @@ DEPENDENCIAS......:
 
 06.STANDAR.WBS_ID.txt
 07.STANDAR.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
 
 NOTA_IMPORTANTE...:
 
@@ -16983,10 +17064,10 @@ No define lógica de negocio de proyectos.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
 
@@ -17281,10 +17362,10 @@ DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
 23.SKILL.WHOAMI_POLICY.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
@@ -17625,8 +17706,8 @@ OUTPUT:
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\SKILL_SET.MANIFEST.txt
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\SKILL_SET.MANIFEST.txt
-SIZE: 955 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 951 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -17648,10 +17729,10 @@ actualizar continuidad y dejar trazabilidad consistente.
 
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
-12.STANDARD.DRAG_AND_DROP.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
+11.STANDAR.HUMAN_README.txt
+12.STANDAR.DRAG_AND_DROP.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 23.SKILL.WHOAMI_POLICY.txt
@@ -17676,8 +17757,8 @@ actualizar continuidad y dejar trazabilidad consistente.
 --------------------------------------------------
 FILE: 90.USECASE\\02.SESSION_CLOSE\\USECASE.MANIFEST.json
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.MANIFEST.json
-SIZE: 7288 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 7283 bytes
+MODIFIED: 2026-04-23 14:44:00
 TYPE: json
 --------------------------------------------------
 {
@@ -17714,8 +17795,8 @@ TYPE: json
                                                  "source_sha256":  "BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674"
                                              },
                                              {
-                                                 "name":  "12.STANDARD.DRAG_AND_DROP.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDARD.DRAG_AND_DROP.txt",
+                                                 "name":  "12.STANDAR.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\12.STANDAR.DRAG_AND_DROP.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8"
                                              }
@@ -17730,14 +17811,14 @@ TYPE: json
                         "delivery_sha256":  "538CA3EFF19C19F00B3E952E2EAD00A590B3A4ED7F169F987E93DC6A84620A3F",
                         "source_files":  [
                                              {
-                                                 "name":  "10.STANDARD.BATON.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDARD.BATON.txt",
+                                                 "name":  "10.STANDAR.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\10.STANDAR.BATON.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "7B1683B4FB69ECD27F672CA06D133BECEFFB1F750973B5FF348BF3E1A4AAFF4B"
                                              },
                                              {
-                                                 "name":  "11.STANDARD.HUMAN_README.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDARD.HUMAN_README.txt",
+                                                 "name":  "11.STANDAR.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\11.STANDAR.HUMAN_README.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "DF38212822EECFB4335BC27BF3914E10144775CF08B7B7DA3F8C8768ACCA3E15"
                                              },
@@ -17758,8 +17839,8 @@ TYPE: json
                         "delivery_sha256":  "1B886ED01EE2FBE92B8427E068DDCB241B5BDAA9D2FA1E90599AD35C47CB8681",
                         "source_files":  [
                                              {
-                                                 "name":  "09.STANDARD.RADAR.txt",
-                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDARD.RADAR.txt",
+                                                 "name":  "09.STANDAR.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\09.STANDAR.RADAR.txt",
                                                  "version":  "UNKNOWN",
                                                  "source_sha256":  "A00CFB501AB2BE3823858C3EC1C26C80CFFFC6B59F962C57D4CED770811E946D"
                                              },
@@ -18306,8 +18387,8 @@ exit 0
 --------------------------------------------------
 FILE: 90.USECASE\\GLOBAL.SKILL.VERSION.REGISTRY.json
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
-SIZE: 1020 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 1015 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: json
 --------------------------------------------------
 {
@@ -18318,11 +18399,11 @@ TYPE: json
     { "file": "00.SKILL.MENU.ACTIVE.txt", "version": "v1.0-CANON" },
     { "file": "06.SKILL.WBS.txt", "version": "v1.2-DRAFT" },
     { "file": "07.SKILL.FILE_CONTENT.txt", "version": "v1.3-DRAFT" },
-    { "file": "08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt", "version": "UNKNOWN" },
-    { "file": "09.STANDARD.RADAR.txt", "version": "UNKNOWN" },
-    { "file": "10.STANDARD.BATON.txt", "version": "UNKNOWN" },
-    { "file": "11.STANDARD.HUMAN_README.txt", "version": "UNKNOWN" },
-    { "file": "12.STANDARD.DRAG_AND_DROP.txt", "version": "UNKNOWN" },
+    { "file": "08.STANDAR.PROBLEM_TROUBLE_INCIDENTS.txt", "version": "UNKNOWN" },
+    { "file": "09.STANDAR.RADAR.txt", "version": "UNKNOWN" },
+    { "file": "10.STANDAR.BATON.txt", "version": "UNKNOWN" },
+    { "file": "11.STANDAR.HUMAN_README.txt", "version": "UNKNOWN" },
+    { "file": "12.STANDAR.DRAG_AND_DROP.txt", "version": "UNKNOWN" },
     { "file": "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt", "version": "v1.0-CANON" },
     { "file": "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "version": "v1.0-DRAFT" },
     { "file": "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "version": "v1.0-CANON" },
@@ -18333,8 +18414,8 @@ TYPE: json
 --------------------------------------------------
 FILE: 90.USECASE\\USECASE.REGISTRY.json
 FULL_PATH: C:\01. GitHub\Skills\90.USECASE\USECASE.REGISTRY.json
-SIZE: 2919 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 2911 bytes
+MODIFIED: 2026-04-23 14:43:47
 TYPE: json
 --------------------------------------------------
 {
@@ -18373,15 +18454,15 @@ TYPE: json
           "source_files": [
             "06.SKILL.WBS.txt",
             "07.SKILL.FILE_CONTENT.txt",
-            "12.STANDARD.DRAG_AND_DROP.txt"
+            "12.STANDAR.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.STANDARD.BATON.txt",
-            "11.STANDARD.HUMAN_README.txt",
+            "10.STANDAR.BATON.txt",
+            "11.STANDAR.HUMAN_README.txt",
             "23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
@@ -18389,7 +18470,7 @@ TYPE: json
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.STANDARD.RADAR.txt",
+            "09.STANDAR.RADAR.txt",
             "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
             "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
             "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
@@ -18414,15 +18495,15 @@ TYPE: json
           "source_files": [
             "06.SKILL.WBS.txt",
             "07.SKILL.FILE_CONTENT.txt",
-            "12.STANDARD.DRAG_AND_DROP.txt"
+            "12.STANDAR.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.STANDARD.BATON.txt",
-            "11.STANDARD.HUMAN_README.txt",
+            "10.STANDAR.BATON.txt",
+            "11.STANDAR.HUMAN_README.txt",
             "23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
@@ -18430,7 +18511,7 @@ TYPE: json
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.STANDARD.RADAR.txt",
+            "09.STANDAR.RADAR.txt",
             "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
             "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
           ]
@@ -19318,8 +19399,8 @@ TYPE: markdown
 --------------------------------------------------
 FILE: SyS\\00.0_BATON_SKILLMACHINE.txt
 FULL_PATH: C:\01. GitHub\Skills\SyS\00.0_BATON_SKILLMACHINE.txt
-SIZE: 4468 bytes
-MODIFIED: 2026-04-23 16:31:07
+SIZE: 4466 bytes
+MODIFIED: 2026-04-23 10:44:34
 TYPE: text
 --------------------------------------------------
 ==========
@@ -19348,8 +19429,8 @@ DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 23.SKILL.WHOAMI_POLICY.txt
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
+09.STANDAR.RADAR.txt
+10.STANDAR.BATON.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, BATON_STATE
 
@@ -19645,191 +19726,6 @@ Es de robustez operativa.
 
 2026-04-21, v1.0-ACTIVE
 - Creación inicial de WhoAmI para SkillMachine
-
---------------------------------------------------
-FILE: SyS\\CIS\\20260421.CIS.txt
-FULL_PATH: C:\01. GitHub\Skills\SyS\CIS\20260421.CIS.txt
-SIZE: 4712 bytes
-MODIFIED: 2026-04-23 10:44:34
-TYPE: text
---------------------------------------------------
-SKILL.CIS.EXPLAINER.txt
-
-CÓDIGO
-SKILL.CIS.01
-
-NOMBRE
-Skill – Explicación Universal del Context Injection System (CIS) para IA en Blanco
-
-PROPÓSITO
-Permitir que cualquier IA sin contexto previo comprenda correctamente qué es CIS, cuál es su rol y cuáles son sus límites.
-
-APLICACIÓN
-Este skill debe entregarse completo a una IA nueva antes de cualquier interacción relacionada con edición estructural del sistema.
-
-======================================================================
-0. DEFINICIÓN EJECUTIVA
-
-CIS significa:
-
-Context Injection System.
-
-CIS es un sistema formal y determinista diseñado para ejecutar decisiones humanas explícitas sobre un conjunto documental gobernado.
-
-CIS NO es un asistente creativo.
-CIS NO toma decisiones.
-CIS NO interpreta intención implícita.
-
-CIS ejecuta exactamente lo que se declara.
-
-======================================================================
-
-PROBLEMA QUE CIS RESUELVE
-======================================================================
-
-CIS existe porque los sistemas documentales fallan por:
-
-Ediciones manuales no trazables
-Mezcla de roles humanos
-Pérdida de estructura
-Resúmenes no autorizados
-Dependencia del contexto conversacional
-Regresiones no detectadas
-
-CIS elimina estos riesgos mediante:
-
-Formalización obligatoria de cambios
-Separación decisión / ejecución
-Trazabilidad estructural
-Validación previa y posterior
-======================================================================
-2. ARQUITECTURA CONCEPTUAL
-
-CIS está compuesto por:
-
-injection.txt
-Documento que contiene decisiones humanas explícitas.
-Es un contrato formal, no un input informal.
-BLOCK_ID
-Identificador único de cada cambio.
-Permite trazabilidad histórica.
-CIS.CORE
-Motor determinista que ejecuta las instrucciones declaradas.
-SYSTEM.STATE
-Archivo que registra estado previo y posterior a cada ejecución.
-======================================================================
-3. PRINCIPIOS OPERATIVOS
-
-3.1 Separación de roles
-
-Humano decide.
-Sistema ejecuta.
-
-La IA no decide qué es mejor.
-La IA no optimiza sin permiso.
-
-3.2 Determinismo
-
-Si injection.txt es válido estructuralmente, CIS ejecutará exactamente lo indicado.
-
-3.3 Trazabilidad
-
-Cada cambio debe poder vincularse a:
-
-Un humano decisor
-Un BLOCK_ID
-Un injection específico
-Un estado registrado
-
-Sin trazabilidad, el cambio es inválido.
-
-======================================================================
-4. LÍMITES EXPLÍCITOS PARA LA IA
-
-Si eres una IA que recibe este skill:
-
-NO debes:
-
-Resumir archivos sin autorización explícita
-Fusionar secciones
-Reducir estructura
-Interpretar intención implícita
-“Mejorar” contenido reduciendo detalle
-Editar archivos directamente
-
-Solo puedes:
-
-Explicar
-Analizar
-Proponer cambios
-Generar injection.txt conforme a reglas declaradas
-
-La ejecución real solo ocurre vía CIS.
-
-======================================================================
-5. PRINCIPIO CRÍTICO
-
-Injection válido ≠ Injection correcto.
-
-La validez estructural no implica coherencia conceptual.
-
-La IA puede ayudar a detectar incoherencias,
-pero no puede modificar decisiones sin instrucción explícita.
-
-======================================================================
-6. CIS ES AGNÓSTICO DEL MEDIO
-
-CIS puede operar con:
-
-Scripts
-IAs
-Sistemas automatizados
-Operadores humanos
-
-El medio no importa.
-
-Lo único válido es la decisión explícita formalizada.
-
-======================================================================
-7. CUÁNDO USAR CIS
-
-CIS debe usarse cuando:
-
-Se modifica estructura documental
-Se agregan secciones permanentes
-Se altera jerarquía
-Se versiona contenido
-Se ejecutan cambios persistentes
-
-CIS no es necesario para conversación exploratoria.
-
-======================================================================
-8. CONSECUENCIA DE IGNORAR CIS
-
-Ignorar CIS provoca:
-
-Pérdida de trazabilidad
-Regresión estructural
-Errores silenciosos
-Dependencia del contexto del chat
-Corrupción progresiva del sistema
-======================================================================
-9. RESUMEN FINAL PARA IA EN BLANCO
-
-CIS es un sistema formal que:
-
-Obliga a declarar decisiones
-Ejecuta cambios de forma determinista
-Separa decisión humana de ejecución técnica
-Protege contra pérdida estructural
-Preserva conocimiento acumulativo
-
-Si interactúas con un sistema que usa CIS,
-tu función es apoyar el análisis,
-no alterar el sistema directamente.
-
-======================================================================
-FIN DEL SKILL
 
 --------------------------------------------------
 FILE: SyS\\Git\\20260416.1_IASKILLS.GIT.txt
@@ -20338,27 +20234,3 @@ Pero:
 ✖ Depende 100% de disciplina de uso
 ✖ Si no se usa en cada sesión → pierde valor
 
-
-++++++++++
-FULL SECTION: TREE_SIZE
-++++++++++
-
-. | 3602433 bytes | 3518 KB
-90.USECASE | 250242 bytes | 244.38 KB
-90.USECASE\\01.NEW_PROJECT | 116496 bytes | 113.77 KB
-90.USECASE\\02.SESSION_CLOSE | 112762 bytes | 110.12 KB
-LEARNING | 19209 bytes | 18.76 KB
-LEARNING\\CERTS | 9875 bytes | 9.64 KB
-LEARNING\\CERTS\\21.1.LearnCAE | 5172 bytes | 5.05 KB
-LEARNING\\CERTS\\21.2.COMPITAScurity | 4703 bytes | 4.59 KB
-LEARNING\\IA | 9334 bytes | 9.12 KB
-LEARNING\\IA\\21.0.LearnAnything | 4269 bytes | 4.17 KB
-LEARNING\\IA\\21.3.IAAuto | 5065 bytes | 4.95 KB
-SyS | 3120784 bytes | 3047.64 KB
-SyS\\A_Tools | 875 bytes | 0.85 KB
-SyS\\A_Tools\\Logs | 875 bytes | 0.85 KB
-SyS\\CIS | 4712 bytes | 4.6 KB
-SyS\\Git | 3809 bytes | 3.72 KB
-SyS\\IADevelopHistory | 3098072 bytes | 3025.46 KB
-SyS\\SkillSystem | 1400 bytes | 1.37 KB
-SyS\\WhoAmI | 4411 bytes | 4.31 KB
