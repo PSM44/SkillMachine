@@ -27,3 +27,4 @@ OUTPUT:
 - observación sobre HUMAN
 - siguiente acción exacta
 - observación sobre mejoras de skills si corresponde
+

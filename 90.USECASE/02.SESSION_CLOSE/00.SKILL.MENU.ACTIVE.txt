@@ -25,7 +25,7 @@ No autoriza inventar skills inexistentes.
 DEPENDENCIAS......:
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
-09.STANDARD.RADAR.txt
+09.SKILL.RADAR.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -90,9 +90,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 
 - 06.SKILL.WBS.txt
 - 07.SKILL.FILE_CONTENT.txt
-- 09.STANDARD.RADAR.txt
-- 10.STANDARD.BATON.txt
-- 11.STANDARD.HUMAN_README.txt
+- 09.SKILL.RADAR.txt
+- 10.SKILL.BATON.txt
+- 11.SKILL.HUMAN_README.txt
 - 23.SKILL.WHOAMI_POLICY.txt
 
 ==========
@@ -134,7 +134,7 @@ PURPOSE...........: Define estructura interna de archivos serios.
 ----------
 
 SKILL_ID..........: SKILL_PROBLEM_TROUBLE
-FILE..............: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+FILE..............: 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
 STATUS............: ACTIVE
 CATEGORY..........: REVIEW
 PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
@@ -144,7 +144,7 @@ PURPOSE...........: Estandariza tratamiento de problemas, trouble e incidentes.
 ----------
 
 SKILL_ID..........: SKILL_RADAR
-FILE..............: 09.STANDARD.RADAR.txt
+FILE..............: 09.SKILL.RADAR.txt
 STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Describe el filesystem de forma determinista.
@@ -154,7 +154,7 @@ PURPOSE...........: Describe el filesystem de forma determinista.
 ----------
 
 SKILL_ID..........: SKILL_BATON
-FILE..............: 10.STANDARD.BATON.txt
+FILE..............: 10.SKILL.BATON.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define continuidad operativa orientada a IA.
@@ -164,7 +164,7 @@ PURPOSE...........: Define continuidad operativa orientada a IA.
 ----------
 
 SKILL_ID..........: SKILL_HUMAN_README
-FILE..............: 11.STANDARD.HUMAN_README.txt
+FILE..............: 11.SKILL.HUMAN_README.txt
 STATUS............: ACTIVE
 CATEGORY..........: CONTINUITY
 PURPOSE...........: Define documentación profunda y explicativa.
@@ -174,7 +174,7 @@ PURPOSE...........: Define documentación profunda y explicativa.
 ----------
 
 SKILL_ID..........: SKILL_DRAG_AND_DROP
-FILE..............: 12.STANDARD.DRAG_AND_DROP.txt
+FILE..............: 12.SKILL.DRAG_AND_DROP.txt
 STATUS............: ACTIVE
 CATEGORY..........: USECASE
 PURPOSE...........: Estandariza mecánica de adjuntar y operar por arrastre.
@@ -307,3 +307,4 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 2026-04-21, v1.0-CANON
 - Creación inicial del SKILL.MENU canónico
 - Inclusión de artefactos operativos base
+

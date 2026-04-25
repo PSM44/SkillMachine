@@ -1,0 +1,17 @@
+==========================================
+CHANGELOG: SKILL NAMING NORMALIZATION
+==========================================
+
+FECHA: 2026-04-25
+
+CAMBIOS:
+- STANDAR → SKILL
+- RADAR_INDEX_CORE_FULL → RADAR
+
+IMPACTO:
+- BREAKING CHANGE en dependencias internas
+- Requiere actualización de prompts y referencias externas
+
+MIGRACION:
+- Reemplazar referencias antiguas por nuevas
+- No hay backward compatibility garantizada

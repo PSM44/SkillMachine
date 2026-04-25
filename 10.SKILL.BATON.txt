@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.BATON.01.00
-NOMBRE_SUGERIDO...: 10.STANDARD.BATON.txt
+NOMBRE_SUGERIDO...: 10.SKILL.BATON.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -35,11 +35,11 @@ Se refuerza BATON como “handoff operacional” para ejecución IA moderna:
 
 DEPENDENCIAS......:
 
-07.STANDAR.FILE_CONTENT.txt
-06.STANDAR.WBS_ID.txt
-11.STANDARD.HUMAN_README.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+07.SKILL.FILE_CONTENT.txt
+06.SKILL.WBS.txt
+11.SKILL.HUMAN_README.txt
+09.SKILL.RADAR.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)

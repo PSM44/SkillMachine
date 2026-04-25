@@ -20,9 +20,9 @@ No define contenido interno detallado de cada artefacto.
 No reemplaza skills específicos de cada componente.
 
 DEPENDENCIAS......:
-09.STANDARD.RADAR.txt
-10.STANDARD.BATON.txt
-11.STANDARD.HUMAN_README.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+11.SKILL.HUMAN_README.txt
 05.SKILL.ROUTING_POLICY.txt
 
 ==========

@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.PROBLEM_TROUBLE_INCIDENT.01.00
-NOMBRE_SUGERIDO...: 08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+NOMBRE_SUGERIDO...: 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
 VERSION...........: v1.4-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (America/Santiago)
@@ -23,10 +23,10 @@ Aplica a cualquier dominio: código, entorno, procesos de negocio, datos, costos
 
 DEPENDENCIAS......:
 
-07.STANDAR.FILE_CONTENT.txt (estructura y delivery de archivos).
-06.STANDAR.WBS_ID.txt (IDs y WBS).
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (mapa de archivos/proyectos).
-10.STANDARD.BATON.txt (estado consolidado del proyecto, si aplica).
+07.SKILL.FILE_CONTENT.txt (estructura y delivery de archivos).
+06.SKILL.WBS.txt (IDs y WBS).
+09.SKILL.RADAR.txt (mapa de archivos/proyectos).
+10.SKILL.BATON.txt (estado consolidado del proyecto, si aplica).
 
 MEJORA_CLAVE_v1.4:
 

@@ -1,20 +1,20 @@
 ==============================
 BUNDLE: CORE
-GENERATED_AT: 2026-04-23 14:43:58
+GENERATED_AT: 2026-04-25 17:23:53
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: 06.SKILL.WBS.txt
 SOURCE_PATH: C:\01. GitHub\Skills\06.SKILL.WBS.txt
 VERSION    : v1.2-DRAFT
-SHA256     : 4D7F102C723BF9C342A162261915B2C9D71BABB43930AB6A6BCF2CCC144BC03B
+SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
 ID_UNICO..........: SKILL.WBS_ID.01.01
-NOMBRE_SUGERIDO...: 06.STANDAR.WBS_ID.txt
+NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -47,9 +47,9 @@ MEJORA_CLAVE_v1.2:
 
 DEPENDENCIAS......:
 
-07.STANDAR.FILE_CONTENT.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (recomendado)
-10.STANDARD.BATON.txt (recomendado)
+07.SKILL.FILE_CONTENT.txt
+09.SKILL.RADAR.txt (recomendado)
+10.SKILL.BATON.txt (recomendado)
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -598,14 +598,14 @@ EXCEPCION_ID_FS...: SI (justificada)
 SOURCE_FILE: 07.SKILL.FILE_CONTENT.txt
 SOURCE_PATH: C:\01. GitHub\Skills\07.SKILL.FILE_CONTENT.txt
 VERSION    : v1.3-DRAFT
-SHA256     : BF7718615157B2BD3631D35B1C4A63B74B1772FB33AF94C8F8A5CC5081EDD674
+SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
 ID_UNICO..........: SKILL.FILE_CONTENT.01.01
-NOMBRE_SUGERIDO...: 07.STANDAR.FILE_CONTENT.txt
+NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -644,7 +644,7 @@ No define modelos IA ni routing/costos (eso vive en skills de orquestación si e
 
 DEPENDENCIAS......:
 
-06.STANDAR.WBS_ID.txt
+06.SKILL.WBS.txt
 (Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
 
 NOTA_IMPORTANTE...:
@@ -1254,17 +1254,17 @@ FIN_DEL_DOCUMENTO
 ==========
 
 --------------------------------------------------
-SOURCE_FILE: 12.STANDARD.DRAG_AND_DROP.txt
-SOURCE_PATH: C:\01. GitHub\Skills\12.STANDARD.DRAG_AND_DROP.txt
+SOURCE_FILE: 12.SKILL.DRAG_AND_DROP.txt
+SOURCE_PATH: C:\01. GitHub\Skills\12.SKILL.DRAG_AND_DROP.txt
 VERSION    : UNKNOWN
-SHA256     : F7BD2FFD6345A73BE19BACE7CDACDF25F2AF57E88554BDBEE783ADC11999F7D8
+SHA256     : A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
 ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
-NOMBRE_SUGERIDO...: 12.STANDARD.DRAG_AND_DROP.txt
+NOMBRE_SUGERIDO...: 12.SKILL.DRAG_AND_DROP.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -1297,11 +1297,11 @@ No define RADAR (pero es compatible y lo referencia).
 
 DEPENDENCIAS......:
 
-07.STANDAR.FILE_CONTENT.txt
-06.STANDAR.WBS_ID.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt
-10.STANDARD.BATON.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+07.SKILL.FILE_CONTENT.txt
+06.SKILL.WBS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
 
 MEJORA_CLAVE_v1.2:
 
@@ -1455,7 +1455,7 @@ Encabezado:
 
 Ejemplo:
 TANDA 2/3
-ARCHIVO: 09.STANDARD.RADAR.txt
+ARCHIVO: 09.SKILL.RADAR.txt
 ACCION: CONCATENAR AL FINAL (orden estricto)
 
 ++++++++++

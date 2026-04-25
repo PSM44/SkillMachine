@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
-NOMBRE_SUGERIDO...: 09.STANDARD.RADAR_INDEX_CORE_FULL.txt
+NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -36,9 +36,9 @@ No define rutas físicas obligatorias: cada proyecto decide dónde guarda output
 
 DEPENDENCIAS......:
 
-06.STANDAR.WBS_ID.txt
-07.STANDAR.FILE_CONTENT.txt
-08.STANDARD.PROBLEM_TROUBLE_INCIDENTS.txt
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
 
 NOTA_IMPORTANTE...:
 

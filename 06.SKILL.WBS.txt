@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.WBS_ID.01.01
-NOMBRE_SUGERIDO...: 06.STANDAR.WBS_ID.txt
+NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
 VERSION...........: v1.2-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -36,9 +36,9 @@ MEJORA_CLAVE_v1.2:
 
 DEPENDENCIAS......:
 
-07.STANDAR.FILE_CONTENT.txt
-09.STANDARD.RADAR_INDEX_CORE_FULL.txt (recomendado)
-10.STANDARD.BATON.txt (recomendado)
+07.SKILL.FILE_CONTENT.txt
+09.SKILL.RADAR.txt (recomendado)
+10.SKILL.BATON.txt (recomendado)
 
 ==========
 00.10_INDICE_GENERAL_WBS

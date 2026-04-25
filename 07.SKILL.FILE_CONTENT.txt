@@ -3,7 +3,7 @@
 ==========
 
 ID_UNICO..........: SKILL.FILE_CONTENT.01.01
-NOMBRE_SUGERIDO...: 07.STANDAR.FILE_CONTENT.txt
+NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
 VERSION...........: v1.3-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (actualizar al guardar)
@@ -42,7 +42,7 @@ No define modelos IA ni routing/costos (eso vive en skills de orquestación si e
 
 DEPENDENCIAS......:
 
-06.STANDAR.WBS_ID.txt
+06.SKILL.WBS.txt
 (Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
 
 NOTA_IMPORTANTE...:
