@@ -86,7 +86,21 @@ function Get-Sha256Safe {
         throw "No se puede calcular hash; archivo no existe: $Path"
     }
 
-    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256 -ErrorAction Stop).Hash
+    $hashCmd = Get-Command Get-FileHash -ErrorAction SilentlyContinue
+    if ($null -ne $hashCmd) {
+        return (Get-FileHash -LiteralPath $Path -Algorithm SHA256 -ErrorAction Stop).Hash.ToUpperInvariant()
+    }
+
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $resolved = (Resolve-Path -LiteralPath $Path -ErrorAction Stop).Path
+        $bytes = [System.IO.File]::ReadAllBytes($resolved)
+        $hashBytes = $sha.ComputeHash($bytes)
+        return ([BitConverter]::ToString($hashBytes) -replace "-", "").ToUpperInvariant()
+    }
+    finally {
+        if ($null -ne $sha) { $sha.Dispose() }
+    }
 }
 
 function Find-CanonicalFile {

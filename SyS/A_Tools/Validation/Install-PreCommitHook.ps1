@@ -7,21 +7,23 @@ $hookPath = ".git/hooks/pre-commit"
 
 $hookContent = @'
 #!/bin/sh
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./SyS/A_Tools/Validation/Validate-SkillMachineNaming.ps1"
+powershell.exe -NoProfile -ExecutionPolicy Bypass -File "./SyS/A_Tools/Validation/Validate-System.ps1"
 STATUS=$?
 
-if [ $STATUS -ne 0 ]; then
-  echo "COMMIT BLOCKED: SkillMachine naming validation failed."
+if [ -z "$STATUS" ]; then
+  echo "ERROR: validation did not return status"
+  exit 1
+fi
+
+if [ "$STATUS" -ne 0 ]; then
+  echo "COMMIT BLOCKED: SkillMachine system validation failed."
   exit 1
 fi
 
 exit 0
 '@
 
-$hookContent = $hookContent -replace "
-", "
-"
-$ascii = [System.Text.Encoding]::ASCII
-[System.IO.File]::WriteAllText((Join-Path $repoRoot $hookPath), $hookContent, $ascii)
+$hookContent = $hookContent -replace "`r`n", "`n"
+[System.IO.File]::WriteAllText((Join-Path $repoRoot $hookPath), $hookContent, [System.Text.Encoding]::ASCII)
 
 Write-Host "Pre-commit hook installed successfully"
