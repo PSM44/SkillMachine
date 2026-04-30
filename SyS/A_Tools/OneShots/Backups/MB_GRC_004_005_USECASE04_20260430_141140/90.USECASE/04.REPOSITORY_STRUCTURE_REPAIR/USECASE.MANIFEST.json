@@ -1,0 +1,32 @@
+{
+  "usecase": "04.REPOSITORY_STRUCTURE_REPAIR",
+  "version": "v0.1-DRAFT",
+  "generated_at": "2026-04-30T14:03:45",
+  "source_root": "C:\\01. GitHub\\Skills",
+  "delivery_files": [
+    "SKILL.md",
+    "README.EXECUTION.txt",
+    "USECASE.MANIFEST.json",
+    "POLICY.REPOSITORY.ARCHITECTURE.txt",
+    "POLICY.NAMING.PATH_ID.txt",
+    "TEMPLATE.GRC.MVP.txt"
+  ],
+  "bundles": [
+    {
+      "bundle_name": "CORE",
+      "files": [
+        "SKILL.md",
+        "README.EXECUTION.txt",
+        "USECASE.MANIFEST.json"
+      ]
+    },
+    {
+      "bundle_name": "GOVERNANCE",
+      "files": [
+        "POLICY.REPOSITORY.ARCHITECTURE.txt",
+        "POLICY.NAMING.PATH_ID.txt",
+        "TEMPLATE.GRC.MVP.txt"
+      ]
+    }
+  ]
+}

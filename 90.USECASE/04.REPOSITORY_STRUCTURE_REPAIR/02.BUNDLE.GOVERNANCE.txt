@@ -1,0 +1,1321 @@
+==============================
+BUNDLE: GOVERNANCE
+GENERATED_AT: 2026-04-30 19:38:08
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: 09.SKILL.RADAR.txt
+SOURCE_PATH: C:\01. GitHub\Skills\09.SKILL.RADAR.txt
+VERSION    : UNKNOWN
+SHA256     : 8E4BDF940457DC5415F9EB8EBCEF34302E55C6EA15BA18D55F08E750F3FF094E
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
+NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
+VERSION...........: v1.3-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Define el contrato transversal RADAR (INDEX, CORE, FULL) para describir un proyecto en FS
+de forma IA-friendly y humano-friendly, sin depender de ningún “frame” (PF/WINGS/EVA/etc.).
+
+RADAR:
+
+Describe (no decide).
+
+Produce outputs deterministas.
+
+Prioriza continuidad y auditabilidad.
+
+Soporta proyectos grandes con política de segmentación por tamaño.
+
+NO_CUBRE..........:
+
+No interpreta negocio (no KPIs, no conclusiones).
+
+No hace OCR de PDFs ni intenta “leer” binarios.
+
+No define rutas físicas obligatorias: cada proyecto decide dónde guarda outputs e históricos.
+
+DEPENDENCIAS......:
+
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+
+NOTA_IMPORTANTE...:
+
+RADAR es FRAME-AGNOSTICO:
+
+No pertenece ni depende de PFUNDATIONS, WINGS, EVA, etc.
+
+No menciona ni depende de BATON o HUMAN.
+
+Otros sistemas pueden consumir outputs RADAR, pero eso no es parte del contrato.
+
+MEJORA_CLAVE_v1.3:
+
+- Agrega modo RADAR_LITE (recomendado) para operación diaria y control de costos.
+- Refuerza política: default INDEX/LITE; CORE por módulo; FULL ocasional.
+- Refuerza contrato OK/FAIL binario real (anti “OK falso”) alineado a PROBLEM/TROUBLE.
+- Mantiene íntegro el contrato base INDEX/CORE/FULL (no se omiten secciones previas).
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Definiciones básicas
+01.15 RADAR_LITE (NUEVO)
+02.00 Modos de RADAR (LITE/INDEX/CORE/FULL)
+02.40 Modo Local FS vs Modo AI Upload
+02.50 Política recomendada de uso (anti-cost)
+
+03.00 Principios de diseño
+04.00 Contrato duro (independencia, outputs, naming)
+
+05.00 Estándar RADAR_LITE (NUEVO)
+06.00 Estándar RADAR_INDEX
+07.00 Estándar RADAR_CORE
+08.00 Estándar RADAR_FULL
+
+09.00 Tamaño, segmentación y chunks IA/humano friendly
+10.00 Exclusiones e inclusiones (FS + tipos)
+11.00 Determinismo, ordenamiento, encoding
+12.00 Evidencia, estado final y exit code (para scripts)
+13.00 Ejemplos prácticos
+14.00 Antipatrones
+15.00 Checklist rápido
+16.00 Historial de cambios
+FIN del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_RADAR
+
+a) Proyectos crecen y se vuelven inmanejables sin inventario confiable.
+b) Tooling e IA fallan cuando el repositorio no tiene mapa.
+c) Auditorías, migraciones y refactors requieren trazabilidad.
+d) Archivos binarios (xlsx/pdf/png) rompen intentos de “leer todo”.
+e) Históricos sin disciplina generan caos; sin históricos no hay continuidad.
+f) En IA cloud, subir FULL/CORE completo puede disparar costos (COST_INCIDENT).
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar único para producir vistas:
+
+LITE : Inventario resumido + diffs básicos (operación diaria).
+INDEX: Inventario total + metadata (para navegación y auditoría).
+CORE : Contenido legible (texto/código) para análisis por IA/humano.
+FULL : Consolidación (INDEX + CORE + extras de auditoría como tree-size).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Asegurar que los outputs puedan:
+
+Ser usados por humanos (lectura rápida, texto plano).
+
+Ser consumidos por IA (chunks y determinismo).
+
+Ser comparables entre ejecuciones (orden estable + formato consistente).
+
+Reducir fricción/costo en cloud evitando “leer todo” sin necesidad.
+
+==========
+01.00_DEFINICIONES_BASICAS
+==========
+
+01.10_RADAR
+
+RADAR es un estándar de “descripción del FS” (file system) de un proyecto, generado por tooling.
+
+Regla dura:
+
+RADAR describe, no decide.
+
+RADAR no reemplaza decisiones humanas ni lógica de negocio.
+
+----------
+01.15_RADAR_LITE_(NUEVO)
+----------
+
+RADAR_LITE es una salida liviana para operación diaria:
+
+- Basada en metadata (similar a INDEX).
+- Puede incluir diffs básicos vs ejecución previa (NEW/MODIFIED/DELETED).
+- No incluye contenido (no es CORE).
+- No interpreta semántica (describe, no decide).
+
+01.20_RADAR_INDEX
+
+Output que lista TODOS los archivos/carpetas relevantes y su metadata (sin contenido).
+
+Incluye, típicamente:
+
+ruta
+
+tamaño
+
+última modificación
+
+tipo lógico
+
+hash (si aplica)
+
+01.30_RADAR_CORE
+
+Output que incluye el contenido SOLO de archivos legibles (texto/código/config).
+
+No incluye:
+
+imágenes, audio, video
+
+pdf (sin OCR)
+
+binarios
+
+xlsx (no se leen celdas)
+
+01.40_RADAR_FULL
+
+Output que consolida:
+
+INDEX + CORE
+
+y agrega extras de auditoría (ej.: tree-size por carpeta)
+
+FULL no agrega semántica de negocio; sigue siendo descriptivo.
+
+==========
+02.00_MODOS_DE_RADAR
+==========
+
+++++++++++
+02.10_MODO_LITE_(NUEVO)
+++++++++++
+
+Produce RADAR_LITE con inventario y diffs básicos.
+
+++++++++++
+02.20_MODO_INDEX
+++++++++++
+
+Produce RADAR_INDEX con inventario completo.
+
+++++++++++
+02.30_MODO_CORE
+++++++++++
+
+Produce RADAR_CORE con contenido legible.
+
+++++++++++
+02.40_MODO_FULL
+++++++++++
+
+Produce RADAR_FULL como consolidación:
+
+INDEX + CORE + tree-size
+y cualquier metadata descriptiva adicional permitida por el proyecto.
+
+++++++++++
+02.40_MODO_LOCAL_FS_VS_MODO_AI_UPLOAD
+++++++++++
+
+MODO_LOCAL_FS (máquina local / FS completo):
+
+No hay límite de tamaño por archivo fuente para CORE (según versión base).
+
+Se genera output ACTIVE completo.
+
+Si ACTIVE > 8 MB:
+
+se mantiene el ACTIVE intacto,
+
+se generan copias segmentadas <= 8 MB para IA/humano.
+
+MODO_AI_UPLOAD (subida a IA/chat):
+
+Se respeta límite de tamaño por tanda (ej. 8–9MB).
+
+Se suben segmentos (chunks) al chat para consumo por IA.
+
+El activo completo puede no subirse (pero existe localmente).
+
+++++++++++
+02.50_POLITICA_RECOMENDADA_DE_USO_(ANTI-COST_INCIDENT)_(NUEVO)
+++++++++++
+
+Regla operativa recomendada:
+
+- Default diario: RADAR_LITE o RADAR_INDEX.
+- CORE: solo cuando vas a analizar/editar un módulo específico.
+- FULL: ocasional (auditoría o “foto completa”), no por costumbre.
+
+Si usas IA cloud:
+- Evitar subir FULL completo al chat salvo necesidad real.
+- Preferir subir segmentos CORE del módulo objetivo.
+
+++++++++++
+02.50_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
+++++++++++
+
+RADAR puede ser consumido por sistemas externos (ej: orquestadores IA)
+para navegación y selección de contexto.
+
+Importante:
+
+- Esto NO cambia el contrato RADAR.
+- RADAR sigue describiendo, no decidiendo.
+- RADAR no depende de consumidores.
+
+Recomendación para consumidores:
+
+- Usar RADAR_INDEX como default.
+- Escalar a CORE por módulo.
+- FULL solo auditoría.
+
+==========
+03.00_PRINCIPIOS_DE_DISENO
+==========
+
+03.10_PRINCIPIO_1_DESCRIBE_NO_DECIDE
+
+RADAR no concluye ni recomienda cambios del negocio. Solo describe.
+
+03.20_PRINCIPIO_2_IA_Y_HUMANO_FRIENDLY
+
+Texto plano.
+
+Formato estable.
+
+Segmentación cuando sea necesario por tamaño.
+
+03.30_PRINCIPIO_3_DETERMINISMO
+
+Misma entrada -> mismo orden de salida (salvo cambios reales del FS).
+
+03.40_PRINCIPIO_4_NO_ROMPER_PROYECTO
+
+RADAR no modifica archivos del proyecto (solo lectura).
+Solo escribe outputs y mueve históricos RADAR.
+
+03.50_PRINCIPIO_5_COST_AWARE_(NUEVO)
+
+RADAR no optimiza por costo, pero el estándar recomienda LITE/INDEX
+para evitar consumo innecesario de tokens/costo en cloud.
+
+==========
+04.00_CONTRATO_DURO
+==========
+
+++++++++++
+04.10_INDEPENDENCIA_DE_FRAME
+++++++++++
+
+RADAR es FRAME-AGNOSTICO:
+
+No depende de PF/WINGS/EVA.
+
+No menciona BATON/HUMAN.
+
+Corre como herramienta standalone.
+
+++++++++++
+04.20_SCRIPT_NAMING_CANONICO
+++++++++++
+
+Contrato duro:
+
+El script se llama SIEMPRE: RADAR.ps1
+
+Nota:
+
+Aunque el estándar general recomienda ID_FS, este contrato permite excepción controlada
+cuando el humano fija el nombre operativo. La excepción debe documentarse en metadatos.
+
+++++++++++
+04.30_TRES_OUTPUTS_SIEMPRE
+++++++++++
+
+Contrato duro:
+
+RADAR siempre produce 3 outputs por ejecución:
+
+RADAR_INDEX (activo)
+
+RADAR_CORE (activo)
+
+RADAR_FULL (activo)
+
+Compatibilidad v1.3:
+- RADAR_LITE es recomendado, no “requisito duro” retroactivo.
+- Si el proyecto adopta LITE, se considera output adicional activo.
+
+==========
+05.00_ESTANDAR_RADAR_LITE_(NUEVO)
+==========
+
+05.10_OBJETIVO
+
+- Reducir peso y frecuencia de CORE/FULL.
+- Entregar inventario y cambios básicos para navegación rápida.
+
+05.20_CONTENIDO_MINIMO
+
+RADAR_LITE debe incluir al menos:
+
+- Timestamp de ejecución
+- Root/base del análisis
+- Conteo total de archivos y carpetas (si aplica)
+- NEW_FILES (rutas)
+- MODIFIED_FILES (rutas)
+- DELETED_FILES (rutas) (si se puede inferir desde histórico)
+- Punteros a outputs activos INDEX/CORE/FULL (rutas exactas)
+
+05.30_REGLAS
+
+- No incluye contenido.
+- No interpreta semántica.
+- Diff basado en metadata (mtime/size/hash si existe).
+
+==========
+06.00_ESTANDAR_RADAR_INDEX
+==========
+
+06.10_CONTENIDO_MINIMO
+
+RADAR_INDEX debe incluir, por archivo:
+
+RUTA (full path o path relativo canónico; el proyecto define cuál)
+
+TAMANO (bytes)
+
+MODIFICADO (timestamp)
+
+EXT (extensión)
+
+TIPO_LOGICO (texto / binario / media / xlsx / etc.)
+
+SHA256 (cuando el proyecto lo exige)
+
+06.20_BINARIOS_E_ILEGIBLES
+
+Se listan en INDEX con metadata y hash.
+
+No se intenta leer contenido.
+
+06.30_XLSX
+
+INDEX puede incluir “estructura superficial”:
+
+nombres de hojas
+
+Prohibido:
+
+leer celdas / KPIs / fórmulas (eso es negocio y va fuera de RADAR)
+
+==========
+07.00_ESTANDAR_RADAR_CORE
+==========
+
+07.10_INCLUSION_POR_LISTA_BLANCA
+
+CORE incluye solo extensiones legibles (texto/código/config), típicamente:
+.txt, .ps1, .py, .json, .yml/.yaml, .xml, .csv, .js, .ts, .md (si existiera)
+
+07.20_ENCODING_Y_ERRORES
+
+Si un archivo no puede leerse (permiso/encoding/bloqueo):
+
+CORE debe registrar error dentro del bloque del archivo (sin detener todo el proceso si el proyecto lo permite)
+
+pero el script debe reflejar estado final (OK real vs FAIL)
+
+07.30_CONTROL_DE_TAMANO_(RECOMENDADO)
+
+Para evitar CORE obeso:
+- permitir exclusión por tamaño (ej.: > 2MB) con registro en CORE “SKIPPED_TOO_LARGE”
+- sin ocultarlo: debe aparecer en INDEX y en CORE como “skipped”.
+
+==========
+08.00_ESTANDAR_RADAR_FULL
+==========
+
+08.10_CONSOLIDACION
+
+FULL incluye:
+
+INDEX completo
+
+CORE completo
+
+TREE-SIZE por carpeta (bytes totales)
+
+08.20_TREE_SIZE
+
+Lista directorios y tamaño total por carpeta.
+
+Sirve para auditoría (identificar “carpetas obesas”).
+
+08.30_NO_NEGOCIO
+
+FULL no agrega KPIs ni conclusiones.
+
+==========
+09.00_TAMANO_SEGMENTACION_Y_CHUNKS
+==========
+
+++++++++++
+09.10_REGLA_DE_8_MB
+++++++++++
+
+Si cualquier output ACTIVE supera 8 MB:
+
+El archivo ACTIVE se mantiene intacto.
+
+Se crean copias segmentadas <= 8 MB.
+
+++++++++++
+09.20_NAMING_DE_SEGMENTOS
+++++++++++
+
+Determinístico.
+
+Sin la palabra “part”.
+
+Ejemplo:
+RADAR_FULL.ACTIVE.txt.seg.001
+RADAR_FULL.ACTIVE.txt.seg.002
+...
+
+++++++++++
+09.30_SEGMENTACION_HIBRIDA
+++++++++++
+
+Texto (outputs y/o contenido textual):
+
+Preferir corte por límites de línea (mejor lectura humana).
+
+Si no es posible (líneas extremadamente largas), fallback a corte por bytes.
+
+Binario (si se segmenta por alguna razón excepcional):
+
+Corte por bytes (reconstrucción byte-exact).
+
+Notas:
+
+El objetivo de la segmentación es consumo IA/humano, no optimización.
+
+El activo completo es la fuente de verdad local.
+
+==========
+10.00_EXCLUSIONES_E_INCLUSIONES
+==========
+
+10.10_EXCLUSIONES_DE_CARPETAS_(COMUNES)
+
+Exclusiones típicas recomendadas:
+
+.git
+
+node_modules
+
+dist
+
+build
+
+.venv
+
+pycache
+
+TEMP / caches (según proyecto)
+
+El proyecto puede ampliar/reducir; RADAR debe documentar su lista de exclusión.
+
+10.20_INCLUSION_ESPECIAL
+
+No existe. RADAR no interpreta negocio.
+
+==========
+11.00_DETERMINISMO_ORDENAMIENTO_ENCODING
+==========
+
+11.10_ORDENAMIENTO
+
+Orden estable por:
+
+ruta completa (ascendente)
+o
+
+ruta relativa canónica (ascendente)
+El proyecto define cuál, pero debe ser estable.
+
+11.20_ENCODING
+
+Outputs RADAR en UTF-8 (idealmente sin BOM) para tooling.
+
+No mezclar encodings dentro del output si se puede evitar.
+
+==========
+12.00_EVIDENCIA_ESTADO_FINAL_EXIT_CODE
+==========
+
+12.10_DONE_BINARIO
+
+DONE cuando:
+
+Existen los activos requeridos (INDEX/CORE/FULL; y LITE si el proyecto lo habilita)
+
+Y el script termina sin excepción no controlada.
+
+12.20_EXIT_CODE
+
+Regla dura:
+
+No imprimir “OK/COMPLETADO” si hubo error no controlado.
+
+Ante excepción no controlada: exit 1.
+
+Solo OK si todo terminó correcto.
+
+12.30_LOGS_(RECOMENDADO)
+
+Registrar:
+- comando exacto
+- root
+- exclusiones
+- outputs generados (paths)
+- estado final OK/FAIL
+
+==========
+13.00_EJEMPLOS_PRACTICOS
+==========
+
+13.10_EJEMPLO_EJECUCION_LOCAL
+
+Ejecutar RADAR.ps1
+
+Obtener outputs en carpeta de RADAR del proyecto
+
+Subir al chat solo segmentos .seg.* si se requiere AI_UPLOAD
+
+13.20_EJEMPLO_DE_USO_PARA_AUDITORIA
+
+FULL para tree-size
+
+INDEX para inventario + hash
+
+LITE para operación diaria y diffs
+
+==========
+14.00_ANTIPATRONES
+==========
+
+14.10_ANTIPATRON_RADAR_COMO_ANALISIS_DE_NEGOCIO
+
+Meter KPIs/celdas de Excel en RADAR = contaminación semántica.
+
+14.20_ANTIPATRON_NO_SEGMENTAR
+
+Subir archivos gigantes al chat sin segmentar = fricción + fallos.
+
+14.30_ANTIPATRON_OK_FALSO
+
+Imprimir “OK” con errores = destruye confianza operacional.
+
+14.40_ANTIPATRON_FULL_DIARIO_(NUEVO)
+
+Generar FULL por hábito (costo/tiempo), cuando bastaba LITE/INDEX.
+
+==========
+15.00_CHECKLIST_RAPIDO
+==========
+
+¿RADAR es independiente y no menciona frames?
+
+¿Produce SIEMPRE INDEX/CORE/FULL?
+
+¿Si el proyecto habilita LITE, se genera LITE?
+
+¿INDEX incluye hash si es requerido?
+
+¿CORE incluye solo texto/código?
+
+¿FULL incluye tree-size?
+
+¿Si ACTIVE >8MB, existen .seg.001..N?
+
+¿Orden estable por ruta?
+
+¿No hay “OK falso” si ocurrió error?
+
+¿Se respetó la política de uso (LITE/INDEX default; CORE por módulo; FULL ocasional)?
+
+==========
+16.00_HISTORIAL_DE_CAMBIOS
+==========
+
+2026-02-26, v1.3-DRAFT
+- Agregado: RADAR_LITE (recomendado) y política de uso anti-cost.
+- Refuerzo: control de tamaño en CORE (SKIPPED_TOO_LARGE con registro).
+- Refuerzo: checklist incluye LITE/política anti FULL diario.
+- Mantiene íntegro el contenido base de v1.2 sin omitir secciones.
+
+2026-02-20, v1.2-CANON
+- RADAR declarado FRAME-AGNOSTICO (sin menciones a BATON/HUMAN).
+- Contrato duro: RADAR.ps1 + 3 outputs siempre.
+- Regla 8MB + segmentación híbrida (opción C).
+- FULL incluye tree-size.
+- Se endurece contrato de exit code / OK real.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
+
+--------------------------------------------------
+SOURCE_FILE: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+SOURCE_PATH: C:\01. GitHub\Skills\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+VERSION    : v1.0-DRAFT
+SHA256     : AF7DA1A28DDBA474C62C80AD20AE5EAAF198EEE60967ED292612C2B35D7506B2
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.OPERATIONAL.ARTIFACTS.POLICY.01.00
+NOMBRE_SUGERIDO...: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-04-21
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define la gobernanza operativa entre los artefactos críticos del sistema:
+HUMAN, BATON, SKILLS y RADAR.
+Establece precedencia, responsabilidades, sincronización y reglas de uso.
+
+NO_CUBRE..........:
+No define contenido interno de cada artefacto (ver skills específicos).
+No define arquitectura técnica del sistema.
+No define lógica de negocio de proyectos.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+11.SKILL.HUMAN_README.txt
+
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
+
+========== 
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+
+01.00 Propósito y problema
+02.00 Definición de artefactos
+03.00 Principio de precedencia
+04.00 Responsabilidades por artefacto
+05.00 Contrato de sincronización
+06.00 Eventos operativos y actualizaciones
+07.00 Reglas de conflicto
+08.00 Antipatrones
+09.00 Checklist operativo
+10.00 Changelog
+
+========== 
+01.00_PROPOSITO_Y_PROBLEMA
+==========
+
+Problema real:
+
+Sin reglas explícitas:
+- múltiples fuentes de verdad
+- divergencia entre IA y humano
+- pérdida de continuidad
+- decisiones inconsistentes
+
+Objetivo:
+
+Definir un modelo único de gobernanza donde:
+- cada artefacto tiene un rol claro
+- existe una jerarquía explícita
+- las actualizaciones son determinísticas
+- la trazabilidad es audit-able
+
+========== 
+02.00_DEFINICION_DE_ARTEFACTOS
+==========
+
+02.10 HUMAN
+
+- Propósito: intención, contexto, explicación para humanos
+- Tipo: narrativo, didáctico
+- Frecuencia: baja/media
+- Consumidor principal: humano
+
+---
+
+02.20 BATON
+
+- Propósito: estado operativo actual del proyecto
+- Tipo: estructurado, resumido
+- Frecuencia: alta (cada sesión)
+- Consumidor principal: IA
+
+---
+
+02.30 SKILLS
+
+- Propósito: reglas del sistema
+- Tipo: normativo
+- Frecuencia: baja
+- Consumidor: humano + IA
+
+---
+
+02.40 RADAR
+
+- Propósito: mapa del filesystem
+- Tipo: descriptivo (no interpretativo)
+- Frecuencia: automática
+- Consumidor: IA
+
+========== 
+03.00_PRINCIPIO_DE_PRECEDENCIA
+==========
+
+Regla dura:
+
+HUMAN > SKILLS > BATON > RADAR
+
+Interpretación:
+
+- HUMAN define intención y contexto
+- SKILLS definen reglas obligatorias
+- BATON refleja estado actual
+- RADAR refleja evidencia física
+
+Regla crítica:
+
+Si hay conflicto:
+→ prevalece el artefacto de mayor jerarquía
+
+========== 
+04.00_RESPONSABILIDADES_POR_ARTEFACTO
+==========
+
+HUMAN:
+- Define el “por qué”
+- Explica decisiones
+- No ejecuta
+
+BATON:
+- Define el “estado actual”
+- Indica siguiente acción
+- No explica en profundidad
+
+SKILLS:
+- Definen el “cómo se hace”
+- Son obligatorios
+- No dependen del estado del proyecto
+
+RADAR:
+- Muestra “qué existe”
+- No interpreta
+- No decide
+
+========== 
+05.00_CONTRATO_DE_SINCRONIZACION
+==========
+
+Regla general:
+
+Los artefactos NO son independientes.
+
+Flujo correcto:
+
+HUMAN → SKILLS → BATON → RADAR
+
+---
+
+05.10 REGLA CRÍTICA
+
+BATON debe estar SIEMPRE alineado con:
+
+- HUMAN (objetivo)
+- SKILLS (reglas)
+
+Si no:
+→ estado inválido
+
+---
+
+05.20 RADAR
+
+RADAR nunca se edita manualmente.
+
+Siempre es resultado de ejecución.
+
+========== 
+06.00_EVENTOS_OPERATIVOS_Y_ACTUALIZACIONES
+==========
+
+06.10 INICIO DE SESION
+
+Debe:
+- leer BATON
+- leer HUMAN (si aplica)
+- usar RADAR_INDEX
+
+No debe:
+- modificar archivos
+
+---
+
+06.20 DURANTE EJECUCION
+
+Si hay cambios estructurales:
+→ actualizar HUMAN
+
+Si hay cambios operativos:
+→ actualizar BATON
+
+---
+
+06.30 FIN DE SESION
+
+Obligatorio:
+
+- actualizar BATON
+- registrar siguiente acción
+- dejar estado consistente
+
+Opcional:
+
+- actualizar HUMAN si cambió entendimiento
+
+---
+
+06.40 CAMBIO DE REGLAS
+
+Si cambia cómo opera el sistema:
+→ actualizar SKILLS
+
+========== 
+07.00_REGLAS_DE_CONFLICTO
+==========
+
+Caso 1:
+BATON contradice HUMAN
+
+→ BATON está incorrecto
+
+---
+
+Caso 2:
+SKILL contradice HUMAN
+
+→ conflicto conceptual
+→ debe resolverse actualizando uno explícitamente
+
+---
+
+Caso 3:
+RADAR contradice BATON
+
+→ BATON está desactualizado
+
+---
+
+Caso 4:
+IA propone acción que viola SKILL
+
+→ acción inválida (FAIL)
+
+========== 
+08.00_ANTIPATRONES
+==========
+
+- Usar RADAR como fuente de verdad lógica
+- No actualizar BATON al cerrar sesión
+- HUMAN desactualizado por semanas
+- SKILLS ignorados en ejecución
+- duplicar información entre artefactos
+- mezclar narrativa en BATON
+
+========== 
+09.00_CHECKLIST_OPERATIVO
+==========
+
+[ ] ¿Existe HUMAN claro?
+[ ] ¿BATON refleja estado actual?
+[ ] ¿SKILLS están alineados?
+[ ] ¿RADAR está actualizado?
+[ ] ¿No hay contradicciones?
+[ ] ¿Se respetó precedencia?
+
+========== 
+10.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-DRAFT
+- Creación del modelo de gobernanza de artefactos
+- Definición de precedencia y responsabilidades
+- Integración con flujo operativo
+
+--------------------------------------------------
+SOURCE_FILE: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SOURCE_PATH: C:\01. GitHub\Skills\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+VERSION    : v1.0-CANON
+SHA256     : 351AEEF47756C135B3FB6D468069255F4DF57A362B1A17EEC04E9DC6AEF69965
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
+NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-04-21
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define el ciclo de vida operativo de cualquier sesión de trabajo.
+Establece eventos, responsabilidades y actualizaciones obligatorias
+de HUMAN, BATON, WhoAmI, SKILLS y RADAR.
+
+NO_CUBRE..........:
+No define contenido interno de cada artefacto.
+No define lógica específica de proyectos.
+
+DEPENDENCIAS......:
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+11.SKILL.HUMAN_README.txt
+23.SKILL.WHOAMI_POLICY.txt
+
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+
+01.00 Objetivo
+02.00 Definición de eventos
+03.00 Flujo del ciclo de vida
+
+04.00 Inicio de sesión
+05.00 Ejecución
+06.00 Cierre de sesión
+
+07.00 Actualización de artefactos
+08.00 Validación con RADAR
+
+09.00 Reglas de consistencia
+10.00 Antipatrones
+
+11.00 Checklist operativo
+12.00 Changelog
+
+==========
+01.00_OBJETIVO
+==========
+
+Establecer un flujo operativo único, repetible y audit-able
+para cualquier sesión de trabajo.
+
+Objetivos:
+
+- evitar pérdida de contexto
+- asegurar continuidad humano/IA
+- mantener consistencia entre artefactos
+- garantizar trazabilidad
+
+==========
+02.00_DEFINICION_DE_EVENTOS
+==========
+
+Eventos del ciclo de vida:
+
+- INICIO_SESION
+- EJECUCION
+- CIERRE_SESION
+
+Cada evento tiene:
+- inputs
+- acciones obligatorias
+- outputs esperados
+
+==========
+03.00_FLUJO_DEL_CICLO_DE_VIDA
+==========
+
+Secuencia obligatoria:
+
+INICIO_SESION
+→ EJECUCION
+→ CIERRE_SESION
+
+Regla:
+
+No se puede cerrar sesión sin:
+- BATON actualizado
+- estado consistente
+
+==========
+04.00_INICIO_DE_SESION
+==========
+
+INPUTS:
+
+- BATON vigente
+- HUMAN vigente
+- WhoAmI vigente
+- RADAR_INDEX
+
+ACCIONES:
+
+- leer BATON
+- leer WhoAmI
+- entender estado actual
+- identificar NEXT_ACTION
+- validar coherencia con HUMAN
+- cargar contexto mínimo (L0/L1)
+
+PROHIBIDO:
+
+- modificar archivos
+- asumir estado sin BATON
+- usar RADAR_FULL sin justificación
+
+OUTPUT:
+
+- comprensión clara del estado
+- plan inicial (PLAN_ONLY)
+
+==========
+05.00_EJECUCION
+==========
+
+TIPOS DE CAMBIO:
+
+05.10 CAMBIO OPERATIVO
+
+Ejemplo:
+- avanzar tarea
+- corregir bug
+
+Acción:
+→ actualizar BATON
+→ actualizar WhoAmI si cambia estado humano operacional
+
+---
+
+05.20 CAMBIO ESTRUCTURAL
+
+Ejemplo:
+- redefinir arquitectura
+- cambiar enfoque del proyecto
+
+Acción:
+→ actualizar HUMAN
+
+---
+
+05.30 CAMBIO DE REGLAS
+
+Ejemplo:
+- nuevo skill
+- modificación de policy
+
+Acción:
+→ actualizar SKILLS
+
+---
+
+REGLAS GENERALES:
+
+- no mezclar responsabilidades
+- no duplicar información
+- mantener trazabilidad
+
+==========
+06.00_CIERRE_DE_SESION
+==========
+
+OBLIGATORIO:
+
+- actualizar BATON
+- definir NEXT_ACTION
+- registrar estado final
+
+SI APLICA:
+
+- actualizar WhoAmI
+- actualizar HUMAN
+- ajustar SKILLS
+
+PROHIBIDO:
+
+- cerrar sesión sin BATON actualizado
+- dejar estado ambiguo
+- dejar tareas sin siguiente acción
+
+OUTPUT:
+
+- BATON consistente
+- continuidad garantizada
+
+==========
+07.00_ACTUALIZACION_DE_ARTEFACTOS
+==========
+
+REGLA BASE:
+
+Cada artefacto se actualiza solo en su dominio.
+
+---
+
+HUMAN:
+
+- cuando cambia el entendimiento del proyecto
+- no en cada sesión
+
+---
+
+WhoAmI:
+
+- cuando cambia el estado humano operacional
+- en lenguaje claro y resumido
+- no reemplaza HUMAN
+
+---
+
+BATON:
+
+- SIEMPRE al cierre de sesión
+- SIEMPRE refleja estado actual
+
+---
+
+SKILLS:
+
+- solo cuando cambian reglas
+- no depende del estado del proyecto
+
+---
+
+RADAR:
+
+- nunca se edita manualmente
+- siempre se ejecuta
+
+==========
+08.00_VALIDACION_CON_RADAR
+==========
+
+Regla crítica:
+
+Toda actualización debe ser validada contra RADAR.
+
+Proceso:
+
+1. ejecutar RADAR
+2. comparar BEFORE vs AFTER
+3. validar:
+   - archivos creados
+   - archivos modificados
+   - consistencia del estado
+
+Si hay inconsistencia:
+
+→ FAIL
+
+==========
+09.00_REGLAS_DE_CONSISTENCIA
+==========
+
+- BATON debe coincidir con estado real (RADAR)
+- WhoAmI no puede contradecir BATON sin actualización explícita
+- HUMAN no puede contradecir BATON sin actualización explícita
+- SKILLS no pueden ser ignorados
+- RADAR no se interpreta como lógica
+
+==========
+10.00_ANTIPATRONES
+==========
+
+- no actualizar BATON al cerrar sesión
+- no actualizar WhoAmI cuando cambia el estado operacional
+- modificar RADAR manualmente
+- usar HUMAN como BATON
+- usar BATON como documentación
+- usar WhoAmI como documentación profunda
+- cerrar sesión sin NEXT_ACTION
+- trabajar sin validar con RADAR
+
+==========
+11.00_CHECKLIST_OPERATIVO
+==========
+
+INICIO:
+
+[ ] BATON leído
+[ ] WhoAmI leído
+[ ] estado entendido
+[ ] NEXT_ACTION identificado
+
+EJECUCION:
+
+[ ] cambios correctamente clasificados
+[ ] artefacto correcto actualizado
+
+CIERRE:
+
+[ ] BATON actualizado
+[ ] NEXT_ACTION definido
+[ ] WhoAmI revisado
+[ ] RADAR ejecutado
+[ ] BEFORE vs AFTER validado
+
+==========
+12.00_CHANGELOG
+==========
+
+2026-04-21, v1.0-CANON
+- Creación del ciclo de vida operativo del sistema
+- Integración con gobernanza de artefactos
+- Definición de eventos y validación
+- Integración explícita de WhoAmI
+
+

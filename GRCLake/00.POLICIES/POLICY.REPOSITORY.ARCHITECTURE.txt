@@ -1,0 +1,416 @@
+==========================================
+GRC POLICY — REPOSITORY ARCHITECTURE
+==========================================
+
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+GRC_ID............: GRC.POLICY.REPOSITORY.ARCHITECTURE.0001
+TIPO..............: POLICY
+DOMINIO...........: REPOSITORY
+NOMBRE_CORTO......: REPOSITORY_ARCHITECTURE
+TITULO............: Política canónica de arquitectura y gobernanza del repositorio SkillsMachine
+
+OWNER.............: HUMAN (PABLO)
+STAKEHOLDERS......: PABLO (Developer, Owner)
+APLICA_A..........: GLOBAL (C:\01. GitHub\Skills)
+
+SEVERIDAD.........: FAIL
+RACIONAL_SEVERIDAD.: Si se viola, el repo deriva en drift, pérdida de trazabilidad y fallas de ejecución/validación.
+
+VERSION...........: v0.1-DRAFT
+FECHA_CREACION....: 2026-04-30
+FECHA_MODIFICACION: 2026-04-30
+ESTADO............: DRAFT
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: C:\01. GitHub\Skills\HUMAN\HUMAN.OPERATING.MODEL.txt
+- HUMAN_SECTION...: JERARQUIA / REGLA_CANONICA / CAMBIO_CONTROLADO
+- HUMAN_INTENT....: HUMAN manda; el resto existe solo para cumplir HUMAN.
+- HUMAN_NON_GOALS.: No define el contenido específico de cada Skill (eso vive en SkillsLake/skills).
+
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, CONFIGURATION_MANAGEMENT, QUALITY_GATE
+
+
+==========
+00.10_OBJETIVO
+==========
+
+Definir una política mandatoria para que el repositorio sea:
+
+- entendible por humanos e IA (sin inventar)
+- estable y escalable (sin drift)
+- gobernable (cambios controlados)
+- validable (quality gates automáticos)
+- auditable (evidencia verificable)
+
+Esta política es GRC, no “sugerencia”. Si falla: se bloquea avance (STOP THE LINE).
+
+
+==========
+00.20_JERARQUIA_CANONICA
+==========
+
+Regla dura de autoridad:
+
+1) HUMAN
+   - manda eternamente
+   - canon y espíritu del sistema
+   - cambios canónicos solo por humano vía HUMAN
+
+2) GRC
+   - enforcement operativo (policy/control/evidence/validation)
+   - deriva de HUMAN para obligar cumplimiento
+
+3) SKILLS
+   - capabilities TI (how-to)
+   - implementan lo exigido por HUMAN/GRC
+
+4) USECASES
+   - packages derivados (deploy/runbook)
+   - no son fuente canónica
+
+5) TOOLS/ARTEFACTOS/LOGS
+   - capa operativa mutable
+
+
+==========
+00.30_SCOPE_Y_FUERA_DE_SCOPE
+==========
+
+SCOPE (cubre):
+- arquitectura de carpetas root del repo
+- canonical sources vs operational copies
+- reglas mínimas de ubicación de artefactos
+- reglas de “no mover sin CIS”
+- reglas de evidencia y validación
+- reglas para módulos de IA desktop (ingest sin duplicar canon)
+- reglas para USECASE packaging
+
+FUERA DE SCOPE (no cubre):
+- contenido profundo de cada skill/policy/control (salvo estructura y ubicación)
+- diseño funcional de herramientas externas
+- refactor masivo automático de todo el repo sin CIS
+
+
+==========
+01.00_POLICY_STATEMENT
+==========
+
+POLICY_STATEMENT:
+El repositorio C:\01. GitHub\Skills debe mantener una arquitectura y gobernanza estable
+que preserve la jerarquía canónica HUMAN > GRC > SKILLS > USECASES,
+asegure trazabilidad y permita validación automática de consistencia.
+
+Reglas duras (no negociables):
+- HUMAN es la autoridad máxima y no se duplica como canon en otras capas.
+- GRC define enforcement; todo GRC debe ser “enforceable” (control+evidencia+validación).
+- USECASE es output derivado; no crea doctrina.
+- No se renombra/mueve/elimina de forma destructiva sin CIS + rollback.
+- “DONE” no existe sin evidencia verificable.
+
+
+==========
+02.00_REPOSITORY_TOP_LEVEL_ARCHITECTURE
+==========
+
+La arquitectura mínima del root debe existir:
+
+MANDATORY_ROOT_FOLDERS:
+- HUMAN\
+- GRCLake\
+- SkillsLake\
+- 90.USECASE\
+- SyS\
+
+RECOMMENDED_ROOT_FOLDERS:
+- 95.AI_MODULES\
+
+OPTIONAL_ROOT_FOLDERS:
+- LEARNING\ (si se usa como lago de aprendizaje, no canon)
+
+Regla:
+- Si falta un folder MANDATORY: FAIL.
+
+
+==========
+03.00_CANONICALITY_Y_SINGLE_SOURCE_OF_TRUTH
+==========
+
+03.10_CANONICAL_SOURCES
+
+Son canónicos (fuente de verdad):
+- HUMAN\  (canon máximo)
+- GRCLake\ (policies/controls/risks/evidence/registries GRC)
+- SkillsLake\ (capabilities/habilidades; no enforcement)
+
+No son canónicos:
+- 90.USECASE\ (outputs derivados)
+- SyS\A_Tools\Radar\ (snapshots)
+- SyS\A_Tools\OneShots\Logs\ (logs)
+
+03.20_COPIAS_OPERATIVAS
+
+Regla:
+- Un USECASE puede tener COPIA operativa de políticas/plantillas.
+- La copia NO es canon.
+- La copia debe declarar (mínimo) SOURCE, VERSION y COPY_DATE.
+
+Requisito mínimo para copias dentro de 90.USECASE\<USECASE>\:
+- SOURCE_CANONICAL_PATH
+- SOURCE_VERSION
+- COPY_DATE
+- COPY_MODE (STATIC_USECASE_COPY)
+
+Si no existe ese header: WARN (hoy), y debe evolucionar a FAIL en release posterior cuando el proceso esté maduro.
+
+
+==========
+04.00_CHANGE_CONTROL_(CIS)_Y_ROLLBACK
+==========
+
+04.10_REGLA_DURA_DE_CAMBIO
+
+Prohibido:
+- mover/renombrar/eliminar en forma masiva sin plan CIS
+- hard delete por defecto
+
+Permitido:
+- cambios con CIS + evidencia + rollback
+
+04.20_CIS_MINIMO
+
+Un cambio estructural debe tener:
+- Change Request (CR) con ID
+- migration map (origen -> destino)
+- motivo (rationale)
+- riesgo + mitigación
+- rollback plan
+- evidencia post-implementación
+
+04.30_SOFT_DELETE
+
+Default para deletes:
+- mover a QUARANTINE (no hard delete)
+- mantener metadata (timestamp, motivo, CR, actor)
+
+
+==========
+05.00_GRC_ENFORCEMENT_REQUIREMENTS
+==========
+
+Para que un artefacto sea “GRC”, debe cumplir el estándar GRC-MVP:
+
+MANDATORY_GRC_BLOCKS:
+- POLICY
+- CONTROL
+- EVIDENCE MODEL
+- VALIDATION
+- SEVERITY
+- CHANGE CONTROL
+
+Referencia:
+- GRCLake\06.TEMPLATES\TEMPLATE.GRC.MVP.txt
+
+Regla dura:
+- Si falta un bloque mandatorio, no se considera GRC enforceable.
+
+Nota práctica:
+- Skills pueden nacer desde HUMAN.
+- Skills ascienden a GRC solo si: “tiene sentido” + cumple GRC-MVP.
+
+
+==========
+06.00_USECASE_PACKAGING_POLICY
+==========
+
+06.10_REGLA
+
+90.USECASE contiene paquetes derivados.
+Un USECASE debe ser autocontenido para una IA en blanco, pero no canónico.
+
+06.20_USO_MINIMO
+
+Cada USECASE debe tener (mínimo):
+- USECASE.MANIFEST.json
+- SKILL.md
+- README.EXECUTION.txt
+- Copias operativas de policies/templates requeridos por el caso
+
+06.30_SEPARACION_PLAN_VS_APPLY
+
+El uso de un USECASE debe seguir:
+- snapshot/read-only primero
+- propuesta de estructura (no cambia FS)
+- CIS migration plan
+- implementación segura
+- validación y evidencia
+- handoff (Baton / next actions)
+
+Si un USECASE intenta “arreglar” sin snapshot + CIS:
+- FAIL (enforcement progresivo; inicialmente WARN, pero objetivo es FAIL).
+
+
+==========
+07.00_AI_MODULES_POLICY
+==========
+
+07.10_OBJETIVO
+
+95.AI_MODULES existe para acelerar ingestión por herramienta (Codex/Claude/OpenCode)
+sin duplicar el canon.
+
+07.20_REGLA_DURA
+
+- Los módulos IA apuntan al canon (HUMAN/GRC).
+- No crean canon propio.
+- No replican HUMAN como fuente; solo link.
+
+Requisito mínimo por módulo:
+- README.ACTIVATION.txt
+- AI.INGEST.ORDER.txt
+- AI.PROMPT.BASE.txt
+- AI.RUNBOOKS\ (snapshot -> propuesta -> CIS -> apply -> validate)
+
+Si falta, WARN (hoy). Target: FAIL cuando la adopción sea estable.
+
+
+==========
+08.00_VALIDATION_(QUALITY_GATES)_Y_STOP_THE_LINE
+==========
+
+08.10_VALIDATION_OWNER
+
+Validadores del repo viven en:
+- SyS\A_Tools\Validation\
+
+Mínimos esperados (ya existentes en el repo, según RADAR):
+- Validate-System.ps1
+- Validate-Structure.ps1
+- Validate-Consistency.ps1
+- Validate-Release.ps1
+
+08.20_GATES_MINIMOS_(ESTA_POLICY)
+
+FAIL si:
+- falta folder mandatory (HUMAN, GRCLake, SkillsLake, 90.USECASE, SyS)
+- falta TEMPLATE.GRC.MVP.txt
+- se detecta que 90.USECASE contiene doctrina canónica (ej: policy “única” que no existe en GRCLake)
+- se ejecutan cambios estructurales sin CIS (cuando el control esté implementado)
+
+WARN si:
+- copias operativas en USECASE sin header de trazabilidad
+- módulos IA incompletos
+- existen archivos sueltos en root que deberían migrar (deuda técnica)
+
+INFO:
+- recomendaciones de reorganización (sin gate)
+
+08.30_STOP_THE_LINE
+
+- Si SEVERIDAD=FAIL y el gate falla -> STOP.
+STOP significa:
+- no deploy / no release / no “session close” como DONE.
+Debe registrarse evidencia del FAIL.
+
+Este enfoque es consistente con control de calidad y “close-first” (no declarar DONE sin evidencia).
+
+
+==========
+09.00_EVIDENCE_MODEL_(MINIMO)
+==========
+
+EVIDENCIA_MINIMA para cumplimiento de esta policy:
+
+- Radar snapshot BEFORE/AFTER (index y/o lite)
+- Git status BEFORE/AFTER (cuando aplique)
+- Validation report (pass/fail) con timestamp
+- CR/CIS artefactos (si hubo cambios)
+- Log de ejecución de scripts (one-shot / validator)
+
+Ubicaciones recomendadas:
+- SyS\A_Tools\Radar\  (outputs)
+- SyS\A_Tools\OneShots\Logs\ (logs)
+- SyS\CIS\ (CRs y mapas; hoy existe una carpeta SyS\CIS)
+
+Retención:
+- No borrar evidence.
+- Archivar en 99.ARCHIVE si se vuelve pesado, pero no perder trazabilidad.
+
+
+==========
+10.00_CONTROL_HOOKS_(TO_BE_IMPLEMENTED)
+==========
+
+Esta policy define hooks para controles GRC (a crear en MB-GRC-004/005):
+
+CONTROL_IDS (target):
+- GRC.CONTROL.REPOSITORY.ARCHITECTURE.VALIDATION.0001
+- GRC.CONTROL.USECASE.PACKAGE.MINIMUM.0001
+- GRC.CONTROL.CANONICALITY.NO_DRIFT.0001
+
+VALIDATION_TARGETS (scripts):
+- SyS\A_Tools\Validation\Validate-System.ps1 (orquestador)
+- SyS\A_Tools\Validation\Validate-Structure.ps1
+- SyS\A_Tools\Validation\Validate-Consistency.ps1
+
+Objetivo:
+Convertir esta policy en enforcement real (no solo texto).
+
+
+==========
+11.00_RIESGOS_Y_MITIGACIONES
+==========
+
+RISK_01 — Drift doctrinario
+- Impacto: el repo se vuelve inconsistente y la IA inventa reglas.
+- Mitigación: jerarquía canónica + gates + “single source of truth”.
+
+RISK_02 — Refactor masivo sin CIS
+- Impacto: rotura de rutas, manifests, validadores y pérdida de historia.
+- Mitigación: CIS + rollback + soft delete.
+
+RISK_03 — Duplicación de HUMAN en módulos/usecases
+- Impacto: conflicto de canon.
+- Mitigación: modules apuntan a HUMAN; no lo duplican.
+
+RISK_04 — “GRC” sin enforcement
+- Impacto: falsa sensación de control.
+- Mitigación: GRC-MVP mandatorio + validación automatizada.
+
+
+==========
+12.00_CHANGE_CONTROL_(DEFINITIVO)
+==========
+
+Autoridad:
+- HUMAN changes: solo humano, editando HUMAN.
+- GRC policy changes: propuesta + aprobación humana + evidencia + version bump.
+
+Proceso mínimo:
+1) Proponer Change Request (CR)
+2) Evaluar impacto (scope/quality/config)
+3) Aprobar (humano)
+4) Implementar (scripts/patches)
+5) Validar (quality gates)
+6) Registrar evidencia
+7) Actualizar versión y changelog
+
+LOG recomendado:
+- SyS\CIS\YYYYMMDD.CIS.<ID>.txt
+
+
+==========
+13.00_CHANGELOG
+==========
+
+2026-04-30, v0.1-DRAFT
+- Creación inicial de policy base de arquitectura del repositorio.
+- Define jerarquía HUMAN > GRC > SKILLS > USECASES.
+- Define mandatory root folders, canonicality, change control y quality gates.
+- Define evidencia mínima y hooks para controles futuros.
+
+==========================================
+FIN — GRC.POLICY.REPOSITORY.ARCHITECTURE.0001
+==========================================

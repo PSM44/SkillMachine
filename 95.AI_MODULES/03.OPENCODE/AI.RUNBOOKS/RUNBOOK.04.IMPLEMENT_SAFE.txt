@@ -1,0 +1,1 @@
+RUNBOOK 04 placeholder: safe implementation (no hard delete).

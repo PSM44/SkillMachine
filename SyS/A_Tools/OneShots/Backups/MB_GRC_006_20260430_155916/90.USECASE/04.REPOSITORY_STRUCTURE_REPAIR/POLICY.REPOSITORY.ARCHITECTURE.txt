@@ -1,0 +1,27 @@
+==========================================
+GRC POLICY — REPOSITORY ARCHITECTURE
+==========================================
+
+GRC_ID............: GRC.POLICY.REPOSITORY.ARCHITECTURE.0001
+TIPO..............: POLICY
+DOMINIO...........: REPOSITORY
+NOMBRE_CORTO......: REPOSITORY_ARCHITECTURE
+VERSION...........: v0.1-DRAFT
+ESTADO............: DRAFT
+FECHA.............: 2026-04-30
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: C:\01. GitHub\Skills\HUMAN\HUMAN.OPERATING.MODEL.txt
+- HUMAN_SECTION...: JERARQUIA / REGLA
+- HUMAN_INTENT....: Ordenar y gobernar el repo para cumplir HUMAN.
+- HUMAN_NON_GOALS.: No define contenido específico de cada skill.
+
+POLICY_STATEMENT..:
+(TO_BE_DEFINED) Regla mandatoria derivada de HUMAN para arquitectura del repositorio.
+
+CONTROL...........:
+(TO_BE_DEFINED) Se definirá control + evidencia + validación en MB-GRC-004/005.
+
+CHANGELOG.........:
+2026-04-30, v0.1-DRAFT
+- Archivo creado (placeholder). Completar en MB-GRC-003.

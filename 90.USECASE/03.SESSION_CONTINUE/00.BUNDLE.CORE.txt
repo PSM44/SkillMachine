@@ -1,0 +1,1549 @@
+==============================
+BUNDLE: CORE
+GENERATED_AT: 2026-04-30 19:38:06
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: 06.SKILL.WBS.txt
+SOURCE_PATH: C:\01. GitHub\Skills\06.SKILL.WBS.txt
+VERSION    : v1.2-DRAFT
+SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.WBS_ID.01.01
+NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
+
+ALCANCE...........:
+
+Define cómo se construyen:
+
+WBS internos (estructura dentro de los archivos).
+
+IDs cortos de archivos/carpetas (ID_FS, compatibles con Windows y tooling).
+
+IDs de BD (ID_DB, compatibles con modelos relacionales / catálogos).
+
+Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
+
+Este SKILL es transversal: ningún frame debe redefinir por su cuenta el formato de WBS e IDs.
+
+Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
+
+MEJORA_CLAVE_v1.2:
+
+- Agrega catálogo FRM recomendado y reglas de extensión.
+- Agrega validación operativa (regex y checklist) para que agentes/TOOLING no generen drift.
+- Agrega mapping explícito ID_FS ↔ ID_DB (para ingestion/DB y RADAR).
+- Refuerza compatibilidad Windows: límites y anti-antipatrones.
+
+DEPENDENCIAS......:
+
+07.SKILL.FILE_CONTENT.txt
+09.SKILL.RADAR.txt (recomendado)
+10.SKILL.BATON.txt (recomendado)
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Definiciones básicas
+02.00 Problemas históricos que este SKILL ataca
+03.00 Principios de diseño para WBS e IDs
+
+04.00 Estándar de WBS interno (dentro de los archivos)
+05.00 Estándar de IDs cortos para archivos y carpetas (FS)
+05.00.08 Excepciones controladas a ID_FS
+05.00.09 Validación operativa (NUEVO)
+
+06.00 Estándar de IDs para BD (DB-friendly)
+06.00.04 Mapping ID_FS ↔ ID_DB (NUEVO)
+
+07.00 Relación IDs ↔ SKILLS ↔ HUMAN ↔ RADAR
+08.00 Ejemplos prácticos
+09.00 Antipatrones (qué no hacer)
+10.00 Implementación progresiva (cómo migrar)
+11.00 Checklist rápido
+12.00 Historial de cambios del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_ESTE_SKILL
+
+a) Rutas demasiado largas en Windows (≈260 caracteres) que rompen copias, zips,
+sincronización (OneDrive, etc.) y tooling.
+
+b) Nombres extremadamente verbosos y heterogéneos que dificultan la lectura y
+el parseo automático.
+
+c) Falta de compatibilidad entre nombres de FS (File System) y claves para BD
+(Base de Datos).
+
+d) Refactors costosos porque versión, WBS, título y demás se mezclan en el nombre
+del archivo.
+
+e) Inconsistencia entre proyectos y sistemas: cada uno inventa su propio esquema
+de nombres, obligando a RADAR y a la IA a “adivinar” patrones.
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar único y simple para:
+
+a) WBS interno (estructura dentro de los archivos).
+b) IDs cortos de archivos y carpetas (FS-friendly).
+c) IDs para BD (DB-friendly).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Permitir que los nombres “humanos” puedan ser largos y explicativos sin romper:
+
+a) Límites de Windows.
+b) Esquemas de BD.
+c) Scripts y tooling que dependan de los IDs.
+
+==========
+01.00_DEFINICIONES_BASICAS
+==========
+
+01.00.01_WBS_INTERNO
+
+Estructura jerárquica dentro de un documento (por ejemplo: 01.00, 01.10, 01.20, etc.).
+
+Función:
+
+Ordenar ideas y secciones de forma estable.
+
+Permitir referencias internas tipo “ver 03.20 de este documento”.
+
+No tiene obligación de coincidir con estructura de carpetas.
+
+01.00.02_ID_FS_(ID_DE_FILE_SYSTEM)
+
+Identificador corto y estable que se usa en nombres de archivos y carpetas.
+
+Reglas mínimas:
+
+ASCII básico, sin espacios, sin tildes, sin caracteres raros.
+
+Amigable para Windows (ruta total razonable).
+
+Se compone normalmente de:
+
+Prefijo de frame o proyecto (FRM).
+
+Tipo lógico (TIPO).
+
+Secuencia numérica (NNNN).
+
+Opcional: sufijo humano corto ASCII.
+
+Ejemplo:
+
+PF_HUM_0005
+
+EVA_SKL_0101
+
+WNG_TL_0200_REGENALL
+
+01.00.03_ID_DB_(ID_DE_BASE_DE_DATOS)
+
+Clave para BD:
+
+Lo más corta posible.
+
+Sin dependencias directas de rutas físicas.
+
+Idealmente unívoca para cada elemento lógico relevante.
+
+Puede reutilizar el patrón ID_FS o derivarlo, pero siempre con mapping claro ID_DB ↔ ID_FS.
+
+01.00.04_FRAME
+
+Conjunto coherente de reglas y artefactos: PFUNDATIONS, EVA.EOL, WINGS, proyectos, etc.
+
+01.00.05_SKILL
+
+Estándar transversal basado en errores reales que define “cómo se trabaja”.
+Los frames deben respetar los SKILLS, salvo excepciones justificadas.
+
+01.00.06_CATALOGO_FRM_(NUEVO, RECOMENDADO)
+
+FRM recomendado (ejemplos; cada ecosistema mantiene su catálogo):
+- PF   = PFUNDATIONS
+- EVA  = EVA.EOL
+- WNG  = WINGS
+- KLAB = Kumquat Lab
+- PROJ = Proyecto puntual
+- OPS  = Operaciones / runbooks
+- SYS  = Sistema base transversal
+
+Regla:
+- Si agregas FRM nuevo, documentarlo en el HUMAN root del ecosistema o en un catálogo central.
+
+==========
+02.00_PROBLEMAS_HISTORICOS_QUE_ESTE_SKILL_ATACA
+==========
+
+02.00.01_PROBLEMA_1_RUTAS_LARGAS_EN_WINDOWS
+
+Árboles profundos + nombres largos + sincronización = riesgo de superar límite de ruta.
+
+Síntomas:
+
+Errores al copiar/mover/eliminar.
+
+Imposibilidad de zippear.
+
+Fallos de scripts.
+
+02.00.02_PROBLEMA_2_NOMBRES_BONITOS_PERO_INESCALABLES
+
+Espacios, tildes, ñ, caracteres especiales.
+
+Mezcla de WBS, título, versión en el mismo string.
+
+Resultado:
+
+Keys poco confiables en BD.
+
+Dificultad para queries limpias.
+
+Dificultad de parseo automático.
+
+02.00.03_PROBLEMA_3_REFACTORS_CAROS
+
+Cambias versión/título y el nombre de archivo cambia → cascada de roturas.
+
+02.00.04_PROBLEMA_4_INCONSISTENCIA_ENTRE_SISTEMAS
+
+Cada proyecto inventa su lógica.
+RADAR y tooling deben “adivinar” patrones.
+
+==========
+03.00_PRINCIPIOS_DE_DISENO_PARA_WBS_E_IDS
+==========
+
+03.00.01_PRINCIPIO_1_SEPARAR_CAPAS
+
+WBS interno → organización conceptual dentro del archivo.
+
+ID_FS → integración con filesystem.
+
+ID_DB → integración con BD/catálogos.
+
+No mezclar todo en el mismo string.
+
+03.00.02_PRINCIPIO_2_ID_CORTO_SEMANTICA_LARGA
+
+El ID debe ser mecánico, corto y estable.
+
+La semántica va en:
+
+títulos de sección,
+
+cabecera/metadatos,
+
+campos descriptivos de BD.
+
+03.00.03_PRINCIPIO_3_ASCII_ONLY_EN_IDS
+
+En IDs FS y BD:
+
+Letras A–Z (mayúsculas recomendadas).
+
+Dígitos 0–9.
+
+Separadores: _ y .
+
+No se permiten:
+
+tildes, ñ, espacios, símbolos raros.
+
+03.00.04_PRINCIPIO_4_ESTABILIDAD_DE_IDS
+
+Una vez asignado un ID:
+
+No se cambia salvo rediseño estructural mayor.
+
+Versiones van en metadatos, no en el ID.
+
+03.00.05_PRINCIPIO_5_LONGITUD_CONTROLADA
+
+Recomendaciones:
+
+ID_FS ≤ 16 caracteres (sin sufijo).
+
+ID_FS + sufijo ≤ 40 caracteres.
+
+Nombre archivo (ID_FS + sufijo + ext) ≤ 80 caracteres.
+
+Ruta objetivo < 200 caracteres.
+
+==========
+04.00_ESTANDAR_DE_WBS_INTERNO_(DENTRO_DE_LOS_ARCHIVOS)
+==========
+
+04.00.01_FORMATO_BASICO
+
+Formato sugerido:
+NN.MM_TITULO_EN_MAYUSCULAS_SIN_TILDES
+
+Ejemplo:
+01.30_RELACION_CON_LOS_SKILLS_Y_ESTANDARES_DEL_SISTEMA
+
+Características:
+
+NN = bloque principal (00, 01, 02, …).
+
+MM = subbloque (00, 10, 20, 30, etc.).
+
+Título en mayúsculas, sin tildes ni caracteres especiales.
+
+Guion bajo _ como separador.
+
+04.00.02_USO_RECOMENDADO
+
+Ordenar contenido y facilitar referencia (“ver 03.20”).
+
+No se usa como nombre de archivo ni como clave de BD.
+
+04.00.03_REGLAS_DE_ESTABILIDAD
+
+Evitar renumerar WBS internos salvo rediseño profundo.
+
+Si agregas un bloque intermedio, usar 01.15, 01.25, etc.
+
+==========
+05.00_ESTANDAR_DE_IDS_CORTOS_PARA_ARCHIVOS_Y_CARPETAS_(FS)
+==========
+
+++++++++++
+05.00.01_OBJETIVO_DE_ID_FS
+++++++++++
+
+Ser clave corta, estable y legible:
+
+unívoca dentro de un frame/proyecto,
+
+parseable por scripts,
+
+amigable con Windows.
+
+++++++++++
+05.00.02_PATRON_GENERAL_FRM_TIPO_NNNN
+++++++++++
+
+Patrón:
+FRM_TIPO_NNNN[_SUFIJO]
+
+FRM = código corto frame/proyecto
+TIPO = tipo lógico (HUM, SKL, RAD, TL, CFG, SCRP, etc.)
+NNNN = secuencia numérica
+SUFIJO = opcional, corto ASCII
+
+++++++++++
+05.00.03_TIPOS_OFICIALES_(EJEMPLOS)
+++++++++++
+
+Ejemplos:
+
+HUM = documentos HUMAN
+SKL = skills/standards
+RAD = outputs RADAR
+TL  = tools/logs
+CFG = configuraciones
+SCRP= scripts
+
+++++++++++
+05.00.04_EJEMPLOS_DE_ID_FS
+++++++++++
+
+PF_HUM_0005_OPERATIONS.txt
+PF_TL_0101_REGENALL.ps1
+WNG_RAD_0001_INDEX.txt
+
+++++++++++
+05.00.05_REGLAS_DE_CARACTERES_Y_LONGITUD
+++++++++++
+
+Permitido:
+A–Z, 0–9, _ y .
+
+No permitido:
+espacios, tildes, ñ, símbolos raros.
+
+Longitud:
+ID_FS recomendado ≤ 16 (sin sufijo).
+Nombre archivo completo ≤ 80.
+
+++++++++++
+05.00.06_IDS_PARA_CARPETAS
+++++++++++
+
+Mismo patrón, sin extensión.
+
+Ejemplos:
+PF_HUM
+WNG_RAD
+PROJ_CFG
+
+++++++++++
+05.00.08_EXCEPCIONES_CONTROLADAS_A_ID_FS
+++++++++++
+
+Regla:
+El estándar ID_FS es recomendado para consistencia y tooling.
+
+Se permiten excepciones cuando el HUMANO define un contrato operativo explícito.
+
+Ejemplo (real):
+Script con nombre fijo: RADAR.ps1
+
+Condiciones para permitir la excepción:
+
+Documentar en metadatos del archivo:
+“EXCEPCION_ID_FS...: SI (justificada)”
+
+Motivo: contrato operativo humano / compatibilidad con tooling.
+
+Objetivo:
+Evitar drift silencioso.
+
+++++++++++
+05.00.09_VALIDACION_OPERATIVA_(NUEVO)
+++++++++++
+
+Regla:
+Todo tooling/agente que cree nombres debe validar ID_FS.
+
+Regex recomendado (mínimo):
+^[A-Z0-9]{2,6}_[A-Z0-9]{2,6}_[0-9]{4}(_[A-Z0-9._]{1,30})?$
+
+Checks:
+- ASCII only
+- longitud nombre archivo <= 80
+- ruta total < 200 recomendado
+- evitar duplicados (si existe catálogo)
+
+Si falla:
+- no crear archivo
+- registrar TROUBLE (severidad BAJA/MEDIA según impacto)
+
+++++++++++
+05.00.09_IDS_PARA_ARTEFACTOS_DE_ORQUESTACION_(AI_ORCH)
+++++++++++
+
+Para artefactos del orquestador (logs, snapshots, reports), se recomienda:
+
+- Mantener IDs cortos y parseables en nombres.
+- Evitar timestamps en ID_FS (preferir timestamp en el sufijo del archivo).
+
+Ejemplos:
+
+AIOR_LOG_0001_RUNS\LOG.RUN.<RUN_ID>.txt
+AIOR_CST_0001\COST_YYYYMMDD.ACTIVE.txt
+AIOR_SNP_0001\SNAP-YYYYMMDD-HHMM-SEQ\manifest.txt
+
+Objetivo:
+
+Parseo por scripts + compatibilidad DB sin rutas imposibles.
+
+==========
+06.00_ESTANDAR_DE_IDS_PARA_BD_(DB-FRIENDLY)
+==========
+
+++++++++++
+06.00.01_OBJETIVO_DE_ID_DB
+++++++++++
+
+Clave estable y portátil que no dependa de:
+
+ruta en disco,
+nombre de archivo,
+ubicación relativa.
+
+++++++++++
+06.00.02_FORMATO_SUGERIDO
+++++++++++
+
+Formato:
+FRM.DOC.SECC
+
+FRM = frame/proyecto
+DOC = número documento (alineado a NNNN si aplica)
+SECC = WBS interno normalizado (ej 0130)
+
+Ejemplos:
+
+PFOP.0005.0000 (documento completo)
+PFOP.0005.0130 (sección 01.30)
+
+++++++++++
+06.00.03_CAMPOS_SUGERIDOS_EN_BD
+++++++++++
+
+id_db
+id_fs
+id_unico
+title_humano
+wbs_interno
+fs_path_rel
+frame
+tipo_elemento
+
+++++++++++
+06.00.04_MAPPING_ID_FS_↔_ID_DB_(NUEVO)
+++++++++++
+
+Principio:
+ID_DB no depende del path, pero debe poder mapearse al archivo.
+
+Mapping recomendado:
+- Tabla catálogo (CSV/SQLite) con:
+  - id_db
+  - id_fs
+  - path_rel
+  - id_unico
+  - version
+
+RADAR puede consumir este catálogo para enriquecer navegación.
+
+==========
+07.00_RELACION_IDS_CON_SKILLS_Y_HUMAN_Y_RADAR
+==========
+
+07.10_ID_UNICO
+Cada archivo serio lleva ID_UNICO lógico, estable.
+
+07.20_ID_FS
+ID_FS es el nombre corto (si se adopta).
+Si se usa excepción (ej RADAR.ps1), se documenta.
+
+07.30_RADAR
+RADAR usa rutas del FS para describir y puede incluir hashes.
+RADAR no decide IDs, pero se beneficia cuando IDs son estables.
+
+==========
+08.00_EJEMPLOS_PRACTICOS
+==========
+
+08.10_EJEMPLO_WBS_INTERNO
+00.00_METADATOS_DEL_DOCUMENTO
+01.10_SECCION
+
+++++++++++
+02.10_SUBSECCION
+++++++++++
+
+08.20_EJEMPLO_EXCEPCION_ID_FS
+Archivo: RADAR.ps1
+Metadatos incluyen:
+EXCEPCION_ID_FS...: SI (justificada)
+
+==========
+09.00_ANTIPATRONES_(QUE_NO_HACER)
+==========
+
+- Meter versión en el nombre de archivo (va en metadatos).
+- Usar espacios/tildes/ñ en IDs.
+- Crear estructuras de carpetas profundas con nombres largos (rompe Windows).
+- Cambiar IDs por razones estéticas (rompe tooling y DB).
+
+==========
+10.00_IMPLEMENTACION_PROGRESIVA_(COMO_MIGRAR)
+==========
+
+- Adoptar ID_FS para archivos nuevos primero.
+- Mantener excepciones controladas documentadas.
+- Crear catálogo de mapping ID_FS ↔ ID_DB cuando la BD sea prioridad.
+- Integrar validación en scripts/agents antes de refactors masivos.
+
+==========
+11.00_CHECKLIST_RAPIDO
+==========
+
+[ ] IDs ASCII only
+[ ] Nombre archivo <= 80
+[ ] Ruta recomendada < 200
+[ ] Version en metadatos, no en nombre
+[ ] Excepciones documentadas
+[ ] Validator activo para nuevos nombres
+
+==========
+12.00_HISTORIAL_DE_CAMBIOS
+==========
+
+2026-02-26, v1.2-DRAFT
+- Agregado: catálogo FRM recomendado.
+- Agregado: validación operativa (regex + checks) para agentes y tooling.
+- Agregado: mapping explícito ID_FS ↔ ID_DB para BD y consumo por RADAR.
+2026-02-20, v1.1-CANON
+- Versión base del estándar WBS/ID.
+
+--------------------------------------------------
+SOURCE_FILE: 07.SKILL.FILE_CONTENT.txt
+SOURCE_PATH: C:\01. GitHub\Skills\07.SKILL.FILE_CONTENT.txt
+VERSION    : v1.3-DRAFT
+SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.FILE_CONTENT.01.01
+NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
+VERSION...........: v1.3-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Regla transversal para crear, evolucionar y auditar el contenido interno de cualquier archivo
+del ecosistema (HUMAN, SYSTEM, scripts, configuraciones, prompts, informes, outputs serios, etc.).
+
+Este skill define:
+
+Estructura mínima obligatoria.
+
+Metadatos mínimos.
+
+Formato obligatorio de títulos y subtítulos (10x símbolos).
+
+Cómo documentar cambios (changelog).
+
+Reglas mínimas para scripts ejecutables (cómo ejecutar, exit code, OK real).
+
+Forma de entrega IA->humano (bloques reemplazables, copy/paste).
+
+NO_CUBRE..........:
+
+No define arquitectura de carpetas ni naming del filesystem (eso vive en WBS/ID y en taxonomía del proyecto).
+
+No define estándares de estilo de código línea-a-línea (eso vive en CODE standards).
+
+No decide la gobernanza conceptual (eso vive en HUMAN y en otros skills).
+
+No define modelos IA ni routing/costos (eso vive en skills de orquestación si existen).
+
+DEPENDENCIAS......:
+
+06.SKILL.WBS.txt
+(Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
+
+NOTA_IMPORTANTE...:
+
+Este skill define “cómo debe verse” un archivo serio por dentro.
+La numeración exacta (WBS interno) se guía por el skill WBS/ID.
+
+MEJORA_CLAVE_v1.3:
+
+- Agrega sección TAGS_OPERATIVOS para etiquetar artefactos runtime-critical (sandbox, costos, routing, executor policy).
+- Refuerza control anti “OK falso” (OK/FAIL binario + evidencia mínima).
+- Agrega convención PowerShell para evitar warnings:
+  "The cmdlet 'X' uses an unapproved verb." (ej.: Validate-* no es verb aprobado).
+  Recomendación: Test-* / Confirm-* / Invoke-*.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Propósito y principios
+02.00 Bloques mínimos de contenido (obligatorios)
+02.15 Tags operativos (NUEVO)
+02.50 Formato de presentación (OBLIGATORIO)
+02.60 Formato obligatorio de títulos (10x símbolos)
+
+03.00 Archivos no ejecutables (HUMAN y docs)
+04.00 Archivos ejecutables (scripts y código)
+04.40 Contrato de exit code y estado final (OBLIGATORIO)
+04.50 Convención PowerShell (verbs aprobados) (NUEVO)
+
+05.00 Interacción humano–IA sobre el contenido
+06.00 Checklist rápido
+07.00 Resumen de uso del skill
+08.00 Historial de cambios
+FIN del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_ESTE_SKILL
+
+a) Archivos “vacíos” o caóticos: sin metadatos, sin propósito, sin secciones.
+b) Pérdida de continuidad: nadie entiende qué es el archivo a los 3 meses.
+c) Dificultad de auditoría: no hay changelog ni trazabilidad de cambios.
+d) Salidas de IA imposibles de aplicar: no indican dónde insertar/reemplazar.
+e) Scripts que “funcionan” pero no son operables: sin cómo ejecutar, sin prerequisitos.
+f) Falsos OK: scripts que declaran éxito aunque fallaron parcialmente.
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar mínimo y estable para que cualquier archivo serio sea entendible por:
+
+Tu yo del futuro.
+
+Un tercero competente.
+
+Una IA en blanco (sin memoria previa).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Estandarizar la forma de:
+
+Presentar metadatos.
+
+Ordenar contenido con títulos claros.
+
+Proponer cambios (replace/add/delete) sin ambigüedad.
+
+Mantener formato consistente (10x símbolos).
+
+Producir outputs ejecutables con estado final confiable.
+
+==========
+01.00_PROPOSITO_Y_PRINCIPIOS
+==========
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Evitar que archivos del ecosistema se conviertan en “ruido” o “tierra de nadie”.
+Un archivo serio debe tener forma repetible y auditable.
+
+----------
+01.20_A_QUE_TIPOS_DE_ARCHIVO_APLICA
+----------
+
+Aplica a:
+
+HUMAN (conceptuales, guías, manuales, constituciones de sistema).
+
+SYSTEM / OPERATIONS (reglas, flujos, contratos operativos).
+
+Scripts ejecutables (.ps1, .py, .sh, .sql, etc.).
+
+Configuraciones y prompts persistentes.
+
+Informes y outputs serios generados por tooling.
+
+No distingue por frame: PF, WINGS, EVA, proyectos sueltos.
+Regla: si el archivo es “serio”, aplica.
+
+----------
+01.30_PRECEDENCIA_DE_FUENTES
+----------
+
+Modelo recomendado de precedencia:
+
+HUMAN (general y específico del proyecto) > SKILLS > (state del sistema si existe) > código.
+
+Si hay conflicto:
+
+Primero se corrige el archivo/código que está violando el contrato.
+
+Si el conflicto es conceptual, se corrige HUMAN o el skill, pero explícitamente (no por drift silencioso).
+
+==========
+02.00_BLOQUES_MINIMOS_DE_CONTENIDO
+==========
+
+++++++++++
+02.10_METADATOS_INICIALES
+++++++++++
+
+OBLIGATORIO: todo archivo serio debe comenzar con un bloque de metadatos mínimo.
+
+Campos mínimos (no negociar):
+
+ID_UNICO (o FILE_ID lógico)
+
+NOMBRE_SUGERIDO (nombre del archivo)
+
+VERSION
+
+FECHA (y HORA si aporta valor)
+
+CIUDAD (o ubicación)
+
+UBICACION_SISTEMA (carpeta lógica en el ecosistema)
+
+AUTOR_HUMANO (o rol)
+
+ALCANCE resumido (2–5 líneas)
+
+NO_CUBRE (2–5 líneas)
+
+DEPENDENCIAS (lista corta, si aplica)
+
+Notas:
+
+La IA puede proponer metadatos, el humano valida.
+
+Si el archivo se vuelve CANON, debe tener metadatos completos y consistentes.
+
+++++++++++
+02.15_TAGS_OPERATIVOS_(NUEVO)
+++++++++++
+
+Objetivo:
+Permitir clasificar rápidamente artefactos “runtime-critical” (operación) sin depender del nombre.
+
+Uso:
+- Campo opcional en metadatos:
+  TAGS_OPERATIVOS...: <lista separada por coma>
+
+Ejemplos de tags:
+- RUNTIME_CRITICAL
+- EXECUTOR_POLICY
+- SANDBOX
+- COST_CONTROL
+- ROUTING
+- RADAR_OUTPUT
+- BATON_STATE
+- INCIDENT_TEMPLATE
+
+Reglas:
+- Tags no reemplazan ID_UNICO ni WBS.
+- Tags no deben ser largos ni inventar taxonomías infinitas.
+- Si un tag se repite mucho, conviene formalizarlo como catálogo.
+
+++++++++++
+02.20_INTRODUCCION_CORTA
+++++++++++
+
+OBLIGATORIO: después de metadatos debe existir una introducción breve que responda:
+
+¿Para qué existe este archivo?
+
+¿Qué problema resuelve?
+
+¿Qué NO cubre?
+
+¿Quién debería leerlo y cuándo?
+
+La introducción es un marco, no reemplaza el contenido.
+
+++++++++++
+02.30_CUERPO_DEL_ARCHIVO
+++++++++++
+
+OBLIGATORIO: el cuerpo debe estar organizado con títulos claros (WBS interno)
+y debe permitir “scaneo rápido”.
+
+Reglas:
+
+Evitar párrafos gigantes (si > 4 ítems, usar listas).
+
+No duplicar grandes bloques de texto: si existe en otro archivo, referenciarlo.
+
+Mantener el contenido útil; por defecto complementar, ordenar y aclarar (no recortar agresivamente).
+
+++++++++++
+02.40_SECCION_DE_CAMBIOS_(CHANGELOG)
+++++++++++
+
+OBLIGATORIO a partir del momento en que el archivo deja de ser un borrador inicial.
+
+Formato recomendado:
+
+FECHA, VERSION, resumen corto (1–3 líneas).
+
+++++++++++
+02.50_FORMATO_DE_PRESENTACION
+++++++++++
+
+OBLIGATORIO (CONTRATO):
+
+Los títulos deben usar separadores de 10 símbolos EXACTOS (10x) para consistencia:
+
+escaneo humano rápido,
+
+parseo simple por IA,
+
+reducción de drift entre archivos.
+
+Campos alineados con “......:” para lectura rápida.
+
+Texto explicativo en bloques separados por líneas en blanco.
+
+++++++++++
+02.60_FORMATO_OBLIGATORIO_DE_TITULOS
+++++++++++
+
+OBLIGATORIO (CONTRATO 10x):
+
+Nivel 1 (Título principal):
+
+Línea de 10 símbolos “=” antes del título.
+
+Línea de 10 símbolos “=” después del título.
+
+Ejemplo:
+
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+Nivel 2 (Subtítulo):
+
+Línea de 10 símbolos “-” antes del subtítulo.
+
+Línea de 10 símbolos “-” después del subtítulo.
+
+Ejemplo:
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Nivel 3 (Sub-subtítulo):
+
+Línea de 10 símbolos “+” antes y después.
+
+Ejemplo:
+
+++++++++++
+02.10_METADATOS_INICIALES
+++++++++++
+
+Nivel 4 (Bloque opcional):
+
+Línea de 10 símbolos “*” antes y después.
+
+Ejemplo:
+
+**********
+NOTAS_OPERATIVAS
+**********
+
+Regla dura:
+
+Si un archivo serio no cumple este formato, se considera NO-CANON hasta corregirse.
+
+==========
+03.00_ARCHIVOS_NO_EJECUTABLES_(HUMAN_Y_DOCS)
+==========
+
+----------
+03.10_REGLAS_PARA_HUMAN_Y_DOCS
+----------
+
+Para HUMAN, manuales y documentación conceptual:
+
+Deben tener metadatos + introducción + cuerpo ordenado + changelog.
+
+Mantener tono explicativo y académico (no telegráfico).
+
+Regla por defecto: NO resumir agresivamente contenido conceptual sin orden humana explícita.
+
+Evolución típica: complementar, ordenar, aclarar y agregar ejemplos.
+
+----------
+03.20_DOCS_OPERATIVOS_MAS_LIVIANOS
+----------
+
+Para documentos operativos más livianos (guías cortas, runbooks pequeños):
+
+Se permite menor profundidad,
+
+pero deben conservar:
+
+metadatos básicos,
+
+introducción mínima,
+
+títulos claros (aunque menos niveles),
+
+“cómo ejecutar” si describe un proceso operativo.
+
+==========
+04.00_ARCHIVOS_EJECUTABLES_(SCRIPTS_Y_CODIGO)
+==========
+
+----------
+04.10_CABECERA_DE_SCRIPTS
+----------
+
+OBLIGATORIO: todo script serio debe comenzar con comentarios/cabecera que incluyan:
+
+Nombre lógico del script.
+
+Propósito (1–5 líneas).
+
+Uso típico (comando(s)).
+
+Prerrequisitos.
+
+Contrato: qué outputs produce y dónde.
+
+Referencia al skill/contrato que implementa (si aplica).
+
+----------
+04.20_SECCION_COMO_EJECUTAR
+----------
+
+OBLIGATORIO: debe existir sección explícita de “Cómo ejecutar” (en el mismo script o en doc asociado).
+
+Contenido mínimo:
+
+Prerrequisitos (versiones, módulos, permisos).
+
+Comandos de ejemplo (caso típico).
+
+Parámetros obligatorios/opcionales.
+
+Ejemplo de output esperado (DONE binario).
+
+----------
+04.30_COMENTARIOS_POR_BLOQUE_DE_CODIGO
+----------
+
+OBLIGATORIO: cada bloque lógico (función, región, sección main) debe explicar:
+
+Qué hace.
+
+Por qué existe así.
+
+Qué supuestos tiene (inputs esperados, contexto).
+
+Riesgos típicos.
+
+No requiere comentar cada línea, pero sí cada bloque.
+
+----------
+04.40_CONTRATO_DE_EXIT_CODE_Y_ESTADO_FINAL
+----------
+
+OBLIGATORIO (CONTRATO):
+
+Un script NO debe declarar éxito (OK/COMPLETADO) si hubo error no controlado.
+
+Si ocurre una excepción no controlada:
+
+Registrar error (Write-Error o equivalente).
+
+Terminar con exit code != 0 (por defecto exit 1).
+
+Imprimir FAIL (no OK) como estado final.
+
+Solo se imprime “OK/COMPLETADO” si:
+
+No hubo excepción,
+
+Se generaron los outputs esperados (DONE binario),
+
+Se dejó evidencia (rutas/archivos generados).
+
+Objetivo:
+
+Evitar falsos positivos (ej.: “OK” con fallos parciales).
+
+Mejorar auditabilidad y confianza operacional.
+
+----------
+04.50_CONVENCIONES_POWERSHELL_(VERBS_APROBADOS)_(NUEVO)
+----------
+
+Problema real:
+PowerShell emite warnings si una función/cmdlet usa verbos no aprobados:
+"The cmdlet 'X' uses an unapproved verb."
+
+Regla:
+Preferir verbos aprobados por PowerShell (ejemplos comunes):
+Get, Set, New, Remove, Add, Clear, Copy, Export, Import, Convert, Update,
+Start, Stop, Invoke, Test, Confirm, Enter, Exit, Find, Format, Join,
+Measure, Move, Out, Push, Pop, Read, Write.
+
+Recomendación dura (para tu caso):
+- Evitar: Validate-*
+- Preferir: Test-* (validación)
+- Preferir: Confirm-* (confirmación)
+- Preferir: Invoke-* (ejecución/acción)
+
+Ejemplo concreto:
+- En vez de Validate-CISMetadata
+  - Test-CISMetadata
+  - Confirm-CISMetadata
+  - Invoke-CISMetadataCheck
+
+Nota:
+Este skill no reemplaza documentación oficial de PowerShell; es una regla operacional anti-warning.
+
+==========
+05.00_INTERACCION_HUMANO_IA_SOBRE_EL_CONTENIDO
+==========
+
+----------
+05.10_CUANDO_LA_IA_PROPONE_CAMBIOS
+----------
+
+Regla dura:
+
+Si la IA cambia algo no-trivial, debe entregar:
+
+BLOQUE_ORIGINAL (tal como está hoy).
+
+BLOQUE_CORREGIDO (propuesta completa).
+
+Esto habilita replace en editor sin ambigüedad.
+
+----------
+05.20_ELIMINAR_VS_RESUMIR_VS_EXTENDER
+----------
+
+Regla por defecto:
+
+No eliminar secciones completas ni resumir agresivamente contenido conceptual sin orden humana explícita.
+
+Cambios aceptables por defecto:
+
+Ordenar mejor.
+
+Clarificar redacción.
+
+Agregar contexto y ejemplos.
+
+Agregar notas de riesgo.
+
+Si se propone eliminar:
+
+Indicar bloque exacto a eliminar.
+
+Explicar por qué (duplicado/obsoleto/contradictorio).
+
+----------
+05.30_AGREGAR_NUEVAS_SECCIONES
+----------
+
+Cuando la IA cree contenido nuevo:
+
+Proponer título y subtítulo.
+
+Indicar dónde insertarlo:
+
+título superior inmediato,
+
+título inferior inmediato (si aplica).
+
+Entregar el contenido completo de la nueva sección en un solo bloque.
+
+Ajustar WBS interno siguiendo skill WBS/ID.
+
+----------
+05.40_ENTREGA_EN_BLOQUE_UNICO_COPIABLE
+----------
+
+Para scripts y archivos que el humano pegará en un archivo en blanco:
+
+La IA debe entregar el contenido completo del archivo en un solo bloque.
+
+El archivo debe quedar ejecutable o usable inmediatamente sin edición extra.
+
+Si requiere varias tandas, cada tanda debe indicar:
+
+“TANDA X/Y”
+
+nombre del archivo
+
+si el humano debe reemplazar o concatenar.
+
+==========
+06.00_CHECKLIST_RAPIDO
+==========
+
+----------
+06.10_PARA_CREAR_DESDE_CERO
+----------
+
+Antes de considerar un archivo aceptable:
+
+¿Tiene metadatos al inicio?
+
+¿Tiene introducción clara?
+
+¿Cuerpo organizado con títulos consistentes (10x)?
+
+Si es script: ¿existe “cómo ejecutar”?
+
+¿Declara qué NO cubre?
+
+¿Tiene changelog cuando aplica?
+
+¿Si es runtime-critical, tiene TAGS_OPERATIVOS?
+
+----------
+06.20_PARA_ACTUALIZAR_UN_ARCHIVO_EXISTENTE
+----------
+
+Antes de cerrar cambios:
+
+¿Se entregó BLOQUE_ORIGINAL y BLOQUE_CORREGIDO para cambios relevantes?
+
+¿No se perdió contexto útil?
+
+¿Introducción sigue alineada?
+
+¿Cambio amerita entrada en changelog?
+
+¿Si es PowerShell, evitaste Validate-* (o aceptaste conscientemente el warning)?
+
+==========
+07.00_RESUMEN_DE_USO_DEL_SKILL
+==========
+
+Usa este skill siempre que crees o rediseñes contenido interno de un archivo.
+
+Plantilla mental mínima (OBLIGATORIA):
+
+Metadatos → Introducción → Cuerpo ordenado (10x) → Cómo ejecutar (si aplica) → Changelog.
+
+Aplica a:
+
+HUMAN
+
+SKILLS
+
+Scripts
+
+Configs
+
+Informes/outputs serios
+
+==========
+08.00_HISTORIAL_DE_CAMBIOS
+==========
+
+2026-02-26, v1.3-DRAFT
+- Agregado: 02.15 TAGS_OPERATIVOS para runtime-critical.
+- Refuerzo: estado final OK/FAIL binario + evidencia mínima (anti “OK falso”).
+- Agregado: 04.50 Convención PowerShell anti “unapproved verb” (Validate-* -> Test/Confirm/Invoke).
+- Se mantiene contenido completo previo (v1.2) sin omitir secciones.
+
+2026-02-20, v1.2-CANON
+- Endurece formato: títulos 10x símbolos pasan a ser contrato obligatorio.
+- Agrega sección 02.60 formato obligatorio de títulos (niveles 1–4).
+- Agrega contrato obligatorio de exit code y estado final (04.40).
+- Agrega regla de entrega en bloque único copiable (05.40).
+- Mantiene estructura original y complementa sin perder contenido útil.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
+
+--------------------------------------------------
+SOURCE_FILE: 12.SKILL.DRAG_AND_DROP.txt
+SOURCE_PATH: C:\01. GitHub\Skills\12.SKILL.DRAG_AND_DROP.txt
+VERSION    : UNKNOWN
+SHA256     : A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
+NOMBRE_SUGERIDO...: 12.SKILL.DRAG_AND_DROP.txt
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\DRAG_AND_DROP)
+AUTOR_HUMANO......: ADMIN
+
+ALCANCE...........:
+
+Define el contrato operativo “Drag & Drop” para trabajar con IA usando archivos y tandas,
+sin perder continuidad ni romper el flujo por límites de tamaño, truncación o formato.
+
+Este skill estandariza:
+
+- Cómo adjuntar archivos al chat / IA.
+- Cómo partir entregas en TANDAS.
+- Cómo nombrar y referenciar archivos adjuntos.
+- Cómo evitar errores típicos: “faltan líneas”, “no era el archivo correcto”, “mezclé versiones”.
+
+Aplica a cualquier proyecto/sistema que use:
+- archivos .txt como canon (HUMAN, SKILLS, BATON, RADAR, logs).
+- outputs grandes (RADAR segs, exports, auditorías).
+- interacción iterativa con IA.
+
+NO_CUBRE..........:
+
+No define contenido interno de los archivos (eso es FILE_CONTENT).
+No define naming FS/IDs (eso es WBS/ID).
+No define RADAR (pero es compatible y lo referencia).
+
+DEPENDENCIAS......:
+
+07.SKILL.FILE_CONTENT.txt
+06.SKILL.WBS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+
+MEJORA_CLAVE_v1.2:
+
+- Reglas explícitas para evitar truncación y “falsos completos”.
+- Contrato de confirmación: IA debe declarar qué recibió (lista exacta).
+- Protocolo “TANDA X/Y” reforzado para copy/paste y replace.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto y objetivos
+
+01.00 Definiciones
+02.00 Principios de Drag & Drop
+03.00 Protocolo de carga de archivos (upload)
+04.00 Protocolo de entregas por TANDAS
+05.00 Protocolo de reemplazos (replace) y parches
+06.00 Validación de integridad (anti-truncación)
+07.00 Errores comunes y mitigaciones
+08.00 Checklist rápido
+09.00 Changelog
+
+==========
+00.20_CONTEXTO_Y_OBJETIVOS
+==========
+
+Problema real:
+- En chats con IA, archivos largos se truncan o se interpretan parcial.
+- Se pierde contexto por “asumir” que el archivo estaba completo.
+- Se mezclan versiones: se edita una copia vieja sin darse cuenta.
+
+Objetivo principal:
+- Asegurar que el flujo “subo archivo -> IA lo entiende -> IA devuelve cambios aplicables”
+sea repetible, auditable y sin ambigüedad.
+
+Objetivo secundario:
+- Permitir trabajo en muchos archivos grandes sin volverse loco con carpetas profundas.
+
+==========
+01.00_DEFINICIONES
+==========
+
+DRAG_AND_DROP:
+- Acción de adjuntar un archivo al chat/IA.
+
+TANDA:
+- Segmento de entrega cuando el contenido no cabe o se decide separar por operabilidad.
+
+PAQUETE:
+- Conjunto de archivos subidos para una tarea (ej.: HUMAN + SKILLS + RADAR segs).
+
+TRUNCACION:
+- El sistema corta el contenido (visible o invisible) y la IA ve solo una parte.
+
+CONFIRMACION_DE_RECEPCION:
+- Respuesta obligatoria de la IA listando EXACTAMENTE qué archivos/segmentos recibió.
+
+==========
+02.00_PRINCIPIOS_DE_DRAG_AND_DROP
+==========
+
+02.10_PRINCIPIO_1_NO_ASUMIR_COMPLETITUD
+- Si hay duda de truncación, se trata como “NO completo” hasta verificar.
+
+02.20_PRINCIPIO_2_TRAZABILIDAD
+- Cada archivo tiene ID_UNICO + VERSION + FECHA.
+- La IA debe citar qué versión está usando.
+
+02.30_PRINCIPIO_3_TANDAS_EXPLICITAS
+- Si se divide, se divide con contrato:
+  - TANDA X/Y
+  - nombre de archivo
+  - qué hacer con la tanda (reemplazar / concatenar / agregar)
+
+02.40_PRINCIPIO_4_CERO_DRIFT
+- Si la IA no tiene el bloque exacto, no hace replace “a ojo”.
+- Pide el bloque faltante o un extracto.
+
+==========
+03.00_PROTOCOLO_DE_CARGA_DE_ARCHIVOS_(UPLOAD)
+==========
+
+++++++++++
+03.10_PASO_0_PREPARACION
+++++++++++
+
+Antes de subir:
+- Verifica que el archivo tenga metadatos (FILE_CONTENT).
+- Verifica VERSION y FECHA.
+- Verifica que el nombre físico coincida con NOMBRE_SUGERIDO (si aplica).
+
+++++++++++
+03.20_PASO_1_SUBIR_ARCHIVOS
+++++++++++
+
+Subir al chat/IA:
+- 1 a 6 archivos por turno idealmente (operabilidad).
+- Si son más: agrupar por “paquetes” (ej. paquete_skills_core).
+
+++++++++++
+03.30_PASO_2_CONFIRMACION_OBLIGATORIA_DE_LA_IA
+++++++++++
+
+La IA debe responder inmediatamente con:
+
+- LISTA_DE_ARCHIVOS_RECIBIDOS:
+  - nombre físico exacto
+  - ID_UNICO
+  - VERSION
+  - FECHA (si está en metadatos)
+- NOTA_DE_INTEGRIDAD:
+  - “No detecto truncación” o “Hay riesgo de truncación”
+- BLOQUE_DE_DEPENDENCIAS:
+  - si falta un archivo dependiente, lo declara
+
+Si la IA no puede confirmar, se asume incompleto.
+
+++++++++++
+03.40_PASO_3_MAPEO_CON_RADAR_(SI APLICA)
+++++++++++
+
+Si el proyecto es grande:
+- Subir RADAR_INDEX o RADAR_CORE segs.
+- La IA usa RADAR como mapa, no “adivina” rutas.
+
+==========
+04.00_PROTOCOLO_DE_ENTREGAS_POR_TANDAS
+==========
+
+++++++++++
+04.10_CUANDO_USAR_TANDAS
+++++++++++
+
+Usar tandas cuando:
+- El archivo es demasiado largo.
+- El chat limita tamaño.
+- Se necesita evitar errores por “cortar por la mitad”.
+
+++++++++++
+04.20_FORMATO_OBLIGATORIO_TANDA
+++++++++++
+
+Encabezado:
+- “TANDA X/Y”
+- Archivo objetivo
+- Acción: REEMPLAZAR / CONCATENAR / AGREGAR
+- Nota: “No mezclar con otras tandas”
+
+Ejemplo:
+TANDA 2/3
+ARCHIVO: 09.SKILL.RADAR.txt
+ACCION: CONCATENAR AL FINAL (orden estricto)
+
+++++++++++
+04.30_REGLA_DE_CIERRE
+++++++++++
+
+La última tanda debe incluir:
+- “FIN_ARCHIVO” (marcador)
+- checksum humano simple opcional:
+  - líneas totales aproximadas, o
+  - último título WBS esperado
+
+Objetivo: evitar “creí que era el final”.
+
+==========
+05.00_PROTOCOLO_DE_REEMPLAZOS_(REPLACE)_Y_PARCHES
+==========
+
+05.10_REEMPLAZO_EXACTO
+- Se usa cuando el usuario hará Ctrl+F “replace” en VS Code.
+- La IA debe entregar:
+  - TITULO/SUBTITULO objetivo
+  - BLOQUE_ORIGINAL completo (tal como está)
+  - BLOQUE_CORREGIDO completo
+
+05.20_AGREGAR
+- La IA debe:
+  - indicar dónde insertar (título superior e inferior)
+  - dar el bloque nuevo completo
+  - no alterar nada fuera de ese bloque
+
+05.30_ELIMINAR
+- La IA debe:
+  - mostrar exactamente el bloque a eliminar
+  - explicar por qué
+  - no borrar contexto conceptual salvo orden humana
+
+==========
+06.00_VALIDACION_DE_INTEGRIDAD_(ANTI-TRUNCACION)
+==========
+
+06.10_SEÑALES_DE_TRUNCACION
+- Falta CHANGELOG.
+- Cortes a mitad de título.
+- Metadatos incompletos.
+- “The file is too long and has been truncated” (si aplica).
+
+06.20_REGLA_DURA
+- Si hay truncación, no se emiten cambios canónicos.
+- Se piden tandas adicionales o extractos.
+
+06.30_EVIDENCIA
+- Registrar en TROUBLE_LOG si truncación bloquea trabajo crítico.
+
+==========
+07.00_ERRORES_COMUNES_Y_MITIGACIONES
+==========
+
+E1) Mezclé versiones:
+- Mitigar: IA siempre repite ID_UNICO + VERSION en su respuesta.
+
+E2) Replace falló:
+- Mitigar: bloque original debe ser exacto; si no, pedir extracto.
+
+E3) Archivo equivocado:
+- Mitigar: IA confirma “archivo y ruta lógica” antes de editar.
+
+E4) Tandas desordenadas:
+- Mitigar: formato TANDA X/Y + orden estricto + “FIN_ARCHIVO”.
+
+==========
+08.00_CHECKLIST_RAPIDO
+==========
+
+[ ] Archivo tiene metadatos + VERSION + FECHA
+[ ] IA confirmó lista de archivos recibidos
+[ ] Si hay TANDAS: X/Y + acción (replace/concat/add)
+[ ] Replace siempre con BLOQUE_ORIGINAL + BLOQUE_CORREGIDO
+[ ] Si hay duda de truncación: parar y pedir el resto
+
+==========
+09.00_CHANGELOG
+==========
+
+2026-02-26, v1.2-DRAFT
+- Refuerzo: confirmación obligatoria de recepción de archivos.
+- Refuerzo: reglas anti-truncación y “no hacer replace a ojo”.
+- Protocolo TANDA formal con acción replace/concat/add y cierre FIN_ARCHIVO.
+(Version previa)
+- Base operacional del skill.
+

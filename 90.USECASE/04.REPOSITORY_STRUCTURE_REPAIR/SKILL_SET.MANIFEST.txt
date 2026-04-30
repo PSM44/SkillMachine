@@ -1,0 +1,25 @@
+==========
+00.00_METADATA
+==========
+
+USECASE_ID........: REPOSITORY_STRUCTURE_REPAIR
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-04-30
+AUTOR.............: PABLO
+
+DESCRIPCION.......:
+Set mínimo de skills requeridos para ejecutar repair gobernado.
+
+SKILLS_MINIMOS....:
+- 06.SKILL.WBS.txt
+- 07.SKILL.FILE_CONTENT.txt
+- 09.SKILL.RADAR.txt
+- 10.SKILL.BATON.txt
+- 11.SKILL.HUMAN_README.txt
+- 23.SKILL.WHOAMI_POLICY.txt
+- 26.SKILL.GRC.CORE.txt
+
+POLICIES_OPERATIVAS_(COPIA_USECASE):
+- POLICY.REPOSITORY.ARCHITECTURE.txt
+- POLICY.NAMING.PATH_ID.txt
+- TEMPLATE.GRC.MVP.txt

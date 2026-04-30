@@ -1,0 +1,301 @@
+==========================================
+TEMPLATE — GRC MINIMUM VIABLE PACKAGE (GRC-MVP)
+==========================================
+
+ID_UNICO..........: TEMPLATE.GRC.MVP.0001
+VERSION...........: v0.1
+ESTADO............: ACTIVE
+FECHA_CREACION....: YYYY-MM-DD
+FECHA_MODIFICACION: YYYY-MM-DD
+
+PROPOSITO.........:
+Estándar mínimo obligatorio para que un artefacto sea considerado GRC (y no solo una "skill con etiqueta").
+Este template define los campos mandatorios para: POLICY, CONTROL, EVIDENCE MODEL, VALIDATION, SEVERITY y CHANGE CONTROL.
+
+JERARQUIA_CANONICA:
+1) HUMAN (manda; propósito/espíritu/horizonte)
+2) GRC (manda operativamente; reglas obligatorias + enforcement)
+3) SKILLS (capacidades; cómo ejecutar)
+4) USECASE (paquetes aplicados; deployment/runbook)
+5) TOOLS/ARTEFACTOS/LOGS (operación)
+
+REGLA_DURA:
+- Si falta algún bloque obligatorio de este template, el artefacto NO califica como GRC.
+- Un GRC siempre debe ser ENFORCEABLE: verificable por control y con evidencia mínima.
+
+SCOPE:
+Este template aplica a:
+- policies
+- controls
+- risks
+- evidence models
+- mappings
+- registries GRC
+cuando se declaran como GRC mandatorio.
+
+FUERA_DE_SCOPE:
+- Skills tácticas sin enforcement
+- Documentos informativos sin validación
+- Outputs transitorios (logs, temp, raw)
+
+
+------------------------------------------
+01. METADATA (MANDATORY)
+------------------------------------------
+
+GRC_ID............: <GRC.<TIPO>.<DOMINIO>.<NOMBRE>.0001>
+TIPO..............: <POLICY/CONTROL/RISK/EVIDENCE/MAPPING/REGISTRY>
+DOMINIO...........: <REPOSITORY/SESSION/AI_OPS/USECASE/NAMING/SECURITY/ETC>
+NOMBRE_CORTO......: <UPPER_SNAKE_CASE>
+TITULO............: <TITULO HUMANO LEGIBLE>
+
+OWNER.............: <HUMAN/DEV/TEAM>
+STAKEHOLDERS......: <LISTA>
+APLICA_A..........: <GLOBAL/REPO/PROYECTO/USECASE/TOOLING>
+
+SEVERIDAD.........: <FAIL/WARN/INFO>
+RACIONAL_SEVERIDAD.: <POR QUE BLOQUEA O SOLO ADVIERTE>
+
+VERSION...........: <vX.Y>
+FECHA_CREACION....: YYYY-MM-DD
+FECHA_MODIFICACION: YYYY-MM-DD
+ESTADO............: <DRAFT/ACTIVE/DEPRECATED/ARCHIVED>
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: <RUTA A DOCUMENTO HUMAN>
+- HUMAN_SECTION...: <SECCION/TITULO EN HUMAN>
+- HUMAN_INTENT....: <QUE PROPOSITO / DOLOR CUBRE>
+- HUMAN_NON_GOALS.: <QUE NO BUSCA / LIMITES>
+
+
+------------------------------------------
+02. POLICY (MANDATORY si TIPO=POLICY)
+------------------------------------------
+
+POLICY_STATEMENT..:
+<REGLA MANDATORIA ESCRITA EN LENGUAJE CLARO Y NO AMBIGUO>
+
+POLICY_RATIONALE..:
+<POR QUE ESTA REGLA EXISTE, EN TERM. HUMAN>
+
+POLICY_SCOPE......:
+<QUE CUBRE EXACTAMENTE>
+
+POLICY_OUT_OF_SCOPE:
+<QUE NO CUBRE>
+
+POLICY_REQUIREMENTS:
+1) <REQUERIMIENTO ATOMICO 1>
+2) <REQUERIMIENTO ATOMICO 2>
+3) <...>
+
+POLICY_EXCEPTIONS.:
+- <EXCEPCION PERMITIDA>
+- <CONDICION DE APROBACION>
+- <QUIEN APRUEBA>
+
+POLICY_DEPENDENCIES:
+- <OTRAS POLICIES/CONTROLS NECESARIOS>
+
+
+------------------------------------------
+03. CONTROL (MANDATORY si TIPO=CONTROL o si POLICY requiere control)
+------------------------------------------
+
+CONTROL_OBJECTIVE..:
+<QUE SE BUSCA ASEGURAR>
+
+CONTROL_STATEMENT.:
+<COMO SE VERIFICA, EN LENGUAJE CLARO>
+
+CONTROL_METHOD....: <AUTOMATED/MANUAL/HYBRID>
+
+CONTROL_FREQUENCY.:
+- <ON_CHANGE/DAILY/WEEKLY/ON_RELEASE/ON_USECASE_BUILD>
+
+CONTROL_INPUTS.....:
+- <ARCHIVOS/REGISTRIES/OUTPUTS QUE USA EL CONTROL>
+
+CONTROL_PROCEDURE..:
+1) <PASO 1>
+2) <PASO 2>
+3) <PASO 3>
+
+CONTROL_PASS_CRITERIA:
+- <CONDICION OBJETIVA DE PASS>
+
+CONTROL_FAIL_CRITERIA:
+- <CONDICION OBJETIVA DE FAIL>
+
+CONTROL_OUTPUTS....:
+- <REPORTE/LOG/ARTEFACTO GENERADO>
+
+CONTROL_ESCALATION.:
+- IF FAIL THEN <ACCION>
+- OWNER NOTIFY <QUIEN>
+- SLA <PLAZO>
+
+
+------------------------------------------
+04. EVIDENCE MODEL (MANDATORY)
+------------------------------------------
+
+EVIDENCE_PURPOSE...:
+<QUE PRUEBA ESTA EVIDENCIA>
+
+EVIDENCE_MINIMUM...:
+- <EVIDENCIA MINIMA 1>
+- <EVIDENCIA MINIMA 2>
+- <EVIDENCIA MINIMA 3>
+
+EVIDENCE_FORMAT....:
+- TYPE: <TXT/JSON/CSV/LOG/SCREENSHOT/ETC>
+- NAMING: <CONVENCION DE NOMBRE>
+- LOCATION: <RUTA CANONICA>
+
+EVIDENCE_FIELDS.....:
+- timestamp
+- actor (human/tool)
+- scope (repo/usecase/project)
+- inputs
+- outputs
+- result (pass/fail)
+- notes
+
+EVIDENCE_RETENTION..:
+- <DIAS/MESES>
+- ARCHIVE_PATH: <RUTA>
+
+EVIDENCE_PRIVACY....:
+- <RESTRICCIONES SI APLICA>
+
+
+------------------------------------------
+05. VALIDATION (MANDATORY)
+------------------------------------------
+
+VALIDATION_TYPE....: <GATE/CHECKLIST/UNIT_TEST/STATIC_ANALYSIS/ETC>
+VALIDATION_OWNER...: <SCRIPT/VALIDATOR/REVIEWER>
+
+VALIDATION_WHEN....:
+- <ON_COMMIT/ON_BUILD/ON_RELEASE/ON_USECASE_RUN/ON_SESSION_CLOSE>
+
+VALIDATION_RULES...:
+1) <REGLA 1 — PASS/FAIL>
+2) <REGLA 2 — PASS/FAIL>
+3) <REGLA 3 — WARN/INFO>
+
+VALIDATION_OUTPUT..:
+- REPORT_PATH: <RUTA>
+- REPORT_FIELDS:
+  - timestamp
+  - status
+  - violations
+  - severity
+  - recommended_fix
+
+STOP_THE_LINE......:
+- IF SEVERIDAD=FAIL AND VALIDATION_FAIL THEN STOP
+- DEFINE STOP AS: <NO DEPLOY / NO SESSION CLOSE / NO USECASE BUILD / ETC>
+
+
+------------------------------------------
+06. RISK (MANDATORY si TIPO=RISK o si POLICY/CONTROL requiere riesgo)
+------------------------------------------
+
+RISK_ID............: <RISK.<DOMINIO>.<NOMBRE>.0001>
+RISK_STATEMENT.....: <QUE PUEDE SALIR MAL>
+RISK_IMPACT........: <IMPACTO REAL>
+RISK_LIKELIHOOD....: <LOW/MED/HIGH>
+RISK_EXPOSURE......: <LOW/MED/HIGH>
+RISK_OWNER.........: <QUIEN LO GESTIONA>
+
+RISK_TRIGGERS......:
+- <SEÑALES DE QUE ESTA PASANDO>
+
+RISK_MITIGATIONS...:
+- <MITIGACION 1>
+- <MITIGACION 2>
+
+RISK_CONTROLS......:
+- <CONTROL RELACIONADO>
+
+
+------------------------------------------
+07. CHANGE CONTROL (MANDATORY)
+------------------------------------------
+
+CHANGE_AUTHORITY...:
+- HUMAN_CANONICAL: HUMAN (solo humano autoriza cambios canónicos)
+- GRC_CHANGES...: <QUIEN PUEDE PROPONER>
+- APPROVAL......: <QUIEN APRUEBA>
+
+CHANGE_PROCESS.....:
+1) Proponer change request (CR)
+2) Evaluar impacto (scope/quality/config)
+3) Aprobar/Rechazar (registro)
+4) Implementar
+5) Validar
+6) Registrar evidencia
+7) Actualizar versión
+
+CHANGE_LOG.........:
+- LOG_PATH: <RUTA>
+- FIELDS:
+  - date
+  - change_id
+  - description
+  - rationale
+  - approved_by
+  - impacted_artifacts
+  - validation_result
+
+
+------------------------------------------
+08. MAPPINGS (OPTIONAL but recommended)
+------------------------------------------
+
+MAPPING_TRACEABILITY:
+- HUMAN -> POLICY -> CONTROL -> EVIDENCE -> VALIDATION
+
+MAPPING_TABLE:
+| HUMAN_REF | POLICY_ID | CONTROL_ID | EVIDENCE | VALIDATION | SEVERITY |
+
+
+------------------------------------------
+09. EXECUTION NOTES (OPTIONAL)
+------------------------------------------
+
+NOTES_FOR_AI........:
+- <REGLAS PARA IA: NO INVENTAR, NO MOVER SIN SNAPSHOT, ETC>
+
+NOTES_FOR_DEV........:
+- <REGLAS PARA TI: DONDE EDITAR, QUE COMANDOS, ETC>
+
+
+------------------------------------------
+10. ACCEPTANCE CRITERIA (MANDATORY)
+------------------------------------------
+
+ACCEPTANCE_CRITERIA:
+- [ ] Metadata completa
+- [ ] Trace a HUMAN definido
+- [ ] Policy (si aplica) escrita sin ambigüedad
+- [ ] Control definido con PASS/FAIL claro
+- [ ] Evidence model definido (mínimos + formato + ubicación)
+- [ ] Validation definida con output verificable
+- [ ] Severity justificada
+- [ ] Change control definido
+- [ ] Versionado definido
+- [ ] Ready para enforcement (no solo texto)
+
+DEFINITION_OF_DONE:
+DONE solo si:
+- Archivo existe
+- Validación PASS (si aplica)
+- Evidencia registrada
+- Version incrementada si cambió lo canónico
+
+==========================================
+FIN TEMPLATE.GRC.MVP.0001
+==========================================

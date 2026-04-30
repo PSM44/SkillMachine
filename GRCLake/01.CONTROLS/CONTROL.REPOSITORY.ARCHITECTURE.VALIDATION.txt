@@ -1,0 +1,119 @@
+==========================================
+GRC CONTROL — REPOSITORY ARCHITECTURE VALIDATION
+==========================================
+
+==========
+00.00_METADATA
+==========
+
+GRC_ID............: GRC.CONTROL.REPOSITORY.ARCHITECTURE.VALIDATION.0001
+TIPO..............: CONTROL
+DOMINIO...........: REPOSITORY
+NOMBRE_CORTO......: REPO_ARCH_VALIDATION
+TITULO............: Control de validación de arquitectura mínima del repositorio
+
+OWNER.............: HUMAN (PABLO)
+APLICA_A..........: GLOBAL (C:\01. GitHub\Skills)
+
+SEVERIDAD.........: FAIL
+RACIONAL_SEVERIDAD.: Si falta arquitectura mínima, el repo deriva en drift y fallan los procesos (validación, usecases, continuidad).
+
+VERSION...........: v0.1-DRAFT
+FECHA_CREACION....: 2026-04-30
+FECHA_MODIFICACION: 2026-04-30
+ESTADO............: DRAFT
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: C:\01. GitHub\Skills\HUMAN\HUMAN.OPERATING.MODEL.txt
+- HUMAN_SECTION...: JERARQUIA / REGLA_CANONICA
+- HUMAN_INTENT....: HUMAN manda; GRC obliga; repo gobernable y validable.
+- HUMAN_NON_GOALS.: No refactoriza contenido (solo valida arquitectura mínima).
+
+==========
+01.00_CONTROL
+==========
+
+CONTROL_OBJECTIVE..:
+Asegurar que el repositorio mantiene la arquitectura mínima y los artefactos canónicos necesarios
+para operar con IA sin drift: HUMAN, GRC, Skills, Usecases, System tools (SyS) y validación.
+
+CONTROL_STATEMENT.:
+El repositorio debe pasar el gate "Validate-GRC-RepositoryArchitecture.ps1" como condición previa a:
+- pre-commit (Validate-System)
+- releases (Validate-Release, si aplica)
+- cierres de sesión marcados como DONE
+
+CONTROL_METHOD....: AUTOMATED
+CONTROL_FREQUENCY.:
+- ON_CHANGE (en cada commit vía pre-commit)
+- ON_RELEASE (cuando se ejecute Validate-Release)
+
+CONTROL_INPUTS.....:
+- C:\01. GitHub\Skills\HUMAN\
+- C:\01. GitHub\Skills\GRCLake\
+- C:\01. GitHub\Skills\SkillsLake\
+- C:\01. GitHub\Skills\SyS\
+- C:\01. GitHub\Skills\90.USECASE\
+
+CONTROL_PROCEDURE..:
+1) Ejecutar:
+   powershell -ExecutionPolicy Bypass -File .\SyS\A_Tools\Validation\Validate-GRC-RepositoryArchitecture.ps1
+2) Si FAIL: detener línea (STOP THE LINE)
+3) Registrar evidencia (log) y corregir antes de continuar
+
+CONTROL_PASS_CRITERIA:
+- Script retorna exit code 0
+- Reporte indica OK para checks MANDATORY
+
+CONTROL_FAIL_CRITERIA:
+- Falta cualquier carpeta mandatory
+- Falta TEMPLATE.GRC.MVP.txt
+- Falta policy base de repo
+- Falta usecase 04 base (si está declarado como mandatory en esta etapa)
+
+CONTROL_OUTPUTS....:
+- Log de ejecución del validator (stdout + transcript si se usa)
+- Resultado PASS/FAIL (exit code)
+
+CONTROL_ESCALATION.:
+- IF FAIL THEN STOP THE LINE
+- OWNER NOTIFY: HUMAN (PABLO)
+
+==========
+02.00_EVIDENCE_MODEL
+==========
+
+EVIDENCE_MINIMUM...:
+- Evidencia de ejecución: output del validator
+- Snapshot de validación: timestamp + status
+- (Opcional) Git status limpio post-fix
+
+EVIDENCE_LOCATION..:
+- SyS\A_Tools\OneShots\Logs\ (si se ejecuta como one-shot)
+- SyS\A_Tools\Validation\ (scripts)
+- SyS\CIS\ (si hay cambios estructurales)
+
+==========
+03.00_VALIDATION
+==========
+
+VALIDATION_TYPE....: GATE
+VALIDATION_OWNER...: SyS\A_Tools\Validation\Validate-GRC-RepositoryArchitecture.ps1
+VALIDATION_WHEN....:
+- ON_COMMIT (via Validate-System)
+- ON_DEMAND (manual)
+
+STOP_THE_LINE......:
+- FAIL => bloquear avance (no “DONE”)
+
+==========
+04.00_CHANGE_CONTROL
+==========
+
+CHANGE_AUTHORITY...:
+- HUMAN_CANONICAL: HUMAN (solo humano autoriza cambios canónicos)
+- CONTROL_CHANGES: propuesta + aprobación humana + evidencia + version bump
+
+CHANGELOG..........:
+2026-04-30, v0.1-DRAFT
+- Creación inicial del control.

@@ -1,0 +1,23 @@
+==========================================
+HUMAN — REPOSITORY STRUCTURE REPAIR (UC04)
+==========================================
+
+ID_UNICO..........: HUMAN.UC04.REPO_REPAIR.0001
+VERSION...........: v0.1
+FECHA.............: 2026-04-30
+AUTOR_HUMANO......: PABLO
+
+PROPOSITO.........:
+Este usecase existe para reparar repositorios desordenados con governance:
+snapshot -> propuesta -> CIS -> apply -> validate.
+
+REGLAS_DURAS.......:
+- HUMAN manda.
+- No hard delete.
+- No refactor funcional (solo estructura).
+- No cambios sin CIS + rollback.
+
+DONE...............:
+- Validate-System PASS
+- Validate-Release PASS
+- Evidencia registrada

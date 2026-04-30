@@ -1,0 +1,29 @@
+==========================================
+HUMAN — CANONICAL LAYER (ROOT)
+==========================================
+
+ID_UNICO..........: HUMAN.ROOT.0001
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-04-30
+CIUDAD............: Santiago, Chile
+AUTOR_HUMANO......: PABLO
+
+OBJETIVO..........:
+HUMAN manda. HUMAN es el espíritu, filosofía, razón de ser y horizonte.
+Todo lo demás existe solo para cumplir HUMAN: GRC, Skills, Usecases, Tools, Artefactos.
+
+REGLA_CANONICA.....:
+- Cambios CANÓNICOS solo los autoriza el humano editando HUMAN.
+- Cambios operativos (tools/artefactos) pueden evolucionar si cumplen HUMAN.
+- Si hay conflicto, HUMAN prevalece.
+
+CAMBIO_CONTROLADO..:
+- Change Request (CR) -> evaluación -> aprobación humana -> ejecución -> evidencia.
+- Nunca "drift silencioso".
+
+SALIDA_ESPERADA....:
+- Una IA en blanco puede entender qué es este repo y cómo operar sin inventar.
+
+CHANGELOG..........:
+2026-04-30, v0.1-DRAFT
+- Creación inicial del HUMAN root.

@@ -1,0 +1,16 @@
+==========================================
+WHOAMI — UC04.REPOSITORY_STRUCTURE_REPAIR
+==========================================
+
+ID_UNICO..........: WHOAMI.UC04.REPO_REPAIR.0001
+VERSION...........: v0.1
+FECHA.............: 2026-04-30
+
+QUE_SOY............:
+Paquete ejecutable para reparar estructura de repositorios con control.
+
+MODO...............:
+PLAN_ONLY por defecto; APPLY solo con CIS.
+
+OUTPUT.............:
+Bundles + manifest + skill + docs base (HUMAN/WHOAMI).

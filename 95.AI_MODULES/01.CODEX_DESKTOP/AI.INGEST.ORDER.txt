@@ -1,0 +1,19 @@
+==========================================
+AI MODULE — INGEST ORDER
+==========================================
+
+ID_UNICO..........: AI.INGEST.ORDER.01.CODEX_DESKTOP.0001
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-04-30
+
+INGEST_ORDER.......:
+1) HUMAN\HUMAN.README.txt
+2) HUMAN\HUMAN.OPERATING.MODEL.txt
+3) GRCLake\00.POLICIES\POLICY.REPOSITORY.ARCHITECTURE.txt
+4) GRCLake\00.POLICIES\POLICY.NAMING.PATH_ID.txt
+5) GRCLake\06.TEMPLATES\TEMPLATE.GRC.MVP.txt
+6) 90.USECASE\ (solo el usecase requerido)
+
+REGLA..............:
+- Si falta algo, pedirlo. No asumir.
+

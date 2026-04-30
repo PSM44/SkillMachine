@@ -1,187 +1,208 @@
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
-==========
+=============================
 
-ID_UNICO..........: BATON.SKILLMACHINE.01.10
-NOMBRE_SUGERIDO...: 00.0_BATON_SKILLMACHINE.txt
-VERSION...........: v1.1-ACTIVE
-FECHA.............: 2026-04-22
-HORA..............: 12:30
+ID_UNICO..........: BATON.SKILLMACHINE.20260426.01
+NOMBRE_SUGERIDO...: 00.0_BATON_SkillMachine.txt
+VERSION...........: v1.0-SESSION_CLOSE
+FECHA.............: 2026-04-26
+HORA..............: 00:40 (aprox, ajustar si necesitas precisión)
 CIUDAD............: Santiago, Chile
-UBICACION_SISTEMA.: \SkillMachine\
+UBICACION_SISTEMA.: C:\01. GitHub\Skills
 AUTOR_HUMANO......: PABLO
 
 ALCANCE...........:
-Snapshot operativo del sistema SkillMachine.
-Permite continuidad inmediata para IA y humano sin reconstruir contexto.
+Snapshot operativo del estado actual del sistema SkillMachine tras implementación
+de validaciones estructurales, consistencia y cierre del usecase SESSION_CLOSE.
 
 NO_CUBRE..........:
+No redefine SKILLS.
 No reemplaza HUMAN.
-No define reglas (eso es SKILLS).
-No describe filesystem completo (eso es RADAR).
+No incluye lógica de negocio fuera del sistema de validación y usecases.
 
 DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+11.SKILL.HUMAN_README.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 23.SKILL.WHOAMI_POLICY.txt
-09.SKILL.RADAR.txt
-10.SKILL.BATON.txt
 
-TAGS_OPERATIVOS...: RUNTIME_CRITICAL, BATON_STATE
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, CONTINUITY, SESSION_CLOSE
 
-==========
-00.10_RESUMEN_EJECUTIVO
-==========
-
-Estado del sistema:
-OPERATIVO_MVP_CON_BLOQUEO_EN_BUILD
-
-El sistema ya permite:
-- construir paquetes de casos de uso
-- validar integridad de archivos
-- generar manifiestos
-- asegurar consistencia por hash
-- mantener use case de cierre de sesión operativo
-
-Bloqueo actual:
-- BUILD.ps1 falla en 01.NEW_PROJECT
-- error observado: propiedad .Count no disponible sobre objeto no normalizado
+---
 
 ==========
-01.00_ESTADO_ACTUAL
-==========
+00.20_CONTEXTO_Y_ESTADO_ACTUAL
+==============================
 
-FASE_ACTUAL.......: HARDENING_DEL_BUILDER_MVP
+Proyecto:
+SkillMachine (repositorio local + GitHub sincronizado)
 
-CAPACIDADES_ACTIVAS:
+Estado actual:
 
-- BUILD.ps1 existente
-- validación de required_files
-- validación de versiones (registry)
-- copia determinística de archivos
-- generación USECASE.MANIFEST.json
-- verificación SHA256 source vs dest
-- FAIL automático ante inconsistencias
-- SESSION_CLOSE operativo y utilizable
+* Repo limpio (git status clean)
+* Validaciones activas:
 
-USECASES_ACTIVOS:
+  * naming
+  * structure
+  * consistency
+* Pre-commit hook funcionando correctamente
+* Sin errores de ejecución ni falsos positivos detectados
 
-- 01.NEW_PROJECT
-- 02.SESSION_CLOSE
+Cambios recientes relevantes:
 
-==========
-02.00_EVIDENCIA_OPERATIVA
-==========
+* Separación de validaciones (pre-commit vs release)
+* Hardening de Validate-Structure (evita self-detection)
+* Implementación completa de Validate-Consistency
+* Integración de consistency en Validate-System
+* Creación y estabilización de usecase:
+  02.SESSION_CLOSE
 
-Estado confirmado:
+Riesgos activos:
 
-- 02.SESSION_CLOSE empaquetado con validation.status = OK
-- skill set mínimo de cierre disponible
-- RADAR operativo y actualizado
-- BATON y WhoAmI ya existen para SkillMachine
+* No existe USECASE.CONTRACT (gap estructural)
+* No existe validación semántica (solo estructural)
+* Prompt es punto único de fallo (no validado contra manifest)
 
-Problema pendiente:
-
-- 01.NEW_PROJECT no queda estable por falla en BUILD.ps1
-- error técnico actual:
-  The property 'Count' cannot be found on this object
+---
 
 ==========
-03.00_RIESGOS_Y_DEUDA_TECNICA
+01.00_OBJETIVOS_ACTIVOS
+=======================
+
+P0 (crítico):
+
+* Formalizar contrato de usecases
+
+P1:
+
+* Fortalecer capa de validación (semántica)
+* Reducir dependencia del prompt
+
+P2:
+
+* Escalar arquitectura de usecases
+* Preparar sistema para múltiples casos reutilizables
+
+---
+
 ==========
+02.00_ESTADO_DE_ARTEFACTOS
+==========================
 
-RIESGOS_ACTUALES:
+HUMAN:
 
-- BUILD.ps1 no es robusto ante drift de tipos
-- posible manejo débil de null/string/array/PSCustomObject
-- falta hardening general del builder
-- el pipeline end-to-end aún no es confiable
-- seguir agregando features antes del fix aumentaría deuda
+* No modificado en esta sesión
+* Sin evidencia de drift (no validado en profundidad)
 
-RIESGO_ESTRUCTURAL:
+SKILLS:
 
-El sistema tiene buena base conceptual y de gobernanza,
-pero todavía depende de tooling frágil en el punto más crítico:
-la construcción de use cases.
+* Activos y consistentes
+* Sin cambios estructurales
+
+BATON:
+
+* Este archivo representa el nuevo estado
+* No había BATON previo visible (posible gap)
+
+WhoAmI:
+
+* No actualizado en esta sesión (pendiente validar si aplica)
+
+RADAR:
+
+* No ejecutado post-cambios (gap contra policy)
+* Validación asumida por consistencia manual y git
+
+---
 
 ==========
-04.00_LIMITES_OPERATIVOS
-==========
+03.00_CONTEXTO_OPERATIVO_PARA_IA
+================================
 
 PROJECT_ROOT:
 C:\01. GitHub\Skills
 
-REPO_REMOTO:
-https://github.com/PSM44/SkillMachine.git
+ZONAS CRITICAS:
 
-PERMITIDO:
+* SyS/A_Tools/Validation
+* 90.USECASE
 
-- crear/modificar archivos dentro de:
-  - 90.USECASE
-  - SKILLS base
-  - SyS
+PERMISOS IMPLICITOS:
 
-PROHIBIDO:
+* Escritura permitida en usecases y validation tools
+* No modificar SKILLS sin instrucción explícita
+* No modificar HUMAN sin cambio conceptual validado
 
-- modificar fuera del root
-- alterar históricos manualmente
-- editar outputs RADAR manualmente
+REGLAS DURAS:
 
-==========
-05.00_PRIORIDADES_ACTUALES
-==========
+* No romper validaciones existentes
+* No introducir falsos positivos
+* Mantener compatibilidad con pre-commit
 
-P0:
-- reparar BUILD.ps1
-- eliminar falla por .Count
-- normalizar manejo de tipos en builder
-
-P1:
-- validar flujo completo de 01.NEW_PROJECT
-- mejorar logging y mensajes de error
-
-P2:
-- BUILD.HISTORY
-- diff entre manifests
-- trazabilidad temporal
-- integración RADAR como índice del builder
+---
 
 ==========
-06.00_NEXT_ACTION
-==========
+04.00_FOCOS_DE_TRABAJO_INMEDIATO
+================================
 
-Ejecutar fix técnico sobre:
-C:\01. GitHub\Skills\90.USECASE\BUILD.ps1
+1. Crear USECASE.CONTRACT para SESSION_CLOSE
+2. Extender Validate-Consistency:
 
-Objetivo exacto:
-- identificar el punto donde se usa .Count sobre objeto no normalizado
-- corregir causa raíz
-- endurecer null/string/array/PSCustomObject
-- validar nuevamente 01.NEW_PROJECT
+   * validación prompt vs manifest
+   * validación estructura de usecase
+3. Definir patrón replicable para nuevos usecases
+4. Evaluar necesidad de 03.SESSION_CONTINUE
 
-==========
-07.00_COMO_INICIAR_PROXIMA_SESION
-==========
-
-1. Leer este BATON
-2. Leer WhoAmI de SkillMachine
-3. Revisar BUILD.ps1
-4. Revisar error actual del builder
-5. Aplicar prompt de fix para Codex
-6. Validar 01.NEW_PROJECT
-7. Si queda estable, recién avanzar a BUILD.HISTORY
+---
 
 ==========
-08.00_CHANGELOG
+05.00_NEXT_ACTION
+=================
+
+Crear archivo:
+
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.CONTRACT.txt
+
+y luego:
+
+Extender Validate-Consistency.ps1 para validar:
+
+* existencia de USECASE.CONTRACT
+* coherencia básica del usecase
+
+---
+
 ==========
+06.00_CHECKLIST_DE_CIERRE
+=========================
 
-2026-04-22, v1.1-ACTIVE
-- Cierre de sesión del 22 de abril
-- Se registra bloqueo actual en BUILD.ps1
-- Se define fix de BUILD como siguiente acción exacta
-- Se agrega referencia operativa al repositorio remoto
+[OK] Código sincronizado con GitHub
+[OK] Working tree limpio
+[OK] Validaciones ejecutadas sin error
+[OK] Pre-commit funcionando
+[OK] Usecase SESSION_CLOSE operativo
+[WARN] RADAR no ejecutado post-cambios
+[WARN] WhoAmI no actualizado
+[WARN] Falta USECASE.CONTRACT
 
-2026-04-21, v1.0-ACTIVE
-- Primer BATON operativo del sistema SkillMachine
-- Registro de estado MVP funcional
-- Definición de siguiente acción estructural
+---
+
+==========
+07.00_CHANGELOG
+===============
+
+2026-04-26, v1.0-SESSION_CLOSE
+
+* Cierre de sesión con validaciones completas (naming, structure, consistency)
+* Implementación de Validate-Consistency
+* Integración completa en pre-commit
+* Estabilización de usecase SESSION_CLOSE
+* Identificación de gaps estructurales (USECASE.CONTRACT, validación semántica)
+
+==========
+FIN_DEL_DOCUMENTO
+=================

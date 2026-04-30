@@ -1,0 +1,25 @@
+==========================================
+HUMAN — OPERATING MODEL (HUMAN > GRC > SKILLS)
+==========================================
+
+ID_UNICO..........: HUMAN.OPERATING.MODEL.0001
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-04-30
+AUTOR_HUMANO......: PABLO
+
+JERARQUIA..........:
+1) HUMAN (manda)
+2) GRC (enforcement: policy/control/evidence/validation)
+3) SKILLS (capabilities TI)
+4) USECASES (paquetes aplicados)
+5) TOOLS/ARTEFACTOS/LOGS (operación)
+
+REGLA..............:
+- Una Skill asciende a GRC solo si: tiene sentido + cumple GRC-MVP.
+
+NOTA_PMI...........:
+Esto implementa Governance + Integrated Change Control + Configuration Management + Quality Gates.
+
+CHANGELOG..........:
+2026-04-30, v0.1-DRAFT
+- Creación inicial.

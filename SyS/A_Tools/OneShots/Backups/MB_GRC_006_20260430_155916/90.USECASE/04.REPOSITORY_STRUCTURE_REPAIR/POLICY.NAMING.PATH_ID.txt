@@ -1,0 +1,27 @@
+==========================================
+GRC POLICY — NAMING + PATH ID
+==========================================
+
+GRC_ID............: GRC.POLICY.NAMING.PATH_ID.0001
+TIPO..............: POLICY
+DOMINIO...........: NAMING
+NOMBRE_CORTO......: NAMING_PATH_ID
+VERSION...........: v0.1-DRAFT
+ESTADO............: DRAFT
+FECHA.............: 2026-04-30
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: C:\01. GitHub\Skills\HUMAN\HUMAN.OPERATING.MODEL.txt
+- HUMAN_SECTION...: JERARQUIA / REGLA
+- HUMAN_INTENT....: Naming estable, anti-drift, compatible Windows/tooling.
+- HUMAN_NON_GOALS.: No impone refactor inmediato de todo el repo.
+
+POLICY_STATEMENT..:
+(TO_BE_DEFINED) Regla mandatoria de naming / IDs / ubicaciones.
+
+CONTROL...........:
+(TO_BE_DEFINED) Se definirá control + evidencia + validación en MB-GRC-004/005.
+
+CHANGELOG.........:
+2026-04-30, v0.1-DRAFT
+- Archivo creado (placeholder). Completar en MB-GRC-003.

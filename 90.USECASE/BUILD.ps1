@@ -1,5 +1,14 @@
 param()
 
+function Safe-GetArray([object]$obj, [string]$propName) {
+  if ($null -eq $obj) { return @() }
+  $p = $obj.PSObject.Properties[$propName]
+  if ($null -eq $p) { return @() }
+  if ($null -eq $obj.$propName) { return @() }
+  return @(Normalize-ToArray $obj.$propName)
+}
+
+
 $ErrorActionPreference = 'Stop'
 Set-StrictMode -Version Latest
 
@@ -310,13 +319,18 @@ $ExcludedRoots = @(Normalize-ToArray $registry.excluded_roots)
 $results = @()
 
 foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
+    # UC04_CAPTURE_EXTRAS_EARLY (Option B)
+    # Capture rich-usecase arrays early; later code may project/override $uc.
+    $UC_PreserveFiles = @(Safe-GetArray $uc "preserve_files")
+    $UC_DeliveryFilesExtra = @(Safe-GetArray $uc "delivery_files_extra")
 
     $UseCaseName = [string]$uc.name
     $UseCaseVersion = [string]$uc.version
     $TargetDir = Join-Path $UseCaseRoot $UseCaseName
-    $PromptFiles = @(Normalize-ToArray $uc.prompt_files)
-    $MenuFiles = @(Normalize-ToArray $uc.menu_files)
-    $BundleDefinitions = @(Normalize-ToArray $uc.bundle_definitions)
+    # Safe-get for optional usecase properties to avoid StrictMode property-not-found failures.
+    $PromptFiles = @(Normalize-ToArray $(if ($uc.PSObject.Properties['prompt_files']) { $uc.prompt_files } else { @() }))
+    $MenuFiles = @(Normalize-ToArray $(if ($uc.PSObject.Properties['menu_files']) { $uc.menu_files } else { @() }))
+    $BundleDefinitions = @(Normalize-ToArray $(if ($uc.PSObject.Properties['bundle_definitions']) { $uc.bundle_definitions } else { @() }))
 
     if ($PromptFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$PromptFiles[0])) { $PromptFiles = @() }
     if ($MenuFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$MenuFiles[0])) { $MenuFiles = @() }
@@ -348,7 +362,21 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         $preserveFiles = @($PromptFiles)
 
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
+            # OPTION_B_MERGE_PRESERVE_FOR_CLEAR
+            # Ensure Clear-GeneratedFiles preserves UC04 rich artifacts (avoid deleting SKILL.md etc.).
+            $preserveFiles = @($preserveFiles)
+            if ($UC_PreserveFiles -and @($UC_PreserveFiles).Count -gt 0) { $preserveFiles += @($UC_PreserveFiles) }
+            if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) { $preserveFiles += @($UC_DeliveryFilesExtra) }
+            if ($UseCaseName -eq "04.REPOSITORY_STRUCTURE_REPAIR") {
+                $preserveFiles += @("SKILL.md","USECASE.MANIFEST.json")
+            }
+            $preserveFiles = @($preserveFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
             $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
+            # OPTION_B_UC04_PRESERVE_EXCLUDE
+            # Defensive: if preserve_files exist, do not count/remove them as cleanup targets.
+            if ($UC_PreserveFiles -and @($UC_PreserveFiles).Count -gt 0 -and $removed) {
+                $removed = @($removed | Where-Object { $UC_PreserveFiles -notcontains $_ })
+            }
             Write-Host "LIMPIEZA: archivos eliminados = $(@($removed).Count)"
             foreach ($f in @($removed)) {
                 Write-Host ("  - removed: {0}" -f $f.Name)
@@ -356,6 +384,18 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $deliveryFiles = @()
+        # OPTION_B_DEFAULTS (avoid strict-mode uninitialized variables)
+        # OPTION_B_UC04_READ_EXTRAS_FROM_REGISTRY
+        # Populate extras from USECASE.REGISTRY when present (UC04), otherwise keep defaults.
+        $PreserveFiles = @(Safe-GetArray $uc "preserve_files")
+        $DeliveryFilesExtra = @(Safe-GetArray $uc "delivery_files_extra")
+        $PreserveFiles = @()
+        $DeliveryFilesExtra = @()
+        # OPTION_B_UC04_DELIVERY_EXTRA
+        # If registry provides delivery_files_extra, include them as delivery artifacts (rich usecase packaging).
+        if ($DeliveryFilesExtra -and @($DeliveryFilesExtra).Count -gt 0) {
+            $deliveryFiles += @($DeliveryFilesExtra)
+        }
         $bundleManifest = @()
 
         foreach ($menuFile in @($MenuFiles)) {
@@ -436,6 +476,11 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             $deliveryFiles += $p
         }
 
+        # OPTION_B_UC04_DELIVERY_EXTRA_BEFORE_FINALIZE
+        # Ensure delivery_files_extra survive later rebuild/finalize of $deliveryFiles.
+        if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) {
+            $deliveryFiles += @($UC_DeliveryFilesExtra)
+        }
         $deliveryFiles = @($deliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
 
         if (@($deliveryFiles).Count -gt [int]$registry.build_policy.max_delivery_files_per_usecase) {
@@ -519,4 +564,5 @@ if ($failCount -gt 0) {
 }
 
 exit 0
+
 

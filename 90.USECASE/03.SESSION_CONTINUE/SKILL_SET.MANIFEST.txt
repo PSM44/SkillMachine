@@ -1,0 +1,49 @@
+==========
+00.00_SKILL_SET_MANIFEST
+==========
+
+USECASE_ID.........: 03.SESSION_CONTINUE
+USECASE_NAME.......: Session Continue
+VERSION............: v1.0-DRAFT
+PURPOSE............: Reanudar una sesión operativa con contexto mínimo suficiente y sin inventar estado.
+
+==========
+01.00_REQUIRED_SKILLS
+==========
+
+CORE:
+- 06.SKILL.WBS.txt
+- 07.SKILL.FILE_CONTENT.txt
+- 12.SKILL.DRAG_AND_DROP.txt
+
+CONTINUITY:
+- 10.SKILL.BATON.txt
+- 11.SKILL.HUMAN_README.txt
+- 23.SKILL.WHOAMI_POLICY.txt
+
+GOVERNANCE:
+- 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+- 09.SKILL.RADAR.txt
+- 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+- 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+
+==========
+02.00_EXPECTED_DELIVERY
+==========
+
+El BUILD debe generar:
+
+- 00.SKILL.MENU.ACTIVE.txt
+- 00.BUNDLE.CORE.txt
+- 01.BUNDLE.CONTINUITY.txt
+- 02.BUNDLE.GOVERNANCE.txt
+- USECASE.MANIFEST.json
+
+==========
+03.00_RULES
+==========
+
+- No incluir skills de ejecución destructiva.
+- No ejecutar BUILD desde el prompt.
+- No modificar archivos durante SESSION_CONTINUE.
+- Solo preparar contexto y siguiente acción.
