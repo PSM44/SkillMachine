@@ -1,7 +1,7 @@
 ﻿{
     "usecase":  "03.SESSION_CONTINUE",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-04-30 20:07:07",
+    "generated_at":  "2026-04-30 20:11:23",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -17,7 +17,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\00.BUNDLE.CORE.txt",
                         "delivery_size_bytes":  38300,
                         "delivery_size_kb":  37.4,
-                        "delivery_sha256":  "30B10CCF15BD24E58D09028923863CBB0EAC19F845E0C554A5FFE81E8C75384A",
+                        "delivery_sha256":  "29F49777418D31BA8E735604A6F907CA3FDE0287C771D94ED0ADE6C492639DE4",
                         "source_files":  [
                                              {
                                                  "name":  "06.SKILL.WBS.txt",
@@ -45,7 +45,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
                         "delivery_size_bytes":  29530,
                         "delivery_size_kb":  28.84,
-                        "delivery_sha256":  "8845C485FC0D97BDB3CF05219A5BE80C6638B2D52099D294B36DD63E3C8307E1",
+                        "delivery_sha256":  "6BD65E8ADD5DFAB972F8A9B1DC9FAA8D7609330BD01E28A0E1B64E4B0BBA4528",
                         "source_files":  [
                                              {
                                                  "name":  "10.SKILL.BATON.txt",
@@ -73,7 +73,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
                         "delivery_size_bytes":  27661,
                         "delivery_size_kb":  27.01,
-                        "delivery_sha256":  "BB579196A2FADCF08F3C8941C18E85FFD453CC9DD34113C31AD59445F0CBBE7A",
+                        "delivery_sha256":  "44C0A8A43AEA7667C7DCA53C162864D0185FF04C49CCD59A221FC48C6588CF26",
                         "source_files":  [
                                              {
                                                  "name":  "09.SKILL.RADAR.txt",
