@@ -1,0 +1,33 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Windows-first types
+[*.ps1]
+end_of_line = crlf
+
+[*.txt]
+end_of_line = crlf
+
+# Cross-platform / standard data formats
+[*.json]
+end_of_line = lf
+
+[*.md]
+end_of_line = lf
+
+[*.yml]
+end_of_line = lf
+
+[*.yaml]
+end_of_line = lf
+
+[*.xml]
+end_of_line = lf
+
+[*.csv]
+end_of_line = lf
