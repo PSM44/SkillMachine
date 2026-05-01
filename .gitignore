@@ -1,27 +1,33 @@
 # =========================
-# RADAR outputs
+# SkillMachine — Hygiene
 # =========================
-SyS/A_Tools/Radar/*
 
-# =========================
-# Logs
-# =========================
-SyS/A_Tools/Logs/*
-*.log
+# OneShots (too noisy for git history)
+SyS/A_Tools/OneShots/Backups/
+SyS/A_Tools/OneShots/Logs/
 
-# =========================
-# OLD / HISTORICAL
-# =========================
+# Generated bundles + menus (rebuildable)
+**/00.BUNDLE.*.txt
+**/01.BUNDLE.*.txt
+**/02.BUNDLE.*.txt
+**/00.SKILL.MENU.ACTIVE.txt
+
+# Large/binary evidence (keep in external vault)
+SyS/IADevelopHistory/
+*.pdf
+
+# Local tooling/config
+.continue/
+.vscode/
+.idea/
+
+# Scratch/legacy
 old/
 
-# =========================
-# Continue config local
-# =========================
-.continue/
+# OS noise
+.DS_Store
+Thumbs.db
 
-# =========================
-# OS / temp
-# =========================
-*.tmp
-*.bak
+# Radar outputs
+SyS/A_Tools/Radar/
 

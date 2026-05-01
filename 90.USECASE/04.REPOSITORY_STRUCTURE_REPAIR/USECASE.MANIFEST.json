@@ -1,7 +1,7 @@
 ﻿{
     "usecase":  "04.REPOSITORY_STRUCTURE_REPAIR",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-04-30 19:38:08",
+    "generated_at":  "2026-04-30 20:07:08",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -17,7 +17,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\00.BUNDLE.CORE.txt",
                         "delivery_size_bytes":  38300,
                         "delivery_size_kb":  37.4,
-                        "delivery_sha256":  "F992195C3EFD95C5D109DD9BB65838E324B4420F6073863A45F44A9DD558A442",
+                        "delivery_sha256":  "3C867193BE4613FB43B940F69AFAFD6F387DF03CECE868B570E861B817BA8AD5",
                         "source_files":  [
                                              {
                                                  "name":  "06.SKILL.WBS.txt",
@@ -45,7 +45,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\01.BUNDLE.CONTINUITY.txt",
                         "delivery_size_bytes":  29530,
                         "delivery_size_kb":  28.84,
-                        "delivery_sha256":  "82F5F345F0ACE599182B0DFB618C95C08252E4413223EFCB4607EEADA884A4B8",
+                        "delivery_sha256":  "E6BD8DF4A14F49105C79DEF87B23A67697C789E2DAF10243C04E3824AC623508",
                         "source_files":  [
                                              {
                                                  "name":  "10.SKILL.BATON.txt",
@@ -73,7 +73,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
                         "delivery_size_bytes":  27661,
                         "delivery_size_kb":  27.01,
-                        "delivery_sha256":  "ABAC745B4F610132DFBC81C889E6F0C11D596F8C331C721E63542B45D7B8FC69",
+                        "delivery_sha256":  "1F4695C835487CA01A93E7A103E27D40C0787E8FB09B03986A42C1C60E8BE6BD",
                         "source_files":  [
                                              {
                                                  "name":  "09.SKILL.RADAR.txt",
