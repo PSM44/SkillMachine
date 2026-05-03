@@ -25,35 +25,35 @@
         "PROMPT.NEW_PROJECT.txt"
       ],
       "menu_files": [
-        "00.SKILL.MENU.ACTIVE.txt"
+        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
       ],
       "bundle_definitions": [
         {
           "name": "CORE",
           "output_file": "00.BUNDLE.CORE.txt",
           "source_files": [
-            "06.SKILL.WBS.txt",
-            "07.SKILL.FILE_CONTENT.txt",
-            "12.SKILL.DRAG_AND_DROP.txt"
+            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.SKILL.BATON.txt",
-            "11.SKILL.HUMAN_README.txt",
-            "23.SKILL.WHOAMI_POLICY.txt"
+            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
         {
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.SKILL.RADAR.txt",
-            "20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
           ]
         }
       ]
@@ -66,34 +66,34 @@
         "PROMPT.SESSION_CLOSE.txt"
       ],
       "menu_files": [
-        "00.SKILL.MENU.ACTIVE.txt"
+        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
       ],
       "bundle_definitions": [
         {
           "name": "CORE",
           "output_file": "00.BUNDLE.CORE.txt",
           "source_files": [
-            "06.SKILL.WBS.txt",
-            "07.SKILL.FILE_CONTENT.txt",
-            "12.SKILL.DRAG_AND_DROP.txt"
+            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.SKILL.BATON.txt",
-            "11.SKILL.HUMAN_README.txt",
-            "23.SKILL.WHOAMI_POLICY.txt"
+            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
         {
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.SKILL.RADAR.txt",
-            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
           ]
         }
       ]
@@ -106,34 +106,34 @@
         "PROMPT.SESSION_CONTINUE.txt"
       ],
       "menu_files": [
-        "00.SKILL.MENU.ACTIVE.txt"
+        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
       ],
       "bundle_definitions": [
         {
           "name": "CORE",
           "output_file": "00.BUNDLE.CORE.txt",
           "source_files": [
-            "06.SKILL.WBS.txt",
-            "07.SKILL.FILE_CONTENT.txt",
-            "12.SKILL.DRAG_AND_DROP.txt"
+            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.SKILL.BATON.txt",
-            "11.SKILL.HUMAN_README.txt",
-            "23.SKILL.WHOAMI_POLICY.txt"
+            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
         {
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.SKILL.RADAR.txt",
-            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
           ]
         }
       ]
@@ -147,27 +147,27 @@
           "name": "CORE",
           "output_file": "00.BUNDLE.CORE.txt",
           "source_files": [
-            "06.SKILL.WBS.txt",
-            "07.SKILL.FILE_CONTENT.txt",
-            "12.SKILL.DRAG_AND_DROP.txt"
+            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt"
           ]
         },
         {
           "name": "CONTINUITY",
           "output_file": "01.BUNDLE.CONTINUITY.txt",
           "source_files": [
-            "10.SKILL.BATON.txt",
-            "11.SKILL.HUMAN_README.txt",
-            "23.SKILL.WHOAMI_POLICY.txt"
+            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt"
           ]
         },
         {
           "name": "GOVERNANCE",
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
-            "09.SKILL.RADAR.txt",
-            "21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
           ]
         }
       ],
@@ -187,7 +187,7 @@
         "VALIDATION.CHECKLIST.txt",
         "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
         "SKILL_SET.MANIFEST.txt",
-        "00.SKILL.MENU.ACTIVE.txt",
+        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
         "USECASE.MANIFEST.json",
         "EXAMPLES\\EXAMPLE.REPO_REPAIR.txt"
       ],
@@ -198,3 +198,4 @@
     }
   ]
 }
+
