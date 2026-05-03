@@ -1,0 +1,324 @@
+==========
+SKILL.AI_AGENT_TOOL_GOVERNANCE
+==========
+
+ID_UNICO..........: SKILL.AI_AGENT_TOOL_GOVERNANCE
+NOMBRE............: AI Agent Tool Governance
+TIPO..............: Skill operativo consolidado
+DOMINIO...........: AI tools / Agent workflows / Tool evaluation / Tool decommissioning
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+CONSOLIDA.........: SKILL.AI_TOOL_EVALUATION_PROTOCOL
+CONSOLIDA.........: SKILL.AI.COLLECTOR_ANALYST_PATTERN
+CONSOLIDA.........: SKILL.AI.SESSION_CONTAMINATION_DETECTION
+CONSOLIDA.........: SKILL.TOOL.DECOMMISSIONING_PROTOCOL
+ORIGEN............: Lessons learned from OpenCode trial and decommissioning during MB-GRC-014A
+
+----------
+1. PURPOSE
+----------
+
+This skill defines how to evaluate, control, reject, decommission, and replace AI coding or agent tools in a repository-driven workflow.
+
+The goal is to prevent tool-driven repository damage, context contamination, cost waste, and false confidence.
+
+----------
+2. OPERATING PRINCIPLE
+----------
+
+An AI tool is not accepted because it exists, installs correctly, or produces text.
+
+An AI tool is accepted only when it proves operational reliability under the project workflow.
+
+Minimum workflow requirement:
+
+READ -> PLAN -> APPROVE -> BUILD -> DIFF -> TEST -> COMMIT/TAG
+
+If the tool cannot support this flow, it is not production-ready for the repository.
+
+----------
+3. TOOL EVALUATION CHECKLIST
+----------
+
+Before adopting an AI tool, validate:
+
+1. Repository awareness
+   - Can it operate in the intended repository root?
+   - Can it identify the current working directory?
+   - Can it distinguish repo files from unrelated context?
+
+2. Read-only compliance
+   - Can it inspect without editing?
+   - Can it produce a useful orientation report?
+   - Can it avoid running destructive commands?
+
+3. Context discipline
+   - Does it avoid stale sessions?
+   - Does it avoid unrelated prior tasks?
+   - Does it stop hallucinating context when reset?
+
+4. Action control
+   - Can the user approve changes before execution?
+   - Can it show diffs before commit?
+   - Can it operate in small batches?
+
+5. Tool reliability
+   - Can it inspect files?
+   - Can it run safe commands?
+   - Can it recover from failed commands?
+
+6. Cost and token governance
+   - Can the user select model?
+   - Can the user select local vs paid model?
+   - Can the user control large-context usage?
+
+7. Failure transparency
+   - Does it admit inability?
+   - Does it expose errors clearly?
+   - Does it avoid pretending success?
+
+----------
+4. AI SESSION CONTAMINATION DETECTION
+----------
+
+A session is contaminated when the agent references unrelated tasks or prior context not present in the current objective.
+
+Observed contamination examples:
+
+- dark mode
+- settings page
+- CSS-in-JS
+- tests/build of an unrelated app
+
+When the current task is repository orientation and the agent discusses unrelated UI work, stop using that session.
+
+----------
+5. CONTAMINATION RESPONSE PROTOCOL
+----------
+
+If contamination appears:
+
+Step 1:
+Send a reset prompt.
+
+Step 2:
+Open a fresh session from the correct repository root.
+
+Step 3:
+Use non-interactive execution if available.
+
+Step 4:
+If contamination continues, abandon the tool for that task.
+
+Step 5:
+Use collector-analyst pattern.
+
+Do not keep correcting the same contaminated session indefinitely.
+
+----------
+6. COLLECTOR-ANALYST PATTERN
+----------
+
+When an AI tool cannot inspect the filesystem reliably, split the work:
+
+Collector:
+- PowerShell
+- Git
+- deterministic commands
+- file inventory
+- status reports
+
+Analyst:
+- AI model
+- textual analysis
+- risk classification
+- next-step recommendation
+
+This avoids relying on broken or unreliable tool access.
+
+----------
+7. COLLECTOR OUTPUT STANDARD
+----------
+
+A collector report should include:
+
+1. Repository root
+2. Git status
+3. Current branch
+4. Current HEAD
+5. Top-level folders and files
+6. Candidate governance files
+7. Relevant manifests/registries
+8. Validation outputs
+9. Error messages
+10. Final status
+
+Do not store collector dumps inside the repo unless they are canonical artifacts.
+
+Preferred external location:
+
+C:\Users\aazcl\Desktop\<PROJECT>_<TASK>_COLLECTOR_<YYYYMMDD>
+
+----------
+8. TOOL FAILURE CRITERIA
+----------
+
+Reject or suspend the tool if it:
+
+1. Cannot inspect the repository.
+2. Ignores explicit read-only instructions.
+3. Reuses stale unrelated context.
+4. Asks generic clarification after receiving a precise task.
+5. Requires excessive manual correction.
+6. Cannot produce verifiable output.
+7. Creates temporary files without control.
+8. Cannot respect the current working tree state.
+
+----------
+9. OPEN TOOL TRIAL RECORD
+----------
+
+During the OpenCode trial, the following failures were observed:
+
+1. Context contamination.
+2. Inability to perform reliable repository orientation.
+3. Generic clarification loops.
+4. Tool/session behavior misaligned with the required workflow.
+5. Operational friction higher than benefit.
+
+Decision:
+OpenCode was removed from the Windows/PowerShell environment for this workflow.
+
+This does not mean OpenCode is universally bad. It means it failed the current operating requirement.
+
+----------
+10. TOOL DECOMMISSIONING PROTOCOL
+----------
+
+When removing an AI tool, address all layers:
+
+1. Binary / executable
+2. npm global package
+3. wrappers
+4. PATH references
+5. config files
+6. auth files
+7. cache
+8. sessions
+9. repo artifacts
+10. final verification
+
+----------
+11. DECOMMISSIONING CHECKLIST
+----------
+
+Run checks equivalent to:
+
+Get-Command <tool>
+where.exe <tool>
+npm list -g --depth=0 | Select-String -Pattern "<tool>"
+known wrapper paths
+config directory
+share directory
+cache directory
+repo artifacts
+
+Do not assume uninstall completed because one command disappeared.
+
+----------
+12. REPO ARTIFACT CLEANUP
+----------
+
+AI tools may create temporary artifacts such as:
+
+- session files
+- context dumps
+- cache folders
+- generated reports
+- scratch files
+
+These must be reviewed and either:
+
+1. archived outside the repo,
+2. ignored explicitly,
+3. converted into canonical artifacts,
+4. deleted.
+
+Default:
+archive outside the repo, then remove from working tree.
+
+----------
+13. PRE-AGENT REPOSITORY GATE
+----------
+
+Before using an AI agent on a repo:
+
+1. Run `git status --short`.
+2. Confirm branch and HEAD.
+3. Confirm working tree is clean or intentionally dirty.
+4. Confirm current task.
+5. Confirm mode:
+   - read-only
+   - plan
+   - build
+6. Confirm model.
+7. Confirm no destructive actions are allowed.
+
+----------
+14. CURSOR TRIAL REQUIREMENT
+----------
+
+A replacement tool such as Cursor must pass the same gate.
+
+Initial Cursor test must be read-only:
+
+Objective:
+Analyze repository architecture and explain SkillsLake, GRCLake, HUMAN, 90.USECASE, registry, and validation hooks.
+
+Cursor must not:
+- create files
+- edit files
+- move files
+- delete files
+- commit
+- run destructive commands
+
+Acceptance:
+It must produce an accurate WBS-style repository orientation report.
+
+----------
+15. ANTI-PATTERNS
+----------
+
+1. Trusting a tool because it is popular.
+2. Continuing a contaminated session.
+3. Letting an agent operate on a dirty repo.
+4. Allowing edits before orientation.
+5. Using AI-generated file moves without registry validation.
+6. Bypassing hooks to satisfy the AI.
+7. Keeping temporary AI artifacts in root.
+
+----------
+16. ACCEPTANCE CRITERIA
+----------
+
+An AI tool is approved for controlled use when:
+
+1. It reads the correct repository.
+2. It respects read-only mode.
+3. It avoids stale context.
+4. It can produce verifiable analysis.
+5. It supports user approval before changes.
+6. It shows diffs.
+7. It works with Git checkpoints.
+8. It fails transparently.
+9. It does not contaminate the repo.
+
+----------
+17. LESSON LEARNED
+----------
+
+The best AI tool is not the most powerful model or the newest interface.
+
+The best AI tool is the one that reliably fits the workflow, preserves repository integrity, respects governance, and reduces operational risk.

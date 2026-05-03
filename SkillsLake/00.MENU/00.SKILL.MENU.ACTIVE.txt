@@ -259,6 +259,76 @@ STATUS............: ACTIVE
 CATEGORY..........: USECASE
 PURPOSE...........: Prompt base GRC para inicializar sesiones con control explicito.
 
+----------
+05.70
+----------
+
+SKILL_ID..........: SKILL_AI_AGENT_TOOL_GOVERNANCE
+FILE..............: SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Gobierna evaluacion, adopcion y baja de herramientas IA en flujo repo.
+
+----------
+05.80
+----------
+
+SKILL_ID..........: SKILL_GIT_STRUCTURAL_CHANGE_GOVERNANCE
+FILE..............: SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Gobierna cambios Git estructurales, staging disciplinado y hooks de validacion.
+
+----------
+05.90
+----------
+
+SKILL_ID..........: SKILL_LOCAL_MODEL_CAPABILITY_TESTING
+FILE..............: SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Evalua capacidades de modelos locales antes de usar agentes u automatizacion.
+
+----------
+06.00
+----------
+
+SKILL_ID..........: SKILL_MANIFEST_PATH_SEMANTICS
+FILE..............: SKILL.MANIFEST.PATH_SEMANTICS.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Define semantica de rutas en manifiestos y registros; evita reemplazo ciego JSON.
+
+----------
+06.10
+----------
+
+SKILL_ID..........: SKILL_POWERSHELL_INTERACTIVE_SAFETY
+FILE..............: SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Ejecucion segura de comandos PowerShell en terminal interactiva.
+
+----------
+06.20
+----------
+
+SKILL_ID..........: SKILL_REGISTRY_ALIGNMENT_AFTER_MIGRATION
+FILE..............: SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Alinea manifests, registros y validacion despues de migraciones de archivo.
+
+----------
+06.30
+----------
+
+SKILL_ID..........: SKILL_REPO_TEMP_ARTIFACT_MANAGEMENT
+FILE..............: SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+STATUS............: ACTIVE
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Clasifica y gestiona artefactos temporarios; evita contaminar canon del repo.
+
 ==========
 05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
 ==========
@@ -303,6 +373,9 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 ==========
 09.00_CHANGELOG
 ==========
+
+2026-05-02, v1.0-CANON
+- Alta en catalogo de siete skills operativos consolidados SKILL.* (gov repo / tooling / seguridad ejecucion)
 
 2026-04-21, v1.0-CANON
 - Creación inicial del SKILL.MENU canónico

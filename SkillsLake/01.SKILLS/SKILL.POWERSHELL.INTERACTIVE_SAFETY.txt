@@ -1,0 +1,269 @@
+
+==========
+SKILL.POWERSHELL.INTERACTIVE_SAFETY
+==========
+
+ID_UNICO..........: SKILL.POWERSHELL.INTERACTIVE_SAFETY
+NOMBRE............: PowerShell Interactive Safety
+TIPO..............: Skill operativo
+DOMINIO...........: PowerShell / Windows / CLI execution
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session
+
+----------
+1. PURPOSE
+----------
+
+This skill defines safe execution practices for PowerShell commands provided to a human operator in an interactive terminal.
+
+The objective is to reduce syntax errors, partial-copy failures, execution drift, and avoidable interruptions when the user copies and pastes command blocks into PowerShell.
+
+----------
+2. PROBLEM STATEMENT
+----------
+
+During operational sessions, the following recurring error was observed:
+
+else: The term 'else' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+Root cause:
+PowerShell interpreted `else` as a standalone command because the prior `if` block had already been closed and executed.
+
+This often happens when a user copies a script in fragments, or when the interactive shell receives the `if` block and the `else` block as separate instructions.
+
+----------
+3. CORE RULE
+----------
+
+When writing PowerShell instructions for interactive copy/paste execution, avoid `else` unless the full `if/else` structure is guaranteed to be pasted and executed as one atomic block.
+
+Preferred pattern:
+
+if (Test-Path $Path) {
+  Write-Host "Exists"
+}
+
+if (-not (Test-Path $Path)) {
+  Write-Host "Missing"
+}
+
+Avoid this pattern in fragile interactive contexts:
+
+if (Test-Path $Path) {
+  Write-Host "Exists"
+}
+else {
+  Write-Host "Missing"
+}
+
+The second pattern is valid PowerShell, but it is less robust when copied manually into an interactive console.
+
+----------
+4. STANDARD EXECUTION HEADER
+----------
+
+Every non-trivial PowerShell one-shot should include:
+
+$ErrorActionPreference = "Stop"
+
+Recommended minimal header:
+
+cd "C:\TARGET\PATH"
+
+$ErrorActionPreference = "Stop"
+
+Write-Host "========== TASK NAME =========="
+
+----------
+5. LOCATION FIRST RULE
+----------
+
+Before providing a command, always state the execution location.
+
+Example:
+
+Location:
+C:\01. GitHub\Skills
+
+Command:
+cd "C:\01. GitHub\Skills"
+
+This prevents accidental execution in the wrong repository or directory.
+
+----------
+6. NO-ELSE INTERACTIVE PATTERN
+----------
+
+Use independent `if` blocks:
+
+if (Test-Path $Source) {
+  Copy-Item $Source $Target -Force
+  Write-Host "Copied:"
+  Write-Host $Source
+}
+
+if (-not (Test-Path $Source)) {
+  Write-Host "Source not found:"
+  Write-Host $Source
+}
+
+This pattern is more verbose but safer for human copy/paste workflows.
+
+----------
+7. PATH SAFETY
+----------
+
+Always quote Windows paths.
+
+Correct:
+
+cd "C:\01. GitHub\Skills"
+
+Incorrect:
+
+cd C:\01. GitHub\Skills
+
+Reason:
+Spaces in paths break unquoted commands.
+
+----------
+8. ERROR HANDLING
+----------
+
+Use:
+
+$ErrorActionPreference = "Stop"
+
+This turns many non-terminating PowerShell errors into terminating errors.
+
+For critical file operations, validate before and after:
+
+if (Test-Path $Target) {
+  Write-Host "OK:"
+  Write-Host $Target
+}
+
+if (-not (Test-Path $Target)) {
+  throw "Missing expected target: $Target"
+}
+
+----------
+9. COMMAND OUTPUT DISCIPLINE
+----------
+
+Each one-shot should produce visible section headers.
+
+Recommended format:
+
+Write-Host "========== PRECHECK =========="
+Write-Host "========== EXECUTION =========="
+Write-Host "========== VALIDATION =========="
+Write-Host "========== STATUS =========="
+
+This helps the AI and the human operator identify where an error occurred.
+
+----------
+10. HIGH-RISK COMMANDS
+----------
+
+The following commands require extra caution:
+
+Remove-Item
+Move-Item
+git reset
+git clean
+git add .
+git commit --no-verify
+npm uninstall -g
+Set-Content
+Copy-Item -Recurse -Force
+
+Rules:
+- State the target path before execution.
+- Back up first when relevant.
+- Avoid wildcards unless validated.
+- Prefer explicit path lists over broad patterns.
+- Never use destructive commands without a status check first.
+
+----------
+11. BACKUP RULE
+----------
+
+Before modifying, deleting, or replacing operational files:
+
+1. Create external backup.
+2. Confirm backup path.
+3. Perform change.
+4. Validate result.
+5. Show git status if inside a repo.
+
+Preferred backup location examples:
+
+C:\Users\aazcl\Desktop\<TASK>_BACKUP_<YYYYMMDD>
+C:\00. Wings\99.Backups\<PROJECT>\<TASK>_<YYYYMMDD_HHMMSS>
+
+Avoid placing temporary backups inside the repository unless explicitly intended.
+
+----------
+12. GIT REPO SAFETY
+----------
+
+Before modifying files inside a Git repository:
+
+git status --short
+
+After modifying files:
+
+git status --short
+
+Before commit:
+
+git diff --cached --name-status
+git diff --cached --stat
+
+Never assume the working tree is clean.
+
+----------
+13. KNOWN ANTI-PATTERNS
+----------
+
+Anti-pattern 1:
+Providing only a command without execution location.
+
+Anti-pattern 2:
+Using `else` in commands likely to be copied in fragments.
+
+Anti-pattern 3:
+Using `git add .` during mixed-change states.
+
+Anti-pattern 4:
+Creating temporary diagnostic files inside the repo and forgetting to remove them.
+
+Anti-pattern 5:
+Running destructive commands before inventory.
+
+----------
+14. ACCEPTANCE CRITERIA
+----------
+
+A PowerShell command block complies with this skill when:
+
+1. It states the working directory.
+2. It uses quoted paths.
+3. It uses `$ErrorActionPreference = "Stop"` for non-trivial operations.
+4. It avoids fragile interactive `else` blocks.
+5. It prints clear section headers.
+6. It validates critical results.
+7. It avoids broad destructive actions.
+8. It shows final status when operating inside Git.
+
+----------
+15. LESSON LEARNED
+----------
+
+PowerShell scripts written for a file and PowerShell commands written for interactive copy/paste are not the same product.
+
+For human-guided AI operations, robustness beats elegance.

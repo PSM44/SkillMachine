@@ -1,0 +1,291 @@
+==========
+SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION
+==========
+
+ID_UNICO..........: SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION
+NOMBRE............: Registry Alignment After Migration
+TIPO..............: Skill operativo
+DOMINIO...........: Registry / Usecase manifests / Repository migration
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+ORIGEN............: SkillsLake migration / MB-GRC-014A
+
+----------
+1. PURPOSE
+----------
+
+This skill defines how to align manifests, registries, and validation contracts after moving repository files.
+
+The objective is to avoid a repository state where files exist physically but are not recognized by the system.
+
+----------
+2. CORE PRINCIPLE
+----------
+
+Moving files is only one layer of migration.
+
+A complete migration must align:
+
+1. Physical filesystem
+2. USECASE.MANIFEST.json
+3. SKILL_SET.MANIFEST.txt
+4. GLOBAL.SKILL.VERSION.REGISTRY.json
+5. USECASE.REGISTRY.json
+6. BUILD.ps1 or generation scripts
+7. pre-commit validation logic
+
+A move is not complete until all active references point to the new canonical location.
+
+----------
+3. OBSERVED ARCHITECTURE
+----------
+
+In the SkillMachine repository, the following active layers were observed:
+
+SkillsLake:
+Canonical location for skills, docs, architecture, and learning content.
+
+90.USECASE:
+Use case manifests, registry files, and usecase automation.
+
+GLOBAL.SKILL.VERSION.REGISTRY.json:
+Global registry of skill source files.
+
+USECASE.REGISTRY.json:
+Registry of use cases and their associated skill references.
+
+USECASE.MANIFEST.json:
+Use case-specific manifest with source and delivery declarations.
+
+BUILD.ps1:
+Build or generation script for usecase artifacts.
+
+pre-commit hook:
+Validates naming, structure, consistency, schema, and GRC architecture.
+
+----------
+4. MIGRATION ALIGNMENT SEQUENCE
+----------
+
+Recommended order:
+
+1. Move files physically.
+2. Validate old/new file equivalence by hash.
+3. Stage renames.
+4. Update use case manifests.
+5. Repair delivery paths.
+6. Update global registry.
+7. Update usecase registry.
+8. Update build scripts.
+9. Validate JSON.
+10. Stage registry/manifest repairs.
+11. Run commit and let hook validate.
+12. Fix hook-reported issues by layer.
+13. Commit only after validation passes.
+
+----------
+5. FILESYSTEM ALIGNMENT
+----------
+
+Physical files must exist at their new canonical paths.
+
+Example:
+
+Old:
+06.SKILL.WBS.txt
+
+New:
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+Validation:
+Git should detect R100 rename after staging.
+
+----------
+6. USECASE MANIFEST ALIGNMENT
+----------
+
+If a use case references a skill source file, it must reference the new canonical path.
+
+Example:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+If the manifest still references:
+
+06.SKILL.WBS.txt
+
+structure validation may fail.
+
+----------
+7. DELIVERY ALIGNMENT
+----------
+
+Delivery files may be interpreted relative to the use case folder.
+
+Example use case:
+
+90.USECASE/01.NEW_PROJECT
+
+Correct delivery reference to root SkillsLake:
+
+../../SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+Incorrect:
+
+SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+because the validator may resolve it as:
+
+90.USECASE/01.NEW_PROJECT/SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+----------
+8. GLOBAL REGISTRY ALIGNMENT
+----------
+
+If a manifest references:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+then GLOBAL.SKILL.VERSION.REGISTRY.json must register:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+Otherwise consistency validation may fail.
+
+----------
+9. USECASE REGISTRY ALIGNMENT
+----------
+
+USECASE.REGISTRY.json must also align with the new canonical skill paths.
+
+If it still references:
+
+06.SKILL.WBS.txt
+
+while manifests reference:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+the repository has registry drift.
+
+----------
+10. BUILD SCRIPT ALIGNMENT
+----------
+
+Build scripts may contain hardcoded source references.
+
+After migration, inspect and update scripts such as:
+
+90.USECASE/BUILD.ps1
+
+Do not assume JSON manifests are the only source of path truth.
+
+----------
+11. VALIDATION HOOK INTERPRETATION
+----------
+
+Observed hook sequence:
+
+VALIDATION: naming
+VALIDATION: structure
+VALIDATION: consistency
+VALIDATION: usecase registry schema
+VALIDATION: GRC repository architecture
+
+Failure mapping:
+
+Source file referenced by manifest does not exist
+=> manifest source path wrong
+
+Declared delivery file missing
+=> delivery path wrong relative to use case
+
+Source file not registered in global registry
+=> global registry not aligned with manifest source
+
+----------
+12. REGISTRY REPAIR SAFETY
+----------
+
+Before repairing registries:
+
+1. Back up target files outside the repo.
+2. Validate JSON after edit.
+3. Search for old references.
+4. Search for new references.
+5. Stage explicitly.
+6. Retry commit.
+
+----------
+13. SEARCH CHECKS
+----------
+
+Check old references:
+
+Select for known old paths, such as:
+06.SKILL.WBS.txt
+10.SKILL.BATON.txt
+09.SKILL.RADAR.txt
+
+Check new references:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+Check duplicate migration errors:
+
+SkillsLake.*SkillsLake
+
+----------
+14. STAGING RULE
+----------
+
+Stage only relevant files:
+
+1. moved files
+2. usecase manifests
+3. global registry
+4. usecase registry
+5. build script if changed
+
+Do not stage:
+- temporary reports
+- backup folders
+- AI session files
+- migration notes unless canonical
+
+----------
+15. ACCEPTANCE CRITERIA
+----------
+
+Registry alignment is complete when:
+
+1. Physical files exist.
+2. Git staged renames are R100 or reviewed.
+3. USECASE.MANIFEST.json references new source paths.
+4. Delivery paths resolve correctly.
+5. GLOBAL.SKILL.VERSION.REGISTRY.json references new paths.
+6. USECASE.REGISTRY.json references new paths.
+7. BUILD.ps1 has no stale active references.
+8. Hook passes all validation layers.
+9. Commit succeeds.
+
+----------
+16. ANTI-PATTERNS
+----------
+
+1. Moving files without updating manifests.
+2. Updating manifests without updating global registry.
+3. Updating registry without validating schema.
+4. Treating delivery paths as repo-relative.
+5. Using broad replacement in structured JSON.
+6. Bypassing validation hook.
+7. Committing halfway-aligned registries.
+
+----------
+17. LESSON LEARNED
+----------
+
+A repository with registries is not just a filesystem.
+
+When a file moves, every contract that names that file must move with it. The filesystem is only the visible layer; the registry is the operating truth.

@@ -1,6 +1,6 @@
 {
   "version": "v1.0-CANON",
-  "generated_at": "2026-04-21 18:10:00",
+  "generated_at": "2026-05-02 12:00:00",
   "source_root": "C:\\01. GitHub\\Skills",
   "skills": [
     {
@@ -53,6 +53,34 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
       "version": "v1.0-CANON"
     }
   ]

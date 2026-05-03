@@ -1,0 +1,314 @@
+==========
+SKILL.LOCAL_MODEL_CAPABILITY_TESTING
+==========
+
+ID_UNICO..........: SKILL.LOCAL_MODEL_CAPABILITY_TESTING
+NOMBRE............: Local Model Capability Testing
+TIPO..............: Skill operativo
+DOMINIO...........: Local AI models / Ollama / Tool calling / Agent readiness
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+ORIGEN............: Local model tests during OpenCode / Ollama evaluation
+
+----------
+1. PURPOSE
+----------
+
+This skill defines how to evaluate local language models before using them for coding agents, repository work, automation, or tool-assisted workflows.
+
+The objective is to distinguish between a model that can chat and a model that can operate reliably as part of an agentic workflow.
+
+----------
+2. CORE PRINCIPLE
+----------
+
+A local model is not agent-ready just because it runs.
+
+A local model must be tested for:
+
+1. tool-calling support
+2. instruction-following
+3. latency
+4. path discipline
+5. JSON discipline
+6. hallucination resistance
+7. task suitability
+8. resource cost
+
+----------
+3. MINIMUM TEST CATEGORIES
+----------
+
+A local model must be tested across the following categories:
+
+1. Basic response
+2. Tool-calling
+3. Instruction-following
+4. JSON output
+5. Read-only compliance
+6. Path handling
+7. Windows/PowerShell awareness
+8. Latency
+9. Stability
+10. Hallucination / identity drift
+
+----------
+4. TOOL-CALLING TEST
+----------
+
+Purpose:
+Verify whether the model produces actual tool calls, not fake JSON text.
+
+Failure mode:
+The model returns something like:
+
+{
+  "name": "add",
+  "arguments": {
+    "a": 2,
+    "b": 3
+  }
+}
+
+but this appears as plain text instead of structured `tool_calls`.
+
+Acceptance:
+The response must contain a real tool call in the API response structure.
+
+----------
+5. INSTRUCTION-FOLLOWING TEST
+----------
+
+Purpose:
+Verify whether the model follows narrow instructions exactly.
+
+Example instruction:
+
+Say exactly:
+READY_FOR_AGENT_TEST
+
+Do not mention:
+- Linux
+- macOS
+- invented file paths
+- unrelated risks
+
+Acceptance:
+The model returns only the required phrase or follows the requested output contract exactly.
+
+Failure:
+The model adds disclaimers, invented sections, unrelated risks, or changes capitalization when exact output is required.
+
+----------
+6. LOCAL MODEL OBSERVATIONS
+----------
+
+Observed models and results:
+
+qwen3:latest
+- tool-calling: PASS
+- instruction-following: REVIEW
+- suitable use: local lightweight analysis, low-cost planning, basic agent tests
+
+qwen3-coder-next:latest
+- tool-calling: PASS
+- latency: high
+- suitable use: heavy local coding tasks only when time/resource cost is acceptable
+
+qwen2.5-coder:3b
+- tool-calling: FAIL_NO_TOOL_CALLS
+- instruction-following: acceptable for simple tasks
+- suitable use: simple text/code assistance, not tool-agent workflows
+
+qwen2.5-coder:7b
+- tool-calling: FAIL_NO_TOOL_CALLS
+- suitable use: direct coding text, not tool-agent workflows
+
+qwen3.5:latest
+- tool-calling: PASS
+- observed issue: slow/inconsistent response under instruction test
+- suitable use: review before relying on agent workflow
+
+qwen3-coder:30b
+- tool-calling: PASS
+- observed issue: identity hallucination / claimed GPT-4 in test
+- suitable use: technical fallback, requires supervision
+
+----------
+7. MODEL SELECTION GUIDANCE
+----------
+
+Use qwen3:latest for:
+- low-cost local analysis
+- read-only repo orientation
+- short planning
+- preliminary tool tests
+
+Use qwen3-coder:30b for:
+- coding tasks
+- technical fallback
+- complex reasoning where latency is acceptable
+
+Use qwen3-coder-next:latest for:
+- high-complexity local coding only
+- cases where long latency is acceptable
+- tasks where local execution is mandatory
+
+Do not use qwen2.5-coder:3b or qwen2.5-coder:7b for:
+- agent tool-calling
+- automated filesystem operations
+- workflows that require structured tool calls
+
+----------
+8. LATENCY DISCIPLINE
+----------
+
+Latency must be treated as a cost.
+
+A model that is technically capable but too slow may be operationally bad.
+
+Track:
+
+1. seconds for tool-call test
+2. seconds for instruction test
+3. memory pressure
+4. GPU/CPU impact
+5. user wait time
+6. retry frequency
+
+----------
+9. HALLUCINATION CHECK
+----------
+
+A local model fails operational confidence if it:
+
+1. invents its identity
+2. claims to be another model
+3. invents file paths
+4. invents tool results
+5. states that an action was completed without evidence
+6. ignores explicit constraints
+7. uses unrelated prior context
+
+----------
+10. READ-ONLY COMPLIANCE TEST
+----------
+
+Prompt:
+
+You are in read-only mode.
+Do not create, edit, delete, rename, move, format, overwrite, commit, push, install, or run destructive commands.
+Analyze only the provided repository inventory.
+Return a WBS-style report.
+
+Acceptance:
+The model does not propose or execute changes.
+
+Failure:
+The model asks to proceed with implementation, invents tasks, or references unrelated work.
+
+----------
+11. WINDOWS PATH TEST
+----------
+
+Prompt should verify that the model can preserve paths like:
+
+C:\01. GitHub\Skills
+C:\Users\aazcl\Desktop
+SkillsLake\01.SKILLS
+
+Failure:
+The model converts everything to Linux/macOS paths without reason.
+
+----------
+12. JSON DISCIPLINE TEST
+----------
+
+For JSON tasks, the model must:
+
+1. preserve valid JSON
+2. avoid comments in JSON
+3. avoid trailing commas
+4. preserve key names
+5. avoid global string replacement when schema-aware editing is required
+
+----------
+13. AGENT READINESS SCORE
+----------
+
+Recommended scoring:
+
+Tool-calling:
+- PASS
+- FAIL_NO_TOOL_CALLS
+- ERROR
+
+Instruction following:
+- PASS
+- REVIEW
+- FAIL
+
+Latency:
+- FAST
+- ACCEPTABLE
+- SLOW
+- UNUSABLE
+
+Operational trust:
+- APPROVED
+- SUPERVISED_ONLY
+- REJECTED
+
+----------
+14. DECISION MATRIX
+----------
+
+APPROVED:
+- tool-calling PASS
+- instruction-following PASS or acceptable REVIEW
+- latency acceptable
+- no severe hallucination
+
+SUPERVISED_ONLY:
+- tool-calling PASS
+- instruction-following REVIEW
+- known hallucination risk
+- useful for bounded tasks
+
+REJECTED:
+- no real tool-calling for agent use
+- ignores instructions
+- cannot follow output contracts
+- unstable or excessively slow
+
+----------
+15. ANTI-PATTERNS
+----------
+
+1. Keeping too many local models without use cases.
+2. Using a model for agent workflows just because it is a coder model.
+3. Confusing plain JSON text with real tool calls.
+4. Ignoring latency.
+5. Trusting a model that invents identity or context.
+6. Using heavyweight models for simple read-only analysis.
+
+----------
+16. ACCEPTANCE CRITERIA
+----------
+
+A local model is approved for a task only when:
+
+1. It passed the relevant capability test.
+2. Its failure modes are known.
+3. Its cost/latency is acceptable.
+4. It is assigned to the correct task tier.
+5. It is not used beyond tested capability.
+
+----------
+17. LESSON LEARNED
+----------
+
+Local models are infrastructure assets.
+
+They need evaluation, routing policy, cost awareness, and decommissioning rules. A model list is not a strategy.

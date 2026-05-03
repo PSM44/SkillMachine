@@ -1,0 +1,270 @@
+==========
+SKILL.MANIFEST.PATH_SEMANTICS
+==========
+
+ID_UNICO..........: SKILL.MANIFEST.PATH_SEMANTICS
+NOMBRE............: Manifest Path Semantics
+TIPO..............: Skill operativo
+DOMINIO...........: JSON manifests / Registry contracts / Path migration
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+ORIGEN............: SkillsLake migration / manifest repair during MB-GRC-014A
+
+----------
+1. PURPOSE
+----------
+
+This skill defines how to reason about paths inside manifests and registries.
+
+The objective is to avoid corrupting structured files through blind text replacement and to preserve the semantic contract of each manifest field.
+
+----------
+2. CORE PRINCIPLE
+----------
+
+Not all paths inside a manifest mean the same thing.
+
+A manifest is not a flat list of strings. It is a contract.
+
+Each field may resolve paths from a different base:
+
+1. repository root
+2. use case directory
+3. absolute Windows path
+4. logical registry path
+5. delivery output path
+6. display name
+7. source file reference
+
+----------
+3. OBSERVED PATH SEMANTICS
+----------
+
+During the SkillsLake migration, the following semantics were observed:
+
+source_path:
+- identifies the source file used by the use case
+- may need an absolute Windows path or root-resolvable path
+- must point to a real physical file
+
+name:
+- may be a logical file identifier
+- may be a logical path
+- should not be blindly treated as a delivery path
+
+delivery / deliverable / output / declared:
+- may be interpreted relative to the use case directory
+- must resolve to an existing file from that base
+
+global registry file:
+- uses logical repo-relative path
+- must align with source paths used by manifests
+
+usecase registry:
+- indexes use cases and associated skill references
+- must align with the global registry and manifests
+
+----------
+4. FAILURE EXAMPLES
+----------
+
+Failure 1:
+Blind replacement created duplicate paths.
+
+Bad:
+
+C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+Cause:
+Text replacement was applied to a value already partially migrated.
+
+Failure 2:
+Delivery path was treated as repo-relative.
+
+Bad:
+
+SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+Validator resolved it as:
+
+C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\SkillsLake\00.MENU\00.SKILL.MENU.ACTIVE.txt
+
+Correct relative path from use case directory:
+
+../../SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+Failure 3:
+Manifest source referenced a file not registered in global registry.
+
+Manifest:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+Registry still had:
+
+06.SKILL.WBS.txt
+
+Correct:
+Both layers must point to the same logical path.
+
+----------
+5. REPAIR STRATEGY
+----------
+
+Use schema-aware repair for JSON.
+
+Do not use broad string replacement on JSON manifests unless the field semantics are known.
+
+Recommended approach:
+
+1. Parse JSON.
+2. Walk properties.
+3. Repair specific fields according to field name.
+4. Preserve unrelated values.
+5. Convert back to JSON.
+6. Validate JSON.
+7. Run targeted search checks.
+8. Run pre-commit hook.
+
+----------
+6. FIELD-AWARE REPAIR RULES
+----------
+
+source_path:
+- normalize slashes for comparison
+- strip repo root if necessary
+- map old logical path to new SkillsLake path
+- return absolute path if validator expects absolute source path
+
+delivery / deliverable / output / declared:
+- if value starts with SkillsLake/
+- convert to ../../SkillsLake/
+- preserve values already starting with ../../SkillsLake/
+
+name:
+- do not modify unless contract confirms it is a file reference
+- do not assume name is a delivery path
+
+registry entries:
+- replace old logical paths with new repo-relative SkillsLake paths
+- keep format consistent with existing registry convention
+
+PS1 scripts:
+- controlled textual replacement may be acceptable
+- still validate after change
+
+TXT files:
+- textual replacement may be acceptable
+- still verify surrounding context
+
+----------
+7. SEARCH VALIDATION
+----------
+
+After repair, check for duplicate path corruption:
+
+SkillsLake.*SkillsLake
+
+Expected result:
+No matches.
+
+Check for legacy bare references when those are no longer valid:
+
+"06.SKILL.WBS.txt"
+"00.SKILL.MENU.ACTIVE.txt"
+"10.SKILL.BATON.txt"
+
+Expected result:
+No matches in active manifests/registries.
+
+Note:
+Matches in old backups may be acceptable if backup folders are excluded from validation.
+
+----------
+8. DELIVERY PATH VALIDATION
+----------
+
+A delivery path must be validated from the correct base directory.
+
+Example use case directory:
+
+C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT
+
+Target file:
+
+C:\01. GitHub\Skills\SkillsLake\00.MENU\00.SKILL.MENU.ACTIVE.txt
+
+Correct relative path:
+
+../../SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+
+----------
+9. REGISTRY PATH VALIDATION
+----------
+
+If a manifest references:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+then the global registry must also register:
+
+SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+
+If not, consistency validation fails.
+
+----------
+10. VALIDATION LAYER MAPPING
+----------
+
+Failure:
+Source file referenced by manifest does not exist
+
+Likely cause:
+source_path points to a stale or invalid file.
+
+Failure:
+Declared delivery file missing
+
+Likely cause:
+delivery path is resolved relative to the use case directory and is not correctly relative.
+
+Failure:
+Source file not registered in global registry
+
+Likely cause:
+manifest source path and global registry are not aligned.
+
+----------
+11. ANTI-PATTERNS
+----------
+
+1. Global blind string replacement in JSON.
+2. Treating all path fields as equivalent.
+3. Fixing `source_path` and ignoring delivery fields.
+4. Updating manifests but not registry.
+5. Updating registry but not usecase registry.
+6. Ignoring pre-commit validation.
+7. Assuming slash direction is the main issue when base path is the real issue.
+
+----------
+12. ACCEPTANCE CRITERIA
+----------
+
+A manifest path migration is acceptable when:
+
+1. JSON is valid.
+2. No duplicate migrated paths exist.
+3. Source paths resolve to real files.
+4. Delivery paths resolve from the use case directory.
+5. Global registry contains referenced source files.
+6. Usecase registry remains schema-valid.
+7. Pre-commit validation passes.
+
+----------
+13. LESSON LEARNED
+----------
+
+A manifest is a schema-driven contract.
+
+Path repair must respect the schema. A string that looks like a path may represent a source, a delivery, a logical name, or a registry key. Treating all of them the same is how migrations break.

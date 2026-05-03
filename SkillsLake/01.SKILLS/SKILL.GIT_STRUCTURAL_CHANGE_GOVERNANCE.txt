@@ -1,0 +1,347 @@
+==========
+SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE
+==========
+
+ID_UNICO..........: SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE
+NOMBRE............: Git Structural Change Governance
+TIPO..............: Skill operativo consolidado
+DOMINIO...........: Git / Repository governance / Refactor control / Pre-commit validation
+ESTADO............: ACTIVE
+VERSION...........: 1.0
+FECHA.............: 2026-05-02
+CONSOLIDA.........: SKILL.GIT.RENAME_RECONCILIATION_BY_HASH
+CONSOLIDA.........: SKILL.GIT.STAGING_DISCIPLINE
+CONSOLIDA.........: SKILL.GIT.PRECOMMIT_VALIDATION_LOOP
+CONSOLIDA.........: SKILL.GIT.WORKING_TREE_HYGIENE_BEFORE_AGENT
+CONSOLIDA.........: SKILL.GIT.CHECKPOINT_COMMIT_TAG_PUSH
+ORIGEN............: SkillsLake migration / MB-GRC-014A
+
+----------
+1. PURPOSE
+----------
+
+This skill defines a controlled Git workflow for structural repository changes such as moving files, reorganizing folders, repairing manifests, aligning registries, and preparing AI-assisted work.
+
+The objective is to prevent data loss, dirty commits, registry drift, and AI-driven repository damage.
+
+----------
+2. CORE PRINCIPLE
+----------
+
+Structural repository changes must be treated as controlled migrations, not casual edits.
+
+A clean structural change requires:
+
+1. working tree inventory
+2. separation of real changes and temporary artifacts
+3. hash-based move reconciliation
+4. controlled staging
+5. validation hook compliance
+6. commit
+7. tag
+8. push
+9. clean final state
+
+----------
+3. PRE-AGENT WORKING TREE HYGIENE
+----------
+
+Before using any AI coding agent or IDE agent, run:
+
+git status --short
+git log -1 --oneline
+git branch --show-current
+
+Do not allow an agent to operate on a repo with unclear mixed state.
+
+Mixed state examples:
+
+D old files
+?? new folder tree
+M manifests
+?? temporary artifacts
+?? session files
+?? backup folders
+
+If the working tree is dirty, classify each change before opening the agent.
+
+----------
+4. CHANGE CLASSIFICATION
+----------
+
+Classify each Git status item as one of:
+
+1. Valid intended change
+2. Accidental change
+3. Temporary artifact
+4. Generated artifact
+5. Migration note
+6. Registry/manifest repair
+7. Unknown
+
+Unknown changes must not be staged.
+
+----------
+5. RENAME RECONCILIATION BY HASH
+----------
+
+When Git shows:
+
+D old/path/file.txt
+?? new/path/file.txt
+
+do not assume success or loss.
+
+Validate by hash:
+
+1. Read old file from HEAD.
+2. Hash old content.
+3. Hash new working tree file.
+4. Compare.
+5. If hashes match, classify as move/rename.
+6. If hashes differ, classify as content change plus move.
+7. If new file missing, classify as loss risk.
+
+Acceptance:
+A move is safe when OldHash equals NewHash.
+
+----------
+6. HASH RECONCILIATION OUTPUT
+----------
+
+A reconciliation report should include:
+
+OldPath
+NewPath
+OldInHead
+NewExists
+Match
+OldHash
+NewHash
+
+Match values:
+
+YES
+CONTENT_DIFF
+NEW_MISSING
+HEAD_NOT_FOUND
+NO
+
+Only YES entries should be staged automatically as pure moves.
+
+----------
+7. STAGING DISCIPLINE
+----------
+
+Do not use:
+
+git add .
+
+during structural refactors.
+
+Use explicit staging:
+
+git add -- "path/to/file"
+git add -A -- "old/path/file.txt"
+git add -f -- "ignored/but/needed/file.txt"
+
+Use `git add -f` only when a required file is blocked by `.gitignore`.
+
+----------
+8. STAGING VALIDATION
+----------
+
+After staging, inspect:
+
+git diff --cached --name-status -M --find-renames=90%
+git diff --cached --summary -M --find-renames=90%
+git diff --cached --stat -M --find-renames=90%
+
+Acceptance for pure move:
+
+R100 old/path.txt new/path.txt
+
+Acceptance for mixed migration:
+
+R100 old/path.txt new/path.txt
+M registry.json
+M manifest.json
+
+Rejected:
+
+D old/path.txt without matching new path
+A new path without validated old path
+temporary artifacts staged
+backup folders staged
+
+----------
+9. PRE-COMMIT HOOK RESPECT
+----------
+
+Never bypass the hook during normal structural migration.
+
+Do not use:
+
+git commit --no-verify
+
+The hook is a contract validator.
+
+If it fails, treat the error as system feedback.
+
+----------
+10. PRE-COMMIT VALIDATION LOOP
+----------
+
+Observed validation pipeline:
+
+1. naming
+2. structure
+3. consistency
+4. usecase registry schema
+5. repository architecture
+
+Each layer may expose a new class of issue.
+
+Example failures and meaning:
+
+Source file referenced by manifest does not exist
+=> The manifest points to an old or invalid physical file path.
+
+Declared delivery file missing
+=> Delivery path is likely interpreted relative to the use case directory.
+
+Source file not registered in global registry
+=> Manifest points to a file path not registered in the global registry.
+
+----------
+11. ERROR RESPONSE RULE
+----------
+
+When the hook fails:
+
+1. Read exact FAIL line.
+2. Identify validation layer.
+3. Repair only the relevant contract.
+4. Stage only relevant files.
+5. Retry commit.
+6. Do not bypass.
+
+----------
+12. CHECKPOINT COMMIT RULE
+----------
+
+A structural change is not closed until:
+
+1. Commit succeeds.
+2. Hook passes.
+3. Working tree is clean or remaining changes are intentionally separated.
+4. Tag is created when change is significant.
+5. Main branch is pushed.
+6. Tag is pushed.
+7. Final status is clean.
+
+----------
+13. TAGGING RULE
+----------
+
+For structural migrations, create a descriptive tag.
+
+Example:
+
+MB-GRC-014A-SkillsLake-migration-20260502
+
+Tag should include:
+
+1. minibattle ID
+2. change theme
+3. date
+
+----------
+14. PUSH RULE
+----------
+
+After successful commit:
+
+git push origin main
+git push origin "<tag>"
+
+Then verify:
+
+git status --short
+git log -1 --oneline
+git tag --points-at HEAD
+
+----------
+15. TEMPORARY ARTIFACT CONTROL
+----------
+
+Before commit, remove or archive:
+
+00_CONTEXT/
+session files
+temporary backups
+reconciliation reports
+AI scratch files
+migration notes that are not canonical
+
+Do not leave temporary artifacts in root.
+
+----------
+16. CLEAN FINAL STATE
+----------
+
+The desired final state:
+
+git status --short
+
+returns empty.
+
+If not empty, each remaining item must be intentionally deferred and documented.
+
+----------
+17. AI AGENT GATE
+----------
+
+An AI agent may be opened only after:
+
+1. working tree clean,
+2. current HEAD verified,
+3. tag/checkpoint exists for recent structural work,
+4. task is read-only or bounded,
+5. user approves model/tool/mode.
+
+----------
+18. ANTI-PATTERNS
+----------
+
+1. git add .
+2. git commit --no-verify
+3. assuming D + ?? is a rename
+4. committing temporary artifacts
+5. mixing unrelated changes
+6. letting an AI agent operate before reconciliation
+7. ignoring hook output
+8. staging registry changes without understanding contract
+
+----------
+19. ACCEPTANCE CRITERIA
+----------
+
+A structural Git change complies with this skill when:
+
+1. Moves are hash-validated or inspected.
+2. Staging is explicit.
+3. Cached diff is reviewed.
+4. Hook passes.
+5. Commit is meaningful.
+6. Tag is created for significant change.
+7. Remote is updated.
+8. Working tree ends clean.
+
+----------
+20. LESSON LEARNED
+----------
+
+The Git working tree is an operating room, not a junk drawer.
+
+During structural changes, discipline beats speed. The cost of a slow clean commit is lower than the cost of forensic recovery after a dirty one.
