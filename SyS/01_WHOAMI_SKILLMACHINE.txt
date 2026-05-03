@@ -2,80 +2,151 @@
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
 
-ID_UNICO..........: WHOAMI.SKILLMACHINE.01.10
+ID_UNICO..........: WHOAMI.SKILLMACHINE.20260503.01
 NOMBRE_SUGERIDO...: 01_WHOAMI_SKILLMACHINE.txt
-VERSION...........: v1.1-ACTIVE
-FECHA.............: 2026-04-22
-HORA..............: 12:30
+VERSION...........: v1.2-MB-GRC-014D-ACTIVE
+FECHA.............: 2026-05-03
+HORA..............: actualizar si se requiere precision operacional
 CIUDAD............: Santiago, Chile
-UBICACION_SISTEMA.: \SkillMachine\
+UBICACION_SISTEMA.: C:\01. GitHub\Skills\SyS\01_WHOAMI_SKILLMACHINE.txt
 AUTOR_HUMANO......: PABLO
 
 ALCANCE...........:
-Resumen humano operacional del proyecto SkillMachine.
-Sirve para entender rápido qué es, en qué está y cómo retomarlo.
+Resumen humano operacional actualizado del proyecto SkillMachine.
+Sirve para entender rapido que es, en que esta, como retomarlo y que restricciones
+operativas deben respetarse tras el cierre de MB-GRC-014B y MB-GRC-014C.
 
 NO_CUBRE..........:
 No reemplaza HUMAN.
 No reemplaza BATON.
 No describe el filesystem completo.
+No aprueba automatizacion IA desatendida.
+No decide inclusion de nuevos skills en bundles.
 
 DEPENDENCIAS......:
-23.SKILL.WHOAMI_POLICY.txt
-22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+SkillsLake\01.SKILLS\23.SKILL.WHOAMI_POLICY.txt
+SkillsLake\01.SKILLS\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SkillsLake\01.SKILLS\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+SkillsLake\01.SKILLS\SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+SkillsLake\01.SKILLS\SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
 
 ==========
 01.00_QUE_ES_ESTE_PROYECTO
 ==========
 
-SkillMachine es un sistema para construir, organizar y operar skills reutilizables,
-más use cases empaquetables, con trazabilidad, validación y continuidad entre sesiones.
+SkillMachine es un sistema para construir, organizar, versionar y operar skills reutilizables,
+usecases empaquetables, registries, manifiestos, validadores y artefactos de continuidad
+humano-IA.
 
 No es solo un repositorio de prompts.
-Busca convertirse en un sistema operativo de skills:
-- con gobernanza
-- con empaquetado
-- con manifiestos
-- con validación de integridad
-- con continuidad humana e IA
+
+Busca operar como sistema gobernado de skills:
+- con trazabilidad;
+- con validacion;
+- con manifests;
+- con registry;
+- con bundles;
+- con continuidad operacional;
+- con control Git;
+- con reglas explicitas para uso de agentes IA.
+
+La jerarquia conceptual activa es:
+
+HUMAN > GRCLake > SkillsLake > 90.USECASE > SyS/tools/artifacts
 
 ==========
 02.00_QUE_SE_HA_LOGRADO
 ==========
 
-Hasta ahora ya existe:
+Estado consolidado actual:
 
-- estructura base del sistema
-- menú de skills activo
-- políticas operativas de artefactos
-- policy de ciclo de vida de sesión
-- policy de WhoAmI
-- use case 01.NEW_PROJECT
-- use case 02.SESSION_CLOSE
-- validación por manifest
-- verificación SHA256 source vs dest
-- BATON y WhoAmI del proyecto
-- RADAR operativo
+- estructura base de SkillMachine operativa;
+- SkillsLake como ubicacion canonica de skills, docs, arquitectura y learning;
+- GRCLake como capa de governance, risk, compliance, policies, controls y templates;
+- HUMAN como capa canonica de autoridad humana;
+- 90.USECASE como capa de usecases, bundles, manifests y registries;
+- SyS como capa de herramientas operativas, RADAR y validacion;
+- pre-commit hook activo;
+- Validate-System.ps1 operativo;
+- validaciones activas:
+  - naming;
+  - structure;
+  - consistency;
+  - usecase registry schema;
+  - GRC repository architecture;
+- usecases existentes:
+  - 01.NEW_PROJECT;
+  - 02.SESSION_CLOSE;
+  - 03.SESSION_CONTINUE;
+  - 04.REPOSITORY_STRUCTURE_REPAIR;
+- GLOBAL.SKILL.VERSION.REGISTRY.json actualizado;
+- 00.SKILL.MENU.ACTIVE.txt actualizado;
+- BATON actualizado post Cursor trial;
+- RADAR operativo.
+
+Governance skills agregados en MB-GRC-014B:
+
+- SkillsLake\01.SKILLS\SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+- SkillsLake\01.SKILLS\SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+- SkillsLake\01.SKILLS\SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt
+- SkillsLake\01.SKILLS\SKILL.MANIFEST.PATH_SEMANTICS.txt
+- SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+- SkillsLake\01.SKILLS\SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt
+- SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+
+Cierres recientes:
+
+MB-GRC-014B:
+- commit: 8b8515b
+- tag: MB-GRC-014B-governance-skills-cursor-trial-20260502
+- resultado: siete governance skills incorporados, registrados y publicados.
+
+MB-GRC-014C:
+- commit: 50df50d
+- tag: MB-GRC-014C-baton-continuity-update-20260503
+- resultado: BATON actualizado, validado y publicado.
 
 ==========
 03.00_EN_QUE_ESTADO_ESTA
 ==========
 
 Estado actual:
-MVP funcional parcial
+MVP funcional gobernado con validacion activa y continuidad actualizada.
 
-Eso significa:
+Estado Git al inicio de MB-GRC-014D:
+- branch: main
+- HEAD: 50df50d
+- tag en HEAD: MB-GRC-014C-baton-continuity-update-20260503
+- remote: origin/main sincronizado
+- working tree: clean antes de modificar este WhoAmI
 
-- la idea base ya bajó a sistema real
-- ya hay artefactos y flujo mínimos
-- pero el pipeline crítico todavía no es estable
+Estado Cursor:
+Cursor Desktop Free fue evaluado y queda aprobado solo para:
+- read-only;
+- plan-only;
+- controlled build con supervision humana.
 
-Bloqueo vigente:
+Cursor Desktop Free no queda aprobado para:
+- automatizacion desatendida;
+- commits directos;
+- push;
+- regeneracion de bundles sin review;
+- cambios estructurales sin aprobacion humana;
+- registry/manifest repair sin diff control.
 
-- BUILD.ps1 falla en 01.NEW_PROJECT
-- error actual:
-  The property 'Count' cannot be found on this object
+Decision sobre Cursor Pro:
+No pasar a pago todavia.
+Solo considerar upgrade si aparece gatillo operativo real:
+- limites de requests;
+- baja calidad por modelo;
+- lentitud operacional;
+- necesidad de modelos superiores;
+- uso sostenido con ROI evidente.
+
+Bloqueo antiguo removido del estado actual:
+El bloqueo historico BUILD.ps1 / error ".Count" ya no debe tratarse como el estado operativo vigente de SkillMachine.
+Puede permanecer como antecedente historico en old/RADAR o skills de troubleshooting, pero no como siguiente accion principal del proyecto.
 
 ==========
 04.00_QUE_FALTA
@@ -83,24 +154,54 @@ Bloqueo vigente:
 
 Falta principalmente:
 
-- reparar BUILD.ps1
-- endurecer el builder ante drift de tipos
-- validar flujo completo de NEW_PROJECT
-- agregar BUILD.HISTORY
-- incorporar comparación entre builds
-- seguir profesionalizando trazabilidad
+P0:
+- Mantener repo limpio.
+- No usar agentes IA sobre working tree ambiguo.
+- No usar git add .
+- No usar git commit --no-verify.
+- Mantener Validate-System.ps1 como gate obligatorio.
+
+P1:
+- Cerrar MB-GRC-014D con este WhoAmI actualizado.
+- Validar sistema.
+- Commit/tag/push de este WhoAmI.
+- Decidir si crear 95.AI_MODULES\04.CURSOR.
+- Decidir si nuevos governance skills deben incorporarse a bundles.
+- Decidir si crear usecase especifico 05.AI_TOOL_GOVERNANCE.
+
+P2:
+- Evaluar fortalecimiento de validacion semantica.
+- Revisar contratos de usecases si corresponde.
+- Revisar si WhoAmI historico en SyS\WhoAmI debe archivarse, actualizarse o declararse legacy.
+- Evaluar limpieza de old/RADAR como politica separada, no como cambio incidental.
 
 ==========
 05.00_SIGUIENTE_PASO
 ==========
 
-Siguiente acción sugerida:
+Siguiente accion inmediata:
 
-Trabajar directamente sobre:
-C:\01. GitHub\Skills\90.USECASE\BUILD.ps1
+Cerrar MB-GRC-014D.
 
-Objetivo:
-corregir la causa raíz del error .Count y dejar 01.NEW_PROJECT estable.
+Secuencia recomendada:
+1. Guardar este WhoAmI actualizado.
+2. Ejecutar Validate-System.ps1.
+3. Revisar git diff.
+4. Stage explicito solo de:
+   SyS\01_WHOAMI_SKILLMACHINE.txt
+5. Commit:
+   20260503.0025_DOC_update_whoami_after_cursor_trial
+6. Tag:
+   MB-GRC-014D-whoami-update-20260503
+7. Push main.
+8. Push tag.
+
+Despues de MB-GRC-014D:
+
+Siguiente decision recomendada:
+- MB-GRC-014E — evaluar creacion de 95.AI_MODULES\04.CURSOR
+o
+- MB-GRC-015 — decidir inclusion de governance skills en bundles/usecases.
 
 ==========
 06.00_NOTAS_OPERATIVAS
@@ -109,20 +210,51 @@ corregir la causa raíz del error .Count y dejar 01.NEW_PROJECT estable.
 Repositorio remoto de referencia:
 https://github.com/PSM44/SkillMachine.git
 
-Regla práctica actual:
+Regla practica actual:
+No agregar nuevas capacidades funcionales antes de cerrar continuidad minima:
+BATON actualizado + WhoAmI actualizado + repo clean + tag publicado.
 
-No seguir agregando nuevas capacidades hasta estabilizar BUILD.
-Hoy el cuello de botella no es conceptual.
-Es de robustez operativa.
+Regla para agentes IA:
+READ -> PLAN -> APPROVE -> BUILD -> DIFF -> TEST -> COMMIT/TAG
+
+Regla para Git:
+- staging explicito;
+- no git add .;
+- no commit --no-verify;
+- validar antes de commit;
+- revisar diff;
+- taggear cambios de governance/continuidad relevantes.
+
+Regla para manifests/registries:
+No hacer reemplazo textual amplio.
+Los paths tienen semantica por campo.
+GLOBAL registry, USECASE registry, manifests y bundles no deben tocarse sin plan.
+
+Regla para RADAR:
+RADAR outputs bajo SyS\A_Tools\Radar son outputs operacionales esperados.
+No tratarlos como basura temporal sin clasificacion previa.
 
 ==========
 07.00_CHANGELOG
 ==========
 
+2026-05-03, v1.2-MB-GRC-014D-ACTIVE
+- Actualizado WhoAmI tras cierre de MB-GRC-014B y MB-GRC-014C.
+- Registrado HEAD 50df50d.
+- Registrado tag MB-GRC-014C-baton-continuity-update-20260503.
+- Removido bloqueo historico BUILD.ps1/.Count como estado vigente.
+- Registrado estado de Cursor Desktop Free.
+- Registrada decision de no pasar todavia a Cursor Pro.
+- Registrado siguiente paso: cerrar MB-GRC-014D con validacion, commit, tag y push.
+
 2026-04-22, v1.1-ACTIVE
-- Se actualiza estado humano operacional
-- Se registra bloqueo actual en BUILD.ps1
-- Se define siguiente paso exacto
+- Se actualiza estado humano operacional.
+- Se registra bloqueo actual en BUILD.ps1.
+- Se define siguiente paso exacto.
 
 2026-04-21, v1.0-ACTIVE
-- Creación inicial de WhoAmI para SkillMachine
+- Creacion inicial de WhoAmI para SkillMachine.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
