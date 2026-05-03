@@ -2,35 +2,49 @@
 00.00_METADATOS_DEL_DOCUMENTO
 =============================
 
-ID_UNICO..........: BATON.SKILLMACHINE.20260426.01
+ID_UNICO..........: BATON.SKILLMACHINE.20260503.01
 NOMBRE_SUGERIDO...: 00.0_BATON_SkillMachine.txt
-VERSION...........: v1.0-SESSION_CLOSE
-FECHA.............: 2026-04-26
-HORA..............: 00:40 (aprox, ajustar si necesitas precisión)
+VERSION...........: v1.1-MB-GRC-014C-CONTINUITY
+FECHA.............: 2026-05-03
+HORA..............: actualizar si se requiere precision operacional
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: C:\01. GitHub\Skills
 AUTOR_HUMANO......: PABLO
 
 ALCANCE...........:
-Snapshot operativo del estado actual del sistema SkillMachine tras implementación
-de validaciones estructurales, consistencia y cierre del usecase SESSION_CLOSE.
+Snapshot operativo actualizado del estado actual del sistema SkillMachine tras:
+* reorganizacion SkillsLake / GRCLake;
+* cierre de MB-GRC-014B;
+* incorporacion canonica de siete governance skills post-migracion;
+* evaluacion controlada de Cursor Desktop Free;
+* fast-forward a main;
+* push de main y tag a GitHub.
 
 NO_CUBRE..........:
-No redefine SKILLS.
-No reemplaza HUMAN.
-No incluye lógica de negocio fuera del sistema de validación y usecases.
+No redefine HUMAN.
+No reemplaza SKILLS.
+No regenera bundles de usecases.
+No aprueba automatizacion desatendida.
+No aprueba Cursor para commits directos ni migraciones estructurales sin supervision humana.
 
 DEPENDENCIAS......:
-06.SKILL.WBS.txt
-07.SKILL.FILE_CONTENT.txt
-09.SKILL.RADAR.txt
-10.SKILL.BATON.txt
-11.SKILL.HUMAN_README.txt
-21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-23.SKILL.WHOAMI_POLICY.txt
+SkillsLake\01.SKILLS\06.SKILL.WBS.txt
+SkillsLake\01.SKILLS\07.SKILL.FILE_CONTENT.txt
+SkillsLake\01.SKILLS\09.SKILL.RADAR.txt
+SkillsLake\01.SKILLS\10.SKILL.BATON.txt
+SkillsLake\01.SKILLS\11.SKILL.HUMAN_README.txt
+SkillsLake\01.SKILLS\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+SkillsLake\01.SKILLS\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SkillsLake\01.SKILLS\23.SKILL.WHOAMI_POLICY.txt
+SkillsLake\01.SKILLS\SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+SkillsLake\01.SKILLS\SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt
+SkillsLake\01.SKILLS\SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+SkillsLake\01.SKILLS\SKILL.MANIFEST.PATH_SEMANTICS.txt
+SkillsLake\01.SKILLS\SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt
+SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
 
-TAGS_OPERATIVOS...: RUNTIME_CRITICAL, CONTINUITY, SESSION_CLOSE
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, CONTINUITY, SESSION_CLOSE, CURSOR_TRIAL, GRC, GOVERNANCE
 
 ---
 
@@ -41,31 +55,50 @@ TAGS_OPERATIVOS...: RUNTIME_CRITICAL, CONTINUITY, SESSION_CLOSE
 Proyecto:
 SkillMachine (repositorio local + GitHub sincronizado)
 
-Estado actual:
+Raiz canonica:
+C:\01. GitHub\Skills
 
-* Repo limpio (git status clean)
-* Validaciones activas:
+Estado Git actual al cierre de MB-GRC-014B:
+* Branch principal: main
+* Commit actual: 8b8515b
+* Commit message: 20260502.2315_GOV_add_post_migration_governance_skills
+* Tag: MB-GRC-014B-governance-skills-cursor-trial-20260502
+* Remote: origin/main sincronizado
+* Working tree: clean
+* Rama trial local trial/cursor-readonly-20260502 eliminada correctamente
 
-  * naming
-  * structure
-  * consistency
-* Pre-commit hook funcionando correctamente
-* Sin errores de ejecución ni falsos positivos detectados
+Estado actual del repositorio:
+* Repo limpio.
+* main actualizado.
+* tag publicado.
+* validaciones activas.
+* pre-commit hook funcionando.
+* siete governance skills incorporados como canonicos.
+* GLOBAL.SKILL.VERSION.REGISTRY.json actualizado.
+* 00.SKILL.MENU.ACTIVE.txt actualizado.
+* bundles de usecases no regenerados por decision explicita.
 
-Cambios recientes relevantes:
+Arquitectura activa:
+* HUMAN: capa canonica de intencion humana.
+* GRCLake: capa de governance, risk, compliance, policies, controls y templates.
+* SkillsLake: capa canonica de skills, docs, arquitectura y learning.
+* 90.USECASE: capa de usecases, bundles, manifests y registries.
+* SyS: tooling operacional, validadores, RADAR y soporte del sistema.
+* 95.AI_MODULES: modulos de soporte para herramientas IA.
 
-* Separación de validaciones (pre-commit vs release)
-* Hardening de Validate-Structure (evita self-detection)
-* Implementación completa de Validate-Consistency
-* Integración de consistency en Validate-System
-* Creación y estabilización de usecase:
-  02.SESSION_CLOSE
+Validaciones activas:
+* naming
+* structure
+* consistency
+* usecase registry schema
+* GRC repository architecture
 
-Riesgos activos:
-
-* No existe USECASE.CONTRACT (gap estructural)
-* No existe validación semántica (solo estructural)
-* Prompt es punto único de fallo (no validado contra manifest)
+Resultado validacion MB-GRC-014B:
+* Validate-System.ps1: PASS
+* pre-commit hook: PASS
+* fast-forward main: PASS
+* push main: PASS
+* push tag: PASS
 
 ---
 
@@ -73,19 +106,23 @@ Riesgos activos:
 01.00_OBJETIVOS_ACTIVOS
 =======================
 
-P0 (crítico):
-
-* Formalizar contrato de usecases
+P0 (critico):
+* Mantener working tree limpio.
+* Mantener registries alineados con filesystem canonico.
+* Mantener pre-commit hook como contrato obligatorio.
+* Evitar agentes IA sobre estados dirty o ambiguos.
 
 P1:
-
-* Fortalecer capa de validación (semántica)
-* Reducir dependencia del prompt
+* Formalizar o reforzar contratos de usecases cuando corresponda.
+* Evaluar si los nuevos governance skills deben incorporarse a bundles especificos.
+* Crear modulo 95.AI_MODULES\04.CURSOR solo si se decide documentar Cursor como herramienta aprobada de uso supervisado.
+* Regenerar RADAR post-BATON para dejar snapshot actualizado.
 
 P2:
-
-* Escalar arquitectura de usecases
-* Preparar sistema para múltiples casos reutilizables
+* Revisar si corresponde crear usecase especifico para AI Tool Governance.
+* Evaluar si Cursor Pro se justifica solo con gatillo operativo real.
+* Fortalecer validacion semantica.
+* Reducir dependencia de prompts no validados contra manifests.
 
 ---
 
@@ -94,28 +131,60 @@ P2:
 ==========================
 
 HUMAN:
+* No modificado durante MB-GRC-014B.
+* Sigue siendo la capa superior de autoridad conceptual.
+* Debe modificarse solo por decision humana cuando exista cambio doctrinal.
 
-* No modificado en esta sesión
-* Sin evidencia de drift (no validado en profundidad)
+GRCLake:
+* Activo.
+* Contiene policies, controls y templates.
+* Validacion GRC repository architecture paso correctamente.
 
-SKILLS:
+SkillsLake:
+* Activo.
+* Ubicacion canonica:
+  C:\01. GitHub\Skills\SkillsLake
 
-* Activos y consistentes
-* Sin cambios estructurales
+Governance skills agregados en MB-GRC-014B:
+* SkillsLake\01.SKILLS\SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+* SkillsLake\01.SKILLS\SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+* SkillsLake\01.SKILLS\SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt
+* SkillsLake\01.SKILLS\SKILL.MANIFEST.PATH_SEMANTICS.txt
+* SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+* SkillsLake\01.SKILLS\SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt
+* SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
 
-BATON:
+Skills menu:
+* SkillsLake\00.MENU\00.SKILL.MENU.ACTIVE.txt actualizado.
+* Los siete governance skills quedaron visibles en catalogo activo.
 
-* Este archivo representa el nuevo estado
-* No había BATON previo visible (posible gap)
+Global registry:
+* 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json actualizado.
+* Los siete governance skills quedaron registrados con path canonico:
+  SkillsLake/01.SKILLS/<archivo>
 
-WhoAmI:
+Usecase registry:
+* 90.USECASE\USECASE.REGISTRY.json no modificado en MB-GRC-014B.
+* Decision explicita: no incorporar todavia los siete governance skills a bundles.
 
-* No actualizado en esta sesión (pendiente validar si aplica)
+Usecase manifests:
+* No modificados en MB-GRC-014B.
+* Decision explicita: no regenerar bundles todavia.
 
 RADAR:
+* Herramienta existe:
+  SyS\A_Tools\Radar\RADAR.ps1
+* Outputs previos existen en:
+  SyS\A_Tools\Radar
+* Pendiente: regenerar RADAR tras actualizar este BATON.
 
-* No ejecutado post-cambios (gap contra policy)
-* Validación asumida por consistencia manual y git
+BATON:
+* Este archivo reemplaza el snapshot anterior de 2026-04-26.
+* Debe considerarse continuidad operacional activa post MB-GRC-014B.
+
+WhoAmI:
+* No actualizado en MB-GRC-014B.
+* Pendiente validar si corresponde en una minibattle posterior.
 
 ---
 
@@ -126,82 +195,309 @@ RADAR:
 PROJECT_ROOT:
 C:\01. GitHub\Skills
 
-ZONAS CRITICAS:
+BRANCH_CANONICA:
+main
 
-* SyS/A_Tools/Validation
+HEAD_CANONICO_ACTUAL:
+8b8515b
+
+TAG_CANONICO_ACTUAL:
+MB-GRC-014B-governance-skills-cursor-trial-20260502
+
+ZONAS_CRITICAS:
+* HUMAN
+* GRCLake
+* SkillsLake
 * 90.USECASE
+* SyS\A_Tools\Validation
+* SyS\A_Tools\Radar
+* 95.AI_MODULES
 
-PERMISOS IMPLICITOS:
+REGLAS_DURAS:
+* No usar git add .
+* No usar git commit --no-verify.
+* No modificar manifests/registries con reemplazo textual amplio.
+* No permitir agentes IA sobre working tree ambiguo.
+* No editar bundles sin plan, validacion y aprobacion humana.
+* No borrar artifacts sin clasificacion previa.
+* No confundir RADAR output con basura temporal.
+* No tratar Cursor como herramienta de automatizacion desatendida.
 
-* Escritura permitida en usecases y validation tools
-* No modificar SKILLS sin instrucción explícita
-* No modificar HUMAN sin cambio conceptual validado
+FLUJO_OBLIGATORIO_PARA_AGENTES_IA:
+READ -> PLAN -> APPROVE -> BUILD -> DIFF -> TEST -> COMMIT/TAG
 
-REGLAS DURAS:
+ESTADO_CURSOR_DESKTOP_FREE:
+* APPROVED_FOR_READ_ONLY
+* APPROVED_FOR_PLAN_ONLY
+* APPROVED_FOR_CONTROLLED_BUILD_WITH_SUPERVISION
 
-* No romper validaciones existentes
-* No introducir falsos positivos
-* Mantener compatibilidad con pre-commit
+CURSOR_NO_APROBADO_PARA:
+* UNATTENDED_AUTOMATION
+* DIRECT_COMMIT
+* BUNDLE_REGENERATION_WITHOUT_REVIEW
+* REGISTRY_REPAIR_WITHOUT_DIFF_CONTROL
+* STRUCTURAL_MIGRATION_WITHOUT_HUMAN_APPROVAL
+
+MODELO_DE_USO_CURSOR:
+* Desktop solamente.
+* Plan gratuito por ahora.
+* No CLI todavia.
+* No cloud agent.
+* No auto-apply sin revision.
+* No auto-run destructivo.
+* No commit desde Cursor.
+* No push desde Cursor.
 
 ---
 
 ==========
-04.00_FOCOS_DE_TRABAJO_INMEDIATO
-================================
+04.00_CIERRE_MB_GRC_014B
+========================
 
-1. Crear USECASE.CONTRACT para SESSION_CLOSE
-2. Extender Validate-Consistency:
+MB-GRC-014B:
+Incorporacion canonica de governance skills post-migracion y prueba controlada de Cursor.
 
-   * validación prompt vs manifest
-   * validación estructura de usecase
-3. Definir patrón replicable para nuevos usecases
-4. Evaluar necesidad de 03.SESSION_CONTINUE
+Resultado:
+CERRADO.
+
+Commit:
+8b8515b
+
+Commit message:
+20260502.2315_GOV_add_post_migration_governance_skills
+
+Tag:
+MB-GRC-014B-governance-skills-cursor-trial-20260502
+
+Push:
+* origin/main actualizado
+* tag publicado
+
+Rama trial:
+* trial/cursor-readonly-20260502 creada para aislar prueba Cursor.
+* fast-forward a main ejecutado correctamente.
+* rama local trial eliminada tras cierre.
+
+Archivos agregados:
+* SkillsLake\01.SKILLS\SKILL.AI_AGENT_TOOL_GOVERNANCE.txt
+* SkillsLake\01.SKILLS\SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+* SkillsLake\01.SKILLS\SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt
+* SkillsLake\01.SKILLS\SKILL.MANIFEST.PATH_SEMANTICS.txt
+* SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+* SkillsLake\01.SKILLS\SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt
+* SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+
+Archivos modificados:
+* 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
+* SkillsLake\00.MENU\00.SKILL.MENU.ACTIVE.txt
+
+Validaciones:
+* Validate-System.ps1: PASS
+* Pre-commit hook: PASS
+* Working tree final: clean
+
+Decision explicita:
+* Los siete skills quedan canonicos y registrados.
+* No se incorporan a bundles todavia.
+* No se regeneran usecases todavia.
+* Cursor queda aprobado solo para controlled build supervisado.
 
 ---
 
 ==========
-05.00_NEXT_ACTION
+05.00_EVALUACION_CURSOR
+=======================
+
+Herramienta:
+Cursor Desktop Free
+
+Objetivo:
+Evaluar si Cursor puede operar dentro del flujo de trabajo esperado para SkillMachine sin dañar repo, contaminar contexto ni saltarse governance.
+
+Test 01:
+READ_ONLY repository orientation.
+
+Resultado:
+PASS con observacion inicial.
+Cursor identifico root, arquitectura, branch, HEAD, registries, validation hooks y working tree risk.
+Falla parcial inicial:
+* No detecto correctamente RADAR outputs bajo SyS\A_Tools\Radar en primer pase.
+Correccion posterior:
+* Cursor reconocio RADAR outputs tras prompt de verificacion.
+
+Test 02:
+PLAN_ONLY para evaluar siete untracked governance skills.
+
+Resultado:
+PASS.
+Cursor clasifico correctamente:
+* filesystem artifact
+* Git untracked
+* global registry absent
+* bundle source absent
+* canonical candidate
+
+Test 03:
+CONTROLLED_BUILD con scope quirurgico.
+
+Target permitido:
+* 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
+* SkillsLake\00.MENU\00.SKILL.MENU.ACTIVE.txt
+
+Resultado:
+PASS.
+Cursor modifico solo archivos permitidos.
+JSON valido.
+Paths correctos.
+No stage.
+No commit.
+No bundles.
+No manifests.
+
+Dictamen:
+Cursor Desktop Free queda aprobado para:
+* read-only
+* plan-only
+* controlled build supervisado
+
+Cursor Desktop Free no queda aprobado para:
+* automatizacion desatendida
+* commits directos
+* push
+* regeneracion de bundles sin review
+* cambios estructurales sin aprobacion humana
+* reparaciones registry/manifest sin diff control
+
+Decision sobre Cursor pago:
+No pasar a Cursor Pro todavia.
+Continuar con Free hasta detectar gatillo operativo real:
+* limite de requests
+* baja calidad en tareas reales
+* lentitud operacional
+* necesidad de modelos superiores
+* uso sostenido que justifique ROI
+
+---
+
+==========
+06.00_RIESGOS_ACTIVOS
+=====================
+
+R1. Bundles no actualizados con nuevos governance skills.
+Estado:
+Aceptado por decision explicita.
+Riesgo:
+Los usecases no consumen todavia estos skills.
+Mitigacion:
+Crear decision posterior para bundle inclusion si aplica.
+
+R2. BATON puede quedar desfasado si no se commitea MB-GRC-014C.
+Estado:
+Este archivo corrige el desfase.
+Mitigacion:
+Validar, regenerar RADAR, commit/tag/push.
+
+R3. Cursor aprobado con supervision puede ser sobrepromovido por entusiasmo.
+Estado:
+Riesgo operativo real.
+Mitigacion:
+Mantener limites explicitos de uso.
+
+R4. Working tree dirty bloquea agentes.
+Estado:
+Actualmente clean antes de actualizar BATON.
+Mitigacion:
+Siempre ejecutar git status --short antes de abrir agente.
+
+R5. Path semantics en manifests/registries.
+Estado:
+Riesgo permanente.
+Mitigacion:
+Usar schema-aware repair. Prohibido broad search/replace.
+
+R6. RADAR outputs pueden ser confundidos con temp artifacts.
+Estado:
+Riesgo detectado durante Cursor trial.
+Mitigacion:
+RADAR bajo SyS\A_Tools\Radar debe tratarse como output operacional esperado.
+
+---
+
+==========
+07.00_NEXT_ACTION
 =================
 
-Crear archivo:
+Accion inmediata:
+1. Guardar este BATON actualizado.
+2. Regenerar RADAR.
+3. Ejecutar Validate-System.ps1.
+4. Revisar git diff.
+5. Commit/tag/push MB-GRC-014C si todo pasa.
 
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.CONTRACT.txt
+Comandos esperados posteriores:
+* powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\Radar\RADAR.ps1"
+* powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\Validation\Validate-System.ps1"
+* git diff --name-status
+* git status --short
 
-y luego:
+Siguiente minibattle recomendada:
+MB-GRC-014C — Continuity update: BATON + RADAR post Cursor trial.
 
-Extender Validate-Consistency.ps1 para validar:
-
-* existencia de USECASE.CONTRACT
-* coherencia básica del usecase
+Despues de MB-GRC-014C:
+Evaluar:
+* crear 95.AI_MODULES\04.CURSOR
+* definir runbooks Cursor
+* decidir si nuevos governance skills se incorporan a usecase bundles
+* decidir si crear usecase 05.AI_TOOL_GOVERNANCE
 
 ---
 
 ==========
-06.00_CHECKLIST_DE_CIERRE
+08.00_CHECKLIST_DE_CIERRE
 =========================
 
-[OK] Código sincronizado con GitHub
-[OK] Working tree limpio
-[OK] Validaciones ejecutadas sin error
-[OK] Pre-commit funcionando
-[OK] Usecase SESSION_CLOSE operativo
-[WARN] RADAR no ejecutado post-cambios
+[OK] main actualizado a 8b8515b
+[OK] origin/main actualizado
+[OK] tag MB-GRC-014B-governance-skills-cursor-trial-20260502 publicado
+[OK] branch trial local eliminada
+[OK] siete governance skills agregados
+[OK] GLOBAL.SKILL.VERSION.REGISTRY.json actualizado
+[OK] 00.SKILL.MENU.ACTIVE.txt actualizado
+[OK] Validate-System.ps1 paso en MB-GRC-014B
+[OK] pre-commit hook paso en MB-GRC-014B
+[OK] Cursor evaluado
+[OK] Cursor aprobado hasta controlled build supervisado
+[WARN] bundles no regenerados por decision explicita
 [WARN] WhoAmI no actualizado
-[WARN] Falta USECASE.CONTRACT
+[WARN] falta regenerar RADAR post-BATON
+[WARN] falta commit/tag/push de MB-GRC-014C
 
 ---
 
 ==========
-07.00_CHANGELOG
+09.00_CHANGELOG
 ===============
+
+2026-05-03, v1.1-MB-GRC-014C-CONTINUITY
+
+* Actualizado BATON tras cierre de MB-GRC-014B.
+* Registrado commit 8b8515b.
+* Registrado tag MB-GRC-014B-governance-skills-cursor-trial-20260502.
+* Registrado push de main y tag a GitHub.
+* Registrada eliminacion de rama trial local.
+* Registrada incorporacion canonica de siete governance skills.
+* Registrado dictamen Cursor Desktop Free.
+* Registrada decision de no pasar todavia a Cursor Pro.
+* Registrada decision de no regenerar bundles todavia.
+* Definido next action: regenerar RADAR, validar y cerrar MB-GRC-014C.
 
 2026-04-26, v1.0-SESSION_CLOSE
 
-* Cierre de sesión con validaciones completas (naming, structure, consistency)
-* Implementación de Validate-Consistency
-* Integración completa en pre-commit
-* Estabilización de usecase SESSION_CLOSE
-* Identificación de gaps estructurales (USECASE.CONTRACT, validación semántica)
+* Cierre de sesion con validaciones completas (naming, structure, consistency).
+* Implementacion de Validate-Consistency.
+* Integracion completa en pre-commit.
+* Estabilizacion de usecase SESSION_CLOSE.
+* Identificacion de gaps estructurales (USECASE.CONTRACT, validacion semantica).
 
 ==========
 FIN_DEL_DOCUMENTO
