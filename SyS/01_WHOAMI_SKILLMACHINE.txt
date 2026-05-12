@@ -258,3 +258,31 @@ No tratarlos como basura temporal sin clasificacion previa.
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+==========
+MB-GRC-016_WHOAMI_UPDATE_20260512
+==========
+
+FECHA..............: 2026-05-12
+HORA...............: 19:XX
+CIUDAD.............: Santiago, Chile
+MINIBATTLE.........: MB-GRC-016
+ESTADO.............: EN CIERRE TECNICO
+
+ROL_ACTUAL_DEL_SISTEMA:
+SkillMachine cuenta ahora con cierre de sesion endurecido y politica de frescura operacional.
+
+CAMBIO_RELEVANTE:
+El cierre de sesion ya no solo valida existencia de BATON/WHOAMI/RADAR.
+Ahora tambien reporta si los artefactos de continuidad estan frescos contra HEAD.
+
+CRITERIO:
+- BATON/WHOAMI: ultimo commit Git por archivo.
+- RADAR: generated_at del manifest.
+- Git dirty: WARN.
+- Validacion fallida o artefacto requerido faltante: FAIL.
+
+ULTIMO_FOCO:
+Cerrar MB-GRC-016 con commit/tag/push y ejecutar RADAR/readiness final.
+
+==========

@@ -1,0 +1,34 @@
+==========
+MB-GRC-016.DELIVERED
+==========
+
+DATE...............: 2026-05-12
+ROOT...............: C:\01. GitHub\Skills
+MINIBATTLE.........: MB-GRC-016
+TITLE..............: BATON / WHOAMI / RADAR freshness policy
+
+CREATED_OR_UPDATED:
+- SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+- 90.USECASE\02.SESSION_CLOSE\RUNBOOK.SESSION_CLOSE.HARDENED.txt
+- 90.USECASE\02.SESSION_CLOSE\PROMPT.SESSION_CLOSE.txt
+- SyS\A_Tools\SessionClose\MB-GRC-016.DELIVERED.txt
+
+BACKUP_DIR:
+C:\01. GitHub\Skills\SyS\A_Tools\OneShots\Backups\MB_GRC_016C_FIX_FRESHNESS_SEMANTICS_20260512_191512
+
+PURPOSE:
+Session close readiness now evaluates freshness of RADAR, BATON and WHOAMI against HEAD.
+
+FRESHNESS_SEMANTICS:
+- BATON and WHOAMI use git last-commit date per path.
+- RADAR uses manifest generated_at because RADAR runtime outputs are ignored.
+- This avoids false WARN caused by filesystem LastWriteTime being earlier than commit time.
+
+EXPECTED_BEHAVIOR:
+- OK when Git is clean, validation passes, required artifacts exist, BATON/WHOAMI are updated in HEAD, and RADAR manifest is fresh against HEAD.
+- WARN when Git is dirty, BATON/WHOAMI were not updated in HEAD, RADAR is older than HEAD, or freshness cannot be determined.
+- FAIL when validation fails or required artifacts are missing.
+
+==========
+FIN
+==========

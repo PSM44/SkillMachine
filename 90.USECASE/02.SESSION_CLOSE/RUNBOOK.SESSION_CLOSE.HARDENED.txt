@@ -108,3 +108,44 @@ Si el resultado es FAIL:
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+==========
+MB-GRC-016_FRESHNESS_POLICY
+==========
+
+El cierre endurecido debe evaluar frescura operacional contra HEAD.
+
+Regla:
+- BATON, WHOAMI y RADAR no solo deben existir.
+- Tambien deben ser iguales o posteriores a la fecha del ultimo commit HEAD.
+- Si existen pero son anteriores a HEAD, el cierre queda en WARN.
+
+Interpretacion:
+- WARN no significa falla tecnica.
+- WARN significa posible deuda de continuidad.
+- El humano decide si actualiza BATON/WHOAMI/RADAR o si acepta el cierre con advertencia.
+
+Campos esperados en el reporte:
+- HEAD_COMMIT_DATE
+- RADAR_FRESH_AGAINST_HEAD
+- BATON_FRESH_AGAINST_HEAD
+- WHOAMI_FRESH_AGAINST_HEAD
+
+==========
+
+==========
+MB-GRC-016C_FRESHNESS_SEMANTICS
+==========
+
+Correccion de criterio:
+
+BATON y WHOAMI:
+- La frescura se mide por el ultimo commit Git que toco cada archivo.
+- No se mide por LastWriteTime del filesystem.
+- Motivo: despues de un commit, la fecha HEAD sera posterior al LastWriteTime del archivo, generando falsos WARN.
+
+RADAR:
+- La frescura se mide por RADAR_GENERATED_AT porque los outputs RADAR son runtime/ignored.
+- Si RADAR queda anterior a HEAD, regenerar RADAR despues del commit o aceptar WARN informado.
+
+==========

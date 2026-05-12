@@ -57,3 +57,31 @@ Regla:
 - WARN exige revisión humana.
 - FAIL bloquea cierre limpio.
 
+
+==========
+MB-GRC-016_FRESHNESS_POLICY
+==========
+
+Ademas del cierre MB-GRC-015, revisar frescura de continuidad:
+
+- HEAD_COMMIT_DATE.
+- RADAR_FRESH_AGAINST_HEAD.
+- BATON_FRESH_AGAINST_HEAD.
+- WHOAMI_FRESH_AGAINST_HEAD.
+
+Regla:
+- Si cualquiera esta en False, reportar WARN.
+- No declarar cierre limpio sin informar la deuda de continuidad.
+
+==========
+
+==========
+MB-GRC-016C_FRESHNESS_SEMANTICS
+==========
+
+Para evaluar frescura:
+- BATON/WHOAMI usan ultimo commit Git del archivo.
+- RADAR usa generated_at del manifest.
+- No usar LastWriteTime como criterio principal para BATON/WHOAMI.
+
+==========

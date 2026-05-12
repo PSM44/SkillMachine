@@ -14,9 +14,20 @@ OUTPUTS:
   SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
 
 CONTRACT:
-  - OK only when Git is clean and Validate-System.ps1 exits 0.
-  - WARN when validation passes but Git has pending changes.
-  - FAIL when validation fails or repository/root artifacts are missing.
+  - OK only when Git is clean, Validate-System.ps1 exits 0, required continuity artifacts exist,
+    BATON/WHOAMI are version-fresh against HEAD, and RADAR runtime output is fresh against HEAD.
+  - WARN when validation passes but Git has pending changes or continuity freshness is stale.
+  - FAIL when validation fails or required artifacts are missing.
+
+CHANGELOG:
+  2026-05-12, MB-GRC-016C
+  - Fixes freshness semantics.
+  - BATON/WHOAMI freshness uses git last commit touching each file, not filesystem LastWriteTime.
+  - RADAR freshness continues to use manifest generated_at because RADAR runtime outputs are ignored.
+  2026-05-12, MB-GRC-016B
+  - Robust full-file canonical version.
+  - Adds freshness checks for RADAR, BATON and WHOAMI against HEAD commit date.
+  - Keeps Windows PowerShell 5.1-compatible native command execution.
 #>
 
 Set-StrictMode -Version Latest
@@ -59,14 +70,6 @@ function Invoke-NativeText {
     [Parameter(Mandatory=$true)][string]$WorkingDirectory
   )
 
-  # Uses System.Diagnostics.Process instead of PowerShell native redirection.
-  # Reason: Git warnings on stderr must be captured as text, not promoted to
-  # NativeCommandError under $ErrorActionPreference = Stop.
-  #
-  # Compatibility note:
-  # Windows PowerShell 5.1 / .NET Framework does not reliably expose
-  # ProcessStartInfo.ArgumentList. Use ProcessStartInfo.Arguments instead.
-
   $psi = New-Object System.Diagnostics.ProcessStartInfo
   $psi.FileName = $FilePath
   $psi.Arguments = ConvertTo-ProcessArgumentString -Arguments $Arguments
@@ -107,12 +110,74 @@ function Invoke-NativeText {
     output    = @($lines)
   }
 }
+
 function Add-Line {
   param(
     [System.Collections.Generic.List[string]]$Lines,
     [string]$Text = ""
   )
   [void]$Lines.Add($Text)
+}
+
+function Parse-DateOffsetOrNull {
+  param(
+    [Parameter(Mandatory=$false)][string]$Raw
+  )
+
+  if ([string]::IsNullOrWhiteSpace($Raw)) {
+    return $null
+  }
+
+  try {
+    return [datetimeoffset]::Parse($Raw.Trim())
+  } catch {
+    return $null
+  }
+}
+
+function Get-GitHeadDate {
+  param(
+    [Parameter(Mandatory=$true)][string]$WorkingDirectory
+  )
+
+  $headDateResult = Invoke-NativeText -FilePath "git" -Arguments @("log","-1","--format=%cI") -WorkingDirectory $WorkingDirectory
+
+  if ($headDateResult.exit_code -ne 0) {
+    return $null
+  }
+
+  return Parse-DateOffsetOrNull -Raw ((@($headDateResult.output) -join "`n").Trim())
+}
+
+function Get-GitPathLastCommitDate {
+  param(
+    [Parameter(Mandatory=$true)][string]$WorkingDirectory,
+    [Parameter(Mandatory=$true)][string]$RelativePath
+  )
+
+  $pathDateResult = Invoke-NativeText -FilePath "git" -Arguments @("log","-1","--format=%cI","--",$RelativePath) -WorkingDirectory $WorkingDirectory
+
+  if ($pathDateResult.exit_code -ne 0) {
+    return $null
+  }
+
+  return Parse-DateOffsetOrNull -Raw ((@($pathDateResult.output) -join "`n").Trim())
+}
+
+function Get-RadarGeneratedDateOffset {
+  param(
+    [Parameter(Mandatory=$false)]$RadarManifest
+  )
+
+  if ($null -eq $RadarManifest) {
+    return $null
+  }
+
+  if (-not $RadarManifest.generated_at) {
+    return $null
+  }
+
+  return Parse-DateOffsetOrNull -Raw ([string]$RadarManifest.generated_at)
 }
 
 $Root = Get-RepoRoot
@@ -128,6 +193,9 @@ $RadarManifestPath = Join-Path $Root "SyS\A_Tools\Radar\radar.manifest.json"
 $RadarLitePath = Join-Path $Root "SyS\A_Tools\Radar\radar.lite.txt"
 $BatonPath = Join-Path $Root "SyS\00.0_BATON_SKILLMACHINE.txt"
 $WhoamiPath = Join-Path $Root "SyS\01_WHOAMI_SKILLMACHINE.txt"
+
+$BatonRelPath = "SyS/00.0_BATON_SKILLMACHINE.txt"
+$WhoamiRelPath = "SyS/01_WHOAMI_SKILLMACHINE.txt"
 
 $branch = Invoke-NativeText -FilePath "git" -Arguments @("branch","--show-current") -WorkingDirectory $Root
 $lastCommit = Invoke-NativeText -FilePath "git" -Arguments @("log","-1","--oneline") -WorkingDirectory $Root
@@ -159,6 +227,27 @@ if ($radarManifestExists) {
   } catch {
     $radarManifest = $null
   }
+}
+
+$headCommitDate = Get-GitHeadDate -WorkingDirectory $Root
+$radarGeneratedDate = Get-RadarGeneratedDateOffset -RadarManifest $radarManifest
+$batonLastCommitDate = Get-GitPathLastCommitDate -WorkingDirectory $Root -RelativePath $BatonRelPath
+$whoamiLastCommitDate = Get-GitPathLastCommitDate -WorkingDirectory $Root -RelativePath $WhoamiRelPath
+
+$radarFreshAgainstHead = $false
+$batonFreshAgainstHead = $false
+$whoamiFreshAgainstHead = $false
+
+if ($headCommitDate -and $radarGeneratedDate) {
+  $radarFreshAgainstHead = ($radarGeneratedDate -ge $headCommitDate)
+}
+
+if ($headCommitDate -and $batonLastCommitDate) {
+  $batonFreshAgainstHead = ($batonLastCommitDate -ge $headCommitDate)
+}
+
+if ($headCommitDate -and $whoamiLastCommitDate) {
+  $whoamiFreshAgainstHead = ($whoamiLastCommitDate -ge $headCommitDate)
 }
 
 $gitDirty = (
@@ -196,7 +285,26 @@ if ($gitDirty -and $status -eq "OK") {
   [void]$issues.Add("Git working tree is not clean.")
 }
 
+if ($status -eq "OK") {
+  if (-not $radarFreshAgainstHead) {
+    $status = "WARN"
+    [void]$issues.Add("RADAR manifest appears older than HEAD or freshness could not be determined.")
+  }
+
+  if (-not $batonFreshAgainstHead) {
+    $status = "WARN"
+    [void]$issues.Add("BATON was not updated in HEAD.")
+  }
+
+  if (-not $whoamiFreshAgainstHead) {
+    $status = "WARN"
+    [void]$issues.Add("WHOAMI was not updated in HEAD.")
+  }
+}
+
 $artifactMeta = [pscustomobject]@{
+  head_commit_date = if ($headCommitDate) { $headCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
+
   radar_manifest_exists = $radarManifestExists
   radar_manifest_path = $RadarManifestPath
   radar_generated_at = if ($radarManifest -and $radarManifest.generated_at) { $radarManifest.generated_at } else { "" }
@@ -204,12 +312,17 @@ $artifactMeta = [pscustomobject]@{
   radar_core_file_count = if ($radarManifest -and $null -ne $radarManifest.core_file_count) { $radarManifest.core_file_count } else { "" }
   radar_skipped_too_large_count = if ($radarManifest -and $null -ne $radarManifest.skipped_too_large_count) { $radarManifest.skipped_too_large_count } else { "" }
   radar_lite_exists = $radarLiteExists
+  radar_fresh_against_head = $radarFreshAgainstHead
+
   baton_exists = $batonExists
   baton_path = $BatonPath
-  baton_modified_at = if ($batonExists) { (Get-Item -LiteralPath $BatonPath).LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss") } else { "" }
+  baton_last_commit_date = if ($batonLastCommitDate) { $batonLastCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
+  baton_fresh_against_head = $batonFreshAgainstHead
+
   whoami_exists = $whoamiExists
   whoami_path = $WhoamiPath
-  whoami_modified_at = if ($whoamiExists) { (Get-Item -LiteralPath $WhoamiPath).LastWriteTime.ToString("yyyy-MM-dd HH:mm:ss") } else { "" }
+  whoami_last_commit_date = if ($whoamiLastCommitDate) { $whoamiLastCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
+  whoami_fresh_against_head = $whoamiFreshAgainstHead
 }
 
 $result = [pscustomobject]@{
@@ -318,27 +431,31 @@ Add-Line $lines ""
 Add-Line $lines "=========="
 Add-Line $lines "04.00_CONTINUITY_ARTIFACTS"
 Add-Line $lines "=========="
+Add-Line $lines ("HEAD_COMMIT_DATE...........: {0}" -f $artifactMeta.head_commit_date)
 Add-Line $lines ("RADAR_MANIFEST_EXISTS......: {0}" -f $artifactMeta.radar_manifest_exists)
 Add-Line $lines ("RADAR_MANIFEST_PATH........: {0}" -f $artifactMeta.radar_manifest_path)
 Add-Line $lines ("RADAR_GENERATED_AT.........: {0}" -f $artifactMeta.radar_generated_at)
 Add-Line $lines ("RADAR_TOTAL_FILE_COUNT.....: {0}" -f $artifactMeta.radar_total_file_count)
 Add-Line $lines ("RADAR_CORE_FILE_COUNT......: {0}" -f $artifactMeta.radar_core_file_count)
 Add-Line $lines ("RADAR_SKIPPED_TOO_LARGE....: {0}" -f $artifactMeta.radar_skipped_too_large_count)
+Add-Line $lines ("RADAR_FRESH_AGAINST_HEAD...: {0}" -f $artifactMeta.radar_fresh_against_head)
 Add-Line $lines ("BATON_EXISTS...............: {0}" -f $artifactMeta.baton_exists)
 Add-Line $lines ("BATON_PATH.................: {0}" -f $artifactMeta.baton_path)
-Add-Line $lines ("BATON_MODIFIED_AT..........: {0}" -f $artifactMeta.baton_modified_at)
+Add-Line $lines ("BATON_LAST_COMMIT_DATE.....: {0}" -f $artifactMeta.baton_last_commit_date)
+Add-Line $lines ("BATON_FRESH_AGAINST_HEAD...: {0}" -f $artifactMeta.baton_fresh_against_head)
 Add-Line $lines ("WHOAMI_EXISTS..............: {0}" -f $artifactMeta.whoami_exists)
 Add-Line $lines ("WHOAMI_PATH................: {0}" -f $artifactMeta.whoami_path)
-Add-Line $lines ("WHOAMI_MODIFIED_AT.........: {0}" -f $artifactMeta.whoami_modified_at)
+Add-Line $lines ("WHOAMI_LAST_COMMIT_DATE....: {0}" -f $artifactMeta.whoami_last_commit_date)
+Add-Line $lines ("WHOAMI_FRESH_AGAINST_HEAD..: {0}" -f $artifactMeta.whoami_fresh_against_head)
 Add-Line $lines ""
 
 Add-Line $lines "=========="
 Add-Line $lines "05.00_NEXT_ACTION"
 Add-Line $lines "=========="
 if ($status -eq "OK") {
-  Add-Line $lines "NEXT_ACTION.........: Session can be closed. Repository is clean and validation passed."
+  Add-Line $lines "NEXT_ACTION.........: Session can be closed. Repository is clean, validation passed, and continuity artifacts are fresh against HEAD."
 } elseif ($status -eq "WARN") {
-  Add-Line $lines "NEXT_ACTION.........: Review pending Git changes before closing session."
+  Add-Line $lines "NEXT_ACTION.........: Review Git and continuity freshness warnings before closing session."
 } else {
   Add-Line $lines "NEXT_ACTION.........: Do not close session as clean. Fix FAIL issues first."
 }
@@ -364,5 +481,3 @@ if ($status -eq "WARN") {
 }
 
 exit 0
-
-

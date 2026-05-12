@@ -502,3 +502,40 @@ Evaluar:
 ==========
 FIN_DEL_DOCUMENTO
 =================
+
+==========
+MB-GRC-016_CONTINUITY_UPDATE_20260512
+==========
+
+FECHA..............: 2026-05-12
+HORA...............: 19:XX
+CIUDAD.............: Santiago, Chile
+MINIBATTLE.........: MB-GRC-016
+ESTADO.............: EN CIERRE TECNICO
+
+RESUMEN:
+Se implemento politica de frescura para cierre de sesion.
+Test-SessionCloseReadiness.ps1 ahora evalua:
+- Git clean / dirty.
+- Validate-System.ps1.
+- RADAR manifest.
+- BATON.
+- WHOAMI.
+- Frescura de RADAR contra HEAD mediante RADAR_GENERATED_AT.
+- Frescura de BATON/WHOAMI contra HEAD mediante ultimo commit Git por archivo.
+
+DECISION TECNICA:
+BATON y WHOAMI no usan LastWriteTime como criterio principal.
+Motivo: despues de un commit, HEAD puede ser posterior al LastWriteTime del archivo y generar falso WARN.
+La frescura versionada debe evaluarse por Git.
+
+ARTEFACTOS RELEVANTES:
+- SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+- 90.USECASE\02.SESSION_CLOSE\RUNBOOK.SESSION_CLOSE.HARDENED.txt
+- 90.USECASE\02.SESSION_CLOSE\PROMPT.SESSION_CLOSE.txt
+- SyS\A_Tools\SessionClose\MB-GRC-016.DELIVERED.txt
+
+PROXIMA_ACCION:
+Commit MB-GRC-016, push, tag, regenerar RADAR post-commit y ejecutar readiness final.
+
+==========
