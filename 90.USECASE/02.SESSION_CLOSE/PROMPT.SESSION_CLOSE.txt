@@ -28,3 +28,32 @@ OUTPUT:
 - siguiente acción exacta
 - observación sobre mejoras de skills si corresponde
 
+
+==========
+MB-GRC-015_SESSION_CLOSE_HARDENING
+==========
+
+Antes de declarar una sesión cerrada, ejecutar obligatoriamente:
+
+powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+
+El cierre debe reportar, como mínimo:
+
+- Rama Git actual.
+- Último commit.
+- Tags en HEAD.
+- Estado Git corto.
+- Diff stat.
+- Diff staged.
+- Archivos untracked.
+- Resultado de Validate-System.ps1.
+- Existencia y metadata básica de RADAR manifest.
+- Existencia y modified_at de BATON.
+- Existencia y modified_at de WHOAMI.
+- Ruta del reporte TXT y JSON generado.
+
+Regla:
+- OK permite cierre limpio.
+- WARN exige revisión humana.
+- FAIL bloquea cierre limpio.
+

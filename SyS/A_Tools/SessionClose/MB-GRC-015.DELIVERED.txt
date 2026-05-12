@@ -1,0 +1,27 @@
+==========
+MB-GRC-015.DELIVERED
+==========
+
+DATE...............: 2026-05-12
+ROOT...............: C:\01. GitHub\Skills
+MINIBATTLE.........: MB-GRC-015
+TITLE..............: SESSION_CLOSE hardening
+
+CREATED_OR_UPDATED:
+- SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+- SyS\A_Tools\SessionClose\MB-GRC-015.DELIVERED.txt
+- 90.USECASE\02.SESSION_CLOSE\RUNBOOK.SESSION_CLOSE.HARDENED.txt
+- 90.USECASE\02.SESSION_CLOSE\PROMPT.SESSION_CLOSE.txt
+
+BACKUP_DIR:
+C:\01. GitHub\Skills\SyS\A_Tools\OneShots\Backups\MB_GRC_015_SESSION_CLOSE_HARDENING_20260512_182404
+
+PURPOSE:
+Session close now has a deterministic readiness check covering Git, validation, RADAR, BATON and WHOAMI.
+
+NEXT:
+Run Test-SessionCloseReadiness.ps1, then Validate-System.ps1, then review Git diff.
+
+==========
+FIN
+==========

@@ -31,3 +31,7 @@ Thumbs.db
 # Radar outputs
 SyS/A_Tools/Radar/
 
+
+# MB-GRC-015D: generated session-close readiness runtime outputs
+SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.txt
+SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.json

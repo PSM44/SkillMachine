@@ -1,0 +1,110 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: RUNBOOK.SESSION_CLOSE.HARDENED.01.00
+NOMBRE_SUGERIDO...: RUNBOOK.SESSION_CLOSE.HARDENED.txt
+VERSION...........: v1.0-MB-GRC-015
+FECHA.............: 2026-05-12
+HORA..............: 18:XX
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 90.USECASE\02.SESSION_CLOSE
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, WHOAMI_STATE
+
+ALCANCE...........:
+Define el cierre endurecido de sesión para SkillMachine.
+El cierre debe capturar evidencia objetiva de Git, validación, RADAR, BATON y WHOAMI.
+
+NO_CUBRE..........:
+No reemplaza BATON.
+No reemplaza WHOAMI.
+No modifica política GRC.
+No migra nombres Validate-* a Test-*.
+
+DEPENDENCIAS......:
+SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+SyS\A_Tools\Validation\Validate-System.ps1
+SyS\A_Tools\Radar\radar.manifest.json
+SyS\00.0_BATON_SKILLMACHINE.txt
+SyS\01_WHOAMI_SKILLMACHINE.txt
+
+==========
+01.00_PROPOSITO
+==========
+
+Este runbook existe para evitar cierres de sesión incompletos.
+
+Problema que resuelve:
+- Cierres sin Git status.
+- Cierres sin HEAD/tag.
+- Cierres sin validación.
+- Cierres sin evidencia RADAR.
+- Cierres sin chequeo BATON/WHOAMI.
+- Dependencia excesiva de memoria humana.
+
+==========
+02.00_COMANDO_CANONICO
+==========
+
+Ejecutar desde:
+
+C:\01. GitHub\Skills
+
+Comando:
+
+powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+
+==========
+03.00_OUTPUTS
+==========
+
+El cierre endurecido genera:
+
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
+
+==========
+04.00_CRITERIO_DE_CIERRE
+==========
+
+OK:
+- Git limpio.
+- Validate-System.ps1 OK.
+- RADAR manifest existe.
+- BATON existe.
+- WHOAMI existe.
+
+WARN:
+- Validación OK, pero Git tiene cambios pendientes.
+
+FAIL:
+- Validación falla.
+- Falta RADAR manifest.
+- Falta BATON.
+- Falta WHOAMI.
+
+==========
+05.00_REGLA_OPERATIVA
+==========
+
+Si el resultado es OK:
+- Se puede cerrar sesión.
+
+Si el resultado es WARN:
+- Revisar cambios Git antes de cerrar.
+
+Si el resultado es FAIL:
+- No cerrar como sesión limpia.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-05-12, v1.0-MB-GRC-015
+- Creación inicial del cierre endurecido de sesión.
+- Agrega captura objetiva de Git, validación y artefactos de continuidad.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
