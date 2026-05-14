@@ -286,3 +286,33 @@ ULTIMO_FOCO:
 Cerrar MB-GRC-016 con commit/tag/push y ejecutar RADAR/readiness final.
 
 ==========
+
+==========
+MB-GRC-017_CONTINUIDAD_HUMANA
+==========
+
+FECHA...............: 2026-05-14
+CIUDAD..............: Santiago, Chile
+ESTADO..............: MB-GRC-017 cerrado y publicado.
+
+QUE_CAMBIO..........:
+RADAR.ps1 quedó versionado y corregido para excluir SyS\A_Tools\OneShots\Backups del inventario activo RADAR. La exclusión ahora es funcional y visible en EXCLUDED_PATHS.
+
+COMO_VERIFICAR......:
+Ejecutar RADAR dos veces. El segundo run debe mostrar:
+- FILES: 158
+- NEW: 0
+- MODIFIED: 0
+- DELETED: 0
+- SKIPPED: 0
+Además:
+- radar.index.txt no debe listar SyS\\A_Tools\\OneShots\\Backups.
+- radar.core.txt no debe tener FILE sections bajo SyS\\A_Tools\\OneShots\\Backups.
+- radar.manifest.json scanned_files debe reportar cero entradas bajo backups.
+
+NOTA_CRITICA........:
+No borrar backups. La regla vigente es retenerlos para auditoría/rollback y excluirlos de RADAR principal.
+
+PROXIMO_FOCO........:
+MB-GRC-018 — separar Radar Engine de Radar Outputs.
+

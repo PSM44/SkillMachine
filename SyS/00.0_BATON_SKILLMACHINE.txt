@@ -539,3 +539,35 @@ PROXIMA_ACCION:
 Commit MB-GRC-016, push, tag, regenerar RADAR post-commit y ejecutar readiness final.
 
 ==========
+
+==========
+MB-GRC-017_CIERRE_OPERATIVO
+==========
+
+FECHA...............: 2026-05-14
+CIUDAD..............: Santiago, Chile
+COMMIT..............: f7e2e56 MB-GRC-017 track radar exclusion hygiene
+TAG.................: MB-GRC-017-radar-backup-exclusion-20260514
+ESTADO..............: CERRADO / PUSHED / TAGGED
+
+RESUMEN.............:
+Se corrigió la higiene operacional de RADAR. El motor RADAR.ps1 quedó versionado en Git y se excluyó SyS\A_Tools\OneShots\Backups del inventario activo RADAR, manteniendo los backups en disco para auditoría/rollback.
+
+EVIDENCIA...........:
+- git push origin main OK.
+- git push origin MB-GRC-017-radar-backup-exclusion-20260514 OK.
+- RADAR post-commit pass 1 OK.
+- RADAR post-commit pass 2 OK.
+- radar.index.txt no contiene backups como inventario activo.
+- radar.core.txt no contiene FILE sections de backups.
+- radar.manifest.json scanned_files reporta SCANNED_HITS=0 para backups.
+- Validate-System.ps1 OK.
+- Git working tree clean.
+
+DECISION_TECNICA....:
+No se borraron ni movieron backups. Se mantuvieron como evidencia operacional, pero fuera del mapa RADAR activo.
+
+BACKLOG_SIGUIENTE...:
+MB-GRC-018 — separar Radar Engine de Radar Outputs.
+Motivo: SyS\A_Tools\Radar\RADAR.ps1 es tooling fuente versionado, mientras SyS\A_Tools\Radar\radar.* son outputs runtime ignorados. La mezcla funciona, pero no es arquitectura limpia.
+
