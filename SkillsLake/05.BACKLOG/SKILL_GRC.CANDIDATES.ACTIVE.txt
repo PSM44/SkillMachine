@@ -1,0 +1,136 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL_GRC.CANDIDATES.ACTIVE.01.00
+NOMBRE_SUGERIDO...: SKILL_GRC.CANDIDATES.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-14
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake\05.BACKLOG
+AUTOR_HUMANO......: Pablo
+ESTADO............: ACTIVE
+
+ALCANCE...........:
+Backlog único de candidatos para crear, mejorar, fusionar o rechazar Skills y GRC
+(Governance, Risk and Compliance).
+
+NO_CUBRE..........:
+No aprueba automáticamente nuevos artefactos.
+No reemplaza catálogo global.
+No reemplaza validación documental.
+No reemplaza decisión humana.
+
+DEPENDENCIAS......:
+00.CATALOG\DOMAIN.REGISTRY.ACTIVE.txt
+00.CATALOG\ARTIFACT.REGISTRY.ACTIVE.txt
+00.CATALOG\CONTEXT.COMPOSER.RULES.ACTIVE.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice general WBS
+00.20 Propósito
+01.00 Reglas de uso
+02.00 Estados permitidos
+03.00 Campos obligatorios
+04.00 Candidatos activos
+05.00 Changelog
+
+==========
+00.20_PROPOSITO
+==========
+
+Este backlog evita que cada idea de chat se convierta automáticamente en un nuevo Skill o GRC.
+
+Toda mejora detectada entra primero como candidato, se clasifica y luego se decide.
+
+==========
+01.00_REGLAS_DE_USO
+==========
+
+01.10_REGLA_1_TODO_CANDIDATO_ENTRA_AQUI
+
+Toda idea de nuevo Skill, mejora de Skill, nuevo GRC, mejora de GRC, consolidación o fusión
+debe registrarse aquí antes de modificar canon.
+
+01.20_REGLA_2_NO_CREAR_SIN_DECISION
+
+Ningún candidato crea archivo por sí solo.
+
+01.30_REGLA_3_PRIORIZAR_MERGE
+
+Si la idea puede integrarse a un artefacto existente, se prefiere merge antes que creación.
+
+01.40_REGLA_4_EXCEPCION_HUMANA
+
+Toda separación de artefacto requiere aprobación humana explícita.
+
+==========
+02.00_ESTADOS_PERMITIDOS
+==========
+
+CANDIDATE
+CLASSIFIED
+APPROVED
+IMPLEMENTED
+REJECTED
+MERGED_WITH_EXISTING
+DEFERRED
+
+==========
+03.00_CAMPOS_OBLIGATORIOS
+==========
+
+Cada candidato debe registrar:
+
+- CANDIDATE_ID
+- FECHA
+- ORIGEN
+- IDEA
+- DOMINIO_AFECTADO
+- ARTEFACTO_RECTOR_AFECTADO
+- TIPO_DE_CAMBIO
+- PRIORIDAD
+- DECISION
+- ESTADO
+- MOTIVO
+- PROXIMO_PASO
+- APROBACION_HUMANA
+
+==========
+04.00_CANDIDATOS_ACTIVOS
+==========
+
+----------
+04.10_CANDIDATE_0001
+----------
+
+CANDIDATE_ID.................: CANDIDATE_0001
+FECHA........................: 2026-05-14
+ORIGEN.......................: Chat SkillsMachine, definición MB-GRC-018
+IDEA.........................: Crear capa global de catálogo y futuro compositor de contexto para seleccionar Skills/GRC por dominio amplio.
+DOMINIO_AFECTADO.............: GLOBAL
+ARTEFACTO_RECTOR_AFECTADO....: 00.CATALOG
+TIPO_DE_CAMBIO...............: NEW_ARCHITECTURAL_LAYER
+PRIORIDAD....................: P0
+DECISION.....................: APPROVED_BY_HUMAN
+ESTADO.......................: IMPLEMENTED_INITIAL_DRAFT
+MOTIVO.......................: Evitar proliferación de cientos de Skills y GRC, mejorar precisión de contexto en chats.
+PROXIMO_PASO.................: Revisar documentación creada y luego definir validación documental.
+APROBACION_HUMANA............: SI, confirmada por Pablo el 2026-05-14.
+
+==========
+05.00_CHANGELOG
+==========
+
+2026-05-14, v0.1-DRAFT
+- Creación inicial del backlog único de candidatos Skill/GRC.
+- Se registra CANDIDATE_0001 asociado a MB-GRC-018.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

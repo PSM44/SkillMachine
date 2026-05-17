@@ -1,0 +1,292 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: DOMAIN.REGISTRY.ACTIVE.01.00
+NOMBRE_SUGERIDO...: DOMAIN.REGISTRY.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-14
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: Pablo
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Catálogo global de dominios funcionales amplios para SkillsMachine.
+Su propósito es evitar proliferación de Skills y GRC (Governance, Risk and Compliance)
+por microtema, agrupando capacidades bajo dominios amplios y trazables.
+
+NO_CUBRE..........:
+No reemplaza SkillsLake.
+No reemplaza GRCLake.
+No reemplaza HUMAN.
+No ejecuta validaciones automáticas todavía.
+No crea nuevos Skills ni GRC por sí mismo.
+
+DEPENDENCIAS......:
+HUMAN
+GRCLake
+SkillsLake
+RADAR
+BATON
+WHOAMI
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Propósito
+01.00 Principios de dominio amplio
+02.00 Reglas de clasificación
+03.00 Dominios iniciales
+04.00 Política anti-proliferación
+05.00 Excepciones
+06.00 Relación con el agente compositor
+07.00 Checklist
+08.00 Changelog
+
+==========
+00.20_PROPOSITO
+==========
+
+Este archivo existe para declarar dominios funcionales amplios y evitar que el ecosistema
+derive en cientos de Skills o GRC (Governance, Risk and Compliance) redundantes.
+
+El principio operativo es:
+
+Un dominio funcional amplio debe agrupar métodos, definiciones, riesgos, controles,
+checklists y reglas relacionadas, evitando crear documentos separados salvo aprobación
+explícita del humano.
+
+==========
+01.00_PRINCIPIOS_DE_DOMINIO_AMPLIO
+==========
+
+01.10_PRINCIPIO_1_DOMINIOS_AMPLIOS
+
+Los dominios se definen por tema funcional amplio, no por microproceso.
+
+Ejemplos correctos:
+- GIT_GITHUB
+- POWERSHELL
+- RADAR
+- BATON
+- SESSION_MANAGEMENT
+- AI_AGENT_EXECUTION
+- MODEL_ROUTING
+- FILE_CONTENT
+- REPOSITORY_ARCHITECTURE
+
+Ejemplos no deseados:
+- GIT_COMMIT_MESSAGE
+- GIT_PUSH_FLOW
+- GIT_BRANCH_POLICY_MINOR
+- RADAR_BACKUP_EXCLUSION_ONLY
+
+01.20_PRINCIPIO_2_UN_DOMINIO_NO_DEBE_EXPLOTAR_EN_DOCUMENTOS
+
+Un dominio puede contener método operativo, control, riesgo, checklist y ejemplos
+dentro de un mismo artefacto rector.
+
+La separación en múltiples artefactos requiere aprobación humana explícita y justificación.
+
+01.30_PRINCIPIO_3_GRC_COMO_CAPA_SUPERIOR
+
+En SkillsMachine, GRC (Governance, Risk and Compliance) se considera una capa superior
+y más potente que un Skill simple.
+
+Un GRC puede gobernar uno o varios Skills.
+Un Skill no debe contradecir un GRC.
+
+01.40_PRINCIPIO_4_CATALOGO_GLOBAL
+
+Este catálogo vive fuera de HUMAN, SkillsLake y GRCLake para operar como capa global
+de clasificación y routing documental.
+
+==========
+02.00_REGLAS_DE_CLASIFICACION
+==========
+
+02.10_SKILL
+
+Un Skill define una capacidad, método o estándar operativo reusable.
+
+Debe responder:
+- Qué problema resuelve.
+- Cómo se usa.
+- Qué reglas aplica.
+- Qué errores evita.
+
+02.20_GRC
+
+Un GRC (Governance, Risk and Compliance) define gobierno, riesgo, cumplimiento, control,
+validación, límites o trazabilidad sobre uno o varios dominios.
+
+Debe responder:
+- Qué gobierna.
+- Qué riesgos controla.
+- Qué evidencia exige.
+- Cuándo bloquear o escalar.
+- Qué Skill o dominios subordina.
+
+02.30_DOMINIO
+
+Un dominio es una agrupación amplia y estable de capacidades.
+
+Debe ser suficientemente amplio para evitar microdocumentos, pero suficientemente claro
+para permitir búsqueda, routing y composición contextual.
+
+02.40_ARTEFACTO_RECTOR
+
+El artefacto rector es el documento principal de un dominio.
+
+Debe evitar la creación de documentos paralelos con el mismo propósito.
+
+==========
+03.00_DOMINIOS_INICIALES
+==========
+
+DOMAIN_ID..........: GIT_GITHUB
+NOMBRE............: Git-GitHub
+ESTADO............: CANDIDATE
+ALCANCE...........: Versionamiento, commits, branches, push, pull, cambios estructurales, evidencia y recuperación.
+
+DOMAIN_ID..........: POWERSHELL
+NOMBRE............: PowerShell
+ESTADO............: CANDIDATE
+ALCANCE...........: Scripts, ejecución segura, comandos, one-shots, logs, exit codes y validaciones.
+
+DOMAIN_ID..........: RADAR
+NOMBRE............: RADAR
+ESTADO............: ACTIVE
+ALCANCE...........: Mapa determinístico del filesystem, indexación, core, full, lite, manifest y exclusiones.
+
+DOMAIN_ID..........: BATON
+NOMBRE............: BATON
+ESTADO............: ACTIVE
+ALCANCE...........: Continuidad operativa, handoff, estado de sesión, contexto mínimo y reinicio con IA en blanco.
+
+DOMAIN_ID..........: SESSION_MANAGEMENT
+NOMBRE............: Session Management
+ESTADO............: ACTIVE
+ALCANCE...........: Session continue, session close, readiness, estado de cierre y continuidad.
+
+DOMAIN_ID..........: AI_AGENT_EXECUTION
+NOMBRE............: AI Agent Execution
+ESTADO............: ACTIVE
+ALCANCE...........: Ejecución de agentes IA (Inteligencia Artificial), límites, permisos, sandbox, rutas, acciones y evidencia.
+
+DOMAIN_ID..........: MODEL_ROUTING
+NOMBRE............: Model Routing
+ESTADO............: ACTIVE
+ALCANCE...........: Selección de modelos, costo, capacidad, routing, cloud/local y eficiencia de contexto.
+
+DOMAIN_ID..........: FILE_CONTENT
+NOMBRE............: File Content
+ESTADO............: ACTIVE
+ALCANCE...........: Estructura interna de archivos serios, metadatos, WBS (Work Breakdown Structure), formato y changelog.
+
+DOMAIN_ID..........: REPOSITORY_ARCHITECTURE
+NOMBRE............: Repository Architecture
+ESTADO............: ACTIVE
+ALCANCE...........: Estructura de carpetas, límites, naming, rutas, arquitectura documental y validación.
+
+==========
+04.00_POLITICA_ANTI_PROLIFERACION
+==========
+
+04.10_REGLA_GENERAL
+
+No se deben crear nuevos Skills ni GRC (Governance, Risk and Compliance) por microtema
+si el contenido puede integrarse en un dominio existente.
+
+04.20_REGLA_DE_BACKLOG
+
+Toda idea nueva debe registrarse primero como candidato en:
+
+SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt
+
+04.30_REGLA_DE_VALIDACION
+
+Antes de crear un nuevo Skill o GRC, se debe revisar:
+- si existe dominio relacionado;
+- si existe artefacto rector;
+- si el cambio es mejora de un artefacto existente;
+- si requiere excepción humana explícita.
+
+04.40_REGLA_DE_FAIL_FUTURO
+
+En fase automatizada futura, la detección de duplicidad deberá producir FAIL duro
+cuando se intente crear un artefacto redundante sin aprobación humana documentada.
+
+==========
+05.00_EXCEPCIONES
+==========
+
+05.10_REGLA_DE_EXCEPCION
+
+Solo el humano puede aprobar la creación de un artefacto separado dentro de un dominio existente.
+
+05.20_UMBRAL_DE_TAMANO
+
+Un archivo puede evaluarse para separación si supera 1 MB.
+
+El tamaño por sí solo no autoriza separación automática.
+
+05.30_DOCUMENTACION_OBLIGATORIA
+
+Toda excepción debe documentar:
+- dominio afectado;
+- artefacto existente;
+- motivo;
+- riesgo de no separar;
+- aprobación humana;
+- fecha;
+- alcance preciso.
+
+==========
+06.00_RELACION_CON_EL_AGENTE_COMPOSITOR
+==========
+
+El futuro agente compositor de contexto debe usar este catálogo para:
+
+- detectar dominio de la consulta;
+- seleccionar Skills y GRC relevantes;
+- evitar cargar material innecesario;
+- agrupar contexto útil;
+- detectar gaps;
+- registrar candidatos en backlog;
+- evitar proliferación de archivos.
+
+El agente compositor no crea canon por sí solo.
+
+==========
+07.00_CHECKLIST
+==========
+
+Antes de crear un nuevo Skill o GRC:
+
+[ ] ¿Existe dominio amplio relacionado?
+[ ] ¿Existe artefacto rector?
+[ ] ¿El cambio puede integrarse al artefacto rector?
+[ ] ¿Se registró candidato en backlog?
+[ ] ¿Existe aprobación humana si se quiere separar?
+[ ] ¿La separación supera el umbral de 1 MB o tiene razón operativa fuerte?
+[ ] ¿Se documentó excepción?
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-05-14, v0.1-DRAFT
+- Creación inicial del catálogo global de dominios.
+- Define política anti-proliferación.
+- Declara GRC (Governance, Risk and Compliance) como capa superior.
+- Define relación con futuro agente compositor de contexto.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

@@ -1,0 +1,226 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: ARTIFACT.REGISTRY.ACTIVE.01.00
+NOMBRE_SUGERIDO...: ARTIFACT.REGISTRY.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-14
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: Pablo
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Registro global inicial de artefactos canónicos, candidatos y subordinados.
+Su propósito es permitir clasificación, composición contextual y control de duplicidad
+entre Skills, GRC (Governance, Risk and Compliance), scripts y otros artefactos.
+
+NO_CUBRE..........:
+No reemplaza RADAR.
+No reemplaza el contenido de los archivos.
+No valida automáticamente todavía.
+No decide por sí solo nuevas creaciones.
+
+DEPENDENCIAS......:
+DOMAIN.REGISTRY.ACTIVE.txt
+CONTEXT.COMPOSER.RULES.ACTIVE.txt
+RADAR
+SkillsLake
+GRCLake
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice general WBS
+00.20 Propósito
+01.00 Tipos de artefacto
+02.00 Reglas de subordinación
+03.00 Registro inicial
+04.00 Política de duplicidad
+05.00 Checklist
+06.00 Changelog
+
+==========
+00.20_PROPOSITO
+==========
+
+Este registro permite saber qué artefactos existen, a qué dominio pertenecen,
+qué capa los gobierna y si pueden o no tener derivados.
+
+Su objetivo principal es prevenir duplicidad semántica.
+
+==========
+01.00_TIPOS_DE_ARTEFACTO
+==========
+
+01.10_SKILL
+
+Capacidad, método o estándar operativo reusable.
+
+01.20_GRC
+
+GRC (Governance, Risk and Compliance): capa superior de gobierno, riesgo,
+cumplimiento, control, trazabilidad y validación.
+
+01.30_SCRIPT
+
+Implementación ejecutable subordinada a un Skill o GRC.
+
+Un script puede existir separado físicamente, pero no es canon doctrinal autónomo.
+
+01.40_USECASE
+
+Paquete operativo de ejecución.
+
+No debe crear doctrina paralela si ya existe Skill o GRC rector.
+
+01.50_TEMPLATE
+
+Plantilla de uso.
+
+No debe reemplazar el artefacto rector.
+
+01.60_BACKLOG_ITEM
+
+Candidato pendiente de decisión.
+
+==========
+02.00_REGLAS_DE_SUBORDINACION
+==========
+
+02.10_GRCLAKE_GOBIERNA_SKILLSLAKE
+
+GRCLake gobierna SkillsLake.
+
+Si hay conflicto entre GRC (Governance, Risk and Compliance) y Skill, prevalece GRC,
+salvo decisión explícita del humano y actualización documental.
+
+02.20_CATALOGO_GOBIERNA_CLASIFICACION
+
+00.CATALOG gobierna la clasificación global de dominios y artefactos.
+
+02.30_SCRIPT_SUBORDINADO
+
+Un script puede existir separado, pero debe estar subordinado a un artefacto rector.
+
+Ejemplo:
+RADAR.ps1 puede existir como implementación.
+No debe crear una doctrina separada no registrada.
+
+02.40_NO_CANON_PARALELO
+
+No se debe crear canon paralelo por microtema.
+
+==========
+03.00_REGISTRO_INICIAL
+==========
+
+ARTIFACT_ID........: SKILL_RADAR
+DOMAIN_ID..........: RADAR
+TYPE...............: SKILL
+LAYER..............: SkillsLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: RECTOR_OR_REFERENCE
+NOTES..............: Define RADAR como mapa determinístico del filesystem.
+
+ARTIFACT_ID........: SKILL_BATON
+DOMAIN_ID..........: BATON
+TYPE...............: SKILL
+LAYER..............: SkillsLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: RECTOR_OR_REFERENCE
+NOTES..............: Define continuidad operativa y handoff.
+
+ARTIFACT_ID........: SKILL_FILE_CONTENT
+DOMAIN_ID..........: FILE_CONTENT
+TYPE...............: SKILL
+LAYER..............: SkillsLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: RECTOR_OR_REFERENCE
+NOTES..............: Define estructura interna de archivos serios.
+
+ARTIFACT_ID........: SKILL_GRC_CORE
+DOMAIN_ID..........: REPOSITORY_ARCHITECTURE
+TYPE...............: GRC
+LAYER..............: SkillsLake
+STATUS.............: REVIEW
+CANON_POLICY.......: NEEDS_REVIEW
+NOTES..............: Archivo existente con nombre Skill/GRC. Debe revisarse su ubicación conceptual futura.
+
+ARTIFACT_ID........: POLICY_REPOSITORY_ARCHITECTURE
+DOMAIN_ID..........: REPOSITORY_ARCHITECTURE
+TYPE...............: GRC
+LAYER..............: GRCLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: SUPERIOR_CONTROL
+NOTES..............: Política superior de arquitectura de repositorio.
+
+ARTIFACT_ID........: CONTROL_REPOSITORY_ARCHITECTURE_VALIDATION
+DOMAIN_ID..........: REPOSITORY_ARCHITECTURE
+TYPE...............: GRC
+LAYER..............: GRCLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: SUPERIOR_CONTROL
+NOTES..............: Control de validación asociado a arquitectura.
+
+ARTIFACT_ID........: BACKLOG_SKILL_GRC_CANDIDATES
+DOMAIN_ID..........: GLOBAL
+TYPE...............: BACKLOG_ITEM
+LAYER..............: SkillsLake
+STATUS.............: ACTIVE
+CANON_POLICY.......: INTAKE_ONLY
+NOTES..............: Archivo único de candidatos.
+
+==========
+04.00_POLITICA_DE_DUPLICIDAD
+==========
+
+04.10_DUPLICIDAD_POR_NOMBRE
+
+La duplicidad por nombre es señal débil.
+Debe revisarse, pero no basta.
+
+04.20_DUPLICIDAD_POR_CONTENIDO
+
+La duplicidad por contenido es señal fuerte.
+La validación futura debe revisar propósito, alcance, definiciones, reglas y controles.
+
+04.30_FAIL_DURO_FUTURO
+
+Cuando exista validador automatizado, la duplicidad no aprobada debe bloquear con FAIL duro.
+
+04.40_MERGE_ANTES_QUE_CREAR
+
+Si un candidato puede mejorar un artefacto existente, debe integrarse en ese artefacto
+en vez de crear uno nuevo.
+
+==========
+05.00_CHECKLIST
+==========
+
+[ ] Cada artefacto tiene ARTIFACT_ID.
+[ ] Cada artefacto tiene DOMAIN_ID.
+[ ] Cada artefacto tiene TYPE.
+[ ] Cada artefacto tiene LAYER.
+[ ] Cada artefacto tiene STATUS.
+[ ] Cada artefacto tiene CANON_POLICY.
+[ ] Los scripts están subordinados.
+[ ] No hay canon paralelo no documentado.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-05-14, v0.1-DRAFT
+- Creación inicial del registro global de artefactos.
+- Define tipos de artefacto.
+- Define subordinación de scripts.
+- Define política de duplicidad futura por contenido.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

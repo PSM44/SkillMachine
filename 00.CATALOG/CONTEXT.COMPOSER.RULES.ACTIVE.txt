@@ -1,0 +1,238 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: CONTEXT.COMPOSER.RULES.ACTIVE.01.00
+NOMBRE_SUGERIDO...: CONTEXT.COMPOSER.RULES.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-14
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: Pablo
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Reglas documentales iniciales para un futuro agente selector y compositor de contexto.
+El agente debe integrarse a la interacción de chat y seleccionar Skills/GRC (Governance, Risk and Compliance)
+relevantes sin cargar ruido ni crear nuevos artefactos innecesarios.
+
+NO_CUBRE..........:
+No implementa agente todavía.
+No define código.
+No reemplaza el juicio humano.
+No crea ni modifica Skills/GRC automáticamente.
+
+DEPENDENCIAS......:
+DOMAIN.REGISTRY.ACTIVE.txt
+ARTIFACT.REGISTRY.ACTIVE.txt
+SKILL_GRC.CANDIDATES.ACTIVE.txt
+RADAR
+BATON
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice general WBS
+00.20 Propósito
+01.00 Rol del compositor
+02.00 Flujo de decisión
+03.00 Reglas de selección
+04.00 Reglas de composición
+05.00 Reglas anti-proliferación
+06.00 Salidas esperadas
+07.00 Checklist
+08.00 Changelog
+
+==========
+00.20_PROPOSITO
+==========
+
+El compositor de contexto busca que cualquier chat pueda beneficiarse de Skills y GRC
+(Governance, Risk and Compliance) existentes sin cargar todo el repositorio ni crear
+documentos redundantes.
+
+El objetivo es eficiencia, precisión y control de proliferación.
+
+==========
+01.00_ROL_DEL_COMPOSITOR
+==========
+
+01.10_DEFINICION
+
+El compositor de contexto es una futura capacidad/agente que:
+
+- interpreta la consulta del usuario;
+- detecta dominio funcional;
+- consulta el catálogo global;
+- selecciona Skills y GRC relevantes;
+- agrupa contexto mínimo suficiente;
+- detecta gaps;
+- registra candidatos de mejora;
+- evita duplicidad.
+
+01.20_NO_ES_UN_CREADOR_AUTONOMO_DE_CANON
+
+El compositor no puede crear canon sin aprobación humana.
+
+01.30_NO_REEMPLAZA_RADAR
+
+RADAR sigue siendo el mapa determinístico del filesystem.
+El compositor usa RADAR como insumo.
+
+==========
+02.00_FLUJO_DE_DECISION
+==========
+
+02.10_PASO_1_ENTENDER_CONSULTA
+
+Identificar:
+- objetivo del usuario;
+- dominio probable;
+- tipo de tarea;
+- riesgo;
+- necesidad de continuidad;
+- necesidad de validación.
+
+02.20_PASO_2_CONSULTAR_CATALOGO
+
+Revisar:
+- DOMAIN.REGISTRY.ACTIVE.txt
+- ARTIFACT.REGISTRY.ACTIVE.txt
+- RADAR vigente
+
+02.30_PASO_3_SELECCIONAR_CONTEXTO
+
+Seleccionar el mínimo necesario:
+- Skill relevante;
+- GRC superior si aplica;
+- BATON si la tarea requiere continuidad;
+- RADAR si la tarea requiere rutas/archivos;
+- backlog si se detecta mejora.
+
+02.40_PASO_4_COMPONER_PAQUETE
+
+Crear mentalmente o materialmente un paquete de contexto preciso para la tarea.
+
+02.50_PASO_5_DETECTAR_GAP
+
+Si falta capacidad:
+- no inventar Skill;
+- registrar candidato;
+- proponer mejora;
+- pedir aprobación humana si implica nuevo artefacto.
+
+==========
+03.00_REGLAS_DE_SELECCION
+==========
+
+03.10_MINIMO_SUFICIENTE
+
+Seleccionar la menor cantidad de contexto que permita responder bien.
+
+03.20_PRIORIDAD_DE_CAPAS
+
+Orden recomendado:
+
+1. HUMAN
+2. 00.CATALOG
+3. GRCLake
+4. SkillsLake
+5. 90.USECASE
+6. SyS/tools/artifacts
+
+03.30_GRC_PREVALECE
+
+Si hay conflicto, GRC (Governance, Risk and Compliance) prevalece sobre Skill.
+
+03.40_BACKLOG_ANTES_DE_CREAR
+
+Toda mejora nueva va primero a backlog.
+
+==========
+04.00_REGLAS_DE_COMPOSICION
+==========
+
+04.10_AGRUPAR_POR_DOMINIO
+
+El contexto se agrupa por dominio amplio, no por microtema.
+
+04.20_EVITAR_RUIDO
+
+No cargar documentos solo por afinidad temática.
+
+04.30_EXTRAER_SECCIONES_RELEVANTES
+
+Cuando sea posible, usar secciones específicas en vez de archivos completos.
+
+04.40_NO_PROMPT_OBLIGATORIO_EN_CADA_SKILL
+
+Los Skills y GRC no requieren prompt interno obligatorio.
+
+El compositor decide cómo aplicar el artefacto según metadatos, alcance, dominio y reglas.
+
+==========
+05.00_REGLAS_ANTI_PROLIFERACION
+==========
+
+05.10_NO_CREAR_MICROSKILLS
+
+No crear Skills por cada microproceso.
+
+05.20_NO_CREAR_MICROGRC
+
+No crear GRC (Governance, Risk and Compliance) por cada riesgo aislado si puede vivir
+dentro de un dominio existente.
+
+05.30_EXCEPCION_HUMANA
+
+Toda excepción requiere aprobación humana explícita.
+
+05.40_UMBRAL_1MB
+
+Separación evaluable si el archivo supera 1 MB.
+No es autorización automática.
+
+==========
+06.00_SALIDAS_ESPERADAS
+==========
+
+El compositor debe poder producir:
+
+- lista de dominios detectados;
+- Skills/GRC seleccionados;
+- motivo de selección;
+- contexto omitido y motivo;
+- gaps detectados;
+- candidatos de backlog;
+- advertencias de duplicidad;
+- recomendación de siguiente acción.
+
+==========
+07.00_CHECKLIST
+==========
+
+[ ] ¿Se detectó dominio amplio?
+[ ] ¿Se revisó catálogo global?
+[ ] ¿Se seleccionó mínimo suficiente?
+[ ] ¿Se evitó ruido documental?
+[ ] ¿Se revisó GRC superior?
+[ ] ¿Se evitó crear microSkill?
+[ ] ¿Se registró gap en backlog?
+[ ] ¿Se pidió aprobación humana para excepción?
+
+==========
+08.00_CHANGELOG
+==========
+
+2026-05-14, v0.1-DRAFT
+- Creación inicial de reglas documentales para compositor de contexto.
+- Define flujo de decisión.
+- Define reglas anti-proliferación.
+- Define que los Skills/GRC no requieren prompt interno obligatorio.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
