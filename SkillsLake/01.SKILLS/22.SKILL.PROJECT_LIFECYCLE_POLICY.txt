@@ -4,21 +4,25 @@
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.0-CANON
-FECHA.............: 2026-04-21
+VERSION...........: v1.1-CANON
+FECHA.............: 2026-05-14
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
 
 ALCANCE...........:
-Define el ciclo de vida operativo de cualquier sesión de trabajo.
-Establece eventos, responsabilidades y actualizaciones obligatorias
-de HUMAN, BATON, WhoAmI, SKILLS y RADAR.
+Define el ciclo de vida operativo general de cualquier sesión de trabajo.
+Establece eventos, responsabilidades, límites y condiciones de cierre formal.
+Regula cuándo se actualizan BATON, backlogs, deuda técnica, HUMAN, RADAR y otros artefactos
+de continuidad del proyecto activo.
 
 NO_CUBRE..........:
 No define contenido interno de cada artefacto.
 No define lógica específica de proyectos.
+No redefine comandos Git; toda operación Git debe derivarse al Skill de Git aplicable.
+No obliga a actualizar BATON, backlogs, deuda técnica ni HUMAN durante toda la sesión.
+No es exclusivo de SkillsMachine; aplica como patrón general a cualquier proyecto que use ciclo de vida operativo.
 
 DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
@@ -29,8 +33,9 @@ DEPENDENCIAS......:
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
 23.SKILL.WHOAMI_POLICY.txt
+Skill de Git aplicable, si existe en el proyecto activo.
 
-TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
+TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL, SESSION_CLOSE, CONTINUITY
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -45,30 +50,34 @@ TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL
 
 04.00 Inicio de sesión
 05.00 Ejecución
-06.00 Cierre de sesión
+06.00 Cierre de sesión por activación explícita
 
 07.00 Actualización de artefactos
 08.00 Validación con RADAR
+09.00 Relación con Git
 
-09.00 Reglas de consistencia
-10.00 Antipatrones
+10.00 Reglas de consistencia
+11.00 Antipatrones
+12.00 Definiciones operativas
 
-11.00 Checklist operativo
-12.00 Changelog
+13.00 Preguntas de ajuste futuro
+14.00 Checklist operativo
+15.00 Changelog
 
 ==========
 01.00_OBJETIVO
 ==========
 
-Establecer un flujo operativo único, repetible y audit-able
-para cualquier sesión de trabajo.
+Establecer un flujo operativo único, repetible y auditable para cualquier sesión de trabajo.
 
 Objetivos:
 
-- evitar pérdida de contexto
-- asegurar continuidad humano/IA
-- mantener consistencia entre artefactos
-- garantizar trazabilidad
+- evitar pérdida de contexto;
+- asegurar continuidad humano/IA;
+- mantener consistencia entre artefactos;
+- evitar burocracia permanente durante la ejecución;
+- concentrar actualizaciones de continuidad en el cierre formal;
+- garantizar trazabilidad sin inventar estado.
 
 ==========
 02.00_DEFINICION_DE_EVENTOS
@@ -81,249 +90,643 @@ Eventos del ciclo de vida:
 - CIERRE_SESION
 
 Cada evento tiene:
-- inputs
-- acciones obligatorias
-- outputs esperados
+
+- inputs;
+- acciones permitidas;
+- acciones obligatorias;
+- outputs esperados;
+- límites.
+
+El cierre formal solo se activa con frase explícita definida en este Skill.
 
 ==========
 03.00_FLUJO_DEL_CICLO_DE_VIDA
 ==========
 
-Secuencia obligatoria:
+Secuencia base:
 
 INICIO_SESION
 → EJECUCION
 → CIERRE_SESION
 
-Regla:
+Regla corregida v1.1:
 
-No se puede cerrar sesión sin:
-- BATON actualizado
-- estado consistente
+Durante INICIO_SESION y EJECUCION no es obligatorio actualizar BATON, backlogs,
+deuda técnica ni HUMAN.
+
+Estas actualizaciones se realizan:
+
+- al CIERRE_SESION formal;
+- o cuando el humano lo solicita de forma explícita;
+- o cuando el cambio doctrinal exige actualizar HUMAN.
+
+Esto evita mantenimiento prematuro, duplicación de esfuerzo y ruido documental durante la ejecución.
 
 ==========
 04.00_INICIO_DE_SESION
 ==========
 
-INPUTS:
+INPUTS RECOMENDADOS:
 
-- BATON vigente
-- HUMAN vigente
-- WhoAmI vigente
-- RADAR_INDEX
+- BATON principal del proyecto activo, si existe;
+- HUMAN vigente, si aplica;
+- WhoAmI vigente, si aplica;
+- RADAR_INDEX o RADAR equivalente, si aplica;
+- backlog operativo del proyecto activo, si existe.
 
 ACCIONES:
 
-- leer BATON
-- leer WhoAmI
-- entender estado actual
-- identificar NEXT_ACTION
-- validar coherencia con HUMAN
-- cargar contexto mínimo (L0/L1)
+- leer BATON si existe;
+- leer WhoAmI si existe y aporta continuidad humana;
+- entender estado actual;
+- identificar NEXT_ACTION;
+- validar coherencia con HUMAN si el proyecto tiene capa HUMAN;
+- cargar contexto mínimo suficiente.
 
 PROHIBIDO:
 
-- modificar archivos
-- asumir estado sin BATON
-- usar RADAR_FULL sin justificación
+- asumir estado sin evidencia;
+- modificar archivos solo por iniciar sesión;
+- usar RADAR_FULL sin justificación;
+- actualizar BATON, backlogs, deuda técnica o HUMAN solo por iniciar sesión.
 
 OUTPUT:
 
-- comprensión clara del estado
-- plan inicial (PLAN_ONLY)
+- comprensión clara del estado;
+- plan inicial o siguiente acción;
+- brechas declaradas si faltan insumos.
 
 ==========
 05.00_EJECUCION
 ==========
 
+Durante la ejecución se prioriza avanzar trabajo real.
+
 TIPOS DE CAMBIO:
 
-05.10 CAMBIO OPERATIVO
+----------
+05.10_CAMBIO_OPERATIVO
+----------
 
-Ejemplo:
-- avanzar tarea
-- corregir bug
+Ejemplos:
 
-Acción:
-→ actualizar BATON
-→ actualizar WhoAmI si cambia estado humano operacional
+- avanzar tarea;
+- corregir bug;
+- crear script;
+- ejecutar diagnóstico;
+- validar output;
+- proponer siguiente minibattle.
 
----
+Regla:
 
-05.20 CAMBIO ESTRUCTURAL
+No obliga por sí mismo a actualizar BATON, backlog, deuda técnica ni HUMAN durante la sesión.
 
-Ejemplo:
-- redefinir arquitectura
-- cambiar enfoque del proyecto
+La actualización de continuidad se difiere al cierre formal, salvo instrucción explícita del humano.
 
-Acción:
-→ actualizar HUMAN
+----------
+05.20_CAMBIO_ESTRUCTURAL
+----------
 
----
+Ejemplos:
 
-05.30 CAMBIO DE REGLAS
+- redefinir arquitectura;
+- cambiar estructura de carpetas;
+- cambiar precedencia de artefactos;
+- modificar el modelo de gobierno del proyecto.
 
-Ejemplo:
-- nuevo skill
-- modificación de policy
+Regla:
 
-Acción:
-→ actualizar SKILLS
+Si el cambio altera doctrina, intención humana, precedencia o regla raíz, debe evaluarse actualización de HUMAN.
+Si solo altera operación, no se actualiza HUMAN por defecto.
 
----
+----------
+05.30_CAMBIO_DE_REGLAS
+----------
 
-REGLAS GENERALES:
+Ejemplos:
 
-- no mezclar responsabilidades
-- no duplicar información
-- mantener trazabilidad
+- nuevo Skill;
+- modificación de Policy;
+- modificación de Control;
+- cambio en GRC (Governance, Risk and Compliance);
+- cambio en protocolo de cierre.
+
+Regla:
+
+Debe actualizarse el artefacto rector correspondiente.
+Si el cambio afecta ciclo de vida, este Skill debe mantenerse alineado.
+
+----------
+05.40_REGLAS_GENERALES_DE_EJECUCION
+----------
+
+- no mezclar responsabilidades;
+- no duplicar información;
+- mantener trazabilidad;
+- declarar brechas;
+- no inventar estado;
+- ejecutar validación cuando corresponda;
+- mantener el mantenimiento documental para cierre formal, salvo instrucción explícita.
 
 ==========
-06.00_CIERRE_DE_SESION
+06.00_CIERRE_DE_SESION_POR_ACTIVACION_EXPLICITA
 ==========
 
-OBLIGATORIO:
+----------
+06.10_FRASE_ACTIVADORA
+----------
 
-- actualizar BATON
-- definir NEXT_ACTION
-- registrar estado final
+El cierre formal de sesión solo se activa cuando el humano usa la frase exacta:
 
-SI APLICA:
+"cierra sesión"
 
-- actualizar WhoAmI
-- actualizar HUMAN
-- ajustar SKILLS
+Otras frases, consultas de estado o solicitudes parciales no activan el cierre formal.
 
-PROHIBIDO:
+Ejemplos que NO activan cierre formal:
 
-- cerrar sesión sin BATON actualizado
-- dejar estado ambiguo
-- dejar tareas sin siguiente acción
+- "en qué estamos";
+- "qué falta";
+- "resumen";
+- "estado del proyecto";
+- "actualiza BATON";
+- "actualiza backlog";
+- "dame deuda técnica".
 
-OUTPUT:
+Estas solicitudes pueden requerir respuesta o actualización parcial, pero no ejecutan cierre formal completo.
 
-- BATON consistente
-- continuidad garantizada
+----------
+06.20_CONTRATO_DE_CIERRE
+----------
+
+Al activarse el cierre formal, la IA debe entregar y/o preparar:
+
+1. Deuda técnica.
+2. Backlogs.
+3. Qué hemos hecho.
+4. Qué falta.
+5. En qué estamos.
+6. Path accionable de desarrollo: minibattles -> battles -> entregable funcional a gerencia.
+7. Actualización del BATON principal del proyecto activo.
+8. Actualización del backlog operativo del proyecto activo, si existe.
+9. Validación operativa.
+10. Estado de cierre.
+11. Handoff opcional para próxima sesión.
+
+----------
+06.30_REGLA_DE_GENERALIDAD
+----------
+
+Este Skill es general.
+
+No debe asumir rutas exclusivas de SkillsMachine.
+No debe asumir nombres específicos de proyecto.
+No debe asumir que siempre existe BATON.
+No debe asumir que siempre existe backlog.
+No debe asumir que siempre existe HUMAN.
+No debe asumir que siempre existe RADAR.
+
+Debe operar con los artefactos equivalentes del proyecto activo.
+
+----------
+06.40_BATON_EN_CIERRE
+----------
+
+La actualización de BATON debe apuntar al BATON principal del proyecto activo.
+
+Si existe más de un BATON, la IA debe identificar el principal antes de actualizar.
+Si no puede identificarlo con evidencia, debe declararlo como brecha y pedir instrucción.
+
+----------
+06.50_BACKLOG_EN_CIERRE
+----------
+
+La actualización de backlog debe apuntar al backlog operativo del proyecto activo, si existe.
+
+Si existen varios backlogs, la IA debe usar el backlog operativo principal.
+Si no puede identificarlo con evidencia, debe declararlo como brecha y pedir instrucción.
+
+----------
+06.60_DEUDA_TECNICA_EN_CIERRE
+----------
+
+La deuda técnica debe registrarse como backlog operativo, salvo que el proyecto tenga un artefacto formal de deuda técnica.
+
+Debe distinguirse:
+
+- deuda técnica;
+- backlog funcional;
+- brecha de información;
+- riesgo abierto.
+
+----------
+06.70_HUMAN_EN_CIERRE
+----------
+
+HUMAN solo se actualiza cuando existe:
+
+- cambio doctrinal;
+- cambio de precedencia;
+- cambio de intención humana;
+- cambio de regla raíz;
+- instrucción explícita del humano.
+
+HUMAN no se actualiza por cambios operativos normales.
+
+----------
+06.80_PATH_MINIBATTLES_BATTLES_ENTREGABLE
+----------
+
+El cierre debe incluir path accionable de desarrollo:
+
+MINIBATTLE -> BATTLE -> ENTREGABLE_FUNCIONAL_A_GERENCIA
+
+Formato recomendado:
+
+MINIBATTLE | OBJETIVO | OUTPUT | BATTLE | ENTREGABLE_GERENCIA | ESTADO
+
+Si faltan fechas, responsables o criterios de éxito, no se inventan.
+Se declaran como pendientes solo si son necesarios para gestión.
+
+----------
+06.90_EVIDENCIA_Y_NO_INVENCION
+----------
+
+No se debe inventar estado.
+
+Si falta evidencia, la IA debe declararlo como brecha.
+
+Hechos confirmados, inferencias y pendientes deben distinguirse.
 
 ==========
 07.00_ACTUALIZACION_DE_ARTEFACTOS
 ==========
 
-REGLA BASE:
+----------
+07.10_REGLA_BASE
+----------
 
-Cada artefacto se actualiza solo en su dominio.
+Las actualizaciones de continuidad se hacen al cierre formal o bajo instrucción explícita.
 
----
+Artefactos típicos:
 
-HUMAN:
+- BATON principal del proyecto activo;
+- backlog operativo del proyecto activo;
+- deuda técnica;
+- HUMAN, solo si aplica;
+- WhoAmI, solo si cambia contexto humano operacional;
+- RADAR, si aplica;
+- readiness o equivalente de cierre, si existe.
 
-- cuando cambia el entendimiento del proyecto
-- no en cada sesión
+----------
+07.20_NO_ACTUALIZACION_PERMANENTE
+----------
 
----
+Antes y durante la sesión no se obliga a actualizar:
 
-WhoAmI:
+- BATON;
+- backlogs;
+- deuda técnica;
+- HUMAN.
 
-- cuando cambia el estado humano operacional
-- en lenguaje claro y resumido
-- no reemplaza HUMAN
+Esto no prohíbe actualizar estos artefactos si el humano lo solicita explícitamente.
 
----
+----------
+07.30_CRITERIO_DE_ACTUALIZACION
+----------
 
-BATON:
+Actualizar solo si:
 
-- SIEMPRE al cierre de sesión
-- SIEMPRE refleja estado actual
-
----
-
-SKILLS:
-
-- solo cuando cambian reglas
-- no depende del estado del proyecto
-
----
-
-RADAR:
-
-- nunca se edita manualmente
-- siempre se ejecuta
+- hubo cambio real;
+- hay evidencia suficiente;
+- el artefacto existe o el humano aprueba crearlo;
+- el cambio no duplica información innecesaria.
 
 ==========
 08.00_VALIDACION_CON_RADAR
 ==========
 
-Regla crítica:
+----------
+08.10_REGLA_GENERAL
+----------
 
-Toda actualización debe ser validada contra RADAR.
+RADAR es mapa/evidencia de filesystem, no fuente de verdad lógica.
 
-Proceso:
+RADAR se usa para:
 
-1. ejecutar RADAR
-2. comparar BEFORE vs AFTER
-3. validar:
-   - archivos creados
-   - archivos modificados
-   - consistencia del estado
+- validar rutas;
+- detectar archivos creados, modificados o eliminados;
+- revisar estado documental;
+- apoyar cierre de sesión;
+- preparar continuidad para IA en blanco.
 
-Si hay inconsistencia:
+----------
+08.20_CUANDO_PEDIR_RADAR
+----------
 
-→ FAIL
+Si falta RADAR vigente o evidencia suficiente para cerrar con fidelidad, la IA debe pedir ejecutar RADAR antes de completar el cierre formal.
 
-==========
-09.00_REGLAS_DE_CONSISTENCIA
-==========
+Esto aplica especialmente cuando:
 
-- BATON debe coincidir con estado real (RADAR)
-- WhoAmI no puede contradecir BATON sin actualización explícita
-- HUMAN no puede contradecir BATON sin actualización explícita
-- SKILLS no pueden ser ignorados
-- RADAR no se interpreta como lógica
+- hubo cambios de filesystem;
+- se crearon archivos;
+- se modificaron artefactos;
+- se eliminó o movió contenido;
+- el cierre requiere confirmar rutas;
+- el proyecto depende de RADAR como mapa de continuidad.
 
-==========
-10.00_ANTIPATRONES
-==========
+----------
+08.30_CUANDO_RADAR_PUEDE_NO_APLICAR
+----------
 
-- no actualizar BATON al cerrar sesión
-- no actualizar WhoAmI cuando cambia el estado operacional
-- modificar RADAR manualmente
-- usar HUMAN como BATON
-- usar BATON como documentación
-- usar WhoAmI como documentación profunda
-- cerrar sesión sin NEXT_ACTION
-- trabajar sin validar con RADAR
+RADAR puede no aplicar si:
 
-==========
-11.00_CHECKLIST_OPERATIVO
-==========
+- la sesión fue puramente conceptual;
+- no hubo cambios de filesystem;
+- el proyecto no usa RADAR ni equivalente;
+- el humano pide cierre parcial y acepta la brecha.
 
-INICIO:
-
-[ ] BATON leído
-[ ] WhoAmI leído
-[ ] estado entendido
-[ ] NEXT_ACTION identificado
-
-EJECUCION:
-
-[ ] cambios correctamente clasificados
-[ ] artefacto correcto actualizado
-
-CIERRE:
-
-[ ] BATON actualizado
-[ ] NEXT_ACTION definido
-[ ] WhoAmI revisado
-[ ] RADAR ejecutado
-[ ] BEFORE vs AFTER validado
+En ese caso se debe declarar explícitamente que RADAR no fue usado.
 
 ==========
-12.00_CHANGELOG
+09.00_RELACION_CON_GIT
 ==========
+
+Este Skill no define comandos Git.
+
+Toda operación Git debe derivarse al Skill de Git aplicable del proyecto activo.
+
+Ejemplos de materias derivadas al Skill de Git:
+
+- git status;
+- git diff;
+- git add;
+- git commit;
+- git push;
+- ramas;
+- tags;
+- reversión;
+- staged vs unstaged;
+- archivos ignorados;
+- commits atómicos.
+
+Durante cierre, este Skill puede exigir verificar estado de versionamiento,
+pero no redefine cómo hacerlo.
+
+==========
+10.00_REGLAS_DE_CONSISTENCIA
+==========
+
+Caso 1:
+BATON contradice HUMAN.
+
+Dictamen:
+BATON está incorrecto o desactualizado.
+
+Acción:
+Actualizar BATON o declarar brecha.
+
+----------
+
+Caso 2:
+Skill contradice HUMAN.
+
+Dictamen:
+Conflicto conceptual.
+
+Acción:
+Resolver actualizando explícitamente HUMAN o Skill según decisión humana.
+
+----------
+
+Caso 3:
+RADAR contradice BATON.
+
+Dictamen:
+BATON está desactualizado o RADAR refleja cambios no incorporados.
+
+Acción:
+Revisar evidencia antes de cerrar.
+
+----------
+
+Caso 4:
+IA propone acción que viola Skill.
+
+Dictamen:
+Acción inválida.
+
+Acción:
+Bloquear o pedir excepción humana documentada.
+
+----------
+
+Caso 5:
+Usuario pide estado pero no cierre.
+
+Dictamen:
+No activar cierre formal.
+
+Acción:
+Responder estado, pero no ejecutar protocolo completo.
+
+----------
+
+Caso 6:
+Usuario dice "cierra sesión".
+
+Dictamen:
+Activar cierre formal completo.
+
+Acción:
+Ejecutar contrato de cierre de este Skill.
+
+==========
+11.00_ANTIPATRONES
+==========
+
+- Actualizar BATON en cada microavance sin necesidad.
+- Convertir el cierre en burocracia permanente.
+- Usar RADAR como fuente de verdad lógica.
+- Cerrar sesión sin declarar brechas.
+- Inventar estado para completar cierre.
+- Actualizar HUMAN por cambios operativos normales.
+- Mezclar Git dentro de este Skill.
+- Duplicar información entre BATON, backlog y HUMAN.
+- Crear backlog si el proyecto ya tiene uno operativo suficiente.
+- Omitir path minibattles -> battles -> entregable funcional a gerencia al cierre formal.
+- Tratar "estado del proyecto" como "cierra sesión".
+
+==========
+12.00_DEFINICIONES_OPERATIVAS
+==========
+
+----------
+12.10_MINIBATTLE
+----------
+
+Unidad corta de avance, verificable, con output concreto y evidencia mínima.
+
+Debe reducir riesgo, desbloquear trabajo o producir avance funcional.
+
+----------
+12.20_BATTLE
+----------
+
+Bloque mayor de trabajo compuesto por una o más minibattles.
+
+Debe conducir hacia una capacidad funcional, decisión relevante o entregable demostrable.
+
+----------
+12.30_ENTREGABLE_FUNCIONAL_A_GERENCIA
+----------
+
+Resultado demostrable, entendible por gerencia y con valor visible.
+
+Puede ser demo, reporte, tablero, presentación, proceso operativo validado o automatización funcional.
+
+No debe ser solo documentación interna salvo que el objetivo gerencial sea gobierno documental.
+
+----------
+12.40_BATON_PRINCIPAL_DEL_PROYECTO_ACTIVO
+----------
+
+Archivo o artefacto de continuidad que resume el estado operativo mínimo para continuar el proyecto en una IA en blanco.
+
+----------
+12.50_BACKLOG_OPERATIVO_DEL_PROYECTO
+----------
+
+Lista activa de pendientes, mejoras, deuda técnica, riesgos y próximas acciones del proyecto.
+
+Se actualiza al cierre si existe y si hay información suficiente.
+
+----------
+12.60_RADAR
+----------
+
+Mapa o índice vigente del filesystem/proyecto usado como evidencia de estado, rutas y artefactos disponibles.
+
+Si falta RADAR y el cierre depende de estado de archivos, la IA debe pedir su ejecución.
+
+==========
+13.00_PREGUNTAS_DE_AJUSTE_FUTURO
+==========
+
+01. ¿La frase activadora del cierre formal sigue siendo exactamente "cierra sesión"?
+
+02. ¿Deben agregarse nuevas frases activadoras o se mantiene activador único?
+
+03. ¿Qué consultas deben considerarse solo estado y no cierre formal?
+
+04. ¿BATON debe actualizarse solo al cierre formal o también bajo instrucción directa?
+
+05. ¿Backlog debe actualizarse solo al cierre formal o también bajo instrucción directa?
+
+06. ¿Deuda técnica debe actualizarse solo al cierre formal o también bajo instrucción directa?
+
+07. ¿HUMAN requiere cambio doctrinal explícito para ser actualizado?
+
+08. ¿Qué artefactos pueden modificarse durante sesión sin activar cierre?
+
+09. ¿El cierre debe entregar siempre deuda técnica, backlogs, avances, pendientes y estado actual?
+
+10. ¿El cierre debe incluir siempre path accionable de minibattles -> battles -> entregable funcional a gerencia?
+
+11. ¿Qué define una minibattle completada?
+
+12. ¿Qué define una battle completada?
+
+13. ¿Qué califica como entregable funcional a gerencia?
+
+14. ¿El path de desarrollo requiere fechas, responsables y criterios de éxito, o basta con siguiente acción accionable?
+
+15. ¿Qué BATON debe actualizarse en proyectos con más de un BATON?
+
+16. ¿Qué backlog operativo debe actualizarse si existen varios backlogs?
+
+17. ¿La deuda técnica debe vivir dentro del backlog operativo o en archivo separado?
+
+18. ¿Cuándo una brecha debe clasificarse como deuda técnica?
+
+19. ¿Cuándo una brecha debe clasificarse como backlog funcional?
+
+20. ¿Cuándo una brecha debe clasificarse como riesgo abierto?
+
+21. ¿Cuándo se debe actualizar HUMAN durante el cierre?
+
+22. ¿Cuándo se debe pedir ejecutar RADAR antes de cerrar?
+
+23. ¿Qué evidencia mínima debe existir para cerrar sesión con fidelidad?
+
+24. ¿Qué debe hacer la IA si falta RADAR vigente?
+
+25. ¿Qué debe hacer la IA si falta output de terminal?
+
+26. ¿Qué debe hacer la IA si faltan datos para actualizar BATON sin inventar?
+
+27. ¿Qué información está prohibido inventar durante cierre?
+
+28. ¿Qué parte del cierre debe derivarse al Skill de Git?
+
+29. ¿Cuándo debe incluirse handoff opcional para próxima sesión?
+
+30. ¿Quién puede aprobar excepciones al protocolo de cierre?
+
+==========
+14.00_CHECKLIST_OPERATIVO
+==========
+
+----------
+14.10_DURANTE_SESION
+----------
+
+[ ] ¿Se está ejecutando trabajo real?
+[ ] ¿Se evitó actualizar continuidad sin necesidad?
+[ ] ¿Se declaró brecha si falta evidencia?
+[ ] ¿Se distinguió cambio operativo vs doctrinal?
+[ ] ¿Se evitó modificar HUMAN sin cambio doctrinal?
+
+----------
+14.20_AL_CIERRE_FORMAL
+----------
+
+[ ] ¿El humano dijo exactamente "cierra sesión"?
+[ ] ¿Se identificó proyecto activo?
+[ ] ¿Se identificó BATON principal del proyecto activo?
+[ ] ¿Se identificó backlog operativo del proyecto activo, si existe?
+[ ] ¿Se indicó deuda técnica?
+[ ] ¿Se indicó backlog?
+[ ] ¿Se indicó qué hemos hecho?
+[ ] ¿Se indicó qué falta?
+[ ] ¿Se indicó en qué estamos?
+[ ] ¿Se mostró path minibattles -> battles -> entregable funcional a gerencia?
+[ ] ¿Se actualizó BATON o se declaró brecha?
+[ ] ¿Se actualizó backlog o se declaró brecha?
+[ ] ¿Se pidió RADAR si faltaba evidencia de filesystem?
+[ ] ¿Se derivó Git al Skill de Git?
+[ ] ¿Se incluyó handoff opcional para próxima sesión?
+[ ] ¿No se inventó estado?
+
+==========
+15.00_CHANGELOG
+==========
+
+2026-05-14, v1.1-CANON
+- Cambia el contrato de cierre: el cierre formal solo se activa con la frase exacta "cierra sesión".
+- Elimina obligación de actualizar BATON, backlogs, deuda técnica y HUMAN durante toda la sesión.
+- Concentra actualización de continuidad en cierre formal o instrucción explícita del humano.
+- Generaliza el Skill para cualquier proyecto, no solo SkillsMachine.
+- Define BATON principal del proyecto activo y backlog operativo del proyecto activo.
+- Agrega path accionable minibattles -> battles -> entregable funcional a gerencia.
+- Deriva operaciones Git al Skill de Git aplicable.
+- Exige pedir RADAR cuando falte evidencia necesaria para cierre fiel.
+- Agrega preguntas de ajuste futuro.
 
 2026-04-21, v1.0-CANON
-- Creación del ciclo de vida operativo del sistema
-- Integración con gobernanza de artefactos
-- Definición de eventos y validación
-- Integración explícita de WhoAmI
+- Creación inicial del Skill de ciclo de vida de proyecto.
+- Definición de eventos de sesión.
+- Integración inicial con HUMAN, BATON, WhoAmI, SKILLS y RADAR.
 
+==========
+FIN_DEL_DOCUMENTO
+==========
