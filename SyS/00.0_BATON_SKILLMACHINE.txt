@@ -1,3 +1,59 @@
+
+==========
+LATEST_SESSION_CLOSE_MB_GRC_021
+==========
+
+FECHA........................: 2026-05-18
+HORA.........................: 2026-05-18 13:30:12
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+BRANCH.......................: main
+ULTIMO_COMMIT_CONFIRMADO.....: 134a9ec 20260518_MB-GRC-020_session_artifact_accumulation_and_usecase_build_fix
+
+ESTADO_EJECUTIVO.............:
+Repo funcional y validado. Se cerró la cadena MB-GRC-018, MB-GRC-019 y MB-GRC-020.
+MB-GRC-020 corrigió el Skill de ciclo de vida y además reparó el build de 90.USECASE.
+
+HECHO_CONFIRMADO.............:
+- MB-GRC-018 creó catálogo global, reglas del compositor contextual y backlog Skill/GRC.
+- MB-GRC-019 definió activador exacto de cierre formal: "cierra sesión".
+- MB-GRC-020 agregó regla de acumulación/perfeccionamiento de artefactos.
+- MB-GRC-020 corrigió BUILD.ps1 para generar delivery files válidos.
+- BUILD.ps1 ejecutó con TOTAL_FAIL 0.
+- Validate-System.ps1 ejecutó OK.
+- Último commit confirmado: 134a9ec.
+
+DEUDA_TECNICA_ABIERTA........:
+- TECH_DEBT_001: BUILD.ps1 no es transaccional; limpia antes de confirmar regeneración.
+- TECH_DEBT_002: Readiness puede quedar WARN por frescura de BATON/WHOAMI/RADAR.
+- TECH_DEBT_003: Warnings CRLF/LF en Git.
+- TECH_DEBT_004: Subtítulos 14.10/14.20 bajo sección 15.00 en 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt.
+- TECH_DEBT_005: Afinar semántica GRC transversal.
+
+BACKLOG_PRIORITARIO..........:
+- MB-GRC-021: cierre formal de continuidad.
+- MB-GRC-022: build transaccional con staging temporal.
+- MB-GRC-023: validación documental de duplicidad Skill/GRC por contenido.
+- MB-GRC-024: revisar .gitattributes / line endings.
+- MB-GRC-025: evaluar si "cerremos sesión" también activa cierre formal.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Ejecutar MB-GRC-021 post-commit/continuity readiness review o avanzar con MB-GRC-022 si se prioriza hardening técnico.
+
+PATH_MINIBATTLES_BATTLES.....:
+MB-GRC-018 -> MB-GRC-019 -> MB-GRC-020 -> MB-GRC-021 -> MB-GRC-022 -> MB-GRC-023
+
+ENTREGABLE_GERENCIA..........:
+Sistema SkillsMachine con catálogo global, cierre formal, acumulación controlada de artefactos y build usecase validable.
+
+HUMAN.........................:
+No actualizado en este cierre. No se detectó necesidad de modificar doctrina superior fuera de los artefactos ya actualizados.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_021
+==========
+
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 =============================
@@ -570,4 +626,5 @@ No se borraron ni movieron backups. Se mantuvieron como evidencia operacional, p
 BACKLOG_SIGUIENTE...:
 MB-GRC-018 — separar Radar Engine de Radar Outputs.
 Motivo: SyS\A_Tools\Radar\RADAR.ps1 es tooling fuente versionado, mientras SyS\A_Tools\Radar\radar.* son outputs runtime ignorados. La mezcla funciona, pero no es arquitectura limpia.
+
 

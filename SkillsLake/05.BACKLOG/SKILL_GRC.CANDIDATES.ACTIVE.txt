@@ -134,3 +134,58 @@ APROBACION_HUMANA............: SI, confirmada por Pablo el 2026-05-14.
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+----------
+CANDIDATE_MB_GRC_021_SESSION_CLOSE_CONTINUITY
+----------
+
+CANDIDATE_ID.................: MB_GRC_021
+FECHA........................: 2026-05-18
+ORIGEN.......................: Cierre formal de sesión activado por "cierra sesión"
+IDEA.........................: Actualizar BATON, WhoAmI, backlog operativo, regenerar RADAR, validar readiness y dejar commit de continuidad.
+DOMINIO_AFECTADO.............: SESSION_MANAGEMENT
+ARTEFACTO_RECTOR_AFECTADO....: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+TIPO_DE_CAMBIO...............: CONTINUITY_UPDATE
+PRIORIDAD....................: P0
+DECISION.....................: APPROVED_BY_HUMAN
+ESTADO.......................: IN_PROGRESS
+MOTIVO.......................: El protocolo de cierre formal exige continuidad actualizada.
+PROXIMO_PASO.................: Ejecutar script MB-GRC-021 y commitear continuidad.
+APROBACION_HUMANA............: SI, frase exacta "cierra sesión".
+
+----------
+TECH_DEBT_MB_GRC_022_BUILD_TRANSACTIONAL
+----------
+
+CANDIDATE_ID.................: MB_GRC_022
+FECHA........................: 2026-05-18
+ORIGEN.......................: Hallazgo durante MB-GRC-020
+IDEA.........................: Endurecer BUILD.ps1 para que sea transaccional: preflight, staging temporal, validación y reemplazo final.
+DOMINIO_AFECTADO.............: USECASE_BUILD
+ARTEFACTO_RECTOR_AFECTADO....: 90.USECASE\BUILD.ps1
+TIPO_DE_CAMBIO...............: TECH_DEBT
+PRIORIDAD....................: P1
+DECISION.....................: DEFERRED
+ESTADO.......................: OPEN
+MOTIVO.......................: BUILD.ps1 todavía limpia outputs antes de confirmar regeneración.
+PROXIMO_PASO.................: Diseñar MB-GRC-022.
+APROBACION_HUMANA............: PENDIENTE.
+
+----------
+BACKLOG_MB_GRC_023_DUPLICATE_SEMANTIC_VALIDATION
+----------
+
+CANDIDATE_ID.................: MB_GRC_023
+FECHA........................: 2026-05-18
+ORIGEN.......................: Capa 00.CATALOG y regla anti-proliferación
+IDEA.........................: Crear validación documental de duplicidad Skill/GRC por contenido y propósito.
+DOMINIO_AFECTADO.............: SKILL_GRC_GOVERNANCE
+ARTEFACTO_RECTOR_AFECTADO....: 00.CATALOG
+TIPO_DE_CAMBIO...............: GOVERNANCE_VALIDATION
+PRIORIDAD....................: P1
+DECISION.....................: DEFERRED
+ESTADO.......................: OPEN
+MOTIVO.......................: Evitar proliferación de Skills y GRC redundantes.
+PROXIMO_PASO.................: Definir validación documental antes de automatización.
+APROBACION_HUMANA............: PENDIENTE.
+
