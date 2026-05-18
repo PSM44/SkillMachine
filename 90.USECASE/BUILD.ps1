@@ -119,7 +119,22 @@ function Find-CanonicalFile {
         [Parameter(Mandatory = $true)]$ExcludedRoots
     )
 
-    $all = @(
+    # MB-GRC-020E_RELATIVE_PATH_RESOLUTION
+    # If the registry/manifest provides a path such as:
+    #   SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+    # resolve it first as a path relative to repo root.
+    # Only fall back to recursive filename search for bare filenames.
+    $normalizedFileName = ([string]$FileName).Replace('/', [System.IO.Path]::DirectorySeparatorChar)
+    $looksLikeRelativePath = ($normalizedFileName -match '[\\/]')
+
+    if ($looksLikeRelativePath) {
+        $candidatePath = Join-Path $Root $normalizedFileName
+
+        if (Test-Path -LiteralPath $candidatePath -PathType Leaf) {
+            return @(Get-Item -LiteralPath $candidatePath)
+        }
+    }
+$all = @(
         Get-ChildItem -Path $Root -Recurse -File | Where-Object {
             $full = $_.FullName
             $isExcluded = $false
@@ -360,6 +375,9 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $preserveFiles = @($PromptFiles)
+        if ($UseCaseName -eq "02.SESSION_CLOSE") {
+            $preserveFiles += @("RUNBOOK.SESSION_CLOSE.HARDENED.txt")
+        }
 
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
             # OPTION_B_MERGE_PRESERVE_FOR_CLEAR
@@ -384,13 +402,10 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $deliveryFiles = @()
-        # OPTION_B_DEFAULTS (avoid strict-mode uninitialized variables)
-        # OPTION_B_UC04_READ_EXTRAS_FROM_REGISTRY
-        # Populate extras from USECASE.REGISTRY when present (UC04), otherwise keep defaults.
+        # Keep optional UC extras from registry. Under StrictMode these properties may be absent,
+        # so Safe-GetArray normalizes to empty arrays without throwing.
         $PreserveFiles = @(Safe-GetArray $uc "preserve_files")
         $DeliveryFilesExtra = @(Safe-GetArray $uc "delivery_files_extra")
-        $PreserveFiles = @()
-        $DeliveryFilesExtra = @()
         # OPTION_B_UC04_DELIVERY_EXTRA
         # If registry provides delivery_files_extra, include them as delivery artifacts (rich usecase packaging).
         if ($DeliveryFilesExtra -and @($DeliveryFilesExtra).Count -gt 0) {
@@ -401,15 +416,20 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         foreach ($menuFile in @($MenuFiles)) {
             $menuMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName $menuFile -ExcludedRoots $ExcludedRoots)
             $menuSource = $menuMatches[0]
-            $menuDest = Join-Path $TargetDir $menuFile
+                        # MB-GRC-020F_MENU_DESTINATION_LEAF
+            # Menu files may be declared as repo-relative paths such as:
+            #   SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+            # but the usecase delivery expects the local leaf file under TargetDir.
+            $menuDestName = Split-Path -Leaf ([string]$menuFile)
+            $menuDest = Join-Path $TargetDir $menuDestName
             Copy-Item -Path $menuSource.FullName -Destination $menuDest -Force
 
             if (!(Test-Path -LiteralPath $menuDest -PathType Leaf)) {
                 throw "No se pudo copiar menu_file '$menuFile' a '$menuDest'"
             }
 
-            Write-Host ("COPIED MENU: {0}" -f $menuFile)
-            $deliveryFiles += $menuFile
+            Write-Host ("COPIED MENU: {0} -> {1}" -f $menuFile, $menuDestName)
+            $deliveryFiles += $menuDestName
         }
 
         foreach ($bundleDef in @($BundleDefinitions)) {
@@ -564,6 +584,8 @@ if ($failCount -gt 0) {
 }
 
 exit 0
+
+
 
 
 

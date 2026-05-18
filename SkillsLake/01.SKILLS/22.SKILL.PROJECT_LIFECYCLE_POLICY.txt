@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.1-CANON
+VERSION...........: v1.2-CANON
 FECHA.............: 2026-05-14
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -60,9 +60,10 @@ TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL, SESSION_CLOSE,
 11.00 Antipatrones
 12.00 Definiciones operativas
 
-13.00 Preguntas de ajuste futuro
-14.00 Checklist operativo
-15.00 Changelog
+13.00 Acumulación y perfeccionamiento de artefactos
+14.00 Preguntas de ajuste futuro
+15.00 Checklist operativo
+16.00 Changelog
 
 ==========
 01.00_OBJETIVO
@@ -609,7 +610,185 @@ Mapa o índice vigente del filesystem/proyecto usado como evidencia de estado, r
 Si falta RADAR y el cierre depende de estado de archivos, la IA debe pedir su ejecución.
 
 ==========
-13.00_PREGUNTAS_DE_AJUSTE_FUTURO
+13.00_ACUMULACION_Y_PERFECCIONAMIENTO_DE_ARTEFACTOS
+==========
+
+----------
+13.10_REGLA_BASE
+----------
+
+Durante el cierre formal de sesión, cada artefacto debe cumplir su función correcta.
+
+No se debe copiar la misma información en todas las capas.
+
+Regla de capa:
+
+- Backlog acumula.
+- Deuda técnica acumula.
+- HUMAN se perfecciona.
+- BATON se refresca.
+- RADAR se regenera.
+- Git registra.
+
+----------
+13.20_BACKLOG
+----------
+
+El backlog operativo del proyecto acumula pendientes no resueltos, mejoras, decisiones abiertas y próximos pasos.
+
+En cada cierre formal:
+
+- se agregan nuevos pendientes;
+- se actualizan pendientes existentes;
+- se cierran ítems resueltos;
+- se fusionan duplicados;
+- se reclasifican ítems cuando cambia su naturaleza.
+
+Un pendiente no resuelto permanece abierto.
+
+No debe duplicarse como nuevo ítem si ya existe.
+
+----------
+13.30_DEUDA_TECNICA
+----------
+
+La deuda técnica acumula problemas técnicos, estructurales u operativos no resueltos.
+
+Debe distinguirse de:
+
+- backlog funcional;
+- brecha de información;
+- riesgo abierto;
+- decisión pendiente.
+
+Estados recomendados:
+
+- NUEVA
+- EXISTENTE_SIN_CAMBIO
+- EXISTENTE_ACTUALIZADA
+- MITIGADA
+- RESUELTA
+- ACEPTADA_CONSCIENTEMENTE
+- DESCARTADA
+
+La deuda técnica debe mantener, cuando exista evidencia suficiente:
+
+- descripción;
+- causa;
+- impacto;
+- riesgo;
+- evidencia;
+- próximo paso;
+- prioridad;
+- relación con minibattle o battle si aplica.
+
+----------
+13.40_HUMAN
+----------
+
+HUMAN no acumula tareas ni pendientes operativos.
+
+HUMAN se perfecciona solo cuando existe:
+
+- cambio doctrinal;
+- aclaración de intención humana;
+- cambio de visión;
+- cambio de principio rector;
+- cambio de precedencia;
+- cambio de regla raíz;
+- mejora conceptual canónica.
+
+Ejemplo correcto:
+Actualizar HUMAN para declarar una nueva regla superior de arquitectura o gobernanza.
+
+Ejemplo incorrecto:
+Agregar a HUMAN una tarea pendiente de implementación.
+
+Las tareas pendientes van en backlog, no en HUMAN.
+
+----------
+13.50_BATON
+----------
+
+BATON no acumula historia completa.
+
+BATON es snapshot operativo vigente.
+
+Debe reflejar:
+
+- estado actual;
+- objetivo activo;
+- próximos pasos;
+- riesgos o brechas que afectan continuidad;
+- archivos/capas relevantes para continuar;
+- decisión operativa vigente.
+
+BATON debe refrescarse al cierre formal cuando exista información suficiente.
+
+No debe convertirse en manual, backlog ni changelog completo.
+
+----------
+13.60_RADAR
+----------
+
+RADAR no se edita manualmente.
+
+RADAR se regenera como evidencia del filesystem o estructura equivalente del proyecto.
+
+RADAR no decide lógica ni doctrina.
+
+RADAR ayuda a validar:
+
+- archivos existentes;
+- rutas;
+- cambios de filesystem;
+- outputs;
+- estado documental observable.
+
+----------
+13.70_GIT
+----------
+
+Git registra trazabilidad histórica mediante commits, ramas, tags y diferencias.
+
+Este Skill no define comandos Git.
+
+La operación Git debe derivarse al Skill de Git aplicable.
+
+----------
+13.80_REGLA_ANTI_DUPLICACION
+----------
+
+No se debe duplicar la misma información en múltiples artefactos.
+
+Cada contenido debe vivir en su capa correcta:
+
+- doctrina en HUMAN;
+- estado operativo vigente en BATON;
+- pendientes en backlog;
+- problemas estructurales en deuda técnica;
+- evidencia filesystem en RADAR;
+- trazabilidad histórica en Git.
+
+Si una misma idea aparece en varias capas, debe tener propósito distinto en cada una.
+
+----------
+13.90_CRITERIO_DE_CIERRE
+----------
+
+Al cierre formal, la IA debe revisar si cada dato pertenece a:
+
+- HUMAN;
+- BATON;
+- backlog;
+- deuda técnica;
+- RADAR;
+- Git;
+- otro artefacto del proyecto activo.
+
+Si no existe evidencia suficiente para clasificar un dato, debe declararse como brecha y no inventarse.
+==========
+14.00_PREGUNTAS_DE_AJUSTE_FUTURO
 ==========
 
 01. ¿La frase activadora del cierre formal sigue siendo exactamente "cierra sesión"?
@@ -673,7 +852,7 @@ Si falta RADAR y el cierre depende de estado de archivos, la IA debe pedir su ej
 30. ¿Quién puede aprobar excepciones al protocolo de cierre?
 
 ==========
-14.00_CHECKLIST_OPERATIVO
+15.00_CHECKLIST_OPERATIVO
 ==========
 
 ----------
@@ -708,9 +887,13 @@ Si falta RADAR y el cierre depende de estado de archivos, la IA debe pedir su ej
 [ ] ¿No se inventó estado?
 
 ==========
-15.00_CHANGELOG
+16.00_CHANGELOG
 ==========
 
+2026-05-17, v1.2-CANON
+- Agrega regla de acumulación y perfeccionamiento de artefactos al cierre formal.
+- Define que backlog acumula, deuda técnica acumula, HUMAN se perfecciona, BATON se refresca, RADAR se regenera y Git registra.
+- Refuerza regla anti-duplicación entre HUMAN, BATON, backlog, deuda técnica, RADAR y Git.
 2026-05-14, v1.1-CANON
 - Cambia el contrato de cierre: el cierre formal solo se activa con la frase exacta "cierra sesión".
 - Elimina obligación de actualizar BATON, backlogs, deuda técnica y HUMAN durante toda la sesión.
@@ -730,3 +913,4 @@ Si falta RADAR y el cierre depende de estado de archivos, la IA debe pedir su ej
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+

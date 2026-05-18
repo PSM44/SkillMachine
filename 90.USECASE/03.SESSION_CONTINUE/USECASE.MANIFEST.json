@@ -1,105 +1,107 @@
-{
-  "usecase": "03.SESSION_CONTINUE",
-  "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-04-30 20:11:23",
-  "source_root": "C:\\01. GitHub\\Skills",
-  "delivery_files": [
-    "00.BUNDLE.CORE.txt",
-    "../../SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
-    "01.BUNDLE.CONTINUITY.txt",
-    "02.BUNDLE.GOVERNANCE.txt",
-    "PROMPT.SESSION_CONTINUE.txt"
-  ],
-  "bundles": [
-    {
-      "bundle_name": "CORE",
-      "delivery_file": "00.BUNDLE.CORE.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\00.BUNDLE.CORE.txt",
-      "delivery_size_bytes": 38300,
-      "delivery_size_kb": 37.4,
-      "delivery_sha256": "29F49777418D31BA8E735604A6F907CA3FDE0287C771D94ED0ADE6C492639DE4",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\06.SKILL.WBS.txt",
-          "version": "v1.2-DRAFT",
-          "source_sha256": "84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\07.SKILL.FILE_CONTENT.txt",
-          "version": "v1.3-DRAFT",
-          "source_sha256": "44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\12.SKILL.DRAG_AND_DROP.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3"
-        }
-      ]
-    },
-    {
-      "bundle_name": "CONTINUITY",
-      "delivery_file": "01.BUNDLE.CONTINUITY.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 29530,
-      "delivery_size_kb": 28.84,
-      "delivery_sha256": "6BD65E8ADD5DFAB972F8A9B1DC9FAA8D7609330BD01E28A0E1B64E4B0BBA4528",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\10.SKILL.BATON.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "B0F126A3AA84746BC15F7EAB8B99F039022328271126ABCC5E950A65705F805D"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\11.SKILL.HUMAN_README.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "40BB16C77F1DAA9574A7D9958A18A53FC6482B5F2525693F572E28A5006E679C"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "0CF35357DEA40D6A1B5DA170F6AB5EF6B60559F039CB841385CFCB3F163324E2"
-        }
-      ]
-    },
-    {
-      "bundle_name": "GOVERNANCE",
-      "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 27661,
-      "delivery_size_kb": 27.01,
-      "delivery_sha256": "44C0A8A43AEA7667C7DCA53C162864D0185FF04C49CCD59A221FC48C6588CF26",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "8E4BDF940457DC5415F9EB8EBCEF34302E55C6EA15BA18D55F08E750F3FF094E"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-          "version": "v1.0-DRAFT",
-          "source_sha256": "AF7DA1A28DDBA474C62C80AD20AE5EAAF198EEE60967ED292612C2B35D7506B2"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "351AEEF47756C135B3FB6D468069255F4DF57A362B1A17EEC04E9DC6AEF69965"
-        }
-      ]
-    }
-  ],
-  "validation": {
-    "missing_files": null,
-    "delivery_file_count": 5,
-    "max_delivery_files_allowed": 5,
-    "status": "OK"
-  }
+﻿{
+    "usecase":  "03.SESSION_CONTINUE",
+    "usecase_version":  "v3.0-BUNDLES",
+    "generated_at":  "2026-05-18 13:26:53",
+    "source_root":  "C:\\01. GitHub\\Skills",
+    "delivery_files":  [
+                           "00.BUNDLE.CORE.txt",
+                           "00.SKILL.MENU.ACTIVE.txt",
+                           "01.BUNDLE.CONTINUITY.txt",
+                           "02.BUNDLE.GOVERNANCE.txt",
+                           "PROMPT.SESSION_CONTINUE.txt"
+                       ],
+    "bundles":  [
+                    {
+                        "bundle_name":  "CORE",
+                        "delivery_file":  "00.BUNDLE.CORE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\00.BUNDLE.CORE.txt",
+                        "delivery_size_bytes":  38426,
+                        "delivery_size_kb":  37.53,
+                        "delivery_sha256":  "C99D604E64C9B868060F7549D3B6BF98CAAE7705B467BEA998EC428DC96D5D7A",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\06.SKILL.WBS.txt",
+                                                 "version":  "v1.2-DRAFT",
+                                                 "source_sha256":  "84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\07.SKILL.FILE_CONTENT.txt",
+                                                 "version":  "v1.3-DRAFT",
+                                                 "source_sha256":  "44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\12.SKILL.DRAG_AND_DROP.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "CONTINUITY",
+                        "delivery_file":  "01.BUNDLE.CONTINUITY.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
+                        "delivery_size_bytes":  29656,
+                        "delivery_size_kb":  28.96,
+                        "delivery_sha256":  "98F131914A716B7DDE1B8D62C08E7045289AF9077CBC48D3E12DD5F4A9181293",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\10.SKILL.BATON.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "B0F126A3AA84746BC15F7EAB8B99F039022328271126ABCC5E950A65705F805D"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\11.SKILL.HUMAN_README.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "40BB16C77F1DAA9574A7D9958A18A53FC6482B5F2525693F572E28A5006E679C"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
+                                                 "version":  "v1.0-CANON",
+                                                 "source_sha256":  "0CF35357DEA40D6A1B5DA170F6AB5EF6B60559F039CB841385CFCB3F163324E2"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "GOVERNANCE",
+                        "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_size_bytes":  45950,
+                        "delivery_size_kb":  44.87,
+                        "delivery_sha256":  "4A95976ABDBD88C5CDB4243F0A2B4E5BCBF83BCFD4B9B8596F6AF8B5A891130A",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "8E4BDF940457DC5415F9EB8EBCEF34302E55C6EA15BA18D55F08E750F3FF094E"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "version":  "v1.0-DRAFT",
+                                                 "source_sha256":  "AF7DA1A28DDBA474C62C80AD20AE5EAAF198EEE60967ED292612C2B35D7506B2"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "version":  "v1.0-CANON",
+                                                 "source_sha256":  "49EC41971435C7F643C889F40B1F27E1F341C25ADB6B4A23D11093FF6AAE40FD"
+                                             }
+                                         ]
+                    }
+                ],
+    "validation":  {
+                       "missing_files":  [
+
+                                         ],
+                       "delivery_file_count":  5,
+                       "max_delivery_files_allowed":  5,
+                       "status":  "OK"
+                   }
 }
