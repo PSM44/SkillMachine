@@ -310,6 +310,92 @@ function Validate-ManifestIntegrity {
     }
 }
 
+function Start-UseCaseTransactionBackup {
+    param(
+        [Parameter(Mandatory = $true)][string]$UseCaseName,
+        [Parameter(Mandatory = $true)][string]$TargetDir,
+        [Parameter(Mandatory = $true)]$PreserveFiles,
+        [Parameter(Mandatory = $true)][string]$TransactionRoot
+    )
+
+    $backupRoot = Join-Path $TransactionRoot $UseCaseName
+    New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
+
+    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt"))
+    $toBackup = @(
+        Get-ChildItem -LiteralPath $TargetDir -File -ErrorAction SilentlyContinue | Where-Object {
+            $_.Name -notin $preserve
+        }
+    )
+
+    foreach ($f in @($toBackup)) {
+        Copy-Item -LiteralPath $f.FullName -Destination (Join-Path $backupRoot $f.Name) -Force
+    }
+
+    return [pscustomobject]@{
+        BackupRoot = $backupRoot
+        BackedUpFiles = @($toBackup | ForEach-Object { $_.Name })
+    }
+}
+
+function Restore-UseCaseTransactionBackup {
+    param(
+        [Parameter(Mandatory = $true)][string]$TargetDir,
+        [Parameter(Mandatory = $true)][string]$BackupRoot
+    )
+
+    if (!(Test-Path -LiteralPath $BackupRoot -PathType Container)) {
+        return
+    }
+
+    $backupFiles = @(Get-ChildItem -LiteralPath $BackupRoot -File -ErrorAction SilentlyContinue)
+    foreach ($f in @($backupFiles)) {
+        Copy-Item -LiteralPath $f.FullName -Destination (Join-Path $TargetDir $f.Name) -Force
+    }
+}
+
+function Invoke-BuildPreflight {
+    param(
+        [Parameter(Mandatory = $true)]$Registry,
+        [Parameter(Mandatory = $true)]$VersionRegistry,
+        [Parameter(Mandatory = $true)][string]$UseCaseRoot,
+        [Parameter(Mandatory = $true)][string]$SkillsRoot,
+        [Parameter(Mandatory = $true)]$ExcludedRoots
+    )
+
+    foreach ($uc in @(Normalize-ToArray $Registry.usecases)) {
+        $useCaseName = [string]$uc.name
+        $targetDir = Join-Path $UseCaseRoot $useCaseName
+        if (!(Test-Path -LiteralPath $targetDir -PathType Container)) {
+            throw "PREFLIGHT: carpeta de use case no existe: $targetDir"
+        }
+
+        $promptFiles = @(Safe-GetArray $uc "prompt_files")
+        $menuFiles = @(Safe-GetArray $uc "menu_files")
+        $bundleDefinitions = @(Safe-GetArray $uc "bundle_definitions")
+
+        foreach ($p in @($promptFiles)) {
+            if ([string]::IsNullOrWhiteSpace([string]$p)) { continue }
+            if (!(Test-Path -LiteralPath (Join-Path $targetDir ([string]$p)) -PathType Leaf)) {
+                throw "PREFLIGHT: prompt faltante en '$useCaseName': $p"
+            }
+        }
+
+        foreach ($menuFile in @($menuFiles)) {
+            if ([string]::IsNullOrWhiteSpace([string]$menuFile)) { continue }
+            [void](Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$menuFile) -ExcludedRoots $ExcludedRoots)
+        }
+
+        foreach ($bundleDef in @($bundleDefinitions)) {
+            $sources = @(Normalize-ToArray $bundleDef.source_files)
+            foreach ($sourceFile in @($sources)) {
+                [void](Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
+                [void](Get-TrackedSourceInfo -VersionRegistry $VersionRegistry -FileName ([string]$sourceFile))
+            }
+        }
+    }
+}
+
 # ==========================================================
 # 02.00 LOAD CONFIG
 # ==========================================================
@@ -326,6 +412,18 @@ if (-not $registry.build_policy) {
 }
 
 $ExcludedRoots = @(Normalize-ToArray $registry.excluded_roots)
+$BuildTxnRoot = Join-Path $env:TEMP ("SkillMachine_BUILD_TRANSACTION_{0}" -f (Get-Date).ToString("yyyyMMdd_HHmmss"))
+
+Write-Host "BUILD PREFLIGHT"
+try {
+    Invoke-BuildPreflight -Registry $registry -VersionRegistry $versionRegistry -UseCaseRoot $UseCaseRoot -SkillsRoot $SkillsRoot -ExcludedRoots $ExcludedRoots
+    Write-Host "OK: preflight passed"
+}
+catch {
+    Write-Host "FAIL: preflight"
+    Write-Host $_.Exception.Message
+    exit 1
+}
 
 # ==========================================================
 # 03.00 BUILD LOOP
@@ -354,6 +452,9 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
     Write-Host "=============================="
     Write-Host "BUILD USECASE: $UseCaseName"
     Write-Host "=============================="
+
+    $txnBackupRoot = $null
+    $txnBackedUpFiles = @()
 
     try {
         if (!(Test-Path -LiteralPath $TargetDir -PathType Container)) {
@@ -389,6 +490,9 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
                 $preserveFiles += @("SKILL.md","USECASE.MANIFEST.json")
             }
             $preserveFiles = @($preserveFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+            $txn = Start-UseCaseTransactionBackup -UseCaseName $UseCaseName -TargetDir $TargetDir -PreserveFiles $preserveFiles -TransactionRoot $BuildTxnRoot
+            $txnBackupRoot = [string]$txn.BackupRoot
+            $txnBackedUpFiles = @(Normalize-ToArray $txn.BackedUpFiles)
             $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
             # OPTION_B_UC04_PRESERVE_EXCLUDE
             # Defensive: if preserve_files exist, do not count/remove them as cleanup targets.
@@ -544,6 +648,10 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
     }
     catch {
         $errMsg = $_.Exception.Message
+        if ($txnBackupRoot -and (Test-Path -LiteralPath $txnBackupRoot -PathType Container)) {
+            Restore-UseCaseTransactionBackup -TargetDir $TargetDir -BackupRoot $txnBackupRoot
+            Write-Host ("RESTORED TRANSACTION BACKUP for {0} ({1} files)" -f $UseCaseName, @($txnBackedUpFiles).Count)
+        }
 
         $results += [pscustomobject]@{
             usecase = $UseCaseName
