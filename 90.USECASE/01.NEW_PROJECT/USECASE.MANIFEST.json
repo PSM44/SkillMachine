@@ -1,7 +1,7 @@
 ﻿{
     "usecase":  "01.NEW_PROJECT",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-05-18 13:26:53",
+    "generated_at":  "2026-05-22 18:14:26",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -17,7 +17,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
                         "delivery_size_bytes":  38426,
                         "delivery_size_kb":  37.53,
-                        "delivery_sha256":  "63E801A8BC061E1F92000CA9AD6E443E0FB3F0E8067330F4101CC9DE449E4FBA",
+                        "delivery_sha256":  "7B7CC012514883DC5C23A78EFC33D44A9478CEBF76EFD15E2D9FE9FEAC00AEA5",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -45,7 +45,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
                         "delivery_size_bytes":  29656,
                         "delivery_size_kb":  28.96,
-                        "delivery_sha256":  "98F131914A716B7DDE1B8D62C08E7045289AF9077CBC48D3E12DD5F4A9181293",
+                        "delivery_sha256":  "526CD3BE2D017534192996AC212A50814C8B4788FF9806749805EB6529983943",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -73,7 +73,7 @@
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
                         "delivery_size_bytes":  49135,
                         "delivery_size_kb":  47.98,
-                        "delivery_sha256":  "E7A5EAE4355AD1FFB6DCD276635543555F7B6AA8C7C27544D271FB2AA5A56B1C",
+                        "delivery_sha256":  "292A7FBE6FD4A0EA0FF62C6D8C9E45904E52CC5277BEDBFE479E12202D8E9559",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",

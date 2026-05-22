@@ -310,6 +310,53 @@ function Validate-ManifestIntegrity {
     }
 }
 
+function ConvertTo-ManifestComparableJson {
+    param(
+        [Parameter(Mandatory = $true)]$ManifestObject
+    )
+
+    $clone = ($ManifestObject | ConvertTo-Json -Depth 20 | ConvertFrom-Json)
+    if ($clone.PSObject.Properties['generated_at']) {
+        $clone.PSObject.Properties.Remove('generated_at')
+    }
+    return ($clone | ConvertTo-Json -Depth 20)
+}
+
+function Write-ManifestIfChanged {
+    param(
+        [Parameter(Mandatory = $true)][string]$ManifestPath,
+        [Parameter(Mandatory = $true)]$ManifestObject
+    )
+
+    $finalManifest = ($ManifestObject | ConvertTo-Json -Depth 20 | ConvertFrom-Json)
+    $shouldWrite = $true
+
+    if (Test-Path -LiteralPath $ManifestPath -PathType Leaf) {
+        $existingRaw = Get-Content -LiteralPath $ManifestPath -Raw -Encoding utf8
+        $existing = $existingRaw | ConvertFrom-Json
+
+        $existingComparable = ConvertTo-ManifestComparableJson -ManifestObject $existing
+        $newComparable = ConvertTo-ManifestComparableJson -ManifestObject $finalManifest
+
+        if ($existingComparable -eq $newComparable) {
+            if ($existing.PSObject.Properties['generated_at']) {
+                $finalManifest.generated_at = [string]$existing.generated_at
+            }
+
+            $finalRaw = ($finalManifest | ConvertTo-Json -Depth 12)
+            if ($finalRaw -eq $existingRaw) {
+                $shouldWrite = $false
+            }
+        }
+    }
+
+    if ($shouldWrite) {
+        $finalManifest | ConvertTo-Json -Depth 12 | Set-Content -Path $ManifestPath -Encoding utf8
+    }
+
+    return $finalManifest
+}
+
 function Start-UseCaseTransactionBackup {
     param(
         [Parameter(Mandatory = $true)][string]$UseCaseName,
@@ -632,7 +679,7 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $manifestPath = Join-Path $TargetDir "USECASE.MANIFEST.json"
-        $manifest | ConvertTo-Json -Depth 12 | Set-Content -Path $manifestPath -Encoding utf8
+        $manifest = Write-ManifestIfChanged -ManifestPath $manifestPath -ManifestObject $manifest
 
         Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -DeliveryFiles $deliveryFiles -TargetDir $TargetDir
 
