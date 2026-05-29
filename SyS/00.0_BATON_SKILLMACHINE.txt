@@ -842,3 +842,25 @@ Elegir entre:
 ==========
 FIN_LATEST_SESSION_CLOSE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
 ==========
+
+==========
+LATEST_SESSION_CLOSE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:31:54
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: 0f362aa 20260529_MB-GRC-025B_duplicate_semantic_review_report
+
+ESTADO_ACTUAL...............:
+- MB-GRC-025B creó reporte inicial de duplicidad semántica.
+- MB-GRC-025C revisó en profundidad 05.SKILL.ROUTING_POLICY vs 27.SKILL.MODEL_ROUTING_POLICY.
+- Dictamen: duplicidad evolutiva probable; no merge inmediato; boundary patch recomendado.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+MB-GRC-025C-2 — boundary patch routing policy, o MB-GRC-025D si se prioriza manifests/registry boundary.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========

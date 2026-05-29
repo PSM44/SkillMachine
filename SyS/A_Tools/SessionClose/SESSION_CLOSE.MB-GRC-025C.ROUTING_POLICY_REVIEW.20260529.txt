@@ -1,0 +1,21 @@
+==========
+SESSION_CLOSE.MB-GRC-025C.ROUTING_POLICY_REVIEW.20260529
+==========
+
+FECHA........................: 2026-05-29
+PROYECTO.....................: SkillsMachine
+MINIBATTLE...................: MB-GRC-025C
+OBJETIVO.....................: Revisar duplicidad semántica entre 05.SKILL.ROUTING_POLICY y 27.SKILL.MODEL_ROUTING_POLICY.
+
+DICTAMEN.....................:
+Duplicidad evolutiva probable.
+No se recomienda merge inmediato.
+Se recomienda boundary patch futuro:
+- 05 = routing general/base/histórico.
+- 27 = routing moderno por modelo/herramienta/modo bajo GRC.
+
+ESTADO.......................: CERRADO COMO REVIEW DOCUMENTAL
+SIGUIENTE_ACCION.............: MB-GRC-025C-2 boundary patch routing, si se aprueba.
+==========
+FIN_DEL_DOCUMENTO
+==========

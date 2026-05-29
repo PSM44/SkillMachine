@@ -1,0 +1,143 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL_GRC.ROUTING_POLICY.DEEP_REVIEW.20260529
+NOMBRE_SUGERIDO...: SKILL_GRC.ROUTING_POLICY.DEEP_REVIEW.20260529.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-29
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: PABLO
+ESTADO............: ACTIVE
+
+ALCANCE...........:
+Revisión documental profunda de posible duplicidad entre:
+- 05.SKILL.ROUTING_POLICY.txt
+- 27.SKILL.MODEL_ROUTING_POLICY.txt
+
+NO_CUBRE..........:
+No fusiona archivos.
+No borra archivos.
+No renombra archivos.
+No modifica el contenido de los skills revisados.
+No automatiza todavía validación semántica.
+
+==========
+01.00_RESUMEN_EJECUTIVO
+==========
+
+El reporte MB-GRC-025B clasificó 05.SKILL.ROUTING_POLICY.txt vs 27.SKILL.MODEL_ROUTING_POLICY.txt
+como DUPLICATE_CANDIDATE.
+
+Dictamen de esta revisión:
+Existe duplicidad evolutiva probable, pero no corresponde merge inmediato.
+
+Hipótesis:
+- 05.SKILL.ROUTING_POLICY.txt parece política base/histórica de routing.
+- 27.SKILL.MODEL_ROUTING_POLICY.txt parece política moderna orientada a modelo/herramienta/modo bajo GRC.
+
+Decisión recomendada:
+Mantener ambos por ahora, pero reclasificar frontera:
+- 05 = routing general / base conceptual / legacy-compatible.
+- 27 = model routing moderno / operativo / GRC enforced.
+
+==========
+02.00_COMPARACION_FUNCIONAL
+==========
+
+05.SKILL.ROUTING_POLICY.txt:
+- Define selección de modelos, niveles de contexto y modo de ejecución PLAN/APPLY.
+- Foco: eficiencia, costo, complejidad y riesgo operativo.
+- Parece más general y anterior.
+
+27.SKILL.MODEL_ROUTING_POLICY.txt:
+- Define qué modelo usar, en qué herramienta y en qué modo PLAN/ACT/VALIDATE.
+- Foco: costo, latencia, calidad y GRC obligatorio.
+- Parece más moderno y más alineado con multi-tool / multi-model.
+
+==========
+03.00_CLASIFICACION
+==========
+
+CLASIFICACION................: DUPLICATE_CANDIDATE_EVOLUTIVE
+SEVERIDAD....................: MEDIA
+URGENCIA.....................: MEDIA
+RIESGO_ACTUAL................: Confusión operativa sobre cuál skill prevalece al decidir modelo/herramienta/modo.
+
+NO_ES_DUPLICIDAD_TOTAL........:
+Ambos pueden coexistir si se define jerarquía.
+
+RIESGO_DE_MERGE_INMEDIATO....:
+Un merge prematuro podría borrar criterios históricos útiles del skill 05 o sobrecargar el skill 27.
+
+==========
+04.00_DECISION_RECOMENDADA
+==========
+
+No fusionar todavía.
+
+Implementar en futura minibattle:
+MB-GRC-025C-2_BOUNDARY_PATCH_ROUTING
+
+Cambios recomendados:
+1. En 05.SKILL.ROUTING_POLICY.txt:
+   - Declarar estado: BASE / LEGACY-COMPATIBLE / GENERAL_ROUTING.
+   - Agregar nota: para routing moderno por modelo/herramienta/modo, ver 27.SKILL.MODEL_ROUTING_POLICY.txt.
+   - No eliminar contenido.
+
+2. En 27.SKILL.MODEL_ROUTING_POLICY.txt:
+   - Declarar estado: ACTIVE / MODERN_MODEL_ROUTING / GRC_ENFORCED.
+   - Agregar dependencia explícita o referencia histórica a 05.
+   - Declarar que prevalece para selección práctica de modelo/herramienta/modo si hay conflicto operativo.
+
+3. En backlog:
+   - Registrar boundary patch pendiente.
+   - No marcar 05 como deprecated hasta revisar contenido completo y uso en bundles/prompts.
+
+==========
+05.00_CRITERIO_DE_PRECEDENCIA_PROPUESTO
+==========
+
+Si la tarea requiere:
+- escoger modelo,
+- escoger herramienta,
+- escoger modo PLAN/ACT/VALIDATE,
+- balancear costo/latencia/calidad bajo GRC,
+
+usar 27.SKILL.MODEL_ROUTING_POLICY.txt.
+
+Si la tarea requiere:
+- entender criterios generales de routing,
+- revisar doctrina histórica,
+- comparar niveles de contexto o modos conceptuales,
+
+usar 05.SKILL.ROUTING_POLICY.txt.
+
+==========
+06.00_DECISION
+==========
+
+Se cierra MB-GRC-025C como deep review documental.
+
+No se aprueba:
+- merge automático,
+- delete,
+- rename,
+- deprecación inmediata.
+
+Sí se recomienda:
+- boundary patch posterior entre 05 y 27.
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-05-29, v0.1-DRAFT
+- Creación inicial del deep review routing policy.
+- Se confirma duplicidad evolutiva probable.
+- Se recomienda boundary patch sin merge inmediato.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

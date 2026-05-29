@@ -504,3 +504,25 @@ QUE_FALTA...................:
 ==========
 FIN_LATEST_WHOAMI_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
 ==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:31:54
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: 0f362aa 20260529_MB-GRC-025B_duplicate_semantic_review_report
+
+ESTADO_ACTUAL...............:
+- Se detectó duplicidad evolutiva probable entre routing histórico/general y model routing moderno.
+- No se eliminó ni fusionó ningún skill.
+- Siguiente decisión: aplicar boundary patch o revisar otro hotspot.
+
+SIGUIENTE_ACCION............:
+Definir si se ejecuta MB-GRC-025C-2 boundary patch routing.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========

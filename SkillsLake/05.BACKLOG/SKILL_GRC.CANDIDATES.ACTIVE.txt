@@ -341,3 +341,32 @@ TECH_DEBT_REMAINING:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========
+
+FECHA........................: 2026-05-29 13:31:54
+FUENTE.......................: MB-GRC-025C_ROUTING_POLICY_DEEP_REVIEW
+HEAD_BASE....................: 0f362aa 20260529_MB-GRC-025B_duplicate_semantic_review_report
+
+DONE:
+- MB-GRC-025C — revisión profunda de 05.SKILL.ROUTING_POLICY vs 27.SKILL.MODEL_ROUTING_POLICY.
+  Evidencia: 00.CATALOG/SKILL_GRC.ROUTING_POLICY.DEEP_REVIEW.20260529.txt
+
+DICTAMEN:
+- Duplicidad evolutiva probable.
+- No hacer merge inmediato.
+- Mantener ambos con frontera explícita.
+
+P1_OPEN:
+- MB-GRC-025C-2 — boundary patch routing policy.
+  Criterio: 05 como routing general/base/histórico; 27 como model routing moderno/GRC enforced.
+
+P1_OPEN:
+- MB-GRC-025D — boundary patch MANIFEST_PATH_SEMANTICS vs REGISTRY_ALIGNMENT.
+- MB-GRC-025E — evaluar validator documental semiautomático.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
+==========
