@@ -260,7 +260,23 @@ function New-BundleFile {
         [void]$lines.Add("")
     }
 
-    [System.IO.File]::WriteAllLines($BundlePath, $lines, [System.Text.UTF8Encoding]::new($false))
+    $newRaw = [string]::Join([Environment]::NewLine, @($lines)) + [Environment]::NewLine
+
+    if (Test-Path -LiteralPath $BundlePath -PathType Leaf) {
+        $existingRaw = Get-Content -LiteralPath $BundlePath -Raw -Encoding utf8
+        $normalizeForCompare = {
+            param([string]$raw)
+            $normalized = $raw -replace "`r`n", "`n"
+            $normalized = $normalized -replace "(?m)^GENERATED_AT:\s.*$", "GENERATED_AT: __PRESERVED__"
+            return $normalized
+        }
+
+        if ((& $normalizeForCompare $newRaw) -eq (& $normalizeForCompare $existingRaw)) {
+            return
+        }
+    }
+
+    [System.IO.File]::WriteAllText($BundlePath, $newRaw, [System.Text.UTF8Encoding]::new($false))
 }
 
 function Validate-ManifestIntegrity {
