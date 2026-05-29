@@ -1,0 +1,37 @@
+==========
+SESSION_CLOSE.MB-GRC-024B.20260529
+==========
+
+FECHA........................: 2026-05-29 13:11:09
+CIUDAD.......................: Santiago, Chile
+PROYECTO.....................: SkillsMachine
+ROOT.........................: C:\01. GitHub\Skills
+ROOT_WSL.....................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+HEAD_BASE....................: cecced5 20260529_MB-GRC-024A_integrate_bash_wsl2_skill
+
+OBJETIVO:
+Cerrar continuidad posterior a MB-GRC-024A, que integro 28.SKILL.BASH.WSL2.txt al sistema.
+
+HECHO:
+- BATON actualizado.
+- WHOAMI actualizado.
+- Backlog actualizado.
+- Cierre documental creado.
+
+ESTADO_PREVIO:
+MB-GRC-024A habia quedado funcional y publicado, pero readiness en WARN porque BATON y WHOAMI estaban stale contra HEAD.
+
+CRITERIO_DE_CIERRE:
+- Validate-System OK.
+- Commit/push de continuidad.
+- RADAR post-commit fresco.
+- Readiness final esperado OK.
+- Git limpio y local/remoto sincronizados.
+
+SIGUIENTE_ACCION:
+Decidir entre MB-GRC-024 line endings / .gitattributes o MB-GRC-025 duplicidad semantica Skill/GRC.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

@@ -414,3 +414,41 @@ PROXIMO_FOCO........:
 MB-GRC-018 — separar Radar Engine de Radar Outputs.
 
 
+
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_024B_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:11:09
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: main
+HEAD_CONFIRMADO.............: cecced5 20260529_MB-GRC-024A_integrate_bash_wsl2_skill
+SHELL_OPERATIVO.............: bash WSL2
+
+ESTADO_ACTUAL...............:
+- MB-GRC-024A integro 28.SKILL.BASH.WSL2.txt como skill activo.
+- Bash WSL2 queda documentado como skill operativo para repos Windows/Git/GitHub.
+- Repo quedo limpio y sincronizado tras push de MB-GRC-024A.
+- Continuidad se actualiza en MB-GRC-024B para resolver readiness WARN por BATON/WHOAMI stale.
+
+QUE_SE_LOGRO................:
+- Nuevo skill WSL2 copiado a SkillsLake/01.SKILLS.
+- Menu activo actualizado con SKILL_BASH_WSL2.
+- GLOBAL.SKILL.VERSION.REGISTRY.json actualizado.
+- Se corrigieron ejemplos inseguros de git add -A dentro del nuevo skill.
+- Build, Validate-System, RADAR y push verificados.
+
+QUE_FALTA...................:
+- Resolver o cerrar deuda CRLF/LF si reaparece.
+- Homologar formato/shape del registry para evitar churn.
+- Avanzar duplicidad semantica Skill/GRC por contenido.
+- Negative test formal del restore transaccional.
+
+SIGUIENTE_ACCION............:
+Despues de cerrar MB-GRC-024B, decidir si se prioriza MB-GRC-024 line endings / .gitattributes o MB-GRC-025 duplicidad semantica Skill/GRC.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_024B_20260529
+==========

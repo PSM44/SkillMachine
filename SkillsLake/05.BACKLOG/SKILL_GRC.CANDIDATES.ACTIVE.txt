@@ -254,3 +254,34 @@ TECH_DEBT_REMAINING:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_023B_FINAL_20260529
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_024B_20260529
+==========
+
+FECHA........................: 2026-05-29 13:11:09
+FUENTE.......................: MB-GRC-024B_CLOSE_CONTINUITY_AFTER_WSL2_SKILL
+HEAD_CONFIRMADO..............: cecced5 20260529_MB-GRC-024A_integrate_bash_wsl2_skill
+
+DONE:
+- MB-GRC-024A — Integrar 28.SKILL.BASH.WSL2.txt.
+  Evidencia: skill agregado a SkillsLake/01.SKILLS, menu activo actualizado, registry actualizado, Build OK, Validate OK, RADAR OK, push OK.
+
+P1_OPEN:
+- MB-GRC-024 — line endings / .gitattributes si aplica.
+  Criterio: eliminar warnings CRLF/LF sin generar churn innecesario.
+- MB-GRC-025 — duplicidad semantica Skill/GRC por contenido.
+  Criterio: detectar duplicidad por proposito/alcance/reglas, no solo por nombre.
+
+P2_OPEN:
+- Negative test formal de restore transaccional.
+- Homologar formato/shape de GLOBAL.SKILL.VERSION.REGISTRY.json para evitar reserializacion completa.
+
+TECH_DEBT_REMAINING:
+- Posible deuda CRLF/LF.
+- Registry JSON tuvo churn de formato en MB-GRC-024A.
+- Duplicidad semantica Skill/GRC pendiente.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_024B_20260529
+==========

@@ -737,3 +737,49 @@ MB-GRC-018 — separar Radar Engine de Radar Outputs.
 Motivo: SyS\A_Tools\Radar\RADAR.ps1 es tooling fuente versionado, mientras SyS\A_Tools\Radar\radar.* son outputs runtime ignorados. La mezcla funciona, pero no es arquitectura limpia.
 
 
+
+==========
+LATEST_SESSION_CLOSE_MB_GRC_024B_20260529
+==========
+
+FECHA........................: 2026-05-29 13:11:09
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+ULTIMO_COMMIT_CONFIRMADO.....: cecced5 20260529_MB-GRC-024A_integrate_bash_wsl2_skill
+SHELL_OPERATIVO..............: bash WSL2
+
+ESTADO_EJECUTIVO.............:
+MB-GRC-024A integrado y publicado. Se incorporo 28.SKILL.BASH.WSL2.txt al SkillsLake, al menu activo y al GLOBAL.SKILL.VERSION.REGISTRY.json.
+
+HECHO_CONFIRMADO.............:
+- Commit MB-GRC-024A: cecced5 20260529_MB-GRC-024A_integrate_bash_wsl2_skill
+- Push a origin/main verificado.
+- Build paso con TOTAL_FAIL 0.
+- Validate-System paso OK.
+- RADAR post-commit paso OK.
+- Git quedo limpio tras la integracion.
+- Readiness quedo WARN solo por continuidad stale: BATON/WHOAMI no estaban actualizados contra HEAD.
+
+DEUDA_TECNICA_ABIERTA........:
+- Homologar shape/formato de GLOBAL.SKILL.VERSION.REGISTRY.json para evitar reserializacion amplia.
+- Revisar CRLF/LF si vuelven a aparecer warnings.
+- Implementar duplicidad semantica Skill/GRC por contenido.
+- Negative test formal de restore transaccional.
+
+BACKLOG_PRIORITARIO..........:
+- MB-GRC-024: line endings / .gitattributes si aplica.
+- MB-GRC-025: duplicidad semantica Skill/GRC por contenido.
+- TECHDEBT: normalizacion controlada del registry JSON sin churn de formato.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Cerrar continuidad MB-GRC-024B y luego decidir entre line endings / .gitattributes o validacion documental de duplicidad Skill/GRC.
+
+HUMAN.........................:
+No actualizado. No se detecto cambio doctrinal; el cambio fue operativo/tactico: formalizar Bash WSL2 como skill.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_024B_20260529
+==========
