@@ -1,0 +1,927 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.BASH.WSL2.01.00
+NOMBRE_SUGERIDO...: 28.SKILL.BASH.WSL2.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-05-22
+HORA..............: HH:MM
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+
+ALCANCE...........:
+Define el uso seguro, operativo y trazable de Bash sobre WSL2 para proyectos
+Windows/Git/GitHub donde el repositorio vive en disco Windows y se opera desde
+Linux mediante rutas /mnt/c.
+
+Este skill captura aprendizajes prácticos obtenidos trabajando con repositorios
+como BeSmartRevEng, especialmente:
+- conversión de rutas Windows <-> WSL2,
+- Git desde WSL2 sobre repos montados en /mnt/c,
+- control de line endings CRLF/LF,
+- uso de GitHub CLI,
+- uso de .venv local,
+- ejecución de one-shots Bash,
+- logs, commits, push y verificación,
+- prevención de contaminación del repo con artefactos temporales.
+
+NO_CUBRE..........:
+No reemplaza SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.
+No reemplaza SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.
+No reemplaza scripts específicos de proyecto.
+No enseña Bash completo desde cero.
+No define arquitectura de WSL2 global del sistema operativo.
+No autoriza ejecutar comandos destructivos sin validación humana.
+No autoriza instalar paquetes del sistema sin propósito explícito.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+
+TAGS_OPERATIVOS...: BASH, WSL2, GIT, GITHUB_CLI, PYTHON_VENV, WINDOWS_REPO, EXECUTION_SAFETY
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+00.20 Objetivo ejecutivo
+
+01.00 Principios de uso
+02.00 Diferencias mínimas PowerShell vs Bash
+03.00 Rutas Windows y rutas WSL2
+04.00 Modo seguro de ejecución Bash
+05.00 Git en WSL2 sobre repos Windows
+06.00 Line endings CRLF/LF
+07.00 GitHub CLI y autenticación
+08.00 Python, pip, venv y dependencias
+09.00 One-shots Bash
+10.00 Logs, output y trazabilidad
+11.00 Artefactos temporales y exclusiones locales
+12.00 Patrón de commit/push/verificación
+13.00 Troubleshooting frecuente
+14.00 Antipatrones
+15.00 Checklist rápido
+16.00 Snippets estándar
+17.00 Changelog
+
+==========
+00.20_OBJETIVO_EJECUTIVO
+==========
+
+Objetivo:
+Usar Bash sobre WSL2 como terminal operativa principal para proyectos Windows,
+manteniendo seguridad, trazabilidad, control Git y reproducibilidad.
+
+Principio rector:
+Bash/WSL2 debe acelerar el trabajo, no contaminar el repositorio.
+
+Regla central:
+Antes de ejecutar scripts que mutan archivos, validar:
+- ruta correcta,
+- branch correcta,
+- HEAD esperado,
+- git status limpio,
+- dependencias disponibles,
+- outputs esperados,
+- commit/push/verificación final.
+
+==========
+01.00_PRINCIPIOS_DE_USO
+==========
+
+01.10 Bash/WSL2 es entorno operativo, no juguete experimental
+
+WSL2 permite usar herramientas Linux sobre repositorios ubicados en Windows.
+Eso es potente, pero introduce riesgos:
+- diferencias de line endings,
+- diferencias de permisos,
+- diferencias de Git config,
+- diferencias de Python/pip/venv,
+- diferencias de autenticación GitHub,
+- diferencias de rutas.
+
+Regla:
+Cada proyecto debe validar WSL2 antes de usarlo para commits.
+
+01.20 No operar sobre barro
+
+Antes de cualquier minibattle o one-shot mutante:
+
+- git branch --show-current
+- git log --oneline -1
+- git status --short
+
+Si Git no está limpio, no avanzar salvo que el objetivo sea precisamente resolver ese estado.
+
+01.30 No repetir one-shots ya ejecutados
+
+Si un one-shot:
+- generó artefactos,
+- actualizó BATON/BACKLOG,
+- creó commit,
+- o falló después de crear outputs,
+
+no se reejecuta a ciegas.
+
+Primero:
+- inspeccionar estado,
+- detectar artefactos parciales,
+- recuperar o continuar,
+- evitar duplicar logs/BATON/BACKLOG/JSON timestamped.
+
+01.40 Bash exige comillas
+
+Toda ruta con espacios debe ir entre comillas.
+
+Ejemplo correcto:
+cd "$ROOT"
+
+Ejemplo incorrecto:
+cd $ROOT
+
+Si el repo vive en:
+C:\01. GitHub\BeSmartRevEng
+
+En WSL2 será:
+"/mnt/c/01. GitHub/BeSmartRevEng"
+
+Sin comillas, Bash parte la ruta y rompe ejecución.
+
+==========
+02.00_DIFERENCIAS_MINIMAS_POWERSHELL_VS_BASH
+==========
+
+PowerShell:
+- Get-Location
+- Set-Location
+- Get-ChildItem
+- $Root = "C:\..."
+- $env:PATH
+- Write-Host
+- Test-Path
+- New-Item
+- Remove-Item
+
+Bash:
+- pwd
+- cd
+- ls -la
+- ROOT="/mnt/c/..."
+- PATH
+- echo
+- test -f / test -d / [[ -f "$p" ]]
+- mkdir -p
+- rm -rf
+
+Tabla rápida:
+
+PowerShell................: Get-Location
+Bash......................: pwd
+
+PowerShell................: Set-Location "C:\..."
+Bash......................: cd "/mnt/c/..."
+
+PowerShell................: Get-ChildItem
+Bash......................: ls -la
+
+PowerShell................: $Root = "C:\repo"
+Bash......................: ROOT="/mnt/c/repo"
+
+PowerShell................: Write-Host "texto"
+Bash......................: echo "texto"
+
+PowerShell................: Test-Path $p
+Bash......................: [[ -f "$p" ]] / [[ -d "$p" ]]
+
+PowerShell................: Select-String
+Bash......................: grep
+
+PowerShell................: Sort-Object
+Bash......................: sort
+
+PowerShell................: Where-Object
+Bash......................: grep / awk / find
+
+==========
+03.00_RUTAS_WINDOWS_Y_RUTAS_WSL2
+==========
+
+03.10 Conversión de ruta Windows a WSL2
+
+Patrón estándar:
+
+ROOT_WIN='C:\01. GitHub\BeSmartRevEng'
+ROOT="$(wslpath -u "$ROOT_WIN")"
+cd "$ROOT"
+
+Resultado esperado:
+C:\01. GitHub\BeSmartRevEng
+-> /mnt/c/01. GitHub/BeSmartRevEng
+
+03.20 Conversión de ruta WSL2 a Windows
+
+Usar cuando se llama powershell.exe desde WSL2:
+
+wslpath -w "$RADAR_PATH"
+
+Ejemplo:
+
+powershell.exe -ExecutionPolicy Bypass -File "$(wslpath -w "$RADAR_PATH")"
+
+03.30 Regla de oro
+
+Nunca hardcodear manualmente /mnt/c si se puede usar wslpath desde ROOT_WIN.
+Eso reduce errores de espacios, encoding y nombres.
+
+==========
+04.00_MODO_SEGURO_DE_EJECUCION_BASH
+==========
+
+04.10 Modo estricto obligatorio
+
+Todo one-shot Bash serio debe iniciar con:
+
+set -Eeuo pipefail
+
+Significado:
+- -E: conserva traps en funciones/subshells.
+- -e: falla si un comando falla.
+- -u: falla si se usa variable no definida.
+- -o pipefail: falla si falla una parte de un pipeline.
+
+04.20 Script de precheck mínimo
+
+Todo script mutante debe imprimir:
+
+- fecha/hora,
+- pwd,
+- branch,
+- HEAD,
+- git status,
+- outputs esperados,
+- final status.
+
+04.30 No prometer ejecución futura
+
+La ejecución ocurre en la sesión actual. Si falla, se diagnostica y se entrega recuperación.
+No se deja “para después” sin estado claro.
+
+04.40 Separar read-only de mutante
+
+READ_ONLY:
+- find
+- grep
+- sed -n
+- git status
+- git log
+- python lectura
+
+MUTANTE:
+- crear/editar archivos
+- git add
+- git commit
+- git push
+- instalar paquetes
+- regenerar RADAR
+- actualizar BATON/BACKLOG
+
+Regla:
+Un script mutante debe declararlo en Purpose.
+
+==========
+05.00_GIT_EN_WSL2_SOBRE_REPOS_WINDOWS
+==========
+
+05.10 Problema típico
+
+PowerShell Git puede ver repo limpio y WSL2 Git puede ver cientos de archivos modificados.
+
+Causas frecuentes:
+- core.autocrlf distinto,
+- core.filemode distinto,
+- core.eol distinto,
+- CRLF/LF,
+- permisos sobre /mnt/c,
+- Git de Windows y Git de Linux con configs distintas.
+
+05.20 Diagnóstico obligatorio
+
+Ejecutar:
+
+git --version
+which git
+git config --show-origin --get core.filemode || echo "core.filemode: <unset>"
+git config --show-origin --get core.autocrlf || echo "core.autocrlf: <unset>"
+git config --show-origin --get core.eol || echo "core.eol: <unset>"
+git status --short | wc -l
+git status --short | sed -n '1,60p'
+git diff --summary | sed -n '1,80p'
+git diff --numstat | sed -n '1,80p'
+
+05.30 Interpretación
+
+Si git diff --summary muestra:
+mode change 100644 => 100755
+
+Probable causa:
+core.filemode.
+
+Corrección local sugerida:
+git config core.filemode false
+
+Si git diff --numstat muestra patrones masivos tipo:
+22 22
+48 48
+422 422
+
+Probable causa:
+CRLF/LF.
+
+Probar sin persistir:
+git -c core.autocrlf=true status --short
+
+Si limpia o mejora:
+git config core.autocrlf true
+
+05.40 Preferir configuración local de repo
+
+No cambiar global salvo decisión explícita.
+
+Correcto:
+git config core.autocrlf true
+git config core.filemode false
+
+Evitar:
+git config --global core.autocrlf true
+
+Razón:
+Cada repo puede tener contratos distintos.
+
+==========
+06.00_LINE_ENDINGS_CRLF_LF
+==========
+
+06.10 Regla operativa
+
+En repos Windows operados desde WSL2 sobre /mnt/c, revisar line endings antes del primer commit desde Bash.
+
+06.20 Warnings esperables
+
+Git puede mostrar:
+
+warning: in the working copy of 'archivo', LF will be replaced by CRLF the next time Git touches it
+
+Este warning no siempre bloquea. Debe evaluarse contra:
+- git status final,
+- diff real,
+- política del repo.
+
+06.30 Prohibido normalizar masivamente sin objetivo
+
+No ejecutar comandos de normalización global de line endings sin issue/minibattle específica.
+
+Antipatrón:
+“Arreglemos todos los CRLF/LF de una vez”.
+
+Eso puede generar commit tóxico con cientos/miles de archivos modificados sin cambio funcional.
+
+==========
+07.00_GITHUB_CLI_Y_AUTENTICACION
+==========
+
+07.10 Verificar GitHub CLI
+
+gh --version
+gh auth status
+
+Si no existe:
+sudo apt update
+sudo apt install gh -y
+
+07.20 Login recomendado
+
+gh auth login
+
+Luego:
+
+gh auth setup-git
+
+07.30 Error típico
+
+GitHub ya no acepta password para Git HTTPS.
+
+Error:
+remote: Invalid username or token. Password authentication is not supported for Git operations.
+
+Corrección:
+- usar gh auth login,
+- usar token/PAT,
+- o cambiar remote a SSH si corresponde.
+
+07.40 Verificar push
+
+git push origin "$(git branch --show-current)"
+git fetch origin
+git rev-parse HEAD
+git rev-parse origin/$(git branch --show-current)
+
+Aceptar solo si:
+LOCAL == REMOTE
+git status --short está limpio.
+
+==========
+08.00_PYTHON_PIP_VENV_Y_DEPENDENCIAS
+==========
+
+08.10 Regla
+
+No instalar paquetes Python globales para el proyecto si se puede usar .venv local.
+
+08.20 Diagnóstico
+
+python3 --version
+which python3
+python3 -m pip --version || true
+python3 -m venv --help >/dev/null 2>&1 && echo "venv: OK" || echo "venv: MISSING"
+
+08.30 Si falta venv/pip
+
+En Debian/Ubuntu/Kali:
+
+sudo apt update
+sudo apt install -y python3.13-venv python3-pip
+
+Si falla paquete específico:
+
+sudo apt install -y python3-venv python3-pip
+
+08.40 Crear .venv local
+
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install openpyxl
+
+08.50 Usar .venv en scripts
+
+Después de cd "$ROOT":
+
+export PATH="$ROOT/.venv/bin:$PATH"
+
+Luego python3 usará .venv/bin/python si existe.
+
+08.60 Excluir .venv local del repo
+
+Usar .git/info/exclude para exclusión local no versionada:
+
+touch .git/info/exclude
+grep -qxF '.venv/' .git/info/exclude || echo '.venv/' >> .git/info/exclude
+
+No commitear .venv.
+
+==========
+09.00_ONE_SHOTS_BASH
+==========
+
+09.10 Patrón recomendado
+
+Para scripts largos, no pegar directo línea por línea.
+
+Usar:
+
+cat > /tmp/script_name.sh <<'SH'
+# contenido
+SH
+
+bash /tmp/script_name.sh
+
+Ventajas:
+- reduce corrupción por pegado,
+- permite reejecución controlada,
+- mantiene bloque íntegro,
+- evita heredocs abiertos dentro del shell principal.
+
+09.20 Patrón mínimo de one-shot
+
+Debe incluir:
+
+- header con MB_ID,
+- set -Eeuo pipefail,
+- ROOT_WIN + wslpath,
+- cd "$ROOT",
+- precheck Git limpio,
+- validación de archivos requeridos,
+- ejecución,
+- outputs,
+- append BATON/BACKLOG si aplica,
+- RADAR si aplica,
+- git add/commit/push,
+- final verify.
+
+09.30 No escribir después del push
+
+Regla:
+Después de git push, el script no debe escribir archivos.
+Solo imprimir verificación.
+
+Razón:
+Evita dejar working tree sucio después del commit.
+
+==========
+10.00_LOGS_OUTPUT_Y_TRAZABILIDAD
+==========
+
+10.10 Logs
+
+Patrón:
+
+LOG_DIR="99_old/Logs"
+LOG_PATH="${LOG_DIR}/${MB_ID}_${STAMP}.log"
+mkdir -p "$LOG_DIR"
+
+log() {
+  echo "$1" | tee -a "$LOG_PATH"
+}
+
+10.20 Marcadores de copia
+
+Todo script debe imprimir:
+
+========== <ID> / START ==========
+
+y cerrar con:
+
+========== COPY OUTPUT ABOVE ==========
+
+10.30 Output que debe pedirse al humano
+
+El humano debe copiar desde START hasta COPY OUTPUT ABOVE.
+
+10.40 No saturar terminal
+
+Usar límites:
+
+sed -n '1,200p'
+head -50
+tail -120
+
+Para JSON/CSV largos, producir archivo y mostrar resumen.
+
+==========
+11.00_ARTEFACTOS_TEMPORALES_Y_EXCLUSIONES_LOCALES
+==========
+
+11.10 Dónde guardar temporales
+
+Temporales ejecutables:
+- /tmp/*.sh
+
+Logs del proyecto:
+- 99_old/Logs
+
+Work dirs de minibattle:
+- 99_old/<MB_ID>_<STAMP>
+
+11.20 Exclusión local
+
+Para evitar contaminar Git con runtime local:
+
+touch .git/info/exclude
+grep -qxF '.venv/' .git/info/exclude || echo '.venv/' >> .git/info/exclude
+grep -qxF '99_old/Logs/' .git/info/exclude || echo '99_old/Logs/' >> .git/info/exclude
+
+11.30 Cuidado
+
+.git/info/exclude no se versiona.
+Sirve para higiene local, no para contrato compartido.
+
+Si una exclusión debe ser estándar del equipo, evaluar .gitignore con minibattle propia.
+
+==========
+12.00_PATRON_DE_COMMIT_PUSH_VERIFICACION
+==========
+
+12.10 Precommit
+
+Antes de stage:
+
+git status --short
+git diff --stat
+
+12.20 Stage
+
+Regla SkillMachine:
+No usar staging masivo por defecto.
+
+Prohibido por defecto:
+git add .
+git add -A
+
+Usar staging explicito por archivo:
+
+git add -- "RUTA/ARCHIVO_1"
+git add -- "RUTA/ARCHIVO_2"
+
+Si hay JSON/CSV ignorados y deben entrar por decision explicita:
+
+git add -f -- "$JSON_OUTPUT"
+git add -f -- "$CSV_OUTPUT"
+
+12.30 Validar staged diff
+
+if [[ -z "$(git diff --cached --stat)" ]]; then
+  echo "FINAL_STATUS.....: FAIL"
+  echo "ERROR............: No staged changes found."
+  exit 1
+fi
+
+git diff --cached --stat
+
+12.40 Commit
+
+git commit -m "YYYYMMDD_DOC_short_description"
+
+12.50 Push
+
+git push origin "$(git branch --show-current)"
+
+12.60 Verificación final
+
+git fetch origin
+
+LOCAL_AFTER="$(git rev-parse HEAD)"
+REMOTE_AFTER="$(git rev-parse origin/$(git branch --show-current))"
+STATUS_AFTER="$(git status --short)"
+
+Aceptar solo si:
+
+LOCAL_AFTER == REMOTE_AFTER
+STATUS_AFTER vacío
+
+Imprimir:
+
+FINAL_STATUS.....: OK
+GIT_STATUS.......:
+(clean)
+PUSH_VERIFY......: OK_LOCAL_REMOTE_SYNCED
+
+==========
+13.00_TROUBLESHOOTING_FRECUENTE
+==========
+
+13.10 Git ve muchos archivos modificados
+
+Síntoma:
+git status --short muestra cientos de M.
+
+Diagnóstico:
+- revisar core.autocrlf,
+- revisar core.filemode,
+- revisar diff --summary,
+- revisar diff --numstat.
+
+Corrección probable:
+git config core.autocrlf true
+git config core.filemode false
+
+13.20 Author identity unknown
+
+Síntoma:
+fatal: empty ident name not allowed
+
+Corrección local:
+
+HEAD_AUTHOR_NAME="$(git log -1 --format='%an')"
+HEAD_AUTHOR_EMAIL="$(git log -1 --format='%ae')"
+git config user.name "$HEAD_AUTHOR_NAME"
+git config user.email "$HEAD_AUTHOR_EMAIL"
+
+No usar global salvo decisión explícita.
+
+13.30 GitHub password authentication failed
+
+Síntoma:
+remote: Invalid username or token. Password authentication is not supported.
+
+Corrección:
+gh auth login
+gh auth setup-git
+git push
+
+13.40 openpyxl no existe
+
+Síntoma:
+ModuleNotFoundError: No module named 'openpyxl'
+
+Corrección:
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install openpyxl
+export PATH="$ROOT/.venv/bin:$PATH"
+
+13.50 pip no existe
+
+Síntoma:
+/usr/bin/python3: No module named pip
+
+Corrección:
+sudo apt update
+sudo apt install -y python3.13-venv python3-pip
+
+o:
+
+sudo apt install -y python3-venv python3-pip
+
+13.60 Script falla después de crear artefactos
+
+No reejecutar a ciegas.
+
+Primero:
+- git status --short,
+- find outputs parciales,
+- revisar logs,
+- decidir recovery.
+
+13.70 Heredoc pegado mal
+
+Síntoma:
+Terminal queda esperando input o aparecen restos raros.
+
+Corrección:
+Ctrl+C.
+No seguir escribiendo comandos encima.
+Volver a crear script /tmp limpio.
+
+==========
+14.00_ANTIPATRONES
+==========
+
+- Pegar scripts largos directamente en terminal interactiva sin /tmp script.
+- Ejecutar git add -A con working tree sucio no entendido.
+- Cambiar Git config global para arreglar un repo puntual.
+- Commitear .venv.
+- Instalar Python packages globalmente cuando basta .venv.
+- Reejecutar one-shot que ya actualizó BATON/BACKLOG.
+- Declarar clon “defendible” solo porque abre en Excel.
+- Confundir values-clone con formula-clone.
+- Normalizar CRLF/LF masivamente sin necesidad.
+- Escribir archivos después de git push.
+- Usar Bash sin comillas en rutas con espacios.
+- Avanzar a presentación cuando el entregable real es el Excel clon.
+
+==========
+15.00_CHECKLIST_RAPIDO
+==========
+
+Antes de ejecutar:
+
+[ ] ¿Estoy en WSL2/Bash correcto?
+[ ] ¿ROOT_WIN está bien?
+[ ] ¿wslpath resuelve la ruta?
+[ ] ¿cd "$ROOT" funciona?
+[ ] ¿branch es la esperada?
+[ ] ¿HEAD es el esperado?
+[ ] ¿git status está limpio?
+[ ] ¿core.autocrlf/core.filemode están controlados?
+[ ] ¿GitHub auth funciona si habrá push?
+[ ] ¿.venv existe si se usa Python?
+[ ] ¿Los archivos requeridos existen?
+[ ] ¿El script tiene START y COPY OUTPUT ABOVE?
+[ ] ¿El script no escribe después del push?
+[ ] ¿El commit message es claro?
+[ ] ¿LOCAL_AFTER == REMOTE_AFTER?
+[ ] ¿GIT_STATUS final está clean?
+
+==========
+16.00_SNIPPETS_ESTANDAR
+==========
+
+16.10 Entrar a repo Windows desde WSL2
+
+ROOT_WIN='C:\01. GitHub\BeSmartRevEng'
+ROOT="$(wslpath -u "$ROOT_WIN")"
+cd "$ROOT"
+pwd
+
+16.20 Precheck Git
+
+echo "BRANCH...........: $(git branch --show-current)"
+echo "HEAD.............: $(git log --oneline -1)"
+echo "GIT_STATUS.......:"
+STATUS="$(git status --short)"
+if [[ -z "$STATUS" ]]; then
+  echo "(clean)"
+else
+  echo "$STATUS"
+fi
+
+16.30 Diagnóstico Git WSL2
+
+git --version
+which git
+git config --show-origin --get core.filemode || echo "core.filemode: <unset>"
+git config --show-origin --get core.autocrlf || echo "core.autocrlf: <unset>"
+git config --show-origin --get core.eol || echo "core.eol: <unset>"
+git status --short | wc -l
+git status --short | sed -n '1,60p'
+git diff --summary | sed -n '1,80p'
+git diff --numstat | sed -n '1,80p'
+
+16.40 Fix local Git para repo Windows
+
+git config core.filemode false
+git -c core.autocrlf=true status --short
+git config core.autocrlf true
+git status --short
+
+16.50 GitHub auth check
+
+if command -v gh >/dev/null 2>&1; then
+  gh --version
+  gh auth status || true
+else
+  echo "GH_FOUND: NO"
+fi
+
+16.60 Crear .venv e instalar openpyxl
+
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install openpyxl
+.venv/bin/python - <<'PY'
+import openpyxl
+print(openpyxl.__version__)
+PY
+
+16.70 Excluir temporales locales
+
+touch .git/info/exclude
+grep -qxF '.venv/' .git/info/exclude || echo '.venv/' >> .git/info/exclude
+grep -qxF '99_old/Logs/' .git/info/exclude || echo '99_old/Logs/' >> .git/info/exclude
+
+16.80 One-shot seguro en /tmp
+
+cat > /tmp/my_oneshot.sh <<'SH'
+set -Eeuo pipefail
+echo "========== MY_ONESHOT / START =========="
+ROOT_WIN='C:\01. GitHub\REPO'
+ROOT="$(wslpath -u "$ROOT_WIN")"
+cd "$ROOT"
+echo "PWD: $(pwd)"
+echo "HEAD: $(git log --oneline -1)"
+echo "========== COPY OUTPUT ABOVE =========="
+SH
+
+bash /tmp/my_oneshot.sh
+
+16.90 Commit/push verify
+
+# Stage explicito. No usar git add . ni git add -A por defecto.
+git add -- "RUTA/ARCHIVO_1"
+git add -- "RUTA/ARCHIVO_2"
+
+if [[ -z "$(git diff --cached --stat)" ]]; then
+  echo "NO_STAGED_CHANGES"
+  exit 1
+fi
+
+git diff --cached --stat
+git commit -m "YYYYMMDD_DOC_description"
+git push origin "$(git branch --show-current)"
+git fetch origin
+
+LOCAL_AFTER="$(git rev-parse HEAD)"
+REMOTE_AFTER="$(git rev-parse origin/$(git branch --show-current))"
+STATUS_AFTER="$(git status --short)"
+
+echo "LOCAL_AFTER......: $LOCAL_AFTER"
+echo "REMOTE_AFTER.....: $REMOTE_AFTER"
+if [[ "$LOCAL_AFTER" == "$REMOTE_AFTER" && -z "$STATUS_AFTER" ]]; then
+  echo "PUSH_VERIFY......: OK_LOCAL_REMOTE_SYNCED"
+else
+  echo "PUSH_VERIFY......: WARN_REVIEW_REQUIRED"
+fi
+
+==========
+17.00_CHANGELOG
+==========
+
+2026-05-22, v1.0-DRAFT
+- Creación inicial del skill Bash/WSL2.
+- Captura aprendizajes de operación BeSmartRevEng:
+  - WSL2 sobre repo Windows,
+  - Git line endings,
+  - GitHub CLI,
+  - .venv/openpyxl,
+  - one-shots /tmp,
+  - cierre con commit/push/verificación.

@@ -1,88 +1,92 @@
 {
-  "version": "v1.0-CANON",
-  "generated_at": "2026-05-02 12:00:00",
-  "source_root": "C:\\01. GitHub\\Skills",
-  "skills": [
-    {
-      "file": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-      "version": "v1.2-DRAFT"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-      "version": "v1.3-DRAFT"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
-      "version": "UNKNOWN"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-      "version": "UNKNOWN"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-      "version": "UNKNOWN"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-      "version": "UNKNOWN"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-      "version": "UNKNOWN"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-      "version": "v1.0-DRAFT"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
-      "version": "v1.0-CANON"
-    },
-    {
-      "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
-      "version": "v1.0-CANON"
-    }
-  ]
+    "version": "v1.0-CANON",
+    "generated_at": "2026-05-02 12:00:00",
+    "source_root": "C:\\01. GitHub\\Skills",
+    "skills": [
+        {
+            "file": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+            "version": "v1.2-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+            "version": "v1.3-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
+            "version": "UNKNOWN"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "version": "UNKNOWN"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+            "version": "UNKNOWN"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+            "version": "UNKNOWN"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
+            "version": "UNKNOWN"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\28.SKILL.BASH.WSL2.txt",
+            "version": "v1.0-DRAFT",
+            "file": "28.SKILL.BASH.WSL2.txt"
+        }
+    ]
 }
-

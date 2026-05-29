@@ -329,6 +329,17 @@ STATUS............: ACTIVE
 CATEGORY..........: GOVERNANCE
 PURPOSE...........: Clasifica y gestiona artefactos temporarios; evita contaminar canon del repo.
 
+
+----------
+06.40
+----------
+
+SKILL_ID..........: SKILL_BASH_WSL2
+FILE..............: 28.SKILL.BASH.WSL2.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define uso seguro, trazable y reproducible de Bash sobre WSL2 para repos Windows/Git/GitHub.
+
 ==========
 05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
 ==========
@@ -373,6 +384,10 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 ==========
 09.00_CHANGELOG
 ==========
+
+2026-05-29, v1.0-CANON
+- Alta de 28.SKILL.BASH.WSL2.txt como skill operativo SYSTEM para Bash/WSL2.
+
 
 2026-05-02, v1.0-CANON
 - Alta en catalogo de siete skills operativos consolidados SKILL.* (gov repo / tooling / seguridad ejecucion)
