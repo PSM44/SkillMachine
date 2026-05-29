@@ -1,4 +1,57 @@
 ==========
+LATEST_SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
+==========
+
+FECHA........................: 2026-05-29 12:43:47
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+ULTIMO_COMMIT_CONFIRMADO.....: 4dae4dc 20260529_MB-GRC-023B_fix_usecase_manifest_idempotency
+SHELL_OPERATIVO..............: bash WSL2
+
+ESTADO_EJECUTIVO.............:
+Cierre final posterior a la corrección real de MB-GRC-023B.
+Build de usecases queda con transaction guard e idempotencia real de manifests.
+La sesión busca cierre perfecto: Validate OK, build doble limpio, RADAR OK, readiness OK, Git limpio y origin/main sincronizado.
+
+HECHO_CONFIRMADO.............:
+- MB-GRC-022: transaction guard cerrado.
+- MB-GRC-023B: idempotencia real corregida en commit 4dae4dc.
+- Root cause: GENERATED_AT en bundles alteraba delivery_sha256 de manifests.
+- Fix: New-BundleFile evita reescritura si solo cambia GENERATED_AT/EOL.
+- Build doble limpio validado antes de este cierre.
+- Git identity local corregida a 6psanmartin@gmail.com.
+
+DEUDA_TECNICA_ABIERTA........:
+- Integrar 28.SKILL.BASH.WSL2.txt correctamente.
+- Revisar CRLF/LF si sigue generando warnings.
+- Implementar duplicidad semántica Skill/GRC por contenido.
+- Negative test formal de restore transaccional.
+
+BACKLOG_PRIORITARIO..........:
+- MB-GRC-024A: integrar 28.SKILL.BASH.WSL2.txt al catálogo, menú y registry.
+- MB-GRC-024: line endings / .gitattributes si aplica.
+- MB-GRC-025: duplicidad semántica Skill/GRC por contenido.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Integrar 28.SKILL.BASH.WSL2.txt desde backup diferido en minibattle separada, después de confirmar cierre perfecto.
+
+PATH_MINIBATTLES_BATTLES.....:
+MB-GRC-018 -> MB-GRC-019 -> MB-GRC-020 -> MB-GRC-021 -> MB-GRC-022 -> MB-GRC-023B -> MB-GRC-024A -> MB-GRC-024 -> MB-GRC-025
+
+ENTREGABLE_GERENCIA..........:
+Sistema SkillsMachine demostrable con usecases validables, continuidad formal, cierre endurecido, build transaccional, idempotencia operacional y shell WSL2 gobernado.
+
+HUMAN.........................:
+No actualizado. No se detectó cambio doctrinal; los cambios son técnicos/operativos.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
+==========
+
+==========
 LATEST_SESSION_CLOSE_MB_GRC_023A_20260529
 ==========
 

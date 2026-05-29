@@ -224,3 +224,33 @@ TECH_DEBT_OPEN:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_20260529_SESSION_CLOSE
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_023B_FINAL_20260529
+==========
+
+FECHA........................: 2026-05-29 12:43:47
+FUENTE.......................: SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
+HEAD_CONFIRMADO_PRE_CIERRE...: 4dae4dc 20260529_MB-GRC-023B_fix_usecase_manifest_idempotency
+
+DONE:
+- MB-GRC-023B — USECASE.MANIFEST idempotency hardening.
+  Evidencia: build doble limpio confirmado por Codex y verificado antes del cierre.
+
+P1_OPEN:
+- MB-GRC-024A — integrar 28.SKILL.BASH.WSL2.txt.
+  Criterio: revisar contenido, registrar en menú/registry si corresponde, validar sistema y commitear explícitamente.
+- MB-GRC-024 — line endings / .gitattributes si aplica.
+- MB-GRC-025 — duplicidad semántica Skill/GRC por contenido.
+
+P2_OPEN:
+- Negative test formal de restore transaccional.
+
+TECH_DEBT_REMAINING:
+- Skill WSL2 diferido, no integrado.
+- CRLF/LF puede seguir como deuda si aparecen warnings.
+- Duplicidad semántica Skill/GRC pendiente.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_023B_FINAL_20260529
+==========

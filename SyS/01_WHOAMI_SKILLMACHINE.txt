@@ -1,4 +1,42 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_GRC_023B_FINAL_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 12:43:47
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: main
+HEAD_CONFIRMADO.............: 4dae4dc 20260529_MB-GRC-023B_fix_usecase_manifest_idempotency
+SHELL_OPERATIVO.............: bash WSL2
+
+ESTADO_ACTUAL...............:
+- MB-GRC-023B quedó corregido de verdad en commit 4dae4dc.
+- Build doble limpio confirmado.
+- Próxima acción: integrar 28.SKILL.BASH.WSL2.txt en minibattle separada.
+- main debe quedar sincronizado con origin/main para cierre perfecto.
+
+QUE_SE_LOGRO................:
+- Transaction guard para BUILD.ps1.
+- Idempotencia real de manifests.
+- Git identity local corregida.
+- Continuidad actualizada para WSL2.
+
+QUE_FALTA...................:
+- Readiness final OK.
+- Push final.
+- Integración gobernada del skill WSL2.
+- Revisión CRLF/LF si aplica.
+- Duplicidad semántica Skill/GRC por contenido.
+
+SIGUIENTE_ACCION............:
+Después del cierre perfecto, iniciar MB-GRC-024A para integrar el skill Bash WSL2 desde backup diferido.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_023B_FINAL_20260529
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_GRC_20260529_WSL2_CLOSE
 ==========
 

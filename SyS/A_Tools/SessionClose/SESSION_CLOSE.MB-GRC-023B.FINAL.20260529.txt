@@ -1,0 +1,123 @@
+==========
+SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
+==========
+
+FECHA........................: 2026-05-29 12:43:47
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+HEAD_CONFIRMADO_PRE_CIERRE...: 4dae4dc 20260529_MB-GRC-023B_fix_usecase_manifest_idempotency
+SHELL_OPERATIVO..............: bash WSL2
+
+==========
+01.00_ESTADO_EJECUTIVO
+==========
+
+Cierre final posterior a la corrección real de MB-GRC-023B.
+
+Hecho confirmado:
+- MB-GRC-022 cerró transaction guard para BUILD.ps1.
+- MB-GRC-023B quedó corregido de verdad en commit 4dae4dc.
+- Root cause: New-BundleFile regeneraba bundles con GENERATED_AT nuevo, alterando delivery_sha256 de manifests.
+- Fix: New-BundleFile compara contenido normalizado ignorando GENERATED_AT y EOL; solo reescribe si hay cambio real.
+- Fix adicional: bundles se preservan antes de cleanup para permitir comparación.
+- Build doble limpio confirmado.
+- Validate-System OK.
+- Git identity local corregida a 6psanmartin@gmail.com.
+- 28.SKILL.BASH.WSL2.txt sigue diferido, no integrado.
+
+==========
+02.00_DEUDA_TECNICA_REMANENTE
+==========
+
+TD-001: Integrar 28.SKILL.BASH.WSL2.txt al catálogo, menú y registry.
+Estado: ABIERTA.
+Siguiente acción: minibattle dedicada.
+
+TD-002: Revisar política CRLF/LF global.
+Estado: ABIERTA.
+Siguiente acción: MB-GRC-024 si persisten warnings o churn.
+
+TD-003: Validación de duplicidad semántica Skill/GRC por contenido.
+Estado: ABIERTA.
+Siguiente acción: MB-GRC-025.
+
+TD-004: Readiness debe quedar OK post-cierre final.
+Estado: en validación de este cierre.
+
+==========
+03.00_BACKLOG_PRIORITARIO
+==========
+
+P0: Verificar readiness final OK después de este cierre.
+P1: MB-GRC-024A — integrar 28.SKILL.BASH.WSL2.txt correctamente.
+P1: MB-GRC-024 — line endings / .gitattributes si aplica.
+P1: MB-GRC-025 — duplicidad semántica Skill/GRC por contenido.
+P2: negative test formal de restore transaccional.
+
+==========
+04.00_QUE_HEMOS_HECHO
+==========
+
+- Sistema de cierre formal estabilizado.
+- Build de usecases reparado.
+- Transaction guard implementado.
+- Idempotencia real de manifests corregida.
+- Git identity local corregida.
+- Cierre WSL2 preparado.
+- Skill WSL2 diferido para integración gobernada.
+
+==========
+05.00_QUE_FALTA
+==========
+
+- Confirmar readiness final OK.
+- Push final a origin/main.
+- Integrar skill WSL2 en minibattle separada.
+- Revisar line endings si persiste deuda.
+- Implementar control de duplicidad semántica Skill/GRC.
+
+==========
+06.00_PATH_MINIBATTLES_BATTLES_ENTREGABLE
+==========
+
+MB-GRC-018 -> Catálogo global / compositor -> Gobierno documental.
+MB-GRC-019 -> Activador cierre formal -> Ciclo de vida.
+MB-GRC-020 -> Build usecase válido -> Delivery IA.
+MB-GRC-021 -> Continuidad formal -> Handoff operacional.
+MB-GRC-022 -> Build transaccional -> Pipeline menos frágil.
+MB-GRC-023B -> Manifests idempotentes -> Build confiable y limpio.
+MB-GRC-024A -> Skill Bash WSL2 integrado -> Shell operativo estándar gobernado.
+MB-GRC-024 -> EOL/Git hygiene -> Diffs auditables.
+MB-GRC-025 -> Duplicidad semántica -> Control anti-proliferación.
+
+ENTREGABLE_GERENCIA:
+Demo funcional donde una IA en blanco pueda continuar sesión, ejecutar una minibattle, validar, cerrar sesión, dejar Git limpio y sincronizado con trazabilidad.
+
+==========
+07.00_HANDOFF_PROXIMA_SESION
+==========
+
+Ruta Windows:
+C:\01. GitHub\Skills
+
+Ruta WSL2:
+cd "/mnt/c/01. GitHub/Skills"
+
+Shell preferente:
+bash WSL2.
+
+Último foco:
+MB-GRC-023B ya corrigió idempotencia real de manifests.
+
+Siguiente acción:
+Integrar 28.SKILL.BASH.WSL2.txt desde backup diferido:
+SyS/A_Tools/OneShots/Backups/DEFERRED_UNTRACKED_WSL2_SKILL_20260529_120052/28.SKILL.BASH.WSL2.txt.deferred
+
+No integrar el skill sin revisar menú, registry, bundles y validación.
+
+==========
+FIN_SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
+==========
