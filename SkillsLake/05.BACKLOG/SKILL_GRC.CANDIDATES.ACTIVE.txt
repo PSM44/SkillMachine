@@ -314,3 +314,30 @@ TECH_DEBT_REMAINING:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========
+
+FECHA........................: 2026-05-29 13:25:54
+FUENTE.......................: MB-GRC-025B_DUPLICATE_SEMANTIC_REVIEW_REPORT
+HEAD_BASE....................: 6049906 20260529_MB-GRC-024C_close_line_endings_decision
+
+DONE:
+- MB-GRC-025B — validación documental inicial de duplicidad semántica Skill/GRC.
+  Evidencia: 00.CATALOG/SKILL_GRC.DUPLICATE.SEMANTIC.REVIEW.ACTIVE.txt
+
+OPEN_DECISIONS:
+- MB-GRC-025C — revisar 05.SKILL.ROUTING_POLICY vs 27.SKILL.MODEL_ROUTING_POLICY.
+- MB-GRC-025D — clarificar boundary entre MANIFEST_PATH_SEMANTICS y REGISTRY_ALIGNMENT.
+- MB-GRC-025E — evaluar validator documental semiautomático.
+
+TECH_DEBT_REMAINING:
+- No hay merge aprobado.
+- No hay eliminación aprobada.
+- No hay rename aprobado.
+- Keyword overlap sigue siendo señal débil; requiere criterio humano/documental.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========

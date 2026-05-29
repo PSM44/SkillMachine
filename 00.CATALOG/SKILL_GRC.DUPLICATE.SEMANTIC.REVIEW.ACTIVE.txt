@@ -1,0 +1,181 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL_GRC.DUPLICATE.SEMANTIC.REVIEW.01.00
+NOMBRE_SUGERIDO...: SKILL_GRC.DUPLICATE.SEMANTIC.REVIEW.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-05-29
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: PABLO
+ESTADO............: ACTIVE
+
+ALCANCE...........:
+Reporte documental de revisión de duplicidad semántica entre Skills y GRC.
+Clasifica solapamientos detectados por keyword overlap y define si son:
+- duplicidad candidata,
+- revisión de frontera,
+- dependencia legítima,
+- falso positivo.
+
+NO_CUBRE..........:
+No fusiona archivos.
+No borra archivos.
+No renombra archivos.
+No reemplaza decisión humana.
+No automatiza aún validación semántica.
+
+DEPENDENCIAS......:
+00.CATALOG/ARTIFACT.REGISTRY.ACTIVE.txt
+00.CATALOG/CONTEXT.COMPOSER.RULES.ACTIVE.txt
+SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
+
+==========
+01.00_RESUMEN_EJECUTIVO
+==========
+
+MB-GRC-025A detectó hotspots de overlap semántico entre Skills/GRC.
+El diagnóstico no prueba duplicidad por sí solo porque muchos documentos comparten metadatos,
+estructura WBS, checklist, changelog y lenguaje operativo común.
+
+Conclusión:
+No corresponde fusionar ni eliminar archivos todavía.
+Sí corresponde crear boundary review documental y backlog de decisiones.
+
+==========
+02.00_CRITERIO_DE_CLASIFICACION
+==========
+
+DUPLICATE_CANDIDATE:
+Dos artefactos parecen cubrir el mismo propósito rector con reglas equivalentes.
+
+BOUNDARY_REVIEW:
+Artefactos distintos pero con frontera insuficientemente clara.
+
+DEPENDENCY_NOT_DUPLICATE:
+Artefactos relacionados por dependencia o secuencia operativa; no duplican propósito.
+
+FALSE_POSITIVE:
+Overlap generado por estructura común, metadatos, WBS, changelog o lenguaje transversal.
+
+==========
+03.00_CANDIDATOS_PRIORITARIOS
+==========
+
+----------
+03.10_MANIFEST_PATH_SEMANTICS_vs_REGISTRY_ALIGNMENT
+----------
+
+A............................: SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt
+B............................: SkillsLake/01.SKILLS/SKILL.REGISTRY_ALIGNMENT_AFTER_MIGRATION.txt
+SCORE_REFERENCIAL............: 0.337
+CLASIFICACION................: BOUNDARY_REVIEW
+DICTAMEN.....................:
+Candidato real a revisión de frontera. Ambos tratan manifests, registries, paths,
+migración, consistencia y fallas por interpretación de rutas.
+No se recomienda merge inmediato porque uno parece gobernar semántica de paths y el otro
+alineación post-migración.
+DECISION_RECOMENDADA.........:
+Definir explícitamente:
+- MANIFEST_PATH_SEMANTICS = significado de campos/rutas.
+- REGISTRY_ALIGNMENT_AFTER_MIGRATION = procedimiento de reconciliación después de mover/crear archivos.
+
+----------
+03.20_ROUTING_POLICY_vs_MODEL_ROUTING_POLICY
+----------
+
+A............................: SkillsLake/01.SKILLS/05.SKILL.ROUTING_POLICY.txt
+B............................: SkillsLake/01.SKILLS/27.SKILL.MODEL_ROUTING_POLICY.txt
+SCORE_REFERENCIAL............: 0.184
+CLASIFICACION................: DUPLICATE_CANDIDATE
+DICTAMEN.....................:
+Posible duplicidad evolutiva. El skill 05 parece routing general histórico.
+El skill 27 parece routing moderno por modelo/herramienta/modo con GRC.
+DECISION_RECOMENDADA.........:
+Revisar si 05 debe quedar como legacy, ser absorbido por 27, o si 27 debe referenciar a 05 como base.
+No fusionar sin revisar contenido completo.
+
+----------
+03.30_GRC_HUMAN_AI_COLLAB_vs_GRC_CORE
+----------
+
+A............................: SkillsLake/01.SKILLS/25.SKILL.GRC.HUMAN_AI_COLLAB.txt
+B............................: SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt
+SCORE_REFERENCIAL............: 0.212
+CLASIFICACION................: DEPENDENCY_NOT_DUPLICATE
+DICTAMEN.....................:
+No parece duplicidad directa. GRC.CORE define guardrails transversales.
+HUMAN_AI_COLLAB define modelo de colaboración humano-IA bajo esos guardrails.
+DECISION_RECOMENDADA.........:
+Agregar boundary explícito si se edita en el futuro.
+
+----------
+03.40_PROMPT_GRC_BASE_vs_GRC_CORE
+----------
+
+A............................: SkillsLake/01.SKILLS/26.1_PROMPT.GRC.BASE.txt
+B............................: SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt
+SCORE_REFERENCIAL............: 0.235
+CLASIFICACION................: DEPENDENCY_NOT_DUPLICATE
+DICTAMEN.....................:
+No duplicado. Prompt operativo vs skill normativo.
+DECISION_RECOMENDADA.........:
+Mantener ambos; el prompt debe declarar dependencia de GRC.CORE.
+
+----------
+03.50_GIT_STRUCTURAL_CHANGE_vs_REGISTRY_ALIGNMENT
+----------
+
+A............................: SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt
+B............................: SkillsLake/01.SKILLS/SKILL.REGISTRY_ALIGNMENT_AFTER_MIGRATION.txt
+SCORE_REFERENCIAL............: 0.271
+CLASIFICACION................: BOUNDARY_REVIEW
+DICTAMEN.....................:
+Solapamiento real por migraciones, Git, staging, registries y validación.
+No duplicado obvio: uno gobierna cambios estructurales Git; el otro alinea registros tras migración.
+DECISION_RECOMENDADA.........:
+Mantener ambos, pero documentar boundary y referencias cruzadas si se actualizan.
+
+==========
+04.00_FALSOS_POSITIVOS_RELEVANTES
+==========
+
+- BATON vs HUMAN_README:
+  Relación natural continuidad/explicación. No duplicar.
+- FILE_CONTENT vs RADAR/BATON/HUMAN:
+  Overlap por formato y estructura documental. No duplicar.
+- AGENT_EXECUTION_POLICY vs SANDBOX_BOUNDARY:
+  Dependencia legítima ejecución/boundary.
+- LOGGING_AUDIT vs CHECKPOINT_ROLLBACK:
+  Dependencia legítima evidencia/rollback.
+- WBS vs RADAR:
+  Relación naming/mapa FS. No duplicar.
+
+==========
+05.00_DECISION
+==========
+
+Se cierra MB-GRC-025B como validación documental inicial.
+
+No se aprueba merge automático.
+No se aprueba eliminación de archivos.
+No se aprueba rename todavía.
+
+Siguientes opciones:
+- MB-GRC-025C: revisión profunda de 05.SKILL.ROUTING_POLICY vs 27.SKILL.MODEL_ROUTING_POLICY.
+- MB-GRC-025D: boundary patch para MANIFEST_PATH_SEMANTICS vs REGISTRY_ALIGNMENT.
+- MB-GRC-025E: convertir este criterio en validator documental semiautomático.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-05-29, v0.1-DRAFT
+- Creación inicial del reporte documental MB-GRC-025B.
+- Clasificación de hotspots detectados por MB-GRC-025A.
+- Se define no ejecutar merge automático.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

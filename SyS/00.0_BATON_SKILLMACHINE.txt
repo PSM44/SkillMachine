@@ -818,3 +818,27 @@ MB-GRC-025 — duplicidad semántica Skill/GRC por contenido, o negative test de
 ==========
 FIN_LATEST_SESSION_CLOSE_MB_GRC_024C_LINE_ENDINGS_20260529
 ==========
+
+==========
+LATEST_SESSION_CLOSE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:25:54
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: 6049906 20260529_MB-GRC-024C_close_line_endings_decision
+
+ESTADO_ACTUAL...............:
+- MB-GRC-025A ejecutó discovery read-only de duplicidad semántica.
+- MB-GRC-025B creó reporte documental de revisión.
+- No se aprobaron merges, deletes ni renames.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Elegir entre:
+- MB-GRC-025C routing policy review.
+- MB-GRC-025D manifest/registry boundary review.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========

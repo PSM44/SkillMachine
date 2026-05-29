@@ -1,0 +1,24 @@
+==========
+SESSION_CLOSE.MB-GRC-025B.DUPLICATE_SEMANTIC_REVIEW.20260529
+==========
+
+FECHA........................: 2026-05-29
+PROYECTO.....................: SkillsMachine
+MINIBATTLE...................: MB-GRC-025B
+OBJETIVO.....................: Crear reporte documental de duplicidad semántica Skill/GRC.
+
+RESULTADO....................:
+Se creó 00.CATALOG/SKILL_GRC.DUPLICATE.SEMANTIC.REVIEW.ACTIVE.txt.
+
+DICTAMEN.....................:
+No hay autorización para merge automático.
+Los principales focos son:
+- MANIFEST_PATH_SEMANTICS vs REGISTRY_ALIGNMENT: boundary review.
+- ROUTING_POLICY vs MODEL_ROUTING_POLICY: duplicate candidate.
+- GRC prompt/core/collab: dependencias, no duplicados directos.
+
+SIGUIENTE_ACCION.............:
+Definir si MB-GRC-025C revisa routing duplicado o boundary manifests/registry.
+==========
+FIN_DEL_DOCUMENTO
+==========

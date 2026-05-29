@@ -481,3 +481,26 @@ Definir si se prioriza MB-GRC-025 o negative test del transaction guard.
 ==========
 FIN_LATEST_WHOAMI_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
 ==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:25:54
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: 6049906 20260529_MB-GRC-024C_close_line_endings_decision
+
+ESTADO_ACTUAL...............:
+- Existe reporte documental activo de duplicidad semántica Skill/GRC.
+- Se detectó posible duplicidad evolutiva entre routing policy antigua y model routing policy.
+- Se detectó boundary review pendiente entre manifest path semantics y registry alignment.
+
+QUE_FALTA...................:
+- Decidir revisión profunda por par.
+- No ejecutar merge automático sin aprobación humana.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_025B_DUPLICATE_SEMANTIC_REVIEW_20260529
+==========
