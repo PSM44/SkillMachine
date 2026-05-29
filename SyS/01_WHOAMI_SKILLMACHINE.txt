@@ -1,3 +1,44 @@
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_20260529_WSL2_CLOSE
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 12:04:40
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: main
+HEAD_CONFIRMADO.............: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening
+SHELL_OPERATIVO.............: bash WSL2
+
+ESTADO_ACTUAL...............:
+- MB-GRC-023B aparece como HEAD confirmado: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening.
+- Sesión de cierre 2026-05-29 migró operación terminal preferente a bash WSL2.
+- 28.SKILL.BASH.WSL2.txt fue detectado como skill candidato no trackeado y diferido a backup.
+- Siguiente acción operacional: verificar MB-GRC-023B con build doble limpio y luego integrar skill WSL2 en minibattle separada.
+
+QUE_SE_LOGRO................:
+- Build de usecases endurecido con transaction guard.
+- Idempotencia de manifests aparentemente abordada por MB-GRC-023B.
+- Cierre formal actualizado para WSL2.
+- WHOAMI preservado desde backup y actualizado incrementalmente.
+
+QUE_FALTA...................:
+- Verificar build doble limpio post-cierre.
+- Integrar 28.SKILL.BASH.WSL2.txt al catálogo/registry si se aprueba.
+- Resolver o cerrar deuda CRLF/LF.
+- Avanzar duplicidad semántica Skill/GRC por contenido.
+
+SIGUIENTE_ACCION............:
+Verificar MB-GRC-023B:
+1. correr BUILD.ps1 dos veces;
+2. correr Validate-System.ps1;
+3. confirmar git status --short limpio;
+4. luego decidir integración formal de 28.SKILL.BASH.WSL2.txt.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_20260529_WSL2_CLOSE
+==========
+
 
 ==========
 LATEST_HUMAN_OPERATIONAL_STATUS_MB_GRC_021

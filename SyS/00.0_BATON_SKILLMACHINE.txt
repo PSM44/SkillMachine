@@ -1,3 +1,59 @@
+==========
+LATEST_SESSION_CLOSE_MB_GRC_023A_20260529
+==========
+
+FECHA........................: 2026-05-29 12:00:52
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+ULTIMO_COMMIT_CONFIRMADO.....: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening
+SHELL_OPERATIVO..............: bash WSL2
+
+ESTADO_EJECUTIVO.............:
+SkillsMachine queda en hardening operacional del sistema de usecases.
+MB-GRC-022 cerrado con transaction guard en BUILD.ps1.
+MB-GRC-023A diagnosticó que USECASE.MANIFEST.json no es idempotente y que los cambios incluyen generated_at, delivery_sha256 y CRLF/LF.
+Se adopta bash WSL2 como shell operativo preferente para próximos comandos de proyecto/repo, salvo necesidad específica Windows/PowerShell.
+
+HECHO_CONFIRMADO.............:
+- MB-GRC-022 cerrado con commit a3ca286.
+- BUILD.ps1 tiene preflight, backup transaccional y restore en falla.
+- BUILD y Validate-System pasan.
+- MB-GRC-023A completado como diagnóstico.
+- Repo estaba limpio antes del cierre, salvo skill WSL2 no trackeado diferido.
+- 28.SKILL.BASH.WSL2.txt quedó respaldado y diferido, no integrado todavía.
+
+DEUDA_TECNICA_ABIERTA........:
+- TD-001: USECASE.MANIFEST.json no idempotente.
+- TD-002: delivery_sha256 en manifests requiere baseline correcto.
+- TD-003: CRLF/LF warnings.
+- TD-004: integrar 28.SKILL.BASH.WSL2.txt correctamente.
+- TD-005: duplicidad semántica Skill/GRC pendiente.
+
+BACKLOG_PRIORITARIO..........:
+- MB-GRC-023B: USECASE.MANIFEST idempotency hardening — aparentemente cerrado en commit 25c5572; verificar build doble limpio.
+- MB-GRC-024: line endings / .gitattributes.
+- MB-GRC-024A: integrar 28.SKILL.BASH.WSL2.txt al catálogo, menú y registry.
+- MB-GRC-025: duplicidad semántica Skill/GRC por contenido.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Verificar MB-GRC-023B post-cierre. Criterio: build doble limpio y no ocultar delivery_sha256 real.
+
+PATH_MINIBATTLES_BATTLES.....:
+MB-GRC-018 -> MB-GRC-019 -> MB-GRC-020 -> MB-GRC-021 -> MB-GRC-022 -> MB-GRC-023B -> MB-GRC-024 -> MB-GRC-024A -> MB-GRC-025
+
+ENTREGABLE_GERENCIA..........:
+Sistema SkillsMachine demostrable con usecases validables, continuidad formal, cierre endurecido, build transaccional, idempotencia operacional y shell WSL2 gobernado.
+
+HUMAN.........................:
+No actualizado. No se detectó cambio doctrinal; el cambio a WSL2 queda como preferencia operativa y skill pendiente de integración.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_023A_20260529
+==========
+
 
 ==========
 LATEST_SESSION_CLOSE_MB_GRC_021

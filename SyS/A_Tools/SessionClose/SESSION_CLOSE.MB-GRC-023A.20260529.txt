@@ -1,0 +1,140 @@
+==========
+SESSION_CLOSE_MB_GRC_20260529
+==========
+
+FECHA........................: 2026-05-29 12:00:52
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+HEAD_CONFIRMADO..............: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening
+SHELL_OPERATIVO..............: bash WSL2
+
+==========
+01.00_ESTADO_EJECUTIVO
+==========
+
+SkillsMachine queda en fase de hardening operacional del sistema de usecases.
+
+Hecho confirmado:
+- MB-GRC-022 quedó cerrado con commit a3ca286: transaction guard para 90.USECASE\BUILD.ps1.
+- BUILD.ps1 ahora tiene preflight, backup transaccional y restore en falla por usecase.
+- MB-GRC-023A diagnosticó idempotencia de USECASE.MANIFEST.json.
+- Diagnóstico MB-GRC-023A confirmó que los manifests cambian por generated_at, delivery_sha256 y CRLF/LF.
+- MB-GRC-023B aparece confirmado por HEAD actual: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening.
+- Se detectó skill nuevo no trackeado: SkillsLake/01.SKILLS/28.SKILL.BASH.WSL2.txt.
+- El skill WSL2 fue diferido a backup para no contaminar el cierre.
+- Desde esta sesión, el flujo operativo preferente pasa a bash WSL2, salvo tarea específicamente PowerShell/Windows.
+
+==========
+02.00_DEUDA_TECNICA_ACUMULADA
+==========
+
+TD-001: USECASE.MANIFEST.json no es idempotente.
+Impacto: cada build puede ensuciar Git o forzar restauraciones manuales.
+Siguiente acción: MB-GRC-023B.
+
+TD-002: Manifests pueden estar stale respecto de delivery_sha256 actuales.
+Impacto: riesgo de evidencia de integridad falsa.
+Siguiente acción: confirmar hashes reales y commitear baseline correcto si aplica.
+
+TD-003: CRLF/LF warnings en manifests.
+Impacto: ruido de diff y fricción operativa.
+Siguiente acción: MB-GRC-024 si no se resuelve en MB-GRC-023B.
+
+TD-004: Integración de 28.SKILL.BASH.WSL2.txt pendiente.
+Impacto: preferencia operativa WSL2 existe, pero el skill aún no está gobernado en menú/registry.
+Siguiente acción: minibattle dedicada para integrar skill WSL2 correctamente.
+
+TD-005: Duplicidad semántica Skill/GRC por contenido sigue pendiente.
+Impacto: proliferación documental futura.
+Siguiente acción: MB-GRC-025.
+
+==========
+03.00_BACKLOG_PRIORITARIO
+==========
+
+P0_DONE: MB-GRC-023B — USECASE.MANIFEST idempotency hardening aparentemente cerrado en commit 25c5572.
+P0: Confirmar si delivery_sha256 nuevo coincide con bundles reales y commitear manifests si corresponde.
+P1: MB-GRC-024 — line endings / .gitattributes.
+P1: MB-GRC-024A — integrar 28.SKILL.BASH.WSL2.txt al catálogo, menú y registry.
+P1: MB-GRC-025 — duplicidad semántica Skill/GRC por contenido.
+P2: Negative test formal de restore transaccional.
+P2: Evaluar push/tag si corresponde a política Git vigente.
+
+==========
+04.00_HECHO_EN_SESION
+==========
+
+- Se verificó repo limpio.
+- Se diagnosticó build baseline.
+- Se escaló a Codex para corregir patch de BUILD.ps1.
+- Codex implementó MB-GRC-022 con commit a3ca286.
+- Se validó build con TOTAL_FAIL 0.
+- Se validó sistema con Validate-System.ps1 OK.
+- Se diagnosticó idempotencia de manifests en MB-GRC-023A.
+- Se identificó que el cambio no era solo generated_at: también cambia delivery_sha256.
+- Se detectó y difirió un skill WSL2 no trackeado.
+
+==========
+05.00_QUE_FALTA
+==========
+
+- Verificar empíricamente post-commit que BUILD.ps1 doble ejecución deja git status limpio.
+- Validar build doble limpio.
+- Resolver o aislar CRLF/LF.
+- Integrar 28.SKILL.BASH.WSL2.txt correctamente.
+- Ejecutar readiness y revisar OK/WARN/FAIL.
+- Decidir push.
+
+==========
+06.00_PATH_MINIBATTLES_BATTLES_ENTREGABLE
+==========
+
+MB-GRC-018 -> Catálogo global / compositor -> Gobierno documental.
+MB-GRC-019 -> Activador cierre formal -> Ciclo de vida.
+MB-GRC-020 -> Build usecase válido -> Delivery IA.
+MB-GRC-021 -> Continuidad formal -> Handoff operacional.
+MB-GRC-022 -> Build transaccional -> Pipeline menos frágil.
+MB-GRC-023B -> Manifests idempotentes -> Build confiable y limpio.
+MB-GRC-024 -> EOL/Git hygiene -> Diffs auditables.
+MB-GRC-024A -> Skill Bash WSL2 integrado -> Shell operativo estándar.
+MB-GRC-025 -> Duplicidad semántica -> Control anti-proliferación.
+
+ENTREGABLE_GERENCIA:
+Demo funcional donde una IA en blanco pueda continuar sesión, ejecutar una minibattle, validar, cerrar sesión y dejar Git limpio con trazabilidad.
+
+==========
+07.00_NEXT_ACTION
+==========
+
+Verificar MB-GRC-023B post-cierre: correr BUILD.ps1 dos veces y confirmar git status limpio.
+
+Criterio de aceptación:
+- BUILD.ps1 corre dos veces.
+- Validate-System.ps1 pasa.
+- git status --short queda limpio después del segundo build.
+- Si manifests cambian por hash real, se commitean como baseline correcto.
+- No se ocultan cambios de delivery_sha256.
+
+==========
+08.00_HANDOFF_OPCIONAL_PROXIMA_SESION
+==========
+
+Prompt sugerido para próxima sesión:
+
+Estamos en C:\01. GitHub\Skills, proyecto SkillsMachine.
+Ruta WSL2: /mnt/c/01. GitHub/Skills.
+Shell operativo preferente: bash WSL2.
+Último cierre formal: SESSION_CLOSE_MB_GRC_20260529.
+HEAD esperado tras cierre: revisar git log --oneline -5.
+MB-GRC-022 está cerrado con commit a3ca286.
+Siguiente acción: verificar MB-GRC-023B y luego integrar 28.SKILL.BASH.WSL2.txt.
+Objetivo: lograr que BUILD.ps1 corrido dos veces deje git status limpio, sin ocultar cambios reales de delivery_sha256.
+No tratar los manifests como ruido si cambia delivery_sha256.
+Después integrar 28.SKILL.BASH.WSL2.txt como minibattle separada.
+
+==========
+FIN_SESSION_CLOSE_MB_GRC_20260529
+==========

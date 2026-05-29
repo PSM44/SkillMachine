@@ -189,3 +189,38 @@ MOTIVO.......................: Evitar proliferación de Skills y GRC redundantes
 PROXIMO_PASO.................: Definir validación documental antes de automatización.
 APROBACION_HUMANA............: PENDIENTE.
 
+
+==========
+BACKLOG_UPDATE_MB_GRC_20260529_SESSION_CLOSE
+==========
+
+FECHA........................: 2026-05-29 12:00:52
+FUENTE.......................: SESSION_CLOSE_MB_GRC_20260529
+HEAD_CONFIRMADO..............: 25c5572 20260519_MB-GRC-023_usecase_manifest_idempotency_hardening
+
+P0_OPEN:
+- MB-GRC-023B — USECASE.MANIFEST idempotency hardening — aparentemente cerrado en commit 25c5572; verificar build doble limpio.
+  Criterio: build doble limpio; no ocultar delivery_sha256 real; Validate-System OK.
+
+P1_OPEN:
+- MB-GRC-024 — line endings / .gitattributes.
+  Criterio: eliminar warnings CRLF/LF sin generar churn innecesario.
+- MB-GRC-024A — integrar 28.SKILL.BASH.WSL2.txt.
+  Criterio: revisar contenido, registrar en menú/registry si corresponde, validar sistema y commitear explícitamente.
+- MB-GRC-025 — duplicidad semántica Skill/GRC por contenido.
+  Criterio: detectar duplicidad por propósito/alcance/reglas, no solo por nombre.
+
+P2_OPEN:
+- Negative test formal de restore transaccional.
+- Evaluar push/tag de cierre si corresponde.
+
+TECH_DEBT_OPEN:
+- USECASE.MANIFEST.json no idempotente.
+- Manifests pueden estar stale respecto de delivery_sha256.
+- CRLF/LF warnings.
+- Skill WSL2 existe como candidato diferido; no está integrado todavía.
+- RADAR/readiness deben mantenerse frescos post cierre.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_20260529_SESSION_CLOSE
+==========
