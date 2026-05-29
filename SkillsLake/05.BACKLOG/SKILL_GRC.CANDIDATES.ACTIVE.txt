@@ -285,3 +285,32 @@ TECH_DEBT_REMAINING:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_024B_20260529
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========
+
+FECHA........................: 2026-05-29 13:18:46
+FUENTE.......................: MB-GRC-024C_LINE_ENDINGS_DECISION_CLOSE
+HEAD_BASE....................: eda55ba 20260529_MB-GRC-024B_close_continuity_after_wsl2_skill
+
+DONE:
+- MB-GRC-024 — diagnóstico CRLF/LF y decisión operativa.
+  Resultado: no cambiar .gitattributes/.editorconfig; no normalizar masivamente; configurar Git local WSL2.
+
+P1_OPEN:
+- MB-GRC-025 — duplicidad semántica Skill/GRC por contenido.
+  Criterio: detectar duplicidad por propósito/alcance/reglas, no solo por nombre.
+
+P2_OPEN:
+- Negative test formal de restore transaccional.
+- Normalización EOL controlada solo si vuelve a generar fricción real.
+
+TECH_DEBT_REMAINING:
+- Drift histórico de EOL en worktree.
+- Algunos archivos siguen MIXED, pero sin dirty state ni diff funcional.
+- Registry tuvo churn de formato durante MB-GRC-024A; posible cleanup menor futuro.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========

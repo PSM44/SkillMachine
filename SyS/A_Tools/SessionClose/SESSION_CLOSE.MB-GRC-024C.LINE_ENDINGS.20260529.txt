@@ -1,0 +1,39 @@
+==========
+SESSION_CLOSE.MB-GRC-024C.LINE_ENDINGS.20260529
+==========
+
+FECHA........................: 2026-05-29
+PROYECTO.....................: SkillsMachine
+MINIBATTLE...................: MB-GRC-024C
+OBJETIVO.....................: Cerrar diagnóstico CRLF/LF tras integración Bash WSL2.
+
+DICTAMEN.....................:
+No se modifica .gitattributes ni .editorconfig.
+La política ya existe:
+- .txt y .ps1 => CRLF
+- .json/.md/.yml/.yaml/.xml/.csv/.sh => LF
+
+HALLAZGO.....................:
+Hay drift histórico de EOL en worktree:
+- archivos CRLF
+- archivos LF
+- archivos MIXED
+
+DECISION.....................:
+No ejecutar normalización masiva ni git add --renormalize .
+Motivo: generaría churn amplio sin cambio funcional inmediato.
+
+ACCION_LOCAL.................:
+Se define configuración local recomendada para WSL2 sobre repo Windows:
+- git config core.filemode false
+- git config core.autocrlf true
+
+DEUDA_TECNICA_REMANENTE......:
+Normalización controlada de EOL queda diferida.
+Debe ejecutarse solo en minibattle propia, con diff acotado y criterio por tipo de archivo.
+
+ESTADO.......................:
+Cerrado como diagnóstico/decisión operativa.
+==========
+FIN_DEL_DOCUMENTO
+==========

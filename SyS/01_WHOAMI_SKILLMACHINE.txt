@@ -452,3 +452,32 @@ Despues de cerrar MB-GRC-024B, decidir si se prioriza MB-GRC-024 line endings / 
 ==========
 FIN_LATEST_WHOAMI_UPDATE_MB_GRC_024B_20260529
 ==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:18:46
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: eda55ba 20260529_MB-GRC-024B_close_continuity_after_wsl2_skill
+SHELL_OPERATIVO.............: bash WSL2
+
+ESTADO_ACTUAL...............:
+- Skill Bash/WSL2 integrado y continuidad cerrada.
+- Diagnóstico CRLF/LF completado.
+- No hay cambio funcional requerido en .gitattributes.
+- Repo WSL2 debe operar con core.filemode=false y core.autocrlf=true localmente.
+
+QUE_FALTA...................:
+- Mantener vigilancia sobre warnings LF/CRLF.
+- Evitar normalización masiva sin minibattle dedicada.
+- Avanzar duplicidad semántica Skill/GRC por contenido.
+
+SIGUIENTE_ACCION............:
+Definir si se prioriza MB-GRC-025 o negative test del transaction guard.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========

@@ -783,3 +783,38 @@ No actualizado. No se detecto cambio doctrinal; el cambio fue operativo/tactico:
 ==========
 FIN_LATEST_SESSION_CLOSE_MB_GRC_024B_20260529
 ==========
+
+==========
+LATEST_SESSION_CLOSE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========
+
+FECHA_ACTUALIZACION.........: 2026-05-29 13:18:46
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: eda55ba 20260529_MB-GRC-024B_close_continuity_after_wsl2_skill
+SHELL_OPERATIVO.............: bash WSL2
+
+ESTADO_ACTUAL...............:
+- MB-GRC-024A integró 28.SKILL.BASH.WSL2.txt.
+- MB-GRC-024B actualizó continuidad post integración.
+- MB-GRC-024C diagnosticó CRLF/LF y decidió no normalizar masivamente.
+
+DECISION_TECNICA............:
+No modificar .gitattributes ni .editorconfig.
+Mantener política existente.
+Configurar Git local para WSL2:
+- core.filemode=false
+- core.autocrlf=true
+
+DEUDA_TECNICA_ABIERTA........:
+- Normalización EOL controlada queda diferida.
+- Duplicidad semántica Skill/GRC por contenido sigue pendiente.
+- Negative test formal del restore transaccional sigue pendiente.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+MB-GRC-025 — duplicidad semántica Skill/GRC por contenido, o negative test del restore transaccional si se prioriza hardening técnico.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_GRC_024C_LINE_ENDINGS_20260529
+==========
