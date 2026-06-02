@@ -396,3 +396,101 @@ Si el requerimiento exige una capacidad que no está cubierta por skills existen
 - Creación inicial del SKILL.MENU canónico
 - Inclusión de artefactos operativos base
 
+==========
+10.00_AUTO_PATCH_MB-GRC-026B_COVERAGE_ALIGNMENT
+==========
+
+FECHA.............: 2026-06-02 13:15:58
+MOTIVO............: Registrar en menú skills activos presentes en SkillsLake/01.SKILLS que no estaban visibles para selección IA.
+POLITICA..........: Registry completo no implica bundle completo; cada usecase empaqueta minimo suficiente.
+
+----------
+6.50
+----------
+
+SKILL_ID..........: SKILL_AGENT_EXECUTION_POLICY
+FILE..............: 02.SKILL.AGENT_EXECUTION_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define ejecucion gobernada de agentes IA, permisos, limites y evidencia operacional.
+
+----------
+6.60
+----------
+
+SKILL_ID..........: SKILL_SANDBOX_BOUNDARY
+FILE..............: 03.SKILL.SANDBOX_BOUNDARY.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define limites de sandbox, alcance permitido y restricciones de escritura/lectura.
+
+----------
+6.70
+----------
+
+SKILL_ID..........: SKILL_COST_CONTROL
+FILE..............: 04.SKILL.COST_CONTROL.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Gobierna uso de costo, tokens, contexto y escalamiento de recursos IA.
+
+----------
+6.80
+----------
+
+SKILL_ID..........: SKILL_ROUTING_POLICY
+FILE..............: 05.SKILL.ROUTING_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define criterios generales/historicos de routing de modelo, contexto y modo de ejecucion.
+
+----------
+6.90
+----------
+
+SKILL_ID..........: SKILL_LOGGING_AUDIT
+FILE..............: 15.SKILL.LOGGING_AUDIT.txt
+STATUS............: ACTIVE
+CATEGORY..........: REVIEW
+PURPOSE...........: Estandariza logging, evidencia, auditoria y trazabilidad de ejecuciones.
+
+----------
+7.00
+----------
+
+SKILL_ID..........: SKILL_CHECKPOINT_ROLLBACK
+FILE..............: 16.SKILL.CHECKPOINT_ROLLBACK.txt
+STATUS............: ACTIVE
+CATEGORY..........: REVIEW
+PURPOSE...........: Define checkpoints, rollback y recuperacion controlada ante cambios fallidos.
+
+----------
+7.10
+----------
+
+SKILL_ID..........: SKILL_SECRETS_HANDLING
+FILE..............: 17.SKILL.SECRETS_HANDLING.txt
+STATUS............: ACTIVE
+CATEGORY..........: REVIEW
+PURPOSE...........: Define manejo seguro de secretos, credenciales y datos sensibles operativos.
+
+----------
+7.20
+----------
+
+SKILL_ID..........: SKILL_DEV_ENV_MINIMAL
+FILE..............: 18.SKILL.DEV_ENV_MINIMAL.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define ambiente minimo de desarrollo y prerequisitos operativos.
+
+----------
+7.30
+----------
+
+SKILL_ID..........: SKILL_MODEL_ROUTING_POLICY
+FILE..............: 27.SKILL.MODEL_ROUTING_POLICY.txt
+STATUS............: ACTIVE
+CATEGORY..........: SYSTEM
+PURPOSE...........: Define routing moderno de modelos/herramientas/modos bajo criterio GRC.
+

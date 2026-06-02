@@ -408,3 +408,20 @@ P2_OPEN:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_0260_SESSION_CLOSE_20260602
 ==========
+
+==========
+MB-GRC-026B_COVERAGE_REGISTRY_MENU_PATCH
+==========
+
+FECHA.............: 2026-06-02 13:15:58
+ESTADO............: DONE_BY_SCRIPT_PENDING_VALIDATION
+DECISION..........:
+- Alinear menu activo y GLOBAL.SKILL.VERSION.REGISTRY.json con SkillsLake/01.SKILLS.
+- Mantener criterio: registry completo no implica bundle completo.
+- Registrar GRC/CATALOG como brecha de discovery/context packaging, no como bundle masivo inmediato.
+
+NEXT_ACTIONS......:
+- MB-GRC-026C build/validate/RADAR/readiness close.
+- MB-GRC-026D context selection + Temp/TO_UPLOAD_TO_IA.
+- MB-GRC-026E SESSION_LEARNING_REVIEW para SESSION_CLOSE.
+- MB-GRC-026F 29.SKILL.CRITICAL_FEEDBACK.txt.

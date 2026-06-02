@@ -895,3 +895,12 @@ Ejecutar MB-GRC-026A para auditar si 90.USECASE esta actualizado con SkillsLake,
 ==========
 FIN_LATEST_SESSION_CLOSE_MB_GRC_0260_20260602
 ==========
+
+==========
+MB-GRC-026B_COVERAGE_REGISTRY_MENU_PATCH
+==========
+
+FECHA.............: 2026-06-02 13:15:58
+RESUMEN...........: Se alinea menu activo y GLOBAL.SKILL.VERSION.REGISTRY.json con inventario activo SkillsLake/01.SKILLS. Se crea 00.CATALOG/USECASE.COVERAGE.AUDIT.ACTIVE.txt.
+DECISION..........: Registry completo no implica bundle completo; los usecases siguen empaquetando minimo suficiente.
+SIGUIENTE.........: MB-GRC-026C build/validate/RADAR/readiness close; luego context selection TO_UPLOAD_TO_IA y SESSION_LEARNING_REVIEW.

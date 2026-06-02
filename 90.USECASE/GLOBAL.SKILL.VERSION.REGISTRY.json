@@ -1,10 +1,30 @@
 {
     "version": "v1.0-CANON",
-    "generated_at": "2026-05-02 12:00:00",
+    "generated_at": "2026-06-02 13:15:58",
     "source_root": "C:\\01. GitHub\\Skills",
     "skills": [
         {
             "file": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "28.SKILL.BASH.WSL2.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt",
+            "version": "v1.1-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/03.SKILL.SANDBOX_BOUNDARY.txt",
+            "version": "v1.1-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/04.SKILL.COST_CONTROL.txt",
+            "version": "v1.1-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/05.SKILL.ROUTING_POLICY.txt",
             "version": "v1.0-CANON"
         },
         {
@@ -36,6 +56,22 @@
             "version": "UNKNOWN"
         },
         {
+            "file": "SkillsLake/01.SKILLS/15.SKILL.LOGGING_AUDIT.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/16.SKILL.CHECKPOINT_ROLLBACK.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/17.SKILL.SECRETS_HANDLING.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/18.SKILL.DEV_ENV_MINIMAL.txt",
+            "version": "v1.0-DRAFT"
+        },
+        {
             "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
             "version": "v1.0-CANON"
         },
@@ -52,8 +88,28 @@
             "version": "v1.0-CANON"
         },
         {
+            "file": "SkillsLake/01.SKILLS/24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/25.SKILL.GRC.HUMAN_AI_COLLAB.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/26.1_PROMPT.GRC.BASE.txt",
+            "version": "v1.0-CANON"
+        },
+        {
             "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
             "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/27.SKILL.MODEL_ROUTING_POLICY.txt",
+            "version": "v1.0-CANON"
+        },
+        {
+            "file": "SkillsLake/01.SKILLS/28.SKILL.BASH.WSL2.txt",
+            "version": "v1.0-DRAFT"
         },
         {
             "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
@@ -82,11 +138,6 @@
         {
             "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
             "version": "v1.0-CANON"
-        },
-        {
-            "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\28.SKILL.BASH.WSL2.txt",
-            "version": "v1.0-DRAFT",
-            "file": "28.SKILL.BASH.WSL2.txt"
         }
     ]
 }
