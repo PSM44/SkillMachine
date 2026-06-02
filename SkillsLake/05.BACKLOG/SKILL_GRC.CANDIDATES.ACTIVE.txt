@@ -370,3 +370,41 @@ P1_OPEN:
 ==========
 FIN_BACKLOG_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
 ==========
+
+==========
+BACKLOG_UPDATE_MB_GRC_0260_SESSION_CLOSE_20260602
+==========
+
+FECHA........................: 2026-06-02 11:00:21 -04
+FUENTE.......................: MB-GRC-0260_SESSION_CLOSE_20260602
+HEAD_BASE....................: 477b620 20260529_MB-GRC-025C_routing_policy_deep_review
+
+DONE_RECONOCIDO:
+- MB-GRC-022 transaction guard.
+- MB-GRC-023B idempotencia manifests/bundles.
+- MB-GRC-024A Bash WSL2 skill.
+- MB-GRC-024B continuidad post WSL2.
+- MB-GRC-024C line endings decision.
+- MB-GRC-025A duplicate semantic discovery.
+- MB-GRC-025B duplicate semantic review report.
+- MB-GRC-025C routing policy deep review.
+
+P0_NEXT:
+- MB-GRC-026A — auditar coverage de 90.USECASE contra SkillsLake, GRCLake y 00.CATALOG.
+  Criterio: detectar canon no empaquetado, bundles obsoletos, registry gaps y manifest gaps.
+
+P1_OPEN:
+- MB-GRC-026B — aplicar patch de coverage si MB-GRC-026A detecta gaps.
+- MB-GRC-026C — build + validate + RADAR + readiness post coverage.
+- MB-GRC-025C-2 — boundary patch routing.
+- MB-GRC-025D — boundary patch MANIFEST_PATH_SEMANTICS vs REGISTRY_ALIGNMENT.
+- MB-GRC-025E — validator documental semiautomatico.
+
+P2_OPEN:
+- MB-GRC-027 — negative test restore transaccional.
+- MB-GRC-028 — demo gerencial funcional.
+- Normalizacion EOL controlada solo si vuelve a generar friccion real.
+
+==========
+FIN_BACKLOG_UPDATE_MB_GRC_0260_SESSION_CLOSE_20260602
+==========

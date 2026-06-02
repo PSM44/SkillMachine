@@ -526,3 +526,29 @@ Definir si se ejecuta MB-GRC-025C-2 boundary patch routing.
 ==========
 FIN_LATEST_WHOAMI_UPDATE_MB_GRC_025C_ROUTING_POLICY_REVIEW_20260529
 ==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_GRC_0260_20260602
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-02 11:00:21 -04
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+HEAD_BASE...................: 477b620 20260529_MB-GRC-025C_routing_policy_deep_review
+
+ESTADO_ACTUAL...............:
+SkillMachine opera como MVP tecnico gobernado: build, validate, RADAR, readiness, BATON, WHOAMI y backlog.
+El foco se desplaza desde crear piezas a verificar cobertura real de usecases contra el canon.
+
+QUE_FALTA...................:
+- Auditar coverage 90.USECASE vs SkillsLake/GRCLake/00.CATALOG.
+- Corregir manifests/registries/bundles si hay gaps.
+- Preparar demo gerencial funcional.
+
+SIGUIENTE_ACCION............:
+MB-GRC-026A_USECASE_COVERAGE_AUDIT.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_GRC_0260_20260602
+==========

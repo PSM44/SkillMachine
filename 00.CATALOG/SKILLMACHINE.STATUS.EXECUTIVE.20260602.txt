@@ -1,0 +1,99 @@
+==========
+SKILLMACHINE.STATUS.EXECUTIVE.20260602
+==========
+
+FECHA........................: 2026-06-02 11:00:21 -04
+PROYECTO.....................: SkillsMachine
+ROOT_WIN.....................: C:\01. GitHub\Skills
+ROOT_WSL.....................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+HEAD.........................: 477b620 20260529_MB-GRC-025C_routing_policy_deep_review
+LOCAL_HASH...................: 477b6207a73a04eac180eb03ed3c0eb81b3bfd21
+REMOTE_HASH..................: 477b6207a73a04eac180eb03ed3c0eb81b3bfd21
+
+==========
+01.00_ESTADO_ACTUAL
+==========
+
+SkillMachine se encuentra en MVP operativo técnico, con:
+- estructura SkillsLake / GRCLake / 00.CATALOG / 90.USECASE;
+- build de usecases operativo;
+- Validate-System operativo;
+- RADAR operativo;
+- readiness de cierre operativo;
+- Bash WSL2 como shell preferente;
+- continuidad BATON/WHOAMI/backlog activa.
+
+Ultimo bloque de trabajo completado:
+- MB-GRC-025C routing policy deep review.
+
+==========
+02.00_DEUDA_TECNICA_ACUMULADA
+==========
+
+P1:
+- MB-GRC-026A: auditar cobertura de 90.USECASE contra SkillsLake, GRCLake y 00.CATALOG.
+- MB-GRC-026B: corregir coverage si hay gaps.
+- MB-GRC-025C-2: boundary patch entre 05.SKILL.ROUTING_POLICY y 27.SKILL.MODEL_ROUTING_POLICY.
+- MB-GRC-025D: boundary patch entre MANIFEST_PATH_SEMANTICS y REGISTRY_ALIGNMENT_AFTER_MIGRATION.
+- MB-GRC-025E: evaluar validator documental semiautomatico de duplicidad semantica.
+
+P2:
+- Negative test formal de restore transaccional.
+- Normalizacion EOL controlada solo si vuelve a generar friccion real.
+- Homologacion menor de registry shape si se decide limpiar diffs historicos.
+
+==========
+03.00_BACKLOG_ACUMULADO
+==========
+
+DONE:
+- MB-GRC-022 transaction guard.
+- MB-GRC-023B idempotencia real de manifests/bundles.
+- MB-GRC-024A integracion de 28.SKILL.BASH.WSL2.txt.
+- MB-GRC-024B continuidad post WSL2.
+- MB-GRC-024C decision line endings.
+- MB-GRC-025A duplicate semantic discovery.
+- MB-GRC-025B duplicate semantic review report.
+- MB-GRC-025C routing policy deep review.
+
+OPEN:
+- MB-GRC-026A USECASE coverage audit.
+- MB-GRC-026B coverage patch.
+- MB-GRC-026C rebuild/validate/readiness cierre coverage.
+- MB-GRC-025C-2 routing boundary patch.
+- MB-GRC-025D manifest/registry boundary patch.
+- MB-GRC-025E semantic duplicate validator.
+- MB-GRC-027 transaction guard negative test.
+- MB-GRC-028 gerencia demo.
+
+==========
+04.00_EN_QUE_ESTAMOS
+==========
+
+Estamos saliendo de hardening documental/operativo y entrando a auditoria sistemica:
+verificar si 90.USECASE realmente empaqueta el canon vigente de SkillsLake, GRCLake y 00.CATALOG.
+
+==========
+05.00_PATH_A_ENTREGABLE_FUNCIONAL_GERENCIA
+==========
+
+MB-GRC-026A -> coverage audit.
+MB-GRC-026B -> coverage patch.
+MB-GRC-026C -> build/validate/readiness.
+MB-GRC-027 -> negative test transaction guard.
+MB-GRC-028 -> demo gerencial de IA gobernada.
+
+Entregable gerencial:
+Demo o memo ejecutivo que muestre una IA en blanco usando un usecase, cargando bundles, entendiendo estado, ejecutando una minibattle controlada, validando, actualizando continuidad y cerrando con readiness OK.
+
+==========
+06.00_DECISIONES
+==========
+
+HUMAN no se actualiza en este cierre salvo decision humana posterior.
+Motivo: no hay cambio doctrinal nuevo; hay continuidad operacional y backlog.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
