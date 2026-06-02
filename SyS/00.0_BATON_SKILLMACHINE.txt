@@ -904,3 +904,14 @@ FECHA.............: 2026-06-02 13:15:58
 RESUMEN...........: Se alinea menu activo y GLOBAL.SKILL.VERSION.REGISTRY.json con inventario activo SkillsLake/01.SKILLS. Se crea 00.CATALOG/USECASE.COVERAGE.AUDIT.ACTIVE.txt.
 DECISION..........: Registry completo no implica bundle completo; los usecases siguen empaquetando minimo suficiente.
 SIGUIENTE.........: MB-GRC-026C build/validate/RADAR/readiness close; luego context selection TO_UPLOAD_TO_IA y SESSION_LEARNING_REVIEW.
+
+----------
+MB-GRC-026D_CONTEXT_SELECTION_TO_UPLOAD_TO_IA
+----------
+STATUS............: DONE
+SUMMARY...........: Added context selection / TO_UPLOAD_TO_IA temporary upload package mechanism.
+ARTIFACTS.........:
+- 00.CATALOG/CONTEXT.SELECTION.TO_UPLOAD_TO_IA.ACTIVE.txt
+- SyS/A_Tools/Context/Build-ToUploadToIA.ps1
+- Temp/TO_UPLOAD_TO_IA generated package (temporary, not canon)
+NEXT_ACTION........: MB-GRC-026E session learning review / feedback skill decision, or close session.

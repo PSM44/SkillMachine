@@ -561,3 +561,8 @@ FECHA.............: 2026-06-02 13:15:58
 RESUMEN...........: Se alinea menu activo y GLOBAL.SKILL.VERSION.REGISTRY.json con inventario activo SkillsLake/01.SKILLS. Se crea 00.CATALOG/USECASE.COVERAGE.AUDIT.ACTIVE.txt.
 DECISION..........: Registry completo no implica bundle completo; los usecases siguen empaquetando minimo suficiente.
 SIGUIENTE.........: MB-GRC-026C build/validate/RADAR/readiness close; luego context selection TO_UPLOAD_TO_IA y SESSION_LEARNING_REVIEW.
+
+----------
+MB-GRC-026D_CONTEXT_SELECTION_TO_UPLOAD_TO_IA
+----------
+SkillsMachine now has a controlled mechanism to build a temporary upload package at Temp/TO_UPLOAD_TO_IA for IA context transfer. Temp output is not canon.

@@ -1,0 +1,105 @@
+==========
+00.00_CONTEXT.SELECTION.TO_UPLOAD_TO_IA.ACTIVE
+==========
+
+ID_UNICO..........: CONTEXT.SELECTION.TO_UPLOAD_TO_IA.01.00
+NOMBRE_SUGERIDO...: CONTEXT.SELECTION.TO_UPLOAD_TO_IA.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-06-02
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: PABLO
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Define el módulo operativo para preparar paquetes temporales de contexto destinados a subir manualmente a una IA.
+
+NO_CUBRE..........:
+No crea canon.
+No decide qué Skill o GRC debe modificarse.
+No reemplaza RADAR.
+No reemplaza BUILD de usecases.
+No debe commitear Temp/TO_UPLOAD_TO_IA.
+
+DEPENDENCIAS......:
+SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json
+90.USECASE/USECASE.REGISTRY.json
+00.CATALOG/CONTEXT.COMPOSER.RULES.ACTIVE.txt
+SyS/A_Tools/Context/Build-ToUploadToIA.ps1
+
+==========
+01.00_PROPOSITO
+==========
+
+Permitir que una IA en blanco reciba un paquete mínimo suficiente de contexto sin subir todo el repositorio.
+
+El flujo es:
+1. La IA revisa menú/resumen disponible.
+2. La IA pide Skills/GRC/Catalog/Usecase necesarios.
+3. El humano ejecuta el generador con los archivos requeridos.
+4. El generador copia archivos a Temp/TO_UPLOAD_TO_IA.
+5. El humano sube el paquete a la IA.
+6. La IA confirma suficiencia o pide delta.
+
+==========
+02.00_RUTA_TEMPORAL
+==========
+
+RUTA_CANONICA_TEMPORAL:
+C:\01. GitHub\Skills\Temp\TO_UPLOAD_TO_IA
+
+Regla:
+Temp/TO_UPLOAD_TO_IA no es canon y puede regenerarse.
+
+==========
+03.00_BUCKETS
+==========
+
+10.SKILLS:
+Skills seleccionados desde SkillsLake/01.SKILLS.
+
+20.GRC:
+Políticas, controles y templates desde GRCLake.
+
+30.CATALOG:
+Catálogos, registros, coverage audit y reglas de composición.
+
+40.USECASE:
+Manifests, prompts, bundles o usecase docs.
+
+90.EXTRA:
+Archivos útiles que no caen en buckets anteriores.
+
+==========
+04.00_REGLAS
+==========
+
+- Copiar, no mover.
+- No modificar archivos fuente.
+- No hacer git add de Temp/TO_UPLOAD_TO_IA.
+- Manifest obligatorio.
+- README de subida obligatorio.
+- Si falta contexto, regenerar con delta.
+- Si se detecta oportunidad de Skill/GRC, registrar candidato; no crear canon automático.
+
+==========
+05.00_ANTIPATRONES
+==========
+
+- Subir radar.full por costumbre.
+- Copiar todo el repo.
+- Crear Skills desde una conversación sin backlog.
+- Usar Temp como fuente de verdad.
+- Editar archivos dentro de Temp creyendo que actualizan canon.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-06-02, v0.1-DRAFT
+- Creación inicial del módulo TO_UPLOAD_TO_IA.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

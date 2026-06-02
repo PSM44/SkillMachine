@@ -425,3 +425,12 @@ NEXT_ACTIONS......:
 - MB-GRC-026D context selection + Temp/TO_UPLOAD_TO_IA.
 - MB-GRC-026E SESSION_LEARNING_REVIEW para SESSION_CLOSE.
 - MB-GRC-026F 29.SKILL.CRITICAL_FEEDBACK.txt.
+
+----------
+MB-GRC-026D_CONTEXT_SELECTION_TO_UPLOAD_TO_IA
+----------
+STATUS............: DONE
+PRIORITY..........: P1
+TYPE..............: CONTEXT_PACKAGING
+SUMMARY...........: Created controlled TO_UPLOAD_TO_IA context package module and generator.
+NEXT..............: Consider integrating context selection README into usecase outputs in a later patch.
