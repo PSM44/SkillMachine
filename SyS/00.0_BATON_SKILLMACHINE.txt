@@ -930,3 +930,13 @@ HEAD_REFERENCE......: 3b739c3 20260603_MB-GRC-026D2_ignore_to_upload_request_tem
 STATUS..............: CONTINUITY_REFRESH
 SUMMARY.............: Refreshed continuity after MB-GRC-026D2 ignored Temp/TO_UPLOAD_REQUEST*.txt and removed transient request residue.
 NEXT_ACTION.........: MB-GRC-026E_SESSION_LEARNING_REVIEW_AND_CRITICAL_FEEDBACK, unless human decides to close session first.
+
+----------
+MB-GRC-026E1_REFRESH_BATON_AFTER_CRITICAL_FEEDBACK
+----------
+FECHA.............: 2026-06-03 16:40:47
+ESTADO............: DONE
+COMMIT_BASE.......: c51f917 20260603_MB-GRC-026E_session_learning_review_critical_feedback
+CAMBIO............: Refresca BATON posterior a MB-GRC-026E para alinear continuidad con HEAD.
+CONTEXTO..........: MB-GRC-026E agregó 29.SKILL.CRITICAL_FEEDBACK.txt y SESSION.LEARNING.REVIEW.ACTIVE.txt, integrados a SESSION_CLOSE.
+NEXT_ACTION........: Con readiness OK, decidir entre prueba enfocada de SESSION_LEARNING_REVIEW o cierre de sesión.
