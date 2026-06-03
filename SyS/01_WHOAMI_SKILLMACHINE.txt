@@ -600,3 +600,13 @@ NEXT_ACTION........: Readiness must return OK before continuing or closing sessi
 ==========
 FIN_MB-GRC-026E2_WHOAMI_REFRESH
 ==========
+
+==========
+MB-GRC-026E3_CONTINUITY_SYNC
+==========
+
+UPDATED_AT.........: 2026-06-03 16:43:08 -0400
+HEAD_CONTEXT.......: 24339c2 20260603_MB-GRC-026E2_refresh_whoami_after_critical_feedback
+STATUS.............: CONTINUITY_SYNC
+SUMMARY............: WHOAMI refreshed together with BATON after MB-GRC-026E session learning review and 29.SKILL.CRITICAL_FEEDBACK integration.
+NEXT_ACTION........: Focused test of SESSION_LEARNING_REVIEW or formal session close.

@@ -940,3 +940,13 @@ COMMIT_BASE.......: c51f917 20260603_MB-GRC-026E_session_learning_review_critica
 CAMBIO............: Refresca BATON posterior a MB-GRC-026E para alinear continuidad con HEAD.
 CONTEXTO..........: MB-GRC-026E agregó 29.SKILL.CRITICAL_FEEDBACK.txt y SESSION.LEARNING.REVIEW.ACTIVE.txt, integrados a SESSION_CLOSE.
 NEXT_ACTION........: Con readiness OK, decidir entre prueba enfocada de SESSION_LEARNING_REVIEW o cierre de sesión.
+
+==========
+MB-GRC-026E3_CONTINUITY_SYNC
+==========
+
+UPDATED_AT.........: 2026-06-03 16:43:08 -0400
+HEAD_CONTEXT.......: 24339c2 20260603_MB-GRC-026E2_refresh_whoami_after_critical_feedback
+STATUS.............: CONTINUITY_SYNC
+SUMMARY............: BATON and WHOAMI refreshed together after MB-GRC-026E session learning review and 29.SKILL.CRITICAL_FEEDBACK integration to avoid freshness ping-pong.
+NEXT_ACTION........: Focused test of SESSION_LEARNING_REVIEW or formal session close.
