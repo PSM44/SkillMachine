@@ -442,3 +442,10 @@ STATUS............: DONE
 DATE..............: 2026-06-02 14:13:01 -0400
 RESULT............: Build-ToUploadToIA.ps1 now requires explicit Include/IncludeFile and no longer generates default context.
 NEXT..............: Test with a real IA-requested file list.
+
+==========
+MB-GRC-026D3_CONTINUITY_REFRESH
+==========
+DATE................: 2026-06-03 16:34:26 -0400
+STATUS..............: DONE
+SUMMARY.............: Refresh BATON/WHOAMI after D2 .gitignore temp-request fix so readiness can return to OK.
