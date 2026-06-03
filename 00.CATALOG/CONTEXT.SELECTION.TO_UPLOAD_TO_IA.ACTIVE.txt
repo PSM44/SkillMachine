@@ -103,3 +103,12 @@ Archivos útiles que no caen en buckets anteriores.
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+==========
+99.10_MB-GRC-026D-1_EXPLICIT_INCLUDE_PATCH
+==========
+
+DATE...............: 2026-06-02 14:13:01 -0400
+DECISION...........: TO_UPLOAD_TO_IA is not an initial/default context package.
+RULE...............: Build-ToUploadToIA.ps1 must require explicit -Include or -IncludeFile.
+RATIONALE..........: Initial usecase folders already contain menu/registry/bundles. TO_UPLOAD_TO_IA is only for IA-requested delta context.

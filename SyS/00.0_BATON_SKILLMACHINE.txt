@@ -915,3 +915,9 @@ ARTIFACTS.........:
 - SyS/A_Tools/Context/Build-ToUploadToIA.ps1
 - Temp/TO_UPLOAD_TO_IA generated package (temporary, not canon)
 NEXT_ACTION........: MB-GRC-026E session learning review / feedback skill decision, or close session.
+
+----------
+MB-GRC-026D-1_UPDATE
+----------
+2026-06-02 14:13:01 -0400
+Build-ToUploadToIA.ps1 corrected: TO_UPLOAD_TO_IA is now explicit delta-context only. It no longer creates default initial packages because 90.USECASE outputs already carry menu/registry/bundles.

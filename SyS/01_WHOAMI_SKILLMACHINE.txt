@@ -566,3 +566,9 @@ SIGUIENTE.........: MB-GRC-026C build/validate/RADAR/readiness close; luego cont
 MB-GRC-026D_CONTEXT_SELECTION_TO_UPLOAD_TO_IA
 ----------
 SkillsMachine now has a controlled mechanism to build a temporary upload package at Temp/TO_UPLOAD_TO_IA for IA context transfer. Temp output is not canon.
+
+----------
+MB-GRC-026D-1_UPDATE
+----------
+2026-06-02 14:13:01 -0400
+Context upload tool corrected: Temp/TO_UPLOAD_TO_IA is for additional IA-requested files only, not default bootstrap context.

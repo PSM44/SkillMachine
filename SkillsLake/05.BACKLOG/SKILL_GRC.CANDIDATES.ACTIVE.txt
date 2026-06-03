@@ -434,3 +434,11 @@ PRIORITY..........: P1
 TYPE..............: CONTEXT_PACKAGING
 SUMMARY...........: Created controlled TO_UPLOAD_TO_IA context package module and generator.
 NEXT..............: Consider integrating context selection README into usecase outputs in a later patch.
+
+----------
+MB-GRC-026D-1_FIX_TO_UPLOAD_TO_IA_EXPLICIT_INCLUDE
+----------
+STATUS............: DONE
+DATE..............: 2026-06-02 14:13:01 -0400
+RESULT............: Build-ToUploadToIA.ps1 now requires explicit Include/IncludeFile and no longer generates default context.
+NEXT..............: Test with a real IA-requested file list.

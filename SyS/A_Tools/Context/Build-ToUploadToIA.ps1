@@ -1,14 +1,8 @@
 param(
-    [string[]]$Include = @(
-        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
-        "90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json",
-        "90.USECASE/USECASE.REGISTRY.json",
-        "00.CATALOG/USECASE.COVERAGE.AUDIT.ACTIVE.txt",
-        "00.CATALOG/DOMAIN.REGISTRY.ACTIVE.txt",
-        "00.CATALOG/ARTIFACT.REGISTRY.ACTIVE.txt",
-        "00.CATALOG/CONTEXT.COMPOSER.RULES.ACTIVE.txt"
-    ),
-    [string]$OutputRel = "Temp/TO_UPLOAD_TO_IA"
+    [string[]]$Include = @(),
+    [string]$IncludeFile = "",
+    [string]$OutputRel = "Temp/TO_UPLOAD_TO_IA",
+    [switch]$AllowMissing
 )
 
 $ErrorActionPreference = "Stop"
@@ -19,6 +13,40 @@ $Out = Join-Path $Root $OutputRel
 Write-Host "========== BUILD TO_UPLOAD_TO_IA / START =========="
 Write-Host "ROOT.............: $Root"
 Write-Host "OUTPUT...........: $Out"
+
+$Requested = New-Object System.Collections.Generic.List[string]
+
+if ($IncludeFile -and $IncludeFile.Trim().Length -gt 0) {
+    $includeFilePath = Join-Path $Root $IncludeFile
+    if (!(Test-Path $includeFilePath)) {
+        Write-Host "ERROR............: IncludeFile not found: $IncludeFile"
+        exit 1
+    }
+
+    Get-Content -Path $includeFilePath | ForEach-Object {
+        $line = $_.Trim()
+        if ($line.Length -gt 0 -and !$line.StartsWith("#")) {
+            $Requested.Add($line)
+        }
+    }
+}
+
+foreach ($item in $Include) {
+    if ($null -ne $item -and $item.Trim().Length -gt 0) {
+        $Requested.Add($item.Trim())
+    }
+}
+
+$Requested = @($Requested | Select-Object -Unique)
+
+if ($Requested.Count -eq 0) {
+    Write-Host "ERROR............: No files requested."
+    Write-Host "USAGE............: Provide -Include or -IncludeFile."
+    Write-Host "EXAMPLE..........: powershell.exe -NoProfile -ExecutionPolicy Bypass -File SyS\A_Tools\Context\Build-ToUploadToIA.ps1 -Include `"SkillsLake/01.SKILLS/28.SKILL.BASH.WSL2.txt`""
+    Write-Host "NOTE.............: TO_UPLOAD_TO_IA is not a default context package. It is only for explicit IA-requested delta files."
+    Write-Host "========== BUILD TO_UPLOAD_TO_IA / END =========="
+    exit 1
+}
 
 if (Test-Path $Out) {
     Remove-Item -Path $Out -Recurse -Force
@@ -34,7 +62,7 @@ New-Item -ItemType Directory -Force -Path (Join-Path $Out "90.EXTRA") | Out-Null
 $Copied = New-Object System.Collections.Generic.List[string]
 $Missing = New-Object System.Collections.Generic.List[string]
 
-foreach ($rel in $Include) {
+foreach ($rel in $Requested) {
     $src = Join-Path $Root $rel
     if (!(Test-Path $src)) {
         $Missing.Add($rel)
@@ -64,7 +92,7 @@ $readme = Join-Path $Out "01.README.UPLOAD_INSTRUCTIONS.txt"
 GENERATED_AT........: $(Get-Date -Format "yyyy-MM-dd HH:mm:ss")
 ROOT................: $Root
 OUTPUT..............: $Out
-PURPOSE.............: Files prepared for manual upload to IA.
+PURPOSE.............: Explicit IA-requested delta context files prepared for manual upload.
 
 ==========
 01.00_RULES
@@ -72,17 +100,24 @@ PURPOSE.............: Files prepared for manual upload to IA.
 
 - This folder is temporary.
 - This folder is not canon.
-- Upload the contents of this folder to the IA when context is requested.
+- This folder is not an initial context package.
+- This folder contains only files explicitly requested by the IA or human.
+- Upload the contents of this folder to the IA only when additional context is requested.
 - Do not edit canonical files from this folder.
 - If context is insufficient, regenerate with additional Include paths.
 
 ==========
-02.00_COPIED_FILES
+02.00_REQUESTED_FILES
+==========
+$($Requested -join "`r`n")
+
+==========
+03.00_COPIED_FILES
 ==========
 $($Copied -join "`r`n")
 
 ==========
-03.00_MISSING_FILES
+04.00_MISSING_FILES
 ==========
 $(if ($Missing.Count -eq 0) { "[NONE]" } else { $Missing -join "`r`n" })
 
@@ -92,21 +127,23 @@ FIN
 "@ | Set-Content -Path $manifest -Encoding UTF8
 
 @"
-Upload this folder to IA:
+Upload this folder to IA only if the IA requested additional files:
 
 $Out
 
 Recommended upload order:
 1. 00.UPLOAD.MANIFEST.txt
-2. 30.CATALOG
-3. 40.USECASE
-4. 10.SKILLS
-5. 20.GRC
+2. 10.SKILLS
+3. 20.GRC
+4. 30.CATALOG
+5. 40.USECASE
 6. 90.EXTRA
 
-If the IA asks for more context, add the requested files to the Include list and regenerate.
+This is not the initial usecase package.
+For initial work, upload the corresponding 90.USECASE output package first.
 "@ | Set-Content -Path $readme -Encoding UTF8
 
+Write-Host "REQUESTED_COUNT..: $($Requested.Count)"
 Write-Host "COPIED_COUNT.....: $($Copied.Count)"
 Write-Host "MISSING_COUNT....: $($Missing.Count)"
 Write-Host "MANIFEST.........: $manifest"
@@ -115,6 +152,12 @@ Write-Host "README...........: $readme"
 if ($Missing.Count -gt 0) {
     Write-Host "WARN_MISSING.....:"
     $Missing | ForEach-Object { Write-Host " - $_" }
+
+    if (!$AllowMissing) {
+        Write-Host "ERROR............: Missing files detected. Use -AllowMissing only if this is intentional."
+        Write-Host "========== BUILD TO_UPLOAD_TO_IA / END =========="
+        exit 2
+    }
 }
 
 Write-Host "========== BUILD TO_UPLOAD_TO_IA / END =========="
