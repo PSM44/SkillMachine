@@ -494,3 +494,14 @@ STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Define routing moderno de modelos/herramientas/modos bajo criterio GRC.
 
+
+----------
+06.90
+----------
+
+SKILL_ID..........: SKILL_CRITICAL_FEEDBACK
+FILE..............: 29.SKILL.CRITICAL_FEEDBACK.txt
+STATUS............: ACTIVE
+CATEGORY..........: REVIEW
+PURPOSE...........: Define feedback critico, realista, no complaciente y accionable.
+

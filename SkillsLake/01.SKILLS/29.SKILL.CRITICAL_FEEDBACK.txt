@@ -1,0 +1,187 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.CRITICAL_FEEDBACK.01.00
+NOMBRE_SUGERIDO...: 29.SKILL.CRITICAL_FEEDBACK.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-06-03
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Define el contrato operativo de "feedback" dentro de SkillsMachine.
+
+En este ecosistema, feedback no significa halago, motivacion ni validacion emocional.
+Feedback significa revision critica, realista, accionable y util para decidir, corregir o mejorar.
+
+NO_CUBRE..........:
+No reemplaza analisis tecnico profundo.
+No reemplaza validacion automatizada.
+No obliga a reescribir artefactos completos.
+No autoriza eliminar contenido util sin criterio.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+25.SKILL.GRC.HUMAN_AI_COLLAB.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Indice
+00.20 Definicion operacional
+01.00 Reglas de feedback
+02.00 Formato recomendado
+03.00 Opciones, pros y contras
+04.00 Omisiones, conflictos y dudas
+05.00 Antipatrones
+06.00 Checklist
+07.00 Changelog
+
+==========
+00.20_DEFINICION_OPERACIONAL
+==========
+
+Feedback = revision critica 100% realista, no complaciente, util y accionable.
+
+Debe buscar:
+- fisuras;
+- conflictos;
+- omisiones;
+- dudas relevantes;
+- riesgos;
+- opciones de mejora;
+- pros y contras de cada opcion cuando aplique;
+- recomendaciones;
+- observaciones concretas para decidir o mejorar.
+
+No debe incluir:
+- halagos;
+- cumplidos;
+- motivacion;
+- validacion emocional;
+- "vamos tu puedes";
+- una seccion obligatoria de "lo bueno";
+- optimismo artificial;
+- critica sin accion;
+- recomendacion sin trade-off.
+
+==========
+01.00_REGLAS_DE_FEEDBACK
+==========
+
+01.10_REALISMO
+
+El feedback debe decir las cosas como son, sin suavizar problemas por cortesia.
+
+01.20_NO_COMPLACENCIA
+
+No se debe agregar una parte positiva por formula.
+Si algo sirve y debe preservarse, se indica solo porque es operacionalmente util.
+
+01.30_ACCIONABILIDAD
+
+Cada observacion importante debe conducir a:
+- una decision;
+- una opcion;
+- una correccion;
+- una duda a resolver;
+- o una recomendacion clara.
+
+01.40_PRESERVAR_LO_UTIL
+
+Cuando se revise un texto, plan, artefacto o codigo, no se debe borrar todo por defecto.
+Se preserva lo util y se corrige lo que necesita mejora.
+
+01.50_NO_INVENTAR_DATA
+
+Si falta informacion, el feedback debe declarar la omision.
+No se inventan datos para cerrar una conclusion.
+
+==========
+02.00_FORMATO_RECOMENDADO
+==========
+
+Formato base:
+
+01.00_DICTAMEN
+02.00_FISURAS_CONFLICTOS
+03.00_OMISIONES_DUDAS
+04.00_OPCIONES
+05.00_PROS_CONTRAS
+06.00_RECOMENDACION
+07.00_NEXT_ACTION
+
+La seccion "lo que sirve" es opcional y solo se usa si ayuda a preservar contenido util.
+
+==========
+03.00_OPCIONES_PROS_Y_CONTRAS
+==========
+
+Cuando existan alternativas, el feedback debe comparar opciones.
+
+Cada opcion relevante debe incluir:
+- beneficio;
+- costo o riesgo;
+- condicion de uso;
+- recomendacion relativa.
+
+No todas las opciones tienen el mismo peso tecnico, pero la decision final corresponde al humano.
+
+==========
+04.00_OMISIONES_CONFLICTOS_Y_DUDAS
+==========
+
+El feedback debe levantar:
+- contradicciones internas;
+- conflictos entre capas;
+- supuestos no probados;
+- dependencias omitidas;
+- data faltante;
+- ambiguedades;
+- riesgos de implementacion;
+- impactos secundarios.
+
+==========
+05.00_ANTIPATRONES
+==========
+
+Antipatrones:
+- "Excelente idea" sin analisis.
+- "Buen trabajo" como relleno.
+- "Vas por buen camino".
+- Criticar sin proponer accion.
+- Reescribir todo sin preservar lo util.
+- Usar tono motivacional.
+- Esconder problemas por diplomacia.
+- Dar una unica recomendacion sin trade-off cuando hay opciones reales.
+
+==========
+06.00_CHECKLIST
+==========
+
+[ ] El feedback evita halagos y motivacion.
+[ ] El feedback identifica fisuras reales.
+[ ] El feedback declara omisiones o dudas.
+[ ] El feedback propone opciones cuando existen alternativas.
+[ ] El feedback incluye pros/contras cuando aporta valor.
+[ ] El feedback entrega recomendacion concreta.
+[ ] El feedback preserva lo util.
+[ ] El feedback no inventa datos.
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-06-03, v1.0-DRAFT
+- Creacion inicial del contrato operativo de feedback critico.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

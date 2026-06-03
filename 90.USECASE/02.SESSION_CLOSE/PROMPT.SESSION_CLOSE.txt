@@ -85,3 +85,19 @@ Para evaluar frescura:
 - No usar LastWriteTime como criterio principal para BATON/WHOAMI.
 
 ==========
+
+
+==========
+SESSION_LEARNING_REVIEW
+==========
+
+Al cierre de sesion, revisar el chat activo y outputs relevantes para detectar oportunidades de:
+- crear o actualizar Skills;
+- crear o actualizar GRC;
+- registrar candidatos en backlog;
+- identificar conflictos, omisiones, duplicidad o deuda tecnica;
+- proponer siguiente minibattle.
+
+Regla dura:
+No crear ni modificar canon automaticamente. Toda oportunidad se registra como candidato o se ejecuta solo si el humano lo instruye explicitamente.
+

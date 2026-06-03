@@ -1,0 +1,130 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SESSION.LEARNING.REVIEW.01.00
+NOMBRE_SUGERIDO...: SESSION.LEARNING.REVIEW.ACTIVE.txt
+VERSION...........: v1.0-DRAFT
+FECHA.............: 2026-06-03
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00.CATALOG
+AUTOR_HUMANO......: PABLO
+ESTADO............: ACTIVE_DRAFT
+
+ALCANCE...........:
+Define un modulo de revision de aprendizaje de sesion para detectar oportunidades de crear,
+actualizar o mejorar Skills/GRC a partir del chat activo, outputs terminales y fricciones reales.
+
+NO_CUBRE..........:
+No crea canon automaticamente.
+No modifica Skills/GRC sin decision humana.
+No reemplaza SESSION_CLOSE.
+No reemplaza BACKLOG.
+No decide merges, deletes o deprecaciones por si mismo.
+
+DEPENDENCIAS......:
+SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt
+SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
+00.CATALOG/DOMAIN.REGISTRY.ACTIVE.txt
+00.CATALOG/ARTIFACT.REGISTRY.ACTIVE.txt
+00.CATALOG/CONTEXT.COMPOSER.RULES.ACTIVE.txt
+
+==========
+01.00_OBJETIVO
+==========
+
+El modulo SESSION_LEARNING_REVIEW se ejecuta como parte conceptual de SESSION_CLOSE.
+
+Su funcion es revisar lo ocurrido en la sesion y detectar:
+- reglas repetidas por el humano;
+- correcciones recurrentes;
+- fricciones operativas;
+- gaps de contexto;
+- oportunidades de Skill;
+- oportunidades de GRC;
+- posibles patches a artefactos existentes;
+- conflictos entre artefactos;
+- deuda tecnica emergente.
+
+==========
+02.00_CONTRATO_DURO
+==========
+
+Este modulo solo produce candidatos y recomendaciones.
+
+No puede:
+- crear Skills automaticamente;
+- crear GRC automaticamente;
+- modificar canon sin aprobacion humana;
+- borrar artefactos;
+- fusionar artefactos;
+- marcar deprecated sin revision.
+
+Toda mejora debe ir primero a backlog o a una minibattle explicita.
+
+==========
+03.00_FORMATO_DE_SALIDA
+==========
+
+La revision debe producir:
+
+01.00_DICTAMEN
+02.00_OPORTUNIDADES_DE_SKILL
+03.00_OPORTUNIDADES_DE_GRC
+04.00_PATCHES_A_ARTEFACTOS_EXISTENTES
+05.00_CONFLICTOS_Y_DUPLICIDAD
+06.00_DEUDA_TECNICA
+07.00_BACKLOG_PROPUESTO
+08.00_RECOMENDACION
+09.00_NEXT_ACTION
+
+==========
+04.00_CRITERIOS_DE_DETECCION
+==========
+
+Detectar candidatos si aparece cualquiera de estas senales:
+- el humano corrige la misma regla mas de una vez;
+- la IA pregunta algo que deberia estar en un artefacto;
+- aparece una convencion operacional recurrente;
+- se crea un workaround que deberia ser proceso;
+- una carpeta output necesita regla de uso;
+- un script necesita contrato;
+- un warning se repite;
+- un concepto aparece como termino de arte;
+- hay conflicto entre Skills/GRC/Usecases.
+
+==========
+05.00_INTEGRACION_CON_SESSION_CLOSE
+==========
+
+SESSION_CLOSE debe incluir una etapa final opcional:
+
+SESSION_LEARNING_REVIEW:
+- revisar sesion activa;
+- detectar candidatos;
+- clasificar prioridad;
+- actualizar backlog si procede;
+- proponer minibattle siguiente;
+- no modificar canon salvo instruccion explicita.
+
+==========
+06.00_ANTIPATRONES
+==========
+
+- Crear microSkills por cada conversacion.
+- Convertir cada preferencia de estilo en Skill.
+- Actualizar canon durante una sesion sin cierre.
+- Usar aprendizaje de sesion para justificar cambios no revisados.
+- Cerrar sin backlog cuando se detecto oportunidad real.
+- Mezclar feedback critico con halago o motivacion.
+
+==========
+07.00_CHANGELOG
+==========
+
+2026-06-03, v1.0-DRAFT
+- Creacion inicial del modulo SESSION_LEARNING_REVIEW.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
