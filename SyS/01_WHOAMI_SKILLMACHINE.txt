@@ -588,3 +588,15 @@ MB-GRC-026E_SESSION_LEARNING_REVIEW_AND_CRITICAL_FEEDBACK
 UPDATED_AT........: 2026-06-03 16:36:40
 STATE.............: Critical feedback is now an explicit Skill. Session close can include learning review to detect Skill/GRC opportunities.
 
+
+==========
+MB-GRC-026E2_WHOAMI_REFRESH
+==========
+FECHA.............: 2026-06-03 16:41:50 -0400
+HEAD_BASE.........: d180eea 20260603_MB-GRC-026E1_refresh_baton_after_critical_feedback
+ESTADO............: WHOAMI refreshed after BATON continuity refresh.
+CONTEXTO..........: MB-GRC-026E added SESSION.LEARNING.REVIEW and 29.SKILL.CRITICAL_FEEDBACK; MB-GRC-026E1 refreshed BATON; this update restores WHOAMI freshness against HEAD.
+NEXT_ACTION........: Readiness must return OK before continuing or closing session.
+==========
+FIN_MB-GRC-026E2_WHOAMI_REFRESH
+==========
