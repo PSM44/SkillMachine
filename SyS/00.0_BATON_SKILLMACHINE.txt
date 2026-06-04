@@ -1021,3 +1021,24 @@ FILES.............:
 - 90.USECASE/* generated delivery outputs
 RECOVERY_NOTE.....: Post-processing call is positioned before BUILD terminal exit.
 NEXT_ACTION.......: Validate whether TO_UPLOAD_TO_IA context packaging should be implemented as MB-GRC-026G.
+
+==========
+MB-GRC-026G_UPDATE
+==========
+DATE..............: 2026-06-04 19:35:23 -04
+STATUS............: DONE
+SUMMARY...........: Added TO_UPLOAD_TO_IA context package generator.
+TOOL..............: 90.USECASE/Prepare-ToUploadToIA.ps1
+OUTPUT............: Temp/TO_UPLOAD_TO_IA
+RULE..............: Output is temporary, ignored, regenerable and not canon.
+NEXT_ACTION.......: Decide whether 01.NEW_PROJECT, 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR prompts should instruct IA to request this package when context is insufficient.
+
+==========
+MB-GRC-026G_INCLUDEPATH_RECOVERY
+==========
+DATE..............: 2026-06-04 19:37:59 -04
+STATUS............: DONE
+SUMMARY...........: Fixed IncludePath parsing in TO_UPLOAD_TO_IA context package generator.
+TOOL..............: 90.USECASE/Prepare-ToUploadToIA.ps1
+OUTPUT............: Temp/TO_UPLOAD_TO_IA
+NEXT_ACTION.......: Decide whether to patch usecase prompts to reference TO_UPLOAD_TO_IA.

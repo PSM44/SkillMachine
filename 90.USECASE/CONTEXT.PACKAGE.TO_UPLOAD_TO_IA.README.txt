@@ -1,0 +1,55 @@
+==========
+00.00_CONTEXT_PACKAGE_TO_UPLOAD_TO_IA
+==========
+
+ID_UNICO..........: USECASE.CONTEXT_PACKAGE.TO_UPLOAD_TO_IA.0001
+VERSION...........: v0.1
+STATUS............: ACTIVE
+PURPOSE...........: Define how to generate temporary context packages for upload to IA/chat.
+
+==========
+01.00_PURPOSE
+==========
+
+This module prepares a controlled temporary package under:
+
+Temp\TO_UPLOAD_TO_IA
+
+The package is intended for upload to an IA/chat when the IA needs selected Skills, GRC, Catalog or Usecase files.
+
+==========
+02.00_RULES
+==========
+
+- Temp\TO_UPLOAD_TO_IA is not canon.
+- Files are copied, never moved.
+- The package is regenerable.
+- The package must include 00.UPLOAD.MANIFEST.txt.
+- The package must include 01.README.UPLOAD_INSTRUCTIONS.txt.
+- The IA may request additional source paths.
+- Canon remains in SkillsLake, GRCLake, 00.CATALOG and 90.USECASE.
+- Do not commit Temp\TO_UPLOAD_TO_IA.
+
+==========
+03.00_STANDARD_COMMAND
+==========
+
+From C:\01. GitHub\Skills:
+
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "90.USECASE\Prepare-ToUploadToIA.ps1" -UseCase "03.SESSION_CONTINUE"
+
+With explicit includes:
+
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "90.USECASE\Prepare-ToUploadToIA.ps1" -UseCase "03.SESSION_CONTINUE" -IncludePath @("SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt","00.CATALOG/SESSION.LEARNING.REVIEW.ACTIVE.txt")
+
+==========
+04.00_DONE
+==========
+
+DONE when:
+
+- Temp\TO_UPLOAD_TO_IA exists.
+- 00.UPLOAD.MANIFEST.txt exists.
+- 01.README.UPLOAD_INSTRUCTIONS.txt exists.
+- Selected usecase files are copied.
+- Explicit include paths are copied or reported missing.

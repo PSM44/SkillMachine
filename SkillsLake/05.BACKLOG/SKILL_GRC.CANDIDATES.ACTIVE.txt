@@ -521,3 +521,24 @@ DECISION..........: 90.USECASE delivery artifacts must carry explicit GENERATED_
 RATIONALE.........: Prevent manual drift in generated bundles, copied menus and usecase manifests.
 RECOVERY_NOTE.....: Initial patch appended post-processor after BUILD terminal flow; recovery inserted it before terminal exit.
 NEXT..............: Test TO_UPLOAD_TO_IA/context packaging only after generated-output policy remains stable through BUILD.
+
+==========
+MB-GRC-026G_TO_UPLOAD_TO_IA_CONTEXT_PACKAGE
+==========
+DATE..............: 2026-06-04 19:35:23 -04
+STATUS............: DONE
+DECISION..........: Create controlled context package generator for Temp/TO_UPLOAD_TO_IA.
+RATIONALE.........: IA-in-blank workflows need a repeatable way to collect selected usecase, skill, GRC and catalog files without contaminating canon.
+OUTPUTS...........:
+- 90.USECASE/Prepare-ToUploadToIA.ps1
+- 90.USECASE/CONTEXT.PACKAGE.TO_UPLOAD_TO_IA.README.txt
+- Temp/TO_UPLOAD_TO_IA generated package ignored by Git
+NEXT..............: Test with SESSION_CONTINUE and then decide whether usecase prompts should explicitly mention this tool.
+
+==========
+MB-GRC-026G_INCLUDEPATH_RECOVERY
+==========
+DATE..............: 2026-06-04 19:37:59 -04
+STATUS............: DONE
+DECISION..........: Prepare-ToUploadToIA.ps1 now normalizes IncludePath arrays and comma-separated strings.
+RATIONALE.........: Bash/PowerShell invocation can pass comma-separated include paths as one string; tool must split safely.
