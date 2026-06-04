@@ -149,3 +149,30 @@ RADAR:
 - Si RADAR queda anterior a HEAD, regenerar RADAR despues del commit o aceptar WARN informado.
 
 ==========
+
+
+==========
+MB-GRC-026F1_RUNBOOK_CONTINUITY_REFRESH_GATE
+==========
+
+FECHA.............: 2026-06-04 10:35:38
+ESTADO............: ACTIVE_RUNBOOK_STEP
+
+PASO_OBLIGATORIO:
+Antes del commit final de cierre o minibattle que afecte continuidad:
+
+1. Actualizar SyS/00.0_BATON_SKILLMACHINE.txt.
+2. Actualizar SyS/01_WHOAMI_SKILLMACHINE.txt.
+3. Stagear ambos en el mismo commit.
+4. Ejecutar Validate-System.
+5. Ejecutar RADAR.
+6. Ejecutar Test-SessionCloseReadiness.
+7. Si readiness indica BATON viejo o WHOAMI viejo, no crear commits alternados.
+   Actualizar ambos juntos y repetir.
+
+REGLA_DE_OUTPUTS_GENERADOS:
+Los outputs generados de 90.USECASE son reproducibles y pueden estar ignorados por Git.
+No forzar stage de outputs ignorados salvo decisión humana explícita.
+
+FIN_MB-GRC-026F1_RUNBOOK_CONTINUITY_REFRESH_GATE
+==========

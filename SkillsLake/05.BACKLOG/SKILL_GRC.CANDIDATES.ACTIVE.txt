@@ -459,3 +459,25 @@ DATE..............: 2026-06-03 16:36:40
 SUMMARY...........: Created Critical Feedback skill and Session Learning Review module; integrated review concept into SESSION_CLOSE.
 NEXT..............: Use SESSION_LEARNING_REVIEW at session close to detect Skill/GRC improvement candidates.
 
+
+
+==========
+MB-GRC-026F1_DONE_CONTINUITY_REFRESH_RULE
+==========
+
+FECHA.............: 2026-06-04 10:35:38
+ESTADO............: DONE
+TIPO..............: PROCESS_HARDENING
+
+RESULTADO:
+Se documenta regla operacional para evitar ping-pong de readiness:
+BATON y WHOAMI deben refrescarse juntos cuando el cambio afecte continuidad.
+
+IMPACTO:
+- Reduce commits auxiliares.
+- Reduce WARN innecesarios.
+- Mejora cierre de sesión.
+- Refuerza disciplina de continuidad.
+
+FIN_MB-GRC-026F1_DONE_CONTINUITY_REFRESH_RULE
+==========

@@ -950,3 +950,21 @@ HEAD_CONTEXT.......: 24339c2 20260603_MB-GRC-026E2_refresh_whoami_after_critical
 STATUS.............: CONTINUITY_SYNC
 SUMMARY............: BATON and WHOAMI refreshed together after MB-GRC-026E session learning review and 29.SKILL.CRITICAL_FEEDBACK integration to avoid freshness ping-pong.
 NEXT_ACTION........: Focused test of SESSION_LEARNING_REVIEW or formal session close.
+
+
+==========
+MB-GRC-026F1_BATON_WHOAMI_TOGETHER
+==========
+
+FECHA.............: 2026-06-04 10:35:38
+ESTADO............: ACTIVE
+
+CONTINUIDAD:
+Se incorporó regla de frescura: BATON y WHOAMI deben actualizarse juntos en cierres o minibattles
+que afecten continuidad operacional.
+
+HEAD_OBJETIVO.....: posterior a MB-GRC-026F1
+NEXT_ACTION.......: Validar readiness OK y continuar con test focal de SESSION_LEARNING_REVIEW o cierre formal.
+
+FIN_MB-GRC-026F1_BATON_WHOAMI_TOGETHER
+==========

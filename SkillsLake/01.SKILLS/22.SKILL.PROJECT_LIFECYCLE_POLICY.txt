@@ -914,3 +914,35 @@ Si no existe evidencia suficiente para clasificar un dato, debe declararse como 
 FIN_DEL_DOCUMENTO
 ==========
 
+
+
+==========
+MB-GRC-026F1_CONTINUITY_REFRESH_RULE
+==========
+
+FECHA.............: 2026-06-04 10:35:38
+ESTADO............: ACTIVE_RULE
+
+REGLA:
+Cuando una minibattle, cierre de sesión o cambio operacional afecte continuidad,
+BATON y WHOAMI deben actualizarse juntos antes del commit final.
+
+NO_RECOMENDADO:
+- Commit BATON-only.
+- Commit WHOAMI-only.
+- Refrescar uno y luego corregir el otro en commit separado.
+
+MOTIVO:
+Readiness compara frescura contra HEAD. Si BATON y WHOAMI se actualizan por separado,
+se produce ping-pong de frescura: uno queda fresco y el otro queda viejo.
+
+CONTRATO:
+- Actualizar BATON + WHOAMI en el mismo bloque operativo.
+- Stagear ambos explícitamente.
+- Commit/push.
+- Regenerar RADAR.
+- Ejecutar readiness final.
+- Cerrar solo con READINESS_STATUS OK y Git clean.
+
+FIN_MB-GRC-026F1_CONTINUITY_REFRESH_RULE
+==========
