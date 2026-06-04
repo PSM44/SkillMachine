@@ -680,3 +680,10 @@ MB-GRC-026G_INCLUDEPATH_RECOVERY
 DATE..............: 2026-06-04 19:37:59 -04
 WHAT_CHANGED......: TO_UPLOAD_TO_IA generator now supports split IncludePath safely.
 OPERATOR_NOTE.....: If manifest reports missing paths, check whether the source file actually exists instead of assuming parser failure.
+
+==========
+MB-GRC-026G2_FINAL_UPDATE
+==========
+DATE..............: 2026-06-04 19:44:33 -04
+WHAT_CHANGED......: Temp/TO_UPLOAD_TO_IA is now excluded from RADAR scans while remaining visible only in EXCLUDED_PATHS.
+OPERATOR_NOTE.....: A path appearing in RADAR EXCLUDED_PATHS is expected and must not be classified as indexed content.

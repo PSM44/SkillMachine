@@ -1042,3 +1042,17 @@ SUMMARY...........: Fixed IncludePath parsing in TO_UPLOAD_TO_IA context package
 TOOL..............: 90.USECASE/Prepare-ToUploadToIA.ps1
 OUTPUT............: Temp/TO_UPLOAD_TO_IA
 NEXT_ACTION.......: Decide whether to patch usecase prompts to reference TO_UPLOAD_TO_IA.
+
+==========
+MB-GRC-026G2_FINAL_UPDATE
+==========
+DATE..............: 2026-06-04 19:44:33 -04
+STATUS............: DONE
+SUMMARY...........: RADAR exclusion for Temp/TO_UPLOAD_TO_IA finalized with RootPath and section-aware verification.
+HEAD_BASE.........: 681a719 20260604_MB-GRC-026G_to_upload_to_ia_context_package
+FILES.............:
+- SyS/A_Tools/Radar/RADAR.ps1
+- SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
+- SyS/00.0_BATON_SKILLMACHINE.txt
+- SyS/01_WHOAMI_SKILLMACHINE.txt
+NEXT_ACTION.......: MB-GRC-026H patch usecase prompts to reference TO_UPLOAD_TO_IA.
