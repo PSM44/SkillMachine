@@ -625,3 +625,12 @@ cierre, backlog o reglas operacionales. Evitar commits separados BATON-only / WH
 
 FIN_MB-GRC-026F1_BATON_WHOAMI_TOGETHER
 ==========
+
+==========
+MB-GRC-026F1C_CONTINUITY_REFRESH
+==========
+UPDATED_AT.........: 2026-06-04 10:58:10 -04
+HEAD...............: a2ca08f 20260604_MB-GRC-026F1B_commit_generated_usecase_manifests
+STATUS.............: WHOAMI refreshed together with BATON after generated USECASE manifest metadata commit.
+RULE_APPLIED.......: BATON and WHOAMI refreshed in same continuity commit to avoid readiness freshness ping-pong.
+NEXT_ACTION........: If readiness OK, continue with generated-output policy test or formal session close.
