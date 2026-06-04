@@ -1056,3 +1056,12 @@ FILES.............:
 - SyS/00.0_BATON_SKILLMACHINE.txt
 - SyS/01_WHOAMI_SKILLMACHINE.txt
 NEXT_ACTION.......: MB-GRC-026H patch usecase prompts to reference TO_UPLOAD_TO_IA.
+
+==========
+MB-GRC-026H_UPDATE
+==========
+DATE..............: 2026-06-04 19:47:10 -04
+STATUS............: DONE
+SUMMARY...........: Patched usecase prompts/docs to request Temp/TO_UPLOAD_TO_IA package when context is insufficient.
+RULE..............: IA should request exact missing paths and package generation; no broad repo upload by default.
+NEXT_ACTION.......: Run readiness and decide whether to close session or execute end-to-end blank-IA package test.

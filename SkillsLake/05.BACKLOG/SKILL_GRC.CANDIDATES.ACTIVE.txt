@@ -552,3 +552,18 @@ DECISION..........: Finalized RADAR exclusion for Temp/TO_UPLOAD_TO_IA using Roo
 RATIONALE.........: Temp/TO_UPLOAD_TO_IA is generated upload context, not canonical repository content. It must appear in EXCLUDED_PATHS but not in RADAR file list sections.
 LESSON............: Grepping the whole RADAR LITE file creates false negatives because excluded paths intentionally appear in the header.
 NEXT..............: MB-GRC-026H patch usecase prompts to request TO_UPLOAD_TO_IA when context is insufficient.
+
+==========
+MB-GRC-026H_PATCH_USECASE_PROMPTS_CONTEXT_REQUEST
+==========
+DATE..............: 2026-06-04 19:47:10 -04
+STATUS............: DONE
+DECISION..........: Usecase prompts/docs now instruct IA to request Temp/TO_UPLOAD_TO_IA when attached context is insufficient.
+RATIONALE.........: IA-in-blank workflows need an explicit escalation path for missing context instead of guessing or asking for broad repo uploads.
+OUTPUTS...........:
+- 90.USECASE/01.NEW_PROJECT/PROMPT.NEW_PROJECT.txt
+- 90.USECASE/02.SESSION_CLOSE/PROMPT.SESSION_CLOSE.txt
+- 90.USECASE/02.SESSION_CLOSE/RUNBOOK.SESSION_CLOSE.HARDENED.txt
+- 90.USECASE/03.SESSION_CONTINUE/PROMPT.SESSION_CONTINUE.txt
+- 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR/SKILL.md
+NEXT..............: Test end-to-end IA-in-blank package workflow or close session.

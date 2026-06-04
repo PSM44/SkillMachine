@@ -687,3 +687,10 @@ MB-GRC-026G2_FINAL_UPDATE
 DATE..............: 2026-06-04 19:44:33 -04
 WHAT_CHANGED......: Temp/TO_UPLOAD_TO_IA is now excluded from RADAR scans while remaining visible only in EXCLUDED_PATHS.
 OPERATOR_NOTE.....: A path appearing in RADAR EXCLUDED_PATHS is expected and must not be classified as indexed content.
+
+==========
+MB-GRC-026H_UPDATE
+==========
+DATE..............: 2026-06-04 19:47:10 -04
+WHAT_CHANGED......: Usecase prompts/docs now tell IA how to request generated context package Temp/TO_UPLOAD_TO_IA.
+OPERATOR_NOTE.....: Use 90.USECASE/Prepare-ToUploadToIA.ps1 when IA needs selected missing context.
