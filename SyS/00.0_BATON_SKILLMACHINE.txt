@@ -1008,3 +1008,16 @@ RISKS:
 
 FIN_MB-GRC-026_SESSION_CLOSE_20260604_BATON_UPDATE
 ==========
+
+==========
+MB-GRC-026F2_UPDATE
+==========
+DATE..............: 2026-06-04 19:09:26 -04
+STATUS............: DONE
+SUMMARY...........: Added generated-output policy post-processing to 90.USECASE BUILD.
+FILES.............:
+- 90.USECASE/Apply-GeneratedOutputPolicy.ps1
+- 90.USECASE/BUILD.ps1
+- 90.USECASE/* generated delivery outputs
+RECOVERY_NOTE.....: Post-processing call is positioned before BUILD terminal exit.
+NEXT_ACTION.......: Validate whether TO_UPLOAD_TO_IA context packaging should be implemented as MB-GRC-026G.

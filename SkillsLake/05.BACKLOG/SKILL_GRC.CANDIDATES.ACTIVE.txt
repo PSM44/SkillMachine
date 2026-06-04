@@ -511,3 +511,13 @@ TECH_DEBT_OPEN:
 
 FIN_MB-GRC-026_SESSION_CLOSE_20260604_BACKLOG_UPDATE
 ==========
+
+==========
+MB-GRC-026F2_GENERATED_OUTPUT_POLICY_PATCH
+==========
+DATE..............: 2026-06-04 19:09:26 -04
+STATUS............: DONE
+DECISION..........: 90.USECASE delivery artifacts must carry explicit GENERATED_OUTPUT_ONLY and DO_NOT_EDIT_MANUALLY markers.
+RATIONALE.........: Prevent manual drift in generated bundles, copied menus and usecase manifests.
+RECOVERY_NOTE.....: Initial patch appended post-processor after BUILD terminal flow; recovery inserted it before terminal exit.
+NEXT..............: Test TO_UPLOAD_TO_IA/context packaging only after generated-output policy remains stable through BUILD.

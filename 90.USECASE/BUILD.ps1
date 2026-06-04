@@ -757,9 +757,14 @@ if ($failCount -gt 0) {
     exit 1
 }
 
+# MB-GRC-026F2_GENERATED_OUTPUT_POLICY
+# Post-process generated delivery artifacts so humans/IA do not edit generated outputs manually.
+$GeneratedOutputPolicyScript = Join-Path $PSScriptRoot "Apply-GeneratedOutputPolicy.ps1"
+if (Test-Path $GeneratedOutputPolicyScript) {
+    Write-Host "=============================="
+    Write-Host "APPLY GENERATED OUTPUT POLICY"
+    Write-Host "=============================="
+    & $GeneratedOutputPolicyScript
+}
+# END_MB-GRC-026F2_GENERATED_OUTPUT_POLICY
 exit 0
-
-
-
-
-

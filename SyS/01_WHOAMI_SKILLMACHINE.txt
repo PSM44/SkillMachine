@@ -658,3 +658,11 @@ MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST o MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DE
 
 FIN_MB-GRC-026_SESSION_CLOSE_20260604_WHOAMI_UPDATE
 ==========
+
+==========
+MB-GRC-026F2_UPDATE
+==========
+DATE..............: 2026-06-04 19:09:26 -04
+WHAT_CHANGED......: 90.USECASE generated outputs now explicitly declare generated-output-only and do-not-edit-manually policy.
+OPERATOR_NOTE.....: Edit source Skills/GRC/manifests/BUILD, not generated bundles or copied menus.
+RECOVERY_NOTE.....: BUILD post-processor was relocated before terminal exit.
