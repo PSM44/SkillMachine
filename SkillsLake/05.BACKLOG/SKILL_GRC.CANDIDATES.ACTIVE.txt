@@ -567,3 +567,17 @@ OUTPUTS...........:
 - 90.USECASE/03.SESSION_CONTINUE/PROMPT.SESSION_CONTINUE.txt
 - 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR/SKILL.md
 NEXT..............: Test end-to-end IA-in-blank package workflow or close session.
+
+==========
+MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST
+==========
+DATE_REGISTERED...: 2026-06-04 19:49:22 -04
+STATUS............: NEXT
+TYPE..............: TEST / VALIDATION
+OBJECTIVE.........: Validate that an IA in blank state can operate with Temp/TO_UPLOAD_TO_IA package for SESSION_CONTINUE without broad repo upload.
+ACCEPTANCE........:
+- Package generated successfully.
+- IA receives package and identifies sufficiency/gaps.
+- Missing context is requested by exact path.
+- No canon is created automatically.
+- SESSION_LEARNING_REVIEW captures any Skill/GRC candidate.

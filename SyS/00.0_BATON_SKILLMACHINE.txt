@@ -1065,3 +1065,13 @@ STATUS............: DONE
 SUMMARY...........: Patched usecase prompts/docs to request Temp/TO_UPLOAD_TO_IA package when context is insufficient.
 RULE..............: IA should request exact missing paths and package generation; no broad repo upload by default.
 NEXT_ACTION.......: Run readiness and decide whether to close session or execute end-to-end blank-IA package test.
+
+==========
+SESSION_CLOSE_AFTER_MB-GRC-026H
+==========
+DATE..............: 2026-06-04 19:49:22 -04
+STATUS............: CLOSED
+HEAD_AT_CLOSE.....: 4f7185c 20260604_MB-GRC-026H_patch_usecase_context_package_request
+SUMMARY...........: Closed session after MB-GRC-026F2/G/G2/H. System now supports generated output policy, controlled TO_UPLOAD_TO_IA context packaging, RADAR exclusion for temporary upload package, and usecase prompt escalation when context is insufficient.
+NEXT_ACTION.......: MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST.
+CLOSE_ARTIFACT....: SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-GRC-026.AFTER_H.20260604_194922.txt

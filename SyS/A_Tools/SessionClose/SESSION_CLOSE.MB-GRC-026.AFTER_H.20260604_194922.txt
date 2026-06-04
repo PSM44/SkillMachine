@@ -1,0 +1,103 @@
+==========
+SESSION_CLOSE.MB-GRC-026.AFTER_H
+==========
+
+ID................: MB-GRC-026_SESSION_CLOSE_AFTER_H
+DATE_LOCAL........: 2026-06-04 19:49:22 -04
+DATE_UTC..........: 2026-06-04T23:49:22Z
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+BRANCH............: main
+HEAD_AT_CLOSE.....: 4f7185c 20260604_MB-GRC-026H_patch_usecase_context_package_request
+
+==========
+01.00_SESSION_SUMMARY
+==========
+
+Closed the post-MB-GRC-026 continuation sequence after the following completed minibattles:
+
+- MB-GRC-026F2: generated output policy for 90.USECASE delivery artifacts.
+- MB-GRC-026G: TO_UPLOAD_TO_IA context package builder.
+- MB-GRC-026G2: RADAR exclusion for Temp/TO_UPLOAD_TO_IA.
+- MB-GRC-026H: usecase prompts/docs now request TO_UPLOAD_TO_IA when context is insufficient.
+
+==========
+02.00_CURRENT_CONFIRMED_STATE
+==========
+
+Repository is expected clean before this close.
+Validation passed before previous commit.
+Readiness was OK after MB-GRC-026H.
+Temp/TO_UPLOAD_TO_IA is temporary, ignored by Git, and excluded from RADAR file lists.
+
+==========
+03.00_KEY_DECISIONS
+==========
+
+- 90.USECASE/* may contain repeated self-contained outputs.
+- Generated outputs must declare generated-output-only / do-not-edit-manually policy.
+- Temp/TO_UPLOAD_TO_IA is upload context, not canon.
+- RADAR must not index Temp/TO_UPLOAD_TO_IA content.
+- Usecase prompts must request precise missing context package instead of broad repo upload.
+- Learning review and Critical Feedback remain active capabilities.
+
+==========
+04.00_NEXT_RECOMMENDED_MINIBATTLE
+==========
+
+MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST
+
+Objective:
+Test whether an IA in blank state can operate with a generated Temp/TO_UPLOAD_TO_IA package for 03.SESSION_CONTINUE without needing broad repo upload.
+
+Suggested test package:
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "90.USECASE\Prepare-ToUploadToIA.ps1" -UseCase "03.SESSION_CONTINUE"
+
+Acceptance criteria:
+- IA understands available context.
+- IA identifies missing context by exact path only if needed.
+- IA does not request entire repo.
+- IA detects opportunities for Skill/GRC updates and routes them to candidate/backlog, not direct canon creation.
+- SESSION_LEARNING_REVIEW is triggered at closure.
+
+==========
+05.00_TECH_DEBT / WATCH ITEMS
+==========
+
+- Test whether IncludePath ergonomics are sufficient for humans.
+- Consider whether Prepare-ToUploadToIA.ps1 should support named profiles, e.g. SESSION_CONTINUE_MINIMAL, SESSION_CLOSE_FULL.
+- Consider whether generated upload package should include checksum manifest.
+- Watch line-ending warnings in touched txt/json/ps1 files; not blocking but recurrent noise.
+- Validate whether prompts become too verbose after repeated patch blocks.
+
+==========
+06.00_OPTIONAL_HANDOFF_PROMPT_NEXT_SESSION
+==========
+
+Hoy es [fecha/hora local], Santiago Chile.
+Quiero continuar SkillMachine desde:
+
+ROOT: C:\01. GitHub\Skills
+HEAD esperado: 4f7185c 20260604_MB-GRC-026H_patch_usecase_context_package_request
+
+Objetivo:
+Ejecutar MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST.
+
+Contexto:
+Ya quedaron cerrados F2/G/G2/H:
+- generated output policy;
+- TO_UPLOAD_TO_IA package builder;
+- RADAR exclusion de Temp/TO_UPLOAD_TO_IA;
+- prompts/usecases piden paquete cuando falta contexto.
+
+Primero valida:
+- git status;
+- readiness;
+- que Temp/TO_UPLOAD_TO_IA esté ignorado por Git y excluido de RADAR;
+- que Prepare-ToUploadToIA.ps1 funcione para 03.SESSION_CONTINUE.
+
+Después propone el test end-to-end.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
