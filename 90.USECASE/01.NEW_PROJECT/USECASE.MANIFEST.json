@@ -1,7 +1,7 @@
 ﻿{
     "usecase":  "01.NEW_PROJECT",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-05-29 12:40:33",
+    "generated_at":  "2026-06-04 10:35:39",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -71,9 +71,9 @@
                         "bundle_name":  "GOVERNANCE",
                         "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
-                        "delivery_size_bytes":  49135,
-                        "delivery_size_kb":  47.98,
-                        "delivery_sha256":  "5DB6D3B998C553F6FF8EB3D13A6AE51A33D4863567ECB27F9DF71BF10BD4058C",
+                        "delivery_size_bytes":  50014,
+                        "delivery_size_kb":  48.84,
+                        "delivery_sha256":  "E5614BBB872979B38D7CA4AEEEEC98BF78BB63A756FABF1D6180CF9733AC5C25",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -97,7 +97,7 @@
                                                  "name":  "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
                                                  "version":  "v1.0-CANON",
-                                                 "source_sha256":  "49EC41971435C7F643C889F40B1F27E1F341C25ADB6B4A23D11093FF6AAE40FD"
+                                                 "source_sha256":  "DE2BBA1A0E19D4E4C5E62294CCDD0314B6B1709171018AD39D7C477A10DF32E3"
                                              }
                                          ]
                     }
