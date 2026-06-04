@@ -977,3 +977,34 @@ HEAD...............: a2ca08f 20260604_MB-GRC-026F1B_commit_generated_usecase_man
 STATUS.............: BATON refreshed together with WHOAMI after generated USECASE manifest metadata commit.
 RULE_APPLIED.......: BATON and WHOAMI must be refreshed together when readiness freshness depends on HEAD.
 NEXT_ACTION........: If readiness OK, continue with generated-output policy test or formal session close.
+
+==========
+MB-GRC-026_SESSION_CLOSE_20260604_BATON_UPDATE
+==========
+
+FECHA.............: 2026-06-04 11:08:17 -04
+HEAD_BASE.........: 91d96ae 20260604_MB-GRC-026F1C_refresh_continuity_after_manifest_commit
+ESTADO............: SESSION_CLOSE_UPDATE
+
+CURRENT_STATE:
+- SkillsMachine queda como MVP tecnico gobernado.
+- Coverage/menu/registry alineados.
+- TO_UPLOAD_TO_IA opera como delta explicito, no paquete default.
+- SESSION_LEARNING_REVIEW y 29.SKILL.CRITICAL_FEEDBACK existen e integran SESSION_CLOSE.
+- Regla BATON+WHOAMI together incorporada para evitar ping-pong de freshness.
+- Readiness previo a cierre estaba OK y Git clean.
+
+NEXT_ACTION_RECOMMENDED:
+1. MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST.
+2. MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST.
+3. MB-GRC-026F4_FORMAL_SESSION_LEARNING_REVIEW_RUN.
+4. MB-GRC-027_TRANSACTION_GUARD_NEGATIVE_TEST.
+5. MB-GRC-028_GERENCIA_DEMO.
+
+RISKS:
+- BUILD/manifests pueden dejar dirty-state si no se stagean controladamente.
+- Warnings LF/CRLF siguen como deuda tecnica.
+- Falta prueba real con IA en blanco y paquete delta.
+
+FIN_MB-GRC-026_SESSION_CLOSE_20260604_BATON_UPDATE
+==========

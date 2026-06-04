@@ -481,3 +481,33 @@ IMPACTO:
 
 FIN_MB-GRC-026F1_DONE_CONTINUITY_REFRESH_RULE
 ==========
+
+==========
+MB-GRC-026_SESSION_CLOSE_20260604_BACKLOG_UPDATE
+==========
+
+FECHA.............: 2026-06-04 11:08:17 -04
+ESTADO............: ACTIVE_BACKLOG_UPDATE
+
+P1_OPEN:
+- MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST: formalizar y probar politica de outputs generados, manifests e ignored outputs.
+- MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST: probar flujo real IA pide delta -> IncludeFile -> Temp/TO_UPLOAD_TO_IA -> IA confirma suficiencia.
+- MB-GRC-026F4_FORMAL_SESSION_LEARNING_REVIEW_RUN: ejecutar primer SESSION_LEARNING_REVIEW formal durante cierre real.
+- MB-GRC-027_TRANSACTION_GUARD_NEGATIVE_TEST: probar guardas de transaccion/rollback con caso negativo.
+- MB-GRC-028_GERENCIA_DEMO: preparar demo funcional a gerencia.
+
+P2_OPEN:
+- MB-GRC-026F5_CONTEXT_MODULE_BOUNDARY_NOTE: diferenciar CONTEXT.COMPOSER, CONTEXT.SELECTION.TO_UPLOAD_TO_IA y SESSION.LEARNING.REVIEW.
+- MB-GRC-025C-2_ROUTING_BOUNDARY_PATCH.
+- MB-GRC-025D_MANIFEST_REGISTRY_BOUNDARY_PATCH.
+
+P3_OPEN:
+- MB-GRC-025E_SEMANTIC_DUPLICATE_VALIDATOR.
+
+TECH_DEBT_OPEN:
+- BUILD debe detectar/stagear USECASE.MANIFEST.json generados cuando cambian hashes/tamanos.
+- Revisar warnings LF/CRLF como deuda separada, no mezclar con cambios funcionales.
+- Reducir commits auxiliares de freshness mediante orden correcto: source patch -> BUILD -> manifests -> BATON+WHOAMI -> commit -> RADAR -> readiness.
+
+FIN_MB-GRC-026_SESSION_CLOSE_20260604_BACKLOG_UPDATE
+==========

@@ -1,0 +1,96 @@
+==========
+00.00_SESSION_CLOSE_METADATA
+==========
+
+ID................: MB-GRC-026_SESSION_CLOSE_20260604
+DATE..............: 2026-06-04 11:08:17 -04
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+BRANCH............: main
+HEAD_AT_START.....: 91d96ae 20260604_MB-GRC-026F1C_refresh_continuity_after_manifest_commit
+STATUS............: FORMAL_SESSION_CLOSE
+
+==========
+01.00_EXECUTIVE_STATUS
+==========
+
+Estado confirmado al cierre:
+- Repo en main.
+- Último HEAD previo al cierre: 91d96ae 20260604_MB-GRC-026F1C_refresh_continuity_after_manifest_commit
+- Readiness anterior reportado OK.
+- Última secuencia completada: MB-GRC-026F1C.
+- Sistema queda en fase MVP técnico gobernado; siguiente foco: pruebas reales y demo gerencial.
+
+==========
+02.00_DONE
+==========
+
+Completado en la secuencia MB-GRC-026:
+- MB-GRC-026B: coverage / registry / menú.
+- MB-GRC-026D: context selection + TO_UPLOAD_TO_IA.
+- MB-GRC-026D1: TO_UPLOAD_TO_IA exige Include o IncludeFile explícito.
+- MB-GRC-026D2: temporales TO_UPLOAD_REQUEST ignorados.
+- MB-GRC-026D3: continuidad refrescada.
+- MB-GRC-026E: SESSION_LEARNING_REVIEW + 29.SKILL.CRITICAL_FEEDBACK.
+- MB-GRC-026E3: corrección de freshness BATON/WHOAMI.
+- MB-GRC-026F1: regla de refresco conjunto BATON + WHOAMI.
+- MB-GRC-026F1B: manifests generados actualizados.
+- MB-GRC-026F1C: continuidad final fresca.
+
+==========
+03.00_TECH_DEBT
+==========
+
+TD-001: BUILD modifica USECASE.MANIFEST.json después de cambios en source/bundles; requiere stage controlado.
+TD-002: Falta test real TO_UPLOAD_TO_IA con IA en blanco.
+TD-003: Falta SESSION_LEARNING_REVIEW formal dentro de cierre real.
+TD-004: Falta política endurecida de generated outputs / manifests / ignored outputs.
+TD-005: Warnings LF/CRLF recurrentes; no bloquean pero ensucian diffs.
+TD-006: Falta boundary formal entre CONTEXT.COMPOSER, CONTEXT.SELECTION y SESSION.LEARNING.REVIEW.
+TD-007: Flujo de cierre genera commits auxiliares si no stagea manifests/continuidad en orden correcto.
+
+==========
+04.00_BACKLOG_NEXT
+==========
+
+P1: MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST
+P1: MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST
+P1: MB-GRC-026F4_FORMAL_SESSION_LEARNING_REVIEW_RUN
+P1: MB-GRC-027_TRANSACTION_GUARD_NEGATIVE_TEST
+P1: MB-GRC-028_GERENCIA_DEMO
+P2: MB-GRC-026F5_CONTEXT_MODULE_BOUNDARY_NOTE
+P2: MB-GRC-025C-2_ROUTING_BOUNDARY_PATCH
+P2: MB-GRC-025D_MANIFEST_REGISTRY_BOUNDARY_PATCH
+P3: MB-GRC-025E_SEMANTIC_DUPLICATE_VALIDATOR
+
+==========
+05.00_PATH_TO_GERENCIA_DELIVERABLE
+==========
+
+MINIBATTLE | OBJECTIVE | OUTPUT | BATTLE | GERENCIA_DELIVERABLE | STATUS
+MB-GRC-026F2 | Generated-output policy test | validated generated output policy | Operational hardening | clean close workflow | PENDING
+MB-GRC-026F3 | Real TO_UPLOAD_TO_IA test | IA-requested delta package | Context packaging | blank IA continuity demo | PENDING
+MB-GRC-026F4 | Formal learning review | backlog/debt from active session | Learning loop | controlled improvement loop | PENDING
+MB-GRC-027 | Transaction guard negative test | rollback/blocking evidence | Safety & control | operational trust evidence | PENDING
+MB-GRC-028A | Demo script | 5-7 min gerencia script | Gerencia demo | understandable narrative | PENDING
+MB-GRC-028B | Dry-run demo | terminal/readiness evidence | Gerencia demo | functional MVP demo | PENDING
+MB-GRC-028C | Executive pack | one-pager + path + risks | Gerencia demo | management-ready deliverable | PENDING
+
+==========
+06.00_OPTIONAL_HANDOFF_PROMPT
+==========
+
+Para continuar en una IA en blanco:
+
+Estoy retomando SkillsMachine.
+Root Windows: C:\01. GitHub\Skills
+Root WSL: /mnt/c/01. GitHub/Skills
+Último cierre: MB-GRC-026_SESSION_CLOSE_20260604
+Último HEAD esperado después de cierre: revisar git log --oneline -1
+Prioridad: MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST o MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST.
+Antes de ejecutar cambios: corroborar git status, readiness y RADAR.
+No inventar estado. Si falta evidencia, pedir terminal/RADAR/BATON.
+
+==========
+FIN
+==========
