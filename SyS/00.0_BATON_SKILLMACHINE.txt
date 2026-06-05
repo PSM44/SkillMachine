@@ -1084,3 +1084,13 @@ STATUS............: DONE
 SUMMARY...........: Replaced TO_UPLOAD_TO_IA temporary package model with direct 90.USECASE folder upload model.
 RULE..............: The human uploads the complete folder for the selected usecase under 90.USECASE.
 NEXT_ACTION.......: Test usecase-folder sufficiency with 03.SESSION_CONTINUE or close.
+
+==========
+SESSION_CLOSE_AFTER_MB-GRC-026I
+==========
+DATE..............: 2026-06-04 20:06:32 -04
+STATUS............: CLOSED
+HEAD_AT_CLOSE.....: fbed76c 20260604_MB-GRC-026I_usecase_folder_upload_package
+SUMMARY...........: Final close after MB-GRC-026I. The TO_UPLOAD_TO_IA temporary package model was retired. Each 90.USECASE/<USECASE_ID> folder is now the direct IA upload package.
+NEXT_ACTION.......: MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST.
+CLOSE_ARTIFACT....: SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-GRC-026.FINAL_AFTER_I.20260604_200632.txt

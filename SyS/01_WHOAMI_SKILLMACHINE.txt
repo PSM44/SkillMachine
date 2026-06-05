@@ -709,3 +709,11 @@ MB-GRC-026I_UPDATE
 DATE..............: 2026-06-04 20:01:58 -04
 WHAT_CHANGED......: 90.USECASE folders are now the direct IA upload packages. Temp/TO_UPLOAD_TO_IA is retired.
 OPERATOR_NOTE.....: For IA context, upload the relevant 90.USECASE/<USECASE_ID> folder contents.
+
+==========
+SESSION_CLOSE_AFTER_MB-GRC-026I
+==========
+DATE..............: 2026-06-04 20:06:32 -04
+WHAT_CHANGED......: Final session close after replacing TO_UPLOAD_TO_IA with direct 90.USECASE folder upload packages.
+CURRENT_HEAD......: fbed76c 20260604_MB-GRC-026I_usecase_folder_upload_package
+NEXT_SESSION......: Test 90.USECASE/03.SESSION_CONTINUE folder sufficiency.

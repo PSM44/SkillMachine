@@ -594,3 +594,18 @@ REMOVED...........:
 - 90.USECASE/CONTEXT.PACKAGE.TO_UPLOAD_TO_IA.README.txt
 - Temp/TO_UPLOAD_TO_IA workflow
 NEXT..............: Test sufficiency by uploading one complete 90.USECASE folder to IA and verifying exact missing-path behavior.
+
+==========
+MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+==========
+DATE_REGISTERED...: 2026-06-04 20:06:32 -04
+STATUS............: NEXT
+TYPE..............: TEST / VALIDATION
+OBJECTIVE.........: Validate that uploading a complete 90.USECASE/<USECASE_ID> folder gives IA sufficient context to operate without broad repo upload.
+TEST_TARGET.......: 90.USECASE/03.SESSION_CONTINUE
+ACCEPTANCE........:
+- IA reads README.UPLOAD_THIS_USECASE.txt.
+- IA uses manifests and bundles correctly.
+- IA requests exact missing paths only if needed.
+- IA does not request full repo.
+- SESSION_LEARNING_REVIEW captures Skill/GRC candidates if gaps are found.
