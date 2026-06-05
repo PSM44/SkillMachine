@@ -189,7 +189,7 @@ function Clear-GeneratedFiles {
         [Parameter(Mandatory = $true)]$PreserveFiles
     )
 
-    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt"))
+    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt", "README.UPLOAD_THIS_USECASE.txt"))
 
     $toRemove = @(
         Get-ChildItem -Path $FolderPath -File -ErrorAction SilentlyContinue | Where-Object {
@@ -384,7 +384,7 @@ function Start-UseCaseTransactionBackup {
     $backupRoot = Join-Path $TransactionRoot $UseCaseName
     New-Item -ItemType Directory -Path $backupRoot -Force | Out-Null
 
-    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt"))
+    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt", "README.UPLOAD_THIS_USECASE.txt"))
     $toBackup = @(
         Get-ChildItem -LiteralPath $TargetDir -File -ErrorAction SilentlyContinue | Where-Object {
             $_.Name -notin $preserve

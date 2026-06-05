@@ -1,0 +1,370 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROMPT_ENGINEERING.DISCOVERY_CHALLENGE.01.00
+NOMBRE_SUGERIDO...: 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+FECHA.............: 2026-06-05
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: PROMPT_ENGINEERING, DISCOVERY, CHALLENGE, READINESS_GATE, ANTI_HALLUCINATION
+
+ALCANCE...........:
+Define un estándar operacional para auditar, desafiar y perfeccionar requerimientos antes de crear prompts relevantes, reutilizables, técnicos, estratégicos, documentales o de automatización.
+
+Este skill evita que una IA genere prompts finales sobre requerimientos incompletos, ambiguos, contradictorios, no verificables o metodológicamente débiles.
+
+NO_CUBRE..........:
+No reemplaza 29.SKILL.CRITICAL_FEEDBACK.txt.
+No reemplaza 26.SKILL.GRC.CORE.txt.
+No reemplaza prompts específicos de usecase.
+No debe aplicarse con máxima fricción a tareas simples, traducciones menores o respuestas directas de bajo riesgo.
+No autoriza crear canon automáticamente.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+29.SKILL.CRITICAL_FEEDBACK.txt
+26.SKILL.GRC.CORE.txt
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto y objetivo
+
+01.00 Cuándo aplicar este skill
+02.00 Principio operacional
+03.00 Discovery obligatorio
+04.00 Challenge obligatorio
+05.00 Prompt readiness gate
+06.00 Prompt final y DRAFT_NOT_READY
+07.00 Control anti mentira y anti alucinación
+08.00 Capa pedagógica subordinada
+09.00 Formato de respuesta recomendado
+10.00 Antipatrones
+11.00 Checklist de validación
+12.00 Changelog
+
+==========
+00.20_CONTEXTO_Y_OBJETIVO
+==========
+
+Este skill existe porque muchos prompts fallan antes de escribirse.
+
+El error común no es redactar mal, sino:
+- no entender el problema;
+- no definir alcance;
+- no identificar inputs;
+- no definir outputs;
+- no declarar criterios de éxito;
+- no declarar criterios de rechazo;
+- automatizar antes de comprender;
+- pedir ejecución sin evidencia;
+- convertir supuestos en hechos.
+
+Objetivo:
+Forzar una fase previa de discovery, challenge y readiness antes de generar prompts de impacto.
+
+==========
+01.00_CUANDO_APLICAR_ESTE_SKILL
+==========
+
+Aplicar este skill cuando el usuario solicite:
+
+- crear un prompt relevante;
+- mejorar un prompt existente;
+- auditar un prompt existente;
+- crear un prompt para otra IA;
+- crear un prompt reutilizable;
+- crear prompt para repositorio, documento, planilla, presentación, sistema, código o workflow;
+- crear o perfeccionar un skill, BATON, RADAR, runbook, workflow o prompt de ejecución técnica;
+- revisar output de otra IA;
+- preparar una IA en blanco para operar con contexto controlado.
+
+No aplicar con máxima fricción cuando:
+- la tarea sea simple;
+- el usuario pida una traducción directa;
+- el usuario pida una redacción menor;
+- el costo del discovery sea superior al riesgo;
+- exista evidencia suficiente y el usuario solo necesite una acción operacional acotada.
+
+==========
+02.00_PRINCIPIO_OPERACIONAL
+==========
+
+La IA no debe generar un prompt final antes de auditar el requerimiento.
+
+Debe distinguir:
+
+- HECHO_CONFIRMADO
+- INFERENCIA
+- SUPUESTO
+- ESTIMACION
+- OPINION_TECNICA
+- RECOMENDACION
+- NO_CONFIRMADO
+
+Regla:
+No inventar datos, contexto, archivos, dependencias, herramientas, resultados, criterios de éxito, capacidades de otra IA, referencias ni evidencia.
+
+==========
+03.00_DISCOVERY_OBLIGATORIO
+==========
+
+Antes de crear el prompt, la IA debe revisar:
+
+01. Problema:
+- qué se intenta resolver;
+- qué ocurre hoy;
+- qué debería ocurrir;
+- qué evidencia existe;
+- si el usuario está resolviendo causa o síntoma.
+
+02. Objetivo:
+- objetivo principal;
+- objetivo secundario;
+- entregable;
+- éxito;
+- fracaso;
+- DoD (Definition of Done).
+
+03. Alcance:
+- dentro del alcance;
+- fuera del alcance;
+- qué no debe mezclarse todavía;
+- qué sería sobreingeniería;
+- qué sería automatización prematura.
+
+04. Inputs:
+- archivos;
+- datos;
+- contexto;
+- evidencia;
+- rutas;
+- restricciones;
+- faltantes.
+
+05. Outputs:
+- formato;
+- profundidad;
+- estructura;
+- idioma;
+- audiencia;
+- evidencia requerida;
+- criterio de aceptación;
+- criterio de rechazo.
+
+06. Tecnología:
+- herramientas;
+- entorno;
+- repositorio;
+- Git;
+- scripts;
+- validadores;
+- limitaciones de lectura o ejecución.
+
+07. Validación:
+- cómo se demostrará que funciona;
+- pruebas;
+- checklist;
+- tolerancias;
+- evidencia mínima.
+
+==========
+04.00_CHALLENGE_OBLIGATORIO
+==========
+
+La IA debe desafiar el requerimiento y reportar:
+
+- contras;
+- riesgos;
+- omisiones;
+- información faltante;
+- alternativas;
+- dependencias ocultas;
+- posibles errores de enfoque;
+- complejidad subestimada;
+- automatización prematura;
+- criterios de éxito insuficientes.
+
+La discrepancia debe ser estructurada, no decorativa.
+
+Formato recomendado:
+
+No estoy de acuerdo porque:
+[razón concreta]
+
+Esto haría en su lugar:
+[alternativa]
+
+El riesgo del enfoque actual es:
+[consecuencia específica]
+
+==========
+05.00_PROMPT_READINESS_GATE
+==========
+
+Antes de generar prompt final, la IA debe declarar uno de estos estados:
+
+PROMPT_READY = NO_BLOCKED
+Existen dudas bloqueantes. No generar prompt final.
+
+PROMPT_READY = NO_CAN_ITERATE
+Falta información relevante, pero puede generarse un borrador preliminar no ejecutable.
+
+PROMPT_READY = YES_WITH_ASSUMPTIONS
+Puede generarse prompt final condicionado con supuestos explícitos.
+
+PROMPT_READY = YES_FULL
+Puede generarse prompt final sin dudas críticas.
+
+==========
+06.00_PROMPT_FINAL_Y_DRAFT_NOT_READY
+==========
+
+Solo generar prompt final cuando:
+
+- PROMPT_READY = YES_WITH_ASSUMPTIONS
+- PROMPT_READY = YES_FULL
+
+Si PROMPT_READY = NO_BLOCKED:
+- no generar prompt final;
+- entregar discovery;
+- preguntas bloqueantes;
+- información requerida;
+- riesgos de avanzar.
+
+Si PROMPT_READY = NO_CAN_ITERATE:
+puede generarse DRAFT_NOT_READY.
+
+Todo DRAFT_NOT_READY debe iniciar con:
+
+ADVERTENCIA:
+Este borrador no debe usarse todavía como prompt final ejecutable.
+Existe información pendiente que puede cambiar alcance, output, validación, restricciones, supuestos o estimaciones.
+
+==========
+07.00_CONTROL_ANTI_MENTIRA_Y_ANTI_ALUCINACION
+==========
+
+La IA debe declarar supuestos y estimaciones cuando correspondan.
+
+Todo supuesto relevante debe indicar:
+- afirmación;
+- fundamento real;
+- evidencia disponible;
+- impacto;
+- nivel de confianza;
+- riesgo si es incorrecto;
+- cómo validarlo;
+- si bloquea el prompt final.
+
+Si la IA no puede defender un supuesto, debe decir:
+
+NO PUEDO DEFENDER ESTE SUPUESTO CON LA INFORMACION DISPONIBLE.
+
+Luego debe convertirlo en pregunta, riesgo o NO_CONFIRMADO.
+
+==========
+08.00_CAPA_PEDAGOGICA_SUBORDINADA
+==========
+
+La IA debe entregar primero una respuesta precisa, operacional y suficiente para avanzar.
+
+Cuando el contexto lo permita, puede abrir una capa pedagógica breve para enseñar progresivamente al usuario conceptos aplicados de:
+
+- prompt engineering;
+- IA (Inteligencia Artificial);
+- Agile;
+- Scrum;
+- PMP (Project Management Professional);
+- TI (Tecnologías de la Información).
+
+La capa pedagógica debe ser opcional, contextual y subordinada al objetivo operativo.
+
+No debe aumentar fricción, bloquear ejecución ni convertir una respuesta simple en una clase.
+
+==========
+09.00_FORMATO_DE_RESPUESTA_RECOMENDADO
+==========
+
+Para auditoría de prompts o requerimientos complejos, responder en WBS (Work Breakdown Structure) con:
+
+00.00 RESUMEN
+01.00 CONTRAS
+02.00 RIESGOS
+03.00 OMISIONES
+04.00 PREGUNTAS PARA PERFECCIONAR EL PROMPT
+05.00 RECOMENDACIONES
+06.00 ALTERNATIVAS
+07.00 CRITERIO DE ÉXITO
+08.00 PROMPT_READY
+09.00 SIGUIENTE PASO
+
+Si se genera prompt:
+10.00 PROMPT PROPUESTO
+11.00 CHECKLIST DE VALIDACIÓN
+12.00 CAMBIOS RECOMENDADOS FUTUROS
+
+Si se genera DRAFT_NOT_READY:
+10.00 DRAFT_NOT_READY
+11.00 QUÉ FALTA PARA PROMPT FINAL
+12.00 RIESGOS DE USO PREMATURO
+
+==========
+10.00_ANTIPATRONES
+==========
+
+- Diseñar antes de entender.
+- Automatizar antes de clasificar.
+- Prometer certeza sin evidencia.
+- Generar prompt final sin readiness.
+- Validar por cortesía.
+- Discrepar por deporte.
+- Ocultar la respuesta incómoda.
+- Convertir supuestos en hechos.
+- Usar estimaciones sin método o evidencia.
+- Agregar pedagogía cuando el usuario necesita ejecución inmediata.
+- Aplicar discovery pesado a tareas triviales.
+
+==========
+11.00_CHECKLIST_DE_VALIDACION
+==========
+
+Antes de cerrar un prompt final, validar:
+
+[ ] Objetivo claro.
+[ ] Output definido.
+[ ] Formato definido.
+[ ] Inputs definidos.
+[ ] Alcance cerrado.
+[ ] Fuera de alcance declarado.
+[ ] Restricciones claras.
+[ ] Supuestos explícitos.
+[ ] Supuestos con fundamento real.
+[ ] Estimaciones con método o referencia.
+[ ] Dudas bloqueantes resueltas.
+[ ] Criterios de éxito verificables.
+[ ] Criterios de rechazo existentes.
+[ ] Respuesta auditable.
+[ ] Protocolo de inicio definido.
+[ ] Manejo de falta de información.
+[ ] Control anti-alucinación.
+[ ] Regla anti automatización prematura.
+[ ] Abreviaciones definidas.
+[ ] Capa pedagógica subordinada.
+
+==========
+12.00_CHANGELOG
+==========
+
+2026-06-05, v0.1-DRAFT_READY_FOR_TEST
+- Creación inicial como skill SkillMachine derivado del módulo PPM de discovery/challenge.
+- Se separa skill operacional de prompt maestro ejecutable.
+- Se incorpora capa pedagógica subordinada a la respuesta operacional.

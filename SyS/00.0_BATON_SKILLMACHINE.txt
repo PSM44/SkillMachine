@@ -1105,3 +1105,19 @@ SUMMARY...........: Corroborated post-MB-GRC-026I model. Each 90.USECASE/<USECAS
 TECH_DEBT.........: Manifest/package alignment, blank-IA terminology, sufficiency test, RADAR source ignore friction, line endings, package divergence risk.
 NEXT_ACTION.......: MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST.
 CLOSE_ARTIFACT....: SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-GRC-026J.STATE_BACKLOG_CLOSE.20260604_201037.txt
+==========
+MB-GRC-027C_UPDATE
+==========
+DATE..............: 2026-06-05 13:48:41 -04
+STATUS............: DONE
+SUMMARY...........: Added draft prompt engineering discovery/challenge skill with subordinated pedagogical layer.
+SCOPE.............: Applied only to 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR.
+NOT_APPLIED_TO....: 02.SESSION_CLOSE, 03.SESSION_CONTINUE.
+NEXT_ACTION.......: Validate BUILD output and confirm no unintended bundle contamination.
+==========
+MB-GRC-027C_EXACT_REGISTRY_UPDATE
+==========
+DATE..............: 2026-06-05 14:10:01 -04
+STATUS............: DONE
+SUMMARY...........: Completed exact registry patch for prompt engineering discovery/challenge skill.
+NEXT_ACTION.......: Run targeted IA-in-blank test for 01.NEW_PROJECT package behavior.

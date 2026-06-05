@@ -46,3 +46,23 @@ REGLAS:
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
+
+
+==========
+MB-GRC-027C_PROMPT_ENGINEERING_DISCOVERY_CHALLENGE
+==========
+
+REGLA:
+Cuando el nuevo proyecto requiera crear, auditar o perfeccionar prompts, la IA debe aplicar 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt.
+
+La IA debe:
+- ejecutar discovery antes de generar prompts finales;
+- desafiar alcance, inputs, outputs, restricciones y criterios de éxito;
+- declarar PROMPT_READY antes de generar un prompt final;
+- usar DRAFT_NOT_READY si falta información relevante;
+- mantener la capa pedagógica subordinada a la respuesta operacional.
+
+La IA no debe:
+- generar prompts finales sobre requerimientos incompletos;
+- crear canon automáticamente;
+- convertir una respuesta operacional simple en una clase.

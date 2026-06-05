@@ -725,3 +725,15 @@ DATE..............: 2026-06-04 20:10:37 -04
 WHAT_CHANGED......: Session close updated state after direct 90.USECASE folder upload model was confirmed as current operating doctrine.
 CURRENT_STATE.....: Usecase folders under 90.USECASE are direct IA upload packages.
 NEXT_SESSION......: Test 90.USECASE/03.SESSION_CONTINUE sufficiency.
+==========
+MB-GRC-027C_UPDATE
+==========
+DATE..............: 2026-06-05 13:48:41 -04
+WHAT_CHANGED......: Added prompt engineering discovery/challenge draft skill.
+OPERATOR_NOTE.....: Use this skill when creating/auditing prompts in NEW_PROJECT or REPOSITORY_STRUCTURE_REPAIR; keep pedagogy subordinate to operational answer.
+==========
+MB-GRC-027C_EXACT_REGISTRY_UPDATE
+==========
+DATE..............: 2026-06-05 14:10:01 -04
+WHAT_CHANGED......: Prompt engineering discovery/challenge skill is included only in NEW_PROJECT and REPOSITORY_STRUCTURE_REPAIR governance bundles through USECASE.REGISTRY.json.
+OPERATOR_NOTE.....: Effective bundle selection is controlled by USECASE.REGISTRY.json bundle_definitions[].source_files.

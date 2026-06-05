@@ -1,7 +1,7 @@
 {
   "usecase": "01.NEW_PROJECT",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-04 10:35:39",
+  "generated_at": "2026-06-05 14:09:52",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -17,7 +17,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 38426,
       "delivery_size_kb": 37.53,
-      "delivery_sha256": "76BDB01E4816B5212606583CB86DFA984094C4F2509FD8CB008B15EEB962D60E",
+      "delivery_sha256": "E80B1FB7A11941D52E0A9F0EA42030C82B406E7AD8D1336101EA02CCE6659DD6",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -45,7 +45,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "D539481C10EB83E9A95533AE8E8205658BF48F0CFAAF2BEC2976837054F17F6A",
+      "delivery_sha256": "77B0F60289E7F769459BD9034903E2F376A3770B3E3C52F96DDC20442CBF3B2A",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -71,9 +71,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 50014,
-      "delivery_size_kb": 48.84,
-      "delivery_sha256": "E5614BBB872979B38D7CA4AEEEEC98BF78BB63A756FABF1D6180CF9733AC5C25",
+      "delivery_size_bytes": 60342,
+      "delivery_size_kb": 58.93,
+      "delivery_sha256": "6E2ED759DE25E404A3EC41FD9A2BA42E3FEFF00E0366B58D95DD094C063CD2B1",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -98,6 +98,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
           "source_sha256": "DE2BBA1A0E19D4E4C5E62294CCDD0314B6B1709171018AD39D7C477A10DF32E3"
+        },
+        {
+          "name": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
+          "version": "v0.1-DRAFT_READY_FOR_TEST",
+          "source_sha256": "1CCA51C2D05CD484037CF2CA3F3995443E7E951070C2987D492E8573A2F96FD8"
         }
       ]
     }

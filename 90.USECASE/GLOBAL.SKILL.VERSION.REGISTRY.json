@@ -1,149 +1,154 @@
 {
-    "version": "v1.0-CANON",
-    "generated_at": "2026-06-03 16:36:40",
-    "source_root": "C:\\01. GitHub\\Skills",
-    "skills": [
-        {
-            "file": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "28.SKILL.BASH.WSL2.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt",
-            "version": "v1.1-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/03.SKILL.SANDBOX_BOUNDARY.txt",
-            "version": "v1.1-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/04.SKILL.COST_CONTROL.txt",
-            "version": "v1.1-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/05.SKILL.ROUTING_POLICY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-            "version": "v1.2-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-            "version": "v1.3-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
-            "version": "UNKNOWN"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-            "version": "UNKNOWN"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-            "version": "UNKNOWN"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "version": "UNKNOWN"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-            "version": "UNKNOWN"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/15.SKILL.LOGGING_AUDIT.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/16.SKILL.CHECKPOINT_ROLLBACK.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/17.SKILL.SECRETS_HANDLING.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/18.SKILL.DEV_ENV_MINIMAL.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/25.SKILL.GRC.HUMAN_AI_COLLAB.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/26.1_PROMPT.GRC.BASE.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/27.SKILL.MODEL_ROUTING_POLICY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/28.SKILL.BASH.WSL2.txt",
-            "version": "v1.0-DRAFT"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
-            "version": "v1.0-CANON"
-        },
-        {
-            "file": "SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt",
-            "version": "v1.0-DRAFT",
-            "skill_id": "SKILL_CRITICAL_FEEDBACK",
-            "status": "ACTIVE"
-        }
-    ]
+  "version": "v1.0-CANON",
+  "generated_at": "2026-06-03 16:36:40",
+  "source_root": "C:\\01. GitHub\\Skills",
+  "skills": [
+    {
+      "file": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "28.SKILL.BASH.WSL2.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt",
+      "version": "v1.1-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/03.SKILL.SANDBOX_BOUNDARY.txt",
+      "version": "v1.1-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/04.SKILL.COST_CONTROL.txt",
+      "version": "v1.1-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/05.SKILL.ROUTING_POLICY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+      "version": "v1.2-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+      "version": "v1.3-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
+      "version": "UNKNOWN"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+      "version": "UNKNOWN"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+      "version": "UNKNOWN"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+      "version": "UNKNOWN"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
+      "version": "UNKNOWN"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/15.SKILL.LOGGING_AUDIT.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/16.SKILL.CHECKPOINT_ROLLBACK.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/17.SKILL.SECRETS_HANDLING.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/18.SKILL.DEV_ENV_MINIMAL.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/24.SKILL.GRC.CONTINUE.MODELOS.LOCALES.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/25.SKILL.GRC.HUMAN_AI_COLLAB.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/26.1_PROMPT.GRC.BASE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/26.SKILL.GRC.CORE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/27.SKILL.MODEL_ROUTING_POLICY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/28.SKILL.BASH.WSL2.txt",
+      "version": "v1.0-DRAFT"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.AI_AGENT_TOOL_GOVERNANCE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.GIT_STRUCTURAL_CHANGE_GOVERNANCE.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.LOCAL_MODEL_CAPABILITY_TESTING.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
+      "version": "v1.0-CANON"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt",
+      "version": "v1.0-DRAFT",
+      "skill_id": "SKILL_CRITICAL_FEEDBACK",
+      "status": "ACTIVE"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
+      "version": "v0.1-DRAFT_READY_FOR_TEST",
+      "sha256": "1CCA51C2D05CD484037CF2CA3F3995443E7E951070C2987D492E8573A2F96FD8"
+    }
+  ]
 }

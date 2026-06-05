@@ -43,3 +43,6 @@ incluyendo estructura base, continuidad y gobierno operativo.
 - Este paquete NO se interpreta parcialmente
 - Si falta un archivo, la IA debe pedirlo
 - No se permite reemplazar por versiones similares
+
+GOVERNANCE:
+- 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt

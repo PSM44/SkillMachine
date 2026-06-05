@@ -340,6 +340,17 @@ STATUS............: ACTIVE
 CATEGORY..........: SYSTEM
 PURPOSE...........: Define uso seguro, trazable y reproducible de Bash sobre WSL2 para repos Windows/Git/GitHub.
 
+
+----------
+06.80
+----------
+
+SKILL_ID..........: SKILL_PROMPT_ENGINEERING_DISCOVERY_CHALLENGE
+FILE..............: 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: REVIEW
+PURPOSE...........: Audita requerimientos antes de crear prompts finales; exige discovery, challenge, readiness gate, supuestos explicitos y capa pedagogica subordinada.
+
 ==========
 05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
 ==========

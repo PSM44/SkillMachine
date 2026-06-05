@@ -671,3 +671,24 @@ STATUS............: BACKLOG
 TYPE..............: AUDIT
 PRIORITY..........: P2
 OBJECTIVE.........: Audit size, duplication and divergence risk across 90.USECASE self-contained packages.
+==========
+MB-GRC-027C_PROMPT_ENGINEERING_DISCOVERY_SKILL
+==========
+DATE..............: 2026-06-05 13:48:41 -04
+STATUS............: DONE
+DECISION..........: Added prompt engineering discovery/challenge skill as DRAFT_READY_FOR_TEST.
+RATIONALE.........: NEW_PROJECT and REPOSITORY_STRUCTURE_REPAIR need controlled prompt discovery/readiness without contaminating SESSION_CONTINUE or SESSION_CLOSE.
+OUTPUTS...........:
+- SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt
+- SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+- 90.USECASE/01.NEW_PROJECT/SKILL_SET.MANIFEST.txt
+- 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR/SKILL_SET.MANIFEST.txt
+NEXT..............: Test whether BUILD bundles include the new skill only in intended usecases.
+==========
+MB-GRC-027C_EXACT_USECASE_REGISTRY_PATCH
+==========
+DATE..............: 2026-06-05 14:10:01 -04
+STATUS............: DONE
+DECISION..........: Added 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt directly to USECASE.REGISTRY.json bundle_definitions[].GOVERNANCE.source_files for 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR.
+RATIONALE.........: USECASE.REGISTRY.json bundle_definitions is the effective source for generated bundle inclusion.
+VALIDATION.........: New skill appears only in target GOVERNANCE bundles and target USECASE.MANIFEST.json files.
