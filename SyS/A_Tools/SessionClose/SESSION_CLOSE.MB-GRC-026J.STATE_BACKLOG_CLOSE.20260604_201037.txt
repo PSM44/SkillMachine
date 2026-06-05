@@ -1,0 +1,147 @@
+==========
+SESSION_CLOSE.MB-GRC-026J.STATE_BACKLOG_CLOSE
+==========
+
+ID................: MB-GRC-026J_STATE_BACKLOG_CLOSE_20260604_2008
+DATE_LOCAL........: 2026-06-04 20:10:37 -04
+DATE_UTC..........: 2026-06-05T00:10:37Z
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+BRANCH............: main
+HEAD_AT_START.....: 6ea1334 20260604_MB-GRC-026_final_session_close_after_i
+
+==========
+01.00_CURRENT_STATE
+==========
+
+Confirmed before update:
+- Working tree clean at start.
+- Current model: each 90.USECASE/<USECASE_ID> folder is the direct IA upload package.
+- Temp/TO_UPLOAD_TO_IA workflow is retired.
+- Session close package uploaded by human corresponds to 02.SESSION_CLOSE.
+- Next operational test should validate usecase-folder sufficiency.
+
+==========
+02.00_ACCUMULATED_TECH_DEBT
+==========
+
+DT-001:
+USECASE.MANIFEST.json for 02.SESSION_CLOSE does not fully reflect the package-folder model.
+It still focuses on generated delivery_files and does not explicitly model README.UPLOAD_THIS_USECASE.txt and RUNBOOK.SESSION_CLOSE.HARDENED.txt as upload-package files.
+
+DT-002:
+Some Skills/manifest language still refers to "IA en blanco".
+Preferred doctrine is context sufficiency: sufficient/insufficient/current/outdated context.
+
+DT-003:
+The usecase-folder upload model is implemented but not yet tested end-to-end with a fresh IA context.
+
+DT-004:
+RADAR source file lives under a path that is broadly ignored, causing recurring force-add behavior for RADAR.ps1 source changes.
+
+DT-005:
+LF/CRLF warnings remain recurring operational noise.
+
+DT-006:
+Usecase package repetition is intentional, but divergence risk must be controlled by BUILD, manifests and validation.
+
+==========
+03.00_ACCUMULATED_BACKLOG
+==========
+
+P0 - MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+Validate whether uploading a complete 90.USECASE/<USECASE_ID> folder is sufficient for IA operation without asking for the full repository.
+
+P0 - MB-GRC-026K_ALIGN_USECASE_MANIFEST_WITH_FOLDER_PACKAGE_MODEL
+Align USECASE.MANIFEST.json / BUILD / registry with the real package-folder upload model.
+
+P1 - MB-GRC-026L_REPLACE_BLANK_IA_LANGUAGE_WITH_CONTEXT_SUFFICIENCY_LANGUAGE
+Replace "IA en blanco" language where it creates wrong doctrine.
+
+P1 - MB-GRC-026M_GITIGNORE_RADAR_SOURCE_SPLIT
+Separate RADAR source from ignored RADAR outputs or adjust ignore rules.
+
+P2 - MB-GRC-026N_LINE_ENDINGS_POLICY_HARDENING
+Reduce LF/CRLF warning noise.
+
+P2 - MB-GRC-026O_USECASE_PACKAGE_SIZE_AND_DUPLICATION_AUDIT
+Audit size, repetition and divergence across 90.USECASE packages.
+
+==========
+04.00_DONE_THIS_SESSION
+==========
+
+- Confirmed uploaded 02.SESSION_CLOSE usecase package is the right input for session close.
+- Reframed status using evidence, not memory.
+- Registered accumulated debt and backlog.
+- Preserved final current model: 90.USECASE folders are direct upload packages.
+
+==========
+05.00_WHAT_REMAINS
+==========
+
+- Execute MB-GRC-026J sufficiency test.
+- Align manifests with real usecase-folder package model.
+- Replace outdated "IA en blanco" terminology where operationally misleading.
+- Reduce Git/RADAR source ignore friction.
+- Harden line endings.
+
+==========
+06.00_PATH_TO_MANAGERIAL_DELIVERABLE
+==========
+
+MINIBATTLE | OBJECTIVE | OUTPUT | BATTLE | MANAGERIAL_DELIVERABLE | STATUS
+MB-GRC-026J | Test usecase-folder sufficiency | Sufficiency report | USECASE_PACKAGE_GOVERNANCE | Demo-ready IA session package model | NEXT
+MB-GRC-026K | Align manifests with real packages | BUILD/manifest patch | USECASE_PACKAGE_GOVERNANCE | Auditable package contract | P0
+MB-GRC-026L | Replace blank-IA terminology | Updated doctrine/prompt text | CONTEXT_GOVERNANCE | Cleaner executive explanation | P1
+MB-GRC-026M | Fix RADAR source ignore friction | Git ignore/source policy patch | TOOLING_HARDENING | Lower operational friction | P1
+MB-GRC-026N | Harden line endings | .gitattributes/editorconfig patch | TOOLING_HARDENING | Cleaner diffs/commits | P2
+MB-GRC-026O | Audit package duplication | Duplication/size report | USECASE_PACKAGE_GOVERNANCE | Scalable usecase package model | P2
+
+==========
+07.00_NEXT_RECOMMENDED_ACTION
+==========
+
+MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+
+Recommended package to upload:
+C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+
+Acceptance:
+- IA reads README.UPLOAD_THIS_USECASE.txt first.
+- IA uses USECASE.MANIFEST.json and SKILL_SET.MANIFEST.txt.
+- IA does not request full repo.
+- IA requests exact paths only if missing.
+- IA identifies Skill/GRC candidates without automatically creating canon.
+
+==========
+08.00_OPTIONAL_HANDOFF_PROMPT_NEXT_SESSION
+==========
+
+Hoy es [fecha/hora], Santiago Chile.
+
+Continuar SkillMachine desde:
+ROOT: C:\01. GitHub\Skills
+HEAD esperado: [leer git log --oneline -1]
+
+Objetivo:
+Ejecutar MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST.
+
+Modelo vigente:
+Cada carpeta 90.USECASE/<USECASE_ID> es paquete directo de subida a IA.
+No usar Temp/TO_UPLOAD_TO_IA.
+
+Primero corroborar:
+- git status;
+- Validate-System;
+- RADAR;
+- Test-SessionCloseReadiness;
+- que los 4 README.UPLOAD_THIS_USECASE.txt existan;
+- que Prepare-ToUploadToIA.ps1 y Temp/TO_UPLOAD_TO_IA no existan.
+
+Luego probar:
+Subir C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE a IA y verificar suficiencia.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

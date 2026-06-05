@@ -609,3 +609,65 @@ ACCEPTANCE........:
 - IA requests exact missing paths only if needed.
 - IA does not request full repo.
 - SESSION_LEARNING_REVIEW captures Skill/GRC candidates if gaps are found.
+
+==========
+MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: NEXT
+TYPE..............: TEST / VALIDATION
+PRIORITY..........: P0
+OBJECTIVE.........: Validate that uploading a full 90.USECASE/<USECASE_ID> folder gives IA sufficient context without broad repo upload.
+TARGET_FIRST......: 90.USECASE/03.SESSION_CONTINUE
+ACCEPTANCE........:
+- IA reads README.UPLOAD_THIS_USECASE.txt first.
+- IA understands usecase.
+- IA uses manifests and bundles.
+- IA does not ask for full repo.
+- IA requests exact additional paths only if required.
+
+==========
+MB-GRC-026K_ALIGN_USECASE_MANIFEST_WITH_FOLDER_PACKAGE_MODEL
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: BACKLOG
+TYPE..............: GOVERNANCE / BUILD
+PRIORITY..........: P0
+OBJECTIVE.........: Align USECASE.MANIFEST.json and BUILD outputs with the real self-contained usecase folder package model.
+RATIONALE.........: Current manifest delivery_files model does not fully represent README.UPLOAD_THIS_USECASE.txt / runbook package content.
+
+==========
+MB-GRC-026L_REPLACE_BLANK_IA_LANGUAGE_WITH_CONTEXT_SUFFICIENCY_LANGUAGE
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: BACKLOG
+TYPE..............: DOCTRINE / LANGUAGE
+PRIORITY..........: P1
+OBJECTIVE.........: Replace operationally misleading "IA en blanco" language with context sufficiency/currentness language where appropriate.
+
+==========
+MB-GRC-026M_GITIGNORE_RADAR_SOURCE_SPLIT
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: BACKLOG
+TYPE..............: TOOLING / GIT
+PRIORITY..........: P1
+OBJECTIVE.........: Avoid recurring force-add behavior for RADAR.ps1 source changes while keeping RADAR generated outputs ignored.
+
+==========
+MB-GRC-026N_LINE_ENDINGS_POLICY_HARDENING
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: BACKLOG
+TYPE..............: TOOLING / HYGIENE
+PRIORITY..........: P2
+OBJECTIVE.........: Reduce recurring LF/CRLF warning noise.
+
+==========
+MB-GRC-026O_USECASE_PACKAGE_SIZE_AND_DUPLICATION_AUDIT
+==========
+DATE_REGISTERED...: 2026-06-04 20:10:37 -04
+STATUS............: BACKLOG
+TYPE..............: AUDIT
+PRIORITY..........: P2
+OBJECTIVE.........: Audit size, duplication and divergence risk across 90.USECASE self-contained packages.
