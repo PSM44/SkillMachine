@@ -1,0 +1,150 @@
+==========
+SESSION_CLOSE.MB-GRC-029E
+==========
+
+ID................: MB-GRC-029E_SESSION_CLOSE_AFTER_GRC_029D
+DATE_LOCAL........: 2026-06-05 16:03:30 -04
+DATE_UTC..........: 2026-06-05T20:03:30Z
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+BRANCH............: main
+HEAD_AT_START.....: 8dcbce4 20260605_MB-GRC-029D_align_generated_output_policy_source
+
+==========
+01.00_STATUS_CONFIRMED
+==========
+
+CONFIRMED:
+- Last committed state before close: 8dcbce4 20260605_MB-GRC-029D_align_generated_output_policy_source
+- Working tree clean at start.
+- Validate-System passed before close update.
+- Session close readiness executed before close update.
+
+CURRENT_PHASE:
+- SkillMachine has completed prompt engineering discovery/challenge skill integration.
+- 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR behavioral tests passed.
+- Registry/build semantics were documented.
+- Generated output policy headers were aligned at actual source: 90.USECASE/Apply-GeneratedOutputPolicy.ps1.
+- Ignored generated bundles are validated locally but not staged.
+
+==========
+02.00_WHAT_WAS_DONE
+==========
+
+DONE:
+1. Created and integrated:
+   SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt
+
+2. Applied the skill only to:
+   - 90.USECASE/01.NEW_PROJECT
+   - 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR
+
+3. Behavioral tests:
+   - 01.NEW_PROJECT: PASS_BEHAVIORAL_PACKAGE_READY
+   - 04.REPOSITORY_STRUCTURE_REPAIR: PASS_BEHAVIORAL_PACKAGE_READY
+
+4. Documented registry/build semantics in:
+   SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt
+
+5. Corrected generated output policy source:
+   90.USECASE/Apply-GeneratedOutputPolicy.ps1
+
+6. Confirmed source-of-truth semantics:
+   - USECASE.REGISTRY.json controls bundle inclusion.
+   - GLOBAL.SKILL.VERSION.REGISTRY.json controls registered source existence/version/hash.
+   - SKILL_SET.MANIFEST.txt is human/usecase-facing guidance, not generated-bundle source.
+   - Generated bundles may be ignored and should not be force-staged without explicit human decision.
+
+==========
+03.00_ACCUMULATED_TECH_DEBT
+==========
+
+DT-001_ONE_SHOT_SCRIPT_QUALITY_GATE:
+One-shot scripts need a formal rule: DISCOVER -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> READINESS.
+
+DT-002_IGNORED_GENERATED_OUTPUTS:
+Generated bundles under 90.USECASE can be ignored by Git. They must be validated locally but not staged unless explicitly approved.
+
+DT-003_CRLF_LF_WARNINGS:
+Line-ending warnings are recurring. Not blocking now, but may create noisy diffs.
+
+DT-004_IA_EN_BLANCO_LANGUAGE:
+Some artifacts still use "IA en blanco". Preferred semantic model should be context sufficient/insufficient/current/stale.
+
+DT-005_UPLOAD_PACKAGE_VS_DELIVERY_FILES:
+Need clearer distinction between build delivery_files and full upload-package files such as README/runbook/docs.
+
+DT-006_GENERATOR_SOURCE_DISCOVERY:
+Before patching generated output, locate actual generator/post-processor. Do not infer source from generated artifact.
+
+==========
+04.00_BACKLOG_ACCUMULATED
+==========
+
+BL-001:
+MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES
+Document one-shot script rules around discovery, patching, staging ignored files, grep safety and readiness.
+
+BL-002:
+MB-GRC-030B_UPLOAD_PACKAGE_MANIFEST_SEMANTICS
+Clarify upload package vs generated delivery_files vs ignored generated outputs.
+
+BL-003:
+MB-GRC-030C_CONTEXT_SEMANTICS_REPLACE_IA_BLANK_LANGUAGE
+Replace "IA en blanco" language with context sufficiency/currentness semantics.
+
+BL-004:
+MB-GRC-030D_LINE_ENDING_POLICY_REVIEW
+Review CRLF/LF policy only if warnings start producing bad diffs.
+
+BL-005:
+MB-GRC-031A_MANAGEMENT_FUNCTIONAL_DELIVERABLE_PATH
+Define first management-facing functional deliverable.
+
+==========
+05.00_WHAT_IS_MISSING
+==========
+
+MISSING:
+- Formal one-shot quality rule.
+- Upload-package semantics documentation.
+- Context sufficiency language cleanup.
+- Management-facing demo / executive deliverable.
+- Optional line-ending policy review.
+
+==========
+06.00_CURRENT_POSITION
+==========
+
+We are no longer only stabilizing internals.
+The system now has enough governed build/session/usecase mechanics to move toward an executive functional deliverable.
+
+Current recommended next phase:
+- Convert SkillMachine from internal governance engine into demonstrable management capability.
+
+==========
+07.00_PATH_TO_MANAGEMENT_FUNCTIONAL_DELIVERABLE
+==========
+
+MINIBATTLE | OBJECTIVE | OUTPUT | BATTLE | MANAGEMENT_DELIVERABLE | STATUS
+MB-GRC-030A | Formalize one-shot quality rules | Updated skill/backlog rule | Execution Governance | Reduced recurring operational failures | PENDING
+MB-GRC-030B | Clarify upload package semantics | Documented build/upload distinction | Packaging Governance | Explainable package model | PENDING
+MB-GRC-030C | Replace IA en blanco terminology | Cleaner context semantics | AI UX Governance | Lower onboarding friction | PENDING
+MB-GRC-031A | Design management demo | Demo script + success criteria | Management Demo | Executive-ready use case | PENDING
+MB-GRC-031B | Build lightweight evidence dashboard | Markdown/HTML summary | Management Demo | Visible system value | PENDING
+MB-GRC-032A | Run end-to-end case | NEW_PROJECT -> BUILD -> TEST -> CLOSE | Functional Proof | Complete workflow demo | PENDING
+MB-GRC-033A | Package Gerencia v0.1 | Executive README + demo + risks + next steps | Management Delivery | Functional deliverable to management | PENDING
+
+==========
+08.00_NEXT_RECOMMENDED_ACTION
+==========
+
+NEXT_ACTION:
+Start next session with MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES.
+
+OBJECTIVE:
+Prevent recurrence of patch/staging/readiness issues by converting session learnings into a formal execution rule.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

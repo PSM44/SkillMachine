@@ -719,3 +719,27 @@ STATUS............: DONE
 DECISION..........: Patched Apply-GeneratedOutputPolicy.ps1, not BUILD.ps1, because BUILD calls policy post-processor for generated output headers.
 RATIONALE.........: Headers must align with MB-GRC-029B semantics: USECASE.REGISTRY.json controls bundle inclusion and GLOBAL.SKILL.VERSION.REGISTRY.json controls registered source existence/version/hash.
 LESSON............: Do not infer generator from generated output; locate actual post-processor first.
+==========
+MB-GRC-029E_SESSION_CLOSE_BACKLOG
+==========
+DATE..............: 2026-06-05 16:03:30 -04
+STATUS............: ACTIVE_BACKLOG_UPDATE
+
+TECH_DEBT:
+- DT-001: One-shot scripts need formal quality gate: DISCOVER -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> READINESS.
+- DT-002: Ignored generated outputs must not be force-staged without explicit human decision.
+- DT-003: CRLF/LF warnings remain monitored technical debt.
+- DT-004: Replace "IA en blanco" language with context sufficiency/currentness semantics.
+- DT-005: Clarify upload package vs delivery_files semantics.
+- DT-006: Generated-output patching must locate actual generator/post-processor before modification.
+
+BACKLOG:
+- BL-001: MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES.
+- BL-002: MB-GRC-030B_UPLOAD_PACKAGE_MANIFEST_SEMANTICS.
+- BL-003: MB-GRC-030C_CONTEXT_SEMANTICS_REPLACE_IA_BLANK_LANGUAGE.
+- BL-004: MB-GRC-030D_LINE_ENDING_POLICY_REVIEW.
+- BL-005: MB-GRC-031A_MANAGEMENT_FUNCTIONAL_DELIVERABLE_PATH.
+- BL-006: MB-GRC-033A_GERENCIA_PACK_V0_1.
+
+NEXT_ACTION:
+MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES.
