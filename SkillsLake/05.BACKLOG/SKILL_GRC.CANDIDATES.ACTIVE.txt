@@ -692,3 +692,13 @@ STATUS............: DONE
 DECISION..........: Added 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt directly to USECASE.REGISTRY.json bundle_definitions[].GOVERNANCE.source_files for 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR.
 RATIONALE.........: USECASE.REGISTRY.json bundle_definitions is the effective source for generated bundle inclusion.
 VALIDATION.........: New skill appears only in target GOVERNANCE bundles and target USECASE.MANIFEST.json files.
+
+==========
+MB-GRC-028D_SESSION_CLOSE_AFTER_PROMPT_ENGINEERING_TESTS
+==========
+DATE..............: 2026-06-05 15:44:43 -04
+STATUS............: DONE
+SUMMARY...........: Formalized close after successful MB-GRC-028A/B/C tests.
+RESULT............: No patch needed for 01.NEW_PROJECT or 04.REPOSITORY_STRUCTURE_REPAIR.
+NEXT_CANDIDATE.....: MB-GRC-029A_REGISTRY_BUILD_SEMANTICS_DOCUMENTATION.
+TECHDEBT..........: Document precedence among SKILL_SET.MANIFEST.txt, GLOBAL.SKILL.VERSION.REGISTRY.json, USECASE.REGISTRY.json and generated USECASE.MANIFEST.json.

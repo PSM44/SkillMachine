@@ -737,3 +737,11 @@ MB-GRC-027C_EXACT_REGISTRY_UPDATE
 DATE..............: 2026-06-05 14:10:01 -04
 WHAT_CHANGED......: Prompt engineering discovery/challenge skill is included only in NEW_PROJECT and REPOSITORY_STRUCTURE_REPAIR governance bundles through USECASE.REGISTRY.json.
 OPERATOR_NOTE.....: Effective bundle selection is controlled by USECASE.REGISTRY.json bundle_definitions[].source_files.
+
+==========
+MB-GRC-028D_SESSION_CLOSE_UPDATE
+==========
+DATE..............: 2026-06-05 15:44:43 -04
+WHAT_CHANGED......: The prompt engineering discovery/challenge skill integration has passed targeted and behavioral read-only tests for NEW_PROJECT and REPOSITORY_STRUCTURE_REPAIR.
+OPERATOR_NOTE.....: Do not assume SKILL_SET.MANIFEST.txt alone controls generated bundles; USECASE.REGISTRY.json controls bundle_definitions.source_files.
+NEXT_ACTION........: Document registry/build semantics in a future focused minibattle.
