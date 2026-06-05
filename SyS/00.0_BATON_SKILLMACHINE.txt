@@ -1075,3 +1075,12 @@ HEAD_AT_CLOSE.....: 4f7185c 20260604_MB-GRC-026H_patch_usecase_context_package_r
 SUMMARY...........: Closed session after MB-GRC-026F2/G/G2/H. System now supports generated output policy, controlled TO_UPLOAD_TO_IA context packaging, RADAR exclusion for temporary upload package, and usecase prompt escalation when context is insufficient.
 NEXT_ACTION.......: MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST.
 CLOSE_ARTIFACT....: SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-GRC-026.AFTER_H.20260604_194922.txt
+
+==========
+MB-GRC-026I_UPDATE
+==========
+DATE..............: 2026-06-04 20:01:58 -04
+STATUS............: DONE
+SUMMARY...........: Replaced TO_UPLOAD_TO_IA temporary package model with direct 90.USECASE folder upload model.
+RULE..............: The human uploads the complete folder for the selected usecase under 90.USECASE.
+NEXT_ACTION.......: Test usecase-folder sufficiency with 03.SESSION_CONTINUE or close.

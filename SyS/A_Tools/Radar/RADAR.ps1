@@ -49,7 +49,6 @@ $ExcludedPathsRaw = @(
     $OutputPath
     (Join-Path $RootPath "SyS\A_Tools\Radar")
     (Join-Path $RootPath "SyS\A_Tools\OneShots\Backups")
-    (Join-Path $RootPath "Temp\TO_UPLOAD_TO_IA")
 )
 
 $ExcludedPaths = @()
@@ -865,5 +864,3 @@ finally {
     if ($ScriptSucceeded) { exit 0 }
     exit 1
 }
-
-

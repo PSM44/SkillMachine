@@ -581,3 +581,16 @@ ACCEPTANCE........:
 - Missing context is requested by exact path.
 - No canon is created automatically.
 - SESSION_LEARNING_REVIEW captures any Skill/GRC candidate.
+
+==========
+MB-GRC-026I_USECASE_FOLDER_IS_UPLOAD_PACKAGE
+==========
+DATE..............: 2026-06-04 20:01:58 -04
+STATUS............: DONE
+DECISION..........: Retire Temp/TO_UPLOAD_TO_IA model. Each 90.USECASE/<USECASE_ID> folder is the direct upload package for IA context.
+RATIONALE.........: Human operator wants to take the corresponding usecase folder directly. Repetition across usecases is acceptable because usecase folders are self-contained operational packages.
+REMOVED...........:
+- 90.USECASE/Prepare-ToUploadToIA.ps1
+- 90.USECASE/CONTEXT.PACKAGE.TO_UPLOAD_TO_IA.README.txt
+- Temp/TO_UPLOAD_TO_IA workflow
+NEXT..............: Test sufficiency by uploading one complete 90.USECASE folder to IA and verifying exact missing-path behavior.

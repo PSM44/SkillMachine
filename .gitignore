@@ -37,5 +37,4 @@ SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.txt
 SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.json
 
 # Temporary IA upload packages
-Temp/TO_UPLOAD_TO_IA/
 Temp/TO_UPLOAD_REQUEST*.txt

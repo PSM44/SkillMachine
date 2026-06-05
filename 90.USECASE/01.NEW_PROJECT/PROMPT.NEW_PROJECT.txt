@@ -28,22 +28,21 @@ OUTPUT:
 
 
 
+
+
 ==========
-MB-GRC-026H_CONTEXT_PACKAGE_REQUEST
+MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
 ==========
 
 REGLA:
-Si el contexto adjunto no es suficiente para operar este usecase sin inventar estado, la IA debe pedir explícitamente al humano generar y subir un paquete temporal de contexto.
+La carpeta del usecase es el paquete operativo de subida a la IA.
 
-COMANDO_BASE:
-pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "90.USECASE\Prepare-ToUploadToIA.ps1" -UseCase "01.NEW_PROJECT"
-
-OUTPUT_ESPERADO:
-Temp\TO_UPLOAD_TO_IA
+CARPETA_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT
 
 REGLAS:
-- Pedir solo paths adicionales necesarios, no el repo completo.
-- Temp\TO_UPLOAD_TO_IA es output temporal, regenerable y no canónico.
-- La fuente de verdad sigue siendo SkillsLake, GRCLake, 00.CATALOG, 90.USECASE, registries y manifests.
-- Si falta un Skill/GRC/Catalog necesario, pedirlo por path exacto.
+- Subir el contenido completo de la carpeta del usecase correspondiente.
+- No usar Temp\TO_UPLOAD_TO_IA.
+- No pedir el repo completo por defecto.
+- Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
