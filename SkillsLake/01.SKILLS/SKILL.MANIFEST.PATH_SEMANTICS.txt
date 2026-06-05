@@ -268,3 +268,155 @@ A manifest path migration is acceptable when:
 A manifest is a schema-driven contract.
 
 Path repair must respect the schema. A string that looks like a path may represent a source, a delivery, a logical name, or a registry key. Treating all of them the same is how migrations break.
+
+==========
+MB-GRC-029B_REGISTRY_BUILD_SEMANTICS
+==========
+
+FECHA.............: 2026-06-05
+STATUS............: ACTIVE
+MOTIVO............: Documentar la semántica real detectada durante MB-GRC-027C/028 para evitar confusión entre manifests humanos, registries y outputs generados.
+
+----------
+01.00_PROBLEMA
+----------
+
+Durante la integración de 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt se confirmó que no basta con editar SKILL_SET.MANIFEST.txt para que un skill aparezca en un bundle generado.
+
+El pipeline de build usa varias capas con roles distintos.
+
+Confundir estas capas genera falsos supuestos, fallos de bundle placement y recuperación innecesaria.
+
+----------
+02.00_REGLA_CANONICA_DE_ROLES
+----------
+
+00.SKILL.MENU.ACTIVE.txt:
+- Rol: catálogo global curado de skills visibles para selección IA.
+- No decide inclusión real en bundles.
+- Puede aparecer copiado dentro de varios usecases sin significar que todos esos usecases aplican cada skill del menú.
+
+SKILL_SET.MANIFEST.txt:
+- Rol: resumen humano/usecase-facing de skills esperados o relevantes.
+- Sirve como guía operacional y checklist documental.
+- No es la fuente autoritativa para generar bundles.
+- No garantiza inclusión en 00.BUNDLE.*.txt.
+
+GLOBAL.SKILL.VERSION.REGISTRY.json:
+- Rol: registro global de existencia, versión y hash de archivos fuente de skills.
+- BUILD.ps1 lo consulta para validar que un source file declarado exista y esté registrado.
+- No decide qué usecase recibe un skill.
+- Si un skill no está registrado aquí, BUILD.ps1 debe fallar o no puede resolverlo correctamente.
+
+USECASE.REGISTRY.json:
+- Rol: fuente efectiva de configuración de paquetes de usecase.
+- Controla:
+  - usecases activos;
+  - prompt_files;
+  - menu_files;
+  - preserve_files;
+  - delivery_files_extra;
+  - bundle_definitions[].name;
+  - bundle_definitions[].output_file;
+  - bundle_definitions[].source_files.
+- Es la fuente real para decidir qué archivos fuente entran en cada bundle generado.
+
+USECASE.MANIFEST.json:
+- Rol: evidencia generada por BUILD.ps1.
+- Declara delivery files, bundles, source files, hashes y validación del paquete generado.
+- No debe editarse manualmente.
+- Si está mal, se corrige la fuente y se re-ejecuta BUILD.ps1.
+
+00.BUNDLE.CORE.txt / 01.BUNDLE.CONTINUITY.txt / 02.BUNDLE.GOVERNANCE.txt:
+- Rol: outputs generados para subida/consumo por IA.
+- Se generan desde bundle_definitions[].source_files.
+- No deben editarse manualmente.
+- Si falta contenido, corregir USECASE.REGISTRY.json y/o GLOBAL.SKILL.VERSION.REGISTRY.json, luego re-ejecutar BUILD.ps1.
+
+BUILD.ps1:
+- Rol: contrato ejecutable de build.
+- Materializa paquetes desde USECASE.REGISTRY.json y GLOBAL.SKILL.VERSION.REGISTRY.json.
+- Aplica política de generated output.
+- Debe preservar archivos operativos definidos como parte del contrato de subida, incluyendo README.UPLOAD_THIS_USECASE.txt.
+
+README.UPLOAD_THIS_USECASE.txt:
+- Rol: instrucción humana/IA para saber qué carpeta subir y cómo iniciar el usecase.
+- Debe preservarse durante BUILD.
+- No es fuente de bundle content, pero sí forma parte del contrato operativo de uso.
+
+----------
+03.00_PRECEDENCIA_FUNCIONAL
+----------
+
+Para saber si un skill existe:
+1. Ver SkillsLake/01.SKILLS.
+2. Ver GLOBAL.SKILL.VERSION.REGISTRY.json.
+3. Ver 00.SKILL.MENU.ACTIVE.txt si la pregunta es visibilidad/selección IA.
+
+Para saber si un skill entra en un bundle:
+1. Ver USECASE.REGISTRY.json.
+2. Revisar usecases[].bundle_definitions[].source_files.
+3. Ejecutar BUILD.ps1.
+4. Confirmar en USECASE.MANIFEST.json y 00.BUNDLE.*.txt.
+
+Para corregir un bundle generado:
+1. No editar el bundle.
+2. No editar USECASE.MANIFEST.json.
+3. Corregir source registry/config.
+4. Ejecutar BUILD.ps1.
+5. Validar placement.
+
+Para corregir documentación humana del paquete:
+1. Editar SKILL_SET.MANIFEST.txt o README.UPLOAD_THIS_USECASE.txt según corresponda.
+2. Si el cambio afecta build real, también actualizar USECASE.REGISTRY.json.
+3. Ejecutar BUILD.ps1 si corresponde.
+
+----------
+04.00_ANTIPATRONES
+----------
+
+- Asumir que SKILL_SET.MANIFEST.txt gobierna bundles.
+- Editar USECASE.MANIFEST.json manualmente.
+- Editar 00.BUNDLE.*.txt manualmente.
+- Registrar un skill en el menú pero no en GLOBAL.SKILL.VERSION.REGISTRY.json.
+- Registrar un skill en GLOBAL.SKILL.VERSION.REGISTRY.json y asumir que eso lo agrega a un usecase.
+- Tratar aparición en 00.SKILL.MENU.ACTIVE.txt de un usecase como evidencia de aplicación del skill a ese usecase.
+- Ignorar README.UPLOAD_THIS_USECASE.txt durante limpieza de build.
+- Declarar OK si bundle placement no fue verificado.
+
+----------
+05.00_CHECKLIST_DE_CAMBIO_DE_SKILL_EN_USECASE
+----------
+
+Cuando se agrega un skill a un usecase:
+
+[ ] Crear o actualizar archivo fuente en SkillsLake/01.SKILLS.
+[ ] Registrar o actualizar 00.SKILL.MENU.ACTIVE.txt si debe quedar visible para IA.
+[ ] Registrar o actualizar GLOBAL.SKILL.VERSION.REGISTRY.json con versión/hash.
+[ ] Agregar el skill en USECASE.REGISTRY.json bajo el bundle correcto.
+[ ] Actualizar SKILL_SET.MANIFEST.txt como guía humana/usecase.
+[ ] Ejecutar 90.USECASE/BUILD.ps1.
+[ ] Verificar USECASE.MANIFEST.json.
+[ ] Verificar que el bundle target contiene el skill.
+[ ] Verificar que bundles no target no lo contienen si no corresponde.
+[ ] Ejecutar Validate-System.ps1.
+[ ] Ejecutar RADAR.
+[ ] Commit/push.
+[ ] Ejecutar RADAR post-commit si readiness advierte frescura RADAR.
+
+----------
+06.00_LECCION_APRENDIDA_MB_GRC_027C_028
+----------
+
+Durante MB-GRC-027C se confirmó que la integración física de un skill requiere al menos tres capas:
+- archivo fuente;
+- registry global de versión/hash;
+- usecase registry para selección efectiva de bundle.
+
+Durante MB-GRC-028A/B/C se confirmó que:
+- 01.NEW_PROJECT recibió correctamente el nuevo skill en GOVERNANCE;
+- 04.REPOSITORY_STRUCTURE_REPAIR recibió correctamente el nuevo skill en GOVERNANCE;
+- 02.SESSION_CLOSE y 03.SESSION_CONTINUE no recibieron el skill en bundles;
+- el menú global puede contener el skill aunque el usecase no lo aplique.
+
+Esta regla queda activa para cambios futuros de build/usecase.

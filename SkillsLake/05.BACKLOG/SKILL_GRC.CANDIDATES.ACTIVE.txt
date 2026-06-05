@@ -702,3 +702,12 @@ SUMMARY...........: Formalized close after successful MB-GRC-028A/B/C tests.
 RESULT............: No patch needed for 01.NEW_PROJECT or 04.REPOSITORY_STRUCTURE_REPAIR.
 NEXT_CANDIDATE.....: MB-GRC-029A_REGISTRY_BUILD_SEMANTICS_DOCUMENTATION.
 TECHDEBT..........: Document precedence among SKILL_SET.MANIFEST.txt, GLOBAL.SKILL.VERSION.REGISTRY.json, USECASE.REGISTRY.json and generated USECASE.MANIFEST.json.
+==========
+MB-GRC-029B_REGISTRY_BUILD_SEMANTICS_DOCUMENTATION
+==========
+DATE..............: 2026-06-05 15:49:09 -04
+STATUS............: DONE
+DECISION..........: Documented source-of-truth semantics for SkillMachine registry/build pipeline.
+RATIONALE.........: MB-GRC-027C/028 exposed confusion risk between SKILL_SET.MANIFEST, GLOBAL.SKILL.VERSION.REGISTRY, USECASE.REGISTRY, USECASE.MANIFEST and generated bundles.
+OUTPUT............: SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt
+NEXT..............: Use this semantic contract before future usecase bundle changes.

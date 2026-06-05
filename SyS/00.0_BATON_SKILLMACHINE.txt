@@ -1134,3 +1134,11 @@ CONFIRMED_TESTS....:
 - MB-GRC-028C: 04.REPOSITORY_STRUCTURE_REPAIR behavioral IA-in-blank test passed.
 CURRENT_HEAD.......: 2b2a9b4 20260605_MB-GRC-027C_prompt_engineering_discovery_skill
 NEXT_ACTION........: MB-GRC-029A_REGISTRY_BUILD_SEMANTICS_DOCUMENTATION.
+==========
+MB-GRC-029B_UPDATE
+==========
+DATE..............: 2026-06-05 15:49:09 -04
+STATUS............: DONE
+SUMMARY...........: Documented registry/build source-of-truth semantics after prompt engineering skill integration and IA-in-blank tests.
+KEY_RULE..........: USECASE.REGISTRY.json controls generated bundle inclusion; GLOBAL.SKILL.VERSION.REGISTRY.json controls existence/version/hash; SKILL_SET.MANIFEST.txt is human/usecase-facing guidance.
+NEXT_ACTION.......: If continuing, run a targeted verification that the new semantics block is discoverable from menu/usecase context; otherwise close session.

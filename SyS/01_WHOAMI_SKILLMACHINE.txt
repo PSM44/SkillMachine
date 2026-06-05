@@ -745,3 +745,9 @@ DATE..............: 2026-06-05 15:44:43 -04
 WHAT_CHANGED......: The prompt engineering discovery/challenge skill integration has passed targeted and behavioral read-only tests for NEW_PROJECT and REPOSITORY_STRUCTURE_REPAIR.
 OPERATOR_NOTE.....: Do not assume SKILL_SET.MANIFEST.txt alone controls generated bundles; USECASE.REGISTRY.json controls bundle_definitions.source_files.
 NEXT_ACTION........: Document registry/build semantics in a future focused minibattle.
+==========
+MB-GRC-029B_UPDATE
+==========
+DATE..............: 2026-06-05 15:49:09 -04
+WHAT_CHANGED......: Added documentation of registry/build semantics.
+OPERATOR_NOTE.....: For future skill-to-usecase changes, patch USECASE.REGISTRY.json bundle_definitions[].source_files for actual bundle inclusion; do not rely only on SKILL_SET.MANIFEST.txt.
