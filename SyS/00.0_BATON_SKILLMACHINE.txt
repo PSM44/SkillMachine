@@ -1142,3 +1142,10 @@ STATUS............: DONE
 SUMMARY...........: Documented registry/build source-of-truth semantics after prompt engineering skill integration and IA-in-blank tests.
 KEY_RULE..........: USECASE.REGISTRY.json controls generated bundle inclusion; GLOBAL.SKILL.VERSION.REGISTRY.json controls existence/version/hash; SKILL_SET.MANIFEST.txt is human/usecase-facing guidance.
 NEXT_ACTION.......: If continuing, run a targeted verification that the new semantics block is discoverable from menu/usecase context; otherwise close session.
+==========
+MB-GRC-029D2_UPDATE
+==========
+DATE..............: 2026-06-05 15:58:06 -04
+STATUS............: DONE
+SUMMARY...........: Patched generated output policy at actual source script Apply-GeneratedOutputPolicy.ps1 and regenerated bundles.
+NEXT_ACTION.......: Validate readiness and close session if clean.

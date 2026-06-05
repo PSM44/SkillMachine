@@ -751,3 +751,9 @@ MB-GRC-029B_UPDATE
 DATE..............: 2026-06-05 15:49:09 -04
 WHAT_CHANGED......: Added documentation of registry/build semantics.
 OPERATOR_NOTE.....: For future skill-to-usecase changes, patch USECASE.REGISTRY.json bundle_definitions[].source_files for actual bundle inclusion; do not rely only on SKILL_SET.MANIFEST.txt.
+==========
+MB-GRC-029D2_UPDATE
+==========
+DATE..............: 2026-06-05 15:58:06 -04
+WHAT_CHANGED......: Generated output policy headers now derive from patched Apply-GeneratedOutputPolicy.ps1.
+OPERATOR_NOTE.....: BUILD.ps1 delegates generated output headers to Apply-GeneratedOutputPolicy.ps1.

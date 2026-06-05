@@ -711,3 +711,11 @@ DECISION..........: Documented source-of-truth semantics for SkillMachine regist
 RATIONALE.........: MB-GRC-027C/028 exposed confusion risk between SKILL_SET.MANIFEST, GLOBAL.SKILL.VERSION.REGISTRY, USECASE.REGISTRY, USECASE.MANIFEST and generated bundles.
 OUTPUT............: SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt
 NEXT..............: Use this semantic contract before future usecase bundle changes.
+==========
+MB-GRC-029D2_GENERATED_OUTPUT_POLICY_SOURCE_PATCH
+==========
+DATE..............: 2026-06-05 15:58:06 -04
+STATUS............: DONE
+DECISION..........: Patched Apply-GeneratedOutputPolicy.ps1, not BUILD.ps1, because BUILD calls policy post-processor for generated output headers.
+RATIONALE.........: Headers must align with MB-GRC-029B semantics: USECASE.REGISTRY.json controls bundle inclusion and GLOBAL.SKILL.VERSION.REGISTRY.json controls registered source existence/version/hash.
+LESSON............: Do not infer generator from generated output; locate actual post-processor first.

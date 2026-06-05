@@ -75,17 +75,17 @@ foreach ($dir in $UsecaseDirs) {
 
     Set-GeneratedTxtHeader `
         -Path (Join-Path $uc "00.BUNDLE.CORE.txt") `
-        -SourceOfTruth "SkillsLake/01.SKILLS + 90.USECASE/SKILL_SET.MANIFEST.txt + 90.USECASE/BUILD.ps1" `
+        -SourceOfTruth "SkillsLake/01.SKILLS + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1" `
         -GenerationMode "BUILD_BUNDLE_CORE"
 
     Set-GeneratedTxtHeader `
         -Path (Join-Path $uc "01.BUNDLE.CONTINUITY.txt") `
-        -SourceOfTruth "SkillsLake/01.SKILLS + 90.USECASE/SKILL_SET.MANIFEST.txt + 90.USECASE/BUILD.ps1" `
+        -SourceOfTruth "SkillsLake/01.SKILLS + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1" `
         -GenerationMode "BUILD_BUNDLE_CONTINUITY"
 
     Set-GeneratedTxtHeader `
         -Path (Join-Path $uc "02.BUNDLE.GOVERNANCE.txt") `
-        -SourceOfTruth "SkillsLake/01.SKILLS + GRCLake + 90.USECASE/SKILL_SET.MANIFEST.txt + 90.USECASE/BUILD.ps1" `
+        -SourceOfTruth "SkillsLake/01.SKILLS + GRCLake + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1" `
         -GenerationMode "BUILD_BUNDLE_GOVERNANCE"
 
     Set-GeneratedTxtHeader `
