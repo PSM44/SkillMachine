@@ -761,3 +761,12 @@ DECISION..........: Patch readiness policy so RADAR freshness is not compared bl
 RATIONALE.........: RADAR is generated before commit; comparing RADAR_GENERATED_AT to HEAD_COMMIT_DATE creates false WARN after a correct lifecycle.
 RULE..............: For ignored runtime outputs, compare freshness against latest tracked file write date for HEAD or equivalent source evidence, not commit timestamp.
 NO_WRITE_AFTER_PUSH: Readiness that writes ACTIVE outputs must run before push; post-push must be read-only checks only.
+==========
+MB-GRC-030E_UPLOAD_PACKAGE_MANIFEST_SEMANTICS
+==========
+DATE..............: 2026-06-08 09:51:12 -04
+STATUS............: DONE
+DECISION..........: USECASE.MANIFEST.json must explicitly distinguish delivery_files from the full usecase folder upload package.
+RATIONALE.........: README.UPLOAD_THIS_USECASE.txt defines SELF_CONTAINED_USECASE_FOLDER, but generated manifests did not expose package semantics.
+SCOPE.............: Patch BUILD.ps1 so generated USECASE.MANIFEST.json files declare upload_package_model, upload_instruction_file, folder_upload_required and delivery_files_scope.
+RULE..............: delivery_files are generated/copied delivery artifacts only; the IA upload package is the full 90.USECASE/<USECASE_ID> folder.

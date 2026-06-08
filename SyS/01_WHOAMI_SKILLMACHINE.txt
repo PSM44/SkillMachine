@@ -785,3 +785,9 @@ MB-GRC-030C-R2_UPDATE
 DATE..............: 2026-06-08 09:47:42 -04
 WHAT_CHANGED......: Corrected readiness policy for RADAR freshness after one-shot quality gate.
 OPERATOR_NOTE.....: Do not regenerate RADAR after push to silence freshness WARN. Run readiness before push if it writes ACTIVE outputs.
+==========
+MB-GRC-030E_UPDATE
+==========
+DATE..............: 2026-06-08 09:51:12 -04
+WHAT_CHANGED......: Generated USECASE.MANIFEST.json files now distinguish generated delivery_files from the full self-contained usecase folder upload package.
+OPERATOR_NOTE.....: For IA context upload, use README.UPLOAD_THIS_USECASE.txt and upload the full 90.USECASE/<USECASE_ID> folder, not only delivery_files.

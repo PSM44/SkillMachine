@@ -688,6 +688,14 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             generated_at = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
             source_root = $SkillsRoot
             delivery_files = @($deliveryFiles)
+            upload_package_model = "SELF_CONTAINED_USECASE_FOLDER"
+            upload_package_root = $TargetDir
+            upload_instruction_file = "README.UPLOAD_THIS_USECASE.txt"
+            upload_package_scope = "FULL_USECASE_FOLDER"
+            folder_upload_required = $true
+            delivery_files_scope = "GENERATED_DELIVERY_FILES_ONLY"
+            delivery_files_note = "delivery_files lists generated/copied delivery artifacts; the operational IA upload package is the full usecase folder. Read README.UPLOAD_THIS_USECASE.txt first."
+            # MB-GRC-030E_UPLOAD_PACKAGE_MANIFEST_SEMANTICS
             bundles = @($bundleManifest)
             validation = [ordered]@{
                 missing_files = @($validationMissing)

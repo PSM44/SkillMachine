@@ -1191,3 +1191,11 @@ STATUS............: DONE
 SUMMARY...........: Readiness RADAR freshness policy corrected after MB-GRC-030C WARN.
 DETAIL............: RADAR freshness now uses latest tracked file write timestamp for HEAD instead of HEAD commit timestamp when available.
 NEXT_ACTION.......: Continue with MB-GRC-030D upload package manifest semantics or line-ending policy review.
+==========
+MB-GRC-030E_UPDATE
+==========
+DATE..............: 2026-06-08 09:51:12 -04
+STATUS............: DONE
+SUMMARY...........: Added explicit upload package semantics to generated USECASE.MANIFEST.json output via BUILD.ps1.
+KEY_RULE..........: delivery_files does not mean full IA upload package. The full usecase folder remains the operational package; README.UPLOAD_THIS_USECASE.txt must be read first.
+NEXT_ACTION.......: Validate generated manifests include upload_package_model and delivery_files_scope.
