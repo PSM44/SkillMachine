@@ -1234,3 +1234,13 @@ LAST_CONFIRMED....: 1c515cf 20260608_MB-GRC-031E_safe_markdown_creation_skill
 SUMMARY...........: Markdown file creation safety skill completed; Temp/ ignored; repository recovered and clean after push.
 NEXT_ACTION.......: MB-GRC-031G blank-IA package test, or apply constitution to HIA/Nightshift if human chooses to skip package test.
 CAUTION...........: Future usecase registry edits must be schema-aware; do not blindly inject skills into every source_files list.
+
+==========
+MB-GRC-031J-R2_CONTINUITY_FRESHNESS_PUSH
+==========
+DATE..............: 2026-06-08 13:30:15 -04
+STATUS............: DONE
+LAST_CONFIRMED....: d944d84 20260608_MB-GRC-031J_sync_session_close_manifest
+SUMMARY...........: 031J fixed schema-aware bundle integration for 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt. Build passed with TOTAL_OK 4 and TOTAL_FAIL 0. Readiness warning was caused by stale BATON/WHOAMI after commits, not by build failure.
+NEXT_ACTION.......: MB-GRC-031K patch constitution self-containment gaps detected by 031G read-only test, or run true manual blank-IA test before patching.
+CAUTION...........: For USECASE.REGISTRY.json, add skill paths only under bundle_definitions/source_files using full repo-relative path such as SkillsLake/01.SKILLS/<skill>.txt. Do not insert into menu_files, prompt_files, preserve_files or delivery_files_extra unless intentionally creating a delivery artifact.

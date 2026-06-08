@@ -817,3 +817,15 @@ TECH_DEBT.........:
 - Avoid blind source_files insertion.
 - Avoid long pasted shell scripts when the channel is unstable.
 NEXT_RECOMMENDED..: MB-GRC-031G blank-IA package test before applying constitution to HIA/Nightshift.
+
+==========
+MB-GRC-031J_SCHEMA_AWARE_MARKDOWN_SKILL_BUNDLE_PATCH
+==========
+DATE..............: 2026-06-08 13:30:15 -04
+STATUS............: DONE
+SUMMARY...........: Schema-aware integration of 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt into CORE bundles for 01.NEW_PROJECT, 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR.
+RESULT............: BUILD OK after adding skill by full path inside bundle_definitions/source_files. No extra copied delivery files were generated.
+COMMITS...........:
+- 0aaa49b 20260608_MB-GRC-031J_schema_aware_markdown_skill_bundle_patch
+- d944d84 20260608_MB-GRC-031J_sync_session_close_manifest
+REMAINING_GAP.....: 031G blank-IA test still showed constitution self-containment gaps. Next patch should address AA.CONSTITUTION/package clarity, not Markdown skill integration.
