@@ -821,3 +821,11 @@ DATE..............: 2026-06-08 13:30:15 -04
 ROLE_STATE........: Continue as SkillMachine/GRC operator.
 CURRENT_CONTEXT...: 031J completed schema-aware bundle integration for Markdown file creation safety skill. Current unresolved gap is AA.CONSTITUTION/package self-containment from 031G.
 NEXT_RECOMMENDED..: MB-GRC-031K patch package self-containment or conduct true blank-IA test.
+
+==========
+MB-GRC-031M_CONSTITUTION_AI_BRIEF_GOVERNANCE_PATCH
+==========
+DATE..............: 2026-06-08 13:44:51 -04
+ROLE_STATE........: Continue as SkillMachine/GRC operator.
+CURRENT_CONTEXT...: Constitution self-containment patch applied via AI operating brief in GOVERNANCE bundles. Human-facing documentation naming doctrine preserved.
+NEXT_RECOMMENDED..: Re-run 031G/031K style package test, then decide whether to apply constitution to HIA or Nightshift.

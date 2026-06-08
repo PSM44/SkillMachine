@@ -1244,3 +1244,12 @@ LAST_CONFIRMED....: d944d84 20260608_MB-GRC-031J_sync_session_close_manifest
 SUMMARY...........: 031J fixed schema-aware bundle integration for 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt. Build passed with TOTAL_OK 4 and TOTAL_FAIL 0. Readiness warning was caused by stale BATON/WHOAMI after commits, not by build failure.
 NEXT_ACTION.......: MB-GRC-031K patch constitution self-containment gaps detected by 031G read-only test, or run true manual blank-IA test before patching.
 CAUTION...........: For USECASE.REGISTRY.json, add skill paths only under bundle_definitions/source_files using full repo-relative path such as SkillsLake/01.SKILLS/<skill>.txt. Do not insert into menu_files, prompt_files, preserve_files or delivery_files_extra unless intentionally creating a delivery artifact.
+
+==========
+MB-GRC-031M_CONSTITUTION_AI_BRIEF_GOVERNANCE_PATCH
+==========
+DATE..............: 2026-06-08 13:44:51 -04
+STATUS............: DONE
+SUMMARY...........: Added GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt and integrated it into GOVERNANCE bundles without touching delivery_files_extra, preserve_files, menu_files, prompt_files or max_delivery_files_per_usecase.
+NEXT_ACTION.......: Re-run blank-IA package readiness test to confirm AA.CONSTITUTION, DEPLOY_DONE, DELIVERABLE_DONE and mockup are now sufficiently represented.
+CAUTION...........: HUMAN docs remain separate. Do not treat bundles/prompts/manifests as human-facing documents just because they mention HUMAN.

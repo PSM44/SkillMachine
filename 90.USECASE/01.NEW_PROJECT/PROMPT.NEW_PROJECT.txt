@@ -87,3 +87,23 @@ The IA must prevent portfolio sprawl and stop-loss failure:
 - Do not open additional active projects without pausing/closing another.
 - Do not continue iteration by habit after Plan B trigger.
 - Do not perform platform/governance work before first output unless it directly unblocks DEPLOY_DONE or DELIVERABLE_DONE.
+
+==========
+MB-GRC-031M_CONSTITUTION_AI_BRIEF_SELF_CONTAINMENT
+==========
+
+When this usecase is used for an IT project, apply the AI operating brief:
+
+GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt
+
+Minimum required sequence before implementation:
+
+1. Define OUTPUT_TYPE: DEPLOY_DONE or DELIVERABLE_DONE.
+2. Define the first deploy or first deliverable.
+3. Define the minimum mockup.
+4. Define minimum functionality and characteristics.
+5. Define minimum work required to satisfy the first output.
+6. Define investment limits: time, cost, effort, complexity and Plan B.
+7. Execute only toward DEPLOY_DONE, DELIVERABLE_DONE or stop-loss.
+
+Do not expand platform, architecture, governance, automation, tooling or future features unless the work directly unblocks the first DEPLOY_DONE or DELIVERABLE_DONE.

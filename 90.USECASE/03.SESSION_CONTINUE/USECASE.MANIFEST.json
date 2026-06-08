@@ -1,7 +1,7 @@
 {
   "usecase": "03.SESSION_CONTINUE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-08 13:27:35",
+  "generated_at": "2026-06-08 13:46:33",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 47961,
       "delivery_size_kb": 46.84,
-      "delivery_sha256": "03156B30A431FCB2B6CB1CD8F1FAFEB0611FE60E273E79B46A4D1AC4ABE04CF9",
+      "delivery_sha256": "2DB054FDE1BF28788864C364B04E25F4980BCC2851BF4B5D965141D982F96DBC",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -58,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "6FCC3BB1AFAEC0606A5DD530943D6E8B625666E99D0E87991A7D15C944E4A459",
+      "delivery_sha256": "483327EBFE8D29A8F35CB7AD9ABFC65D4B1EEC38FA00233841E2B6DC9CDE1924",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -84,9 +84,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 46829,
-      "delivery_size_kb": 45.73,
-      "delivery_sha256": "7263C3386862CD9DCCFACFE0FA0615F3474D241C10597BA39E8C4A4C7F038B50",
+      "delivery_size_bytes": 52314,
+      "delivery_size_kb": 51.09,
+      "delivery_sha256": "535647D1E68AF728FD8914E0C417DB1F56FFE51E6C614450B32BFA84EB30008D",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -105,6 +105,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
           "source_sha256": "DE2BBA1A0E19D4E4C5E62294CCDD0314B6B1709171018AD39D7C477A10DF32E3"
+        },
+        {
+          "name": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\AA.CONSTITUTION\\05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
+          "version": "01.00",
+          "source_sha256": "11EB71797C9E8E8D1DF3964E6C151DFBA8833242E8948A7F311E053FFEA314AB"
         }
       ]
     }

@@ -76,3 +76,20 @@ Cuando la sesión requiera crear o modificar archivos .md, Mermaid, fences Markd
 - no entregar scripts IA con triple backtick literal;
 - usar placeholders para Markdown sensible;
 - convertir placeholders después de escribir el archivo mediante código de carácter, por ejemplo chr(96) * 3.
+
+==========
+MB-GRC-031M_CONSTITUTION_AI_BRIEF_LOAD_RULE
+==========
+
+When continuing an IT project, first determine whether the current work is related to DEPLOY_DONE or DELIVERABLE_DONE.
+
+If yes, apply:
+
+GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt
+
+If the full AA.CONSTITUTION folder is available, use it.
+If not, treat the AI operating brief included in the GOVERNANCE bundle as the compact controlling constitution layer.
+
+Respect naming doctrine:
+- files primarily directed to humans must contain HUMAN in the filename;
+- files without HUMAN are not primary human-facing documents, even if they mention HUMAN as a governance concept.

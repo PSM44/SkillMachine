@@ -159,6 +159,12 @@
       "file": "31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
       "version": "v0.2-DRAFT_READY_FOR_TEST",
       "sha256": "CA1E375E4B8971BAD14CDB6987DB16E0133E137AFE7F2F222564F9001586560F"
+    },
+    {
+      "file": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
+      "version": "01.00",
+      "status": "ACTIVE",
+      "description": "AI operating brief for IT project delivery constitution self-containment in usecase bundles."
     }
   ]
 }

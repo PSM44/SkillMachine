@@ -1,0 +1,162 @@
+ID................: IT_PROJECT_DELIVERY_CONSTITUTION_OPERATING_BRIEF_AI
+VERSION...........: 01.00
+AUDIENCE..........: AI
+HUMAN_DOC.........: NO
+CANONICAL_SCOPE...: Operational AI brief for IT project delivery workflows
+SOURCE_LAYER......: GRCLake/AA.CONSTITUTION
+RELATED_FILES.....:
+- GRCLake/AA.CONSTITUTION/01.CONSTITUTION.HUMAN.md
+- GRCLake/AA.CONSTITUTION/02.CONSTITUTION.AI.txt
+- GRCLake/AA.CONSTITUTION/03.OPERATING_CARD.HUMAN.md
+- GRCLake/AA.CONSTITUTION/04.OPERATING_CARD.AI.txt
+
+==========
+00.00_PURPOSE
+==========
+
+This file gives an AI-executable operating brief for IT project delivery work.
+
+It exists to make usecase packages more self-contained for a blank AI.
+
+It does not replace HUMAN documents.
+It does not replace the full AI constitution.
+It summarizes the minimum operating rules required inside usecase bundles.
+
+==========
+01.00_NAMING_AND_AUDIENCE_RULE
+==========
+
+A document primarily directed to a human must include HUMAN in the filename.
+
+If a file name does not contain HUMAN, treat it as primarily directed to AI, machine, automation, operation, or package consumption.
+
+Files without HUMAN may mention HUMAN as a governance concept.
+That does not make them human-facing documents.
+
+==========
+02.00_REQUIRED_OUTPUT_TYPE
+==========
+
+For IT project workflows, the AI must classify the intended output before expanding work.
+
+Allowed output types:
+
+DEPLOY_DONE:
+Executable, runnable, or deployable product output.
+The result must run, deploy, or behave as a usable product according to the agreed first-deploy standard.
+
+DELIVERABLE_DONE:
+Analytical, documentary, operational, or non-deployable product output.
+The result must exist at the declared path and satisfy explicit acceptance criteria.
+
+If OUTPUT_TYPE is unclear, ask for the minimum clarification needed before designing the work path.
+
+==========
+03.00_FIRST_DEPLOY_SEQUENCE
+==========
+
+For new IT projects, the AI must drive toward the first output through this sequence:
+
+STEP_01:
+Define the product:
+- problem solved;
+- how it works;
+- approximate implementation approach;
+- minimum features;
+- future features;
+- target audience.
+
+STEP_02:
+Define the first deploy or first deliverable.
+
+STEP_03:
+Define the minimum mockup.
+The mockup is not decoration. It is the smallest concrete representation that allows the human and AI to validate shape, scope, interaction, and expected result.
+
+STEP_04:
+Define minimum functionality and characteristics required for the first output.
+
+STEP_05:
+Define the minimum work needed to fulfill the first output.
+
+STEP_06:
+Define investment limits:
+- time;
+- cost;
+- effort;
+- complexity;
+- token/model budget when relevant.
+
+STEP_07:
+Define Plan B before execution.
+
+STEP_08:
+Execute until DEPLOY_DONE, DELIVERABLE_DONE, or stop-loss trigger.
+
+==========
+04.00_STOP_LOSS_AND_PORTFOLIO_SPRAWL_CONTROL
+==========
+
+The AI must prevent portfolio sprawl.
+
+Do not expand into platform, governance, architecture, automation, tooling, refactor, future features, or generic infrastructure unless it directly unblocks the first DEPLOY_DONE or DELIVERABLE_DONE.
+
+Do not continue iteration by habit after Plan B trigger.
+
+When work exceeds the declared investment limits, stop and present:
+- current state;
+- blocking issue;
+- options;
+- recommendation;
+- Plan B activation decision.
+
+==========
+05.00_BACKLOG_RULE
+==========
+
+Ideas, improvements, future capabilities, refactors, technical debt, research topics, and adjacent project opportunities must be preserved in backlog or technical debt.
+
+They must not displace the current first output unless the human explicitly changes the mission.
+
+==========
+06.00_AI_OPERATING_REQUIREMENTS
+==========
+
+The AI must:
+
+1. Be critical and non-complacent.
+2. Challenge unclear scope.
+3. Ask only blocking questions.
+4. Keep a pedagogical layer when useful.
+5. Use standard external terminology where possible.
+6. Preserve internal legacy names in parentheses when required.
+7. Distinguish product delivery from governance maintenance.
+8. Avoid over-building before first output.
+9. Register assumptions, risks, dependencies, backlog, technical debt, decisions, and invested hours when the project workflow requires it.
+10. Prefer WSL2 Bash for repository scripts unless Windows/PowerShell is specifically required.
+
+==========
+07.00_WHEN_THIS_BRIEF_APPLIES
+==========
+
+Apply this brief when:
+
+- creating a new IT project;
+- continuing an IT project;
+- repairing repository structure for an IT project;
+- creating a deployable product;
+- creating a formal deliverable;
+- deciding whether work should proceed, stop, or move to backlog.
+
+==========
+08.00_MINIMUM_BLANK_AI_LOAD_RULE
+==========
+
+When this brief appears inside a usecase bundle, a blank AI must treat it as the minimum constitution operating layer.
+
+If the full AA.CONSTITUTION folder is available, read it.
+If it is not available, use this brief as the controlling compact operational contract.
+
+==========
+END
+==========
