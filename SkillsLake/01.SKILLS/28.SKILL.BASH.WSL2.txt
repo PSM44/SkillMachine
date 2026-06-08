@@ -1073,3 +1073,35 @@ CHANGELOG:
 - Se formaliza gate de calidad para one-shots Bash WSL2.
 - Se explicita ciclo DISCOVER -> BACKUP -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> POST_PUSH_READINESS_READONLY.
 - Se agrega regla dura de no escribir archivos después del push.
+
+==========
+MB-GRC-030C-R2_READINESS_RADAR_FRESHNESS_POLICY
+==========
+CONTEXTO:
+MB-GRC-030C expuso un conflicto operacional:
+- RADAR debe generarse antes del commit para validar evidencia de filesystem.
+- El commit ocurre después de RADAR.
+- Si readiness compara RADAR_GENERATED_AT contra HEAD_COMMIT_DATE, produce WARN falso.
+- Si se regenera RADAR después del push para silenciar WARN, se viola la regla no-write-after-push.
+
+REGLA:
+Para outputs runtime ignorados como RADAR, la frescura no debe evaluarse contra la hora del commit.
+Debe evaluarse contra la última modificación local de los archivos versionables incluidos en HEAD o contra una referencia equivalente de evidencia fuente.
+
+PATRON_CORRECTO:
+1. PATCH
+2. BUILD
+3. VALIDATE
+4. RADAR
+5. STAGE_VERSIONABLE_ONLY
+6. COMMIT
+7. READINESS antes de push, si el readiness escribe outputs ACTIVE ignorados
+8. PUSH
+9. POST_PUSH solo checks que no escriben archivos versionables ni runtime outputs
+
+REGLA_DURA:
+No regenerar RADAR después del push solo para satisfacer freshness.
+Si la política de readiness exige escritura post-push, la política está mal ubicada o el script necesita modo no-write.
+
+CRITERIO:
+Un cierre perfecto no debe depender de escribir archivos después del push.

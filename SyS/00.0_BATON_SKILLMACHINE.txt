@@ -1183,3 +1183,11 @@ SUMMARY...........: Formalized one-shot script quality gate inside 28.SKILL.BASH
 KEY_RULE..........: One-shots must follow DISCOVER/BACKUP/PATCH/BUILD/VERIFY/STAGE/COMMIT/PUSH/READONLY-POSTCHECK lifecycle.
 HARD_STOP.........: No file writes after git push; if post-push mutation is needed, open a new minibattle and commit again.
 NEXT_ACTION.......: Continue with MB-GRC-030B/030C backlog line: upload package manifest semantics or IA blank terminology replacement, depending on priority.
+==========
+MB-GRC-030C-R2_UPDATE
+==========
+DATE..............: 2026-06-08 09:47:42 -04
+STATUS............: DONE
+SUMMARY...........: Readiness RADAR freshness policy corrected after MB-GRC-030C WARN.
+DETAIL............: RADAR freshness now uses latest tracked file write timestamp for HEAD instead of HEAD commit timestamp when available.
+NEXT_ACTION.......: Continue with MB-GRC-030D upload package manifest semantics or line-ending policy review.

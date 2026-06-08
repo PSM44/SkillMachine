@@ -779,3 +779,9 @@ MB-GRC-030C_UPDATE
 DATE..............: 2026-06-08 09:42:50 -04
 WHAT_CHANGED......: One-shot Bash WSL2 quality gate formalized in 28.SKILL.BASH.WSL2.txt.
 OPERATOR_NOTE.....: Future one-shots must avoid git add . by default, avoid OK falso, and must not write files after push.
+==========
+MB-GRC-030C-R2_UPDATE
+==========
+DATE..............: 2026-06-08 09:47:42 -04
+WHAT_CHANGED......: Corrected readiness policy for RADAR freshness after one-shot quality gate.
+OPERATOR_NOTE.....: Do not regenerate RADAR after push to silence freshness WARN. Run readiness before push if it writes ACTIVE outputs.

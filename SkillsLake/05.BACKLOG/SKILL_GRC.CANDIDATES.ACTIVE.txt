@@ -752,3 +752,12 @@ DECISION..........: Patch 28.SKILL.BASH.WSL2.txt instead of creating a new skill
 RATIONALE.........: Existing Bash WSL2 skill already covers one-shots, staging, logs, commit/push and verification; missing element was a formal reusable lifecycle gate.
 RULE..............: DISCOVER -> BACKUP -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> POST_PUSH_READINESS_READONLY.
 HARD_RULE.........: No write operations after git push. Post-push checks must be read-only.
+==========
+MB-GRC-030C-R2_READINESS_RADAR_FRESHNESS_POLICY
+==========
+DATE..............: 2026-06-08 09:47:42 -04
+STATUS............: DONE
+DECISION..........: Patch readiness policy so RADAR freshness is not compared blindly against HEAD commit timestamp.
+RATIONALE.........: RADAR is generated before commit; comparing RADAR_GENERATED_AT to HEAD_COMMIT_DATE creates false WARN after a correct lifecycle.
+RULE..............: For ignored runtime outputs, compare freshness against latest tracked file write date for HEAD or equivalent source evidence, not commit timestamp.
+NO_WRITE_AFTER_PUSH: Readiness that writes ACTIVE outputs must run before push; post-push must be read-only checks only.

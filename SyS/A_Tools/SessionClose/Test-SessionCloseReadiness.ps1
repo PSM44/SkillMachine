@@ -189,6 +189,38 @@ $JsonOut = Join-Path $OutDir "SESSION_CLOSE.READINESS.ACTIVE.json"
 New-Item -ItemType Directory -Force -Path $OutDir | Out-Null
 
 $ValidationPath = Join-Path $Root "SyS\A_Tools\Validation\Validate-System.ps1"
+function Get-LatestHeadTrackedFileWriteDate {
+  param(
+    [Parameter(Mandatory=$true)][string]$WorkingDirectory
+  )
+
+  $showResult = Invoke-NativeText -FilePath "git" -Arguments @("show","--name-only","--format=","HEAD") -WorkingDirectory $WorkingDirectory
+  if ($showResult.exit_code -ne 0) {
+    return $null
+  }
+
+  $latest = $null
+  foreach ($raw in @($showResult.output)) {
+    $rel = ([string]$raw).Trim()
+    if ([string]::IsNullOrWhiteSpace($rel)) { continue }
+
+    $full = Join-Path $WorkingDirectory ($rel -replace "/", "\")
+    if (-not (Test-Path -LiteralPath $full)) { continue }
+
+    try {
+      $item = Get-Item -LiteralPath $full -ErrorAction Stop
+      $dto = [DateTimeOffset]::new($item.LastWriteTime)
+      if ($null -eq $latest -or $dto -gt $latest) {
+        $latest = $dto
+      }
+    } catch {
+      continue
+    }
+  }
+
+  return $latest
+}
+
 $RadarManifestPath = Join-Path $Root "SyS\A_Tools\Radar\radar.manifest.json"
 $RadarLitePath = Join-Path $Root "SyS\A_Tools\Radar\radar.lite.txt"
 $BatonPath = Join-Path $Root "SyS\00.0_BATON_SKILLMACHINE.txt"
@@ -231,6 +263,7 @@ if ($radarManifestExists) {
 
 $headCommitDate = Get-GitHeadDate -WorkingDirectory $Root
 $radarGeneratedDate = Get-RadarGeneratedDateOffset -RadarManifest $radarManifest
+$latestHeadTrackedFileWriteDate = Get-LatestHeadTrackedFileWriteDate -WorkingDirectory $Root
 $batonLastCommitDate = Get-GitPathLastCommitDate -WorkingDirectory $Root -RelativePath $BatonRelPath
 $whoamiLastCommitDate = Get-GitPathLastCommitDate -WorkingDirectory $Root -RelativePath $WhoamiRelPath
 
@@ -238,8 +271,12 @@ $radarFreshAgainstHead = $false
 $batonFreshAgainstHead = $false
 $whoamiFreshAgainstHead = $false
 
-if ($headCommitDate -and $radarGeneratedDate) {
-  $radarFreshAgainstHead = ($radarGeneratedDate -ge $headCommitDate)
+if ($radarGeneratedDate) {
+  if ($latestHeadTrackedFileWriteDate) {
+    $radarFreshAgainstHead = ($radarGeneratedDate -ge $latestHeadTrackedFileWriteDate)
+  } elseif ($headCommitDate) {
+    $radarFreshAgainstHead = ($radarGeneratedDate -ge $headCommitDate)
+  }
 }
 
 if ($headCommitDate -and $batonLastCommitDate) {
@@ -304,6 +341,7 @@ if ($status -eq "OK") {
 
 $artifactMeta = [pscustomobject]@{
   head_commit_date = if ($headCommitDate) { $headCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
+  radar_freshness_reference_date = if ($latestHeadTrackedFileWriteDate) { $latestHeadTrackedFileWriteDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
 
   radar_manifest_exists = $radarManifestExists
   radar_manifest_path = $RadarManifestPath
@@ -432,6 +470,7 @@ Add-Line $lines "=========="
 Add-Line $lines "04.00_CONTINUITY_ARTIFACTS"
 Add-Line $lines "=========="
 Add-Line $lines ("HEAD_COMMIT_DATE...........: {0}" -f $artifactMeta.head_commit_date)
+Add-Line $lines ("RADAR_REFERENCE_DATE.......: {0}" -f $artifactMeta.radar_freshness_reference_date)
 Add-Line $lines ("RADAR_MANIFEST_EXISTS......: {0}" -f $artifactMeta.radar_manifest_exists)
 Add-Line $lines ("RADAR_MANIFEST_PATH........: {0}" -f $artifactMeta.radar_manifest_path)
 Add-Line $lines ("RADAR_GENERATED_AT.........: {0}" -f $artifactMeta.radar_generated_at)
