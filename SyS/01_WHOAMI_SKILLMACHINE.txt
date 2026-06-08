@@ -829,3 +829,11 @@ DATE..............: 2026-06-08 13:44:51 -04
 ROLE_STATE........: Continue as SkillMachine/GRC operator.
 CURRENT_CONTEXT...: Constitution self-containment patch applied via AI operating brief in GOVERNANCE bundles. Human-facing documentation naming doctrine preserved.
 NEXT_RECOMMENDED..: Re-run 031G/031K style package test, then decide whether to apply constitution to HIA or Nightshift.
+
+==========
+MB-GRC-031O_SESSION_CLOSE_AFTER_031M_031N
+==========
+DATE..............: 2026-06-08 13:54:23 -04
+ROLE_STATE........: Continue as SkillMachine/GRC operator.
+CURRENT_CONTEXT...: MB-GRC-031M/031N completed. Usecase packages now include compact AI constitution operating brief in GOVERNANCE bundles. HUMAN naming doctrine is active.
+NEXT_RECOMMENDED..: Apply constitution to Nightshift if testing AI automation patterns; apply to HIA if improving active product workflow.

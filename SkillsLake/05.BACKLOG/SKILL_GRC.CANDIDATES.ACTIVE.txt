@@ -838,3 +838,22 @@ STATUS............: DONE
 SUMMARY...........: Created AI operating brief for AA.CONSTITUTION self-containment and inserted it into GOVERNANCE bundles for 01.NEW_PROJECT, 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR.
 NAMING_RULE.......: Human-facing documentation must contain HUMAN in filename. Non-HUMAN files are treated as AI/operation/machine-facing even if they mention HUMAN as a concept.
 EXPECTED_RESULT...: Blank IA packages should now carry compact constitution operating rules without adding a sixth delivery file.
+
+==========
+MB-GRC-031O_SESSION_CLOSE_AFTER_031M_031N
+==========
+DATE..............: 2026-06-08 13:54:23 -04
+STATUS............: DONE
+SUMMARY...........: Formal close after constitution AI operating brief patch and blank-IA package self-containment test.
+CONFIRMED.........:
+- 031M commit ddacb7e pushed.
+- 031N read-only package test returned OK_BASIC_BLANK_IA_CONSTITUTION_SELF_CONTAINMENT.
+- Delivery count remained 5.
+- Governance bundles now carry compact AI constitution operating rules.
+NONBLOCKING_TD....:
+- Decide future naming treatment for GRCLake/AA.CONSTITUTION/00.README.md.
+- Keep TempScript.sh as reusable local operator script for long scripts.
+NEXT_OPTIONS......:
+- Apply constitution workflow to HIA.
+- Apply constitution workflow to Nightshift.
+- Run true blank-IA manual test before applying to a real project.

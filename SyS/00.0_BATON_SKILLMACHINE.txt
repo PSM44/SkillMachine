@@ -1253,3 +1253,14 @@ STATUS............: DONE
 SUMMARY...........: Added GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt and integrated it into GOVERNANCE bundles without touching delivery_files_extra, preserve_files, menu_files, prompt_files or max_delivery_files_per_usecase.
 NEXT_ACTION.......: Re-run blank-IA package readiness test to confirm AA.CONSTITUTION, DEPLOY_DONE, DELIVERABLE_DONE and mockup are now sufficiently represented.
 CAUTION...........: HUMAN docs remain separate. Do not treat bundles/prompts/manifests as human-facing documents just because they mention HUMAN.
+
+==========
+MB-GRC-031O_SESSION_CLOSE_AFTER_031M_031N
+==========
+DATE..............: 2026-06-08 13:54:23 -04
+STATUS............: DONE
+LAST_CONFIRMED....: ddacb7e 20260608_MB-GRC-031M_constitution_ai_brief_governance_patch
+SUMMARY...........: Constitution AI operating brief was created, registered and inserted into GOVERNANCE bundles. Blank-IA package readiness check after 031M returned OK with failure count 0.
+CURRENT_REPO_STATE: Clean before close artifact.
+NEXT_ACTION.......: Choose between applying constitution workflow to HIA, applying it to Nightshift, or running a true blank-IA manual test.
+CAUTION...........: Do not mix HUMAN documentation with AI operating bundles. Files primarily directed to humans must include HUMAN in filename.

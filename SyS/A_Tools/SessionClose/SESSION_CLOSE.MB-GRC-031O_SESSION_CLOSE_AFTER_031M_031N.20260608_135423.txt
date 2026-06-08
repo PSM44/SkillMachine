@@ -1,0 +1,116 @@
+==========
+SESSION_CLOSE: MB-GRC-031O_SESSION_CLOSE_AFTER_031M_031N
+==========
+
+DATE..............: 2026-06-08 13:54:23 -04
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+HEAD_BEFORE.......: ddacb7e 20260608_MB-GRC-031M_constitution_ai_brief_governance_patch
+
+==========
+01.00_STATUS
+==========
+
+Session closing after MB-GRC-031M and MB-GRC-031N.
+
+Latest confirmed commit:
+ddacb7e 20260608_MB-GRC-031M_constitution_ai_brief_governance_patch
+
+Repository state before close:
+clean
+
+==========
+02.00_COMPLETED
+==========
+
+MB-GRC-031M completed:
+- Created GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt.
+- Registered it in 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json.
+- Added it to GOVERNANCE bundle source_files for:
+  - 01.NEW_PROJECT
+  - 03.SESSION_CONTINUE
+  - 04.REPOSITORY_STRUCTURE_REPAIR
+- Strengthened PROMPT.NEW_PROJECT.txt with:
+  - DEPLOY_DONE
+  - DELIVERABLE_DONE
+  - first deploy
+  - minimum mockup
+  - Plan B
+  - stop-loss / anti portfolio sprawl
+- Strengthened PROMPT.SESSION_CONTINUE.txt with:
+  - AA.CONSTITUTION load rule
+  - DEPLOY_DONE / DELIVERABLE_DONE detection
+  - HUMAN naming doctrine
+
+MB-GRC-031N read-only package test completed:
+- Required files present.
+- Delivery count remained 5.
+- Governance bundles include constitution operating brief.
+- PROMPT.NEW_PROJECT includes minimum mockup.
+- PROMPT.SESSION_CONTINUE includes constitution load rule.
+- FAILURE_COUNT: 0.
+- READONLY_VERDICT: OK_BASIC_BLANK_IA_CONSTITUTION_SELF_CONTAINMENT.
+
+==========
+03.00_DECISIONS_AND_DOCTRINE
+==========
+
+HUMAN naming doctrine:
+- Files primarily directed to humans must contain HUMAN in the filename.
+- Files without HUMAN are not primary human-facing documents, even if they mention HUMAN as a governance concept.
+- AI / operation / machine-facing documents may mention HUMAN without being human-facing.
+
+Current interpretation:
+- HUMAN docs remain separate.
+- AI operating brief is intentionally not named HUMAN.
+- Bundles, prompts and manifests are operational package files, not primary human documentation.
+
+==========
+04.00_NONBLOCKING_TECHNICAL_DEBT
+==========
+
+TD-031O-01:
+GRCLake/AA.CONSTITUTION/00.README.md still requires a future naming decision.
+
+Current issue:
+- It is Markdown and lacks HUMAN or AI in filename.
+- If human-facing, rename or replace with a HUMAN-named document.
+- If AI-facing or package-facing, consider renaming to 00.README.AI.txt or splitting into HUMAN and AI variants.
+
+This is nonblocking because 031N confirmed basic blank-IA constitution self-containment through 05.CONSTITUTION.OPERATING_BRIEF.AI.txt.
+
+TD-031O-02:
+Future scripts should prefer Temp/TempScript.sh for long scripts and a short wrapper.
+The wrapper must preserve TempScript.sh and normalize BOM/CRLF before copying to /tmp.
+
+TD-031O-03:
+Large logs should be saved fully to Temp, but chat-visible output should prioritize markers, grep summaries and tail excerpts to avoid truncation.
+
+==========
+05.00_NEXT_ACTION_OPTIONS
+==========
+
+Recommended next options:
+
+Option A:
+Apply the constitution workflow to HIA.
+
+Option B:
+Apply the constitution workflow to Nightshift as a laboratory for Codex / Claude Code automation.
+
+Option C:
+Run one true blank-IA manual prompt test using the generated usecase folder, not only heuristic grep checks.
+
+Recommended next:
+Use Nightshift if the objective is to test AI automation patterns safely.
+Use HIA if the objective is to immediately improve an active product workflow.
+
+==========
+06.00_CLOSE_VERDICT
+==========
+
+Session can close after this artifact is committed and pushed.
+
+==========
+END
+==========
