@@ -925,3 +925,151 @@ fi
   - .venv/openpyxl,
   - one-shots /tmp,
   - cierre con commit/push/verificación.
+
+
+==========
+MB-GRC-030C_ONE_SHOT_SCRIPT_QUALITY_GATE
+==========
+
+OBJETIVO:
+Formalizar el ciclo de vida mínimo obligatorio para one-shots Bash WSL2 que modifican repositorios Git.
+
+ALCANCE:
+Aplica a scripts one-shot que:
+- crean, editan, mueven o eliminan archivos;
+- ejecutan BUILD, validadores, RADAR o herramientas de gobierno;
+- actualizan BATON, WHOAMI, backlog, registry, manifests o policies;
+- hacen git add, commit o push.
+
+NO_APLICA_CON_MAXIMA_FRICCION:
+- inspecciones read-only simples;
+- comandos de diagnóstico acotados;
+- grep/find/listados sin mutación;
+- pruebas locales sin escritura ni Git.
+
+LIFECYCLE_OBLIGATORIO:
+1. DISCOVER:
+   - confirmar root;
+   - confirmar branch;
+   - confirmar HEAD;
+   - confirmar working tree clean;
+   - verificar archivos requeridos;
+   - declarar propósito;
+   - imprimir COPY_FROM_HERE.
+
+2. BACKUP:
+   - respaldar solo archivos objetivo antes de mutar;
+   - guardar backups bajo SyS/A_Tools/OneShots/Backups;
+   - no tratar backups como fuente canónica.
+
+3. PATCH:
+   - aplicar cambios idempotentes cuando sea razonable;
+   - no editar generated outputs manualmente;
+   - no escribir fuera de PROJECT_ROOT;
+   - abortar ante archivo faltante crítico.
+
+4. BUILD:
+   - ejecutar BUILD.ps1 cuando cambien skills, usecases, registry, manifests o fuentes de bundles;
+   - si BUILD falla, no continuar a commit.
+
+5. VERIFY:
+   - validar existencia de outputs esperados;
+   - verificar inclusión/exclusión de bundles cuando aplique;
+   - ejecutar Validate-System.ps1;
+   - ejecutar RADAR.ps1 si cambió filesystem/versionable relevante;
+   - evitar OK falso.
+
+6. STAGE_VERSIONABLE_ONLY:
+   - no usar git add . por defecto;
+   - no usar git add -A por defecto;
+   - usar staging explícito por archivo o whitelist controlada;
+   - no force-stage outputs ignorados salvo decisión humana explícita;
+   - revisar git status --short antes de commit.
+
+7. COMMIT:
+   - commit message trazable con fecha y MB_ID;
+   - no usar git commit --no-verify;
+   - si pre-commit falla, no hacer bypass.
+
+8. PUSH:
+   - ejecutar git push;
+   - verificar HEAD y tracking contra origin/main.
+
+9. POST_PUSH_READINESS_READONLY:
+   - después del push solo se permiten verificaciones read-only;
+   - permitido: git status, git log, Test-SessionCloseReadiness.ps1 si no escribe archivos;
+   - prohibido: modificar BATON, WHOAMI, backlog, RADAR, manifests o cualquier archivo después del push.
+
+REGLA_DURA_NO_WRITE_AFTER_PUSH:
+Un one-shot de cierre perfecto no debe escribir archivos después de git push.
+Si se detecta una necesidad de escritura post-push:
+- declarar el cierre como incompleto;
+- ejecutar una nueva minibattle;
+- hacer nuevo commit/push;
+- no ocultar el cambio en un supuesto "post-check".
+
+REGLA_DURA_ANTI_REPETICION:
+No reejecutar un one-shot mutante si ya aplicó cambios parciales sin antes:
+- diagnosticar estado actual;
+- clasificar qué quedó aplicado;
+- definir recovery;
+- respaldar estado dirty;
+- evitar duplicar bloques en BATON/WHOAMI/backlog.
+
+REGLA_DURA_OK_REAL:
+El script no debe imprimir DONE, OK, COMMITTED, PUSHED o FINAL_STATUS exitoso si:
+- falló BUILD;
+- falló Validate-System;
+- falló RADAR cuando aplica;
+- falló commit;
+- falló push;
+- quedó working tree dirty no explicado;
+- hubo escritura post-push.
+
+PATRON_MINIMO_DE_SALIDA:
+Todo one-shot serio debe imprimir:
+- START marker;
+- LOCAL_TIME;
+- ROOT_WIN;
+- ROOT_WSL;
+- PURPOSE;
+- COPY_FROM_HERE;
+- secciones numeradas;
+- HEAD_BEFORE;
+- STATUS_BEFORE;
+- DIFF SUMMARY;
+- STAGED_STATUS;
+- COMMIT hash;
+- PUSH result;
+- HEAD_AFTER;
+- STATUS_AFTER;
+- FINAL_STATUS;
+- END marker.
+
+CRITERIO_DE_DONE:
+DONE solo si:
+- cambios aplicados;
+- build requerido OK;
+- validación OK;
+- RADAR ejecutado si aplica;
+- commit creado;
+- push OK;
+- post-push readiness read-only OK o advertencia explícita justificada;
+- git status final clean;
+- no hubo escritura posterior al push.
+
+ANTIPATRONES:
+- escribir archivos después del push;
+- usar git add . para cerrar rápido;
+- reejecutar scripts mutantes parcialmente aplicados;
+- registrar OK con warnings no explicados;
+- ocultar generated output drift;
+- mezclar diagnóstico read-only con patch sin declarar cambio de modo;
+- pedir al humano subir repo completo cuando basta path exacto;
+- usar RADAR como fuente lógica de decisión.
+
+CHANGELOG:
+2026-06-08, MB-GRC-030C
+- Se formaliza gate de calidad para one-shots Bash WSL2.
+- Se explicita ciclo DISCOVER -> BACKUP -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> POST_PUSH_READINESS_READONLY.
+- Se agrega regla dura de no escribir archivos después del push.

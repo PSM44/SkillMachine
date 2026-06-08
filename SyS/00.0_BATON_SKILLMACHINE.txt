@@ -1174,3 +1174,12 @@ MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES.
 
 PATH_TO_MANAGEMENT_DELIVERABLE:
 MB-GRC-030A -> MB-GRC-030B -> MB-GRC-030C -> MB-GRC-031A -> MB-GRC-031B -> MB-GRC-032A -> MB-GRC-033A_GERENCIA_PACK_V0_1.
+==========
+MB-GRC-030C_UPDATE
+==========
+DATE..............: 2026-06-08 09:42:50 -04
+STATUS............: DONE
+SUMMARY...........: Formalized one-shot script quality gate inside 28.SKILL.BASH.WSL2.txt.
+KEY_RULE..........: One-shots must follow DISCOVER/BACKUP/PATCH/BUILD/VERIFY/STAGE/COMMIT/PUSH/READONLY-POSTCHECK lifecycle.
+HARD_STOP.........: No file writes after git push; if post-push mutation is needed, open a new minibattle and commit again.
+NEXT_ACTION.......: Continue with MB-GRC-030B/030C backlog line: upload package manifest semantics or IA blank terminology replacement, depending on priority.

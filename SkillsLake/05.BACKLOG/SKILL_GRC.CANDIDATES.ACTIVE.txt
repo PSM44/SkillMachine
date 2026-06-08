@@ -743,3 +743,12 @@ BACKLOG:
 
 NEXT_ACTION:
 MB-GRC-030A_ONE_SHOT_SCRIPT_QUALITY_RULES.
+==========
+MB-GRC-030C_ONE_SHOT_SCRIPT_QUALITY_GATE
+==========
+DATE..............: 2026-06-08 09:42:50 -04
+STATUS............: DONE
+DECISION..........: Patch 28.SKILL.BASH.WSL2.txt instead of creating a new skill.
+RATIONALE.........: Existing Bash WSL2 skill already covers one-shots, staging, logs, commit/push and verification; missing element was a formal reusable lifecycle gate.
+RULE..............: DISCOVER -> BACKUP -> PATCH -> BUILD -> VERIFY -> STAGE_VERSIONABLE_ONLY -> COMMIT -> PUSH -> POST_PUSH_READINESS_READONLY.
+HARD_RULE.........: No write operations after git push. Post-push checks must be read-only.
