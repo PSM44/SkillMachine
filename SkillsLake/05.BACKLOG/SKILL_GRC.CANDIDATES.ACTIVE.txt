@@ -789,3 +789,19 @@ USECASES_UPDATED..:
 - 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR
 RATIONALE.........: Prevent portfolio sprawl and missing stop-loss; prioritize first DEPLOY_DONE or DELIVERABLE_DONE.
 NEXT..............: Test constitution on a deployable project before expanding platform governance.
+
+==========
+MB-GRC-031E-R_MARKDOWN_CREATION_SAFETY_SKILL
+==========
+DATE..............: 2026-06-08 12:46:55 -04
+STATUS............: DONE
+DECISION..........: Created dedicated Markdown file creation safety skill and integrated it into selected usecases.
+SKILL.............: SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+GITIGNORE.........: Temp/ is ignored as local reusable operator workspace.
+RATIONALE.........: Prevent Markdown/Mermaid/fence rendering issues, shell paste failures and CRLF/BOM execution failures.
+CORRECTION........: Previous strategy was incomplete because scripts still contained literal triple backtick fences. New rule prohibits literal triple backticks in delivered IA scripts and requires character-code fence generation.
+USECASES_UPDATED..:
+- 01.NEW_PROJECT
+- 03.SESSION_CONTINUE
+- 04.REPOSITORY_STRUCTURE_REPAIR
+NEXT..............: Run blank-IA package test or apply constitution to next project once readiness is OK.

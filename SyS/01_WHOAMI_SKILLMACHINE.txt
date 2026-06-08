@@ -798,3 +798,10 @@ MB-GRC-031B_UPDATE
 DATE..............: 2026-06-08 12:19:30 -04
 WHAT_CHANGED......: IT project delivery constitution created under GRCLake/AA.CONSTITUTION.
 OPERATOR_NOTE.....: Future IT projects must choose DEPLOY_DONE or DELIVERABLE_DONE, define first output, mockup, scope, no-scope, budget, stop-loss and Plan B before build expansion.
+
+==========
+MB-GRC-031E-R_UPDATE
+==========
+DATE..............: 2026-06-08 12:46:55 -04
+WHAT_CHANGED......: Markdown file creation safety skill added; Temp/ is now local ignored workspace.
+OPERATOR_NOTE.....: For long scripts, use Temp/TempScript.sh, copy to /tmp, normalize BOM/CRLF, execute from /tmp, and preserve TempScript.sh. Scripts delivered by IA must avoid literal triple backtick fences.

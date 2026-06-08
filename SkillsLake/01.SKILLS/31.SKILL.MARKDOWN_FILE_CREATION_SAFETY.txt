@@ -1,0 +1,300 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.MARKDOWN.FILE.CREATION.SAFETY.01.00
+NOMBRE_SUGERIDO...: 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+FECHA.............: 2026-06-08
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+AUTOR_IA..........: ChatGPT
+
+ALCANCE...........:
+Define reglas seguras para crear o modificar archivos Markdown (.md) mediante scripts, prompts, shells, wrappers o respuestas IA cuando existen riesgos de interpretación por Markdown, Mermaid, fences, heredocs, renderizado prematuro, truncación, CRLF/LF o BOM.
+
+NO_CUBRE..........:
+No define estructura semántica completa del contenido interno de cualquier archivo; eso vive en 07.SKILL.FILE_CONTENT.txt.
+No define política general Bash/WSL2; eso vive en 28.SKILL.BASH.WSL2.txt.
+No define política de artefactos temporales del repo; eso vive en SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt.
+No reemplaza validación, RADAR, readiness ni revisión humana.
+
+DEPENDENCIAS......:
+07.SKILL.FILE_CONTENT.txt
+12.SKILL.DRAG_AND_DROP.txt
+28.SKILL.BASH.WSL2.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+
+TAGS_OPERATIVOS...: MARKDOWN, MERMAID, FILE_CREATION, SCRIPTING, WSL2, PLACEHOLDERS, CRLF, BOM, TEMP_WORKSPACE
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+01.00 Propósito
+02.00 Problema real
+03.00 Regla central
+04.00 Regla dura anti-fence literal
+05.00 Patrón seguro de creación Markdown
+06.00 Placeholders recomendados
+07.00 Conversión segura con código de carácter
+08.00 TempScript.sh y workspace local
+09.00 CRLF/BOM
+10.00 Validaciones mínimas
+11.00 Antipatrones
+12.00 Checklist rápido
+13.00 Changelog
+
+==========
+01.00_PROPOSITO
+==========
+
+Este skill reduce fallas al crear archivos Markdown mediante IA y scripts.
+
+Especialmente aplica cuando el contenido incluye:
+
+- fences Markdown;
+- bloques Mermaid;
+- backticks triples;
+- heredocs;
+- plantillas con sintaxis sensible;
+- caracteres que ChatGPT puede renderizar;
+- contenido que Windows puede guardar con CRLF o BOM;
+- scripts largos pegados desde editor gráfico.
+
+El objetivo no es “hacer Markdown bonito”. El objetivo es que el archivo final quede correcto, reproducible, auditable y sin romper shell, Git ni renderizado.
+
+==========
+02.00_PROBLEMA_REAL
+==========
+
+Al crear .md desde ChatGPT + shell aparecen fallas típicas:
+
+1. ChatGPT renderiza Mermaid o fences antes de tiempo.
+2. El shell interpreta mal heredocs o bloques largos.
+3. El usuario pega script largo y se corta.
+4. Windows guarda CRLF/BOM y Bash falla.
+5. Markdown final queda sin cierre de fence.
+6. Git queda con warnings LF/CRLF.
+7. El archivo parece creado, pero contiene marcadores erróneos o truncación.
+8. El script entregado contiene backticks triples literales y la interfaz los interpreta antes de que el usuario pueda copiar el script correctamente.
+
+Estos errores producen retrabajo y falsa sensación de avance.
+
+==========
+03.00_REGLA_CENTRAL
+==========
+
+No escribir sintaxis Markdown sensible directamente si el canal de entrega puede interpretarla, renderizarla, truncarla o romper el shell.
+
+Usar marcadores inertes primero.
+
+Luego convertir los marcadores a sintaxis Markdown real dentro del script, después de que el archivo fue escrito.
+
+==========
+04.00_REGLA_DURA_ANTI_FENCE_LITERAL
+==========
+
+Regla dura:
+
+En respuestas ChatGPT, scripts pegables, heredocs, strings Python, ejemplos y plantillas intermedias, no incluir triple backtick literal.
+
+Ni dentro de documentación.
+Ni dentro de ejemplos.
+Ni dentro de heredocs.
+Ni dentro de strings de conversión.
+Ni como “resultado esperado”.
+
+La única forma permitida de producir un fence real dentro del archivo final es generarlo programáticamente después de la escritura, por ejemplo usando:
+
+fence = chr(96) * 3
+
+Esta regla existe porque la interfaz puede renderizar o encapsular mal cualquier triple backtick literal, incluso si el autor cree que está “dentro del script”.
+
+==========
+05.00_PATRON_SEGURO_DE_CREACION_MARKDOWN
+==========
+
+Flujo recomendado:
+
+1. Crear archivo destino con contenido Markdown usando placeholders inertes.
+2. Evitar backticks triples reales en el script entregado por IA.
+3. Usar placeholders para fences, Mermaid y delimitadores peligrosos.
+4. Escribir archivo.
+5. Ejecutar conversión controlada de placeholders.
+6. La conversión debe generar fences usando código de carácter, no texto literal con backticks triples.
+7. Normalizar BOM/CRLF si aplica.
+8. Verificar que el archivo final contiene el Markdown esperado.
+9. Ejecutar validación relevante.
+10. Registrar si el patrón evitó un fallo.
+
+==========
+06.00_PLACEHOLDERS_RECOMENDADOS
+==========
+
+06.10 Mermaid
+
+Usar en contenido intermedio:
+
+@@FENCE_MERMAID@@
+flowchart TD
+A[Inicio] --> B[Fin]
+@@FENCE@@
+
+06.20 Bash
+
+Usar en contenido intermedio:
+
+@@FENCE_BASH@@
+echo "hello"
+@@FENCE@@
+
+06.30 Text
+
+Usar en contenido intermedio:
+
+@@FENCE_TEXT@@
+contenido literal
+@@FENCE@@
+
+06.40 Genérico
+
+Usar:
+
+@@FENCE@@
+
+para cierre o apertura genérica, según contexto.
+
+==========
+07.00_CONVERSION_SEGURA_CON_CODIGO_DE_CARACTER
+==========
+
+Conversión recomendada:
+
+- definir fence como chr(96) multiplicado por 3;
+- reemplazar @@FENCE_MERMAID@@ por fence + "mermaid";
+- reemplazar @@FENCE_BASH@@ por fence + "bash";
+- reemplazar @@FENCE_TEXT@@ por fence + "text";
+- reemplazar @@FENCE@@ por fence.
+
+Ejemplo conceptual:
+
+1. Leer archivo.
+2. Calcular fence = chr(96) * 3.
+3. Reemplazar placeholders.
+4. Escribir archivo.
+5. Confirmar que no quedan placeholders.
+
+No escribir el fence real en el script entregado por IA.
+
+==========
+08.00_TEMPSCRIPT_Y_WORKSPACE_LOCAL
+==========
+
+08.10 Ruta estándar
+
+Para scripts largos en SkillMachine:
+
+C:\01. GitHub\Skills\Temp\TempScript.sh
+
+08.20 Regla
+
+TempScript.sh es un archivo local reutilizable de operador.
+
+No se debe borrar por defecto.
+
+No debe ser canon del repo.
+
+08.30 Wrapper correcto
+
+El wrapper debe:
+
+1. copiar Temp/TempScript.sh a /tmp;
+2. remover BOM si existe;
+3. convertir CRLF/CR a LF;
+4. ejecutar desde /tmp;
+5. conservar Temp/TempScript.sh para uso futuro.
+
+08.40 Git
+
+La carpeta Temp/ debe estar ignorada en Git.
+
+==========
+09.00_CRLF_BOM
+==========
+
+Todo script pegado desde Windows hacia WSL2 debe normalizarse antes de ejecutarse.
+
+Patrón mínimo:
+
+1. leer bytes;
+2. remover BOM UTF-8 si existe;
+3. convertir CRLF y CR a LF;
+4. escribir bytes normalizados;
+5. ejecutar con bash desde /tmp.
+
+No ejecutar scripts largos copiados desde Windows sin normalización.
+
+==========
+10.00_VALIDACIONES_MINIMAS
+==========
+
+Para .md con Mermaid:
+
+- verificar que no quedaron placeholders @@FENCE;
+- verificar que existe apertura Mermaid real en el archivo final si corresponde;
+- verificar que existe cierre de fence real;
+- verificar que el archivo está en UTF-8 sin BOM si el tooling lo requiere;
+- revisar git diff;
+- ejecutar validadores del proyecto si aplica.
+
+La validación debe buscar tanto placeholders residuales como resultado final esperado.
+
+==========
+11.00_ANTIPATRONES
+==========
+
+A1. Pegar scripts gigantes directo al shell interactivo.
+A2. Incluir fences Markdown reales dentro de un bloque que ChatGPT puede renderizar mal.
+A3. Incluir triple backtick literal dentro del propio script entregado por IA.
+A4. Borrar TempScript.sh después de cada ejecución si el humano lo usa como archivo reutilizable.
+A5. Normalizar CRLF/LF masivamente sin necesidad.
+A6. Asumir que .md “se ve bien” sin revisar diff.
+A7. Reejecutar un script mutante parcial sin recovery.
+A8. Integrar archivos .md generados sin validar cierres de fence.
+A9. Esconder errores de formato como si fueran cambios de contenido.
+
+==========
+12.00_CHECKLIST_RAPIDO
+==========
+
+[ ] ¿El script largo se pegó en Temp/TempScript.sh?
+[ ] ¿El wrapper copió a /tmp?
+[ ] ¿Se normalizó BOM/CRLF antes de bash?
+[ ] ¿El script entregado por IA evita triple backtick literal?
+[ ] ¿Se usaron placeholders para fences o Mermaid?
+[ ] ¿Se convirtieron placeholders después de escribir el archivo?
+[ ] ¿La conversión usó chr(96) * 3 u otro método equivalente?
+[ ] ¿No quedaron placeholders @@FENCE?
+[ ] ¿Se revisó git diff?
+[ ] ¿Se ejecutó Validate-System si aplica?
+[ ] ¿Se preservó TempScript.sh localmente?
+
+==========
+13.00_CHANGELOG
+==========
+
+2026-06-08, v0.2-DRAFT_READY_FOR_TEST
+- Corrige la primera estrategia: no basta con placeholder dentro del archivo final.
+- Agrega regla dura: ningún triple backtick literal debe aparecer en scripts entregados por IA.
+- Formaliza generación de fences mediante chr(96) * 3.
+- Formaliza Temp/TempScript.sh como archivo local reutilizable de operador.
+- Declara Temp/ como workspace local ignorado por Git.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

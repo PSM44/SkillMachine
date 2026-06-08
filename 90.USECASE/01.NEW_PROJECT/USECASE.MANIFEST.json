@@ -1,7 +1,7 @@
 {
   "usecase": "01.NEW_PROJECT",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-08 12:19:31",
+  "generated_at": "2026-06-08 13:16:52",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 38426,
       "delivery_size_kb": 37.53,
-      "delivery_sha256": "5A9BAB1ACEEF93EE1AE68EF935A55EA87B9A7A66DC8828E49B58CB12400E9125",
+      "delivery_sha256": "57AAAA9C729FCE5ADD27DD834ED3EFBE10CBD1722C7638BCB7B9A6AAB0E5429C",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -52,7 +52,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "332C9E8FDD85D35D010623630EEB982137F8F93264EBE86536D8E261E43C706B",
+      "delivery_sha256": "8A5C630A95901D997F2774D603944E424C4F3E149A5D0B4EF0E5D65B8A5DFDD1",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -80,7 +80,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
       "delivery_size_bytes": 60342,
       "delivery_size_kb": 58.93,
-      "delivery_sha256": "AE647CC9B17A8551A1CF5930F4198805C1BF184F9C541E9C03366D6664CC6A9E",
+      "delivery_sha256": "62F6BC86FCED7BDB5FC7814037C0839E27DBA2C35252304CCA6F8437593B683A",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",

@@ -1211,3 +1211,16 @@ KEY_DECISIONS.....:
 - Recognize DEPLOY_DONE and DELIVERABLE_DONE as product output states.
 - Update 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR to enforce first output, stop-loss, Plan B and anti portfolio sprawl.
 NEXT_ACTION.......: Validate build/readiness and then apply constitution in a real project with first output focus.
+
+==========
+MB-GRC-031E-R_UPDATE
+==========
+DATE..............: 2026-06-08 12:46:55 -04
+STATUS............: DONE
+SUMMARY...........: Added 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt and integrated safe Markdown/Mermaid/TempScript workflow.
+KEY_DECISIONS.....:
+- Temp/ is ignored in Git as local operator workspace.
+- Temp/TempScript.sh is preserved locally and not deleted by wrappers by default.
+- Markdown-sensitive syntax must use placeholders before conversion to real fences.
+- Delivered IA scripts must not contain literal triple backtick fences; final fences must be generated programmatically.
+NEXT_ACTION.......: Validate build/readiness and then continue with blank-IA package test or apply constitution to a real project.

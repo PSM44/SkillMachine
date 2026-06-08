@@ -62,3 +62,17 @@ REGLAS:
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
+
+==========
+MB-GRC-031E_MARKDOWN_FILE_CREATION_SAFETY
+==========
+
+Cuando la sesión requiera crear o modificar archivos .md, Mermaid, fences Markdown o scripts largos:
+- aplicar 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt;
+- usar Temp/TempScript.sh como archivo local reutilizable para scripts largos;
+- copiar Temp/TempScript.sh a /tmp antes de ejecutar;
+- normalizar BOM/CRLF antes de bash;
+- no borrar TempScript.sh por defecto;
+- no entregar scripts IA con triple backtick literal;
+- usar placeholders para Markdown sensible;
+- convertir placeholders después de escribir el archivo mediante código de carácter, por ejemplo chr(96) * 3.

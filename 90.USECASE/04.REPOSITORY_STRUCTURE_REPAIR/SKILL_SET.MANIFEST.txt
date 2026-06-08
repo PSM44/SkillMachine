@@ -26,3 +26,6 @@ POLICIES_OPERATIVAS_(COPIA_USECASE):
 
 GOVERNANCE:
 - 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt
+
+- 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+  - Uso: aplicar cuando el usecase cree o modifique archivos .md, Mermaid, fences Markdown o scripts largos mediante Temp/TempScript.sh. Regla dura: no entregar scripts IA con triple backtick literal; generar fences finales mediante código de carácter.

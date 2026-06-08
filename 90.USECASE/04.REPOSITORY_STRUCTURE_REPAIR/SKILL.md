@@ -57,3 +57,15 @@ Rules:
 - Register non-blocking repairs as backlog or technical debt.
 - Do not let repository repair become portfolio sprawl, stop-loss avoidance, or governance theater.
 - If repair exceeds the declared time/session budget, trigger Plan B.
+
+## MB-GRC-031E_MARKDOWN_FILE_CREATION_SAFETY
+
+When repository structure repair creates or modifies `.md` files, Mermaid diagrams, Markdown fences or long shell scripts, apply `31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt`.
+
+Rules:
+- Use placeholder markers for Markdown-sensitive syntax.
+- Do not deliver IA scripts containing literal triple backtick fences.
+- Convert placeholders after file creation using character-code generation, for example chr(96) multiplied by 3.
+- Use `Temp/TempScript.sh` as reusable local paste/edit script file.
+- Copy to `/tmp`, normalize BOM/CRLF, then execute.
+- Do not delete `Temp/TempScript.sh` by default.

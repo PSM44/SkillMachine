@@ -351,6 +351,17 @@ STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: REVIEW
 PURPOSE...........: Audita requerimientos antes de crear prompts finales; exige discovery, challenge, readiness gate, supuestos explicitos y capa pedagogica subordinada.
 
+
+----------
+06.85
+----------
+
+SKILL_ID..........: SKILL_MARKDOWN_FILE_CREATION_SAFETY
+FILE..............: 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: FORMAT
+PURPOSE...........: Define creación segura de archivos Markdown mediante scripts, placeholders, Mermaid, fences, TempScript.sh y normalización BOM/CRLF, prohibiendo triple backtick literal en scripts entregados por IA.
+
 ==========
 05.00_REGLAS_PARA_RECOMENDAR_SKILLS_ADICIONALES
 ==========
