@@ -805,3 +805,15 @@ USECASES_UPDATED..:
 - 03.SESSION_CONTINUE
 - 04.REPOSITORY_STRUCTURE_REPAIR
 NEXT..............: Run blank-IA package test or apply constitution to next project once readiness is OK.
+
+==========
+MB-GRC-031F_SESSION_CLOSE_AFTER_031E
+==========
+DATE..............: 2026-06-08 13:20:40 -04
+STATUS............: DONE
+SUMMARY...........: Closed session after MB-GRC-031E Markdown file creation safety skill was committed and pushed.
+TECH_DEBT.........:
+- Schema-aware usecase registry patching required for future skill integration.
+- Avoid blind source_files insertion.
+- Avoid long pasted shell scripts when the channel is unstable.
+NEXT_RECOMMENDED..: MB-GRC-031G blank-IA package test before applying constitution to HIA/Nightshift.

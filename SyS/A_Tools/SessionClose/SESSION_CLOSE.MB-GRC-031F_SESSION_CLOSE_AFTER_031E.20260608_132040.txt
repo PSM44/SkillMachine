@@ -1,0 +1,81 @@
+==========
+SESSION_CLOSE: MB-GRC-031F_SESSION_CLOSE_AFTER_031E
+==========
+
+DATE..............: 2026-06-08 13:20:40 -04
+ROOT_WIN..........: C:\01. GitHub\Skills
+ROOT_WSL..........: /mnt/c/01. GitHub/Skills
+HEAD_BEFORE.......: 1c515cf 20260608_MB-GRC-031E_safe_markdown_creation_skill
+
+==========
+01.00_STATUS
+==========
+
+MB-GRC-031E completed and pushed.
+
+Final commit:
+1c515cf 20260608_MB-GRC-031E_safe_markdown_creation_skill
+
+Readiness after MB-GRC-031E:
+OK
+GIT_DIRTY: False
+Repository clean after push.
+
+==========
+02.00_COMPLETED
+==========
+
+Created and versioned:
+SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+
+Updated:
+.gitignore
+SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
+90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json
+90.USECASE/USECASE.REGISTRY.json
+90.USECASE/01.NEW_PROJECT/SKILL_SET.MANIFEST.txt
+90.USECASE/03.SESSION_CONTINUE/SKILL_SET.MANIFEST.txt
+90.USECASE/03.SESSION_CONTINUE/PROMPT.SESSION_CONTINUE.txt
+90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR/SKILL_SET.MANIFEST.txt
+90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR/SKILL.md
+SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
+SyS/00.0_BATON_SKILLMACHINE.txt
+SyS/01_WHOAMI_SKILLMACHINE.txt
+
+==========
+03.00_TECHNICAL_DEBT
+==========
+
+TD-031E-01:
+Bundle-registry integration for new skills requires schema-aware patching.
+Blind insertion into source_files caused delivery overflow because BUILD.ps1 interpreted the skill as an additional copied delivery file in some usecases.
+
+TD-031E-02:
+Long script delivery through chat became unstable.
+Operational rule strengthened: when shell/channel is unstable, stop long paste execution and switch to shorter phased commands or saved runner files with tee logs.
+
+TD-031E-03:
+Markdown-sensitive file generation requires placeholder strategy and no literal triple backtick in IA-delivered scripts.
+
+==========
+04.00_NEXT_ACTION_OPTIONS
+==========
+
+Option A:
+Run MB-GRC-031G blank-IA package test for 01.NEW_PROJECT / 03.SESSION_CONTINUE / 04.REPOSITORY_STRUCTURE_REPAIR.
+
+Option B:
+Apply the IT project delivery constitution to HIA or Nightshift.
+
+Recommended next:
+MB-GRC-031G blank-IA package test before applying the constitution to a real project.
+
+==========
+05.00_CLOSE_VERDICT
+==========
+
+Session can close. Repository is expected to be clean after this close commit and push.
+
+==========
+END
+==========

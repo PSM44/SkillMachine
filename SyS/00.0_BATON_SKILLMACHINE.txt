@@ -1224,3 +1224,13 @@ KEY_DECISIONS.....:
 - Markdown-sensitive syntax must use placeholders before conversion to real fences.
 - Delivered IA scripts must not contain literal triple backtick fences; final fences must be generated programmatically.
 NEXT_ACTION.......: Validate build/readiness and then continue with blank-IA package test or apply constitution to a real project.
+
+==========
+MB-GRC-031F_SESSION_CLOSE_AFTER_031E
+==========
+DATE..............: 2026-06-08 13:20:40 -04
+STATUS............: DONE
+LAST_CONFIRMED....: 1c515cf 20260608_MB-GRC-031E_safe_markdown_creation_skill
+SUMMARY...........: Markdown file creation safety skill completed; Temp/ ignored; repository recovered and clean after push.
+NEXT_ACTION.......: MB-GRC-031G blank-IA package test, or apply constitution to HIA/Nightshift if human chooses to skip package test.
+CAUTION...........: Future usecase registry edits must be schema-aware; do not blindly inject skills into every source_files list.

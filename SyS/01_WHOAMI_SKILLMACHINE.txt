@@ -805,3 +805,11 @@ MB-GRC-031E-R_UPDATE
 DATE..............: 2026-06-08 12:46:55 -04
 WHAT_CHANGED......: Markdown file creation safety skill added; Temp/ is now local ignored workspace.
 OPERATOR_NOTE.....: For long scripts, use Temp/TempScript.sh, copy to /tmp, normalize BOM/CRLF, execute from /tmp, and preserve TempScript.sh. Scripts delivered by IA must avoid literal triple backtick fences.
+
+==========
+MB-GRC-031F_SESSION_CLOSE_AFTER_031E
+==========
+DATE..............: 2026-06-08 13:20:40 -04
+ROLE_STATE........: Continue as SkillMachine/GRC operator.
+CURRENT_CONTEXT...: MB-GRC-031E completed after recovery. New Markdown file creation safety skill exists. Next work should avoid long shell paste patterns when unstable.
+NEXT_RECOMMENDED..: MB-GRC-031G blank-IA package test.
