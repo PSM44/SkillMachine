@@ -770,3 +770,22 @@ DECISION..........: USECASE.MANIFEST.json must explicitly distinguish delivery_f
 RATIONALE.........: README.UPLOAD_THIS_USECASE.txt defines SELF_CONTAINED_USECASE_FOLDER, but generated manifests did not expose package semantics.
 SCOPE.............: Patch BUILD.ps1 so generated USECASE.MANIFEST.json files declare upload_package_model, upload_instruction_file, folder_upload_required and delivery_files_scope.
 RULE..............: delivery_files are generated/copied delivery artifacts only; the IA upload package is the full 90.USECASE/<USECASE_ID> folder.
+
+==========
+MB-GRC-031B_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+DATE..............: 2026-06-08 12:19:30 -04
+STATUS............: DONE
+DECISION..........: Created GRCLake/AA.CONSTITUTION as IT project delivery constitution root.
+OUTPUT_TYPES......: DEPLOY_DONE, DELIVERABLE_DONE.
+FILES.............:
+- GRCLake/AA.CONSTITUTION/00.README.md
+- GRCLake/AA.CONSTITUTION/01.CONSTITUTION.HUMAN.md
+- GRCLake/AA.CONSTITUTION/02.CONSTITUTION.AI.txt
+- GRCLake/AA.CONSTITUTION/03.OPERATING_CARD.HUMAN.md
+- GRCLake/AA.CONSTITUTION/04.OPERATING_CARD.AI.txt
+USECASES_UPDATED..:
+- 90.USECASE/01.NEW_PROJECT
+- 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR
+RATIONALE.........: Prevent portfolio sprawl and missing stop-loss; prioritize first DEPLOY_DONE or DELIVERABLE_DONE.
+NEXT..............: Test constitution on a deployable project before expanding platform governance.

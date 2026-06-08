@@ -66,3 +66,24 @@ La IA no debe:
 - generar prompts finales sobre requerimientos incompletos;
 - crear canon automáticamente;
 - convertir una respuesta operacional simple en una clase.
+
+==========
+MB-GRC-031B_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+When creating a new IT project, apply GRCLake/AA.CONSTITUTION.
+
+The IA must force these decisions before proposing implementation:
+1. OUTPUT_TYPE: DEPLOY_DONE or DELIVERABLE_DONE.
+2. FIRST_OUTPUT_CONTRACT.
+3. MINIMUM_MOCKUP.
+4. MUST_HAVE.
+5. NO_SCOPE.
+6. MAX_HOURS / MAX_SESSIONS / MAX_COST_OR_COST_POLICY / MAX_EFFORT.
+7. PLAN_B_TRIGGER.
+8. PLAN_B_ACTION.
+9. TIMELOG format or path.
+
+The IA must prevent portfolio sprawl and stop-loss failure:
+- Do not open additional active projects without pausing/closing another.
+- Do not continue iteration by habit after Plan B trigger.
+- Do not perform platform/governance work before first output unless it directly unblocks DEPLOY_DONE or DELIVERABLE_DONE.

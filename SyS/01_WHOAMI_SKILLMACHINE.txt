@@ -791,3 +791,10 @@ MB-GRC-030E_UPDATE
 DATE..............: 2026-06-08 09:51:12 -04
 WHAT_CHANGED......: Generated USECASE.MANIFEST.json files now distinguish generated delivery_files from the full self-contained usecase folder upload package.
 OPERATOR_NOTE.....: For IA context upload, use README.UPLOAD_THIS_USECASE.txt and upload the full 90.USECASE/<USECASE_ID> folder, not only delivery_files.
+
+==========
+MB-GRC-031B_UPDATE
+==========
+DATE..............: 2026-06-08 12:19:30 -04
+WHAT_CHANGED......: IT project delivery constitution created under GRCLake/AA.CONSTITUTION.
+OPERATOR_NOTE.....: Future IT projects must choose DEPLOY_DONE or DELIVERABLE_DONE, define first output, mockup, scope, no-scope, budget, stop-loss and Plan B before build expansion.

@@ -46,3 +46,14 @@ Rules:
 - Use `DRAFT_NOT_READY` when relevant information is missing.
 - Keep the pedagogical layer subordinate to the operational answer.
 - Do not apply this skill to trivial edits where discovery cost exceeds operational value.
+
+## MB-GRC-031B_IT_PROJECT_DELIVERY_CONSTITUTION
+
+When repository structure repair supports an IT project, apply `GRCLake/AA.CONSTITUTION`.
+
+Rules:
+- Select whether the target output is `DEPLOY_DONE` or `DELIVERABLE_DONE`.
+- Repair only what directly enables the first output unless the human explicitly approves broader repair.
+- Register non-blocking repairs as backlog or technical debt.
+- Do not let repository repair become portfolio sprawl, stop-loss avoidance, or governance theater.
+- If repair exceeds the declared time/session budget, trigger Plan B.

@@ -1,0 +1,34 @@
+==========
+OPERATING_CARD_AI
+==========
+
+BEFORE_BUILD_GATE:
+[ ] PROJECT_ID known
+[ ] OUTPUT_TYPE selected: DEPLOY_DONE | DELIVERABLE_DONE
+[ ] FIRST_OUTPUT_CONTRACT defined
+[ ] TARGET_USER_OR_AUDIENCE defined
+[ ] MINIMUM_MOCKUP defined
+[ ] MUST_HAVE listed
+[ ] NO_SCOPE listed
+[ ] MAX_HOURS defined
+[ ] MAX_SESSIONS defined
+[ ] PLAN_B_TRIGGER defined
+[ ] PLAN_B_ACTION defined
+[ ] TIMELOG path or format defined
+
+SESSION_CLASSIFICATION:
+- DEPLOY_TRACK
+- DELIVERABLE_TRACK
+- PLATFORM_TRACK
+- PARKING_LOT
+
+RULE:
+Before first output, PLATFORM_TRACK work is allowed only if it directly unblocks DEPLOY_DONE or DELIVERABLE_DONE.
+
+OUTPUT_DONE_CHECK:
+DEPLOY_DONE requires executable/runnable output.
+DELIVERABLE_DONE requires validated artifact at declared path.
+
+IF_UNCLEAR:
+Ask for exact missing decision or propose a default with assumptions.
+Do not continue expanding scope silently.

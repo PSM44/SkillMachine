@@ -1199,3 +1199,15 @@ STATUS............: DONE
 SUMMARY...........: Added explicit upload package semantics to generated USECASE.MANIFEST.json output via BUILD.ps1.
 KEY_RULE..........: delivery_files does not mean full IA upload package. The full usecase folder remains the operational package; README.UPLOAD_THIS_USECASE.txt must be read first.
 NEXT_ACTION.......: Validate generated manifests include upload_package_model and delivery_files_scope.
+
+==========
+MB-GRC-031B_UPDATE
+==========
+DATE..............: 2026-06-08 12:19:30 -04
+STATUS............: DONE
+SUMMARY...........: Added IT project delivery constitution under GRCLake/AA.CONSTITUTION with human and AI versions.
+KEY_DECISIONS.....:
+- Keep GRCLake/AA.CONSTITUTION as constitution root.
+- Recognize DEPLOY_DONE and DELIVERABLE_DONE as product output states.
+- Update 01.NEW_PROJECT and 04.REPOSITORY_STRUCTURE_REPAIR to enforce first output, stop-loss, Plan B and anti portfolio sprawl.
+NEXT_ACTION.......: Validate build/readiness and then apply constitution in a real project with first output focus.

@@ -71,3 +71,22 @@ DONE when:
 - IA can identify whether context is sufficient.
 - IA requests only exact missing paths if needed.
 - IA does not request broad repository upload by default.
+
+==========
+05.00_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+If repository repair is part of an IT project, the IA must read and apply:
+C:\01. GitHub\Skills\GRCLake\AA.CONSTITUTION
+
+Repository repair must not become an excuse to delay DEPLOY_DONE or DELIVERABLE_DONE.
+
+Allowed before first output:
+- repair that directly unblocks deploy/deliverable;
+- minimum structure required for execution, validation or continuity;
+- rollback/safety needed to avoid damaging the repo.
+
+Not allowed before first output unless explicitly justified:
+- broad restructuring;
+- aesthetic reorganization;
+- governance expansion;
+- non-critical architecture cleanup.

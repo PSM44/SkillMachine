@@ -71,3 +71,23 @@ DONE when:
 - IA can identify whether context is sufficient.
 - IA requests only exact missing paths if needed.
 - IA does not request broad repository upload by default.
+
+==========
+05.00_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+If this usecase is used for an IT project, the IA must read and apply:
+C:\01. GitHub\Skills\GRCLake\AA.CONSTITUTION
+
+Minimum decisions before build:
+- OUTPUT_TYPE: DEPLOY_DONE or DELIVERABLE_DONE
+- FIRST_OUTPUT_CONTRACT
+- MINIMUM_MOCKUP
+- MUST_HAVE
+- NO_SCOPE
+- MAX_HOURS
+- MAX_SESSIONS
+- PLAN_B_TRIGGER
+- PLAN_B_ACTION
+
+Rule:
+Do not expand platform, governance, architecture, tooling or future features before the first DEPLOY_DONE or DELIVERABLE_DONE unless it directly unblocks that output.

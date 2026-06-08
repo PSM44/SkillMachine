@@ -1,0 +1,168 @@
+==========
+00.00_METADATA
+==========
+ID................: IT_PROJECT_DELIVERY_CONSTITUTION
+VERSION...........: v0.1-DRAFT
+STATUS............: DRAFT_READY_FOR_TEST
+LOCATION..........: GRCLake/AA.CONSTITUTION
+APPLIES_TO........: IT_PROJECTS, AI_ASSISTED_DEVELOPMENT, SKILLMACHINE_USECASES
+OUTPUT_TYPES......: DEPLOY_DONE, DELIVERABLE_DONE
+
+==========
+01.00_PRINCIPLE
+==========
+RULE_CORE:
+This constitution exists to accelerate DEPLOY_DONE or DELIVERABLE_DONE.
+If applying this constitution delays the first functional output unnecessarily, it is being used incorrectly.
+
+==========
+02.00_OUTPUT_TYPES
+==========
+DEPLOY_DONE:
+Executable/deployable product output.
+Use when product must run as app, dashboard, API, agent, local system, hosted system, or executable prototype.
+
+DEPLOY_DONE_MINIMUM_FIELDS:
+- output_name
+- target_user
+- use_case
+- environment
+- run_command_or_url
+- smoke_test
+- evidence
+- defects_backlog
+- timelog
+- commit_or_release_marker
+
+DELIVERABLE_DONE:
+Analytical, documentary, operational, or non-deployable product output.
+Use when output is workbook, report, matrix, analysis, audit, package, document, or GRC artifact.
+
+DELIVERABLE_DONE_MINIMUM_FIELDS:
+- output_name
+- audience
+- purpose
+- file_path
+- validation_evidence
+- acceptance_criteria
+- backlog_or_debt
+- timelog
+- commit_or_version_marker
+
+==========
+03.00_MANDATORY_SEQUENCE
+==========
+STEP_01: DEFINE_FIRST_OUTPUT
+STEP_02: DEFINE_MINIMUM_MOCKUP
+STEP_03: DEFINE_MINIMUM_FEATURES_AND_CHARACTERISTICS
+STEP_04: DEFINE_MINIMUM_NEEDED_TO_SATISFY_EXPECTED_FUNCTIONALITY
+STEP_05: DEFINE_INVESTMENT_LIMITS_AND_PLAN_B
+STEP_06: EXECUTE_UNTIL_DEPLOY_DONE_OR_DELIVERABLE_DONE_OR_STOP_LOSS
+STEP_07: RUN_BRUTAL_RETROSPECTIVE
+STEP_08: DECIDE_NEXT_STATE
+
+==========
+04.00_REQUIRED_FIELDS_BEFORE_BUILD
+==========
+REQUIRED_BEFORE_BUILD:
+- PROJECT_ID
+- OUTPUT_TYPE: DEPLOY_DONE | DELIVERABLE_DONE
+- FIRST_OUTPUT_CONTRACT
+- TARGET_USER_OR_AUDIENCE
+- MINIMUM_MOCKUP
+- MUST_HAVE
+- NO_SCOPE
+- MAX_HOURS
+- MAX_SESSIONS
+- MAX_COST_OR_COST_POLICY
+- MAX_EFFORT
+- PLAN_B_TRIGGER
+- PLAN_B_ACTION
+- TIMELINE_OR_TIMELOG_PATH
+
+==========
+05.00_WIP_AND_PORTFOLIO_CONTROL
+==========
+DEPLOY_TRACK_LIMIT: 1
+PLATFORM_TRACK_LIMIT: 1
+PARKING_LOT_ALLOWED: YES
+
+RULE:
+If a new active project enters, another active project must be closed, paused, killed, or moved to parking lot.
+
+==========
+06.00_STOP_LOSS
+==========
+STOP_LOSS_REQUIRED: YES
+
+IF_PLAN_B_TRIGGER_REACHED:
+- stop normal iteration
+- report current state
+- identify blocker
+- reduce scope or switch execution mode
+- optionally use Codex/Claude/DeepSeek under branch, DoD and review
+- do not continue by habit
+
+==========
+07.00_ALLOWED_WORK_BEFORE_FIRST_OUTPUT
+==========
+ALLOWED:
+- scope reduction
+- deploy/deliverable blocker resolution
+- minimum implementation
+- smoke testing
+- evidence capture
+- timelog
+- debt registration
+- backlog registration
+- controlled AI executor escalation
+
+PROHIBITED_UNLESS_BLOCKER:
+- new governance
+- non-critical refactor
+- future feature expansion
+- aesthetic polish
+- stack change
+- tooling research
+- architecture optimization
+
+==========
+08.00_AI_BEHAVIOR
+==========
+AI_MUST:
+- be realistic, critical and exact
+- challenge scope when needed
+- propose improvements
+- register doubts and conflicts
+- distinguish confirmed facts, assumptions and recommendations
+- teach briefly when useful
+- prioritize output over ceremony
+
+AI_MUST_NOT:
+- flatter
+- agree by default
+- expand scope without reason
+- hide risks
+- spend tokens pleasing the user
+- convert learning into friction
+- create canon automatically without instruction
+
+==========
+09.00_RETROSPECTIVE
+==========
+RETRO_REQUIRED_AFTER_OUTPUT: YES
+
+RETRO_FIELDS:
+- promised_output
+- actual_output
+- not_delivered
+- hours_real
+- time_distribution
+- product_vs_governance_vs_rework
+- bad_decisions
+- excess_scope
+- cut_late_items
+- accepted_debt
+- learnings
+- next_cycle_change
+- final_decision: CONTINUE | IMPROVE | SCALE | PAUSE | KILL | SWITCH_PROJECT
