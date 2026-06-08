@@ -1,7 +1,7 @@
 {
   "usecase": "01.NEW_PROJECT",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-08 13:16:52",
+  "generated_at": "2026-06-08 13:27:34",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -22,9 +22,9 @@
       "bundle_name": "CORE",
       "delivery_file": "00.BUNDLE.CORE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
-      "delivery_size_bytes": 38426,
-      "delivery_size_kb": 37.53,
-      "delivery_sha256": "57AAAA9C729FCE5ADD27DD834ED3EFBE10CBD1722C7638BCB7B9A6AAB0E5429C",
+      "delivery_size_bytes": 47961,
+      "delivery_size_kb": 46.84,
+      "delivery_sha256": "03156B30A431FCB2B6CB1CD8F1FAFEB0611FE60E273E79B46A4D1AC4ABE04CF9",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -43,6 +43,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\12.SKILL.DRAG_AND_DROP.txt",
           "version": "UNKNOWN",
           "source_sha256": "A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3"
+        },
+        {
+          "name": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
+          "version": "v0.2-DRAFT_READY_FOR_TEST",
+          "source_sha256": "CA1E375E4B8971BAD14CDB6987DB16E0133E137AFE7F2F222564F9001586560F"
         }
       ]
     },
@@ -52,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "8A5C630A95901D997F2774D603944E424C4F3E149A5D0B4EF0E5D65B8A5DFDD1",
+      "delivery_sha256": "D782AAC3E97525F86BC9C263005204B8599D812560F073AE168058BA6828AAE4",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -80,7 +86,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
       "delivery_size_bytes": 60342,
       "delivery_size_kb": 58.93,
-      "delivery_sha256": "62F6BC86FCED7BDB5FC7814037C0839E27DBA2C35252304CCA6F8437593B683A",
+      "delivery_sha256": "1D02C5F800D7313A5662CC60D4E90DC86F682625430030FF3E925E2D8ADD0666",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
