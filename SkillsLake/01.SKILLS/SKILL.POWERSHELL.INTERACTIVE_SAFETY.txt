@@ -8,9 +8,9 @@ NOMBRE............: PowerShell Interactive Safety
 TIPO..............: Skill operativo
 DOMINIO...........: PowerShell / Windows / CLI execution
 ESTADO............: ACTIVE
-VERSION...........: 1.0
-FECHA.............: 2026-05-02
-ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session
+VERSION...........: 1.2
+FECHA.............: 2026-06-09
+ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session; updated after MB-EXAM-005R2 PowerShell wrapper recovery; repaired by MB-SKILL-PS-INTERACTIVE-002
 
 ----------
 1. PURPOSE
@@ -267,3 +267,162 @@ A PowerShell command block complies with this skill when:
 PowerShell scripts written for a file and PowerShell commands written for interactive copy/paste are not the same product.
 
 For human-guided AI operations, robustness beats elegance.
+
+========== SKILL UPDATE MB-EXAM-005R2 POWERSHELL WRAPPER SAFETY BEGIN ==========
+
+----------
+16. LESSON LEARNED - HERE-STRING AND WRAPPER FILE SAFETY
+----------
+
+A second recurring failure mode was observed during MB-EXAM-005 / MB-EXAM-005R / MB-EXAM-005R2:
+
+- A long PowerShell wrapper was pasted into an interactive console.
+- The wrapper used an outer here-string to write a .ps1 file.
+- Inside that wrapper, another here-string was used to define Python code.
+- PowerShell interpreted the inner terminator as the end of the outer here-string.
+- Everything after that point executed loose in the console.
+- Variables such as ProducerPath, ReportPath, RegisterPath and LogPath became null.
+- Functions such as Invoke-NativeChecked were not available.
+- try, catch and finally blocks were executed as orphan commands.
+- A manual STATUS OK line was printed even though the operation had failed.
+
+Root cause:
+
+PowerShell here-strings are delimiter-sensitive. Nested here-strings using the same delimiter pattern are unsafe when generating scripts interactively. This is worse when the human operator pastes a large block into the console instead of executing a saved .ps1 file.
+
+Operational conclusion:
+
+A script that works as a file is not automatically safe as an interactive paste block. Delivery format is part of the design.
+
+----------
+17. CORE RULE - DO NOT NEST FRAGILE HERE-STRINGS IN INTERACTIVE WRAPPERS
+----------
+
+Avoid this in interactive wrappers:
+
+Outer wrapper:
+@'
+...
+Inner generated script:
+ProducerCode = @'
+...
+'@
+...
+'@ | Set-Content ...
+
+This can prematurely close the outer block and cause partial execution.
+
+Preferred options:
+
+Option A - Write the final .ps1 file directly, then execute it.
+Option B - Use a different content construction method, such as an array of lines joined with CRLF.
+Option C - Use base64 payload only when justified and clearly validated.
+Option D - Use double-quoted here-string inside single-quoted outer wrapper only if there is no variable expansion risk and delimiters are visually audited.
+
+Recommended default for AI-guided human execution:
+
+1. Create a script file under Temp.
+2. Validate that the script file exists.
+3. Execute the script file with powershell -NoProfile -ExecutionPolicy Bypass -File.
+4. Validate outputs.
+5. Never run the internal body manually line by line.
+
+----------
+18. TRY/CATCH/FINALLY ATOMICITY RULE
+----------
+
+try/catch/finally must be executed as one atomic block.
+
+Never instruct the user to execute finally separately.
+
+Invalid operational pattern:
+
+try {
+  ...
+}
+
+Then later:
+
+finally {
+  Stop-Transcript
+}
+
+This produces:
+
+finally: The term 'finally' is not recognized...
+
+Correct pattern:
+
+Place try/catch/finally inside a saved .ps1 file or provide a single complete paste block that cannot be split.
+
+For fragile human workflows, prefer:
+
+try { Stop-Transcript | Out-Null } catch {}
+
+as a standalone cleanup command before a new execution, not as an orphan finally block.
+
+----------
+19. NO BASH HEREDOC IN POWERSHELL RULE
+----------
+
+Do not use Bash heredoc syntax inside PowerShell:
+
+python - <<'PY'
+import sys
+PY
+
+This is Bash syntax, not PowerShell syntax.
+
+PowerShell-safe alternatives:
+
+python -c "import sys; print(sys.version)"
+
+or write a temporary .py file and execute:
+
+Set-Content -LiteralPath "Temp\script.py" -Value $PythonLines -Encoding UTF8
+python "Temp\script.py"
+
+----------
+20. FALSE OK PROHIBITION
+----------
+
+Never accept a final STATUS OK line if earlier output contains:
+
+- Cannot bind argument because it is null.
+- The term '<function>' is not recognized.
+- ParserError.
+- Unexpected token.
+- catch/finally not recognized.
+- Missing output.
+- Failed native command.
+
+A valid OK requires:
+
+1. All critical variables are non-null.
+2. The main command executed.
+3. The expected artifact exists.
+4. The log path exists.
+5. Output validation confirms file sizes or command results.
+6. No unhandled error appears before the summary.
+
+If any of these fail, mark the minibattle as FAILED or RECOVERY_REQUIRED. Do not progress the backlog based on a printed OK alone.
+
+----------
+21. ACCEPTANCE CRITERIA ADDENDUM
+----------
+
+A PowerShell one-shot involving generated scripts complies with this skill only when:
+
+1. It does not depend on fragile nested here-string delimiters.
+2. It writes long generated scripts to a .ps1 file before execution.
+3. It validates script creation before execution.
+4. It does not mix Bash heredoc syntax into PowerShell.
+5. It prevents orphan try/catch/finally blocks.
+6. It treats manually printed OK lines as insufficient evidence.
+7. It validates outputs using Test-Path/Get-Item or equivalent.
+8. It emits clear START/END markers.
+9. It tells the human exactly from where to copy terminal output.
+10. It avoids continuing after null critical paths.
+
+========== SKILL UPDATE MB-EXAM-005R2 POWERSHELL WRAPPER SAFETY END ==========
+
