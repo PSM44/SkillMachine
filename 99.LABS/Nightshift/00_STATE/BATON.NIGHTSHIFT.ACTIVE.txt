@@ -127,3 +127,11 @@ DATE..............: 2026-06-08 15:11:17 -04:00
 STATUS............: DONE
 SUMMARY...........: Nightshift PowerShell runner patched after no-origin remote handling failure. Repo has no origin remote currently; this is acceptable until a remote is explicitly configured.
 NEXT_ACTION.......: Define first Nightshift pilot project using 05_TOOLS\RUN_TEMPSCRIPT.ps1.
+
+==========
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+STATUS............: DONE
+SUMMARY...........: First Nightshift pilot defined. Selected NS-PILOT-001_MARKDOWN_TASK_RUNNER as a small Python/Markdown task runner for controlled Codex vs Claude Code comparison.
+NEXT_ACTION.......: Create pilot scaffold under 99.LABS/Nightshift/03_EXPERIMENTS.

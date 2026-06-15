@@ -92,3 +92,11 @@ DATE..............: 2026-06-08 15:11:17 -04:00
 ROLE_STATE........: Continue as PS.Nightshift laboratory operator.
 CURRENT_CONTEXT...: Runner is PowerShell-based and does not require an origin remote. Use Temp\TempScript.ps1 plus 05_TOOLS\RUN_TEMPSCRIPT.ps1.
 NEXT_RECOMMENDED..: MB-NS-001C define first pilot project.
+
+==========
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+ROLE_STATE........: Continue as Nightshift lab operator inside PS.SkillsMachine.
+CURRENT_CONTEXT...: First pilot is defined but not yet scaffolded. No automation has started.
+NEXT_RECOMMENDED..: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.

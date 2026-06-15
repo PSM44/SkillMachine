@@ -98,3 +98,22 @@ Boundary:
 01_HUMAN contains priority human-reading documents and should remain intentionally small.
 
 AI/operational documents should live outside 01_HUMAN.
+
+==========
+MB-NS-001C_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+STATUS............: LAB_ONLY / DELIVERABLE_DONE
+
+First Nightshift pilot selected:
+
+NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+Purpose:
+Compare Codex and Claude Code on the same small, reversible, measurable task.
+
+Human rule:
+Do not start automation before scaffold, branch policy, evidence policy and stop-loss are in place.
+
+Next:
+MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD

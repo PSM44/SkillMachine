@@ -1,0 +1,219 @@
+ID................: MB-NS-001C_FIRST_PILOT_PROJECT
+STATUS............: LAB_ONLY
+PROJECT...........: PS.SkillsMachine / 99.LABS/Nightshift
+OUTPUT_TYPE.......: DELIVERABLE_DONE
+DATE..............: 2026-06-15 10:44:08 -04:00
+TITLE.............: First Nightshift Pilot — Codex vs Claude Code controlled comparison
+
+==========
+00.00_PURPOSE
+==========
+
+Define the first Nightshift pilot project before any autonomous or semi-autonomous AI execution begins.
+
+This pilot exists to compare Codex and Claude Code on the same controlled repository task.
+
+This is LAB_ONLY. It is not canonical SkillsMachine doctrine unless explicitly promoted later.
+
+==========
+01.00_PILOT_THESIS
+==========
+
+Nightshift should not test "big automation" first.
+
+The first pilot must be small, reversible, measurable, and comparable.
+
+The goal is to evaluate agent behavior under controlled conditions, not to build a product.
+
+==========
+02.00_SELECTED_PILOT
+==========
+
+Pilot name:
+
+NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+Pilot summary:
+
+Create a tiny Markdown task runner that reads a simple Markdown checklist and produces a normalized execution report.
+
+This is intentionally small. It gives Codex and Claude Code enough structure to modify code, add tests, and produce evidence without opening a large product scope.
+
+==========
+03.00_PILOT_REPOSITORY_MODEL
+==========
+
+The pilot should live inside the Nightshift lab, not in SkillsMachine core.
+
+Recommended path:
+
+99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+Initial structure:
+
+- README.HUMAN.md
+- TASKS.sample.md
+- src/
+- tests/
+- evidence/
+- AGENT_BRIEF.Codex.AI.txt
+- AGENT_BRIEF.ClaudeCode.AI.txt
+
+Nothing inside this pilot is canonical.
+
+==========
+04.00_TASK_DESCRIPTION
+==========
+
+Build a small CLI or script that:
+
+1. reads a Markdown file containing checklist items;
+2. extracts tasks marked as pending, done, or blocked;
+3. writes a normalized report;
+4. includes basic tests;
+5. records evidence of execution.
+
+Preferred implementation language:
+
+Python.
+
+Reason:
+
+Python keeps the pilot simple, testable and comparable without forcing frontend, database, or deployment decisions.
+
+==========
+05.00_ACCEPTANCE_CRITERIA
+==========
+
+The pilot is accepted only if both agent attempts can be compared using the same criteria.
+
+Minimum acceptance criteria:
+
+- repository/subfolder created in the lab;
+- sample input file exists;
+- script parses pending/done/blocked checklist items;
+- output report is deterministic;
+- basic test exists and passes;
+- evidence file records command, result and agent;
+- git diff is inspectable;
+- no agent modifies SkillsMachine core;
+- no agent adds unnecessary frameworks;
+- no agent creates external dependencies unless justified.
+
+==========
+06.00_AGENT COMPARISON CRITERIA
+==========
+
+Codex and Claude Code will be compared on:
+
+- instruction following;
+- diff cleanliness;
+- amount of unnecessary code;
+- correctness;
+- test quality;
+- evidence quality;
+- ability to stay inside declared scope;
+- respect for LAB_ONLY boundary;
+- ability to recover from errors;
+- need for human intervention.
+
+==========
+07.00_BRANCH_POLICY
+==========
+
+Recommended branch model:
+
+- main remains human-controlled.
+- create one branch per agent run:
+  - lab/ns-pilot-001-codex
+  - lab/ns-pilot-001-claude
+- do not merge automatically.
+- compare diffs before any acceptance decision.
+
+If branches are too much for the first dry run, run one agent at a time and preserve evidence before switching agents.
+
+==========
+08.00_STOP_LOSS
+==========
+
+Stop the pilot if:
+
+- the same failure repeats three times;
+- the agent edits outside 99.LABS/Nightshift;
+- the agent modifies core folders such as GRCLake, SkillsLake, 90.USECASE or SyS without explicit approval;
+- the agent introduces unnecessary architecture;
+- the human cannot explain the resulting diff;
+- evidence is missing or not reproducible;
+- the comparison becomes subjective rather than evidence-based.
+
+==========
+09.00_EVIDENCE_REQUIREMENTS
+==========
+
+Each agent run must preserve:
+
+- agent name;
+- date/time;
+- branch or working mode;
+- prompt/brief used;
+- command output;
+- test output;
+- changed files;
+- known failures;
+- final verdict.
+
+Recommended evidence path:
+
+99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-001/<agent>/<timestamp>/
+
+==========
+10.00_PROMOTION_RULE
+==========
+
+Possible outcomes:
+
+LAB_ONLY:
+The pilot produces local learning only.
+
+CANDIDATE_FOR_CORE:
+The pilot reveals a reusable improvement for SkillsMachine.
+
+APPROVED_FOR_CORE:
+Human approves promoting the finding.
+
+CORE_PROMOTED:
+The reusable improvement is implemented in SkillsMachine core.
+
+No automatic promotion is allowed.
+
+==========
+11.00_NEXT_MINIBATTLES
+==========
+
+Recommended sequence:
+
+MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD
+- Create the pilot folder and seed files.
+
+MB-NS-001E_CODEX_RUN_001
+- Run Codex against the controlled brief.
+
+MB-NS-001F_CLAUDE_CODE_RUN_001
+- Run Claude Code against the same controlled brief.
+
+MB-NS-001G_COMPARE_AGENT_OUTPUTS
+- Compare diffs, tests, evidence, and intervention level.
+
+==========
+12.00_CURRENT_VERDICT
+==========
+
+DELIVERABLE_DONE:
+
+The first Nightshift pilot project is defined.
+
+No automation has started yet.
+
+==========
+END
+==========

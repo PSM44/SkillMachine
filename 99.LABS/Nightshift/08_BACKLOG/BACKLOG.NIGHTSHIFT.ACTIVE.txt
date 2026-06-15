@@ -99,3 +99,13 @@ STATUS............: DONE
 SUMMARY...........: Patched 05_TOOLS\RUN_TEMPSCRIPT.ps1 so missing origin remote does not break runner execution. Runner now reports script exit status and repo state without probing origin.
 CAUSE.............: Previous R2 TempScript used git remote get-url origin under PowerShell ErrorActionPreference=Stop, which converted missing origin into script failure after commit.
 NEXT_ACTION.......: Use the patched runner for MB-NS-001C pilot definition.
+
+==========
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+STATUS............: DONE
+OUTPUT_TYPE.......: DELIVERABLE_DONE
+DELIVERABLE.......: 99.LABS\Nightshift\03_EXPERIMENTS\MB-NS-001C_FIRST_PILOT_PROJECT.AI.txt
+SUMMARY...........: Defined first Nightshift pilot project: NS-PILOT-001_MARKDOWN_TASK_RUNNER for Codex vs Claude Code comparison.
+NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.

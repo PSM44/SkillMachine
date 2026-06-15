@@ -881,3 +881,14 @@ TARGET............: SkillsLake\01.SKILLS\29.SKILL.CLAUDE.WORD.PLUGIN.EFFICIENT.P
 REGISTRY..........: 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
 RATIONALE.........: File content declared canonical title and contained real skill material, so it was promoted rather than discarded.
 NEXT_ACTION.......: Continue with MB-NS-001C inside 99.LABS/Nightshift after readiness is OK.
+
+==========
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+STATUS............: DONE
+SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
+SUMMARY...........: Defined first Nightshift pilot project for controlled Codex vs Claude Code comparison.
+TARGET............: 99.LABS/Nightshift/03_EXPERIMENTS/MB-NS-001C_FIRST_PILOT_PROJECT.AI.txt
+BOUNDARY..........: No SkillsMachine core method promoted. This is a lab-only definition.
+NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.

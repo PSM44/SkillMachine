@@ -1280,3 +1280,11 @@ DATE..............: 2026-06-15 10:39:47 -04:00
 STATUS............: DONE
 SUMMARY...........: Cleaned post-migration untracked file by promoting real Claude Word Plugin skill to canonical SkillsLake path and registry.
 NEXT_ACTION.......: Continue with MB-NS-001C inside 99.LABS/Nightshift after readiness is OK.
+
+==========
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+==========
+DATE..............: 2026-06-15 10:44:08 -04:00
+STATUS............: DONE
+SUMMARY...........: Nightshift lab selected first pilot: NS-PILOT-001_MARKDOWN_TASK_RUNNER. Work remains LAB_ONLY inside 99.LABS/Nightshift.
+NEXT_ACTION.......: Continue with MB-NS-001D scaffold.
