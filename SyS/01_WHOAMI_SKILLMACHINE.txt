@@ -878,3 +878,18 @@ STATUS............: DONE
 SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
 SUMMARY...........: Created scaffold for first Nightshift pilot.
 NEXT_ACTION.......: MB-NS-001E_CODEX_RUN_001.
+
+==========
+MB-NS-001Z_SESSION_CLOSE_20260615
+==========
+DATE..............: 2026-06-15 19:21:36 -04:00
+STATUS............: SESSION_CLOSE_IN_PROGRESS
+PROJECT...........: SkillsMachine / 99.LABS/Nightshift
+MAIN_HEAD.........: f4531ee 20260615_MB-NS-001D_create_ns_pilot_001_scaffold
+CODEX_BRANCH......: lab/ns-pilot-001-codex | 0406be3 20260615_MB-NS-001E_remove_codex_pycache
+CLAUDE_BRANCH.....: lab/ns-pilot-001-claude | fb66846 20260615_MB-NS-001F_import_claude_code_run_001
+WHAT_DONE.........: Nightshift migrated as lab; first pilot scaffolded; Codex RUN_001 executed and cleaned; Claude Code RUN_001 imported and pushed; both branches ready for comparison.
+WHERE_WE_ARE......: Pre-comparison stage. Next action is MB-NS-001G_COMPARE_CODEX_VS_CLAUDE_RUN_001.
+NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet.
+TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
+BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.

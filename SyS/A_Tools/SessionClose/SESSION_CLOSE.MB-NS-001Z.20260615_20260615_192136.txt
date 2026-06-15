@@ -1,0 +1,51 @@
+==========
+SESSION_CLOSE.MB-NS-001Z.20260615
+==========
+DATE..............: 2026-06-15 19:21:36 -04:00
+ROOT_WIN..........: C:\01. GitHub\Skills
+BRANCH............: main
+MAIN_HEAD.........: f4531ee 20260615_MB-NS-001D_create_ns_pilot_001_scaffold
+CODEX_HEAD........: 0406be3 20260615_MB-NS-001E_remove_codex_pycache
+CLAUDE_HEAD.......: fb66846 20260615_MB-NS-001F_import_claude_code_run_001
+
+WHAT_DONE:
+- Migrated Nightshift as isolated lab.
+- Created NS-PILOT-001 Markdown task runner scaffold.
+- Prepared and executed Codex RUN_001 branch.
+- Accepted Codex result and cleaned pycache.
+- Prepared and executed Claude Code RUN_001 branch.
+- Imported Claude transcript result into controlled branch.
+- Both agent outputs are pushed and ready for comparison.
+
+TECH_DEBT:
+- Compare branches before promotion.
+- Harden Python acceptance scripts for cwd/cache.
+- Harden external-agent branch/push protocol.
+- Improve RADAR failure capture.
+- Avoid long nested PowerShell here-strings.
+
+BACKLOG:
+- MB-NS-001G compare Codex vs Claude.
+- Select candidate implementation.
+- Promote chosen result to main.
+- Register findings.
+- Prepare managerial functional demo.
+
+PATH_TO_MANAGERIAL_DELIVERABLE:
+MB-NS-001G_COMPARE -> MB-NS-001H_SELECT_AND_PROMOTE -> MB-NS-001I_MANAGERIAL_SUMMARY -> demo/report for management.
+
+NEXT_ACTION:
+Run MB-NS-001G_COMPARE_CODEX_VS_CLAUDE_RUN_001.
+
+HUMAN_UPDATE:
+Not required now. Changes are operational/lab workflow, not doctrine root.
+
+SKILL_CANDIDATES:
+- Python acceptance post-test cache cleanup.
+- Test cwd/PYTHONPATH policy.
+- External agent isolated workspace import protocol.
+- RADAR failure capture hardening.
+
+==========
+END_SESSION_CLOSE
+==========

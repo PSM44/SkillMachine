@@ -913,3 +913,22 @@ STATUS............: DONE
 SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
 SUMMARY...........: Created scaffold for first Nightshift pilot.
 NEXT_ACTION.......: MB-NS-001E_CODEX_RUN_001.
+
+==========
+MB-NS-001Z_SESSION_CLOSE_BACKLOG_20260615
+==========
+DATE..............: 2026-06-15 19:21:36 -04:00
+PROJECT...........: Nightshift / SkillsMachine
+
+P0_OPEN...........: MB-NS-001G_COMPARE_CODEX_VS_CLAUDE_RUN_001
+P0_OPEN...........: Select promotion strategy: Codex, Claude, fusion, or discard.
+P0_OPEN...........: Integrate selected result to main through controlled merge/cherry-pick.
+P1_DEBT...........: Acceptance scripts must clean __pycache__ after tests and before git add.
+P1_DEBT...........: Python test runner must execute from pilot cwd or set PYTHONPATH.
+P1_DEBT...........: Claude Code may work in isolated branch/workspace; require import-control protocol.
+P1_DEBT...........: External tool push/MCP permissions must be handled as non-blocking local import.
+P1_DEBT...........: RADAR failure capture should preserve stderr/stdout for diagnosis.
+P1_DEBT...........: Avoid long nested here-strings in PowerShell interactive writer scripts.
+P2_BACKLOG........: Create managerial summary for Nightshift pilot.
+P2_BACKLOG........: Convert findings into candidate skill/core patches after review.
+PATH_TO_MGMT......: compare -> select -> promote -> summarize -> demo repeatable agent workflow.
