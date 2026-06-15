@@ -1,0 +1,2521 @@
+========== GENERATED_OUTPUT_POLICY ==========
+GENERATED_OUTPUT_ONLY.......: YES
+DO_NOT_EDIT_MANUALLY........: YES
+SOURCE_OF_TRUTH.............: SkillsLake/01.SKILLS + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1
+GENERATION_MODE.............: BUILD_BUNDLE_CORE
+REGENERATION_CONTRACT.......: Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills
+HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
+========== END_GENERATED_OUTPUT_POLICY ==========
+==============================
+BUNDLE: CORE
+GENERATED_AT: 2026-06-08 13:46:33
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: SkillsLake/01.SKILLS/06.SKILL.WBS.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\06.SKILL.WBS.txt
+VERSION    : v1.2-DRAFT
+SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.WBS_ID.01.01
+NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
+
+ALCANCE...........:
+
+Define cómo se construyen:
+
+WBS internos (estructura dentro de los archivos).
+
+IDs cortos de archivos/carpetas (ID_FS, compatibles con Windows y tooling).
+
+IDs de BD (ID_DB, compatibles con modelos relacionales / catálogos).
+
+Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
+
+Este SKILL es transversal: ningún frame debe redefinir por su cuenta el formato de WBS e IDs.
+
+Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
+
+MEJORA_CLAVE_v1.2:
+
+- Agrega catálogo FRM recomendado y reglas de extensión.
+- Agrega validación operativa (regex y checklist) para que agentes/TOOLING no generen drift.
+- Agrega mapping explícito ID_FS ↔ ID_DB (para ingestion/DB y RADAR).
+- Refuerza compatibilidad Windows: límites y anti-antipatrones.
+
+DEPENDENCIAS......:
+
+07.SKILL.FILE_CONTENT.txt
+09.SKILL.RADAR.txt (recomendado)
+10.SKILL.BATON.txt (recomendado)
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Definiciones básicas
+02.00 Problemas históricos que este SKILL ataca
+03.00 Principios de diseño para WBS e IDs
+
+04.00 Estándar de WBS interno (dentro de los archivos)
+05.00 Estándar de IDs cortos para archivos y carpetas (FS)
+05.00.08 Excepciones controladas a ID_FS
+05.00.09 Validación operativa (NUEVO)
+
+06.00 Estándar de IDs para BD (DB-friendly)
+06.00.04 Mapping ID_FS ↔ ID_DB (NUEVO)
+
+07.00 Relación IDs ↔ SKILLS ↔ HUMAN ↔ RADAR
+08.00 Ejemplos prácticos
+09.00 Antipatrones (qué no hacer)
+10.00 Implementación progresiva (cómo migrar)
+11.00 Checklist rápido
+12.00 Historial de cambios del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_ESTE_SKILL
+
+a) Rutas demasiado largas en Windows (≈260 caracteres) que rompen copias, zips,
+sincronización (OneDrive, etc.) y tooling.
+
+b) Nombres extremadamente verbosos y heterogéneos que dificultan la lectura y
+el parseo automático.
+
+c) Falta de compatibilidad entre nombres de FS (File System) y claves para BD
+(Base de Datos).
+
+d) Refactors costosos porque versión, WBS, título y demás se mezclan en el nombre
+del archivo.
+
+e) Inconsistencia entre proyectos y sistemas: cada uno inventa su propio esquema
+de nombres, obligando a RADAR y a la IA a “adivinar” patrones.
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar único y simple para:
+
+a) WBS interno (estructura dentro de los archivos).
+b) IDs cortos de archivos y carpetas (FS-friendly).
+c) IDs para BD (DB-friendly).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Permitir que los nombres “humanos” puedan ser largos y explicativos sin romper:
+
+a) Límites de Windows.
+b) Esquemas de BD.
+c) Scripts y tooling que dependan de los IDs.
+
+==========
+01.00_DEFINICIONES_BASICAS
+==========
+
+01.00.01_WBS_INTERNO
+
+Estructura jerárquica dentro de un documento (por ejemplo: 01.00, 01.10, 01.20, etc.).
+
+Función:
+
+Ordenar ideas y secciones de forma estable.
+
+Permitir referencias internas tipo “ver 03.20 de este documento”.
+
+No tiene obligación de coincidir con estructura de carpetas.
+
+01.00.02_ID_FS_(ID_DE_FILE_SYSTEM)
+
+Identificador corto y estable que se usa en nombres de archivos y carpetas.
+
+Reglas mínimas:
+
+ASCII básico, sin espacios, sin tildes, sin caracteres raros.
+
+Amigable para Windows (ruta total razonable).
+
+Se compone normalmente de:
+
+Prefijo de frame o proyecto (FRM).
+
+Tipo lógico (TIPO).
+
+Secuencia numérica (NNNN).
+
+Opcional: sufijo humano corto ASCII.
+
+Ejemplo:
+
+PF_HUM_0005
+
+EVA_SKL_0101
+
+WNG_TL_0200_REGENALL
+
+01.00.03_ID_DB_(ID_DE_BASE_DE_DATOS)
+
+Clave para BD:
+
+Lo más corta posible.
+
+Sin dependencias directas de rutas físicas.
+
+Idealmente unívoca para cada elemento lógico relevante.
+
+Puede reutilizar el patrón ID_FS o derivarlo, pero siempre con mapping claro ID_DB ↔ ID_FS.
+
+01.00.04_FRAME
+
+Conjunto coherente de reglas y artefactos: PFUNDATIONS, EVA.EOL, WINGS, proyectos, etc.
+
+01.00.05_SKILL
+
+Estándar transversal basado en errores reales que define “cómo se trabaja”.
+Los frames deben respetar los SKILLS, salvo excepciones justificadas.
+
+01.00.06_CATALOGO_FRM_(NUEVO, RECOMENDADO)
+
+FRM recomendado (ejemplos; cada ecosistema mantiene su catálogo):
+- PF   = PFUNDATIONS
+- EVA  = EVA.EOL
+- WNG  = WINGS
+- KLAB = Kumquat Lab
+- PROJ = Proyecto puntual
+- OPS  = Operaciones / runbooks
+- SYS  = Sistema base transversal
+
+Regla:
+- Si agregas FRM nuevo, documentarlo en el HUMAN root del ecosistema o en un catálogo central.
+
+==========
+02.00_PROBLEMAS_HISTORICOS_QUE_ESTE_SKILL_ATACA
+==========
+
+02.00.01_PROBLEMA_1_RUTAS_LARGAS_EN_WINDOWS
+
+Árboles profundos + nombres largos + sincronización = riesgo de superar límite de ruta.
+
+Síntomas:
+
+Errores al copiar/mover/eliminar.
+
+Imposibilidad de zippear.
+
+Fallos de scripts.
+
+02.00.02_PROBLEMA_2_NOMBRES_BONITOS_PERO_INESCALABLES
+
+Espacios, tildes, ñ, caracteres especiales.
+
+Mezcla de WBS, título, versión en el mismo string.
+
+Resultado:
+
+Keys poco confiables en BD.
+
+Dificultad para queries limpias.
+
+Dificultad de parseo automático.
+
+02.00.03_PROBLEMA_3_REFACTORS_CAROS
+
+Cambias versión/título y el nombre de archivo cambia → cascada de roturas.
+
+02.00.04_PROBLEMA_4_INCONSISTENCIA_ENTRE_SISTEMAS
+
+Cada proyecto inventa su lógica.
+RADAR y tooling deben “adivinar” patrones.
+
+==========
+03.00_PRINCIPIOS_DE_DISENO_PARA_WBS_E_IDS
+==========
+
+03.00.01_PRINCIPIO_1_SEPARAR_CAPAS
+
+WBS interno → organización conceptual dentro del archivo.
+
+ID_FS → integración con filesystem.
+
+ID_DB → integración con BD/catálogos.
+
+No mezclar todo en el mismo string.
+
+03.00.02_PRINCIPIO_2_ID_CORTO_SEMANTICA_LARGA
+
+El ID debe ser mecánico, corto y estable.
+
+La semántica va en:
+
+títulos de sección,
+
+cabecera/metadatos,
+
+campos descriptivos de BD.
+
+03.00.03_PRINCIPIO_3_ASCII_ONLY_EN_IDS
+
+En IDs FS y BD:
+
+Letras A–Z (mayúsculas recomendadas).
+
+Dígitos 0–9.
+
+Separadores: _ y .
+
+No se permiten:
+
+tildes, ñ, espacios, símbolos raros.
+
+03.00.04_PRINCIPIO_4_ESTABILIDAD_DE_IDS
+
+Una vez asignado un ID:
+
+No se cambia salvo rediseño estructural mayor.
+
+Versiones van en metadatos, no en el ID.
+
+03.00.05_PRINCIPIO_5_LONGITUD_CONTROLADA
+
+Recomendaciones:
+
+ID_FS ≤ 16 caracteres (sin sufijo).
+
+ID_FS + sufijo ≤ 40 caracteres.
+
+Nombre archivo (ID_FS + sufijo + ext) ≤ 80 caracteres.
+
+Ruta objetivo < 200 caracteres.
+
+==========
+04.00_ESTANDAR_DE_WBS_INTERNO_(DENTRO_DE_LOS_ARCHIVOS)
+==========
+
+04.00.01_FORMATO_BASICO
+
+Formato sugerido:
+NN.MM_TITULO_EN_MAYUSCULAS_SIN_TILDES
+
+Ejemplo:
+01.30_RELACION_CON_LOS_SKILLS_Y_ESTANDARES_DEL_SISTEMA
+
+Características:
+
+NN = bloque principal (00, 01, 02, …).
+
+MM = subbloque (00, 10, 20, 30, etc.).
+
+Título en mayúsculas, sin tildes ni caracteres especiales.
+
+Guion bajo _ como separador.
+
+04.00.02_USO_RECOMENDADO
+
+Ordenar contenido y facilitar referencia (“ver 03.20”).
+
+No se usa como nombre de archivo ni como clave de BD.
+
+04.00.03_REGLAS_DE_ESTABILIDAD
+
+Evitar renumerar WBS internos salvo rediseño profundo.
+
+Si agregas un bloque intermedio, usar 01.15, 01.25, etc.
+
+==========
+05.00_ESTANDAR_DE_IDS_CORTOS_PARA_ARCHIVOS_Y_CARPETAS_(FS)
+==========
+
+++++++++++
+05.00.01_OBJETIVO_DE_ID_FS
+++++++++++
+
+Ser clave corta, estable y legible:
+
+unívoca dentro de un frame/proyecto,
+
+parseable por scripts,
+
+amigable con Windows.
+
+++++++++++
+05.00.02_PATRON_GENERAL_FRM_TIPO_NNNN
+++++++++++
+
+Patrón:
+FRM_TIPO_NNNN[_SUFIJO]
+
+FRM = código corto frame/proyecto
+TIPO = tipo lógico (HUM, SKL, RAD, TL, CFG, SCRP, etc.)
+NNNN = secuencia numérica
+SUFIJO = opcional, corto ASCII
+
+++++++++++
+05.00.03_TIPOS_OFICIALES_(EJEMPLOS)
+++++++++++
+
+Ejemplos:
+
+HUM = documentos HUMAN
+SKL = skills/standards
+RAD = outputs RADAR
+TL  = tools/logs
+CFG = configuraciones
+SCRP= scripts
+
+++++++++++
+05.00.04_EJEMPLOS_DE_ID_FS
+++++++++++
+
+PF_HUM_0005_OPERATIONS.txt
+PF_TL_0101_REGENALL.ps1
+WNG_RAD_0001_INDEX.txt
+
+++++++++++
+05.00.05_REGLAS_DE_CARACTERES_Y_LONGITUD
+++++++++++
+
+Permitido:
+A–Z, 0–9, _ y .
+
+No permitido:
+espacios, tildes, ñ, símbolos raros.
+
+Longitud:
+ID_FS recomendado ≤ 16 (sin sufijo).
+Nombre archivo completo ≤ 80.
+
+++++++++++
+05.00.06_IDS_PARA_CARPETAS
+++++++++++
+
+Mismo patrón, sin extensión.
+
+Ejemplos:
+PF_HUM
+WNG_RAD
+PROJ_CFG
+
+++++++++++
+05.00.08_EXCEPCIONES_CONTROLADAS_A_ID_FS
+++++++++++
+
+Regla:
+El estándar ID_FS es recomendado para consistencia y tooling.
+
+Se permiten excepciones cuando el HUMANO define un contrato operativo explícito.
+
+Ejemplo (real):
+Script con nombre fijo: RADAR.ps1
+
+Condiciones para permitir la excepción:
+
+Documentar en metadatos del archivo:
+“EXCEPCION_ID_FS...: SI (justificada)”
+
+Motivo: contrato operativo humano / compatibilidad con tooling.
+
+Objetivo:
+Evitar drift silencioso.
+
+++++++++++
+05.00.09_VALIDACION_OPERATIVA_(NUEVO)
+++++++++++
+
+Regla:
+Todo tooling/agente que cree nombres debe validar ID_FS.
+
+Regex recomendado (mínimo):
+^[A-Z0-9]{2,6}_[A-Z0-9]{2,6}_[0-9]{4}(_[A-Z0-9._]{1,30})?$
+
+Checks:
+- ASCII only
+- longitud nombre archivo <= 80
+- ruta total < 200 recomendado
+- evitar duplicados (si existe catálogo)
+
+Si falla:
+- no crear archivo
+- registrar TROUBLE (severidad BAJA/MEDIA según impacto)
+
+++++++++++
+05.00.09_IDS_PARA_ARTEFACTOS_DE_ORQUESTACION_(AI_ORCH)
+++++++++++
+
+Para artefactos del orquestador (logs, snapshots, reports), se recomienda:
+
+- Mantener IDs cortos y parseables en nombres.
+- Evitar timestamps en ID_FS (preferir timestamp en el sufijo del archivo).
+
+Ejemplos:
+
+AIOR_LOG_0001_RUNS\LOG.RUN.<RUN_ID>.txt
+AIOR_CST_0001\COST_YYYYMMDD.ACTIVE.txt
+AIOR_SNP_0001\SNAP-YYYYMMDD-HHMM-SEQ\manifest.txt
+
+Objetivo:
+
+Parseo por scripts + compatibilidad DB sin rutas imposibles.
+
+==========
+06.00_ESTANDAR_DE_IDS_PARA_BD_(DB-FRIENDLY)
+==========
+
+++++++++++
+06.00.01_OBJETIVO_DE_ID_DB
+++++++++++
+
+Clave estable y portátil que no dependa de:
+
+ruta en disco,
+nombre de archivo,
+ubicación relativa.
+
+++++++++++
+06.00.02_FORMATO_SUGERIDO
+++++++++++
+
+Formato:
+FRM.DOC.SECC
+
+FRM = frame/proyecto
+DOC = número documento (alineado a NNNN si aplica)
+SECC = WBS interno normalizado (ej 0130)
+
+Ejemplos:
+
+PFOP.0005.0000 (documento completo)
+PFOP.0005.0130 (sección 01.30)
+
+++++++++++
+06.00.03_CAMPOS_SUGERIDOS_EN_BD
+++++++++++
+
+id_db
+id_fs
+id_unico
+title_humano
+wbs_interno
+fs_path_rel
+frame
+tipo_elemento
+
+++++++++++
+06.00.04_MAPPING_ID_FS_↔_ID_DB_(NUEVO)
+++++++++++
+
+Principio:
+ID_DB no depende del path, pero debe poder mapearse al archivo.
+
+Mapping recomendado:
+- Tabla catálogo (CSV/SQLite) con:
+  - id_db
+  - id_fs
+  - path_rel
+  - id_unico
+  - version
+
+RADAR puede consumir este catálogo para enriquecer navegación.
+
+==========
+07.00_RELACION_IDS_CON_SKILLS_Y_HUMAN_Y_RADAR
+==========
+
+07.10_ID_UNICO
+Cada archivo serio lleva ID_UNICO lógico, estable.
+
+07.20_ID_FS
+ID_FS es el nombre corto (si se adopta).
+Si se usa excepción (ej RADAR.ps1), se documenta.
+
+07.30_RADAR
+RADAR usa rutas del FS para describir y puede incluir hashes.
+RADAR no decide IDs, pero se beneficia cuando IDs son estables.
+
+==========
+08.00_EJEMPLOS_PRACTICOS
+==========
+
+08.10_EJEMPLO_WBS_INTERNO
+00.00_METADATOS_DEL_DOCUMENTO
+01.10_SECCION
+
+++++++++++
+02.10_SUBSECCION
+++++++++++
+
+08.20_EJEMPLO_EXCEPCION_ID_FS
+Archivo: RADAR.ps1
+Metadatos incluyen:
+EXCEPCION_ID_FS...: SI (justificada)
+
+==========
+09.00_ANTIPATRONES_(QUE_NO_HACER)
+==========
+
+- Meter versión en el nombre de archivo (va en metadatos).
+- Usar espacios/tildes/ñ en IDs.
+- Crear estructuras de carpetas profundas con nombres largos (rompe Windows).
+- Cambiar IDs por razones estéticas (rompe tooling y DB).
+
+==========
+10.00_IMPLEMENTACION_PROGRESIVA_(COMO_MIGRAR)
+==========
+
+- Adoptar ID_FS para archivos nuevos primero.
+- Mantener excepciones controladas documentadas.
+- Crear catálogo de mapping ID_FS ↔ ID_DB cuando la BD sea prioridad.
+- Integrar validación en scripts/agents antes de refactors masivos.
+
+==========
+11.00_CHECKLIST_RAPIDO
+==========
+
+[ ] IDs ASCII only
+[ ] Nombre archivo <= 80
+[ ] Ruta recomendada < 200
+[ ] Version en metadatos, no en nombre
+[ ] Excepciones documentadas
+[ ] Validator activo para nuevos nombres
+
+==========
+12.00_HISTORIAL_DE_CAMBIOS
+==========
+
+2026-02-26, v1.2-DRAFT
+- Agregado: catálogo FRM recomendado.
+- Agregado: validación operativa (regex + checks) para agentes y tooling.
+- Agregado: mapping explícito ID_FS ↔ ID_DB para BD y consumo por RADAR.
+2026-02-20, v1.1-CANON
+- Versión base del estándar WBS/ID.
+
+--------------------------------------------------
+SOURCE_FILE: SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\07.SKILL.FILE_CONTENT.txt
+VERSION    : v1.3-DRAFT
+SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.FILE_CONTENT.01.01
+NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
+VERSION...........: v1.3-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
+AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
+
+ALCANCE...........:
+
+Regla transversal para crear, evolucionar y auditar el contenido interno de cualquier archivo
+del ecosistema (HUMAN, SYSTEM, scripts, configuraciones, prompts, informes, outputs serios, etc.).
+
+Este skill define:
+
+Estructura mínima obligatoria.
+
+Metadatos mínimos.
+
+Formato obligatorio de títulos y subtítulos (10x símbolos).
+
+Cómo documentar cambios (changelog).
+
+Reglas mínimas para scripts ejecutables (cómo ejecutar, exit code, OK real).
+
+Forma de entrega IA->humano (bloques reemplazables, copy/paste).
+
+NO_CUBRE..........:
+
+No define arquitectura de carpetas ni naming del filesystem (eso vive en WBS/ID y en taxonomía del proyecto).
+
+No define estándares de estilo de código línea-a-línea (eso vive en CODE standards).
+
+No decide la gobernanza conceptual (eso vive en HUMAN y en otros skills).
+
+No define modelos IA ni routing/costos (eso vive en skills de orquestación si existen).
+
+DEPENDENCIAS......:
+
+06.SKILL.WBS.txt
+(Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
+
+NOTA_IMPORTANTE...:
+
+Este skill define “cómo debe verse” un archivo serio por dentro.
+La numeración exacta (WBS interno) se guía por el skill WBS/ID.
+
+MEJORA_CLAVE_v1.3:
+
+- Agrega sección TAGS_OPERATIVOS para etiquetar artefactos runtime-critical (sandbox, costos, routing, executor policy).
+- Refuerza control anti “OK falso” (OK/FAIL binario + evidencia mínima).
+- Agrega convención PowerShell para evitar warnings:
+  "The cmdlet 'X' uses an unapproved verb." (ej.: Validate-* no es verb aprobado).
+  Recomendación: Test-* / Confirm-* / Invoke-*.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto del problema y objetivos
+
+01.00 Propósito y principios
+02.00 Bloques mínimos de contenido (obligatorios)
+02.15 Tags operativos (NUEVO)
+02.50 Formato de presentación (OBLIGATORIO)
+02.60 Formato obligatorio de títulos (10x símbolos)
+
+03.00 Archivos no ejecutables (HUMAN y docs)
+04.00 Archivos ejecutables (scripts y código)
+04.40 Contrato de exit code y estado final (OBLIGATORIO)
+04.50 Convención PowerShell (verbs aprobados) (NUEVO)
+
+05.00 Interacción humano–IA sobre el contenido
+06.00 Checklist rápido
+07.00 Resumen de uso del skill
+08.00 Historial de cambios
+FIN del documento
+
+==========
+00.20_CONTEXTO_DEL_PROBLEMA_Y_OBJETIVOS
+==========
+
+00.20.01_PROBLEMAS_REALES_QUE_MOTIVAN_ESTE_SKILL
+
+a) Archivos “vacíos” o caóticos: sin metadatos, sin propósito, sin secciones.
+b) Pérdida de continuidad: nadie entiende qué es el archivo a los 3 meses.
+c) Dificultad de auditoría: no hay changelog ni trazabilidad de cambios.
+d) Salidas de IA imposibles de aplicar: no indican dónde insertar/reemplazar.
+e) Scripts que “funcionan” pero no son operables: sin cómo ejecutar, sin prerequisitos.
+f) Falsos OK: scripts que declaran éxito aunque fallaron parcialmente.
+
+00.20.02_OBJETIVO_PRINCIPAL
+
+Definir un estándar mínimo y estable para que cualquier archivo serio sea entendible por:
+
+Tu yo del futuro.
+
+Un tercero competente.
+
+Una IA en blanco (sin memoria previa).
+
+00.20.03_OBJETIVO_SECUNDARIO
+
+Estandarizar la forma de:
+
+Presentar metadatos.
+
+Ordenar contenido con títulos claros.
+
+Proponer cambios (replace/add/delete) sin ambigüedad.
+
+Mantener formato consistente (10x símbolos).
+
+Producir outputs ejecutables con estado final confiable.
+
+==========
+01.00_PROPOSITO_Y_PRINCIPIOS
+==========
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Evitar que archivos del ecosistema se conviertan en “ruido” o “tierra de nadie”.
+Un archivo serio debe tener forma repetible y auditable.
+
+----------
+01.20_A_QUE_TIPOS_DE_ARCHIVO_APLICA
+----------
+
+Aplica a:
+
+HUMAN (conceptuales, guías, manuales, constituciones de sistema).
+
+SYSTEM / OPERATIONS (reglas, flujos, contratos operativos).
+
+Scripts ejecutables (.ps1, .py, .sh, .sql, etc.).
+
+Configuraciones y prompts persistentes.
+
+Informes y outputs serios generados por tooling.
+
+No distingue por frame: PF, WINGS, EVA, proyectos sueltos.
+Regla: si el archivo es “serio”, aplica.
+
+----------
+01.30_PRECEDENCIA_DE_FUENTES
+----------
+
+Modelo recomendado de precedencia:
+
+HUMAN (general y específico del proyecto) > SKILLS > (state del sistema si existe) > código.
+
+Si hay conflicto:
+
+Primero se corrige el archivo/código que está violando el contrato.
+
+Si el conflicto es conceptual, se corrige HUMAN o el skill, pero explícitamente (no por drift silencioso).
+
+==========
+02.00_BLOQUES_MINIMOS_DE_CONTENIDO
+==========
+
+++++++++++
+02.10_METADATOS_INICIALES
+++++++++++
+
+OBLIGATORIO: todo archivo serio debe comenzar con un bloque de metadatos mínimo.
+
+Campos mínimos (no negociar):
+
+ID_UNICO (o FILE_ID lógico)
+
+NOMBRE_SUGERIDO (nombre del archivo)
+
+VERSION
+
+FECHA (y HORA si aporta valor)
+
+CIUDAD (o ubicación)
+
+UBICACION_SISTEMA (carpeta lógica en el ecosistema)
+
+AUTOR_HUMANO (o rol)
+
+ALCANCE resumido (2–5 líneas)
+
+NO_CUBRE (2–5 líneas)
+
+DEPENDENCIAS (lista corta, si aplica)
+
+Notas:
+
+La IA puede proponer metadatos, el humano valida.
+
+Si el archivo se vuelve CANON, debe tener metadatos completos y consistentes.
+
+++++++++++
+02.15_TAGS_OPERATIVOS_(NUEVO)
+++++++++++
+
+Objetivo:
+Permitir clasificar rápidamente artefactos “runtime-critical” (operación) sin depender del nombre.
+
+Uso:
+- Campo opcional en metadatos:
+  TAGS_OPERATIVOS...: <lista separada por coma>
+
+Ejemplos de tags:
+- RUNTIME_CRITICAL
+- EXECUTOR_POLICY
+- SANDBOX
+- COST_CONTROL
+- ROUTING
+- RADAR_OUTPUT
+- BATON_STATE
+- INCIDENT_TEMPLATE
+
+Reglas:
+- Tags no reemplazan ID_UNICO ni WBS.
+- Tags no deben ser largos ni inventar taxonomías infinitas.
+- Si un tag se repite mucho, conviene formalizarlo como catálogo.
+
+++++++++++
+02.20_INTRODUCCION_CORTA
+++++++++++
+
+OBLIGATORIO: después de metadatos debe existir una introducción breve que responda:
+
+¿Para qué existe este archivo?
+
+¿Qué problema resuelve?
+
+¿Qué NO cubre?
+
+¿Quién debería leerlo y cuándo?
+
+La introducción es un marco, no reemplaza el contenido.
+
+++++++++++
+02.30_CUERPO_DEL_ARCHIVO
+++++++++++
+
+OBLIGATORIO: el cuerpo debe estar organizado con títulos claros (WBS interno)
+y debe permitir “scaneo rápido”.
+
+Reglas:
+
+Evitar párrafos gigantes (si > 4 ítems, usar listas).
+
+No duplicar grandes bloques de texto: si existe en otro archivo, referenciarlo.
+
+Mantener el contenido útil; por defecto complementar, ordenar y aclarar (no recortar agresivamente).
+
+++++++++++
+02.40_SECCION_DE_CAMBIOS_(CHANGELOG)
+++++++++++
+
+OBLIGATORIO a partir del momento en que el archivo deja de ser un borrador inicial.
+
+Formato recomendado:
+
+FECHA, VERSION, resumen corto (1–3 líneas).
+
+++++++++++
+02.50_FORMATO_DE_PRESENTACION
+++++++++++
+
+OBLIGATORIO (CONTRATO):
+
+Los títulos deben usar separadores de 10 símbolos EXACTOS (10x) para consistencia:
+
+escaneo humano rápido,
+
+parseo simple por IA,
+
+reducción de drift entre archivos.
+
+Campos alineados con “......:” para lectura rápida.
+
+Texto explicativo en bloques separados por líneas en blanco.
+
+++++++++++
+02.60_FORMATO_OBLIGATORIO_DE_TITULOS
+++++++++++
+
+OBLIGATORIO (CONTRATO 10x):
+
+Nivel 1 (Título principal):
+
+Línea de 10 símbolos “=” antes del título.
+
+Línea de 10 símbolos “=” después del título.
+
+Ejemplo:
+
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+Nivel 2 (Subtítulo):
+
+Línea de 10 símbolos “-” antes del subtítulo.
+
+Línea de 10 símbolos “-” después del subtítulo.
+
+Ejemplo:
+
+----------
+01.10_POR_QUE_EXISTE_ESTE_SKILL
+----------
+
+Nivel 3 (Sub-subtítulo):
+
+Línea de 10 símbolos “+” antes y después.
+
+Ejemplo:
+
+++++++++++
+02.10_METADATOS_INICIALES
+++++++++++
+
+Nivel 4 (Bloque opcional):
+
+Línea de 10 símbolos “*” antes y después.
+
+Ejemplo:
+
+**********
+NOTAS_OPERATIVAS
+**********
+
+Regla dura:
+
+Si un archivo serio no cumple este formato, se considera NO-CANON hasta corregirse.
+
+==========
+03.00_ARCHIVOS_NO_EJECUTABLES_(HUMAN_Y_DOCS)
+==========
+
+----------
+03.10_REGLAS_PARA_HUMAN_Y_DOCS
+----------
+
+Para HUMAN, manuales y documentación conceptual:
+
+Deben tener metadatos + introducción + cuerpo ordenado + changelog.
+
+Mantener tono explicativo y académico (no telegráfico).
+
+Regla por defecto: NO resumir agresivamente contenido conceptual sin orden humana explícita.
+
+Evolución típica: complementar, ordenar, aclarar y agregar ejemplos.
+
+----------
+03.20_DOCS_OPERATIVOS_MAS_LIVIANOS
+----------
+
+Para documentos operativos más livianos (guías cortas, runbooks pequeños):
+
+Se permite menor profundidad,
+
+pero deben conservar:
+
+metadatos básicos,
+
+introducción mínima,
+
+títulos claros (aunque menos niveles),
+
+“cómo ejecutar” si describe un proceso operativo.
+
+==========
+04.00_ARCHIVOS_EJECUTABLES_(SCRIPTS_Y_CODIGO)
+==========
+
+----------
+04.10_CABECERA_DE_SCRIPTS
+----------
+
+OBLIGATORIO: todo script serio debe comenzar con comentarios/cabecera que incluyan:
+
+Nombre lógico del script.
+
+Propósito (1–5 líneas).
+
+Uso típico (comando(s)).
+
+Prerrequisitos.
+
+Contrato: qué outputs produce y dónde.
+
+Referencia al skill/contrato que implementa (si aplica).
+
+----------
+04.20_SECCION_COMO_EJECUTAR
+----------
+
+OBLIGATORIO: debe existir sección explícita de “Cómo ejecutar” (en el mismo script o en doc asociado).
+
+Contenido mínimo:
+
+Prerrequisitos (versiones, módulos, permisos).
+
+Comandos de ejemplo (caso típico).
+
+Parámetros obligatorios/opcionales.
+
+Ejemplo de output esperado (DONE binario).
+
+----------
+04.30_COMENTARIOS_POR_BLOQUE_DE_CODIGO
+----------
+
+OBLIGATORIO: cada bloque lógico (función, región, sección main) debe explicar:
+
+Qué hace.
+
+Por qué existe así.
+
+Qué supuestos tiene (inputs esperados, contexto).
+
+Riesgos típicos.
+
+No requiere comentar cada línea, pero sí cada bloque.
+
+----------
+04.40_CONTRATO_DE_EXIT_CODE_Y_ESTADO_FINAL
+----------
+
+OBLIGATORIO (CONTRATO):
+
+Un script NO debe declarar éxito (OK/COMPLETADO) si hubo error no controlado.
+
+Si ocurre una excepción no controlada:
+
+Registrar error (Write-Error o equivalente).
+
+Terminar con exit code != 0 (por defecto exit 1).
+
+Imprimir FAIL (no OK) como estado final.
+
+Solo se imprime “OK/COMPLETADO” si:
+
+No hubo excepción,
+
+Se generaron los outputs esperados (DONE binario),
+
+Se dejó evidencia (rutas/archivos generados).
+
+Objetivo:
+
+Evitar falsos positivos (ej.: “OK” con fallos parciales).
+
+Mejorar auditabilidad y confianza operacional.
+
+----------
+04.50_CONVENCIONES_POWERSHELL_(VERBS_APROBADOS)_(NUEVO)
+----------
+
+Problema real:
+PowerShell emite warnings si una función/cmdlet usa verbos no aprobados:
+"The cmdlet 'X' uses an unapproved verb."
+
+Regla:
+Preferir verbos aprobados por PowerShell (ejemplos comunes):
+Get, Set, New, Remove, Add, Clear, Copy, Export, Import, Convert, Update,
+Start, Stop, Invoke, Test, Confirm, Enter, Exit, Find, Format, Join,
+Measure, Move, Out, Push, Pop, Read, Write.
+
+Recomendación dura (para tu caso):
+- Evitar: Validate-*
+- Preferir: Test-* (validación)
+- Preferir: Confirm-* (confirmación)
+- Preferir: Invoke-* (ejecución/acción)
+
+Ejemplo concreto:
+- En vez de Validate-CISMetadata
+  - Test-CISMetadata
+  - Confirm-CISMetadata
+  - Invoke-CISMetadataCheck
+
+Nota:
+Este skill no reemplaza documentación oficial de PowerShell; es una regla operacional anti-warning.
+
+==========
+05.00_INTERACCION_HUMANO_IA_SOBRE_EL_CONTENIDO
+==========
+
+----------
+05.10_CUANDO_LA_IA_PROPONE_CAMBIOS
+----------
+
+Regla dura:
+
+Si la IA cambia algo no-trivial, debe entregar:
+
+BLOQUE_ORIGINAL (tal como está hoy).
+
+BLOQUE_CORREGIDO (propuesta completa).
+
+Esto habilita replace en editor sin ambigüedad.
+
+----------
+05.20_ELIMINAR_VS_RESUMIR_VS_EXTENDER
+----------
+
+Regla por defecto:
+
+No eliminar secciones completas ni resumir agresivamente contenido conceptual sin orden humana explícita.
+
+Cambios aceptables por defecto:
+
+Ordenar mejor.
+
+Clarificar redacción.
+
+Agregar contexto y ejemplos.
+
+Agregar notas de riesgo.
+
+Si se propone eliminar:
+
+Indicar bloque exacto a eliminar.
+
+Explicar por qué (duplicado/obsoleto/contradictorio).
+
+----------
+05.30_AGREGAR_NUEVAS_SECCIONES
+----------
+
+Cuando la IA cree contenido nuevo:
+
+Proponer título y subtítulo.
+
+Indicar dónde insertarlo:
+
+título superior inmediato,
+
+título inferior inmediato (si aplica).
+
+Entregar el contenido completo de la nueva sección en un solo bloque.
+
+Ajustar WBS interno siguiendo skill WBS/ID.
+
+----------
+05.40_ENTREGA_EN_BLOQUE_UNICO_COPIABLE
+----------
+
+Para scripts y archivos que el humano pegará en un archivo en blanco:
+
+La IA debe entregar el contenido completo del archivo en un solo bloque.
+
+El archivo debe quedar ejecutable o usable inmediatamente sin edición extra.
+
+Si requiere varias tandas, cada tanda debe indicar:
+
+“TANDA X/Y”
+
+nombre del archivo
+
+si el humano debe reemplazar o concatenar.
+
+==========
+06.00_CHECKLIST_RAPIDO
+==========
+
+----------
+06.10_PARA_CREAR_DESDE_CERO
+----------
+
+Antes de considerar un archivo aceptable:
+
+¿Tiene metadatos al inicio?
+
+¿Tiene introducción clara?
+
+¿Cuerpo organizado con títulos consistentes (10x)?
+
+Si es script: ¿existe “cómo ejecutar”?
+
+¿Declara qué NO cubre?
+
+¿Tiene changelog cuando aplica?
+
+¿Si es runtime-critical, tiene TAGS_OPERATIVOS?
+
+----------
+06.20_PARA_ACTUALIZAR_UN_ARCHIVO_EXISTENTE
+----------
+
+Antes de cerrar cambios:
+
+¿Se entregó BLOQUE_ORIGINAL y BLOQUE_CORREGIDO para cambios relevantes?
+
+¿No se perdió contexto útil?
+
+¿Introducción sigue alineada?
+
+¿Cambio amerita entrada en changelog?
+
+¿Si es PowerShell, evitaste Validate-* (o aceptaste conscientemente el warning)?
+
+==========
+07.00_RESUMEN_DE_USO_DEL_SKILL
+==========
+
+Usa este skill siempre que crees o rediseñes contenido interno de un archivo.
+
+Plantilla mental mínima (OBLIGATORIA):
+
+Metadatos → Introducción → Cuerpo ordenado (10x) → Cómo ejecutar (si aplica) → Changelog.
+
+Aplica a:
+
+HUMAN
+
+SKILLS
+
+Scripts
+
+Configs
+
+Informes/outputs serios
+
+==========
+08.00_HISTORIAL_DE_CAMBIOS
+==========
+
+2026-02-26, v1.3-DRAFT
+- Agregado: 02.15 TAGS_OPERATIVOS para runtime-critical.
+- Refuerzo: estado final OK/FAIL binario + evidencia mínima (anti “OK falso”).
+- Agregado: 04.50 Convención PowerShell anti “unapproved verb” (Validate-* -> Test/Confirm/Invoke).
+- Se mantiene contenido completo previo (v1.2) sin omitir secciones.
+
+2026-02-20, v1.2-CANON
+- Endurece formato: títulos 10x símbolos pasan a ser contrato obligatorio.
+- Agrega sección 02.60 formato obligatorio de títulos (niveles 1–4).
+- Agrega contrato obligatorio de exit code y estado final (04.40).
+- Agrega regla de entrega en bloque único copiable (05.40).
+- Mantiene estructura original y complementa sin perder contenido útil.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
+
+--------------------------------------------------
+SOURCE_FILE: SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\12.SKILL.DRAG_AND_DROP.txt
+VERSION    : UNKNOWN
+SHA256     : A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.DRAG_AND_DROP.01.00
+NOMBRE_SUGERIDO...: 12.SKILL.DRAG_AND_DROP.txt
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-02-26
+HORA..............: HH:MM (actualizar al guardar)
+CIUDAD............: Maria Luisa, Chile
+UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\DRAG_AND_DROP)
+AUTOR_HUMANO......: ADMIN
+
+ALCANCE...........:
+
+Define el contrato operativo “Drag & Drop” para trabajar con IA usando archivos y tandas,
+sin perder continuidad ni romper el flujo por límites de tamaño, truncación o formato.
+
+Este skill estandariza:
+
+- Cómo adjuntar archivos al chat / IA.
+- Cómo partir entregas en TANDAS.
+- Cómo nombrar y referenciar archivos adjuntos.
+- Cómo evitar errores típicos: “faltan líneas”, “no era el archivo correcto”, “mezclé versiones”.
+
+Aplica a cualquier proyecto/sistema que use:
+- archivos .txt como canon (HUMAN, SKILLS, BATON, RADAR, logs).
+- outputs grandes (RADAR segs, exports, auditorías).
+- interacción iterativa con IA.
+
+NO_CUBRE..........:
+
+No define contenido interno de los archivos (eso es FILE_CONTENT).
+No define naming FS/IDs (eso es WBS/ID).
+No define RADAR (pero es compatible y lo referencia).
+
+DEPENDENCIAS......:
+
+07.SKILL.FILE_CONTENT.txt
+06.SKILL.WBS.txt
+09.SKILL.RADAR.txt
+10.SKILL.BATON.txt
+08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt (si aplica a incidentes por pérdida de datos)
+
+MEJORA_CLAVE_v1.2:
+
+- Reglas explícitas para evitar truncación y “falsos completos”.
+- Contrato de confirmación: IA debe declarar qué recibió (lista exacta).
+- Protocolo “TANDA X/Y” reforzado para copy/paste y replace.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos del documento
+00.10 Índice general WBS
+00.20 Contexto y objetivos
+
+01.00 Definiciones
+02.00 Principios de Drag & Drop
+03.00 Protocolo de carga de archivos (upload)
+04.00 Protocolo de entregas por TANDAS
+05.00 Protocolo de reemplazos (replace) y parches
+06.00 Validación de integridad (anti-truncación)
+07.00 Errores comunes y mitigaciones
+08.00 Checklist rápido
+09.00 Changelog
+
+==========
+00.20_CONTEXTO_Y_OBJETIVOS
+==========
+
+Problema real:
+- En chats con IA, archivos largos se truncan o se interpretan parcial.
+- Se pierde contexto por “asumir” que el archivo estaba completo.
+- Se mezclan versiones: se edita una copia vieja sin darse cuenta.
+
+Objetivo principal:
+- Asegurar que el flujo “subo archivo -> IA lo entiende -> IA devuelve cambios aplicables”
+sea repetible, auditable y sin ambigüedad.
+
+Objetivo secundario:
+- Permitir trabajo en muchos archivos grandes sin volverse loco con carpetas profundas.
+
+==========
+01.00_DEFINICIONES
+==========
+
+DRAG_AND_DROP:
+- Acción de adjuntar un archivo al chat/IA.
+
+TANDA:
+- Segmento de entrega cuando el contenido no cabe o se decide separar por operabilidad.
+
+PAQUETE:
+- Conjunto de archivos subidos para una tarea (ej.: HUMAN + SKILLS + RADAR segs).
+
+TRUNCACION:
+- El sistema corta el contenido (visible o invisible) y la IA ve solo una parte.
+
+CONFIRMACION_DE_RECEPCION:
+- Respuesta obligatoria de la IA listando EXACTAMENTE qué archivos/segmentos recibió.
+
+==========
+02.00_PRINCIPIOS_DE_DRAG_AND_DROP
+==========
+
+02.10_PRINCIPIO_1_NO_ASUMIR_COMPLETITUD
+- Si hay duda de truncación, se trata como “NO completo” hasta verificar.
+
+02.20_PRINCIPIO_2_TRAZABILIDAD
+- Cada archivo tiene ID_UNICO + VERSION + FECHA.
+- La IA debe citar qué versión está usando.
+
+02.30_PRINCIPIO_3_TANDAS_EXPLICITAS
+- Si se divide, se divide con contrato:
+  - TANDA X/Y
+  - nombre de archivo
+  - qué hacer con la tanda (reemplazar / concatenar / agregar)
+
+02.40_PRINCIPIO_4_CERO_DRIFT
+- Si la IA no tiene el bloque exacto, no hace replace “a ojo”.
+- Pide el bloque faltante o un extracto.
+
+==========
+03.00_PROTOCOLO_DE_CARGA_DE_ARCHIVOS_(UPLOAD)
+==========
+
+++++++++++
+03.10_PASO_0_PREPARACION
+++++++++++
+
+Antes de subir:
+- Verifica que el archivo tenga metadatos (FILE_CONTENT).
+- Verifica VERSION y FECHA.
+- Verifica que el nombre físico coincida con NOMBRE_SUGERIDO (si aplica).
+
+++++++++++
+03.20_PASO_1_SUBIR_ARCHIVOS
+++++++++++
+
+Subir al chat/IA:
+- 1 a 6 archivos por turno idealmente (operabilidad).
+- Si son más: agrupar por “paquetes” (ej. paquete_skills_core).
+
+++++++++++
+03.30_PASO_2_CONFIRMACION_OBLIGATORIA_DE_LA_IA
+++++++++++
+
+La IA debe responder inmediatamente con:
+
+- LISTA_DE_ARCHIVOS_RECIBIDOS:
+  - nombre físico exacto
+  - ID_UNICO
+  - VERSION
+  - FECHA (si está en metadatos)
+- NOTA_DE_INTEGRIDAD:
+  - “No detecto truncación” o “Hay riesgo de truncación”
+- BLOQUE_DE_DEPENDENCIAS:
+  - si falta un archivo dependiente, lo declara
+
+Si la IA no puede confirmar, se asume incompleto.
+
+++++++++++
+03.40_PASO_3_MAPEO_CON_RADAR_(SI APLICA)
+++++++++++
+
+Si el proyecto es grande:
+- Subir RADAR_INDEX o RADAR_CORE segs.
+- La IA usa RADAR como mapa, no “adivina” rutas.
+
+==========
+04.00_PROTOCOLO_DE_ENTREGAS_POR_TANDAS
+==========
+
+++++++++++
+04.10_CUANDO_USAR_TANDAS
+++++++++++
+
+Usar tandas cuando:
+- El archivo es demasiado largo.
+- El chat limita tamaño.
+- Se necesita evitar errores por “cortar por la mitad”.
+
+++++++++++
+04.20_FORMATO_OBLIGATORIO_TANDA
+++++++++++
+
+Encabezado:
+- “TANDA X/Y”
+- Archivo objetivo
+- Acción: REEMPLAZAR / CONCATENAR / AGREGAR
+- Nota: “No mezclar con otras tandas”
+
+Ejemplo:
+TANDA 2/3
+ARCHIVO: 09.SKILL.RADAR.txt
+ACCION: CONCATENAR AL FINAL (orden estricto)
+
+++++++++++
+04.30_REGLA_DE_CIERRE
+++++++++++
+
+La última tanda debe incluir:
+- “FIN_ARCHIVO” (marcador)
+- checksum humano simple opcional:
+  - líneas totales aproximadas, o
+  - último título WBS esperado
+
+Objetivo: evitar “creí que era el final”.
+
+==========
+05.00_PROTOCOLO_DE_REEMPLAZOS_(REPLACE)_Y_PARCHES
+==========
+
+05.10_REEMPLAZO_EXACTO
+- Se usa cuando el usuario hará Ctrl+F “replace” en VS Code.
+- La IA debe entregar:
+  - TITULO/SUBTITULO objetivo
+  - BLOQUE_ORIGINAL completo (tal como está)
+  - BLOQUE_CORREGIDO completo
+
+05.20_AGREGAR
+- La IA debe:
+  - indicar dónde insertar (título superior e inferior)
+  - dar el bloque nuevo completo
+  - no alterar nada fuera de ese bloque
+
+05.30_ELIMINAR
+- La IA debe:
+  - mostrar exactamente el bloque a eliminar
+  - explicar por qué
+  - no borrar contexto conceptual salvo orden humana
+
+==========
+06.00_VALIDACION_DE_INTEGRIDAD_(ANTI-TRUNCACION)
+==========
+
+06.10_SEÑALES_DE_TRUNCACION
+- Falta CHANGELOG.
+- Cortes a mitad de título.
+- Metadatos incompletos.
+- “The file is too long and has been truncated” (si aplica).
+
+06.20_REGLA_DURA
+- Si hay truncación, no se emiten cambios canónicos.
+- Se piden tandas adicionales o extractos.
+
+06.30_EVIDENCIA
+- Registrar en TROUBLE_LOG si truncación bloquea trabajo crítico.
+
+==========
+07.00_ERRORES_COMUNES_Y_MITIGACIONES
+==========
+
+E1) Mezclé versiones:
+- Mitigar: IA siempre repite ID_UNICO + VERSION en su respuesta.
+
+E2) Replace falló:
+- Mitigar: bloque original debe ser exacto; si no, pedir extracto.
+
+E3) Archivo equivocado:
+- Mitigar: IA confirma “archivo y ruta lógica” antes de editar.
+
+E4) Tandas desordenadas:
+- Mitigar: formato TANDA X/Y + orden estricto + “FIN_ARCHIVO”.
+
+==========
+08.00_CHECKLIST_RAPIDO
+==========
+
+[ ] Archivo tiene metadatos + VERSION + FECHA
+[ ] IA confirmó lista de archivos recibidos
+[ ] Si hay TANDAS: X/Y + acción (replace/concat/add)
+[ ] Replace siempre con BLOQUE_ORIGINAL + BLOQUE_CORREGIDO
+[ ] Si hay duda de truncación: parar y pedir el resto
+
+==========
+09.00_CHANGELOG
+==========
+
+2026-02-26, v1.2-DRAFT
+- Refuerzo: confirmación obligatoria de recepción de archivos.
+- Refuerzo: reglas anti-truncación y “no hacer replace a ojo”.
+- Protocolo TANDA formal con acción replace/concat/add y cierre FIN_ARCHIVO.
+(Version previa)
+- Base operacional del skill.
+
+--------------------------------------------------
+SOURCE_FILE: SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+VERSION    : v0.2-DRAFT_READY_FOR_TEST
+SHA256     : CA1E375E4B8971BAD14CDB6987DB16E0133E137AFE7F2F222564F9001586560F
+--------------------------------------------------
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.MARKDOWN.FILE.CREATION.SAFETY.01.00
+NOMBRE_SUGERIDO...: 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+FECHA.............: 2026-06-08
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+AUTOR_IA..........: ChatGPT
+
+ALCANCE...........:
+Define reglas seguras para crear o modificar archivos Markdown (.md) mediante scripts, prompts, shells, wrappers o respuestas IA cuando existen riesgos de interpretación por Markdown, Mermaid, fences, heredocs, renderizado prematuro, truncación, CRLF/LF o BOM.
+
+NO_CUBRE..........:
+No define estructura semántica completa del contenido interno de cualquier archivo; eso vive en 07.SKILL.FILE_CONTENT.txt.
+No define política general Bash/WSL2; eso vive en 28.SKILL.BASH.WSL2.txt.
+No define política de artefactos temporales del repo; eso vive en SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt.
+No reemplaza validación, RADAR, readiness ni revisión humana.
+
+DEPENDENCIAS......:
+07.SKILL.FILE_CONTENT.txt
+12.SKILL.DRAG_AND_DROP.txt
+28.SKILL.BASH.WSL2.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+
+TAGS_OPERATIVOS...: MARKDOWN, MERMAID, FILE_CREATION, SCRIPTING, WSL2, PLACEHOLDERS, CRLF, BOM, TEMP_WORKSPACE
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+01.00 Propósito
+02.00 Problema real
+03.00 Regla central
+04.00 Regla dura anti-fence literal
+05.00 Patrón seguro de creación Markdown
+06.00 Placeholders recomendados
+07.00 Conversión segura con código de carácter
+08.00 TempScript.sh y workspace local
+09.00 CRLF/BOM
+10.00 Validaciones mínimas
+11.00 Antipatrones
+12.00 Checklist rápido
+13.00 Changelog
+
+==========
+01.00_PROPOSITO
+==========
+
+Este skill reduce fallas al crear archivos Markdown mediante IA y scripts.
+
+Especialmente aplica cuando el contenido incluye:
+
+- fences Markdown;
+- bloques Mermaid;
+- backticks triples;
+- heredocs;
+- plantillas con sintaxis sensible;
+- caracteres que ChatGPT puede renderizar;
+- contenido que Windows puede guardar con CRLF o BOM;
+- scripts largos pegados desde editor gráfico.
+
+El objetivo no es “hacer Markdown bonito”. El objetivo es que el archivo final quede correcto, reproducible, auditable y sin romper shell, Git ni renderizado.
+
+==========
+02.00_PROBLEMA_REAL
+==========
+
+Al crear .md desde ChatGPT + shell aparecen fallas típicas:
+
+1. ChatGPT renderiza Mermaid o fences antes de tiempo.
+2. El shell interpreta mal heredocs o bloques largos.
+3. El usuario pega script largo y se corta.
+4. Windows guarda CRLF/BOM y Bash falla.
+5. Markdown final queda sin cierre de fence.
+6. Git queda con warnings LF/CRLF.
+7. El archivo parece creado, pero contiene marcadores erróneos o truncación.
+8. El script entregado contiene backticks triples literales y la interfaz los interpreta antes de que el usuario pueda copiar el script correctamente.
+
+Estos errores producen retrabajo y falsa sensación de avance.
+
+==========
+03.00_REGLA_CENTRAL
+==========
+
+No escribir sintaxis Markdown sensible directamente si el canal de entrega puede interpretarla, renderizarla, truncarla o romper el shell.
+
+Usar marcadores inertes primero.
+
+Luego convertir los marcadores a sintaxis Markdown real dentro del script, después de que el archivo fue escrito.
+
+==========
+04.00_REGLA_DURA_ANTI_FENCE_LITERAL
+==========
+
+Regla dura:
+
+En respuestas ChatGPT, scripts pegables, heredocs, strings Python, ejemplos y plantillas intermedias, no incluir triple backtick literal.
+
+Ni dentro de documentación.
+Ni dentro de ejemplos.
+Ni dentro de heredocs.
+Ni dentro de strings de conversión.
+Ni como “resultado esperado”.
+
+La única forma permitida de producir un fence real dentro del archivo final es generarlo programáticamente después de la escritura, por ejemplo usando:
+
+fence = chr(96) * 3
+
+Esta regla existe porque la interfaz puede renderizar o encapsular mal cualquier triple backtick literal, incluso si el autor cree que está “dentro del script”.
+
+==========
+05.00_PATRON_SEGURO_DE_CREACION_MARKDOWN
+==========
+
+Flujo recomendado:
+
+1. Crear archivo destino con contenido Markdown usando placeholders inertes.
+2. Evitar backticks triples reales en el script entregado por IA.
+3. Usar placeholders para fences, Mermaid y delimitadores peligrosos.
+4. Escribir archivo.
+5. Ejecutar conversión controlada de placeholders.
+6. La conversión debe generar fences usando código de carácter, no texto literal con backticks triples.
+7. Normalizar BOM/CRLF si aplica.
+8. Verificar que el archivo final contiene el Markdown esperado.
+9. Ejecutar validación relevante.
+10. Registrar si el patrón evitó un fallo.
+
+==========
+06.00_PLACEHOLDERS_RECOMENDADOS
+==========
+
+06.10 Mermaid
+
+Usar en contenido intermedio:
+
+@@FENCE_MERMAID@@
+flowchart TD
+A[Inicio] --> B[Fin]
+@@FENCE@@
+
+06.20 Bash
+
+Usar en contenido intermedio:
+
+@@FENCE_BASH@@
+echo "hello"
+@@FENCE@@
+
+06.30 Text
+
+Usar en contenido intermedio:
+
+@@FENCE_TEXT@@
+contenido literal
+@@FENCE@@
+
+06.40 Genérico
+
+Usar:
+
+@@FENCE@@
+
+para cierre o apertura genérica, según contexto.
+
+==========
+07.00_CONVERSION_SEGURA_CON_CODIGO_DE_CARACTER
+==========
+
+Conversión recomendada:
+
+- definir fence como chr(96) multiplicado por 3;
+- reemplazar @@FENCE_MERMAID@@ por fence + "mermaid";
+- reemplazar @@FENCE_BASH@@ por fence + "bash";
+- reemplazar @@FENCE_TEXT@@ por fence + "text";
+- reemplazar @@FENCE@@ por fence.
+
+Ejemplo conceptual:
+
+1. Leer archivo.
+2. Calcular fence = chr(96) * 3.
+3. Reemplazar placeholders.
+4. Escribir archivo.
+5. Confirmar que no quedan placeholders.
+
+No escribir el fence real en el script entregado por IA.
+
+==========
+08.00_TEMPSCRIPT_Y_WORKSPACE_LOCAL
+==========
+
+08.10 Ruta estándar
+
+Para scripts largos en SkillMachine:
+
+C:\01. GitHub\Skills\Temp\TempScript.sh
+
+08.20 Regla
+
+TempScript.sh es un archivo local reutilizable de operador.
+
+No se debe borrar por defecto.
+
+No debe ser canon del repo.
+
+08.30 Wrapper correcto
+
+El wrapper debe:
+
+1. copiar Temp/TempScript.sh a /tmp;
+2. remover BOM si existe;
+3. convertir CRLF/CR a LF;
+4. ejecutar desde /tmp;
+5. conservar Temp/TempScript.sh para uso futuro.
+
+08.40 Git
+
+La carpeta Temp/ debe estar ignorada en Git.
+
+==========
+09.00_CRLF_BOM
+==========
+
+Todo script pegado desde Windows hacia WSL2 debe normalizarse antes de ejecutarse.
+
+Patrón mínimo:
+
+1. leer bytes;
+2. remover BOM UTF-8 si existe;
+3. convertir CRLF y CR a LF;
+4. escribir bytes normalizados;
+5. ejecutar con bash desde /tmp.
+
+No ejecutar scripts largos copiados desde Windows sin normalización.
+
+==========
+10.00_VALIDACIONES_MINIMAS
+==========
+
+Para .md con Mermaid:
+
+- verificar que no quedaron placeholders @@FENCE;
+- verificar que existe apertura Mermaid real en el archivo final si corresponde;
+- verificar que existe cierre de fence real;
+- verificar que el archivo está en UTF-8 sin BOM si el tooling lo requiere;
+- revisar git diff;
+- ejecutar validadores del proyecto si aplica.
+
+La validación debe buscar tanto placeholders residuales como resultado final esperado.
+
+==========
+11.00_ANTIPATRONES
+==========
+
+A1. Pegar scripts gigantes directo al shell interactivo.
+A2. Incluir fences Markdown reales dentro de un bloque que ChatGPT puede renderizar mal.
+A3. Incluir triple backtick literal dentro del propio script entregado por IA.
+A4. Borrar TempScript.sh después de cada ejecución si el humano lo usa como archivo reutilizable.
+A5. Normalizar CRLF/LF masivamente sin necesidad.
+A6. Asumir que .md “se ve bien” sin revisar diff.
+A7. Reejecutar un script mutante parcial sin recovery.
+A8. Integrar archivos .md generados sin validar cierres de fence.
+A9. Esconder errores de formato como si fueran cambios de contenido.
+
+==========
+12.00_CHECKLIST_RAPIDO
+==========
+
+[ ] ¿El script largo se pegó en Temp/TempScript.sh?
+[ ] ¿El wrapper copió a /tmp?
+[ ] ¿Se normalizó BOM/CRLF antes de bash?
+[ ] ¿El script entregado por IA evita triple backtick literal?
+[ ] ¿Se usaron placeholders para fences o Mermaid?
+[ ] ¿Se convirtieron placeholders después de escribir el archivo?
+[ ] ¿La conversión usó chr(96) * 3 u otro método equivalente?
+[ ] ¿No quedaron placeholders @@FENCE?
+[ ] ¿Se revisó git diff?
+[ ] ¿Se ejecutó Validate-System si aplica?
+[ ] ¿Se preservó TempScript.sh localmente?
+
+==========
+13.00_CHANGELOG
+==========
+
+2026-06-08, v0.2-DRAFT_READY_FOR_TEST
+- Corrige la primera estrategia: no basta con placeholder dentro del archivo final.
+- Agrega regla dura: ningún triple backtick literal debe aparecer en scripts entregados por IA.
+- Formaliza generación de fences mediante chr(96) * 3.
+- Formaliza Temp/TempScript.sh como archivo local reutilizable de operador.
+- Declara Temp/ como workspace local ignorado por Git.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
+
+
+
+==========
+MB-GRC-032C_INCLUDED_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+DATE..............: 2026-06-15 11:16:31 -04:00
+SOURCE_SKILL......: SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+STATUS............: ACTIVE
+PURPOSE...........: Ensure this usecase carries the temporary executable one-shot protocol.
+
+==========
+PROTOCOL_SUMMARY
+==========
+
+For long repository automation scripts:
+
+1. Do not paste long scripts directly into terminal.
+2. Save the long script as Temp/<MB_ID>.ps1 or Temp/<MB_ID>.sh.
+3. Run it through a short activation wrapper.
+4. Require MB_ID guard, Temp/ path guard and root-level script rejection.
+5. Print a self-contained START/END block with COPY_FROM_HERE: YES.
+6. Use comprehensive one-shot scripts for fast first-pass progress.
+7. If the first attempt fails, reduce scope and isolate the error.
+8. Maximum three assisted attempts.
+9. If the third attempt still fails, escalate to Codex Desktop or Claude Code Desktop.
+10. Do not leave temporary scripts in repo root.
+11. Repo must be clean or the script must explain why not.
+
+==========
+FULL_SOURCE_SKILL_EXCERPT
+==========
+
+
+==========
+SKILL.POWERSHELL.INTERACTIVE_SAFETY
+==========
+
+ID_UNICO..........: SKILL.POWERSHELL.INTERACTIVE_SAFETY
+NOMBRE............: PowerShell Interactive Safety
+TIPO..............: Skill operativo
+DOMINIO...........: PowerShell / Windows / CLI execution
+ESTADO............: ACTIVE
+VERSION...........: 1.2
+FECHA.............: 2026-06-09
+ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session; updated after MB-EXAM-005R2 PowerShell wrapper recovery; repaired by MB-SKILL-PS-INTERACTIVE-002
+
+----------
+1. PURPOSE
+----------
+
+This skill defines safe execution practices for PowerShell commands provided to a human operator in an interactive terminal.
+
+The objective is to reduce syntax errors, partial-copy failures, execution drift, and avoidable interruptions when the user copies and pastes command blocks into PowerShell.
+
+----------
+2. PROBLEM STATEMENT
+----------
+
+During operational sessions, the following recurring error was observed:
+
+else: The term 'else' is not recognized as a name of a cmdlet, function, script file, or executable program.
+Check the spelling of the name, or if a path was included, verify that the path is correct and try again.
+
+Root cause:
+PowerShell interpreted `else` as a standalone command because the prior `if` block had already been closed and executed.
+
+This often happens when a user copies a script in fragments, or when the interactive shell receives the `if` block and the `else` block as separate instructions.
+
+----------
+3. CORE RULE
+----------
+
+When writing PowerShell instructions for interactive copy/paste execution, avoid `else` unless the full `if/else` structure is guaranteed to be pasted and executed as one atomic block.
+
+Preferred pattern:
+
+if (Test-Path $Path) {
+  Write-Host "Exists"
+}
+
+if (-not (Test-Path $Path)) {
+  Write-Host "Missing"
+}
+
+Avoid this pattern in fragile interactive contexts:
+
+if (Test-Path $Path) {
+  Write-Host "Exists"
+}
+else {
+  Write-Host "Missing"
+}
+
+The second pattern is valid PowerShell, but it is less robust when copied manually into an interactive console.
+
+----------
+4. STANDARD EXECUTION HEADER
+----------
+
+Every non-trivial PowerShell one-shot should include:
+
+$ErrorActionPreference = "Stop"
+
+Recommended minimal header:
+
+cd "C:\TARGET\PATH"
+
+$ErrorActionPreference = "Stop"
+
+Write-Host "========== TASK NAME =========="
+
+----------
+5. LOCATION FIRST RULE
+----------
+
+Before providing a command, always state the execution location.
+
+Example:
+
+Location:
+C:\01. GitHub\Skills
+
+Command:
+cd "C:\01. GitHub\Skills"
+
+This prevents accidental execution in the wrong repository or directory.
+
+----------
+6. NO-ELSE INTERACTIVE PATTERN
+----------
+
+Use independent `if` blocks:
+
+if (Test-Path $Source) {
+  Copy-Item $Source $Target -Force
+  Write-Host "Copied:"
+  Write-Host $Source
+}
+
+if (-not (Test-Path $Source)) {
+  Write-Host "Source not found:"
+  Write-Host $Source
+}
+
+This pattern is more verbose but safer for human copy/paste workflows.
+
+----------
+7. PATH SAFETY
+----------
+
+Always quote Windows paths.
+
+Correct:
+
+cd "C:\01. GitHub\Skills"
+
+Incorrect:
+
+cd C:\01. GitHub\Skills
+
+Reason:
+Spaces in paths break unquoted commands.
+
+----------
+8. ERROR HANDLING
+----------
+
+Use:
+
+$ErrorActionPreference = "Stop"
+
+This turns many non-terminating PowerShell errors into terminating errors.
+
+For critical file operations, validate before and after:
+
+if (Test-Path $Target) {
+  Write-Host "OK:"
+  Write-Host $Target
+}
+
+if (-not (Test-Path $Target)) {
+  throw "Missing expected target: $Target"
+}
+
+----------
+9. COMMAND OUTPUT DISCIPLINE
+----------
+
+Each one-shot should produce visible section headers.
+
+Recommended format:
+
+Write-Host "========== PRECHECK =========="
+Write-Host "========== EXECUTION =========="
+Write-Host "========== VALIDATION =========="
+Write-Host "========== STATUS =========="
+
+This helps the AI and the human operator identify where an error occurred.
+
+----------
+10. HIGH-RISK COMMANDS
+----------
+
+The following commands require extra caution:
+
+Remove-Item
+Move-Item
+git reset
+git clean
+git add .
+git commit --no-verify
+npm uninstall -g
+Set-Content
+Copy-Item -Recurse -Force
+
+Rules:
+- State the target path before execution.
+- Back up first when relevant.
+- Avoid wildcards unless validated.
+- Prefer explicit path lists over broad patterns.
+- Never use destructive commands without a status check first.
+
+----------
+11. BACKUP RULE
+----------
+
+Before modifying, deleting, or replacing operational files:
+
+1. Create external backup.
+2. Confirm backup path.
+3. Perform change.
+4. Validate result.
+5. Show git status if inside a repo.
+
+Preferred backup location examples:
+
+C:\Users\aazcl\Desktop\<TASK>_BACKUP_<YYYYMMDD>
+C:\00. Wings\99.Backups\<PROJECT>\<TASK>_<YYYYMMDD_HHMMSS>
+
+Avoid placing temporary backups inside the repository unless explicitly intended.
+
+----------
+12. GIT REPO SAFETY
+----------
+
+Before modifying files inside a Git repository:
+
+git status --short
+
+After modifying files:
+
+git status --short
+
+Before commit:
+
+git diff --cached --name-status
+git diff --cached --stat
+
+Never assume the working tree is clean.
+
+----------
+13. KNOWN ANTI-PATTERNS
+----------
+
+Anti-pattern 1:
+Providing only a command without execution location.
+
+Anti-pattern 2:
+Using `else` in commands likely to be copied in fragments.
+
+Anti-pattern 3:
+Using `git add .` during mixed-change states.
+
+Anti-pattern 4:
+Creating temporary diagnostic files inside the repo and forgetting to remove them.
+
+Anti-pattern 5:
+Running destructive commands before inventory.
+
+----------
+14. ACCEPTANCE CRITERIA
+----------
+
+A PowerShell command block complies with this skill when:
+
+1. It states the working directory.
+2. It uses quoted paths.
+3. It uses `$ErrorActionPreference = "Stop"` for non-trivial operations.
+4. It avoids fragile interactive `else` blocks.
+5. It prints clear section headers.
+6. It validates critical results.
+7. It avoids broad destructive actions.
+8. It shows final status when operating inside Git.
+
+----------
+15. LESSON LEARNED
+----------
+
+PowerShell scripts written for a file and PowerShell commands written for interactive copy/paste are not the same product.
+
+For human-guided AI operations, robustness beats elegance.
+
+========== SKILL UPDATE MB-EXAM-005R2 POWERSHELL WRAPPER SAFETY BEGIN ==========
+
+----------
+16. LESSON LEARNED - HERE-STRING AND WRAPPER FILE SAFETY
+----------
+
+A second recurring failure mode was observed during MB-EXAM-005 / MB-EXAM-005R / MB-EXAM-005R2:
+
+- A long PowerShell wrapper was pasted into an interactive console.
+- The wrapper used an outer here-string to write a .ps1 file.
+- Inside that wrapper, another here-string was used to define Python code.
+- PowerShell interpreted the inner terminator as the end of the outer here-string.
+- Everything after that point executed loose in the console.
+- Variables such as ProducerPath, ReportPath, RegisterPath and LogPath became null.
+- Functions such as Invoke-NativeChecked were not available.
+- try, catch and finally blocks were executed as orphan commands.
+- A manual STATUS OK line was printed even though the operation had failed.
+
+Root cause:
+
+PowerShell here-strings are delimiter-sensitive. Nested here-strings using the same delimiter pattern are unsafe when generating scripts interactively. This is worse when the human operator pastes a large block into the console instead of executing a saved .ps1 file.
+
+Operational conclusion:
+
+A script that works as a file is not automatically safe as an interactive paste block. Delivery format is part of the design.
+
+----------
+17. CORE RULE - DO NOT NEST FRAGILE HERE-STRINGS IN INTERACTIVE WRAPPERS
+----------
+
+Avoid this in interactive wrappers:
+
+Outer wrapper:
+@'
+...
+Inner generated script:
+ProducerCode = @'
+...
+'@
+...
+'@ | Set-Content ...
+
+This can prematurely close the outer block and cause partial execution.
+
+Preferred options:
+
+Option A - Write the final .ps1 file directly, then execute it.
+Option B - Use a different content construction method, such as an array of lines joined with CRLF.
+Option C - Use base64 payload only when justified and clearly validated.
+Option D - Use double-quoted here-string inside single-quoted outer wrapper only if there is no variable expansion risk and delimiters are visually audited.
+
+Recommended default for AI-guided human execution:
+
+1. Create a script file under Temp.
+2. Validate that the script file exists.
+3. Execute the script file with powershell -NoProfile -ExecutionPolicy Bypass -File.
+4. Validate outputs.
+5. Never run the internal body manually line by line.
+
+----------
+18. TRY/CATCH/FINALLY ATOMICITY RULE
+----------
+
+try/catch/finally must be executed as one atomic block.
+
+Never instruct the user to execute finally separately.
+
+Invalid operational pattern:
+
+try {
+  ...
+}
+
+Then later:
+
+finally {
+  Stop-Transcript
+}
+
+This produces:
+
+finally: The term 'finally' is not recognized...
+
+Correct pattern:
+
+Place try/catch/finally inside a saved .ps1 file or provide a single complete paste block that cannot be split.
+
+For fragile human workflows, prefer:
+
+try { Stop-Transcript | Out-Null } catch {}
+
+as a standalone cleanup command before a new execution, not as an orphan finally block.
+
+----------
+19. NO BASH HEREDOC IN POWERSHELL RULE
+----------
+
+Do not use Bash heredoc syntax inside PowerShell:
+
+python - <<'PY'
+import sys
+PY
+
+This is Bash syntax, not PowerShell syntax.
+
+PowerShell-safe alternatives:
+
+python -c "import sys; print(sys.version)"
+
+or write a temporary .py file and execute:
+
+Set-Content -LiteralPath "Temp\script.py" -Value $PythonLines -Encoding UTF8
+python "Temp\script.py"
+
+----------
+20. FALSE OK PROHIBITION
+----------
+
+Never accept a final STATUS OK line if earlier output contains:
+
+- Cannot bind argument because it is null.
+- The term '<function>' is not recognized.
+- ParserError.
+- Unexpected token.
+- catch/finally not recognized.
+- Missing output.
+- Failed native command.
+
+A valid OK requires:
+
+1. All critical variables are non-null.
+2. The main command executed.
+3. The expected artifact exists.
+4. The log path exists.
+5. Output validation confirms file sizes or command results.
+6. No unhandled error appears before the summary.
+
+If any of these fail, mark the minibattle as FAILED or RECOVERY_REQUIRED. Do not progress the backlog based on a printed OK alone.
+
+----------
+21. ACCEPTANCE CRITERIA ADDENDUM
+----------
+
+A PowerShell one-shot involving generated scripts complies with this skill only when:
+
+1. It does not depend on fragile nested here-string delimiters.
+2. It writes long generated scripts to a .ps1 file before execution.
+3. It validates script creation before execution.
+4. It does not mix Bash heredoc syntax into PowerShell.
+5. It prevents orphan try/catch/finally blocks.
+6. It treats manually printed OK lines as insufficient evidence.
+7. It validates outputs using Test-Path/Get-Item or equivalent.
+8. It emits clear START/END markers.
+9. It tells the human exactly from where to copy terminal output.
+10. It avoids continuing after null critical paths.
+
+========== SKILL UPDATE MB-EXAM-005R2 POWERSHELL WRAPPER SAFETY END ==========
+
+
+==========
+MB-GRC-032C_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+DATE..............: 2026-06-15 11:16:31 -04:00
+STATUS............: ACTIVE
+TYPE..............: execution_protocol
+SCOPE.............: one-shot scripts, temporary executable scripts, repository automation, recovery and escalation
+
+==========
+00.00_PRINCIPLE
+==========
+
+Do not avoid long one-shot scripts when the objective is fast controlled progress.
+
+Govern them.
+
+The first execution phase may use a large, comprehensive script when the task requires coordinated filesystem, validation, continuity, RADAR, commit and push operations.
+
+The long script must not be pasted directly into the terminal.
+
+It must be saved as a temporary executable file and run through a short activation wrapper.
+
+==========
+01.00_STANDARD_PATHS
+==========
+
+PowerShell:
+
+Temp/<MB_ID>.ps1
+
+WSL2 Bash:
+
+Temp/<MB_ID>.sh
+
+Forbidden:
+
+- root-level MB scripts;
+- stale generic TempScript execution without MB_ID guard;
+- direct paste of long scripts into terminal;
+- script-generated temporary files outside Temp/ unless explicitly intended and versioned.
+
+==========
+02.00_ACTIVATION_WRAPPER
+==========
+
+The activation wrapper must be short.
+
+It must:
+
+1. set the repository root;
+2. define RUN_ID / MB_ID;
+3. verify that the target script exists under Temp/;
+4. verify that the script contains the expected MB_ID;
+5. reject root-level temporary scripts;
+6. normalize encoding when appropriate;
+7. copy the script to the system temp directory;
+8. execute the copy;
+9. save a timestamped log under Temp/;
+10. print the log;
+11. print RUN_EXIT, HEAD_AFTER, STATUS_AFTER.
+
+==========
+03.00_SCRIPT_OUTPUT_CONTRACT
+==========
+
+Every long one-shot script must print a self-contained block:
+
+========== <MB_ID> / START ==========
+...
+========== <MB_ID> / END ==========
+
+The block must include:
+
+- local time;
+- root path;
+- purpose;
+- COPY_FROM_HERE: YES;
+- precheck;
+- current branch and HEAD;
+- git status before;
+- main actions performed;
+- validation result;
+- RADAR result when relevant;
+- staged files;
+- commit hash or explicit no-commit reason;
+- push result or explicit no-push reason;
+- readiness summary when relevant;
+- git status after;
+- final status;
+- next action.
+
+The user should only need to copy the START/END block back to the assistant.
+
+==========
+04.00_ERROR_POLICY
+==========
+
+If the first large script fails, do not continue blindly.
+
+The next attempt must reduce scope or isolate the failing stage.
+
+Maximum assisted repair sequence:
+
+- Attempt 1: comprehensive one-shot for fast progress.
+- Attempt 2: reduced diagnostic or targeted recovery script.
+- Attempt 3: second reduced recovery / final local isolation.
+- After third persistent failure: escalate to Codex Desktop or Claude Code Desktop.
+
+The escalation agent must receive:
+
+- root path;
+- failing MB_ID;
+- latest START/END block;
+- git status;
+- expected deliverable;
+- explicit boundary of what may be edited;
+- validation command;
+- expected proof of resolution.
+
+==========
+05.00_FAILURE_OUTPUT_REQUIREMENTS
+==========
+
+On failure, the script must report:
+
+- failing stage;
+- failing command;
+- exit code when available;
+- dirty/untracked files;
+- whether any commit happened;
+- whether any push happened;
+- what is safe to retry;
+- exact next action.
+
+The script must not print a false success line after a failed mandatory stage.
+
+Avoid contradictory lines such as READINESS_EXIT: 0 when readiness failed.
+
+==========
+06.00_GIT_POLICY
+==========
+
+Before execution:
+
+- repo should be clean unless the purpose is cleanup/recovery;
+- if dirty, fail early with status details.
+
+During execution:
+
+- stage only intended files;
+- avoid broad git add . unless the task explicitly requires it;
+- never stage Temp/;
+- never stage root-level one-shot scripts.
+
+After execution:
+
+- git status must be clean or the script must explain why not;
+- readiness should be OK for closeable work;
+- unpushed commits must be reported.
+
+==========
+07.00_FAST_PROGRESS_POLICY
+==========
+
+This protocol supports speed.
+
+The preferred first move for repository automation is a high-coverage one-shot script, not a sequence of small manual commands.
+
+The quality bar is not smallness.
+
+The quality bar is:
+
+- reproducibility;
+- controlled scope;
+- clear failure boundary;
+- START/END observability;
+- clean repo at close;
+- maximum three assisted repair attempts before escalation.
+
+==========
+08.00_MINIMUM_USECASE_INCLUSION
+==========
+
+This protocol must be present in the operational content for at least:
+
+- 90.USECASE/01.NEW_PROJECT
+- 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR
+
+==========
+END_MB-GRC-032C_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+
+
+==========
+END_MB-GRC-032C_INCLUDED_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========

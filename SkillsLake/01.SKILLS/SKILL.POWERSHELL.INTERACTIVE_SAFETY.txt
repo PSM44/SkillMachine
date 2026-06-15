@@ -426,3 +426,195 @@ A PowerShell one-shot involving generated scripts complies with this skill only 
 
 ========== SKILL UPDATE MB-EXAM-005R2 POWERSHELL WRAPPER SAFETY END ==========
 
+
+==========
+MB-GRC-032C_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+DATE..............: 2026-06-15 11:16:31 -04:00
+STATUS............: ACTIVE
+TYPE..............: execution_protocol
+SCOPE.............: one-shot scripts, temporary executable scripts, repository automation, recovery and escalation
+
+==========
+00.00_PRINCIPLE
+==========
+
+Do not avoid long one-shot scripts when the objective is fast controlled progress.
+
+Govern them.
+
+The first execution phase may use a large, comprehensive script when the task requires coordinated filesystem, validation, continuity, RADAR, commit and push operations.
+
+The long script must not be pasted directly into the terminal.
+
+It must be saved as a temporary executable file and run through a short activation wrapper.
+
+==========
+01.00_STANDARD_PATHS
+==========
+
+PowerShell:
+
+Temp/<MB_ID>.ps1
+
+WSL2 Bash:
+
+Temp/<MB_ID>.sh
+
+Forbidden:
+
+- root-level MB scripts;
+- stale generic TempScript execution without MB_ID guard;
+- direct paste of long scripts into terminal;
+- script-generated temporary files outside Temp/ unless explicitly intended and versioned.
+
+==========
+02.00_ACTIVATION_WRAPPER
+==========
+
+The activation wrapper must be short.
+
+It must:
+
+1. set the repository root;
+2. define RUN_ID / MB_ID;
+3. verify that the target script exists under Temp/;
+4. verify that the script contains the expected MB_ID;
+5. reject root-level temporary scripts;
+6. normalize encoding when appropriate;
+7. copy the script to the system temp directory;
+8. execute the copy;
+9. save a timestamped log under Temp/;
+10. print the log;
+11. print RUN_EXIT, HEAD_AFTER, STATUS_AFTER.
+
+==========
+03.00_SCRIPT_OUTPUT_CONTRACT
+==========
+
+Every long one-shot script must print a self-contained block:
+
+========== <MB_ID> / START ==========
+...
+========== <MB_ID> / END ==========
+
+The block must include:
+
+- local time;
+- root path;
+- purpose;
+- COPY_FROM_HERE: YES;
+- precheck;
+- current branch and HEAD;
+- git status before;
+- main actions performed;
+- validation result;
+- RADAR result when relevant;
+- staged files;
+- commit hash or explicit no-commit reason;
+- push result or explicit no-push reason;
+- readiness summary when relevant;
+- git status after;
+- final status;
+- next action.
+
+The user should only need to copy the START/END block back to the assistant.
+
+==========
+04.00_ERROR_POLICY
+==========
+
+If the first large script fails, do not continue blindly.
+
+The next attempt must reduce scope or isolate the failing stage.
+
+Maximum assisted repair sequence:
+
+- Attempt 1: comprehensive one-shot for fast progress.
+- Attempt 2: reduced diagnostic or targeted recovery script.
+- Attempt 3: second reduced recovery / final local isolation.
+- After third persistent failure: escalate to Codex Desktop or Claude Code Desktop.
+
+The escalation agent must receive:
+
+- root path;
+- failing MB_ID;
+- latest START/END block;
+- git status;
+- expected deliverable;
+- explicit boundary of what may be edited;
+- validation command;
+- expected proof of resolution.
+
+==========
+05.00_FAILURE_OUTPUT_REQUIREMENTS
+==========
+
+On failure, the script must report:
+
+- failing stage;
+- failing command;
+- exit code when available;
+- dirty/untracked files;
+- whether any commit happened;
+- whether any push happened;
+- what is safe to retry;
+- exact next action.
+
+The script must not print a false success line after a failed mandatory stage.
+
+Avoid contradictory lines such as READINESS_EXIT: 0 when readiness failed.
+
+==========
+06.00_GIT_POLICY
+==========
+
+Before execution:
+
+- repo should be clean unless the purpose is cleanup/recovery;
+- if dirty, fail early with status details.
+
+During execution:
+
+- stage only intended files;
+- avoid broad git add . unless the task explicitly requires it;
+- never stage Temp/;
+- never stage root-level one-shot scripts.
+
+After execution:
+
+- git status must be clean or the script must explain why not;
+- readiness should be OK for closeable work;
+- unpushed commits must be reported.
+
+==========
+07.00_FAST_PROGRESS_POLICY
+==========
+
+This protocol supports speed.
+
+The preferred first move for repository automation is a high-coverage one-shot script, not a sequence of small manual commands.
+
+The quality bar is not smallness.
+
+The quality bar is:
+
+- reproducibility;
+- controlled scope;
+- clear failure boundary;
+- START/END observability;
+- clean repo at close;
+- maximum three assisted repair attempts before escalation.
+
+==========
+08.00_MINIMUM_USECASE_INCLUSION
+==========
+
+This protocol must be present in the operational content for at least:
+
+- 90.USECASE/01.NEW_PROJECT
+- 90.USECASE/04.REPOSITORY_STRUCTURE_REPAIR
+
+==========
+END_MB-GRC-032C_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========

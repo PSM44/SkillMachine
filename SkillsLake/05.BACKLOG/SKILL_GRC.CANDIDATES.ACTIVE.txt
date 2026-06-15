@@ -892,3 +892,15 @@ SUMMARY...........: Defined first Nightshift pilot project for controlled Codex 
 TARGET............: 99.LABS/Nightshift/03_EXPERIMENTS/MB-NS-001C_FIRST_PILOT_PROJECT.AI.txt
 BOUNDARY..........: No SkillsMachine core method promoted. This is a lab-only definition.
 NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.
+
+==========
+MB-GRC-032C_FORMALIZE_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+DATE..............: 2026-06-15 11:16:31 -04:00
+STATUS............: DONE
+SUMMARY...........: Perfected existing skill with temporary executable one-shot protocol and included it in mandatory usecases.
+SKILL.............: SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+USECASE_01........: 90.USECASE\01.NEW_PROJECT\00.BUNDLE.CORE.txt
+USECASE_04........: 90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\00.BUNDLE.CORE.txt
+RATIONALE.........: Long one-shot scripts are valid for fast first-pass progress but must be run from Temp/<MB_ID>, produce START/END output, and support max-three-attempt escalation to Codex/Claude Desktop.
+NEXT_ACTION.......: Continue MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD using the formalized Temp one-shot protocol.

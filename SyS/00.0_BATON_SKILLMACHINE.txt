@@ -1288,3 +1288,11 @@ DATE..............: 2026-06-15 10:44:08 -04:00
 STATUS............: DONE
 SUMMARY...........: Nightshift lab selected first pilot: NS-PILOT-001_MARKDOWN_TASK_RUNNER. Work remains LAB_ONLY inside 99.LABS/Nightshift.
 NEXT_ACTION.......: Continue with MB-NS-001D scaffold.
+
+==========
+MB-GRC-032C_FORMALIZE_TEMP_ONESHOT_EXECUTION_PROTOCOL
+==========
+DATE..............: 2026-06-15 11:16:31 -04:00
+STATUS............: DONE
+SUMMARY...........: Formalized governed long one-shot workflow in existing skill and mandatory usecase content. Future long scripts must live in Temp/<MB_ID> and run via short activator.
+NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.

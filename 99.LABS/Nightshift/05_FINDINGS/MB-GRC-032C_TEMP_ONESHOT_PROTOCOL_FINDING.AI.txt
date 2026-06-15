@@ -1,0 +1,27 @@
+﻿CANDIDATE_FOR_SKILLSMACHINE:
+SOURCE_PROJECT....: PS.SkillsMachine / 99.LABS.Nightshift
+SOURCE_RUN........: MB-GRC-032A / MB-GRC-032B / MB-NS-001C
+TYPE..............: skill_patch | usecase_patch | execution_protocol
+STATUS............: CORE_PROMOTED
+DATE..............: 2026-06-15 11:16:31 -04:00
+
+SUMMARY...........:
+Formalized the temporary executable one-shot protocol by perfecting an existing skill and embedding the protocol in mandatory usecase content.
+
+EVIDENCE..........:
+- TempScript stale execution caused wrong Nightshift script to run.
+- Root-level .ps1 script caused readiness WARN.
+- Cleanup moved script to Temp/ and restored readiness OK.
+- User clarified desired method: long first-pass scripts are acceptable and preferred for speed, followed by at most three reduced repair attempts before escalation.
+
+PROMOTED_SKILL....:
+SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
+
+USECASE_INCLUSION.:
+90.USECASE\01.NEW_PROJECT\00.BUNDLE.CORE.txt
+90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\00.BUNDLE.CORE.txt
+
+RULE..............:
+Use large governed one-shots for fast progress. If failure persists through three assisted attempts, escalate to Codex Desktop or Claude Code Desktop.
+
+END
