@@ -1,0 +1,75 @@
+ID................: NIGHTSHIFT_MIGRATION_FROM_EXTERNAL_REPO
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 10:31:14 -04:00
+SOURCE_WIN........: C:\01. GitHub\Nightshift
+SOURCE_BRANCH.....: master
+SOURCE_HEAD.......: a2e07e4 20260608_MB-NS-001B-R3_fix_runner_no_origin_handling
+TARGET_REL........: 99.LABS\Nightshift
+
+==========
+00.00_DECISION
+==========
+
+Nightshift is migrated into PS.SkillsMachine as an isolated lab environment.
+
+Reason:
+- Both PS.SkillsMachine and PS.Nightshift are still in development.
+- Keeping two separate project contexts created unnecessary handoff overhead.
+- Nightshift is primarily a test/lab environment for methods created by SkillsMachine.
+- Integration reduces friction while preserving logical isolation.
+
+==========
+01.00_BOUNDARY
+==========
+
+This lab is not canonical.
+
+Anything under 99.LABS/Nightshift is LAB_ONLY unless explicitly promoted.
+
+Core folders such as GRCLake, SkillsLake, 90.USECASE and SyS remain the canonical areas.
+
+==========
+02.00_MIGRATED_CONTENT
+==========
+
+Controlled migration included:
+- 00_STATE
+- 01_HUMAN
+- 02_GOVERNANCE
+- 05_TOOLS copied to 06_TOOLS
+- 08_BACKLOG
+- 09_RADAR
+- README.md copied as README.SOURCE.md
+
+Excluded:
+- .git
+- Temp
+- temporary scratch files
+- external repo identity
+
+==========
+03.00_CURRENT_IMPORTED_HEADS
+==========
+
+External Nightshift latest local commit at migration:
+a2e07e4 20260608_MB-NS-001B-R3_fix_runner_no_origin_handling
+
+Known recent Nightshift commits:
+- 1e1b43b 20260608_MB-NS-001B_nightshift_operating_model
+- 12eca8d 20260608_MB-NS-001B-R2_powershell_execution_method
+- a2e07e4 20260608_MB-NS-001B-R3_fix_runner_no_origin_handling
+
+==========
+04.00_NEXT_ACTION
+==========
+
+Continue inside PS.SkillsMachine at:
+
+99.LABS/Nightshift
+
+Next minibattle:
+MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT
+
+==========
+END
+==========

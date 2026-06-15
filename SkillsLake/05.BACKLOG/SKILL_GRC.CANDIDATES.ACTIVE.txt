@@ -857,3 +857,15 @@ NEXT_OPTIONS......:
 - Apply constitution workflow to HIA.
 - Apply constitution workflow to Nightshift.
 - Run true blank-IA manual test before applying to a real project.
+
+==========
+MB-GRC-032A_MIGRATE_NIGHTSHIFT_AS_LAB
+==========
+DATE..............: 2026-06-15 10:31:14 -04:00
+STATUS............: DONE
+SUMMARY...........: Migrated external Nightshift repo into PS.SkillsMachine as isolated LAB_ONLY environment under 99.LABS/Nightshift.
+SOURCE............: C:\01. GitHub\Nightshift
+SOURCE_HEAD.......: a2e07e4 20260608_MB-NS-001B-R3_fix_runner_no_origin_handling
+TARGET............: 99.LABS/Nightshift
+BOUNDARY..........: Lab content is not canonical. Findings require explicit promotion before modifying SkillsMachine core.
+NEXT_ACTION.......: Continue with MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT inside 99.LABS/Nightshift.

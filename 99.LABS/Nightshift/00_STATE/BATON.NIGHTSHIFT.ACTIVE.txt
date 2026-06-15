@@ -1,0 +1,129 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: BATON.NIGHTSHIFT.ACTIVE.01.00
+NOMBRE_SUGERIDO...: BATON.NIGHTSHIFT.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-06-06 21:37:45 -0400
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00_STATE
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: BATON_STATE, CONTINUITY, AI_EXECUTION
+
+ALCANCE...........:
+Snapshot operativo inicial para continuar Nightshift en una IA en blanco.
+
+NO_CUBRE..........:
+No reemplaza HUMAN.
+No reemplaza SkillsMachine.
+No define todavía la arquitectura final.
+
+DEPENDENCIAS......:
+01_HUMAN/HUMAN.NIGHTSHIFT.ROOT.txt
+00_STATE/WHOAMI.NIGHTSHIFT.ACTIVE.txt
+08_BACKLOG/BACKLOG.NIGHTSHIFT.ACTIVE.txt
+09_RADAR/RADAR_INDEX.ACTIVE.txt
+
+==========
+01.00_PROJECT_ID
+==========
+
+PROJECT_ID........: PRJ_NIGHTSHIFT
+PROJECT_NAME......: Nightshift
+ROOT_WIN..........: C:\01. GitHub\Nightshift
+ROOT_WSL..........: /mnt/c/01. GitHub/Nightshift
+DEFAULT_SHELL.....: bash WSL2
+
+==========
+02.00_ESTADO_ACTUAL
+==========
+
+BOOTSTRAP_INICIAL completado.
+
+Nightshift existe como proyecto operativo separado.
+Debe usar SkillsMachine como fuente metodológica, pero no debe copiar todo SkillsMachine dentro del repo.
+
+==========
+03.00_LIMITES_OPERATIVOS
+==========
+
+PROJECT_ROOT:
+/mnt/c/01. GitHub/Nightshift
+
+WRITE_ALLOWED:
+- 00_STATE
+- 01_HUMAN
+- 02_GOVERNANCE
+- 03_SKILLS_REFERENCES
+- 04_PROJECTS
+- 05_TOOLS
+- 06_RUNS
+- 07_EVIDENCE
+- 08_BACKLOG
+- 09_RADAR
+- 89_LEGACY/Logs
+
+READ_ONLY_BY_POLICY:
+- Fuera de PROJECT_ROOT.
+
+FORBIDDEN:
+- Crear secretos.
+- Modificar configuración global del sistema.
+- Push directo a main sin instrucción humana.
+- Borrar historial Git.
+- Hacer cambios fuera del root.
+
+==========
+04.00_NEXT_ACTION
+==========
+
+ID.................: MB-NS-000B_DEFINE_NIGHTSHIFT_OPERATING_MODEL
+OBJETIVO...........: Definir modelo operativo Nightshift v0.1.
+OUTPUT_ESPERADO....:
+- Documento de governance inicial.
+- Decisión sobre agentes/usuarios GPT.NS y CLAUDE.NS.
+- Política de ramas/PR/merge.
+- Pilotos recomendados.
+- Checklist de validación.
+
+==========
+05.00_BRECHAS
+==========
+
+01. No existe todavía política formal de identidad GitHub para agentes.
+02. No existe todavía estructura de pilotos.
+03. No existe todavía contrato de costo/token.
+04. No existe todavía runbook Codex/Claude Code.
+05. No existe todavía criterio de aceptación para trabajo nocturno exitoso.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-06-06 21:37:45 -0400, v0.1-DRAFT
+- Creación inicial del BATON Nightshift.
+
+==========
+MB-NS-001B_NIGHTSHIFT_OPERATING_MODEL_DELIVERABLE
+==========
+DATE..............: 2026-06-08 14:48:49 -04
+STATUS............: DONE
+SUMMARY...........: Nightshift operating model v0.1 created. Boundary with PS.SkillsMachine clarified.
+NEXT_ACTION.......: Define first Nightshift pilot project.
+
+==========
+MB-NS-001B-R2_POWERSHELL_EXECUTION_METHOD
+==========
+DATE..............: 2026-06-08 15:09:48 -04:00
+STATUS............: DONE
+SUMMARY...........: Nightshift now uses a versioned PowerShell runner at 05_TOOLS\RUN_TEMPSCRIPT.ps1. Long scripts should be edited in VS Code at Temp\TempScript.ps1 and executed from PowerShell.
+NEXT_ACTION.......: Define first Nightshift pilot project with the hardened PowerShell execution method.
+
+==========
+MB-NS-001B-R3_FIX_NO_ORIGIN_REMOTE_HANDLING
+==========
+DATE..............: 2026-06-08 15:11:17 -04:00
+STATUS............: DONE
+SUMMARY...........: Nightshift PowerShell runner patched after no-origin remote handling failure. Repo has no origin remote currently; this is acceptable until a remote is explicitly configured.
+NEXT_ACTION.......: Define first Nightshift pilot project using 05_TOOLS\RUN_TEMPSCRIPT.ps1.

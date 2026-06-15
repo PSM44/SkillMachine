@@ -1,0 +1,8 @@
+# Nightshift lab local scratch
+Temp/
+*.tmp
+*.bak
+
+# Local raw scratch/evidence not explicitly curated
+07_SANDBOX/*
+!07_SANDBOX/.gitkeep

@@ -1264,3 +1264,11 @@ SUMMARY...........: Constitution AI operating brief was created, registered and 
 CURRENT_REPO_STATE: Clean before close artifact.
 NEXT_ACTION.......: Choose between applying constitution workflow to HIA, applying it to Nightshift, or running a true blank-IA manual test.
 CAUTION...........: Do not mix HUMAN documentation with AI operating bundles. Files primarily directed to humans must include HUMAN in filename.
+
+==========
+MB-GRC-032A_MIGRATE_NIGHTSHIFT_AS_LAB
+==========
+DATE..............: 2026-06-15 10:31:14 -04:00
+STATUS............: DONE
+SUMMARY...........: Nightshift has been migrated into SkillsMachine as 99.LABS/Nightshift. External repo remains historical source. Lab is isolated and LAB_ONLY by default.
+NEXT_ACTION.......: Work on MB-NS-001C inside 99.LABS/Nightshift. Promote findings to core only by explicit decision.

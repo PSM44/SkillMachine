@@ -1,0 +1,119 @@
+ID................: NIGHTSHIFT_OPERATING_MODEL_AI
+VERSION...........: 00.01
+AUDIENCE..........: AI
+HUMAN_DOC.........: NO
+PROJECT...........: PS.Nightshift
+OUTPUT_TYPE.......: DELIVERABLE_DONE
+
+==========
+00.00_PURPOSE
+==========
+
+PS.Nightshift is the laboratory project for testing AI-assisted development workflows with Codex and Claude Code.
+
+Nightshift applies methods created in PS.SkillsMachine, but it must not become PS.SkillsMachine.
+
+==========
+01.00_SCOPE_BOUNDARY
+==========
+
+PS.SkillsMachine owns:
+- reusable governance;
+- skills;
+- usecases;
+- constitutions;
+- operating doctrine;
+- cross-project methods.
+
+PS.Nightshift owns:
+- laboratory execution;
+- agent runs;
+- test projects;
+- Codex and Claude Code experiments;
+- evidence;
+- project-specific backlog;
+- project-specific state.
+
+Reusable improvements discovered in Nightshift are registered as candidates for PS.SkillsMachine.
+They are not implemented automatically in PS.SkillsMachine.
+
+==========
+02.00_FIRST_DELIVERABLE
+==========
+
+DELIVERABLE_DONE:
+Nightshift Operating Model v0.1.
+
+Acceptance criteria:
+- boundary between PS.SkillsMachine and PS.Nightshift is explicit;
+- human-priority documentation remains in 01_HUMAN;
+- AI operating model lives in 02_GOVERNANCE;
+- branch/review gate exists;
+- stop-loss exists;
+- evidence policy exists.
+
+==========
+03.00_BRANCH_AND_REVIEW_GATE
+==========
+
+Agent work should happen in a dedicated branch when the task is more than trivial.
+
+No agent may push directly to main/master without human review unless explicitly approved by the human.
+
+Review gate:
+- objective;
+- changed files;
+- validation/test output;
+- known risks;
+- accept/merge decision.
+
+==========
+04.00_STOP_LOSS
+==========
+
+Stop if:
+- the same failure repeats three times;
+- the agent loops without a verifiable increment;
+- work expands beyond the declared output;
+- platform/governance work displaces the current deliverable;
+- the human cannot explain what changed at a practical level.
+
+==========
+05.00_EVIDENCE_POLICY
+==========
+
+Meaningful runs should preserve:
+- objective;
+- agent/model used;
+- prompt or command;
+- changed files;
+- validation output;
+- final status;
+- human decision.
+
+Evidence belongs in PS.Nightshift unless it becomes reusable doctrine.
+
+==========
+06.00_HUMAN_DOCUMENT_RULE
+==========
+
+01_HUMAN contains priority human-reading documents.
+
+Keep 01_HUMAN small.
+
+Files primarily directed to humans must include HUMAN in the filename.
+
+AI and operational documents belong outside 01_HUMAN unless explicitly approved.
+
+==========
+07.00_NEXT_STEP
+==========
+
+Next step:
+define the first pilot project for Codex/Claude comparison.
+
+The pilot must be small, reversible and measurable.
+
+==========
+END
+==========

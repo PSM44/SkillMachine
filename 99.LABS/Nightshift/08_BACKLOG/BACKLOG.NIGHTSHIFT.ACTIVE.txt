@@ -1,0 +1,101 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: BACKLOG.NIGHTSHIFT.ACTIVE.01.00
+NOMBRE_SUGERIDO...: BACKLOG.NIGHTSHIFT.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-06-06 21:37:45 -0400
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 08_BACKLOG
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: BACKLOG, NIGHTSHIFT
+
+==========
+01.00_BACKLOG_ACTIVO
+==========
+
+----------
+NS-BL-0001
+----------
+
+TIPO..............: GOVERNANCE
+PRIORIDAD.........: P0
+ESTADO............: OPEN
+TITULO............: Definir modelo operativo Nightshift v0.1
+DESCRIPCION.......: Formalizar cómo operarán Codex, Claude Code u otros agentes en repos controlados.
+
+----------
+NS-BL-0002
+----------
+
+TIPO..............: TECHNICAL
+PRIORIDAD.........: P0
+ESTADO............: OPEN
+TITULO............: Definir política de ramas, PRs y merge
+DESCRIPCION.......: Evitar que agentes trabajen directo en main y asegurar revisión humana.
+
+----------
+NS-BL-0003
+----------
+
+TIPO..............: EXPERIMENT
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+TITULO............: Seleccionar 1-2 proyectos piloto
+DESCRIPCION.......: Probar Nightshift en proyectos de bajo riesgo antes de usarlo en repos críticos.
+
+----------
+NS-BL-0004
+----------
+
+TIPO..............: GOVERNANCE
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+TITULO............: Evaluar usuarios colaboradores GPT.NS y CLAUDE.NS
+DESCRIPCION.......: Analizar pros/contras de identidades separadas para trazabilidad y revisión.
+
+----------
+NS-BL-0005
+----------
+
+TIPO..............: TOOLING
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+TITULO............: Crear RADAR real para Nightshift
+DESCRIPCION.......: Pasar de RADAR_INDEX liviano a RADAR script/tooling formal cuando la estructura madure.
+
+==========
+02.00_CHANGELOG
+==========
+
+2026-06-06 21:37:45 -0400, v0.1-DRAFT
+- Creación inicial del backlog.
+
+==========
+MB-NS-001B_NIGHTSHIFT_OPERATING_MODEL_DELIVERABLE
+==========
+DATE..............: 2026-06-08 14:48:49 -04
+STATUS............: DONE
+OUTPUT_TYPE.......: DELIVERABLE_DONE
+DELIVERABLE.......: 02_GOVERNANCE/NIGHTSHIFT.OPERATING_MODEL.AI.txt
+NEXT_ACTION.......: Define first pilot project for Codex/Claude comparison.
+
+==========
+MB-NS-001B-R2_POWERSHELL_EXECUTION_METHOD
+==========
+DATE..............: 2026-06-08 15:09:48 -04:00
+STATUS............: DONE
+SUMMARY...........: Standardized Nightshift execution method around VS Code editor, PowerShell terminal, Temp\TempScript.ps1 and 05_TOOLS\RUN_TEMPSCRIPT.ps1.
+POLICY............: Long scripts are saved in Temp\TempScript.ps1 through VS Code. Terminal executes only a short activation command.
+GIT_POLICY........: Temp/ is ignored and remains local operator scratchpad.
+NEXT_ACTION.......: Use 05_TOOLS\RUN_TEMPSCRIPT.ps1 for MB-NS-001C pilot definition.
+
+==========
+MB-NS-001B-R3_FIX_NO_ORIGIN_REMOTE_HANDLING
+==========
+DATE..............: 2026-06-08 15:11:17 -04:00
+STATUS............: DONE
+SUMMARY...........: Patched 05_TOOLS\RUN_TEMPSCRIPT.ps1 so missing origin remote does not break runner execution. Runner now reports script exit status and repo state without probing origin.
+CAUSE.............: Previous R2 TempScript used git remote get-url origin under PowerShell ErrorActionPreference=Stop, which converted missing origin into script failure after commit.
+NEXT_ACTION.......: Use the patched runner for MB-NS-001C pilot definition.

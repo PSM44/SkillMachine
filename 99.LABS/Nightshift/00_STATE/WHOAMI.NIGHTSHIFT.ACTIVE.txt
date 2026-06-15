@@ -1,0 +1,94 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: WHOAMI.NIGHTSHIFT.ACTIVE.01.00
+NOMBRE_SUGERIDO...: WHOAMI.NIGHTSHIFT.ACTIVE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-06-06 21:37:45 -0400
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 00_STATE
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: CONTINUITY, HUMAN_ONBOARDING
+
+==========
+01.00_QUE_ES
+==========
+
+Nightshift es un proyecto experimental-operativo para gobernar trabajo de IA ejecutora
+sobre repositorios GitHub, especialmente Codex Desktop y Claude Code.
+
+==========
+02.00_ESTADO_ACTUAL
+==========
+
+Estado: BOOTSTRAP_INICIAL.
+
+Root Windows:
+C:\01. GitHub\Nightshift
+
+Root WSL2:
+/mnt/c/01. GitHub/Nightshift
+
+Shell estándar:
+bash WSL2
+
+==========
+03.00_QUE_SE_LOGRO
+==========
+
+- Definido root del proyecto.
+- Definido uso de bash WSL2.
+- Inicializada estructura mínima de proyecto.
+- Creados HUMAN, WHOAMI, BATON, BACKLOG y RADAR_INDEX liviano.
+
+==========
+04.00_QUE_FALTA
+==========
+
+- Definir arquitectura Nightshift v0.1.
+- Definir protocolo para agentes GPT.NS / CLAUDE.NS o alternativa equivalente.
+- Definir proyecto piloto 1 y proyecto piloto 2.
+- Definir validación antes de merge a main.
+- Definir política de ramas, PRs, evidencia y rollback.
+
+==========
+05.00_SIGUIENTE_ACCION
+==========
+
+NEXT_ACTION:
+MB-NS-000B_DEFINE_NIGHTSHIFT_OPERATING_MODEL
+
+Objetivo:
+Formalizar el modelo operativo: agentes, ramas, PRs, límites, evidencia, integración y pilotos.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-06-06 21:37:45 -0400, v0.1-DRAFT
+- Creación inicial.
+
+==========
+MB-NS-001B_NIGHTSHIFT_OPERATING_MODEL_DELIVERABLE
+==========
+DATE..............: 2026-06-08 14:48:49 -04
+ROLE_STATE........: Continue as PS.Nightshift laboratory operator.
+CURRENT_CONTEXT...: Nightshift is separate from PS.SkillsMachine.
+NEXT_RECOMMENDED..: Define first pilot project for Codex/Claude comparison.
+
+==========
+MB-NS-001B-R2_POWERSHELL_EXECUTION_METHOD
+==========
+DATE..............: 2026-06-08 15:09:48 -04:00
+ROLE_STATE........: Continue as PS.Nightshift laboratory operator using VS Code + PowerShell execution method.
+CURRENT_CONTEXT...: Do not paste long scripts directly into terminal. Save them to Temp\TempScript.ps1 and execute through 05_TOOLS\RUN_TEMPSCRIPT.ps1.
+NEXT_RECOMMENDED..: MB-NS-001C define first pilot project.
+
+==========
+MB-NS-001B-R3_FIX_NO_ORIGIN_REMOTE_HANDLING
+==========
+DATE..............: 2026-06-08 15:11:17 -04:00
+ROLE_STATE........: Continue as PS.Nightshift laboratory operator.
+CURRENT_CONTEXT...: Runner is PowerShell-based and does not require an origin remote. Use Temp\TempScript.ps1 plus 05_TOOLS\RUN_TEMPSCRIPT.ps1.
+NEXT_RECOMMENDED..: MB-NS-001C define first pilot project.

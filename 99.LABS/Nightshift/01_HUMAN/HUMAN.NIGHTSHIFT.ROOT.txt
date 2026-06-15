@@ -1,0 +1,100 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: HUMAN.NIGHTSHIFT.ROOT.01.00
+NOMBRE_SUGERIDO...: HUMAN.NIGHTSHIFT.ROOT.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-06-06 21:37:45 -0400
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 01_HUMAN
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: HUMAN_ROOT, AI_EXECUTION, GOVERNANCE
+
+ALCANCE...........:
+Define la intención humana inicial del proyecto Nightshift.
+Nightshift busca gobernar trabajo asistido por IA sobre repos/proyectos,
+con foco en continuidad, trazabilidad, ejecución controlada y revisión humana.
+
+NO_CUBRE..........:
+No reemplaza SkillsMachine.
+No define todavía automatización final.
+No autoriza ejecución autónoma sin límites.
+No define todavía integración completa con Codex, Claude Code u otros agentes.
+
+DEPENDENCIAS......:
+SkillsMachine usecase 01.NEW_PROJECT.
+Skills: WBS, FILE_CONTENT, HUMAN_README, BATON, RADAR, PROJECT_BOOTSTRAP, LIFECYCLE, GOVERNANCE.
+
+==========
+01.00_PROPOSITO
+==========
+
+Nightshift es un proyecto para diseñar y probar un sistema de trabajo nocturno/asistido por IA
+sobre repositorios GitHub, usando agentes como Codex Desktop y Claude Code bajo control humano.
+
+Objetivo principal:
+Crear un marco operativo que permita delegar trabajo técnico a IA sin perder control,
+sin contaminar main, sin romper trazabilidad y sin convertir al agente en un cowboy con teclado.
+
+==========
+02.00_PRINCIPIOS_INICIALES
+==========
+
+01. La IA puede proponer y ejecutar bajo sandbox, pero el humano decide integración final.
+02. El trabajo debe dejar evidencia: logs, commits, diffs, reportes y handoff.
+03. No se trabaja directo sobre main salvo instrucción humana explícita.
+04. Cada agente debe operar como colaborador controlado, idealmente con ramas, PR o identidad separable.
+05. El sistema debe ser útil antes de volverse elegante.
+06. SkillsMachine gobierna método; Nightshift prueba operación real.
+
+==========
+03.00_LIMITES_INICIALES_DE_AUTOMATIZACION
+==========
+
+ALLOWED:
+- Crear y editar archivos dentro de PROJECT_ROOT.
+- Crear logs, reportes, backlog y evidencia.
+- Proponer ramas, commits y PRs.
+- Preparar scripts reproducibles.
+
+FORBIDDEN:
+- Cambios fuera de PROJECT_ROOT.
+- Escritura de secretos o tokens en repo.
+- Instalaciones globales sin autorización.
+- Push automático a main sin revisión humana.
+- Borrar historia Git.
+- Reescribir canon humano sin aprobación.
+
+==========
+04.00_DECISIONES_ABIERTAS
+==========
+
+01. Definir si habrá usuarios GitHub separados tipo GPT.NS y CLAUDE.NS.
+02. Definir si Codex y Claude Code tendrán forks, ramas dedicadas o PR-only.
+03. Definir estructura definitiva de carpetas Nightshift.
+04. Definir protocolo mínimo de validación antes de integrar a main.
+05. Definir si Nightshift será genérico o primero se probará en 1-2 proyectos tipo.
+
+==========
+05.00_CHANGELOG
+==========
+
+2026-06-06 21:37:45 -0400, v0.1-DRAFT
+- Creación inicial del HUMAN root de Nightshift.
+
+==========
+MB-NS-001B_SCOPE_BOUNDARY
+==========
+DATE..............: 2026-06-08 14:48:49 -04
+STATUS............: ACTIVE
+
+PS.Nightshift is the laboratory project for testing AI-assisted development with Codex and Claude Code.
+
+Boundary:
+- PS.SkillsMachine defines reusable governance, skills, usecases, constitutions, operating doctrine and cross-project methods.
+- PS.Nightshift applies and tests those methods as a separate laboratory with its own state, backlog, evidence, runs and project-specific artifacts.
+
+01_HUMAN contains priority human-reading documents and should remain intentionally small.
+
+AI/operational documents should live outside 01_HUMAN.
