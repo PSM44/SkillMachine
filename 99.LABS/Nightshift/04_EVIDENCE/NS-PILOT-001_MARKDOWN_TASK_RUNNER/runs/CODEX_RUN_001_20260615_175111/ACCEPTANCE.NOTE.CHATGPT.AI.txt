@@ -1,0 +1,21 @@
+﻿ID................: ACCEPTANCE_NOTE_CODEX_RUN_001
+STATUS............: ACCEPTED_FOR_BRANCH_COMMIT
+DATE..............: 2026-06-15 18:08:18 -04:00
+BRANCH............: lab/ns-pilot-001-codex
+PILOT.............: NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+REVIEW_RESULT.....: PASS_REVIEW_READY
+BOUNDARY_STATUS...: OK
+TEST_EXIT.........: 0
+CLI_EXIT..........: 0
+ACCEPTANCE_PROBE..: 99.LABS\Nightshift\04_EVIDENCE\NS-PILOT-001_MARKDOWN_TASK_RUNNER\runs\CODEX_RUN_001_20260615_175111\TASKS.sample.acceptance_probe.report.json
+
+SUMMARY...........:
+Codex RUN_001 stayed inside allowed pilot/evidence paths, produced a Python task runner, tests, report output and evidence. Cache folders were removed before commit.
+
+KNOWN_LIMITATIONS.:
+- Python availability depends on local environment; py.exe was available during acceptance.
+- BLOCKED text rule is intentionally broad for this pilot.
+- Report preserves source line order.
+
+NEXT_ACTION.......: Prepare Claude Code branch/run for comparison.

@@ -1,0 +1,13 @@
+ID................: CODEX_RUN_001_RESULT
+STATUS............: IMPLEMENTED
+DATE..............: 2026-06-15 17:51:11 -04:00
+PILOT.............: NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+SUMMARY:
+- Added a minimal Python markdown task runner under the pilot src/ path.
+- Added unittest coverage under the pilot tests/ path.
+- Generated a deterministic normalized report from TASKS.sample.md.
+
+BOUNDARY_CHECK:
+- No edits outside the allowed pilot path.
+- Evidence written only under the declared run evidence path.

@@ -1,0 +1,53 @@
+{
+  "source": "99.LABS\\Nightshift\\03_EXPERIMENTS\\NS-PILOT-001_MARKDOWN_TASK_RUNNER\\TASKS.sample.md",
+  "summary": {
+    "blocked": 2,
+    "done": 2,
+    "pending": 3,
+    "total": 7
+  },
+  "tasks": [
+    {
+      "line_number": 4,
+      "raw_line": "- [ ] Draft parser interface",
+      "state": "pending",
+      "text": "Draft parser interface"
+    },
+    {
+      "line_number": 5,
+      "raw_line": "- [ ] Implement report writer",
+      "state": "pending",
+      "text": "Implement report writer"
+    },
+    {
+      "line_number": 6,
+      "raw_line": "- [ ] Add CLI entrypoint",
+      "state": "pending",
+      "text": "Add CLI entrypoint"
+    },
+    {
+      "line_number": 9,
+      "raw_line": "- [x] Define pilot scope",
+      "state": "done",
+      "text": "Define pilot scope"
+    },
+    {
+      "line_number": 10,
+      "raw_line": "- [X] Create scaffold",
+      "state": "done",
+      "text": "Create scaffold"
+    },
+    {
+      "line_number": 13,
+      "raw_line": "- [!] Agent execution not started",
+      "state": "blocked",
+      "text": "Agent execution not started"
+    },
+    {
+      "line_number": 14,
+      "raw_line": "- [ ] BLOCKED: comparison cannot run until both agent runs exist",
+      "state": "blocked",
+      "text": "BLOCKED: comparison cannot run until both agent runs exist"
+    }
+  ]
+}

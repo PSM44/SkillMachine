@@ -9,3 +9,13 @@ EVIDENCE_PATH.....: 99.LABS\Nightshift\04_EVIDENCE\NS-PILOT-001_MARKDOWN_TASK_RU
 CURRENT_VERDICT...: NOT_RUN
 
 NEXT_ACTION.......: Open Codex Desktop on this repository and run the prompt from PROMPT.CODEX.RUN_001.AI.txt.
+
+==========
+ACCEPTANCE_UPDATE
+==========
+DATE..............: 2026-06-15 18:08:18 -04:00
+STATUS............: ACCEPTED_FOR_BRANCH_COMMIT
+REVIEW_VERDICT....: PASS_REVIEW_READY
+TEST_EXIT.........: 0
+CLI_EXIT..........: 0
+NEXT_ACTION.......: Prepare Claude Code run for comparison.
