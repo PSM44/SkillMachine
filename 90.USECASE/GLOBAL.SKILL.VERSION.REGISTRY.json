@@ -165,6 +165,12 @@
       "version": "01.00",
       "status": "ACTIVE",
       "description": "AI operating brief for IT project delivery constitution self-containment in usecase bundles."
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/29.SKILL.CLAUDE.WORD.PLUGIN.EFFICIENT.PROMPTING.txt",
+      "version": "01.00",
+      "status": "ACTIVE",
+      "description": "Efficient prompting skill for Claude Word Plugin as a document-operation executor."
     }
   ]
 }

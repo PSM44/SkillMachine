@@ -869,3 +869,15 @@ SOURCE_HEAD.......: a2e07e4 20260608_MB-NS-001B-R3_fix_runner_no_origin_handling
 TARGET............: 99.LABS/Nightshift
 BOUNDARY..........: Lab content is not canonical. Findings require explicit promotion before modifying SkillsMachine core.
 NEXT_ACTION.......: Continue with MB-NS-001C_DEFINE_FIRST_PILOT_PROJECT inside 99.LABS/Nightshift.
+
+==========
+MB-GRC-032B_PROMOTE_CLAUDE_WORD_SKILL
+==========
+DATE..............: 2026-06-15 10:39:47 -04:00
+STATUS............: DONE
+SUMMARY...........: Promoted accidental untracked Claude Word Plugin skill draft into canonical SkillsLake skill.
+SOURCE............: SkillsLake\01.SKILLS\Skill.Word.Claude.work. .txt
+TARGET............: SkillsLake\01.SKILLS\29.SKILL.CLAUDE.WORD.PLUGIN.EFFICIENT.PROMPTING.txt
+REGISTRY..........: 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
+RATIONALE.........: File content declared canonical title and contained real skill material, so it was promoted rather than discarded.
+NEXT_ACTION.......: Continue with MB-NS-001C inside 99.LABS/Nightshift after readiness is OK.

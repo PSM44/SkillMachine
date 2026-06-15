@@ -1272,3 +1272,11 @@ DATE..............: 2026-06-15 10:31:14 -04:00
 STATUS............: DONE
 SUMMARY...........: Nightshift has been migrated into SkillsMachine as 99.LABS/Nightshift. External repo remains historical source. Lab is isolated and LAB_ONLY by default.
 NEXT_ACTION.......: Work on MB-NS-001C inside 99.LABS/Nightshift. Promote findings to core only by explicit decision.
+
+==========
+MB-GRC-032B_PROMOTE_CLAUDE_WORD_SKILL
+==========
+DATE..............: 2026-06-15 10:39:47 -04:00
+STATUS............: DONE
+SUMMARY...........: Cleaned post-migration untracked file by promoting real Claude Word Plugin skill to canonical SkillsLake path and registry.
+NEXT_ACTION.......: Continue with MB-NS-001C inside 99.LABS/Nightshift after readiness is OK.

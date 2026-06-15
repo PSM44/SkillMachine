@@ -1,0 +1,426 @@
+# 29.SKILL.CLAUDE.WORD.PLUGIN.EFFICIENT.PROMPTING.txt
+
+## PROPÓSITO
+
+Este skill define cómo utilizar Claude Word Plugin de forma eficiente, predecible y con bajo consumo de tokens cuando se trabaja sobre documentos Word.
+
+El objetivo es que Claude actúe como un operador documental y no como un analista académico.
+
+La responsabilidad del análisis, estrategia, contenido, rúbrica, UML, validaciones y decisiones queda fuera de Claude.
+
+Claude debe limitarse a ejecutar modificaciones específicas sobre el documento.
+
+---
+
+# 1. PRINCIPIO FUNDAMENTAL
+
+Claude Word Plugin NO es el responsable de:
+
+* analizar el documento
+* interpretar la rúbrica
+* evaluar cumplimiento
+* decidir mejoras
+* redactar contenido académico
+* proponer cambios
+
+Claude Word Plugin SÍ es responsable de:
+
+* localizar contenido
+* leer secciones específicas
+* insertar texto
+* reemplazar texto
+* eliminar contenido
+* mover bloques
+* aplicar formato
+* escalar imágenes
+* verificar ejecución
+
+---
+
+# 2. DISTRIBUCIÓN DE RESPONSABILIDADES
+
+## ChatGPT
+
+Responsable de:
+
+* análisis académico
+* revisión de profesor
+* rúbrica
+* indicadores de logro
+* estrategia documental
+* contenido
+* UML
+* validaciones
+* trazabilidad
+* decisiones
+
+## Claude Word Plugin
+
+Responsable de:
+
+* localizar
+* leer
+* insertar
+* reemplazar
+* mover
+* renombrar
+* escalar
+* formatear
+* verificar
+
+---
+
+# 3. FLUJO OFICIAL
+
+## FASE A — LOCALIZACIÓN
+
+Objetivo:
+
+Construir mapa del documento.
+
+Prompt recomendado:
+
+"Lee únicamente la sección indicada.
+
+No modifiques nada.
+
+Muestra:
+
+* heading
+* párrafo inicial
+* párrafo final
+* índices
+* imágenes
+* tablas"
+
+Resultado esperado:
+
+Claude devuelve estructura.
+
+No realiza cambios.
+
+---
+
+## FASE B — ANÁLISIS EXTERNO
+
+Objetivo:
+
+Realizar análisis académico.
+
+Responsable:
+
+ChatGPT.
+
+Claude no participa.
+
+---
+
+## FASE C — EJECUCIÓN
+
+Objetivo:
+
+Modificar documento.
+
+Prompt recomendado:
+
+"Realiza únicamente los cambios indicados.
+
+No analices.
+No evalúes.
+No propongas mejoras.
+No modifiques contenido fuera de lo solicitado.
+
+CAMBIO 1
+...
+
+CAMBIO 2
+...
+
+CAMBIO 3
+..."
+
+Resultado esperado:
+
+Claude ejecuta.
+
+No razona.
+
+---
+
+## FASE D — VERIFICACIÓN
+
+Objetivo:
+
+Validar ejecución.
+
+Prompt recomendado:
+
+"Lee únicamente la sección modificada.
+
+No modifiques nada.
+
+Muestra el resultado completo."
+
+Resultado esperado:
+
+Claude muestra cambios.
+
+No analiza.
+
+---
+
+# 4. REGLAS DE ORO
+
+## Regla 1
+
+Nunca pedir:
+
+* analiza
+* evalúa
+* revisa
+* optimiza
+* mejora
+* perfecciona
+
+Porque Claude comenzará a leer y razonar innecesariamente.
+
+---
+
+## Regla 2
+
+Siempre pedir:
+
+* inserta
+* reemplaza
+* elimina
+* mueve
+* renombra
+* centra
+* escala
+* aplica estilo
+
+---
+
+## Regla 3
+
+Nunca pedir cambios ambiguos.
+
+Incorrecto:
+
+"Mejora esta sección."
+
+Correcto:
+
+"Reemplaza este párrafo por el siguiente texto exacto."
+
+---
+
+# 5. PATRONES RECOMENDADOS
+
+## Reemplazar párrafo
+
+Ubica el párrafo que comienza con:
+
+"[texto]"
+
+Reemplázalo completamente por:
+
+"[texto completo]"
+
+---
+
+## Insertar después
+
+Después del heading:
+
+"[heading]"
+
+Inserta:
+
+"[texto]"
+
+---
+
+## Insertar antes
+
+Antes de:
+
+"[texto]"
+
+Inserta:
+
+"[texto]"
+
+---
+
+## Eliminar
+
+Elimina únicamente el párrafo que comienza con:
+
+"[texto]"
+
+No elimines ningún otro contenido.
+
+---
+
+## Renombrar
+
+Reemplaza:
+
+"[texto actual]"
+
+por:
+
+"[texto nuevo]"
+
+---
+
+## Mover bloque
+
+Mueve el bloque completo:
+
+"[heading]"
+
+para dejarlo inmediatamente antes de:
+
+"[heading]"
+
+---
+
+## Escalar imagen
+
+Escala la imagen un 25%.
+
+Mantén proporción.
+
+No modifiques contenido.
+
+---
+
+## Aplicar estilo
+
+Aplica el mismo estilo utilizado por:
+
+"[heading existente]"
+
+al siguiente texto:
+
+"[texto]"
+
+---
+
+# 6. PATRONES PROHIBIDOS
+
+## Incorrecto
+
+"¿Qué opinas del documento?"
+
+---
+
+## Incorrecto
+
+"¿Qué mejorarías?"
+
+---
+
+## Incorrecto
+
+"Revísalo completo."
+
+---
+
+## Incorrecto
+
+"¿Cumple la rúbrica?"
+
+---
+
+## Incorrecto
+
+"Optimiza el contenido."
+
+---
+
+# 7. ESTRATEGIA DE TOKENS
+
+## Muy mala
+
+"Revisa todo el documento y dime qué mejorar."
+
+Consecuencia:
+
+Claude lee decenas de páginas.
+
+Consumo alto.
+
+---
+
+## Mala
+
+"Revisa toda la sección 4."
+
+Claude debe interpretar contexto.
+
+---
+
+## Buena
+
+"Lee únicamente la sección 4.4."
+
+Lectura acotada.
+
+---
+
+## Excelente
+
+"Lee párrafos 220 a 230."
+
+Lectura mínima.
+
+---
+
+# 8. CUÁNDO USAR CLAUDE
+
+Usar Claude cuando se necesite:
+
+* modificar Word
+* insertar contenido
+* mover secciones
+* corregir formato
+* trabajar tablas
+* trabajar imágenes
+* actualizar índices
+* aplicar estilos
+* realizar cambios repetitivos
+
+---
+
+# 9. CUÁNDO NO USAR CLAUDE
+
+No usar Claude para:
+
+* decidir contenido
+* evaluar entregables
+* revisar rúbricas
+* validar UML
+* diseñar arquitectura
+* definir conclusiones
+* generar estrategia académica
+
+Esas tareas deben resolverse previamente fuera de Claude.
+
+---
+
+# 10. PATRÓN RECOMENDADO PARA PROYECTOS ACADÉMICOS
+
+1. Claude localiza.
+2. ChatGPT analiza.
+3. Usuario valida.
+4. ChatGPT genera cambios exactos.
+5. Claude ejecuta.
+6. Claude muestra resultado.
+7. ChatGPT verifica.
+
+Este patrón minimiza tokens, reduce errores y evita análisis innecesarios dentro de Word.
+
+END OF SKILL
