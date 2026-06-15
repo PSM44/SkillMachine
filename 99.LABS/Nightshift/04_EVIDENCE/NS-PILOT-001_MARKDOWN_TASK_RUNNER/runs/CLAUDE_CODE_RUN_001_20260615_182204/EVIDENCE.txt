@@ -1,0 +1,24 @@
+ID................: NS_PILOT_001_EVIDENCE_TEMPLATE
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 18:22:04 -04:00
+
+AGENT............: Claude Code Desktop
+RUN_ID...........: CLAUDE_CODE_RUN_001_20260615_182204
+BRANCH_OR_MODE...: lab/ns-pilot-001-claude
+PROMPT_FILE......: PROMPT.CLAUDE_CODE.RUN_001.AI.txt
+TARGET_PATH......: 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+COMMANDS:
+  cd 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-001_MARKDOWN_TASK_RUNNER
+  python -m unittest discover -s tests -v
+  python -m src.cli TASKS.sample.md ../../../04_EVIDENCE/NS-PILOT-001_MARKDOWN_TASK_RUNNER/runs/CLAUDE_CODE_RUN_001_20260615_182204/TASKS.sample.report.md
+
+RESULTS:
+  Ran 20 tests -- OK
+  Deterministic report generated.
+
+KNOWN_LIMITATIONS:
+  BLOCKED keyword detection uses full-line search and may classify any checklist line containing BLOCKED as blocked.
+
+VERDICT:
+PASS
