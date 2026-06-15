@@ -1296,3 +1296,12 @@ DATE..............: 2026-06-15 11:16:31 -04:00
 STATUS............: DONE
 SUMMARY...........: Formalized governed long one-shot workflow in existing skill and mandatory usecase content. Future long scripts must live in Temp/<MB_ID> and run via short activator.
 NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.
+
+==========
+MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD
+==========
+DATE..............: 2026-06-15 17:46:42 -04:00
+STATUS............: DONE
+SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
+SUMMARY...........: Created scaffold for first Nightshift pilot.
+NEXT_ACTION.......: MB-NS-001E_CODEX_RUN_001.

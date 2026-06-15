@@ -1,0 +1,32 @@
+﻿ID................: NS-PILOT-001_MARKDOWN_TASK_RUNNER
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 17:46:42 -04:00
+OUTPUT_TYPE.......: SCAFFOLD_DONE
+
+OBJECTIVE:
+Create a controlled micro-pilot for comparing Codex and Claude Code.
+
+TASK:
+Build a small Python Markdown checklist parser and deterministic report generator.
+
+CHECKLIST STATES:
+- pending: - [ ]
+- done: - [x] or - [X]
+- blocked: - [!] or line containing BLOCKED
+
+ACCEPTANCE:
+- implementation stays inside pilot root
+- evidence stays inside evidence root
+- no unnecessary frameworks
+- tests exist
+- output is deterministic
+- changed files are inspectable
+
+STOP_LOSS:
+- edits outside allowed paths
+- unnecessary architecture
+- same error repeats three times
+- human cannot explain diff
+
+CURRENT_VERDICT:
+SCAFFOLD_DONE

@@ -1,0 +1,21 @@
+﻿ID................: NS_PILOT_001_EVIDENCE_TEMPLATE
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 17:46:42 -04:00
+
+AGENT............:
+RUN_ID...........:
+BRANCH_OR_MODE...:
+PROMPT_FILE......:
+TARGET_PATH......:
+
+COMMANDS:
+<insert commands>
+
+RESULTS:
+<insert test/report output>
+
+CHANGED_FILES:
+<insert git status/diff summary>
+
+VERDICT:
+PASS / PARTIAL / FAIL

@@ -869,3 +869,12 @@ DATE..............: 2026-06-15 11:16:31 -04:00
 ROLE_STATE........: Continue as PS.SkillsMachine operator.
 CURRENT_CONTEXT...: Temporary executable one-shot protocol is now formalized. Use large first-pass scripts for speed, then max three reduced repair attempts, then escalate to Codex/Claude Desktop.
 NEXT_RECOMMENDED..: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD inside 99.LABS/Nightshift.
+
+==========
+MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD
+==========
+DATE..............: 2026-06-15 17:46:42 -04:00
+STATUS............: DONE
+SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
+SUMMARY...........: Created scaffold for first Nightshift pilot.
+NEXT_ACTION.......: MB-NS-001E_CODEX_RUN_001.

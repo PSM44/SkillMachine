@@ -1,0 +1,17 @@
+﻿ID................: NS_PILOT_001_COMPARE_TEMPLATE
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 17:46:42 -04:00
+
+PILOT.............: NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+DIMENSIONS:
+- instruction following
+- scope discipline
+- code minimality
+- correctness
+- test quality
+- evidence quality
+- human intervention
+
+PROMOTION_DECISION:
+LAB_ONLY / CANDIDATE_FOR_CORE / APPROVED_FOR_CORE / CORE_PROMOTED
