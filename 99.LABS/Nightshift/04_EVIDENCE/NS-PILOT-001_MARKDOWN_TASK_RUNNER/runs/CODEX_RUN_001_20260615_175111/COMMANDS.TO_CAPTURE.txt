@@ -1,0 +1,12 @@
+﻿COMMANDS TO CAPTURE DURING CODEX RUN
+
+After Codex modifies files, capture:
+
+git status --short
+git diff --stat
+python --version
+python -m unittest discover -s 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-001_MARKDOWN_TASK_RUNNER/tests
+
+If Codex creates a CLI, also capture the command that generates the report.
+
+Do not commit Codex changes until human review.
