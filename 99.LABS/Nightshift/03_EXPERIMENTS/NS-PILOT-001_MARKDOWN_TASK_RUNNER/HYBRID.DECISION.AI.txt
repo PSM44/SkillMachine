@@ -1,0 +1,33 @@
+ID................: HYBRID_DECISION_NS_PILOT_001_RUN_001
+MB_ID.............: MB-NS-001J_CREATE_HYBRID_BRANCH_RUN_001
+GENERATED_AT......: 2026-06-16 11:07:25 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+BASE_BRANCH.......: main
+CODEX_SOURCE......: lab/ns-pilot-001-codex
+CLAUDE_SOURCE.....: lab/ns-pilot-001-claude
+
+DECISION..........: HYBRID_BRANCH
+RATIONALE.........: Direct promotion is blocked by overlap and merge conflict signals. Runtime probe showed both agent outputs are functional without pytest.
+
+CODEX_FINDINGS:
+- unittest passed: 3/3.
+- src.task_runner imports and runs.
+- Generates deterministic JSON report.
+- Stronger executable single-file CLI behavior.
+- Weakness: monolithic structure.
+
+CLAUDE_FINDINGS:
+- unittest passed: 20/20.
+- src.cli, src.parser and src.report import.
+- Generates human-readable Markdown report.
+- Better modular structure.
+- Weakness: --help is not handled; script execution fails due to relative imports.
+
+HYBRID_SCOPE:
+- Keep Claude modular parser/report/cli as core.
+- Keep Codex task_runner.py and integration-style test as deterministic JSON path.
+- Do not import BATON, WHOAMI, backlog, session close artifacts, or continuity files from either agent branch.
+
+NEXT_RECOMMENDED:
+- Run tests and smoke probes on hybrid branch.
+- Decide whether to unify CLI into one entrypoint supporting markdown/json output.

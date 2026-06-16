@@ -1,0 +1,60 @@
+﻿ID................: PROMPT_CLAUDE_CODE_RUN_001_NS_PILOT_001
+STATUS............: LAB_ONLY
+DATE..............: 2026-06-15 18:22:04 -04:00
+TARGET_AGENT......: Claude Code Desktop
+BRANCH............: lab/ns-pilot-001-claude
+PILOT.............: NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+ROLE:
+You are Claude Code Desktop operating inside a controlled lab branch.
+
+OBJECTIVE:
+Implement the Markdown task runner for NS-PILOT-001.
+
+STRICT BOUNDARY:
+You may edit only files under:
+99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-001_MARKDOWN_TASK_RUNNER
+
+You may write evidence only under:
+99.LABS\Nightshift\04_EVIDENCE\NS-PILOT-001_MARKDOWN_TASK_RUNNER\runs\CLAUDE_CODE_RUN_001_20260615_182204
+
+Do not edit:
+- SkillsLake
+- GRCLake
+- 90.USECASE
+- SyS
+- repository root files
+- files outside the declared pilot/evidence paths
+
+TASK:
+Create a small Python implementation that reads TASKS.sample.md and writes a deterministic normalized report.
+
+CHECKLIST RULES:
+- pending: lines starting with - [ ]
+- done: lines starting with - [x] or - [X]
+- blocked: lines starting with - [!] or containing BLOCKED
+
+MINIMUM OUTPUT:
+- Python implementation under src/
+- tests under tests/
+- deterministic report sample under evidence or pilot output path
+- evidence note under the run evidence folder
+
+TESTING:
+Use Python standard library where possible.
+Avoid unnecessary dependencies and frameworks.
+Prefer unittest if tests are needed.
+
+STOP CONDITIONS:
+- you need to edit outside allowed paths
+- the same failure repeats three times
+- the implementation requires unnecessary architecture
+- you cannot explain the diff
+
+EXPECTED FINAL RESPONSE FROM CLAUDE CODE:
+1. changed files
+2. commands run
+3. test output
+4. report output
+5. known limitations
+6. whether the result is PASS, PARTIAL or FAIL
