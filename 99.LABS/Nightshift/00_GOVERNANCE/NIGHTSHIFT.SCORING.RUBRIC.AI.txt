@@ -1,0 +1,112 @@
+ID................: NIGHTSHIFT_SCORING_RUBRIC
+MB_ID.............: MB-NS-002B_CREATE_SCORING_RUBRIC_ARTIFACT
+STATUS............: ACTIVE
+SCOPE.............: Nightshift lab governance
+VERSION...........: v0.1
+DATE..............: 2026-06-21 00:31:49 -04:00
+SOURCE............: MB-NS-002A_SCORING_RUBRIC_READONLY
+
+PURPOSE:
+Define a reusable scoring rubric for comparing agent outputs in Nightshift pilots.
+The rubric is used to score Codex, Claude, hybrid, or other agent branches before deciding whether to accept, hybridize, continue, or defer merge.
+
+BOUNDARY:
+- This artifact governs Nightshift lab comparisons.
+- It is not global SkillsMachine canon yet.
+- Promotion to SkillsMachine/SkillsLake requires repeatability across at least one additional pilot.
+- Do not patch HUMAN or global SkillsLake from this artifact without explicit minibattle approval.
+
+SCORING_TOTAL:
+100 points.
+
+DIMENSION_01_FUNCTIONAL_CORRECTNESS:
+WEIGHT............: 25
+QUESTION..........: Does the output solve the declared task and produce valid deterministic output?
+FULL_SCORE........: Declared task is solved end-to-end; output is valid; edge cases within stated scope are handled.
+PARTIAL_SCORE.....: Core task works but relevant scope gaps remain.
+ZERO_SCORE........: Output does not run, does not solve the task, or produces unusable results.
+
+DIMENSION_02_TEST_VALIDATION:
+WEIGHT............: 15
+QUESTION..........: Are tests present, relevant, runnable, and passing?
+FULL_SCORE........: Meaningful tests exist, are standard-library or approved dependency based, and pass cleanly.
+PARTIAL_SCORE.....: Tests exist but are shallow, incomplete, or require minor correction.
+ZERO_SCORE........: No tests, broken tests, or tests unrelated to the declared task.
+
+DIMENSION_03_CLI_CONTRACT:
+WEIGHT............: 10
+QUESTION..........: Does command-line behavior support help, valid args, invalid args, and stable exit codes?
+FULL_SCORE........: --help works; valid commands work; missing/invalid args fail cleanly; exit codes are stable.
+PARTIAL_SCORE.....: CLI works for happy path but weak help/errors/exit-code behavior remains.
+ZERO_SCORE........: CLI is missing, broken, or cannot be executed as documented.
+
+DIMENSION_04_STRUCTURE_MAINTAINABILITY:
+WEIGHT............: 15
+QUESTION..........: Is the implementation maintainable without unnecessary architecture?
+FULL_SCORE........: Code is simple, modular, readable, and proportionate to task complexity.
+PARTIAL_SCORE.....: Code is functional but too monolithic, duplicated, over-engineered, or under-structured.
+ZERO_SCORE........: Code structure blocks comprehension, testing, or extension.
+
+DIMENSION_05_BOUNDARY_DISCIPLINE:
+WEIGHT............: 10
+QUESTION..........: Did the agent stay inside allowed paths and avoid governance/runtime contamination?
+FULL_SCORE........: All edits remain inside declared pilot/evidence paths; no unauthorized governance, root, build, or runtime artifacts remain.
+PARTIAL_SCORE.....: Minor cleanup required but no persistent unauthorized canonical edits.
+ZERO_SCORE........: Agent edits forbidden paths, pollutes repository state, or modifies governance without approval.
+
+DIMENSION_06_DETERMINISM_REPRODUCIBILITY:
+WEIGHT............: 10
+QUESTION..........: Are outputs deterministic and reproducible with standard commands?
+FULL_SCORE........: Same input and command produce stable output; command sequence is documented and repeatable.
+PARTIAL_SCORE.....: Mostly reproducible but has path, ordering, timestamp, or environment sensitivity.
+ZERO_SCORE........: Output cannot be reproduced reliably.
+
+DIMENSION_07_EVIDENCE_QUALITY:
+WEIGHT............: 10
+QUESTION..........: Are changed files, commands, test output, limitations, and status documented?
+FULL_SCORE........: Evidence is explicit, reviewable, and sufficient for independent assessment.
+PARTIAL_SCORE.....: Evidence exists but lacks commands, outputs, limitations, or clear status.
+ZERO_SCORE........: No usable evidence or final state cannot be reconstructed.
+
+DIMENSION_08_INTEGRATION_FRICTION:
+WEIGHT............: 5
+QUESTION..........: How much cleanup, correction, or hybridization was needed?
+FULL_SCORE........: Low friction; output can be accepted with no or minimal correction.
+PARTIAL_SCORE.....: Moderate correction or hybridization required but useful components are recoverable.
+ZERO_SCORE........: High friction; integration cost exceeds value or requires major rework.
+
+STATUS_CLASSIFICATION:
+PASS..............: Score >= 85 and no severe boundary violation.
+PARTIAL...........: Score 60-84, or useful but incomplete output requiring correction/hybridization.
+FAIL..............: Score < 60, broken runnable path, missing core output, or severe boundary violation.
+BLOCKED...........: Cannot score because evidence, outputs, tests, or commands are missing.
+
+DECISION_RULES:
+- ACCEPT_BASELINE requires PASS and clean working tree.
+- HYBRIDIZE is appropriate when two or more branches have complementary strengths and no severe boundary violations.
+- DEFER_MERGE_TO_MAIN when branch contains lab evidence/prompt/decision artifacts and repository-lab-canon acceptance has not been granted.
+- PROMOTE_TO_MAIN only after explicit human decision that the pilot belongs in main.
+- CANDIDATE_FOR_SKILLSMACHINE only after repeatable finding appears across pilots.
+
+SCORECARD_TEMPLATE:
+AGENT_OR_BRANCH....: <name>
+FUNCTIONAL.........: <0-25>
+TEST_VALIDATION....: <0-15>
+CLI_CONTRACT.......: <0-10>
+STRUCTURE..........: <0-15>
+BOUNDARY...........: <0-10>
+DETERMINISM........: <0-10>
+EVIDENCE...........: <0-10>
+FRICTION...........: <0-5>
+TOTAL..............: <0-100>
+STATUS.............: PASS | PARTIAL | FAIL | BLOCKED
+DECISION...........: ACCEPT_BASELINE | HYBRIDIZE | CONTINUE | REJECT | DEFER_MERGE
+RATIONALE..........: <short evidence-based rationale>
+
+NS-PILOT-001_REFERENCE:
+CODEX..............: 70/100 | deterministic JSON path strong; monolithic structure weaker.
+CLAUDE.............: 75/100 | modular structure strong; original CLI help/import weakness.
+HYBRID.............: 100/100 | accepted baseline after CLI contract correction and full test pass.
+
+NEXT_USE:
+Apply this rubric in NS-PILOT-002 before accepting, hybridizing, merging, or closing the pilot.
