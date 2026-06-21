@@ -23,3 +23,73 @@ Esto implementa Governance + Integrated Change Control + Configuration Managemen
 CHANGELOG..........:
 2026-04-30, v0.1-DRAFT
 - Creación inicial.
+
+==========
+MB-GRC-033B_USECASE_FIRST_FOCUS_GATE
+==========
+
+DATE..............: 2026-06-16
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+PURPOSE...........:
+Evitar que una IA que trabaja sobre PS.SkillsMachine derive prematuramente hacia desarrollo técnico,
+scripts, ramas, commits, RADAR, Nightshift u otra ejecución táctica sin confirmar primero el caso de uso.
+
+PRINCIPIO_RECTOR..:
+PS.SkillsMachine se usa primero por caso de uso, no por navegación libre del repositorio.
+
+CASOS_DE_USO_BASE.:
+01.NEW_PROJECT................: iniciar un proyecto nuevo.
+02.SESSION_CLOSE..............: cerrar sesión, continuidad y aprendizaje.
+03.SESSION_CONTINUE...........: continuar un proyecto ya iniciado.
+04.REPOSITORY_STRUCTURE_REPAIR: adaptar/reparar un proyecto que no nació bajo criterio SkillsMachine.
+
+REGLA_DE_CAPAS....:
+- HUMAN explica y gobierna la comprensión humana prioritaria.
+- SkillsLake, GRCLake y 00.CATALOG contienen fuentes, capacidades, gobierno, registros y reglas técnicas.
+- SyS contiene tooling, continuidad, validación y evidencia operacional.
+- 90.USECASE contiene outputs generados o compilados para facilitar upload del usuario a una IA.
+- 90.USECASE no es canon primario y puede regenerarse.
+
+FOCUS_GATE........:
+Antes de proponer desarrollo, scripts, patches, ramas, commits, refactors o cambios de arquitectura,
+la IA debe declarar:
+
+1. USECASE_DETECTED:
+   Qué caso de uso aplica o si falta información para elegirlo.
+
+2. USER_GOAL:
+   Qué quiere lograr el usuario en esta interacción.
+
+3. CONFIRMED_CONTEXT:
+   Qué contexto está confirmado por los archivos subidos o por instrucción expresa del usuario.
+
+4. MISSING_CONTEXT:
+   Qué contexto falta y por qué es necesario.
+
+5. RECOMMENDED_UPLOADS:
+   Qué Skills, GRC, HUMAN, CATALOG, BATON, RADAR o paths exactos pide subir, si corresponde.
+
+6. FOCUS_BOUNDARY:
+   Qué queda fuera de foco en esta sesión.
+
+7. NEXT_ACTION:
+   Siguiente acción mínima, reversible y alineada al usecase.
+
+ANTIPATRONES......:
+- Tratar 90.USECASE como canon primario.
+- Crear documentación rectora dentro de 90.USECASE.
+- Saltar a desarrollo técnico antes de identificar el usecase.
+- Pedir todo el repositorio por costumbre.
+- Usar RADAR FULL como primera respuesta por defecto.
+- Confundir laboratorio técnico con propósito central de PS.SkillsMachine.
+- Crear microSkills o microGRC sin pasar por backlog y aprobación humana.
+- Editar outputs generados en vez de las fuentes que los producen.
+
+DONE_WHEN.........:
+Una IA en blanco, al recibir un paquete de usecase, debe responder primero con encuadre de usecase,
+suficiencia de contexto y uploads adicionales requeridos, antes de ejecutar trabajo técnico.
+
+==========
+FIN_MB-GRC-033B_USECASE_FIRST_FOCUS_GATE
+==========

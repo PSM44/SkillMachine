@@ -236,3 +236,66 @@ El compositor debe poder producir:
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+==========
+MB-GRC-033C_USECASE_FIRST_ROUTING
+==========
+
+DATE..............: 2026-06-16
+STATUS............: ACTIVE
+LAYER.............: CONTEXT_COMPOSER_RULE
+PURPOSE...........:
+Force SkillsMachine conversations to route through the applicable usecase before selecting
+extra context, proposing technical execution, writing scripts, creating branches, or modifying files.
+
+RULE..............:
+When the user is working with PS.SkillsMachine, the assistant must identify the applicable
+base usecase before doing technical work.
+
+BASE_USECASES.....:
+01.NEW_PROJECT................: new project bootstrap.
+02.SESSION_CLOSE..............: session close, continuity, and learning review.
+03.SESSION_CONTINUE...........: continue an existing project/session.
+04.REPOSITORY_STRUCTURE_REPAIR: adapt or repair an existing non-SkillsMachine project.
+
+REQUIRED_INITIAL_FRAME:
+Before proposing execution, the assistant must state:
+
+1. USECASE_DETECTED
+2. USER_GOAL
+3. CONFIRMED_CONTEXT
+4. MISSING_CONTEXT
+5. RECOMMENDED_UPLOADS
+6. FOCUS_BOUNDARY
+7. NEXT_ACTION
+
+ROUTING_ORDER......:
+1. HUMAN
+2. 90.USECASE package supplied by the user
+3. 00.CATALOG routing/composer rules
+4. GRCLake policies and controls
+5. SkillsLake skills
+6. SyS tools, BATON, WHOAMI, RADAR, logs, and execution artifacts
+
+OUTPUT_PACKAGE_RULE:
+90.USECASE is an upload/output package layer. It is not primary canon.
+If a usecase package needs improvement, patch the canonical source or registry and rebuild the package.
+
+DELTA_CONTEXT_RULE:
+Do not ask for the full repository by default.
+If context is insufficient, request exact paths from HUMAN, SkillsLake, GRCLake, 00.CATALOG, SyS, BATON, WHOAMI, RADAR, or project files.
+
+ANTI_DRIFT_RULES:
+- Do not jump to Nightshift, RADAR, scripts, branches, commits, or patches before confirming usecase fit.
+- Do not treat generated usecase bundles as source of truth.
+- Do not create new Skills/GRC automatically.
+- Register candidates in backlog before creating canon.
+- Prefer patching existing rector artifacts over creating microSkills or microGRC.
+
+DONE_WHEN.........:
+The assistant can explain why a requested action belongs to a specific usecase and can name the minimum
+additional context required before acting.
+
+==========
+FIN_MB-GRC-033C_USECASE_FIRST_ROUTING
+==========

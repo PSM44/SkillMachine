@@ -128,3 +128,63 @@ SESSION_LEARNING_REVIEW:
 ==========
 FIN_DEL_DOCUMENTO
 ==========
+
+==========
+MB-GRC-033D_FOCUS_DRIFT_LEARNING_SIGNAL
+==========
+
+DATE..............: 2026-06-16
+STATUS............: ACTIVE
+LAYER.............: SESSION_LEARNING_REVIEW
+PURPOSE...........:
+Detectar como aprendizaje formal cuando la IA pierde el foco operativo de PS.SkillsMachine,
+omite el usecase aplicable, trata outputs generados como canon, o salta a desarrollo técnico
+sin validar primero el encuadre de sesión.
+
+SIGNAL............:
+Registrar candidato de mejora cuando ocurra cualquiera de estas señales:
+
+- El humano corrige que PS.SkillsMachine se usa por 90.USECASE.
+- El humano recuerda que HUMAN es la capa de lectura prioritaria humana.
+- La IA propone crear documentación rectora dentro de 90.USECASE.
+- La IA trata 90.USECASE como canon primario en vez de output generado/subible.
+- La IA salta a scripts, branches, commits, RADAR, Nightshift o desarrollo técnico sin declarar USECASE_DETECTED.
+- La IA pide todo el repositorio o RADAR FULL por costumbre, sin justificar necesidad.
+- La IA confunde un laboratorio técnico con el propósito central de SkillsMachine.
+- La IA propone crear microSkills o microGRC sin revisar artefactos existentes y backlog.
+
+REQUIRED_REVIEW_OUTPUT:
+Cuando se detecte focus drift, SESSION_LEARNING_REVIEW debe producir:
+
+1. FOCUS_DRIFT_DETECTED:
+   YES/NO.
+
+2. CORRECTED_BY_HUMAN:
+   Regla corregida por el humano.
+
+3. ROOT_CAUSE:
+   Falta de HUMAN, falta de Context Composer, prompt usecase incompleto,
+   mal uso de output generado, o ejecución técnica prematura.
+
+4. PATCH_TARGET:
+   HUMAN, 00.CATALOG, SkillsLake, GRCLake, usecase prompt source, registry, BUILD,
+   .gitignore, Temp policy, o backlog.
+
+5. BACKLOG_OR_MINIBATTLE:
+   Registrar candidato o proponer minibattle explícita.
+
+6. NO_CANON_AUTO:
+   Confirmar que no se crea ni modifica canon sin instrucción humana o minibattle aprobada.
+
+SESSION_CLOSE_RULE:
+Al cerrar sesión, si hubo focus drift corregido por el humano,
+debe evaluarse explícitamente si corresponde patch a HUMAN, Context Composer,
+Session Learning, prompts de usecase o políticas de outputs generados.
+
+DONE_WHEN.........:
+La revisión de aprendizaje captura el desvío de foco como insumo de mejora estructural,
+sin crear canon automáticamente y sin convertir cada incidente en microSkill.
+
+==========
+FIN_MB-GRC-033D_FOCUS_DRIFT_LEARNING_SIGNAL
+==========
