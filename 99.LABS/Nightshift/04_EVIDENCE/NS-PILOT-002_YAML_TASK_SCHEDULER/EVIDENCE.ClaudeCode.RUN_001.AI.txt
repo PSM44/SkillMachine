@@ -7,7 +7,7 @@ AGENT_ID..........: CLAUDE_CODE (claude-sonnet-4-6)
 RUN_NUMBER........: 001
 DATE_RUN..........: 2026-06-21
 BRANCH............: lab/ns-pilot-002-claude
-COMMIT_HASH.......: bf084bf (pre-final-amend; final hash may differ by one amend cycle)
+COMMIT_HASH.......: e19ade6 NS-PILOT-002_CLAUDE_RUN_001_YAML_TASK_SCHEDULER
 SPEC_VERSION......: PILOT.SPEC.AI.txt v1.0
 BRIEF_VERSION.....: AGENT_BRIEF.ClaudeCode.AI.txt v1.1
 
@@ -249,7 +249,7 @@ EXIT_CODE_1_TEST..: PASS (exit 1 for file not found)
 EXIT_CODE_2_TEST..: PASS (exit 2 for invalid YAML)
 REQUIREMENTS_TXT..: PRESENT_WITH_VERSION (pyyaml>=6.0)
 SCOPE_ISSUES......: NONE
-WORKING_TREE......: CLEAN (post-commit)
+WORKING_TREE......: CLEAN
 
 FINAL_STATUS......: COMPLETE
 
