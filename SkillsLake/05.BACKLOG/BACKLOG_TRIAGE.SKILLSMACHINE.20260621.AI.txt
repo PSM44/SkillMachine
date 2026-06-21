@@ -1,0 +1,359 @@
+==========
+BACKLOG TRIAGE — SKILLSMACHINE
+==========
+
+ID................: BACKLOG_TRIAGE.SKILLSMACHINE.20260621
+MB_ID.............: MB-GRC-036D_BACKLOG_TRIAGE_READONLY
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD_AT_TRIAGE....: 9de6b28 20260621_MB-GRC-036B_create_project_continuity_close_structure
+STATUS............: TRIAGE_COMPLETE — READONLY — NO EXECUTION
+
+==========
+01.00 PROPÓSITO
+==========
+
+Consolidar y clasificar todo el backlog y deuda técnica abierta de SkillsMachine
+en un solo triage priorizado para la próxima sesión de trabajo.
+
+Fuentes consultadas:
+- SyS\00.0_BATON_SKILLMACHINE.txt
+- SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt
+- 99.LABS\Nightshift\08_BACKLOG\BACKLOG.NIGHTSHIFT.ACTIVE.txt
+- 99.LABS\Nightshift\05_REPORTS\SESSION_CLOSE.AFTER_NS_PILOT_001.20260621.AI.txt
+- SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt
+
+==========
+02.00 CLASIFICACIÓN GLOBAL
+==========
+
+LEYENDA:
+[P0] Crítico — bloquea o degrada continuidad operativa.
+[P1] Importante — avanza metodología o reduce deuda técnica relevante.
+[P2] Deseable — mejora sin urgencia.
+[AG] Ejecutable por agente sin consulta humana.
+[HD] Requiere decisión humana antes de ejecutar.
+[RK] Riesgoso — no ejecutar sin plan detallado y aprobación.
+[NS] Candidato a Nightshift (piloto de agente).
+[SK] Candidato a skill futuro.
+
+==========
+03.00 TRIAGE POR ÍTEM
+==========
+
+----------
+ITEM_001
+----------
+MB_ID.............: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+TIPO..............: PLANNING_MB
+PRIORIDAD.........: P0
+ESTADO............: EJECUTADO EN ESTE RUN (2026-06-21)
+DESCRIPCIÓN.......: Diseño read-only de NS-PILOT-002. Archivo creado.
+CLASIFICACIÓN.....: AG (ya ejecutado)
+NEXT..............: Aprobación humana para proceder a scaffold.
+
+----------
+ITEM_002
+----------
+MB_ID.............: MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD
+TIPO..............: IMPLEMENTATION_MB
+PRIORIDAD.........: P0
+ESTADO............: OPEN — pendiente aprobación de diseño NS-PILOT-002
+DESCRIPCIÓN.......: Crear carpetas, spec, briefs y sample YAML para NS-PILOT-002.
+CLASIFICACIÓN.....: HD (requiere aprobación humana de ITEM_001 primero)
+BLOQUEADO_POR.....: Aprobación de NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt
+NEXT..............: Esperar decisión humana sobre diseño.
+
+----------
+ITEM_003
+----------
+MB_ID.............: MB-GRC-036C1_CREATE_AI_READING_FILE_LATEST
+TIPO..............: IMPLEMENTATION_MB
+PRIORIDAD.........: P0
+ESTADO............: OPEN — diseño completado en ITEM_003 de este run
+DESCRIPCIÓN.......: Crear SyS\PROJECT_CONTINUITY\AI_READING_FILE.LATEST.txt.
+CLASIFICACIÓN.....: AG — bajo riesgo, archivo nuevo de continuidad
+BLOQUEADO_POR.....: NINGUNO — puede ejecutarse en próxima sesión
+NEXT..............: Ejecutar en próxima sesión tras validación de este triage.
+ESTIMADO..........: 1 MB rápido (< 30 min).
+
+----------
+ITEM_004
+----------
+MB_ID.............: MB-GRC-036F_UPDATE_PROJECT_CONTINUITY_HEAD
+TIPO..............: CONTINUITY_MB
+PRIORIDAD.........: P0
+ESTADO............: EJECUTADO EN ESTE RUN (como parte del commit final)
+DESCRIPCIÓN.......: PROJECT_CONTINUITY.LATEST.txt y PROJECT_CLOSE.LATEST.txt tenían HEAD
+                    stale (af6514a) vs HEAD real (9de6b28). Corregido en este batch.
+CLASIFICACIÓN.....: AG (ya ejecutado)
+
+----------
+ITEM_005
+----------
+MB_ID.............: MB-GRC-036E_LINE_ENDING_WARNINGS_READONLY
+TIPO..............: PLANNING_MB
+PRIORIDAD.........: P1
+ESTADO............: EJECUTADO EN ESTE RUN (2026-06-21)
+DESCRIPCIÓN.......: Triage de line endings CRLF/LF. Archivo creado.
+CLASIFICACIÓN.....: AG (ya ejecutado)
+NEXT..............: Ver recomendación en LINE_ENDINGS.TRIAGE.20260621.AI.txt.
+
+----------
+ITEM_006
+----------
+MB_ID.............: MB-GRC-025C-2_ROUTING_BOUNDARY_PATCH
+TIPO..............: DOCUMENTATION_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Patch de frontera entre 05.SKILL.ROUTING_POLICY y 27.SKILL.MODEL_ROUTING_POLICY.
+                    Dictamen previo: duplicidad evolutiva probable; no merge inmediato.
+                    Propuesta: agregar sección BOUNDARY_WITH a cada skill.
+CLASIFICACIÓN.....: AG — solo modifica documentación de skills existentes
+RIESGO............: BAJO — no modifica comportamiento, solo documenta frontera
+NEXT..............: Puede ejecutarse sin decisión humana previa.
+ESTIMADO..........: 1 MB mediano.
+
+----------
+ITEM_007
+----------
+MB_ID.............: MB-GRC-025D_MANIFEST_REGISTRY_BOUNDARY_PATCH
+TIPO..............: DOCUMENTATION_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Clarificar frontera entre SKILL.MANIFEST.PATH_SEMANTICS y SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.
+CLASIFICACIÓN.....: AG — solo documenta frontera entre skills
+RIESGO............: BAJO
+NEXT..............: Puede ejecutarse después de ITEM_006.
+
+----------
+ITEM_008
+----------
+MB_ID.............: MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+TIPO..............: TEST_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Validar que un agente en blanco puede operar con 90.USECASE/03.SESSION_CONTINUE
+                    sin subir repo completo.
+CLASIFICACIÓN.....: NS — candidato Nightshift; requiere contexto de agente-en-blanco
+RIESGO............: BAJO (read-only test)
+BLOQUEADO_POR.....: Ninguno técnico; requiere sesión de agente-en-blanco.
+NEXT..............: Ejecutar manualmente o delegar a Nightshift en una sesión.
+
+----------
+ITEM_009
+----------
+MB_ID.............: MB-GRC-026K_ALIGN_MANIFEST_FOLDER_PACKAGE_MODEL
+TIPO..............: GOVERNANCE_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Alinear USECASE.MANIFEST.json con el modelo real de folder-upload package.
+                    delivery_files no representa el package completo.
+CLASIFICACIÓN.....: HD — modifica BUILD.ps1 y manifests generados; requiere revisión
+RIESGO............: MEDIO — toca generadores de 90.USECASE
+NEXT..............: Diseñar primero como READONLY antes de ejecutar.
+
+----------
+ITEM_010
+----------
+MB_ID.............: MB-GRC-026L_REPLACE_BLANK_IA_LANGUAGE
+TIPO..............: DOCTRINE_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Reemplazar "IA en blanco" con semántica de context sufficiency/currentness.
+                    Afecta prompts de usecases y docs internos.
+CLASIFICACIÓN.....: AG — solo modifica texto de prompts/docs
+RIESGO............: BAJO
+NEXT..............: Puede ejecutarse en próxima sesión.
+ESTIMADO..........: 1 MB quirúrgico.
+
+----------
+ITEM_011
+----------
+MB_ID.............: MB-GRC-026M_GITIGNORE_RADAR_SOURCE_SPLIT
+TIPO..............: TOOLING_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Evitar force-add behavior para RADAR.ps1 mientras outputs siguen ignorados.
+CLASIFICACIÓN.....: HD — modifica .gitignore o .gitattributes; requiere revisión
+RIESGO............: MEDIO
+NEXT..............: Evaluar en triage de line endings; ver ITEM_005.
+
+----------
+ITEM_012
+----------
+MB_ID.............: MB-GRC-026N_LINE_ENDINGS_POLICY_HARDENING
+TIPO..............: HYGIENE_MB
+PRIORIDAD.........: P2
+ESTADO............: OPEN — ver recomendación en LINE_ENDINGS.TRIAGE.20260621.AI.txt
+DESCRIPCIÓN.......: Reducir ruido CRLF/LF en commits y warnings.
+CLASIFICACIÓN.....: HD — decisión política sobre normalización
+RIESGO............: MEDIO si se hace masivo; BAJO si se hace quirúrgico y controlado
+
+----------
+ITEM_013
+----------
+MB_ID.............: MB-GRC-026O_USECASE_PACKAGE_SIZE_AUDIT
+TIPO..............: AUDIT_MB
+PRIORIDAD.........: P2
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Auditar tamaño, duplicación y divergencia entre folders de 90.USECASE.
+CLASIFICACIÓN.....: AG — read-only audit
+RIESGO............: NINGUNO (solo lectura)
+NEXT..............: Ejecutar cuando se tenga tiempo; no urgente.
+
+----------
+ITEM_014
+----------
+MB_ID.............: MB-GRC-027_TRANSACTION_GUARD_NEGATIVE_TEST
+TIPO..............: TEST_MB
+PRIORIDAD.........: P2
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Probar que BUILD.ps1 rollback funciona en falla real.
+CLASIFICACIÓN.....: HD — requiere inducir falla controlada; riesgo de working tree dirty
+RIESGO............: ALTO sin plan; BAJO con plan detallado y backup previo
+NEXT..............: Diseñar primero (READONLY), luego proponer a humano.
+
+----------
+ITEM_015
+----------
+MB_ID.............: MB-GRC-025E_SEMANTIC_DUPLICATE_VALIDATOR
+TIPO..............: TOOLING_MB
+PRIORIDAD.........: P2
+ESTADO............: OPEN
+DESCRIPCIÓN.......: Validator documental semiautomático para detectar duplicidad Skill/GRC.
+CLASIFICACIÓN.....: SK — candidato a skill futuro
+RIESGO............: BAJO (herramienta nueva, no modifica existentes)
+NEXT..............: Después de ITEM_006 y ITEM_007.
+
+----------
+ITEM_016
+----------
+MB_ID.............: MB-NS-003C_VERIFY_RUBRICA_NS_PILOT_002
+TIPO..............: PLANNING_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN — recomendado antes de ejecutar NS-PILOT-002
+DESCRIPCIÓN.......: Revisar rubrica de scoring contra NS-PILOT-002 task YAML.
+CLASIFICACIÓN.....: AG — solo lectura y análisis
+RIESGO............: NINGUNO
+NEXT..............: Ejecutar después de aprobación de NS-PILOT-002 diseño.
+
+----------
+ITEM_017
+----------
+MB_ID.............: MB-GRC-036C2_GENERATOR_SCRIPT_AI_READING_FILE
+TIPO..............: TOOLING_MB
+PRIORIDAD.........: P2
+ESTADO............: DIFERIDO — esperar que archivo manual sea útil por >= 2 sesiones
+DESCRIPCIÓN.......: Script PowerShell para regenerar AI_READING_FILE.LATEST.txt automáticamente.
+CLASIFICACIÓN.....: SK — candidato a skill/tooling
+RIESGO............: MEDIO (modifica tooling SyS)
+NEXT..............: Diferido.
+
+----------
+ITEM_018
+----------
+MB_ID.............: WHOAMI_REFRESH_SKILLSMACHINE
+TIPO..............: CONTINUITY_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN — WHOAMI actual llega hasta MB-GRC-036B pero el texto principal
+                    sigue referenciando estado de 2026-05-03.
+DESCRIPCIÓN.......: Actualizar sección principal de SyS\01_WHOAMI_SKILLMACHINE.txt para
+                    reflejar el estado real post-NS-PILOT-001 y post-MB-GRC-036B.
+CLASIFICACIÓN.....: AG — solo modifica documento de continuidad
+RIESGO............: BAJO
+NEXT..............: Puede hacerse en próxima sesión junto con AI_READING_FILE.LATEST.txt.
+
+----------
+ITEM_019
+----------
+MB_ID.............: BATON_REFRESH_SKILLSMACHINE
+TIPO..............: CONTINUITY_MB
+PRIORIDAD.........: P1
+ESTADO............: OPEN — BATON tiene entradas acumulativas hasta MB-GRC-036B pero la
+                    sección principal (00.20, 01.00, etc.) sigue desactualizada desde 2026-05-03.
+DESCRIPCIÓN.......: Actualizar secciones estructurales de SyS\00.0_BATON_SKILLMACHINE.txt
+                    para reflejar estado real: lab branch activa, Nightshift integrado,
+                    PROJECT_CONTINUITY y PROJECT_CLOSE existentes.
+CLASIFICACIÓN.....: HD — BATON es archivo de autoridad; cambios estructurales requieren
+                    revisión y aprobación humana implícita (commit supervisado).
+RIESGO............: BAJO si es solo actualización de estado; MEDIO si se reescribe sección completa.
+NEXT..............: Proponer estructura nueva antes de ejecutar. Puede incluirse en ITEM_018.
+
+==========
+04.00 RESUMEN EJECUTIVO DE PRIORIDADES
+==========
+
+P0 — EJECUTAR INMEDIATAMENTE O EN PRÓXIMA SESIÓN:
+| ITEM | MB_ID | Descripción | Clasificación |
+|------|-------|-------------|---------------|
+| 001 | MB-NS-003A | Diseño NS-PILOT-002 | EJECUTADO |
+| 004 | MB-GRC-036F | Update HEAD continuity files | EJECUTADO |
+| 005 | MB-GRC-036E | Triage line endings | EJECUTADO |
+| 002 | MB-NS-003B | Scaffold NS-PILOT-002 | HD — espera aprobación diseño |
+| 003 | MB-GRC-036C1 | Crear AI_READING_FILE.LATEST.txt | AG — próxima sesión |
+
+P1 — PRÓXIMAS 2-3 SESIONES:
+| ITEM | MB_ID | Descripción | Clasificación |
+|------|-------|-------------|---------------|
+| 016 | MB-NS-003C | Verificar rubrica NS-PILOT-002 | AG |
+| 006 | MB-GRC-025C-2 | Routing boundary patch | AG |
+| 007 | MB-GRC-025D | Manifest/registry boundary | AG |
+| 010 | MB-GRC-026L | Reemplazar "IA en blanco" | AG |
+| 018 | WHOAMI_REFRESH | Actualizar sección principal WHOAMI | AG |
+| 019 | BATON_REFRESH | Actualizar secciones estructurales BATON | HD |
+| 008 | MB-GRC-026J | Usecase folder sufficiency test | NS |
+| 009 | MB-GRC-026K | Align manifest folder package model | HD |
+| 011 | MB-GRC-026M | Gitignore RADAR source split | HD |
+
+P2 — BACKLOG NO URGENTE:
+| ITEM | MB_ID | Descripción | Clasificación |
+|------|-------|-------------|---------------|
+| 012 | MB-GRC-026N | Line endings hardening | HD |
+| 013 | MB-GRC-026O | Usecase package size audit | AG |
+| 014 | MB-GRC-027 | Transaction guard negative test | HD+RK |
+| 015 | MB-GRC-025E | Semantic duplicate validator | SK |
+| 017 | MB-GRC-036C2 | Generator script AI reading file | SK — diferido |
+
+==========
+05.00 CANDIDATOS A NIGHTSHIFT
+==========
+
+NS_CANDIDATE_001:
+MB: MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST
+Descripción: Agente-en-blanco valida suficiencia de 90.USECASE/03.SESSION_CONTINUE.
+Ventaja Nightshift: tarea acotada, resultado binario (suficiente/no suficiente), trazable.
+
+NS_CANDIDATE_002:
+MB: MB-GRC-025E_SEMANTIC_DUPLICATE_VALIDATOR
+Descripción: Agente construye script de validación documental semiautomático.
+Ventaja Nightshift: tarea técnica acotada, output medible (script que corre o no).
+Prerrequisito: MB-GRC-025C-2 y MB-GRC-025D completados primero.
+
+==========
+06.00 CANDIDATOS A SKILL FUTURO
+==========
+
+SK_CANDIDATE_001:
+Idea: Skill de triage de backlog estructurado (este documento como template).
+Dominio: SESSION_MANAGEMENT / GRC.
+Acción: Registrar en SKILL_GRC.CANDIDATES.ACTIVE.txt en próxima sesión.
+
+SK_CANDIDATE_002:
+Idea: Skill de AI_READING_FILE generation (procedimiento de generación manual).
+Dominio: SESSION_CONTINUE / CONTINUITY.
+Acción: Crear tras ITEM_003 (AI_READING_FILE.LATEST.txt) sea útil por >= 2 sesiones.
+
+==========
+07.00 DECISIONES HUMANAS REQUERIDAS
+==========
+
+HD_001: Aprobar NS-PILOT-002 diseño (ITEM_002).
+HD_002: Aprobar actualización estructural de BATON (ITEM_019).
+HD_003: Decidir política de normalización EOL (ITEM_012).
+HD_004: Aprobar manifest alignment con folder package model (ITEM_009).
+HD_005: Aprobar gitignore RADAR source split (ITEM_011).
+
+==========
+FIN_BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt
+==========

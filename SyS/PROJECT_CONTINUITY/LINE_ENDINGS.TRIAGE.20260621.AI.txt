@@ -1,0 +1,161 @@
+==========
+LINE ENDINGS TRIAGE — SKILLSMACHINE
+==========
+
+ID................: LINE_ENDINGS.TRIAGE.20260621
+MB_ID.............: MB-GRC-036E_LINE_ENDING_WARNINGS_READONLY
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD_AT_TRIAGE....: 9de6b28 20260621_MB-GRC-036B_create_project_continuity_close_structure
+STATUS............: ANALYSIS_COMPLETE — NO CHANGES APPLIED
+
+==========
+01.00 ESTADO ACTUAL DE .gitattributes
+==========
+
+ARCHIVO: .gitattributes
+RUTA: C:\01. GitHub\Skills\.gitattributes
+ÚLTIMA MODIFICACIÓN: 2026-04-30T20:11:08 (según radar.index.txt)
+
+POLÍTICA ACTUAL:
+- * text=auto                  → Git normaliza internamente a LF por defecto.
+- *.ps1 text eol=crlf          → PowerShell scripts: CRLF en checkout (Windows-first).
+- *.txt text eol=crlf          → Archivos .txt: CRLF en checkout (Windows-first).
+- *.md  text eol=lf            → Markdown: LF en checkout (cross-platform).
+- *.json text eol=lf           → JSON: LF en checkout.
+- *.yml / *.yaml text eol=lf   → YAML: LF en checkout.
+- *.xml / *.csv text eol=lf    → XML/CSV: LF.
+- *.sh text eol=lf             → Shell scripts: LF.
+- Binarios: .png, .jpg, .pdf, .zip, etc. marcados como binary (sin normalización).
+
+EVALUACIÓN:
+La política en .gitattributes es coherente y explícita.
+No hay omisiones obvias para los tipos de archivo del proyecto.
+El .gitattributes fue creado/modificado en 2026-04-30 y no ha cambiado desde entonces.
+
+==========
+02.00 HISTORIAL CONOCIDO DE WARNINGS EOL
+==========
+
+MB-GRC-023A (2026-05-29):
+- Diagnóstico: USECASE.MANIFEST.json no era idempotente, incluía GENERATED_AT y CRLF/LF diff.
+- Root cause real: New-BundleFile reescribía si solo cambiaba GENERATED_AT o EOL.
+- Resolución: Fix en MB-GRC-023B; build doble limpio confirmado.
+
+MB-GRC-024C (2026-05-29):
+- Diagnóstico específico de CRLF/LF: no cambiar .gitattributes ni .editorconfig.
+- Decisión: mantener política existente.
+- Configuración local WSL2: core.filemode=false + core.autocrlf=true.
+- No se normalizó masivamente; drift histórico de EOL en worktree aceptado.
+
+MB-GRC-026N (registrado como backlog):
+- Objetivo: reducir ruido LF/CRLF warning noise.
+- Estado: OPEN — diferido.
+
+Advertencias recientes en commits de esta rama:
+- No hay registro explícito de warnings LF/CRLF en los logs de OneShots para los MBs
+  de esta sesión (MB-GRC-036A/B). Los logs de OneShots existen pero no se leyeron
+  en detalle; no hay evidencia de warning activo.
+
+==========
+03.00 ANÁLISIS DE RIESGO ACTUAL
+==========
+
+RIESGO_REAL: BAJO
+
+Razones:
+1. .gitattributes está activo y es coherente.
+2. La decisión de MB-GRC-024C fue explícita y documentada: no normalizar masivamente.
+3. Los warnings CRLF/LF son cosméticos en este entorno (Windows + WSL2 mixto).
+4. No hay evidencia de que los warnings estén causando commits incorrectos o diff contaminado.
+5. Build doble limpio fue confirmado en MB-GRC-023B; BUILD.ps1 no introduce churn de EOL.
+
+RIESGO_POTENCIAL: MEDIO si se introducen nuevos archivos .txt con LF en un checkout Windows.
+- El .gitattributes convertirá .txt a CRLF en checkout.
+- Si un script genera .txt con LF hardcoded, puede producir diff falso en el siguiente commit.
+- Archivos bajo PROJECT_CONTINUITY y PROJECT_CLOSE (nuevos en este HEAD) son .txt;
+  fueron creados en Windows bajo esta rama; deberían tener CRLF en checkout.
+
+==========
+04.00 ARCHIVOS NUEVOS EN ESTE HEAD (riesgo EOL relevante)
+==========
+
+Archivos creados en MB-GRC-036B (commit 9de6b28):
+- SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt  → .txt → CRLF esperado
+- SyS\PROJECT_CONTINUITY\README.PROJECT_CONTINUITY.txt  → .txt → CRLF esperado
+- SyS\PROJECT_CLOSE\PROJECT_CLOSE.LATEST.txt            → .txt → CRLF esperado
+- SyS\PROJECT_CLOSE\README.PROJECT_CLOSE.txt            → .txt → CRLF esperado
+
+Si estos archivos fueron creados con PowerShell en Windows (probable dado el commit),
+sus EOLs deberían ser CRLF, consistente con la política .gitattributes.
+Si fueron creados por Claude Code (herramienta IA sobre Windows), pueden ser LF.
+
+Archivos creados en ESTE RUN (pendientes de commit):
+- 99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt  → .txt → CRLF esperado
+- SyS\PROJECT_CONTINUITY\AI_READING_FILE.DESIGN.20260621.AI.txt              → .txt → CRLF esperado
+- SkillsLake\05.BACKLOG\BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt         → .txt → CRLF esperado
+- SyS\PROJECT_CONTINUITY\LINE_ENDINGS.TRIAGE.20260621.AI.txt                 → este archivo → .txt → CRLF esperado
+- SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt                       → modificado → .txt → CRLF esperado
+- SyS\PROJECT_CLOSE\PROJECT_CLOSE.LATEST.txt                                 → modificado → .txt → CRLF esperado
+
+Nota: Claude Code escribe con LF por defecto. Git convertirá a CRLF en checkout Windows
+según .gitattributes. El commit puede mostrar "warning: LF will be replaced by CRLF" si
+el entorno local no tiene core.autocrlf=true. Esto es esperado y no es un error.
+
+==========
+05.00 RECOMENDACIÓN
+==========
+
+RECOMENDACIÓN_PRINCIPAL:
+NO normalizar masivamente. Mantener política actual de .gitattributes.
+
+RECOMENDACIÓN_OPERATIVA:
+Si aparece "warning: LF will be replaced by CRLF" en el commit de este run:
+- Es esperado y correcto dado que Claude Code escribe en LF y .gitattributes convierte .txt a CRLF.
+- No indica error ni corrupción.
+- No es necesario corregir antes del commit.
+
+RECOMENDACIÓN_FUTURA (MB-GRC-026N):
+Si los warnings se vuelven frecuentes y ruidosos en git log, considerar agregar a .gitattributes:
+    *.txt text eol=lf
+Esto normalizaría .txt a LF en lugar de CRLF, eliminando las conversiones para archivos
+de texto plano creados por herramientas IA.
+RIESGO: archivos .ps1-adjacent que dependen de CRLF para ejecución no se verían afectados
+(*.ps1 sigue siendo eol=crlf explícitamente).
+Esta decisión debe ser humana (HD_003 en BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt).
+
+==========
+06.00 ¿CONVIENE NORMALIZAR?
+==========
+
+NORMALIZAR_MASIVA: NO
+- Ya fue decidido en MB-GRC-024C: no normalizar masivamente.
+- Riesgo de churn innecesario en git blame y diff history.
+- El drift histórico de EOL en worktree es aceptado.
+
+NORMALIZAR_QUIRÚRGICA (nueva infraestructura):
+- Para archivos nuevos creados a partir de ahora: no es necesario intervenir;
+  .gitattributes los manejará correctamente.
+- Si se detecta un archivo específico causando diff falso por EOL: normalizar solo ese archivo
+  en un MB separado con staging explícito.
+
+==========
+07.00 ¿DEBE SER MB SEPARADO?
+==========
+
+Este análisis es suficiente para tomar decisión en próxima sesión.
+
+MB-GRC-026N (normalización EOL hardening) DEBE SEGUIR SIENDO MB SEPARADO si:
+- Se decide cambiar política .gitattributes para .txt a LF.
+- Se decide normalizar archivos específicos del worktree.
+- Se necesita agregar .editorconfig con reglas EOL adicionales.
+
+NO requiere MB separado si:
+- Solo se acepta el estado actual y los warnings ocasionales.
+- No se detectan diff falsos causados por EOL.
+
+RECOMENDACIÓN_INMEDIATA: diferir MB-GRC-026N como P2. No tiene urgencia operativa hoy.
+
+==========
+FIN_LINE_ENDINGS.TRIAGE.20260621.AI.txt
+==========

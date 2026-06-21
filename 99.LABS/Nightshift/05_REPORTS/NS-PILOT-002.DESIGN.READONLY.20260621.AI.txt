@@ -1,0 +1,322 @@
+==========
+NS-PILOT-002 DESIGN — READONLY
+==========
+
+ID................: NS-PILOT-002.DESIGN.READONLY.20260621
+MB_ID.............: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD_AT_DESIGN....: 9de6b28 20260621_MB-GRC-036B_create_project_continuity_close_structure
+STATUS............: DESIGN_ONLY — NO EXECUTION YET
+SCOPE.............: LAB_ONLY inside 99.LABS/Nightshift
+
+==========
+01.00 PROPÓSITO
+==========
+
+Diseñar el segundo piloto Nightshift (NS-PILOT-002) de forma controlada antes de
+ejecutar ningún agente.
+
+NS-PILOT-001 estableció:
+- Infraestructura de comparación Codex vs Claude Code.
+- Baseline híbrido aceptado.
+- Rubrica de scoring reutilizable en 99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt.
+
+NS-PILOT-002 debe:
+- Repetir el ciclo con un task diferente.
+- Validar repetibilidad de la metodología.
+- Generar nueva evidencia comparativa.
+- Ser candidato a skill global solo tras repetibilidad demostrada.
+
+==========
+02.00 HIPÓTESIS
+==========
+
+H1 — REPETIBILIDAD:
+La metodología Nightshift (especificación -> agente A -> agente B -> scoring con rubrica)
+es repetible en un dominio distinto al de NS-PILOT-001.
+
+H2 — DIFERENCIACIÓN:
+Claude Code y Codex producirán diferencias observables en calidad de código,
+estructura de tests y manejo de errores para un task de procesamiento de datos YAML.
+
+H3 — RUBRICA:
+La rubrica de scoring creada en NS-PILOT-001 es suficiente para evaluar NS-PILOT-002
+sin modificación mayor.
+
+==========
+03.00 ALCANCE
+==========
+
+TASK SELECCIONADO: NS-PILOT-002_YAML_TASK_SCHEDULER
+
+Descripción:
+Construir un CLI Python que lea un archivo YAML con tareas (tasks) y produzca
+un reporte de texto formateado con filtrado y ordenamiento.
+
+Especificación funcional mínima:
+
+  Inputs:
+  - Archivo YAML con lista de tareas.
+  - Cada tarea tiene: title (str), priority (high/medium/low), due_date (YYYY-MM-DD), status (open/done/blocked).
+  - Flags CLI:
+      --input PATH          archivo YAML de entrada (obligatorio)
+      --filter-status STR   filtrar por status (opcional)
+      --sort-by FIELD       ordenar por priority o due_date (opcional, default: priority)
+      --output PATH         archivo de salida (opcional, default: stdout)
+
+  Outputs:
+  - Reporte de texto con tasks listadas en orden especificado.
+  - Línea de resumen al final: total tasks, open, done, blocked.
+  - Si el archivo de entrada no existe: error con exit code 1 y mensaje claro.
+  - Si el YAML es inválido: error con exit code 2 y mensaje claro.
+
+Estructura de código esperada:
+  src/
+    parser.py       — leer y validar YAML
+    scheduler.py    — filtrado y ordenamiento
+    report.py       — formateado de salida
+    cli.py          — entry point CLI
+  tests/
+    test_parser.py
+    test_scheduler.py
+    test_report.py
+    test_cli.py
+
+Criterio cuantitativo mínimo: >= 12 tests pasando.
+
+==========
+04.00 NO-ALCANCE
+==========
+
+- No base de datos ni persistencia.
+- No interfaz web ni API.
+- No async ni concurrencia.
+- No autenticación ni autorización.
+- No integración con calendarios externos.
+- No notificaciones ni alertas.
+- No deployment ni empaquetado pip.
+- No modificación del canon SkillsMachine durante el piloto.
+- No merge de resultados a main sin decisión humana explícita.
+- No ejecución de ningún agente hasta que este diseño sea aprobado por humano.
+
+==========
+05.00 CARPETAS DESTINO
+==========
+
+Scaffold (lab artifacts):
+  99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER\
+    PILOT.SPEC.AI.txt
+    AGENT_BRIEF.ClaudeCode.AI.txt
+    AGENT_BRIEF.Codex.AI.txt
+    TASKS.sample.yaml
+    src\.gitkeep
+    tests\.gitkeep
+    README.HUMAN.md
+
+Evidencia de runs:
+  99.LABS\Nightshift\04_EVIDENCE\NS-PILOT-002_YAML_TASK_SCHEDULER\
+    runs\.gitkeep
+    COMPARE_TEMPLATE.AI.txt
+    EVIDENCE_TEMPLATE.AI.txt
+
+Reportes finales:
+  99.LABS\Nightshift\05_REPORTS\
+    NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt    (este archivo)
+    NS-PILOT-002.COMPARISON.20260621.AI.txt         (por crear post-ejecución)
+    NS-PILOT-002.CLOSE.20260621.AI.txt              (por crear al cerrar piloto)
+
+==========
+06.00 INPUTS
+==========
+
+Por agente (idénticos para comparación justa):
+- PILOT.SPEC.AI.txt: especificación funcional completa.
+- AGENT_BRIEF.<AGENTE>.AI.txt: instrucciones operativas específicas por agente.
+- TASKS.sample.yaml: archivo de entrada de ejemplo para pruebas.
+
+Rubrica de scoring (preexistente):
+- 99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt
+
+==========
+07.00 OUTPUTS ESPERADOS
+==========
+
+Por agente:
+- Código fuente bajo src/ con los cuatro módulos.
+- Tests bajo tests/ con >= 12 tests.
+- Todos los tests pasando: pytest sin errores.
+- CLI funcional: python -m src.cli --input TASKS.sample.yaml produce output.
+- No archivos temporales sin trackear.
+- Working tree limpio post-run.
+
+Comparación:
+- NS-PILOT-002.COMPARISON.20260621.AI.txt con scores por rubrica y decisión.
+
+==========
+08.00 CRITERIOS DE ÉXITO
+==========
+
+PILOT_SUCCESS si:
+- Ambos agentes completan el task (código + tests que pasan).
+- La rubrica produce scores diferenciados o iguales (ambos son resultado válido).
+- El ciclo completo (spec -> run A -> run B -> score -> compare) es trazable.
+- No se contamina el canon SkillsMachine (sin cambios en main).
+- El resultado es candidato a decisión humana: promover hallazgos, descartar, o diferir.
+
+==========
+09.00 CRITERIOS DE FALLO
+==========
+
+PILOT_FAILED si:
+- Ningún agente produce código que corra (tests fallan con errores de sintaxis o import).
+- El scaffold se corrompe durante el run.
+- Se hace commit a main sin decisión humana.
+- El working tree queda dirty sin registro de causa.
+- Los outputs no son comparables por diferencia de spec interpretada.
+
+PILOT_PARTIAL si:
+- Un agente completa y el otro no.
+- Resultado válido: puede compararse calidad parcial.
+- Se registra como PARTIAL en la evidencia.
+
+==========
+10.00 LÍMITES PARA CLAUDE CODE DESKTOP
+==========
+
+- Trabaja en rama: lab/ns-pilot-002-claude (nueva, desde lab/ns-pilot-001-hybrid o desde main HEAD).
+- Solo crea/modifica archivos bajo:
+    99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER\
+- No modifica canon: SkillsLake, GRCLake, 90.USECASE, SyS, HUMAN.
+- No hace push a main.
+- No hace merge con otras ramas.
+- No borra evidencia de NS-PILOT-001.
+- Puede hacer commit a su rama lab.
+- Debe dejar working tree limpio al finalizar.
+- Debe reportar: tests run, tests passed, CLI smoke test result.
+
+==========
+11.00 LÍMITES PARA CODEX DESKTOP
+==========
+
+- Trabaja en rama: lab/ns-pilot-002-codex (nueva, paralela a Claude).
+- Solo crea/modifica archivos bajo:
+    99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER\
+- No modifica canon.
+- No hace push a main.
+- No hace merge con otras ramas.
+- No usa git add -A sin revisión.
+- Debe dejar working tree limpio.
+- Debe reportar: tests run, tests passed, CLI smoke test result.
+
+==========
+12.00 CÓMO SE COMPARARÁN RESULTADOS
+==========
+
+Mecanismo:
+1. Importar outputs de ambas ramas al comparador (merge read-only o diff).
+2. Aplicar NIGHTSHIFT.SCORING.RUBRIC.AI.txt punto a punto.
+3. Registrar scores en NS-PILOT-002.COMPARISON.20260621.AI.txt.
+4. Dictamen: Claude mejor / Codex mejor / Empate / Ninguno aceptable.
+5. Decisión humana: promover baseline, solicitar revisión o descartar.
+
+Dimensiones de la rubrica (reference):
+- Correctness: tests pasan, CLI funciona, outputs correctos.
+- Code structure: modularidad, separación de responsabilidades.
+- Error handling: exit codes correctos, mensajes claros.
+- Test quality: coverage, casos edge, independencia entre tests.
+- Cleanup: no artifacts temporales, working tree limpio.
+- Adherence to spec: cumplimiento exacto de CLI contract.
+
+==========
+13.00 VALIDACIÓN ESPERADA
+==========
+
+Antes de ejecutar agentes:
+- Este diseño debe ser aprobado por humano (HUMAN_DECISION_REQUIRED).
+- Scaffold debe ser creado (MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD).
+- Ramas de agente deben ser creadas limpias.
+
+Post-ejecución por agente:
+- pytest --tb=short debe reportar PASSED para todos los tests.
+- python -m src.cli --input TASKS.sample.yaml debe correr sin error.
+- git status --short debe mostrar working tree limpio.
+
+Post-comparación:
+- NS-PILOT-002.COMPARISON.20260621.AI.txt debe estar completo con scores.
+- Decisión de baseline debe estar documentada.
+
+==========
+14.00 RIESGOS
+==========
+
+R1 — SPEC AMBIGUA:
+El agent brief puede ser interpretado diferente por cada agente.
+Mitigación: PILOT.SPEC.AI.txt debe ser maximal en precisión; sin ambigüedad en CLI contract.
+
+R2 — YAML DEPENDENCY:
+pyyaml puede no estar instalado en el entorno.
+Mitigación: incluir requirements.txt en el scaffold con pyyaml>=6.0.
+
+R3 — BRANCH COLLISION:
+Ramas lab/ns-pilot-002-claude y lab/ns-pilot-002-codex no deben mezclarse.
+Mitigación: crear ramas desde un punto base limpio y aislado.
+
+R4 — RUBRICA INSUFICIENTE:
+La rubrica de NS-PILOT-001 puede no capturar diferencias relevantes de NS-PILOT-002.
+Mitigación: evaluar rubrica antes del run; si hay gap, proponer ajuste menor en MB previo.
+
+R5 — SCOPE CREEP:
+Agentes pueden agregar features no pedidos.
+Mitigación: AGENT_BRIEF debe decir explícitamente "implementar solo lo especificado".
+
+==========
+15.00 PRÓXIMOS MBs
+==========
+
+MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD
+- Crear estructura de carpetas, PILOT.SPEC.AI.txt, AGENT_BRIEF files, TASKS.sample.yaml.
+- Requerimiento: aprobación humana de este diseño.
+- Tipo: IMPLEMENTATION_MB
+
+MB-NS-003C_VERIFY_RUBRICA_NS_PILOT_002
+- Revisar NIGHTSHIFT.SCORING.RUBRIC.AI.txt contra NS-PILOT-002 task.
+- Proponer ajustes menores si aplica.
+- Tipo: PLANNING_MB / READONLY
+
+MB-NS-004A_CLAUDE_CODE_RUN_001_NS_PILOT_002
+- Ejecutar Claude Code en lab/ns-pilot-002-claude.
+- Requerimiento: scaffold creado y branch limpia.
+- Tipo: EXECUTION_MB (requiere decisión humana)
+
+MB-NS-004B_CODEX_RUN_001_NS_PILOT_002
+- Ejecutar Codex en lab/ns-pilot-002-codex.
+- Requerimiento: scaffold creado y branch limpia.
+- Tipo: EXECUTION_MB (requiere decisión humana)
+
+MB-NS-005A_COMPARE_NS_PILOT_002
+- Comparar outputs, aplicar rubrica, documentar resultado.
+- Tipo: ANALYSIS_MB
+
+==========
+16.00 HUMAN_DECISION_REQUIRED
+==========
+
+DECISION_001:
+- Aprobar o rechazar este diseño antes de crear scaffold.
+- Opciones:
+  A) Aprobar NS-PILOT-002 con task YAML_TASK_SCHEDULER tal como está.
+  B) Ajustar task (cambiar dominio, reducir scope, modificar CLI contract).
+  C) Diferir NS-PILOT-002 y trabajar otra deuda técnica primero.
+- Recomendación: OPCIÓN A. El task es bounded, distinto a NS-PILOT-001, y usa rubrica existente.
+
+DECISION_002:
+- ¿Rubrica existente es suficiente o necesita ajuste antes del run?
+- Opciones:
+  A) Usar rubrica as-is.
+  B) Leer rubrica y proponer patch menor (MB-NS-003C).
+- Recomendación: OPCIÓN B. Leer rubrica primero; es bajo costo y reduce riesgo de evaluación incompleta.
+
+==========
+FIN_NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt
+==========

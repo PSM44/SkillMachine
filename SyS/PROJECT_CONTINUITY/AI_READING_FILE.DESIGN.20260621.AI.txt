@@ -1,0 +1,274 @@
+==========
+AI READING FILE — DESIGN
+==========
+
+ID................: AI_READING_FILE.DESIGN.20260621
+MB_ID.............: MB-GRC-036C_AI_READING_FILE_DESIGN_READONLY
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD_AT_DESIGN....: 9de6b28 20260621_MB-GRC-036B_create_project_continuity_close_structure
+STATUS............: DESIGN_ONLY — NO FILE CREATED YET
+
+==========
+01.00 PROPÓSITO
+==========
+
+Diseñar un archivo consolidado de lectura IA para SkillsMachine que permita a un agente
+entrante (Claude Code, Codex, u otro) orientarse rápidamente al contexto operativo del
+proyecto sin leer decenas de archivos dispersos.
+
+Problema actual:
+- BATON: largo, acumulativo, histórico.
+- WHOAMI: orientado a humano, no denso en contexto IA.
+- RADAR: inventario técnico, no narrativo.
+- PROJECT_CONTINUITY.LATEST.txt: estado mínimo.
+- PROJECT_CLOSE.LATEST.txt: estado de cierre.
+- Ninguno de estos es suficiente solo para orientar a una IA en blanco en < 2 minutos.
+
+==========
+02.00 RUTA Y NOMBRE PROPUESTO
+==========
+
+RUTA_PROPUESTA: SyS\PROJECT_CONTINUITY\AI_READING_FILE.LATEST.txt
+
+RATIONALE:
+- Vive bajo SyS\PROJECT_CONTINUITY porque es continuidad SkillsMachine-dedicada.
+- No vive bajo 90.USECASE porque no es empaquetable genéricamente.
+- No vive bajo SkillsLake porque no es un Skill exportable.
+- El sufijo .LATEST.txt sigue convención de PROJECT_CONTINUITY.LATEST.txt y PROJECT_CLOSE.LATEST.txt.
+
+ALTERNATIVA DESCARTADA:
+- SyS\AI_READING_FILE.txt: demasiado alto en el árbol SyS; mezclaría con tooling.
+- 95.AI_MODULES\: ya contiene módulos de contexto por herramienta; no es de proyecto.
+- 90.USECASE\: es genérico/exportable; AI_READING_FILE es SkillsMachine-dedicado.
+
+==========
+03.00 PROPÓSITO DETALLADO DEL ARCHIVO
+==========
+
+El AI_READING_FILE.LATEST.txt debe responder en < 500 líneas:
+1. ¿Qué es este proyecto y su estado actual?
+2. ¿En qué branch estamos y cuál es el HEAD?
+3. ¿Cuál es la siguiente acción inmediata?
+4. ¿Qué no se debe hacer?
+5. ¿Cuáles son las reglas duras de operación?
+6. ¿Dónde están los archivos clave?
+7. ¿Qué hay pendiente en backlog?
+
+No debe incluir:
+- Historia completa de MBs anteriores (eso es BATON).
+- Inventario de todos los skills (eso es RADAR/MENU).
+- Changelog detallado (eso es BATON/WHOAMI).
+- Outputs de herramientas (eso es RADAR).
+
+==========
+04.00 INPUTS DEL ARCHIVO
+==========
+
+Fuentes que nutren el AI_READING_FILE.LATEST.txt:
+
+FUENTE_1: SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt
+- Aporta: branch, HEAD, next action, status expected.
+
+FUENTE_2: SyS\PROJECT_CLOSE\PROJECT_CLOSE.LATEST.txt
+- Aporta: last close, close status, next action.
+
+FUENTE_3: SyS\00.0_BATON_SKILLMACHINE.txt (solo sección 03.00 y 07.00)
+- Aporta: reglas duras, flujo obligatorio para agentes IA, zonas críticas.
+
+FUENTE_4: SyS\01_WHOAMI_SKILLMACHINE.txt (solo secciones 01.00 y 05.00)
+- Aporta: qué es el proyecto, siguiente paso.
+
+FUENTE_5: SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt (solo últimas entradas P0/P1)
+- Aporta: backlog priorizado vigente.
+
+FUENTE_6: 99.LABS\Nightshift\08_BACKLOG\BACKLOG.NIGHTSHIFT.ACTIVE.txt (solo últimas entradas P0/P1)
+- Aporta: backlog Nightshift vigente.
+
+FUENTE_7: git branch --show-current + git log --oneline -1 + git log --oneline -1 main
+- Aporta: estado Git real.
+
+==========
+05.00 QUÉ DEBE CONTENER
+==========
+
+Sección 01: IDENTITY
+  - Nombre del proyecto.
+  - Root canónico.
+  - Arquitectura en 2 líneas.
+  - Jerarquía conceptual activa.
+
+Sección 02: CURRENT_STATE
+  - Branch actual.
+  - HEAD actual.
+  - Main HEAD.
+  - Working tree expected state.
+  - Last close MB_ID.
+  - Next action MB_ID.
+
+Sección 03: HARD_RULES
+  - No git add .
+  - No commit --no-verify.
+  - No merge lab a main sin decisión humana.
+  - No modificar 90.USECASE sin plan.
+  - No agentes sobre working tree ambiguo.
+  - Flujo: READ -> PLAN -> APPROVE -> BUILD -> DIFF -> TEST -> COMMIT.
+
+Sección 04: CRITICAL_ZONES
+  - Lista de zonas críticas (HUMAN, GRCLake, SkillsLake, 90.USECASE, SyS\A_Tools, 99.LABS).
+  - Frontera 90.USECASE (genérico) vs SyS\PROJECT_CONTINUITY (dedicado).
+
+Sección 05: KEY_FILES
+  - BATON: SyS\00.0_BATON_SKILLMACHINE.txt
+  - WHOAMI: SyS\01_WHOAMI_SKILLMACHINE.txt
+  - RADAR index: SyS\A_Tools\Radar\radar.index.txt
+  - Validator: SyS\A_Tools\Validation\Validate-System.ps1
+  - Backlog GRC: SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt
+  - Backlog Nightshift: 99.LABS\Nightshift\08_BACKLOG\BACKLOG.NIGHTSHIFT.ACTIVE.txt
+  - PROJECT_CONTINUITY: SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt
+  - PROJECT_CLOSE: SyS\PROJECT_CLOSE\PROJECT_CLOSE.LATEST.txt
+
+Sección 06: BACKLOG_SNAPSHOT
+  - Top 5 items P0/P1 vigentes.
+  - Formato: ID | Tipo | Estado | Descripción breve.
+
+Sección 07: DO_NOT
+  - Lista explícita de lo que NO debe hacerse en este contexto.
+
+==========
+06.00 QUÉ NO DEBE CONTENER
+==========
+
+- Changelog de MBs históricos (eso es BATON/WHOAMI).
+- Inventario completo de skills (eso es GLOBAL.SKILL.VERSION.REGISTRY.json).
+- Outputs de RADAR (eso es radar.index.txt).
+- Decisiones aprobadas de sesiones anteriores sin relevancia operativa actual.
+- Comentarios sobre herramientas evaluadas (Cursor, Codex) salvo que afecten restricciones actuales.
+- Información redundante con PROJECT_CONTINUITY.LATEST.txt o PROJECT_CLOSE.LATEST.txt.
+
+==========
+07.00 RELACIÓN CON OTROS ARTEFACTOS
+==========
+
+BATON:
+- AI_READING_FILE.LATEST.txt es un subconjunto operativo de BATON.
+- BATON es la fuente de verdad completa e histórica.
+- AI_READING_FILE no reemplaza BATON; lo complementa como vista compacta IA.
+- Cuando hay conflicto: BATON tiene autoridad.
+
+WHOAMI:
+- AI_READING_FILE toma la esencia operativa de WHOAMI (qué es, siguiente paso).
+- WHOAMI es la vista narrativa humana.
+- AI_READING_FILE es la vista compacta máquina.
+
+RADAR:
+- AI_READING_FILE referencia dónde está RADAR, no replica su contenido.
+- RADAR es inventario técnico; AI_READING_FILE es contexto operativo.
+
+PROJECT_CONTINUITY y PROJECT_CLOSE:
+- AI_READING_FILE integra el estado de ambos en una sola vista.
+- PROJECT_CONTINUITY.LATEST.txt y PROJECT_CLOSE.LATEST.txt siguen siendo la fuente primaria.
+- AI_READING_FILE.LATEST.txt los consume, no los reemplaza.
+
+90.USECASE:
+- AI_READING_FILE no pertenece a 90.USECASE porque no es genérico ni exportable.
+- 90.USECASE tiene sus propios READMEs de contexto por usecase.
+- No mezclar: un agente trabajando en SkillsMachine lee AI_READING_FILE; un agente trabajando en un proyecto genérico lee el usecase correspondiente de 90.USECASE.
+
+==========
+08.00 CÓMO SE ACTUALIZA
+==========
+
+ACTUALIZACIÓN NORMAL:
+Cada vez que se actualiza PROJECT_CONTINUITY.LATEST.txt o PROJECT_CLOSE.LATEST.txt,
+AI_READING_FILE.LATEST.txt debe actualizarse en el mismo commit.
+
+ACTUALIZACIÓN FORZADA:
+Cuando cambia la siguiente acción (NEXT_ACTION), el backlog top-5, o las reglas duras.
+
+ACTUALIZACIÓN PROHIBIDA:
+No actualizar AI_READING_FILE.LATEST.txt por sí solo sin actualizar al menos uno de los
+archivos fuente (PROJECT_CONTINUITY, PROJECT_CLOSE, BATON, WHOAMI, Backlog).
+Razón: evitar divergencia entre archivo de lectura y fuentes de verdad.
+
+GENERACIÓN:
+- Manual por agente IA siguiendo las fuentes definidas en sección 04.00.
+- NO automatizada aún (sin script generador todavía).
+- El script generador es el siguiente MB (ver sección 12.00).
+
+==========
+09.00 CUÁNDO SE REGENERA
+==========
+
+- Al inicio de cada nueva sesión de trabajo si está stale respecto a HEAD.
+- Criterio de staleness: PROJECT_CONTINUITY.LATEST.txt o PROJECT_CLOSE.LATEST.txt tienen
+  un HEAD diferente al de AI_READING_FILE.LATEST.txt registrado.
+- Después de un commit que cambia NEXT_ACTION o el backlog priorizado.
+- No debe regenerarse después de un push sin commits funcionales.
+
+==========
+10.00 CÓMO LO USARÁN CLAUDE/CODEX
+==========
+
+PRIMER ARCHIVO A LEER:
+Un agente nuevo debe leer AI_READING_FILE.LATEST.txt como primer archivo de orientación.
+Antes de BATON, antes de WHOAMI, antes de RADAR.
+
+FLUJO SUGERIDO PARA AGENTE ENTRANTE:
+1. Leer AI_READING_FILE.LATEST.txt (orientación completa en < 2 min).
+2. Verificar git branch, git log --oneline -1.
+3. Confirmar NEXT_ACTION.
+4. Si necesita más contexto: leer BATON sección 03.00.
+5. Si necesita inventario: leer radar.index.txt.
+6. Si necesita backlog detallado: leer SKILL_GRC.CANDIDATES.ACTIVE.txt.
+
+CODEX:
+- Puede recibir AI_READING_FILE.LATEST.txt como parte del contexto inicial de sesión.
+- Reduce necesidad de subir BATON completo como contexto.
+
+==========
+11.00 RIESGOS DE DUPLICAR ESTADO
+==========
+
+R1 — STALE AI_READING_FILE:
+Si AI_READING_FILE.LATEST.txt no se actualiza junto con PROJECT_CONTINUITY/PROJECT_CLOSE,
+un agente puede operar con NEXT_ACTION desactualizado.
+Mitigación: regla explícita en sección 08.00 — actualización obligatoria en el mismo commit.
+
+R2 — CONFLICTO CON BATON:
+AI_READING_FILE puede mostrar estado diferente al BATON si se actualizan en momentos distintos.
+Mitigación: BATON tiene autoridad. AI_READING_FILE es vista derivada; en caso de conflicto
+el agente debe leer BATON.
+
+R3 — PROLIFERACIÓN DE VISTAS:
+Agregar otro artefacto de continuidad puede aumentar el ruido si no se mantiene disciplinadamente.
+Mitigación: AI_READING_FILE.LATEST.txt reemplaza la necesidad de subir BATON+WHOAMI+RADAR
+completos para orientación inicial. Si se mantiene limpio, reduce fricción neta.
+
+R4 — CONFUSIÓN CON 90.USECASE READMES:
+Los READMEs de 90.USECASE (README.UPLOAD_THIS_USECASE.txt) también orientan a la IA.
+Mitigación: mantener separación clara: READMEs de 90.USECASE son para contexto de usecase genérico;
+AI_READING_FILE.LATEST.txt es para contexto del proyecto SkillsMachine.
+
+==========
+12.00 SIGUIENTE MB PARA IMPLEMENTARLO
+==========
+
+MB-GRC-036C1_CREATE_AI_READING_FILE_LATEST
+- Tipo: IMPLEMENTATION_MB
+- Objetivo: Crear SyS\PROJECT_CONTINUITY\AI_READING_FILE.LATEST.txt con contenido real.
+- Precondición: este diseño aprobado por humano.
+- Riesgo: BAJO (archivo nuevo, no modifica código existente).
+- Decisión humana requerida: SI — aprobar creación del archivo antes de proceder.
+
+MB-GRC-036C2_GENERATOR_SCRIPT_AI_READING_FILE (DIFERIDO)
+- Tipo: TOOLING_MB
+- Objetivo: Crear script PowerShell para regenerar AI_READING_FILE.LATEST.txt automáticamente
+  desde las fuentes definidas.
+- Precondición: archivo manual creado y probado.
+- Riesgo: MEDIO (modifica tooling SyS).
+- Diferido: no implementar hasta que el archivo manual sea útil por >= 2 sesiones.
+
+==========
+FIN_AI_READING_FILE.DESIGN.20260621.AI.txt
+==========
