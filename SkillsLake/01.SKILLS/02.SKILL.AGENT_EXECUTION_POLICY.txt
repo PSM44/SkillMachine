@@ -257,3 +257,83 @@ En OK/FAIL, registrar:
 - Refuerzo: ejecución frecuente segura = rollback + quarantine + no OS arbitrary.
 - Refuerzo: Test-* verbos aprobados (evitar Validate-*).
 - Contrato: evidencia mínima obligatoria OK/FAIL.
+
+==========
+MB-GRC-034B_SAFE_POWERSHELL_LAUNCHER_CONTRACT
+==========
+
+DATE..............: 2026-06-21
+STATUS............: ACTIVE
+LAYER.............: AGENT_EXECUTION_POLICY
+PURPOSE...........:
+Prevent terminal breakage, accidental terminal closure, partial script execution, pager capture,
+unintended generated-output dirtiness, and unsafe staging during PowerShell-based repository operations.
+
+SCOPE.............:
+This rule applies when the IA provides or executes PowerShell workflows for repository automation,
+governance patches, validation, commit/push flows, session close, session continue, or one-shot scripts.
+
+SAFE_LAUNCHER_RULES:
+
+1. TEMP_PS1_REQUIRED:
+   Long PowerShell logic must be written to Temp\<MB_ID>.<timestamp>.ps1 or an equivalent Temp path.
+   The interactive console must only run a short launcher that creates and invokes that .ps1 file.
+
+2. NO_LONG_INTERACTIVE_PASTE:
+   Do not paste long try/catch/finally blocks directly into an interactive terminal.
+   Interactive paste can split syntax and execute finally/catch/remaining lines as standalone commands.
+
+3. NO_LAUNCHER_EXIT:
+   The console launcher must not call exit or exit $ExitCode.
+   It must print SCRIPT_EXIT and LAUNCHER_STATUS and leave the terminal open.
+
+4. CHILD_SCRIPT_FAILURE:
+   The child .ps1 may return or stop internally, but the launcher must preserve the terminal.
+   Failure must be reported by SCRIPT_EXIT, LAUNCHER_STATUS, FINAL_STATUS, ERROR, and NEXT_ACTION.
+
+5. NO_NESTED_HERE_STRING:
+   Do not nest PowerShell here-strings inside launcher here-strings.
+   For embedded patch text, use arrays of lines, external template files, or another construction that cannot truncate the launcher.
+
+6. PAGER_DISABLED:
+   Repository scripts must set GIT_PAGER=cat and PAGER=cat.
+   Diagnostic git commands must use git --no-pager for log, diff, show, and similar output.
+
+7. BUILD_SCOPE_CONTROL:
+   Do not run BUILD.ps1 unless generated build outputs are explicitly in scope.
+   If BUILD.ps1 dirties generated outputs unexpectedly, stop before commit and restore or isolate those changes.
+
+8. EXPLICIT_STAGE_ONLY:
+   Use explicit git add file whitelists.
+   Do not use git add -A or git add . in governance patches unless the human explicitly approves it and the dirty set is fully understood.
+
+9. DIRTY_SET_GATE:
+   Before staging, compare git status --short against the expected changed-file whitelist.
+   If unexpected files are dirty, stop and report the exact unexpected paths.
+
+10. GENERATED_OUTPUT_GATE:
+   Generated outputs, manifests, bundles, logs, Temp artifacts, pycache, and probe outputs must not be staged by accident.
+   If they are intentionally staged, the script must state why and name the approving decision.
+
+11. START_END_CONTRACT:
+   Every script must print START and END blocks, purpose, root, branch, status, validation result, failure cause, and next action.
+
+12. TERMINAL_SAFETY_DONE_WHEN:
+   The terminal remains usable after script completion, SCRIPT_EXIT is printed, LAUNCHER_STATUS is printed, and worktree state is explicit.
+
+ANTI_PATTERNS:
+- Pasting a long script directly into PowerShell line by line.
+- Splitting try/catch/finally across separate interactive executions.
+- Ending launchers with exit $ExitCode.
+- Using git diff/log without --no-pager or pager suppression.
+- Running BUILD.ps1 as a side effect of an unrelated patch.
+- Using git add -A to recover from a failed stage list.
+- Committing generated-output drift without explicit scope and approval.
+
+DONE_WHEN.........:
+Future IA-generated PowerShell automation uses a short non-closing launcher plus Temp .ps1 child script,
+does not trap the user in pager output, does not close the terminal, and stops on unexpected dirtiness.
+
+==========
+FIN_MB-GRC-034B_SAFE_POWERSHELL_LAUNCHER_CONTRACT
+==========
