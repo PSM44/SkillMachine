@@ -951,3 +951,8 @@ DONE..............: PowerShell long payload / ParseFile safety rule promoted to 
 DONE..............: NS-PILOT-001 closed as lab evidence.
 P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
 NOTE..............: Future long PowerShell scripts must be file-authored, then executed by short ParseFile launcher.
+
+========== MB-GRC-036B_CREATE_PROJECT_CONTINUITY_CLOSE_STRUCTURE ==========
+DONE..............: Created SkillsMachine-dedicated PROJECT_CONTINUITY and PROJECT_CLOSE folders under SyS.
+DONE..............: Clarified boundary between generic 90.USECASE and SkillsMachine self-continuity/self-close.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY

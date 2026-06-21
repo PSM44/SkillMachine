@@ -1,0 +1,198 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: RUNBOOK.SESSION_CLOSE.HARDENED.01.00
+NOMBRE_SUGERIDO...: RUNBOOK.SESSION_CLOSE.HARDENED.txt
+VERSION...........: v1.0-MB-GRC-015
+FECHA.............: 2026-05-12
+HORA..............: 18:XX
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 90.USECASE\02.SESSION_CLOSE
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, WHOAMI_STATE
+
+ALCANCE...........:
+Define el cierre endurecido de sesión para SkillMachine.
+El cierre debe capturar evidencia objetiva de Git, validación, RADAR, BATON y WHOAMI.
+
+NO_CUBRE..........:
+No reemplaza BATON.
+No reemplaza WHOAMI.
+No modifica política GRC.
+No migra nombres Validate-* a Test-*.
+
+DEPENDENCIAS......:
+SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+SyS\A_Tools\Validation\Validate-System.ps1
+SyS\A_Tools\Radar\radar.manifest.json
+SyS\00.0_BATON_SKILLMACHINE.txt
+SyS\01_WHOAMI_SKILLMACHINE.txt
+
+==========
+01.00_PROPOSITO
+==========
+
+Este runbook existe para evitar cierres de sesión incompletos.
+
+Problema que resuelve:
+- Cierres sin Git status.
+- Cierres sin HEAD/tag.
+- Cierres sin validación.
+- Cierres sin evidencia RADAR.
+- Cierres sin chequeo BATON/WHOAMI.
+- Dependencia excesiva de memoria humana.
+
+==========
+02.00_COMANDO_CANONICO
+==========
+
+Ejecutar desde:
+
+C:\01. GitHub\Skills
+
+Comando:
+
+powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+
+==========
+03.00_OUTPUTS
+==========
+
+El cierre endurecido genera:
+
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
+
+==========
+04.00_CRITERIO_DE_CIERRE
+==========
+
+OK:
+- Git limpio.
+- Validate-System.ps1 OK.
+- RADAR manifest existe.
+- BATON existe.
+- WHOAMI existe.
+
+WARN:
+- Validación OK, pero Git tiene cambios pendientes.
+
+FAIL:
+- Validación falla.
+- Falta RADAR manifest.
+- Falta BATON.
+- Falta WHOAMI.
+
+==========
+05.00_REGLA_OPERATIVA
+==========
+
+Si el resultado es OK:
+- Se puede cerrar sesión.
+
+Si el resultado es WARN:
+- Revisar cambios Git antes de cerrar.
+
+Si el resultado es FAIL:
+- No cerrar como sesión limpia.
+
+==========
+06.00_CHANGELOG
+==========
+
+2026-05-12, v1.0-MB-GRC-015
+- Creación inicial del cierre endurecido de sesión.
+- Agrega captura objetiva de Git, validación y artefactos de continuidad.
+
+==========
+FIN_DEL_DOCUMENTO
+==========
+
+==========
+MB-GRC-016_FRESHNESS_POLICY
+==========
+
+El cierre endurecido debe evaluar frescura operacional contra HEAD.
+
+Regla:
+- BATON, WHOAMI y RADAR no solo deben existir.
+- Tambien deben ser iguales o posteriores a la fecha del ultimo commit HEAD.
+- Si existen pero son anteriores a HEAD, el cierre queda en WARN.
+
+Interpretacion:
+- WARN no significa falla tecnica.
+- WARN significa posible deuda de continuidad.
+- El humano decide si actualiza BATON/WHOAMI/RADAR o si acepta el cierre con advertencia.
+
+Campos esperados en el reporte:
+- HEAD_COMMIT_DATE
+- RADAR_FRESH_AGAINST_HEAD
+- BATON_FRESH_AGAINST_HEAD
+- WHOAMI_FRESH_AGAINST_HEAD
+
+==========
+
+==========
+MB-GRC-016C_FRESHNESS_SEMANTICS
+==========
+
+Correccion de criterio:
+
+BATON y WHOAMI:
+- La frescura se mide por el ultimo commit Git que toco cada archivo.
+- No se mide por LastWriteTime del filesystem.
+- Motivo: despues de un commit, la fecha HEAD sera posterior al LastWriteTime del archivo, generando falsos WARN.
+
+RADAR:
+- La frescura se mide por RADAR_GENERATED_AT porque los outputs RADAR son runtime/ignored.
+- Si RADAR queda anterior a HEAD, regenerar RADAR despues del commit o aceptar WARN informado.
+
+==========
+
+
+==========
+MB-GRC-026F1_RUNBOOK_CONTINUITY_REFRESH_GATE
+==========
+
+FECHA.............: 2026-06-04 10:35:38
+ESTADO............: ACTIVE_RUNBOOK_STEP
+
+PASO_OBLIGATORIO:
+Antes del commit final de cierre o minibattle que afecte continuidad:
+
+1. Actualizar SyS/00.0_BATON_SKILLMACHINE.txt.
+2. Actualizar SyS/01_WHOAMI_SKILLMACHINE.txt.
+3. Stagear ambos en el mismo commit.
+4. Ejecutar Validate-System.
+5. Ejecutar RADAR.
+6. Ejecutar Test-SessionCloseReadiness.
+7. Si readiness indica BATON viejo o WHOAMI viejo, no crear commits alternados.
+   Actualizar ambos juntos y repetir.
+
+REGLA_DE_OUTPUTS_GENERADOS:
+Los outputs generados de 90.USECASE son reproducibles y pueden estar ignorados por Git.
+No forzar stage de outputs ignorados salvo decisión humana explícita.
+
+FIN_MB-GRC-026F1_RUNBOOK_CONTINUITY_REFRESH_GATE
+==========
+
+
+
+
+==========
+MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
+==========
+
+REGLA:
+La carpeta del usecase es el paquete operativo de subida a la IA.
+
+CARPETA_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+
+REGLAS:
+- Subir el contenido completo de la carpeta del usecase correspondiente.
+- No usar Temp\TO_UPLOAD_TO_IA.
+- No pedir el repo completo por defecto.
+- Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
+- Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.

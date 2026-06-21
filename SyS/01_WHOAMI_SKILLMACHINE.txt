@@ -915,3 +915,9 @@ CURRENT_STATE.....: NS-PILOT-001 closed as lab evidence; main contains promoted 
 CURRENT_BRANCH....: lab/ns-pilot-001-hybrid
 MAIN_BRANCH.......: main updated through PowerShell safety promotion only.
 NEXT_ACTION.......: Design NS-PILOT-002 readonly before any further agent execution.
+
+========== MB-GRC-036B_CREATE_PROJECT_CONTINUITY_CLOSE_STRUCTURE ==========
+DATE..............: 2026-06-21 01:57:47 -04:00
+CURRENT_STATE.....: Created SyS\PROJECT_CONTINUITY and SyS\PROJECT_CLOSE as SkillsMachine-dedicated self-continuity/self-close folders.
+BOUNDARY..........: 90.USECASE remains generic/exportable for any project.
+NEXT_ACTION.......: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY

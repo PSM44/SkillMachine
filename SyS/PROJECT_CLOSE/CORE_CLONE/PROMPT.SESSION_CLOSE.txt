@@ -1,0 +1,123 @@
+PROYECTO: Session Close
+
+OBJETIVO:
+Cerrar sesión dejando continuidad humana e IA consistente para la próxima ocasión.
+
+INPUT:
+- requerimiento del usuario
+- estado actual
+- BATON vigente
+- WhoAmI vigente
+- HUMAN si aplica
+- RADAR before/after
+- SKILL.MENU
+- lifecycle y artifacts policy
+
+DEBES:
+1. revisar el estado actual
+2. actualizar BATON
+3. actualizar WhoAmI si cambió el estado humano operacional
+4. actualizar HUMAN solo si cambió el entendimiento profundo
+5. validar coherencia con RADAR
+6. identificar si algo aprendido amerita actualizar o crear skills
+
+OUTPUT:
+- BATON actualizado
+- WhoAmI actualizado si aplica
+- observación sobre HUMAN
+- siguiente acción exacta
+- observación sobre mejoras de skills si corresponde
+
+
+==========
+MB-GRC-015_SESSION_CLOSE_HARDENING
+==========
+
+Antes de declarar una sesión cerrada, ejecutar obligatoriamente:
+
+powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+
+El cierre debe reportar, como mínimo:
+
+- Rama Git actual.
+- Último commit.
+- Tags en HEAD.
+- Estado Git corto.
+- Diff stat.
+- Diff staged.
+- Archivos untracked.
+- Resultado de Validate-System.ps1.
+- Existencia y metadata básica de RADAR manifest.
+- Existencia y modified_at de BATON.
+- Existencia y modified_at de WHOAMI.
+- Ruta del reporte TXT y JSON generado.
+
+Regla:
+- OK permite cierre limpio.
+- WARN exige revisión humana.
+- FAIL bloquea cierre limpio.
+
+
+==========
+MB-GRC-016_FRESHNESS_POLICY
+==========
+
+Ademas del cierre MB-GRC-015, revisar frescura de continuidad:
+
+- HEAD_COMMIT_DATE.
+- RADAR_FRESH_AGAINST_HEAD.
+- BATON_FRESH_AGAINST_HEAD.
+- WHOAMI_FRESH_AGAINST_HEAD.
+
+Regla:
+- Si cualquiera esta en False, reportar WARN.
+- No declarar cierre limpio sin informar la deuda de continuidad.
+
+==========
+
+==========
+MB-GRC-016C_FRESHNESS_SEMANTICS
+==========
+
+Para evaluar frescura:
+- BATON/WHOAMI usan ultimo commit Git del archivo.
+- RADAR usa generated_at del manifest.
+- No usar LastWriteTime como criterio principal para BATON/WHOAMI.
+
+==========
+
+
+==========
+SESSION_LEARNING_REVIEW
+==========
+
+Al cierre de sesion, revisar el chat activo y outputs relevantes para detectar oportunidades de:
+- crear o actualizar Skills;
+- crear o actualizar GRC;
+- registrar candidatos en backlog;
+- identificar conflictos, omisiones, duplicidad o deuda tecnica;
+- proponer siguiente minibattle.
+
+Regla dura:
+No crear ni modificar canon automaticamente. Toda oportunidad se registra como candidato o se ejecuta solo si el humano lo instruye explicitamente.
+
+
+
+
+
+==========
+MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
+==========
+
+REGLA:
+La carpeta del usecase es el paquete operativo de subida a la IA.
+
+CARPETA_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+
+REGLAS:
+- Subir el contenido completo de la carpeta del usecase correspondiente.
+- No usar Temp\TO_UPLOAD_TO_IA.
+- No pedir el repo completo por defecto.
+- Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
+- Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
