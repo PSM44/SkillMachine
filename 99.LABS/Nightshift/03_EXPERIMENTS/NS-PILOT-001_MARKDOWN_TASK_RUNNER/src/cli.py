@@ -1,24 +1,13 @@
-"""CLI entrypoint: python -m src.cli <markdown_file> [output_file]"""
+"""Unified CLI entrypoint for the Nightshift markdown task runner.
 
-import sys
-from .parser import parse_file
-from .report import generate
+This module intentionally delegates to src.task_runner so both entrypoints
+share the same argparse contract, --help behavior, validation, and output format.
+"""
 
+from __future__ import annotations
 
-def main() -> None:
-    if len(sys.argv) < 2:
-        print("Usage: python -m src.cli <markdown_file> [output_file]", file=sys.stderr)
-        sys.exit(1)
-    path = sys.argv[1]
-    items = parse_file(path)
-    report = generate(items, source=path)
-    if len(sys.argv) >= 3:
-        with open(sys.argv[2], "w", encoding="utf-8") as fh:
-            fh.write(report)
-        print(f"Report written to {sys.argv[2]}")
-    else:
-        print(report)
+from .task_runner import main
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())
