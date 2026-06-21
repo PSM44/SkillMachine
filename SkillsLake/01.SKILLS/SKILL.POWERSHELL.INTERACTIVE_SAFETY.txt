@@ -618,3 +618,75 @@ This protocol must be present in the operational content for at least:
 ==========
 END_MB-GRC-032C_TEMP_ONESHOT_EXECUTION_PROTOCOL
 ==========
+
+========== SKILL UPDATE MB-GRC-035B POWERSHELL LONG PAYLOAD PARSE GATE BEGIN ==========
+
+20. LONG PAYLOAD AND PARSE GATE RULE
+
+20.1 LESSON LEARNED
+
+A PowerShell script can pass the operational intent but fail before execution when the generated .ps1 file contains a broken string, missing here-string terminator, truncated payload, or fragile embedded interpolation.
+
+Observed failure signals include:
+- ParserError.
+- The string is missing the terminator.
+- Interactive secondary prompt shown as >>.
+- A launcher succeeds but the generated child .ps1 fails to parse.
+- A long document payload is truncated before the closing delimiter.
+
+20.2 HARD RULE
+
+For non-trivial PowerShell work, especially when creating or modifying files, the AI must not rely on direct interactive paste of a long script or on long document payloads embedded in here-strings.
+
+The required pattern is:
+1. Generate a temporary .ps1 file under Temp/<MB_ID>.ps1.
+2. Generate script content as an array/list of lines when the script contains long document payloads.
+3. Run a parser gate with System.Management.Automation.Language.Parser.ParseFile before execution.
+4. If parser errors exist, print them and do not execute the child script.
+5. Execute the child script with pwsh.exe -NoProfile -ExecutionPolicy Bypass -File.
+6. The launcher must report SCRIPT_EXIT or equivalent and must not close the terminal.
+7. The child script must print START, END, FINAL_STATUS, LOG_PATH, failure cause, and next action.
+
+20.3 DOCUMENT PAYLOAD RULE
+
+When a PowerShell script creates a long report, brief, Markdown document, prompt, or policy block, prefer string arrays or a List[string] with one line per item:
+
+- New-Object System.Collections.Generic.List[string]
+- Add one logical output line per Add() call.
+- Set-Content -Path <target> -Value  -Encoding UTF8
+
+Avoid long embedded blocks such as:
+-  = @" ... long payload ... "@
+-  = @' ... long payload ... '@
+- nested here-strings inside launcher-generated scripts
+- complex .Replace() or  interpolation inside Write-Host strings
+
+20.4 PARSE GATE MINIMUM
+
+Before running a generated .ps1 file, the launcher must parse it:
+
+ = 
+ = 
+[System.Management.Automation.Language.Parser]::ParseFile(, [ref], [ref]) | Out-Null
+if (.Count -gt 0) { print errors; do not execute }
+
+20.5 RECOVERY RULE
+
+If the human sees the interactive secondary prompt >>, the human must not keep pasting. The correct recovery is:
+1. Press Ctrl+C.
+2. Confirm return to PS <repo path>.
+3. Run git status --short.
+4. Re-run only through a saved .ps1 file with parser gate.
+
+20.6 DONE
+
+A PowerShell long-script delivery is acceptable only when:
+- the generated .ps1 exists under Temp/;
+- ParseFile returns zero parser errors;
+- the launcher prints the child script exit status;
+- the child script prints FINAL_STATUS;
+- git status is checked before and after;
+- changed files are staged explicitly;
+- Temp/ is never staged.
+
+========== SKILL UPDATE MB-GRC-035B POWERSHELL LONG PAYLOAD PARSE GATE END ==========
