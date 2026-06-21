@@ -160,3 +160,18 @@ WHERE_WE_ARE......: Pre-comparison stage. Next action is MB-NS-001G_COMPARE_CODE
 NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet.
 TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
 BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.
+
+==========
+MB-CLOSE-002_NIGHTSHIFT_REFRESH_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: b0fca43 20260621_MB-NS-002B_create_scoring_rubric
+NS-PILOT-001......: CLOSED / ACCEPTED_AS_LAB_BASELINE
+HYBRID_BASELINE...: b120c87 20260621_MB-NS-001N_accept_hybrid_lab_baseline
+SCORING_RUBRIC....: b0fca43 20260621_MB-NS-002B_create_scoring_rubric
+MERGE_TO_MAIN.....: DEFERRED
+NEXT_OPTIONS......: pause Nightshift; design NS-PILOT-002; evaluate repository-lab-canon merge later.
+==========
+FIN_MB-CLOSE-002_NIGHTSHIFT_REFRESH_20260621
+==========

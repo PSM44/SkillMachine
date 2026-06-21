@@ -893,3 +893,18 @@ WHERE_WE_ARE......: Pre-comparison stage. Next action is MB-NS-001G_COMPARE_CODE
 NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet.
 TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
 BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.
+
+==========
+MB-CLOSE-002_WHOAMI_REFRESH_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: b0fca43 20260621_MB-NS-002B_create_scoring_rubric
+ESTADO_ACTUAL.....: SkillsMachine operativo; Nightshift lab cerrado con baseline hibrido y rubrica de scoring.
+QUE_ES............: SkillsMachine gobierna skills/usecases; Nightshift es laboratorio para comparar agentes Codex/Claude/hibrido.
+QUE_SE_LOGRO......: Focus Gate, Safe Launcher, NS-PILOT-001, baseline hibrido y rubrica reusable.
+QUE_FALTA.........: RADAR/readiness final, decision sobre NS-PILOT-002 y entregable gerencial.
+SIGUIENTE_ACCION..: Ejecutar MB-CLOSE-003_RADAR_READINESS_FINAL.
+==========
+FIN_MB-CLOSE-002_WHOAMI_REFRESH_20260621
+==========

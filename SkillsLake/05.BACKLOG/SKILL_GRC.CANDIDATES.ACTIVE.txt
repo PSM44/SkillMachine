@@ -932,3 +932,16 @@ P1_DEBT...........: Avoid long nested here-strings in PowerShell interactive wri
 P2_BACKLOG........: Create managerial summary for Nightshift pilot.
 P2_BACKLOG........: Convert findings into candidate skill/core patches after review.
 PATH_TO_MGMT......: compare -> select -> promote -> summarize -> demo repeatable agent workflow.
+
+==========
+MB-CLOSE-002_CANDIDATE_FOR_SKILLSMACHINE_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+TIPO..............: CANDIDATE_FOR_SKILLSMACHINE
+SOURCE............: Nightshift NS-PILOT-001 + NS scoring rubric
+CANDIDATE.........: Evaluar promover rubrica de comparacion de agentes a skill global tras NS-PILOT-002.
+STATUS............: CANDIDATE_ONLY
+NEXT..............: Probar repetibilidad en NS-PILOT-002 antes de canonizar.
+==========
+FIN_MB-CLOSE-002_CANDIDATE_FOR_SKILLSMACHINE_20260621
+==========

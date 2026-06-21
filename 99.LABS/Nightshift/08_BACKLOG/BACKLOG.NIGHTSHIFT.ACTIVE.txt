@@ -138,3 +138,24 @@ P1_DEBT...........: Avoid long nested here-strings in PowerShell interactive wri
 P2_BACKLOG........: Create managerial summary for Nightshift pilot.
 P2_BACKLOG........: Convert findings into candidate skill/core patches after review.
 PATH_TO_MGMT......: compare -> select -> promote -> summarize -> demo repeatable agent workflow.
+
+==========
+MB-CLOSE-002_BACKLOG_REFRESH_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+ESTADO............: ACTIVE_BACKLOG_UPDATE
+
+OPEN_P0:
+- MB-CLOSE-003_RADAR_READINESS_FINAL: regenerar RADAR y ejecutar readiness final.
+
+OPEN_P1:
+- MB-NS-003A_DESIGN_NS_PILOT_002_READONLY: disenar segundo piloto Nightshift con rubrica.
+- MB-MGMT-001_STATUS_BRIEF_READONLY: disenar brief gerencial funcional.
+
+TECH_DEBT:
+- Mantener separacion explicita entre main SkillsMachine y ramas lab Nightshift.
+- Decidir si rubrica Nightshift se promueve a main solo tras repetibilidad en NS-PILOT-002.
+- Controlar ruido de backups OneShots en discovery/readiness.
+==========
+FIN_MB-CLOSE-002_BACKLOG_REFRESH_20260621
+==========

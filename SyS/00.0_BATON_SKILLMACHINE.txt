@@ -1320,3 +1320,39 @@ WHERE_WE_ARE......: Pre-comparison stage. Next action is MB-NS-001G_COMPARE_CODE
 NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet.
 TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
 BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.
+
+==========
+MB-CLOSE-002_CONTINUITY_REFRESH_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: b0fca43 20260621_MB-NS-002B_create_scoring_rubric
+ESTADO............: SESSION_CLOSE_CONTINUITY_REFRESH
+
+QUE_SE_HIZO:
+- SkillsMachine main quedo operativo con Focus Gate y Safe Launcher en b23d632.
+- Nightshift NS-PILOT-001 fue cerrado como baseline hibrido aceptado en rama lab/ns-pilot-001-hybrid.
+- Se corrigio contrato CLI del piloto, se agregaron tests y quedaron 26 tests pasando.
+- Se creo rubrica reusable de scoring Nightshift en 99.LABS/Nightshift/00_GOVERNANCE.
+
+DEUDA_TECNICA_ACUMULADA:
+- RADAR manifest estaba anterior al HEAD actual al iniciar cierre; requiere regeneracion final.
+- BATON/WHOAMI estaban frescos solo hasta e2158e1 y requerian refresh conjunto.
+- Rama lab diverge de main por diseno; no confundir canon main con laboratorio Nightshift.
+- Entregable gerencial aun no existe como artefacto funcional.
+
+BACKLOG_ACUMULADO:
+- Regenerar RADAR y ejecutar readiness final.
+- Decidir en proxima sesion: pausar Nightshift, iniciar NS-PILOT-002 o evaluar merge lab a main.
+- Disenar entregable gerencial de estado SkillsMachine + Nightshift.
+
+PATH_GERENCIA:
+1. Cierre confiable: continuidad fresca + readiness.
+2. Nightshift repetible: NS-PILOT-002 con rubrica.
+3. Consolidacion ejecutiva: brief gerencial con evidencia, riesgos y roadmap.
+
+NEXT_ACTION:
+- Ejecutar MB-CLOSE-003_RADAR_READINESS_FINAL.
+==========
+FIN_MB-CLOSE-002_CONTINUITY_REFRESH_20260621
+==========
