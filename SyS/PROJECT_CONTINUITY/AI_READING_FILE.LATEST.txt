@@ -1,0 +1,211 @@
+==========
+AI_READING_FILE — SKILLSMACHINE
+==========
+
+VERSION...........: v1.0
+MB_ID.............: MB-GRC-036C1_CREATE_AI_READING_FILE_LATEST
+DATE_CREATED......: 2026-06-21
+HEAD_AT_CREATION..: 6580e80 20260621_MB-NS-003A_GRC-036C-D-E_design_triage_batch
+AUTHORITY.........: BATON has authority over this file in any conflict.
+STALENESS_SIGNAL..: If PROJECT_CONTINUITY.LATEST.txt CURRENT_HEAD differs from
+                    HEAD_AT_CREATION above, this file is stale — regenerate it.
+
+PURPOSE:
+Read this file first. It provides complete operational context for an incoming agent
+in under 2 minutes. After reading, verify git branch and git log --oneline -1.
+
+==========
+01.00 IDENTITY
+==========
+
+PROJECT_NAME......: SkillsMachine (repo: SkillMachine)
+ROOT..............: C:\01. GitHub\Skills
+REMOTE............: https://github.com/PSM44/SkillMachine.git
+
+WHAT IT IS:
+A governed system for building, organizing, versioning and operating reusable skills,
+usecases, manifests, validators and human-AI continuity artifacts.
+Not a prompt library. A full operational layer with validation, registries, bundles
+and tightly controlled agent governance.
+
+HIERARCHY:
+HUMAN > GRCLake > SkillsLake > 90.USECASE > SyS / tools / artifacts
+
+LAYERS:
+- HUMAN         : canonical human intent layer
+- GRCLake       : governance, risk, compliance, policies, controls, templates
+- SkillsLake    : canonical skills, docs, architecture, learning
+- 90.USECASE    : usecases, bundles, manifests, registries — GENERIC / exportable
+- SyS           : operational tooling, validators, RADAR, continuity
+- 99.LABS       : isolated lab environment (Nightshift); not canon
+
+==========
+02.00 CURRENT STATE
+==========
+
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: 6580e80 20260621_MB-NS-003A_GRC-036C-D-E_design_triage_batch
+MAIN_HEAD.........: 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+WORKING_TREE......: clean (expected)
+LAST_CLOSE........: MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001
+LAST_MB_BATCH.....: MB-NS-003A + MB-GRC-036C/D/E (design triage batch, 2026-06-21)
+NEXT_ACTION.......: MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD
+                    (BLOCKED: awaiting human approval of NS-PILOT-002 design)
+ALTERNATE_NEXT....: MB-GRC-025C-2_ROUTING_BOUNDARY_PATCH (AG, no blocker)
+
+LAB STATUS:
+- NS-PILOT-001 closed as lab evidence (hybrid baseline accepted).
+- NS-PILOT-002 designed (YAML_TASK_SCHEDULER, Codex vs Claude Code comparison).
+- NS-PILOT-002 rubric verified as fit (as-is with scorer notes).
+- NS-PILOT-002 scaffold NOT yet created.
+
+MAIN STATUS:
+- main contains only globally promoted changes from lab.
+- Lab artifacts (Nightshift, scoring rubric, pilots) remain in lab branch.
+- Last main promotion: PowerShell safety ParseFile rule (MB-GRC-035C).
+
+BOUNDARY:
+- 90.USECASE is generic/exportable. Do not use it as SkillsMachine live continuity.
+- SyS\PROJECT_CONTINUITY is SkillsMachine-dedicated self-continuity.
+- SyS\PROJECT_CLOSE is SkillsMachine-dedicated self-close.
+- 99.LABS\Nightshift is isolated lab. Not canon. Not merged to main without explicit decision.
+
+==========
+03.00 HARD RULES
+==========
+
+RULE_01: No git add -A or git add .
+          Stage only explicitly named files.
+
+RULE_02: No git commit --no-verify
+          The pre-commit hook (Validate-System.ps1) is a hard gate.
+
+RULE_03: No full merge of lab/ns-pilot-001-hybrid into main.
+          Only cherry-pick / selective promotion with human decision.
+
+RULE_04: No modifications to 90.USECASE without a plan, diff review, and validation.
+          USECASE.REGISTRY.json, BUILD.ps1, and manifests have semantic field constraints.
+
+RULE_05: No agent work on a dirty working tree.
+          Always run git status --short first. If not clean: stop, diagnose, fix.
+
+RULE_06: No heredoc Bash syntax inside PowerShell (no cat <<EOF, no $(cat <<...)).
+          Use PowerShell here-strings: @'...'@ for literal, @"..."@ for interpolated.
+
+RULE_07: No long scripts pasted into the terminal.
+          Write long scripts to a .ps1 file first, then execute with a short launcher.
+          Gate: pwsh.exe [System.Management.Automation.Language.Parser]::ParseFile(...)
+
+RULE_08: Validate before every commit.
+          Command: pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "SyS\A_Tools\Validation\Validate-System.ps1"
+          Required exit code: 0.
+
+RULE_09: No push to main.
+          Push only to current lab branch unless human explicitly approves main push.
+
+RULE_10: No structural changes to registries/manifests without schema-aware patching.
+          USECASE.REGISTRY.json bundle_definitions source_files must use full repo-relative paths.
+
+AGENT_FLOW:
+READ -> PLAN -> APPROVE -> BUILD -> DIFF -> TEST -> COMMIT -> (PUSH if clean)
+
+==========
+04.00 CRITICAL ZONES
+==========
+
+ZONE         PATH                                        RISK IF MODIFIED
+------------ ------------------------------------------ ---------------------
+HUMAN        HUMAN\                                      Doctrinal layer; human-only changes
+GRCLake      GRCLake\                                    Governance/policies; plan required
+SkillsLake   SkillsLake\01.SKILLS\                       Skills canon; schema-aware only
+Usecases     90.USECASE\                                 Generic/exportable; BUILD controls
+Registry     90.USECASE\USECASE.REGISTRY.json            Schema semantic; no broad replace
+Build        90.USECASE\BUILD.ps1                        Generator; transactional; backup first
+Validation   SyS\A_Tools\Validation\                     Gate tools; do not disable
+RADAR        SyS\A_Tools\Radar\                          Outputs are operational, not temp
+Continuity   SyS\PROJECT_CONTINUITY\                     SkillsMachine-dedicated; not generic
+Close        SyS\PROJECT_CLOSE\                          SkillsMachine-dedicated; not generic
+Lab          99.LABS\Nightshift\                         Isolated; never canon without decision
+
+==========
+05.00 KEY FILES
+==========
+
+BATON (authority):    SyS\00.0_BATON_SKILLMACHINE.txt
+WHOAMI (narrative):   SyS\01_WHOAMI_SKILLMACHINE.txt
+RADAR index:          SyS\A_Tools\Radar\radar.index.txt
+Validator:            SyS\A_Tools\Validation\Validate-System.ps1
+Readiness:            SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+Backlog GRC:          SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt
+Backlog triage:       SkillsLake\05.BACKLOG\BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt
+Backlog NS:           99.LABS\Nightshift\08_BACKLOG\BACKLOG.NIGHTSHIFT.ACTIVE.txt
+PROJECT_CONTINUITY:   SyS\PROJECT_CONTINUITY\PROJECT_CONTINUITY.LATEST.txt
+PROJECT_CLOSE:        SyS\PROJECT_CLOSE\PROJECT_CLOSE.LATEST.txt
+NS rubric:            99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt
+NS-PILOT-002 design:  99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt
+NS-PILOT-002 rubric:  99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.RUBRIC_FIT.READONLY.20260621.AI.txt
+Gitattributes:        .gitattributes
+Gitignore:            .gitignore
+
+==========
+06.00 BACKLOG SNAPSHOT — TOP 5
+==========
+
+ID                              | P  | AG/HD | Descripción
+--------------------------------|----|-------|----------------------------------------------
+MB-NS-003B_SCAFFOLD_NS_PILOT_002| P0 | HD    | Crear scaffold NS-PILOT-002; espera HD_001
+MB-GRC-025C-2_ROUTING_BOUNDARY  | P1 | AG    | Patch frontera routing policy vs model routing
+MB-GRC-026L_REPLACE_IA_BLANK    | P1 | AG    | Reemplazar "IA en blanco" en prompts/docs
+WHOAMI_REFRESH_SKILLSMACHINE    | P1 | AG    | Actualizar sección principal WHOAMI a estado real
+BATON_REFRESH_STRUCTURAL        | P1 | HD    | Actualizar secciones 00.20/01.00 de BATON
+
+HUMAN DECISIONS PENDING:
+HD_001: Aprobar NS-PILOT-002 diseño (YAML_TASK_SCHEDULER) → enables MB-NS-003B
+HD_002: Política EOL para .txt (mantener CRLF actual vs cambiar a LF)
+HD_003: Actualización estructural de BATON (proponer estructura antes de ejecutar)
+
+For full triage see: SkillsLake\05.BACKLOG\BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt
+
+==========
+07.00 DO NOT
+==========
+
+DO NOT merge lab/ns-pilot-001-hybrid to main without explicit human promotion decision.
+DO NOT start NS-PILOT-002 agent runs before scaffold exists and HD_001 is approved.
+DO NOT modify 90.USECASE BUILD.ps1 or USECASE.REGISTRY.json without a plan and diff.
+DO NOT run agents on a dirty working tree.
+DO NOT git add -A or git add . (stage explicitly).
+DO NOT use cat <<EOF or $(cat <<EOF) in PowerShell — use @'...'@ here-strings.
+DO NOT push large scripts into interactive terminal — write to .ps1 file first.
+DO NOT promote 99.LABS artifacts to SkillsLake/GRCLake without explicit MB approval.
+DO NOT treat RADAR outputs under SyS\A_Tools\Radar as temp/garbage.
+DO NOT update this file alone without also updating PROJECT_CONTINUITY.LATEST.txt.
+
+==========
+08.00 HOW TO USE THIS FILE
+==========
+
+FOR CLAUDE CODE (this tool):
+1. Read this file first to orient yourself.
+2. Run git branch --show-current and git --no-pager log --oneline -1 to verify state.
+3. If STALENESS_SIGNAL fires, regenerate this file before proceeding.
+4. Check DO NOT list before any action.
+5. For more context: read BATON section 03.00 (operational context for AI).
+6. For backlog detail: read BACKLOG_TRIAGE.SKILLSMACHINE.20260621.AI.txt.
+
+FOR CODEX DESKTOP:
+1. Upload this file as context before starting a session.
+2. Verify git state matches section 02.00 before any changes.
+3. If working on NS-PILOT-002: also upload NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt.
+4. If context is insufficient for a task: request specific file paths; do not request full repo.
+5. For a complete SkillsMachine session: upload the 90.USECASE/03.SESSION_CONTINUE folder.
+
+CONFLICT RESOLUTION:
+If this file conflicts with BATON: trust BATON.
+If this file conflicts with PROJECT_CONTINUITY.LATEST.txt: trust PROJECT_CONTINUITY.LATEST.txt.
+If in doubt: stop and ask the human before proceeding.
+
+==========
+FIN_AI_READING_FILE.LATEST.txt
+==========

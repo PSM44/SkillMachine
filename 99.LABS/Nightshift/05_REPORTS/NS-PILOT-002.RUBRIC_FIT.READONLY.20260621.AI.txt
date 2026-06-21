@@ -1,0 +1,344 @@
+==========
+NS-PILOT-002 — RUBRIC FIT ANALYSIS
+==========
+
+ID................: NS-PILOT-002.RUBRIC_FIT.READONLY.20260621
+MB_ID.............: MB-NS-003C_VERIFY_RUBRICA_NS_PILOT_002
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD_AT_ANALYSIS..: 6580e80 20260621_MB-NS-003A_GRC-036C-D-E_design_triage_batch
+STATUS............: ANALYSIS_COMPLETE — READONLY — NO CHANGES APPLIED
+RUBRIC_FILE.......: 99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt
+PILOT_DESIGN......: 99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt
+RUBRIC_VERDICT....: USE_AS_IS — with scorer notes below
+
+==========
+01.00 PROPÓSITO
+==========
+
+Verificar si la rubrica de scoring de Nightshift (diseñada para NS-PILOT-001,
+Markdown task runner) cubre adecuadamente los requisitos de NS-PILOT-002,
+un CLI Python YAML task scheduler.
+
+Preguntas a responder:
+1. ¿Cada dimensión de la rubrica aplica a NS-PILOT-002?
+2. ¿Hay gaps que la rubrica no cubre para este piloto?
+3. ¿Se necesita modificar la rubrica, agregar notas, o usar as-is?
+
+==========
+02.00 DESCRIPCIÓN DE NS-PILOT-002
+==========
+
+TASK: Python CLI que lee un archivo YAML de tareas y genera un reporte filtrado y ordenado.
+
+CLI SPEC:
+  python cli.py --input PATH [--filter-status STR] [--sort-by FIELD] [--output PATH]
+
+EXIT CODES:
+  0 = éxito
+  1 = archivo no encontrado
+  2 = YAML inválido
+
+MODULES (4):
+  parser.py     — lectura y validación de YAML
+  scheduler.py  — lógica de filtrado y ordenamiento
+  report.py     — generación de reporte de texto
+  cli.py        — interfaz de línea de comandos
+
+TESTS:
+  test_parser.py, test_scheduler.py, test_report.py, test_cli.py
+  Mínimo: 12 tests en total
+
+DEPENDENCY:
+  pyyaml >= 6.0 (no stdlib; debe estar en requirements.txt)
+
+SCOPE LIMIT (per brief):
+  Solo 4 flags, solo los 4 módulos, solo los 2 exit codes de error.
+  Cualquier feature extra (flags adicionales, módulos extra, validaciones no pedidas)
+  cuenta como scope creep.
+
+==========
+03.00 ANÁLISIS POR DIMENSIÓN
+==========
+
+----------
+DIM_01: FUNCTIONAL_CORRECTNESS — 25 pts
+----------
+
+RUBRIC: Resuelve la tarea declarada de extremo a extremo con output válido y determinístico.
+
+EVALUACIÓN NS-PILOT-002:
+- Tarea declarada: YAML in → reporte filtrado/ordenado out.
+- El output es determinístico: mismo YAML + mismos flags → mismo reporte.
+- Determinismo depende del sort field elegido; si sort es sobre campo string,
+  el lexicographic order es reproducible.
+
+FIT.........: FULL
+SCORER_NOTE.: Verificar que el reporte de output sea texto plano estructurado y
+              reproduzca exactamente el contenido del YAML filtrado, sin adornos extra.
+              Si el agente inventa secciones en el reporte no especificadas: penalizar aquí.
+
+----------
+DIM_02: TEST_VALIDATION — 15 pts
+----------
+
+RUBRIC: Tests presentes, relevantes, ejecutables y pasando.
+
+EVALUACIÓN NS-PILOT-002:
+- Requisito explícito: >= 12 tests en 4 archivos de test.
+- La rubrica no especifica un mínimo de tests, solo que sean "presentes y relevantes".
+- Un agente con 5 tests mediocres puede pasar la rubrica en teoría.
+
+FIT.........: PARTIAL
+SCORER_NOTE.: Para NS-PILOT-002, aplicar penalización proporcional si hay < 12 tests:
+              - >= 12 tests relevantes y pasando: score completo de la dimensión.
+              - 8-11 tests: -4 pts.
+              - 4-7 tests: -8 pts.
+              - < 4 tests: -15 pts (cero en dimensión).
+              También verificar: ¿los tests cubren exit codes 1 y 2 explícitamente?
+              ¿Al menos 3 tests por módulo (parser, scheduler, report)?
+
+----------
+DIM_03: CLI_CONTRACT — 10 pts
+----------
+
+RUBRIC: --help funciona, args válidos funcionan, args inválidos fallan limpiamente,
+        exit codes estables.
+
+EVALUACIÓN NS-PILOT-002:
+- 4 flags específicos: --input, --filter-status, --sort-by, --output.
+- Exit codes: 0 (ok), 1 (file not found), 2 (invalid YAML).
+- La rubrica dice "exit codes estables" pero no verifica valores específicos.
+- Un agente que retorna exit code 1 para YAML inválido (en lugar de 2) técnicamente
+  tiene "exit codes estables" pero no cumple el contrato del spec.
+
+FIT.........: PARTIAL — GAP IDENTIFICADO
+GAP: La rubrica no distingue entre "tiene exit codes" y "tiene los exit codes CORRECTOS".
+SCORER_NOTE.: Para NS-PILOT-002, el CLI contract es aprobado SOLO si:
+              - exit code 1 corresponde exactamente a "archivo no encontrado".
+              - exit code 2 corresponde exactamente a "YAML inválido".
+              - Invertirlos o usar códigos distintos (ej: 2 para file not found): -5 pts.
+              - --help debe listar los 4 flags con sus descripcion y tipos.
+              - --output ausente → stdout (no error); verificar comportamiento.
+
+----------
+DIM_04: STRUCTURE_MAINTAINABILITY — 15 pts
+----------
+
+RUBRIC: Estructura modular, legible, proporcional. Sin arquitectura innecesaria.
+
+EVALUACIÓN NS-PILOT-002:
+- Spec define exactamente 4 módulos (parser, scheduler, report, cli).
+- Un agente que crea 4 módulos bien separados y no inventa módulos extra: score completo.
+- Un agente que mete todo en cli.py (monolítico): penalizar.
+- Un agente que agrega utils.py, helpers.py, config.py no requeridos: también penalizar
+  (arquitectura innecesaria).
+
+FIT.........: FULL
+SCORER_NOTE.: Verificar que el agente NO añada módulos no solicitados.
+              Añadir un 5to módulo no pedido → -3 pts en esta dimensión (arquitectura excesiva).
+              Subdividir un módulo requerido en 2 sin justificación → -2 pts.
+
+----------
+DIM_05: BOUNDARY_DISCIPLINE — 10 pts
+----------
+
+RUBRIC: El agente se mantuvo dentro de los paths permitidos. No editó archivos canon.
+
+EVALUACIÓN NS-PILOT-002:
+- Zona permitida: solo el folder del piloto (99.LABS/Nightshift/02_PILOTS/NS-PILOT-002/).
+- Ningún archivo fuera de esa zona debe haber sido tocado.
+- No editar SkillsLake, GRCLake, 90.USECASE, SyS, ni ningún archivo de Nightshift fuera del folder.
+
+FIT.........: FULL
+SCORER_NOTE.: Revisar git diff para verificar que SOLO files bajo NS-PILOT-002/ fueron modificados.
+              Si el agente tocó algún archivo fuera del piloto (ej: un README de 99.LABS/):
+              -5 pts si fue accidental, -10 pts si fue intencional.
+
+----------
+DIM_06: DETERMINISM_REPRODUCIBILITY — 10 pts
+----------
+
+RUBRIC: Mismo input → output estable. La secuencia de comandos es reproducible.
+
+EVALUACIÓN NS-PILOT-002:
+- Con el mismo YAML + mismos flags → mismo reporte: inherentemente determinístico.
+- La rubrica no menciona explícitamente la gestión de dependencias.
+- Si el agente no incluye requirements.txt con pyyaml>=6.0, la reproducibilidad se rompe:
+  el evaluador puede no tener pyyaml o puede tener una versión incompatible.
+
+FIT.........: PARTIAL — GAP IDENTIFICADO
+GAP: La rubrica no cubre explícitamente la declaración de dependencias.
+SCORER_NOTE.: Para NS-PILOT-002, la puntuación de reproducibilidad incluye:
+              - requirements.txt presente con pyyaml>=6.0: condición necesaria.
+              - Ausencia de requirements.txt: -4 pts (no reproducible sin él).
+              - requirements.txt presente pero sin versión pinneada (solo "pyyaml"): -1 pt.
+              - Si usa importlib.metadata o similar para validar pyyaml en runtime: bonus 0 pts
+                (no penalizar pero no bonificar; no fue pedido).
+
+----------
+DIM_07: EVIDENCE_QUALITY — 10 pts
+----------
+
+RUBRIC: Archivos cambiados, comandos ejecutados, output de tests documentados.
+
+EVALUACIÓN NS-PILOT-002:
+- Aplica directamente: el agente debe mostrar pytest output, ejemplo de ejecución CLI,
+  ejemplo de YAML input y output de reporte generado.
+- No hay gap adicional vs NS-PILOT-001.
+
+FIT.........: FULL
+SCORER_NOTE.: Verificar que el AGENT_REPORT incluya:
+              - Bloque de output de pytest (todos pasando).
+              - Al menos 1 ejemplo de ejecución con --filter-status y --sort-by.
+              - El archivo YAML de muestra usado.
+              - Un fragmento del reporte generado.
+
+----------
+DIM_08: INTEGRATION_FRICTION — 5 pts
+----------
+
+RUBRIC: Correcciones o limpiezas requeridas post-entrega del agente.
+
+EVALUACIÓN NS-PILOT-002:
+- Aplica directamente: ¿el agente dejó archivos temporales, imports no usados,
+  TODOs sin resolver, o scope creep que debería removerse?
+- Scope creep dentro del piloto (flags extra, módulos extra): se penaliza aquí
+  además de en DIM_04.
+
+FIT.........: FULL
+SCORER_NOTE.: Scope creep visible en el folder (archivos no pedidos, flags implementados
+              pero no en spec): penalizar aquí independientemente de si "funcionan".
+              Razonamiento: la fricción de integración incluye el esfuerzo de remover
+              lo que no se pidió.
+
+==========
+04.00 RESUMEN DE GAPS
+==========
+
+GAP_01: CLI_CONTRACT — exit codes específicos
+---------
+Dimensión afectada: DIM_03
+Descripción: La rubrica evalúa "exit codes estables" pero no verifica que los
+             valores específicos (1=file not found, 2=invalid YAML) sean correctos.
+Impacto: Un agente podría obtener score completo en CLI_CONTRACT con exit codes invertidos.
+Mitigación: Scorer note — aplicar -5 pts si exit codes no coinciden con el spec.
+Acción requerida: Solo nota de scoring. NO requiere cambio a la rubrica.
+
+GAP_02: TEST_VALIDATION — mínimo de tests
+---------
+Dimensión afectada: DIM_02
+Descripción: La rubrica no especifica un mínimo numérico. NS-PILOT-002 requiere >= 12.
+Impacto: Un agente con 6 tests podría obtener score completo si todos pasan.
+Mitigación: Scorer note — tabla de penalización por cantidad de tests.
+Acción requerida: Solo nota de scoring. NO requiere cambio a la rubrica.
+
+GAP_03: DEPENDENCY MANAGEMENT — requirements.txt
+---------
+Dimensión afectada: DIM_06
+Descripción: La rubrica no menciona declaración de dependencias externas.
+             pyyaml es una dependencia no-stdlib que debe declararse.
+Impacto: Sin requirements.txt el pilot no es reproducible por el evaluador.
+Mitigación: Scorer note — penalización de -4 pts en DIM_06 si requirements.txt ausente.
+Acción requerida: Solo nota de scoring. NO requiere cambio a la rubrica.
+
+GAP_04: SCOPE CREEP INTRA-PILOT
+---------
+Dimensión afectada: DIM_04 + DIM_08
+Descripción: La rubrica evalúa scope fuera del pilot (boundary discipline) pero no
+             evalúa explícitamente scope creep DENTRO del pilot (features extra no pedidas).
+Impacto: Un agente que añade --verbose, --format JSON, un 5to módulo y 3 CLI flags extra
+         podría obtener score completo si todo funciona y está bien estructurado.
+Mitigación: Las notas de scoring en DIM_04 (-3 pts por módulo extra) y DIM_08 (fricción)
+             capturan esto de forma distribuida.
+Acción requerida: Solo notas de scoring. NO requiere cambio a la rubrica.
+
+==========
+05.00 VEREDICTO
+==========
+
+RUBRIC_VERDICT: USE_AS_IS
+
+JUSTIFICACIÓN:
+La rubrica de 8 dimensiones (100 pts) cubre correctamente NS-PILOT-002 en 5 de 8 dimensiones
+sin ninguna adaptación. Los 4 gaps identificados son menores y todos se resuelven
+con notas de scoring al evaluador, sin necesidad de modificar el archivo de rubrica.
+
+La rubrica fue diseñada con suficiente generalidad (no hace referencias a Markdown
+ni a task runner específicos) que aplica a cualquier Python CLI con contratos claros.
+
+GAPS IDENTIFICADOS: 4
+GAPS CRÍTICOS: 0
+GAPS MENORES: 4 (todos resueltos con scorer notes)
+
+ACCIÓN REQUERIDA: Ninguna sobre el archivo de rubrica.
+                  Las scorer notes de este documento son suficientes.
+
+PENDING_HUMAN_DECISION:
+HD_002 — El humano debe confirmar si el veredicto "use as-is" es aceptable o prefiere
+         un patch formal al archivo de rubrica para proyectos futuros.
+
+==========
+06.00 SCORER NOTES CONSOLIDADAS
+==========
+
+Estas notas deben leerlas quien evalúe NS-PILOT-002 (Claude Code o Codex) antes de puntuar.
+
+NOTE_01 (DIM_02 — Test Validation):
+Penalizar si el total de tests es < 12:
+- 8-11 tests: -4 pts en DIM_02
+- 4-7 tests: -8 pts en DIM_02
+- < 4 tests: -15 pts en DIM_02 (cero)
+Verificar además: ¿cubren exit code 1 y exit code 2 explícitamente?
+
+NOTE_02 (DIM_03 — CLI Contract):
+El score completo en CLI_CONTRACT exige exit codes EXACTOS:
+- exit code 1 DEBE ser solo para "archivo no encontrado"
+- exit code 2 DEBE ser solo para "YAML inválido"
+- Valores invertidos, mezclados, o usa-todos-los-errores-como-1: -5 pts en DIM_03
+
+NOTE_03 (DIM_04 — Structure):
+NS-PILOT-002 especifica exactamente 4 módulos (parser, scheduler, report, cli).
+- Por cada módulo extra no pedido: -3 pts en DIM_04 (máximo -9 pts).
+- Subdividir un módulo en 2 sin justificación: -2 pts.
+- Monolito en cli.py: -8 pts.
+
+NOTE_04 (DIM_06 — Determinism):
+Verificar que requirements.txt exista y contenga pyyaml>=6.0:
+- Ausente: -4 pts en DIM_06
+- Presente sin versión: -1 pt en DIM_06
+
+NOTE_05 (DIM_08 — Integration Friction):
+Scope creep dentro del pilot (flags extra, archivos extra no pedidos):
+- Contar cada feature extra no pedida como un ítem de fricción.
+- 1 ítem: -1 pt; 2 ítems: -3 pts; 3+ ítems: -5 pts (máximo de la dimensión).
+
+==========
+07.00 SCORECARD TEMPLATE PARA NS-PILOT-002
+==========
+
+AGENT_ID: [CLAUDE_CODE | CODEX]
+EVALUATOR: [nombre o ID del evaluador]
+DATE_EVALUATED: [fecha]
+
+DIMENSION                        | MAX | SCORE | NOTES
+---------------------------------|-----|-------|------
+DIM_01 FUNCTIONAL_CORRECTNESS    | 25  |       |
+DIM_02 TEST_VALIDATION           | 15  |       | Apply NOTE_01
+DIM_03 CLI_CONTRACT              | 10  |       | Apply NOTE_02
+DIM_04 STRUCTURE_MAINTAINABILITY | 15  |       | Apply NOTE_03
+DIM_05 BOUNDARY_DISCIPLINE       | 10  |       |
+DIM_06 DETERMINISM_REPRODUCIB.   | 10  |       | Apply NOTE_04
+DIM_07 EVIDENCE_QUALITY          | 10  |       |
+DIM_08 INTEGRATION_FRICTION      |  5  |       | Apply NOTE_05
+---------------------------------|-----|-------|------
+TOTAL                            | 100 |       |
+
+RESULT: [ ] PASS (>=85) [ ] PARTIAL (60-84) [ ] FAIL (<60)
+
+COMMENTS:
+[...]
+
+==========
+FIN_NS-PILOT-002.RUBRIC_FIT.READONLY.20260621.AI.txt
+==========
