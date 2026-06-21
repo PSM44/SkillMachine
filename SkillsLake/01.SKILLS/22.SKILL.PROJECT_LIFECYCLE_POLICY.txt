@@ -946,3 +946,80 @@ CONTRATO:
 
 FIN_MB-GRC-026F1_CONTINUITY_REFRESH_RULE
 ==========
+
+==========
+MB-GRC-034C_MINIBATTLE_SAFE_LAUNCHER_GATE
+==========
+
+DATE..............: 2026-06-21
+STATUS............: ACTIVE
+LAYER.............: PROJECT_LIFECYCLE_POLICY
+PURPOSE...........:
+Prevent minibattle execution from damaging terminal state, committing unintended generated outputs,
+or bypassing validation/stage discipline when long scripts or launchers are required.
+
+SCOPE.............:
+Applies to any minibattle, one-shot, repository patch, session close, session continue, RADAR,
+build, validation, or governance patch that requires a long PowerShell script.
+
+SAFE_LAUNCHER_GATE:
+Before running a long PowerShell operation, the IA must use the safe launcher pattern:
+
+1. TEMP_SCRIPT_FILE:
+   Write long logic to Temp/<MB_ID>.<timestamp>.ps1.
+
+2. SHORT_CONSOLE_LAUNCHER:
+   The interactive console only creates the .ps1 file, runs pwsh -File, captures LASTEXITCODE,
+   prints SCRIPT_EXIT and LAUNCHER_STATUS, and returns to prompt.
+
+3. NO_INTERACTIVE_TRY_CATCH_FINALLY:
+   Do not paste long try/catch/finally blocks directly into the interactive terminal.
+
+4. NO_LAUNCHER_EXIT:
+   The launcher must not call exit. It must not close VS Code terminal or the user shell.
+
+5. NO_NESTED_HERE_STRING:
+   Do not nest PowerShell here-strings inside launcher here-strings. Use arrays of lines or a
+   different construction method.
+
+6. NO_PAGER_CAPTURE:
+   Set GIT_PAGER=cat and PAGER=cat. Use git --no-pager for log/diff/show/status diagnostics.
+
+7. BUILD_SCOPE_GATE:
+   Do not run BUILD.ps1 unless generated outputs are explicitly in scope. If BUILD dirties
+   generated outputs unexpectedly, STOP before commit and decide restore/isolate/commit explicitly.
+
+8. EXPLICIT_STAGE_ONLY:
+   Stage only the expected files with explicit git add -- <path>. Do not use git add -A or git add .
+   for governance/policy patches.
+
+9. DIRTY_SET_GATE:
+   Before commit, compare git status --short against an allowed dirty-file whitelist. If unexpected
+   files appear, STOP and report.
+
+10. STAGED_DIFF_GATE:
+   Print git --no-pager diff --cached --name-status. If no staged changes exist, STOP before commit.
+
+11. VALIDATION_GATE:
+   Run Validate-System.ps1 before commit. If available and relevant, run post-build validation as well.
+
+12. FINAL_CLEAN_GATE:
+   After commit/push, verify branch, HEAD, remote head, unpushed/unpulled and clean working tree.
+
+REQUIRED_OUTPUT:
+Every lifecycle script must print START/END, LOCAL_TIME, ROOT, PURPOSE, COPY_FROM_HERE, validation
+exit code, commit/push exit codes if applicable, FINAL_STATUS, LOG_PATH and NEXT_ACTION.
+
+FAILURE_HANDLING:
+- If terminal closes, run recovery diagnostic before continuing.
+- If generated outputs become dirty unexpectedly, restore or isolate before further changes.
+- If a commit fails because staged set is empty, inspect whether the intended files were actually changed.
+- If the shell enters pager END state, rerun with --no-pager and pager environment disabled.
+
+DONE_WHEN.........:
+A minibattle can be executed without closing the user's terminal, without accidental generated-output
+commits, and with deterministic validation/stage/commit/push/final-clean evidence.
+
+==========
+FIN_MB-GRC-034C_MINIBATTLE_SAFE_LAUNCHER_GATE
+==========
