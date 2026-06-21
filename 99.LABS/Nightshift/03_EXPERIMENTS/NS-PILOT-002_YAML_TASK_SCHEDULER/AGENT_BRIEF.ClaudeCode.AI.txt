@@ -4,7 +4,7 @@ AGENT BRIEF — CLAUDE CODE — NS-PILOT-002
 
 AGENT.............: Claude Code (claude-sonnet-4-6 or equivalent)
 PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
-BRIEF_VERSION.....: v1.0
+BRIEF_VERSION.....: v1.1
 DATE..............: 2026-06-21
 TARGET_BRANCH.....: lab/ns-pilot-002-claude
 SPEC_FILE.........: PILOT.SPEC.AI.txt (in this folder — canonical source of truth)
@@ -47,16 +47,23 @@ You may also modify:
   99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/requirements.txt
   (only to add a pinned version if needed; pyyaml>=6.0 must remain)
 
+You may create exactly one evidence file:
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.ClaudeCode.RUN_001.AI.txt
+
+These evidence folder files are READ-ONLY (do not modify):
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE_TEMPLATE.AI.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/COMPARE_TEMPLATE.AI.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/runs/.gitkeep
+
 ==========
 04.00 PROHIBITED PATHS
 ==========
 
-Do NOT touch any file outside NS-PILOT-002_YAML_TASK_SCHEDULER/.
+Do NOT touch any file outside the allowed paths listed in section 03.00.
 Specifically prohibited:
   - SkillsLake/, GRCLake/, 90.USECASE/, SyS/, HUMAN/
   - 99.LABS/Nightshift/00_GOVERNANCE/
   - 99.LABS/Nightshift/05_REPORTS/
-  - 99.LABS/Nightshift/04_EVIDENCE/ (read-only for evidence templates)
   - NS-PILOT-001_MARKDOWN_TASK_RUNNER/ (prior pilot, do not touch)
   - .gitattributes, .gitignore, any root-level files
   - main branch (never push to main)
@@ -96,6 +103,7 @@ Due date sort order: ascending (earliest first)
 
 Minimum 12 tests total across the four test files.
 All tests must pass: pytest tests/ must exit 0.
+pytest must be available in the execution environment. requirements.txt declares runtime dependency pyyaml>=6.0 only.
 Tests must not require network access.
 Tests must use TASKS.sample.yaml from the pilot folder or create their own temp files.
 
