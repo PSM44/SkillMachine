@@ -1,0 +1,132 @@
+==========
+00.00_METADATOS
+==========
+
+ID_UNICO..........: MGMT.STATUS_BRIEF.NS-PILOT-001.20260621
+NOMBRE_ARCHIVO....: MGMT.STATUS_BRIEF.NS-PILOT-001.20260621.AI.txt
+MB_ID.............: MB-MGMT-002_R2_STATUS_BRIEF_ARTIFACT
+GENERATED_AT......: 2026-06-21 01:26:43 -04:00
+ROOT_WIN..........: C:\01. GitHub\Skills
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: 712590a 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+STATUS............: MANAGEMENT_BRIEF
+AUDIENCIA.........: Management / project owner
+ALCANCE...........: Estado ejecutivo de NS-PILOT-001 antes de decidir merge, cierre o NS-PILOT-002.
+
+==========
+01.00_RESUMEN_EJECUTIVO
+==========
+
+NS-PILOT-001 ya no esta en estado scaffold. El piloto produjo evidencia suficiente para concluir que el flujo Nightshift funciona como laboratorio controlado para comparar agentes IA sobre una tarea acotada.
+
+Estado actual confirmado:
+- Rama activa: lab/ns-pilot-001-hybrid.
+- Repo limpio y sincronizado.
+- Readiness OK en prechecks previos de la sesion.
+- Validate-System OK.
+- Baseline hibrido aceptado.
+- CLI unificado creado.
+- Rubrica de scoring creada.
+- Skill PowerShell reforzado con regla de long payload y ParseFile gate.
+
+Decision recomendada: no iniciar NS-PILOT-002 hasta resolver cierre documental y decision layer de NS-PILOT-001.
+
+==========
+02.00_ESTADO_GIT_CONFIRMADO
+==========
+
+MAIN_LOCAL........: b23d632 20260621_MB-GRC-034E_merge_launcher_safety_to_main
+MAIN_REMOTE.......: b23d632 20260621_MB-GRC-034E_merge_launcher_safety_to_main
+HYBRID_REMOTE.....: 712590a 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+CODEX_REMOTE......: 0406be3 20260615_MB-NS-001E_remove_codex_pycache
+CLAUDE_REMOTE.....: fb66846 20260615_MB-NS-001F_import_claude_code_run_001
+
+Lectura:
+- main contiene la linea canon hasta MB-GRC-034E.
+- lab/ns-pilot-001-hybrid contiene el desarrollo Nightshift del piloto 001.
+- codex y claude quedan como ramas fuente/evidencia comparativa.
+- la rama hibrida es el estado operativo actual del piloto.
+
+==========
+03.00_EVIDENCIA_FUNCIONAL
+==========
+
+Archivos principales observados:
+- src/cli.py
+- src/parser.py
+- src/report.py
+- src/task_runner.py
+
+Contrato funcional:
+- Parser Markdown para checklist.
+- Estados soportados: pending, done, blocked.
+- Reporte Markdown humano.
+- Reporte JSON deterministico.
+- CLI unificado con argparse.
+
+Tests visibles:
+- tests/test_cli.py
+- tests/test_parser.py
+- tests/test_report.py
+- tests/test_task_runner.py
+
+==========
+04.00_EVIDENCIA_DE_GOBIERNO
+==========
+
+Boundary operacional definido:
+- agentes solo podian editar bajo 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-001_MARKDOWN_TASK_RUNNER.
+- evidencia bajo 99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-001_MARKDOWN_TASK_RUNNER.
+- prohibido editar SkillsLake, GRCLake, 90.USECASE, SyS y raiz sin autorizacion.
+
+Decision hibrida aplicada:
+- no promover Codex directo.
+- no promover Claude directo.
+- crear rama hibrida.
+
+Razon: Codex aporto JSON deterministico y runner compacto; Claude aporto estructura modular y salida humana Markdown.
+
+==========
+05.00_DISCREPANCIAS_Y_DEUDA
+==========
+
+Discrepancia documental:
+- README.HUMAN.md aun indica scaffold only / no agent run started.
+- PILOT.SPEC.AI.txt aun indica CURRENT_VERDICT: SCAFFOLD_DONE.
+
+Estado real:
+- el piloto ya fue ejecutado.
+- existe baseline hibrido.
+- existe CLI unificado.
+- existe scoring rubric.
+- la continuidad ya fue actualizada.
+
+Riesgo: una IA o humano que lea solo README/PILOT.SPEC puede entender mal el estado vivo del piloto.
+
+==========
+06.00_OPCIONES_DE_DECISION
+==========
+
+OPCION_A_CERRAR_PILOTO: cerrar NS-PILOT-001 como evidencia validada.
+OPCION_B_PREPARAR_MERGE_A_MAIN: disenar estrategia de promocion desde lab/ns-pilot-001-hybrid a main.
+OPCION_C_CORREGIR_DOCUMENTACION_STALE: actualizar README.HUMAN.md y PILOT.SPEC.AI.txt.
+OPCION_D_DISEÑAR_NS_PILOT_002: crear siguiente piloto comparativo, solo despues de cerrar decision layer.
+
+==========
+07.00_RECOMENDACION
+==========
+
+Secuencia recomendada:
+1. MB-MGMT-003_PATCH_STALE_PILOT_DOCS.
+2. MB-MGMT-004_MERGE_READINESS_PLAN.
+3. Decision humana: merge a main, mantener lab como evidencia, o cerrar piloto sin merge.
+4. Solo despues: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY.
+
+Dictamen: no iniciar NS-PILOT-002 mientras README/PILOT.SPEC sigan stale.
+
+==========
+08.00_NEXT_ACTION
+==========
+
+NEXT_ACTION.........: MB-MGMT-003_PATCH_STALE_PILOT_DOCS
+ALTERNATIVE.........: MB-MGMT-004_MERGE_READINESS_PLAN
