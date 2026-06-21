@@ -159,3 +159,8 @@ TECH_DEBT:
 ==========
 FIN_MB-CLOSE-002_BACKLOG_REFRESH_20260621
 ==========
+
+========== MB-MGMT-006_CLOSE_NS_PILOT_001_LAB_PHASE ==========
+DONE..............: Close NS-PILOT-001 as lab evidence.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+NOTE..............: Nightshift lab artifacts remain outside main; global PowerShell safety patch was promoted separately.

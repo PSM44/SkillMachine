@@ -1,0 +1,30 @@
+==========
+NS-PILOT-001 LAB PHASE CLOSE
+==========
+
+ID................: NS-PILOT-001.LAB_PHASE_CLOSE.20260621
+DATE..............: 2026-06-21
+BRANCH............: lab/ns-pilot-001-hybrid
+STATUS............: CLOSED_AS_LAB_EVIDENCE
+
+SUMMARY
+NS-PILOT-001 was executed as a Nightshift lab experiment comparing Codex and Claude Code outputs on a controlled Markdown task runner scope.
+
+CONFIRMED OUTCOMES
+- Codex and Claude Code branches were preserved as comparative evidence.
+- A hybrid branch was created and accepted as the lab baseline.
+- CLI, parser, report, task_runner and tests are present in the lab experiment folder.
+- Scoring rubric exists under Nightshift governance.
+- Management status brief exists under 99.LABS/Nightshift/05_REPORTS.
+- Stale scaffold-only README/PILOT.SPEC language was patched.
+- PowerShell long payload / ParseFile safety rule was promoted separately to main.
+
+MAIN PROMOTION
+- main now contains the global SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt patch.
+- Nightshift lab artifacts were intentionally not merged to main.
+
+DECISION
+Keep lab/ns-pilot-001-hybrid as evidence/lab branch. Do not full-merge Nightshift pilot artifacts into main at this stage.
+
+NEXT RECOMMENDED ACTION
+Design NS-PILOT-002 as a new readonly planning step before any additional agent execution.

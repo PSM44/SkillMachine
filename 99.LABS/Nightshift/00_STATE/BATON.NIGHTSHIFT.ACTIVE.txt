@@ -175,3 +175,9 @@ NEXT_OPTIONS......: pause Nightshift; design NS-PILOT-002; evaluate repository-l
 ==========
 FIN_MB-CLOSE-002_NIGHTSHIFT_REFRESH_20260621
 ==========
+
+========== MB-MGMT-006_CLOSE_NS_PILOT_001_LAB_PHASE ==========
+DATE..............: 2026-06-21
+STATUS............: NS-PILOT-001_CLOSED_AS_LAB_EVIDENCE
+MAIN_PROMOTION....: PowerShell safety skill patch promoted to main.
+NEXT_ACTION.......: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
