@@ -1,0 +1,35 @@
+tasks:
+  - title: "Set up CI pipeline"
+    priority: "high"
+    due_date: "2026-07-01"
+    status: "open"
+
+  - title: "Write API documentation"
+    priority: "medium"
+    due_date: "2026-07-10"
+    status: "open"
+
+  - title: "Migrate legacy database"
+    priority: "high"
+    due_date: "2026-06-28"
+    status: "blocked"
+
+  - title: "Deploy staging environment"
+    priority: "high"
+    due_date: "2026-07-05"
+    status: "done"
+
+  - title: "Code review sprint 3"
+    priority: "medium"
+    due_date: "2026-07-03"
+    status: "done"
+
+  - title: "Update dependency versions"
+    priority: "low"
+    due_date: "2026-07-15"
+    status: "open"
+
+  - title: "Performance audit"
+    priority: "medium"
+    due_date: "2026-07-08"
+    status: "open"

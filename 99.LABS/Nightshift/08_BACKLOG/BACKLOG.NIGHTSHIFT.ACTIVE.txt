@@ -168,3 +168,12 @@ NOTE..............: Nightshift lab artifacts remain outside main; global PowerSh
 ========== MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001 ==========
 DONE..............: Session close after NS-PILOT-001.
 P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+========== MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD ==========
+DATE..............: 2026-06-21
+STATUS............: DONE
+SUMMARY...........: Created full scaffold for NS-PILOT-002_YAML_TASK_SCHEDULER.
+PILOT_ROOT........: 99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER
+EVIDENCE_ROOT.....: 99.LABS\Nightshift\04_EVIDENCE\NS-PILOT-002_YAML_TASK_SCHEDULER
+HD_APPROVED.......: HD_001 (design approved), HD_002 (rubric use-as-is approved)
+NEXT_ACTION.......: MB-NS-004A_CLAUDE_CODE_RUN_001_NS_PILOT_002 and MB-NS-004B_CODEX_RUN_001_NS_PILOT_002

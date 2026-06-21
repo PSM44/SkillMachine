@@ -1,0 +1,190 @@
+==========
+AGENT BRIEF — CODEX DESKTOP — NS-PILOT-002
+==========
+
+AGENT.............: Codex Desktop (OpenAI)
+PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
+BRIEF_VERSION.....: v1.0
+DATE..............: 2026-06-21
+TARGET_BRANCH.....: lab/ns-pilot-002-codex
+SPEC_FILE.........: PILOT.SPEC.AI.txt (in this folder — canonical source of truth)
+
+==========
+01.00 YOUR TASK
+==========
+
+Implement NS-PILOT-002_YAML_TASK_SCHEDULER as specified in PILOT.SPEC.AI.txt.
+
+Read PILOT.SPEC.AI.txt first. This brief adds execution context specific to Codex Desktop.
+In case of any conflict between this brief and PILOT.SPEC.AI.txt, trust the spec.
+
+Summary:
+Build a Python CLI that reads a YAML task file and outputs a formatted, filtered,
+sorted text report. Four modules. Four test files. Minimum 12 tests. pyyaml only.
+
+==========
+02.00 BRANCH
+==========
+
+You must work on branch: lab/ns-pilot-002-codex
+
+This branch does not exist yet. Create it before making any changes:
+  git checkout -b lab/ns-pilot-002-codex
+
+Branch base: lab/ns-pilot-001-hybrid (current HEAD when scaffold was created)
+Do NOT work on main or lab/ns-pilot-001-hybrid directly.
+Do NOT create branches with other names.
+Do NOT merge with lab/ns-pilot-002-claude.
+
+==========
+03.00 ALLOWED PATHS
+==========
+
+You may create and modify files ONLY under:
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/
+
+You may also modify:
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/requirements.txt
+  (only to add a pinned version if needed; pyyaml>=6.0 must remain)
+
+==========
+04.00 PROHIBITED PATHS
+==========
+
+Do NOT touch any file outside NS-PILOT-002_YAML_TASK_SCHEDULER/.
+Specifically prohibited:
+  - SkillsLake/, GRCLake/, 90.USECASE/, SyS/, HUMAN/
+  - 99.LABS/Nightshift/00_GOVERNANCE/
+  - 99.LABS/Nightshift/05_REPORTS/
+  - 99.LABS/Nightshift/04_EVIDENCE/ (read-only for evidence templates)
+  - NS-PILOT-001_MARKDOWN_TASK_RUNNER/ (prior pilot, do not touch)
+  - .gitattributes, .gitignore, any root-level files
+  - main branch (never push to main)
+
+==========
+05.00 WHAT TO BUILD
+==========
+
+Files to create inside src/:
+  src/__init__.py        (empty or minimal)
+  src/parser.py          read YAML, return task list, raise errors for missing file / invalid YAML
+  src/scheduler.py       filter by status, sort by priority or due_date
+  src/report.py          format task list as plain text report
+  src/cli.py             argparse CLI: --input, --filter-status, --sort-by, --output
+
+Files to create inside tests/:
+  tests/__init__.py      (empty)
+  tests/test_parser.py
+  tests/test_scheduler.py
+  tests/test_report.py
+  tests/test_cli.py
+
+Exact CLI interface:
+  python -m src.cli --input PATH [--filter-status STR] [--sort-by FIELD] [--output PATH]
+
+Exit codes (mandatory, exact):
+  0 = success
+  1 = input file not found
+  2 = invalid YAML
+
+Priority sort order: high → medium → low
+Due date sort order: ascending (earliest first)
+
+==========
+06.00 TEST REQUIREMENTS
+==========
+
+Minimum 12 tests total across the four test files.
+All tests must pass: pytest tests/ must exit 0.
+Tests must not require network access.
+Tests may use TASKS.sample.yaml from the pilot folder or create their own temp files.
+
+Required coverage (see PILOT.SPEC.AI.txt section 07.00 for full list):
+  - Valid YAML load
+  - Missing file → exit code 1
+  - Invalid YAML → exit code 2
+  - Filter by status
+  - Sort by priority
+  - Sort by due_date
+  - Empty result after filter (still exit 0)
+  - Report structure (contains expected fields)
+  - Summary line in report
+
+==========
+07.00 EVIDENCE REQUIREMENTS
+==========
+
+After completing implementation, produce an evidence file:
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/
+    EVIDENCE.Codex.RUN_001.AI.txt
+
+Use the template at:
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE_TEMPLATE.AI.txt
+
+Evidence must include:
+  1. Exact branch and commit hash
+  2. All commands run (pip install, pytest, CLI smoke tests)
+  3. Full pytest output (pass/fail summary)
+  4. CLI smoke test outputs (at least 3 runs with different flags)
+  5. List of all files created/modified
+  6. Known limitations (if any)
+  7. Final status: PASS / PARTIAL / FAIL with score estimate
+
+Note for Codex: if you cannot run commands directly, document what commands were
+intended and what the expected output would be. Flag as UNVERIFIED in evidence.
+
+==========
+08.00 NO SCOPE CREEP
+==========
+
+Implement ONLY what is in PILOT.SPEC.AI.txt. Do not add:
+  - Extra CLI flags beyond --input, --filter-status, --sort-by, --output
+  - Extra modules beyond parser.py, scheduler.py, report.py, cli.py
+  - Logging framework
+  - Configuration file support
+  - Output format options (JSON, CSV, HTML)
+  - Task creation or editing (read-only tool)
+  - Any third-party library beyond pyyaml
+
+Every unrequested feature reduces your score in Structure and Integration Friction dimensions.
+
+==========
+09.00 GIT RULES (Codex specific)
+==========
+
+  - Prefer explicit staging over git add -A when possible
+  - Do NOT push to main
+  - Do NOT merge with lab/ns-pilot-002-claude or lab/ns-pilot-001-hybrid
+  - Working tree must be clean at end of run
+  - If Codex cannot run git directly, document intended git commands in evidence file
+
+Recommended commit message:
+  NS-PILOT-002_CODEX_RUN_001_YAML_TASK_SCHEDULER
+
+==========
+10.00 FINAL REPORT FORMAT
+==========
+
+After completing the run, provide this report in your session output:
+
+CODEX RUN REPORT — NS-PILOT-002
+
+BRANCH...........:
+COMMIT...........:
+FILES_CREATED....:
+TESTS_RUN........:
+TESTS_PASSED.....:
+TESTS_FAILED.....:
+CLI_SMOKE_TEST...: PASS | FAIL | UNVERIFIED
+EXIT_CODE_1_TEST.: PASS | FAIL | UNVERIFIED
+EXIT_CODE_2_TEST.: PASS | FAIL | UNVERIFIED
+REQUIREMENTS_TXT.: PRESENT | MISSING
+SCOPE_ISSUES.....: NONE | (list any extra features added)
+WORKING_TREE.....: CLEAN | DIRTY | UNKNOWN
+ESTIMATE_SCORE...: (rough score out of 100 per rubric)
+FINAL_STATUS.....: COMPLETE | PARTIAL | FAILED
+
+==========
+FIN_AGENT_BRIEF.Codex.AI.txt
+==========

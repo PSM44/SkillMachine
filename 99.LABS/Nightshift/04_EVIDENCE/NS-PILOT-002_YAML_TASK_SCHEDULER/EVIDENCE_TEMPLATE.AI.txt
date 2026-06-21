@@ -1,0 +1,143 @@
+==========
+EVIDENCE TEMPLATE — NS-PILOT-002_YAML_TASK_SCHEDULER
+==========
+
+PURPOSE: Use this template to document each agent's run.
+OUTPUT FILENAME: EVIDENCE.<AGENT>.RUN_<N>.AI.txt
+  Examples:
+    EVIDENCE.ClaudeCode.RUN_001.AI.txt
+    EVIDENCE.Codex.RUN_001.AI.txt
+
+Copy this template, fill in all fields, and save the completed file in this folder.
+
+==========
+01.00 RUN METADATA
+==========
+
+PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
+AGENT_ID..........: [CLAUDE_CODE | CODEX]
+RUN_NUMBER........: [001 | 002 | ...]
+DATE_RUN..........: [YYYY-MM-DD]
+BRANCH............: [lab/ns-pilot-002-claude | lab/ns-pilot-002-codex]
+COMMIT_HASH.......: [git hash of final commit]
+SPEC_VERSION......: PILOT.SPEC.AI.txt v1.0
+
+==========
+02.00 COMMANDS RUN
+==========
+
+List all commands executed during implementation and verification, in order.
+Include working directory if non-standard.
+
+  # Example format:
+  pip install -r requirements.txt
+  pytest tests/ -v
+  python -m src.cli --input TASKS.sample.yaml
+  python -m src.cli --input TASKS.sample.yaml --filter-status open --sort-by due_date
+  python -m src.cli --input TASKS.sample.yaml --output report_out.txt
+  python -m src.cli --input nonexistent.yaml ; echo "exit: $LASTEXITCODE"
+  python -m src.cli --input invalid.yaml ; echo "exit: $LASTEXITCODE"
+  python -m src.cli --help
+
+[Replace with actual commands run]
+
+==========
+03.00 PYTEST OUTPUT
+==========
+
+Paste the full pytest output below (from pytest tests/ -v or equivalent).
+Include: test names, pass/fail per test, and final summary line.
+
+[Paste full pytest output here]
+
+==========
+04.00 CLI SMOKE TEST OUTPUTS
+==========
+
+For each smoke test, include the command and the actual output.
+
+--- Smoke test 1: basic run ---
+Command: python -m src.cli --input TASKS.sample.yaml
+Output:
+[paste output]
+Exit code: [0]
+
+--- Smoke test 2: with filter ---
+Command: python -m src.cli --input TASKS.sample.yaml --filter-status open
+Output:
+[paste output]
+Exit code: [0]
+
+--- Smoke test 3: with sort ---
+Command: python -m src.cli --input TASKS.sample.yaml --sort-by due_date
+Output:
+[paste output]
+Exit code: [0]
+
+--- Smoke test 4: exit code 1 ---
+Command: python -m src.cli --input nonexistent.yaml
+Stderr: [paste error message]
+Exit code: [must be 1]
+
+--- Smoke test 5: exit code 2 ---
+Command: python -m src.cli --input invalid.yaml
+Stderr: [paste error message]
+Exit code: [must be 2]
+
+==========
+05.00 FILES CREATED / MODIFIED
+==========
+
+List all files created or modified by the agent run.
+Path relative to repo root.
+
+CREATED:
+  [path/to/file]
+
+MODIFIED:
+  [path/to/file]
+
+NOT TOUCHED (confirm these were left unchanged):
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/PILOT.SPEC.AI.txt
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/TASKS.sample.yaml
+  (list other scaffold files confirmed untouched)
+
+==========
+06.00 KNOWN LIMITATIONS
+==========
+
+List any known limitations, edge cases not covered, or deviations from spec.
+
+  [NONE] or list items:
+  - [limitation 1]
+  - [limitation 2]
+
+==========
+07.00 SCOPE ISSUES
+==========
+
+List any items implemented beyond the spec (scope creep), even if they work correctly.
+
+  [NONE] or list items:
+  - [extra feature / module / flag]
+
+==========
+08.00 FINAL STATUS
+==========
+
+TESTS_RUN.........:
+TESTS_PASSED......:
+TESTS_FAILED......:
+CLI_SMOKE_TEST....: PASS | FAIL
+EXIT_CODE_1_TEST..: PASS | FAIL | UNVERIFIED
+EXIT_CODE_2_TEST..: PASS | FAIL | UNVERIFIED
+REQUIREMENTS_TXT..: PRESENT_WITH_VERSION | PRESENT_NO_VERSION | MISSING
+SCOPE_ISSUES......: NONE | (count and description)
+WORKING_TREE......: CLEAN | DIRTY
+
+FINAL_STATUS......: COMPLETE | PARTIAL | FAILED
+ESTIMATE_SCORE....: (rough score out of 100, by dimension if possible)
+
+==========
+FIN_EVIDENCE_TEMPLATE.AI.txt
+==========

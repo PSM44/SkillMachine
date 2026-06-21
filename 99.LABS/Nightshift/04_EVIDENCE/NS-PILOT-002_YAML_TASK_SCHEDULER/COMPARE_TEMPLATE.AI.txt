@@ -1,0 +1,200 @@
+==========
+COMPARE TEMPLATE — NS-PILOT-002_YAML_TASK_SCHEDULER
+==========
+
+PURPOSE: Scorecard for comparing Claude Code vs Codex after both runs complete.
+OUTPUT FILENAME: NS-PILOT-002.COMPARISON.20260621.AI.txt (save in 05_REPORTS/)
+RUBRIC REF.....: 99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt
+SCORER NOTES...: 99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.RUBRIC_FIT.READONLY.20260621.AI.txt
+
+Read PILOT.SPEC.AI.txt and both EVIDENCE files before scoring.
+
+==========
+01.00 COMPARISON METADATA
+==========
+
+PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
+DATE_COMPARED.....: [YYYY-MM-DD]
+SCORER............: [human name or agent ID]
+CLAUDE_EVIDENCE...: EVIDENCE.ClaudeCode.RUN_001.AI.txt
+CODEX_EVIDENCE....: EVIDENCE.Codex.RUN_001.AI.txt
+CLAUDE_BRANCH.....: lab/ns-pilot-002-claude
+CODEX_BRANCH......: lab/ns-pilot-002-codex
+CLAUDE_COMMIT.....: [hash]
+CODEX_COMMIT......: [hash]
+
+==========
+02.00 SCORECARD
+==========
+
+SCORER NOTES (apply before scoring each dimension):
+  NOTE_01 (DIM_02): <12 tests → deduct: 8-11: -4pts; 4-7: -8pts; <4: -15pts
+  NOTE_02 (DIM_03): wrong exit code values (1 vs 2 swapped or other codes) → -5pts
+  NOTE_03 (DIM_04): extra module beyond the 4 required → -3pts each (max -9pts)
+  NOTE_04 (DIM_06): no requirements.txt → -4pts; no version pin → -1pt
+  NOTE_05 (DIM_08): scope creep feature → -1 to -5pts depending on count
+
+DIMENSION                        | MAX | CLAUDE | CODEX | NOTES
+---------------------------------|-----|--------|-------|------
+DIM_01 FUNCTIONAL_CORRECTNESS    | 25  |        |       |
+DIM_02 TEST_VALIDATION           | 15  |        |       | NOTE_01
+DIM_03 CLI_CONTRACT              | 10  |        |       | NOTE_02
+DIM_04 STRUCTURE_MAINTAINABILITY | 15  |        |       | NOTE_03
+DIM_05 BOUNDARY_DISCIPLINE       | 10  |        |       |
+DIM_06 DETERMINISM_REPRODUCIB.   | 10  |        |       | NOTE_04
+DIM_07 EVIDENCE_QUALITY          | 10  |        |       |
+DIM_08 INTEGRATION_FRICTION      |  5  |        |       | NOTE_05
+---------------------------------|-----|--------|-------|------
+TOTAL                            | 100 |        |       |
+
+RESULT (CLAUDE): [ ] PASS (>=85) [ ] PARTIAL (60-84) [ ] FAIL (<60)
+RESULT (CODEX):  [ ] PASS (>=85) [ ] PARTIAL (60-84) [ ] FAIL (<60)
+
+==========
+03.00 DIMENSION-BY-DIMENSION NOTES
+==========
+
+DIM_01 — FUNCTIONAL CORRECTNESS
+Claude:
+  [Evidence: did the CLI produce a correct, deterministic report for TASKS.sample.yaml?]
+  Score rationale: [...]
+Codex:
+  [Evidence: ...]
+  Score rationale: [...]
+
+----------
+
+DIM_02 — TEST VALIDATION
+Claude:
+  Tests run: [N]  Tests passed: [N]  Tests failed: [N]
+  Test count penalty applied: [YES / NO / N/A] → adjustment: [pts]
+  Exit code coverage: [exit 1 covered: Y/N] [exit 2 covered: Y/N]
+  Score rationale: [...]
+Codex:
+  Tests run: [N]  Tests passed: [N]  Tests failed: [N]
+  Test count penalty applied: [YES / NO / N/A] → adjustment: [pts]
+  Exit code coverage: [exit 1 covered: Y/N] [exit 2 covered: Y/N]
+  Score rationale: [...]
+
+----------
+
+DIM_03 — CLI CONTRACT
+Claude:
+  --help present: [Y/N]
+  exit code 1 correct (file not found): [Y/N]
+  exit code 2 correct (invalid YAML): [Y/N]
+  exit code penalty applied: [Y/N] → -5pts if swapped or wrong
+  Score rationale: [...]
+Codex:
+  --help present: [Y/N]
+  exit code 1 correct: [Y/N]
+  exit code 2 correct: [Y/N]
+  exit code penalty applied: [Y/N]
+  Score rationale: [...]
+
+----------
+
+DIM_04 — STRUCTURE & MAINTAINABILITY
+Claude:
+  Modules present: parser.py [Y/N] scheduler.py [Y/N] report.py [Y/N] cli.py [Y/N]
+  Extra modules (count): [N] → penalty: [pts]
+  Monolithic structure: [Y/N] → penalty if Y
+  Score rationale: [...]
+Codex:
+  Modules present: parser.py [Y/N] scheduler.py [Y/N] report.py [Y/N] cli.py [Y/N]
+  Extra modules (count): [N] → penalty: [pts]
+  Score rationale: [...]
+
+----------
+
+DIM_05 — BOUNDARY DISCIPLINE
+Claude:
+  Files outside NS-PILOT-002_YAML_TASK_SCHEDULER/: [NONE | list]
+  Canon files touched: [NONE | list]
+  Score rationale: [...]
+Codex:
+  Files outside NS-PILOT-002_YAML_TASK_SCHEDULER/: [NONE | list]
+  Score rationale: [...]
+
+----------
+
+DIM_06 — DETERMINISM & REPRODUCIBILITY
+Claude:
+  requirements.txt present: [Y/N]
+  pyyaml version pinned: [Y/N] → penalty if N
+  Same input → same output verified: [Y/N]
+  Score rationale: [...]
+Codex:
+  requirements.txt present: [Y/N]
+  pyyaml version pinned: [Y/N]
+  Score rationale: [...]
+
+----------
+
+DIM_07 — EVIDENCE QUALITY
+Claude:
+  Commands documented: [Y/N]
+  Full pytest output included: [Y/N]
+  CLI smoke test outputs included: [Y/N]
+  Files list complete: [Y/N]
+  Score rationale: [...]
+Codex:
+  Commands documented: [Y/N]
+  Full pytest output included: [Y/N]
+  CLI smoke test outputs included: [Y/N]
+  Score rationale: [...]
+
+----------
+
+DIM_08 — INTEGRATION FRICTION
+Claude:
+  Scope creep items: [NONE | list]
+  Cleanup required: [NONE | description]
+  Friction score penalty: [0 | -1 | -3 | -5]
+  Score rationale: [...]
+Codex:
+  Scope creep items: [NONE | list]
+  Cleanup required: [NONE | description]
+  Score rationale: [...]
+
+==========
+04.00 VERDICT
+==========
+
+WINNER........: [CLAUDE | CODEX | TIE | NEITHER]
+SCORE_CLAUDE..: [total / 100]
+SCORE_CODEX...: [total / 100]
+
+DIFFERENTIATORS:
+  [Key observations about where the agents differed meaningfully]
+
+HYPOTHESIS_H1_RESULT (REPEATABILITY):
+  The NS-PILOT-002 methodology cycle was: [ ] REPEATABLE [ ] FAILED
+  Notes: [...]
+
+HYPOTHESIS_H2_RESULT (DIFFERENTIATION):
+  Meaningful differences observed: [ ] YES [ ] NO [ ] MARGINAL
+  Notes: [...]
+
+HYPOTHESIS_H3_RESULT (RUBRIC SUFFICIENCY):
+  Rubric was: [ ] SUFFICIENT [ ] REQUIRED_ADJUSTMENTS [ ] INSUFFICIENT
+  Scorer notes applied: [list which notes were triggered]
+
+==========
+05.00 HUMAN DECISION REQUIRED
+==========
+
+Based on the above:
+
+OPTION_A: Promote [CLAUDE | CODEX | HYBRID] output as NS-PILOT-002 baseline.
+OPTION_B: Discard both runs. Re-run with adjusted spec or agent brief.
+OPTION_C: Defer decision. Additional evidence needed.
+
+Recommendation: [...]
+Reasoning: [...]
+
+Pending human decision before any promotion to canon.
+
+==========
+FIN_COMPARE_TEMPLATE.AI.txt
+==========

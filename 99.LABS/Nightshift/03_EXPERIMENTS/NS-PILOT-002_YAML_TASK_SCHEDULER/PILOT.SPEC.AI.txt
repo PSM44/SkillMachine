@@ -1,0 +1,260 @@
+==========
+PILOT.SPEC — NS-PILOT-002_YAML_TASK_SCHEDULER
+==========
+
+PILOT_ID..........: NS-PILOT-002
+PILOT_NAME........: YAML_TASK_SCHEDULER
+STATUS............: SCAFFOLD_READY — awaiting agent runs
+SPEC_VERSION......: v1.0
+DATE..............: 2026-06-21
+SCAFFOLD_MB.......: MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD
+DESIGN_REF........: 99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.DESIGN.READONLY.20260621.AI.txt
+RUBRIC_REF........: 99.LABS\Nightshift\00_GOVERNANCE\NIGHTSHIFT.SCORING.RUBRIC.AI.txt
+RUBRIC_NOTES_REF..: 99.LABS\Nightshift\05_REPORTS\NS-PILOT-002.RUBRIC_FIT.READONLY.20260621.AI.txt
+
+==========
+01.00 TASK SUMMARY
+==========
+
+Build a Python CLI that reads a YAML file containing a list of tasks and outputs
+a formatted text report with filtering and sorting applied.
+
+This spec is the canonical source of truth. Agent briefs summarize it for each
+agent's specific execution context. In case of conflict, this file has authority
+over agent briefs.
+
+==========
+02.00 INPUT YAML SCHEMA
+==========
+
+File format: YAML
+Root key: tasks (list)
+
+Each task item has exactly these fields:
+  title     : string — task name (required)
+  priority  : string — one of: high | medium | low (required)
+  due_date  : string — ISO 8601 date YYYY-MM-DD (required)
+  status    : string — one of: open | done | blocked (required)
+
+Example structure:
+  tasks:
+    - title: "Task name"
+      priority: "high"
+      due_date: "2026-07-01"
+      status: "open"
+
+Sample file for testing: TASKS.sample.yaml (in this folder).
+
+==========
+03.00 CLI CONTRACT
+==========
+
+Entry point: python -m src.cli  OR  python src/cli.py
+
+REQUIRED FLAG:
+  --input PATH       Path to YAML input file. Fails with exit code 1 if file not found.
+
+OPTIONAL FLAGS:
+  --filter-status STR   Filter tasks by status value (open | done | blocked).
+                        If omitted: include all tasks.
+  --sort-by FIELD       Sort output by field (priority | due_date).
+                        Default if omitted: priority.
+                        Priority sort order: high → medium → low.
+                        due_date sort: ascending (earliest first).
+  --output PATH         Write report to this file instead of stdout.
+                        If omitted: output to stdout.
+
+--help flag must be present and list all flags with descriptions.
+
+==========
+04.00 OUTPUT REPORT CONTRACT
+==========
+
+Format: plain text
+Encoding: UTF-8
+
+Structure:
+  Line 1: header "TASK REPORT"
+  Separator line (dashes or equals)
+  For each task (in sorted/filtered order):
+    TITLE: <title>
+    PRIORITY: <priority>
+    DUE: <due_date>
+    STATUS: <status>
+    (blank line between tasks)
+  Final separator
+  Summary line: "Total: N | Open: N | Done: N | Blocked: N"
+
+The report must be deterministic: same input file + same flags → identical output.
+
+==========
+05.00 EXIT CODES
+==========
+
+EXIT CODE 0: success — report generated (or no tasks matched filter, still success)
+EXIT CODE 1: input file not found — print error to stderr, exit 1
+EXIT CODE 2: invalid YAML — file exists but cannot be parsed; print error to stderr, exit 2
+
+These exit codes are exact and mandatory. Do not use other codes for these conditions.
+Do not use exit code 1 for YAML errors or exit code 2 for file-not-found.
+
+==========
+06.00 REQUIRED MODULES
+==========
+
+src/
+  parser.py      — read YAML file; validate structure; return task list or raise appropriate error
+  scheduler.py   — filter by status; sort by field; return ordered task list
+  report.py      — format task list as text report string
+  cli.py         — parse CLI args; orchestrate parser → scheduler → report → output
+
+No additional modules. Do not create utils.py, helpers.py, config.py, or any other module
+unless it is one of the four listed above. Scope creep in modules is penalized.
+
+==========
+07.00 REQUIRED TESTS
+==========
+
+tests/
+  test_parser.py      — tests for parser.py functions
+  test_scheduler.py   — tests for scheduler.py functions
+  test_report.py      — tests for report.py functions
+  test_cli.py         — tests for cli.py (use subprocess or argparse testing)
+
+MINIMUM: 12 tests total across the four test files.
+All tests must pass: pytest must exit 0.
+Tests must be runnable with: pytest tests/ (from pilot root directory).
+No test may depend on external network access.
+
+Suggested test coverage (non-exhaustive):
+  test_parser.py:
+    - load valid YAML → returns correct task list
+    - missing file → raises FileNotFoundError (or equivalent)
+    - invalid YAML content → raises appropriate error
+  test_scheduler.py:
+    - filter by status=open → returns only open tasks
+    - sort by priority → correct order (high, medium, low)
+    - sort by due_date → ascending order
+    - filter + sort combined
+  test_report.py:
+    - non-empty task list → report contains TITLE and STATUS
+    - empty task list → report still valid (no tasks, summary shows 0s)
+  test_cli.py:
+    - --input with valid file → exit code 0
+    - --input with missing file → exit code 1
+    - --input with invalid YAML → exit code 2
+    - --filter-status filters output correctly
+
+==========
+08.00 DEPENDENCY
+==========
+
+External dependency: pyyaml>=6.0
+This is NOT a stdlib module. It must be declared.
+
+Required file: requirements.txt at pilot root with content:
+  pyyaml>=6.0
+
+Install before running: pip install -r requirements.txt
+
+No other external dependencies. Do not add requests, click, typer, rich, or any other
+third-party library beyond pyyaml.
+
+==========
+09.00 NO-SCOPE LIST
+==========
+
+Do NOT implement any of the following:
+  - Database or file persistence beyond reading the input YAML
+  - Web interface or REST API
+  - Async or concurrent processing
+  - Authentication or authorization
+  - External calendar integration
+  - Notifications or alerts
+  - pip packaging (setup.py, pyproject.toml)
+  - Configuration files (.env, config.yaml, settings.py)
+  - Logging framework (Python logging module)
+  - Additional CLI flags beyond the 4 specified
+  - Additional output formats (JSON, CSV, HTML)
+  - Task creation or mutation (read-only tool)
+
+Implementing any item from this list constitutes scope creep and is penalized
+in scoring dimensions DIM_04 and DIM_08.
+
+==========
+10.00 VALIDATION COMMANDS
+==========
+
+After implementation, the following must all succeed:
+
+  # 1. Install dependency
+  pip install -r requirements.txt
+
+  # 2. Run all tests
+  pytest tests/ -v
+
+  # 3. Smoke test: basic run
+  python -m src.cli --input TASKS.sample.yaml
+
+  # 4. Smoke test: with filter
+  python -m src.cli --input TASKS.sample.yaml --filter-status open
+
+  # 5. Smoke test: with sort
+  python -m src.cli --input TASKS.sample.yaml --sort-by due_date
+
+  # 6. Smoke test: exit code 1 (file not found)
+  python -m src.cli --input nonexistent.yaml
+  echo "Exit code: $LASTEXITCODE"   # must be 1
+
+  # 7. Smoke test: exit code 2 (invalid YAML)
+  # Create a file with invalid YAML content, then:
+  python -m src.cli --input invalid.yaml
+  echo "Exit code: $LASTEXITCODE"   # must be 2
+
+  # 8. Help output
+  python -m src.cli --help
+
+All commands must succeed (exit 0) except #6 (exit 1) and #7 (exit 2).
+
+==========
+11.00 SCORING REFERENCES
+==========
+
+Rubric: NIGHTSHIFT.SCORING.RUBRIC.AI.txt (8 dimensions, 100 pts)
+Rubric fit notes: NS-PILOT-002.RUBRIC_FIT.READONLY.20260621.AI.txt
+
+Key scorer notes for this pilot:
+  NOTE_01: <12 tests → proportional deduction in DIM_02
+  NOTE_02: wrong exit code values → -5 pts in DIM_03
+  NOTE_03: extra modules beyond the 4 required → -3 pts each in DIM_04
+  NOTE_04: missing requirements.txt or no version pin → up to -4 pts in DIM_06
+  NOTE_05: scope creep features → -1 to -5 pts in DIM_08
+
+Pass threshold: >= 85 pts
+Partial: 60-84 pts
+Fail: < 60 pts
+
+==========
+12.00 BOUNDARY RULES
+==========
+
+ALLOWED PATHS (agent may create/modify):
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/
+
+ALLOWED FILES (agent may modify):
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/requirements.txt
+  (add pinned versions if needed, but pyyaml>=6.0 must remain)
+
+PROHIBITED (agent must NOT touch):
+  Any file outside NS-PILOT-002_YAML_TASK_SCHEDULER/
+  SkillsLake/, GRCLake/, 90.USECASE/, SyS/, HUMAN/
+  99.LABS/Nightshift/00_GOVERNANCE/
+  99.LABS/Nightshift/05_REPORTS/
+  Any file in NS-PILOT-001_MARKDOWN_TASK_RUNNER/
+  .gitattributes, .gitignore
+  main branch (no push to main)
+
+==========
+FIN_PILOT.SPEC.AI.txt
+==========

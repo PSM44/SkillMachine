@@ -4,13 +4,13 @@ PROJECT_CLOSE LATEST - SkillsMachine
 
 DATE..............: 2026-06-21
 CURRENT_BRANCH....: lab/ns-pilot-001-hybrid
-STATE_SUMMARY_HEAD: 23ab2e6 20260621_MB-GRC-036C1_NS-003C_ai_reading_file_and_rubric_fit
+STATE_SUMMARY_HEAD: d694880 20260621_MB-GRC-036F4_repair_continuity_head_semantics
 HEAD_SEMANTICS....: STATE_SUMMARY_HEAD identifies the latest operational state summarized by this file. It is not required to equal the commit containing this file.
 MAIN_HEAD.........: 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
 LAST_CLOSE........: MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001
-LAST_MB...........: MB-GRC-036C1_CREATE_AI_READING_FILE_LATEST + MB-NS-003C_VERIFY_RUBRICA
+LAST_MB...........: MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD
 CLOSE_STATUS......: SESSION_CLOSE_READY_OK_CLEAN
-NEXT_ACTION.......: MB-NS-003B_CREATE_NS_PILOT_002_SCAFFOLD [BLOCKED: awaiting HD_001]
+NEXT_ACTION.......: MB-NS-004A_CLAUDE_CODE_RUN_001_NS_PILOT_002 and MB-NS-004B_CODEX_RUN_001_NS_PILOT_002 [BLOCKED: scaffold review first]
 
 BOUNDARY
 - 90.USECASE is generic/exportable.
