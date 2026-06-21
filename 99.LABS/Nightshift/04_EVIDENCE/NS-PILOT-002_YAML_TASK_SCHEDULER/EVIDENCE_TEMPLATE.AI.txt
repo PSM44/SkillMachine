@@ -141,3 +141,26 @@ ESTIMATE_SCORE....: (rough score out of 100, by dimension if possible)
 ==========
 FIN_EVIDENCE_TEMPLATE.AI.txt
 ==========
+
+========== BEGIN_MB_GRC_037A_EVIDENCE_HASH_SEMANTICS ==========
+COMMIT HASH SEMANTICS — ADDED BY MB-GRC-037A
+Use these fields instead of relying on a single self-referential COMMIT_HASH.
+
+IMPLEMENTATION_COMMIT:
+- Commit that contains the actual implementation/code/test changes.
+
+EVIDENCE_FIX_COMMIT:
+- Commit that fixes evidence-only or cleanup-only issues after implementation.
+- Use NONE if no later evidence/cleanup commit exists.
+
+BRANCH_HEAD:
+- Final branch HEAD after all implementation and evidence/cleanup commits.
+
+WORKING_TREE_PROOF:
+- Paste or summarize git status --short.
+- WORKING_TREE=CLEAN is valid only if git status --short returns empty.
+
+PYTHON_CLEANUP:
+- After running tests, remove __pycache__ and verify no generated runtime artifacts remain.
+========== END_MB_GRC_037A_EVIDENCE_HASH_SEMANTICS ==========
+

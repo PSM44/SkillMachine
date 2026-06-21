@@ -1,0 +1,154 @@
+==========
+CLAUDE CODE DESKTOP LESSONS — NS-PILOT-002
+==========
+ID................: CLAUDE_CODE_DESKTOP.LESSONS.20260621
+MB_ID.............: MB-GRC-037A_CAPTURE_CLAUDE_CODE_DESKTOP_LESSONS
+DATE..............: 2026-06-21
+PROJECT...........: SkillsMachine / Nightshift
+STATUS............: LESSONS_CAPTURED
+PR_STATUS.........: PENDING — no PR before comparison/scoring
+SOURCE_BRANCH.....: lab/ns-pilot-002-claude
+BASE_BRANCH.......: lab/ns-pilot-001-hybrid
+BASE_HEAD.........: 32be922 20260621_MB-NS-003B-R1_patch_agent_brief_evidence_boundary
+IMPLEMENTATION....: e19ade6 NS-PILOT-002_CLAUDE_RUN_001_YAML_TASK_SCHEDULER
+REPAIR_COMMIT.....: 06c2073 NS-PILOT-002_CLAUDE_RUN_001_fix_evidence_and_clean_tree
+
+==========
+01.00 CONTEXT
+==========
+Claude Code Desktop was used as the first agent execution environment for NS-PILOT-002.
+
+The run was useful, but it surfaced operational rules that must be captured before
+running the next agent or creating any PR.
+
+==========
+02.00 OBSERVED FACTS
+==========
+- Claude Code Desktop passed the environment gate when the gate was explicit.
+- The agent branch was correctly created as lab/ns-pilot-002-claude from lab/ns-pilot-001-hybrid at 32be922.
+- Claude implemented the required modules and tests under the allowed pilot folder.
+- 31 tests passed.
+- Exit code 1 and exit code 2 were verified.
+- The implementation commit was e19ade6.
+- A later repair commit 06c2073 was required to correct evidence and clean the tree.
+- The PR button was visible in the UI, but no PR should be created before scoring/comparison.
+
+==========
+03.00 FAILURES / FRICTION OBSERVED
+==========
+F01 — PYTHON CACHE ARTIFACTS
+After tests, src/__pycache__ and tests/__pycache__ remained untracked.
+
+F02 — FALSE CLEAN CLAIM
+Claude reported the working tree as clean while git status --short still showed untracked __pycache__ folders.
+
+F03 — SELF-REFERENTIAL COMMIT HASH LOOP
+Claude attempted to make the evidence contain the commit hash of the commit containing the evidence itself.
+
+F04 — EVIDENCE REPAIR COMMIT REQUIRED
+A second commit was required to correct evidence fields and remove generated cache files.
+
+F05 — PR BUTTON RISK
+The UI offered Create PR, but a PR at that stage would have been premature.
+
+==========
+04.00 RULES LEARNED
+==========
+RULE_01_ENVIRONMENT_GATE:
+Claude Code Desktop must start with a hard environment gate: root, branch, HEAD, main HEAD, and clean tree.
+
+RULE_02_AGENT_BRANCH:
+Agent execution must happen on a dedicated agent branch created from a verified clean base.
+
+RULE_03_NO_AGENT_WORK_ON_BASE:
+Agents must not implement directly on lab/ns-pilot-001-hybrid, main, or any shared base branch.
+
+RULE_04_PR_DISCIPLINE:
+Do not create PR automatically from the UI. A PR requires explicit base branch, compare branch, draft/review purpose, and no-merge status.
+
+RULE_05_WORKING_TREE_PROOF:
+Do not state WORKING_TREE=CLEAN unless git status --short returns empty.
+
+RULE_06_PYTHON_CLEANUP:
+After Python tests, remove __pycache__ and verify git status before evidence and commit.
+
+RULE_07_EVIDENCE_HASH_SEMANTICS:
+Evidence must not rely on a single COMMIT_HASH field when evidence may be corrected later.
+Use IMPLEMENTATION_COMMIT, EVIDENCE_FIX_COMMIT, and BRANCH_HEAD.
+
+RULE_08_NO_PR_BEFORE_COMPARISON:
+Agent branches are evidence branches. Do not merge or promote before comparison/scoring.
+
+RULE_09_NO_MAIN_PUSH:
+Agent branches must not push to main.
+
+RULE_10_SCORE_IS_NOT_SELF-AUTHORITATIVE:
+Agent self-estimated score is not final. It must be reviewed during comparison.
+
+==========
+05.00 RECOMMENDED PROTOCOL
+==========
+1. Verify base branch and clean working tree.
+2. Create dedicated agent branch.
+3. Read only spec, agent brief, sample input, evidence template, and rubric notes.
+4. Implement only allowed files.
+5. Run tests and smoke tests.
+6. Remove generated runtime artifacts.
+7. Verify git status.
+8. Create evidence with IMPLEMENTATION_COMMIT / EVIDENCE_FIX_COMMIT / BRANCH_HEAD semantics.
+9. Validate repository.
+10. Stage explicitly.
+11. Commit and push only the agent branch.
+12. Do not create PR until comparison/scoring.
+
+==========
+06.00 IMPACT ON NIGHTSHIFT
+==========
+Nightshift needs a formal agent execution protocol:
+- hard gates;
+- branch isolation;
+- evidence semantics;
+- cleanup controls;
+- PR discipline;
+- post-run review before comparison.
+
+==========
+07.00 IMPACT ON SKILLSMACHINE
+==========
+Candidate for future Skill/GRC control:
+CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL
+
+This should become a reusable protocol if the same patterns appear across the Codex run or future pilots.
+
+==========
+08.00 PR DECISION
+==========
+PR_STATUS: PENDING
+
+Do not create PR yet.
+
+A future PR, if used, should be:
+- draft;
+- base: lab/ns-pilot-001-hybrid;
+- compare: lab/ns-pilot-002-claude;
+- purpose: review only;
+- merge: no.
+
+No PR to main before scoring/comparison and human promotion decision.
+
+==========
+09.00 NEXT MBS
+==========
+MB-NS-004B_CODEX_RUN_001_NS_PILOT_002
+- Execute the Codex agent branch from the same base 32be922.
+- Do not read or reuse Claude implementation.
+
+MB-NS-005A_COMPARE_NS_PILOT_002
+- Compare Claude and Codex outputs using the rubric and scorer notes.
+
+MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL
+- Convert repeated lessons into formal Skill/GRC control if validated by Codex or next pilot.
+
+==========
+FIN_CLAUDE_CODE_DESKTOP.LESSONS.20260621.AI.txt
+==========

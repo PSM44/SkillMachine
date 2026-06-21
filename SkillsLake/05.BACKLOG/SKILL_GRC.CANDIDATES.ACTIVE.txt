@@ -956,3 +956,17 @@ NOTE..............: Future long PowerShell scripts must be file-authored, then e
 DONE..............: Created SkillsMachine-dedicated PROJECT_CONTINUITY and PROJECT_CLOSE folders under SyS.
 DONE..............: Clarified boundary between generic 90.USECASE and SkillsMachine self-continuity/self-close.
 P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+========== BEGIN_MB_GRC_037A_CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL ==========
+CANDIDATE_FOR_SKILLSMACHINE
+ID................: CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL
+SOURCE............: NS-PILOT-002 Claude Code Desktop run
+TYPE..............: Skill / GRC operating rule candidate
+STATUS............: CANDIDATE
+DATE..............: 2026-06-21
+EVIDENCE..........: Claude Code Desktop successfully executed an agent branch, but required explicit gates, cleanup, evidence hash semantics, and PR discipline.
+LESSONS_REPORT....: 99.LABS\Nightshift\05_REPORTS\CLAUDE_CODE_DESKTOP.LESSONS.20260621.AI.txt
+RECOMMENDATION....: Convert repeated lessons into a formal skill or GRC control after Codex run confirms cross-agent relevance.
+RULES_TO_CAPTURE..: environment gate, branch discipline, allowed paths, evidence protocol, cleanup protocol, no dirty tree, no automatic PR, no main push.
+========== END_MB_GRC_037A_CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL ==========
+

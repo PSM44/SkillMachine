@@ -117,3 +117,23 @@ The pilot must be small, reversible and measurable.
 ==========
 END
 ==========
+
+========== BEGIN_MB_GRC_037A_CLAUDE_CODE_DESKTOP_EXECUTION_LESSONS ==========
+CLAUDE_CODE_DESKTOP_EXECUTION_LESSONS
+DATE..............: 2026-06-21
+SOURCE............: NS-PILOT-002 Claude Code Desktop run
+STATUS............: ACTIVE_RULES
+
+Rules:
+- Claude Code Desktop requires an explicit environment gate before any file modification.
+- Agent work must happen on a dedicated agent branch created from a verified clean base branch.
+- Agent branches are evidence branches; they are not canonical branches.
+- Do not create PR automatically from the UI.
+- PRs require explicit base, compare, draft/review purpose, and no-merge status.
+- PR is a review/merge artifact, not a synchronization mechanism.
+- Python test runs must clean __pycache__ and verify git status --short before evidence/commit.
+- WORKING_TREE=CLEAN may only be stated when git status --short returns empty.
+- Evidence must use IMPLEMENTATION_COMMIT, EVIDENCE_FIX_COMMIT, and BRANCH_HEAD semantics.
+- Do not merge or promote agent outputs before scoring/comparison and human decision.
+========== END_MB_GRC_037A_CLAUDE_CODE_DESKTOP_EXECUTION_LESSONS ==========
+
