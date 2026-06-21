@@ -1,0 +1,43 @@
+ID................: ACCEPTANCE_NS_PILOT_001_HYBRID_BASELINE
+MB_ID.............: MB-NS-001N_ACCEPT_HYBRID_LAB_BASELINE
+DATE..............: 2026-06-21 00:25:32 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: 1fff189 20260621_MB-NS-001K_unify_cli_contract
+STATUS............: ACCEPTED_AS_LAB_BASELINE
+
+PURPOSE:
+Formalize the NS-PILOT-001 hybrid implementation as the accepted Nightshift lab baseline.
+
+DECISION:
+Accept the hybrid branch as lab baseline and defer merge to main.
+
+RATIONALE:
+- Hybrid combines Claude modular parser/report/cli structure with Codex deterministic JSON reporting path.
+- CLI contract was unified in MB-NS-001K.
+- unittest discover passes: 26/26.
+- cli --help passes.
+- task_runner --help passes.
+- cli smoke passes.
+- task_runner smoke passes.
+- Branch remains lab-scoped and includes AI decision/prompt artifacts.
+
+SCORECARD:
+FUNCTIONAL........: 100/100
+CODEX.............: 70/100
+CLAUDE............: 75/100
+HYBRID............: 100/100
+
+MERGE_DECISION:
+DEFER_MERGE_TO_MAIN.
+
+MERGE_RATIONALE:
+The branch contains a complete lab pilot and AI decision artifacts. Merge to main should occur only after explicit acceptance of the pilot as repository lab canon, not merely because tests pass.
+
+BOUNDARY:
+- No SkillsMachine governance files touched.
+- No 90.USECASE BUILD executed.
+- No merge to main performed.
+- Acceptance artifact stays inside the Nightshift pilot folder.
+
+NEXT_ACTION:
+Proceed with the next Nightshift step: second pilot/project, agent comparison expansion, or formal session close.
