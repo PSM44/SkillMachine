@@ -1,0 +1,43 @@
+==========
+SESSION CLOSE AFTER NS-PILOT-001
+==========
+
+ID................: SESSION_CLOSE.AFTER_NS_PILOT_001.20260621
+MB_ID.............: MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001
+DATE..............: 2026-06-21
+ROOT..............: C:\01. GitHub\Skills
+LAB_BRANCH........: lab/ns-pilot-001-hybrid
+MAIN_BRANCH.......: main
+
+CLOSING STATUS
+- NS-PILOT-001 is closed as lab evidence.
+- The lab branch remains separate from main.
+- PowerShell long payload / ParseFile safety rule was promoted to main.
+- Management status brief was created.
+- Stale NS-PILOT-001 scaffold documentation was patched.
+- NS-PILOT-001 lab phase close report was created.
+
+MAIN STATUS
+- main contains only the global PowerShell safety promotion from this sequence.
+- Nightshift lab artifacts were intentionally not full-merged to main.
+
+LAB STATUS
+- lab/ns-pilot-001-hybrid preserves NS-PILOT-001 evidence and management artifacts.
+- Codex and Claude Code comparative evidence remains in the lab branch.
+- Hybrid baseline remains accepted as lab evidence.
+
+OPERATIONAL LESSON
+- Do not paste long PowerShell generator scripts into the interactive terminal.
+- For long scripts, create or edit the .ps1 file directly, then run a short launcher with Parser.ParseFile.
+- The parser gate is useful only after the complete child .ps1 file exists.
+
+NEXT ACTION
+- MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+DO NOT
+- Do not start NS-PILOT-002 execution before designing its scope.
+- Do not full-merge lab/ns-pilot-001-hybrid into main without a separate promotion decision.
+- Do not place canonical source docs under 90.USECASE.
+
+FINAL VERDICT
+SESSION_READY_TO_CLOSE_AFTER_VALIDATION_AND_PUSH

@@ -945,3 +945,9 @@ NEXT..............: Probar repetibilidad en NS-PILOT-002 antes de canonizar.
 ==========
 FIN_MB-CLOSE-002_CANDIDATE_FOR_SKILLSMACHINE_20260621
 ==========
+
+========== MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001 ==========
+DONE..............: PowerShell long payload / ParseFile safety rule promoted to main.
+DONE..............: NS-PILOT-001 closed as lab evidence.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+NOTE..............: Future long PowerShell scripts must be file-authored, then executed by short ParseFile launcher.

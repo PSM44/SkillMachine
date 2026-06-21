@@ -164,3 +164,7 @@ FIN_MB-CLOSE-002_BACKLOG_REFRESH_20260621
 DONE..............: Close NS-PILOT-001 as lab evidence.
 P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
 NOTE..............: Nightshift lab artifacts remain outside main; global PowerShell safety patch was promoted separately.
+
+========== MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001 ==========
+DONE..............: Session close after NS-PILOT-001.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
