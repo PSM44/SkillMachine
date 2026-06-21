@@ -1,0 +1,269 @@
+==========
+EVIDENCE — CLAUDE CODE — NS-PILOT-002 RUN 001
+==========
+
+PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
+AGENT_ID..........: CLAUDE_CODE (claude-sonnet-4-6)
+RUN_NUMBER........: 001
+DATE_RUN..........: 2026-06-21
+BRANCH............: lab/ns-pilot-002-claude
+COMMIT_HASH.......: bf084bf (pre-final-amend; final hash may differ by one amend cycle)
+SPEC_VERSION......: PILOT.SPEC.AI.txt v1.0
+BRIEF_VERSION.....: AGENT_BRIEF.ClaudeCode.AI.txt v1.1
+
+==========
+01.00 COMMANDS RUN
+==========
+
+Set-Location "C:\01. GitHub\Skills\99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER"
+python -m pip install -r requirements.txt --quiet
+python -m pip install pytest --quiet
+pytest tests/ -v
+python -m src.cli --input TASKS.sample.yaml
+python -m src.cli --input TASKS.sample.yaml --filter-status open
+python -m src.cli --input TASKS.sample.yaml --sort-by due_date
+python -m src.cli --input TASKS.sample.yaml --filter-status open --sort-by due_date
+python -m src.cli --input TASKS.sample.yaml --output report_out.txt  [via test_cli_output_to_file]
+python -m src.cli --input nonexistent.yaml
+python -m src.cli --input invalid.yaml  [invalid.yaml created temporarily, removed after test]
+python -m src.cli --help
+
+==========
+02.00 PYTEST OUTPUT
+==========
+
+============================= test session starts =============================
+platform win32 -- Python 3.11.9, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\01. GitHub\Skills\99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER
+plugins: anyio-4.14.0
+collected 31 items
+
+tests/test_cli.py::test_cli_happy_path_exit_zero PASSED
+tests/test_cli.py::test_cli_output_contains_task_report PASSED
+tests/test_cli.py::test_cli_output_contains_summary_line PASSED
+tests/test_cli.py::test_cli_missing_file_exits_1 PASSED
+tests/test_cli.py::test_cli_invalid_yaml_exits_2 PASSED
+tests/test_cli.py::test_cli_filter_status_reduces_output PASSED
+tests/test_cli.py::test_cli_sort_by_due_date_exits_zero PASSED
+tests/test_cli.py::test_cli_filter_and_sort_combined PASSED
+tests/test_cli.py::test_cli_help_exits_zero PASSED
+tests/test_cli.py::test_cli_output_to_file PASSED
+tests/test_parser.py::test_load_valid_yaml_returns_list PASSED
+tests/test_parser.py::test_load_valid_yaml_task_has_required_fields PASSED
+tests/test_parser.py::test_load_missing_file_raises_file_not_found PASSED
+tests/test_parser.py::test_load_invalid_yaml_raises_yaml_error PASSED
+tests/test_parser.py::test_load_yaml_missing_tasks_key_raises_yaml_error PASSED
+tests/test_parser.py::test_load_yaml_task_count_matches_sample PASSED
+tests/test_report.py::test_report_contains_header PASSED
+tests/test_report.py::test_report_contains_title_field PASSED
+tests/test_report.py::test_report_contains_status_field PASSED
+tests/test_report.py::test_report_contains_priority_and_due PASSED
+tests/test_report.py::test_report_summary_line_correct_counts PASSED
+tests/test_report.py::test_report_empty_task_list PASSED
+tests/test_report.py::test_report_is_deterministic PASSED
+tests/test_scheduler.py::test_filter_open_returns_only_open PASSED
+tests/test_scheduler.py::test_filter_done_returns_only_done PASSED
+tests/test_scheduler.py::test_filter_blocked_returns_only_blocked PASSED
+tests/test_scheduler.py::test_filter_none_returns_all PASSED
+tests/test_scheduler.py::test_sort_by_priority_order PASSED
+tests/test_scheduler.py::test_sort_by_due_date_ascending PASSED
+tests/test_scheduler.py::test_filter_and_sort_combined PASSED
+tests/test_scheduler.py::test_filter_nonexistent_status_returns_empty PASSED
+
+============================= 31 passed in 1.18s ==============================
+
+==========
+03.00 CLI SMOKE TEST OUTPUTS
+==========
+
+--- Smoke 1: basic run ---
+Command: python -m src.cli --input TASKS.sample.yaml
+Exit code: 0
+Output:
+TASK REPORT
+----------------------------------------
+TITLE: Set up CI pipeline
+PRIORITY: high
+DUE: 2026-07-01
+STATUS: open
+
+TITLE: Migrate legacy database
+PRIORITY: high
+DUE: 2026-06-28
+STATUS: blocked
+
+TITLE: Deploy staging environment
+PRIORITY: high
+DUE: 2026-07-05
+STATUS: done
+
+TITLE: Write API documentation
+PRIORITY: medium
+DUE: 2026-07-10
+STATUS: open
+
+TITLE: Code review sprint 3
+PRIORITY: medium
+DUE: 2026-07-03
+STATUS: done
+
+TITLE: Performance audit
+PRIORITY: medium
+DUE: 2026-07-08
+STATUS: open
+
+TITLE: Update dependency versions
+PRIORITY: low
+DUE: 2026-07-15
+STATUS: open
+
+----------------------------------------
+Total: 7 | Open: 4 | Done: 2 | Blocked: 1
+
+--- Smoke 2: filter open ---
+Command: python -m src.cli --input TASKS.sample.yaml --filter-status open
+Exit code: 0
+Output:
+TASK REPORT
+----------------------------------------
+TITLE: Set up CI pipeline
+PRIORITY: high
+DUE: 2026-07-01
+STATUS: open
+
+TITLE: Write API documentation
+PRIORITY: medium
+DUE: 2026-07-10
+STATUS: open
+
+TITLE: Performance audit
+PRIORITY: medium
+DUE: 2026-07-08
+STATUS: open
+
+TITLE: Update dependency versions
+PRIORITY: low
+DUE: 2026-07-15
+STATUS: open
+
+----------------------------------------
+Total: 4 | Open: 4 | Done: 0 | Blocked: 0
+
+--- Smoke 3: sort by due_date ---
+Command: python -m src.cli --input TASKS.sample.yaml --sort-by due_date
+Exit code: 0
+Output (date ascending confirmed — 2026-06-28 first):
+TASK REPORT
+----------------------------------------
+TITLE: Migrate legacy database
+PRIORITY: high
+DUE: 2026-06-28
+STATUS: blocked
+...
+TITLE: Update dependency versions
+PRIORITY: low
+DUE: 2026-07-15
+STATUS: open
+----------------------------------------
+Total: 7 | Open: 4 | Done: 2 | Blocked: 1
+
+--- Smoke 4: filter open + sort due_date ---
+Command: python -m src.cli --input TASKS.sample.yaml --filter-status open --sort-by due_date
+Exit code: 0
+Output (only open tasks, date ascending):
+TITLE: Set up CI pipeline  DUE: 2026-07-01
+TITLE: Performance audit   DUE: 2026-07-08
+TITLE: Write API documentation DUE: 2026-07-10
+TITLE: Update dependency versions DUE: 2026-07-15
+Total: 4 | Open: 4 | Done: 0 | Blocked: 0
+
+--- Smoke 5: exit code 1 (file not found) ---
+Command: python -m src.cli --input nonexistent.yaml
+Stderr: Error: file not found: 'nonexistent.yaml'
+Exit code: 1
+
+--- Smoke 6: exit code 2 (invalid YAML) ---
+Command: python -m src.cli --input invalid.yaml  [content: "tasks: [invalid"]
+Stderr: Error: invalid YAML: Invalid YAML in 'invalid.yaml': while parsing a flow sequence
+Exit code: 2
+
+--- Smoke 7: --help ---
+Command: python -m src.cli --help
+Exit code: 0
+Output: lists --input, --filter-status, --sort-by, --output with descriptions
+
+==========
+04.00 FILES CREATED
+==========
+
+CREATED:
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/__init__.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/parser.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/scheduler.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/report.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/cli.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/__init__.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_parser.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_scheduler.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_report.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_cli.py
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.ClaudeCode.RUN_001.AI.txt
+
+MODIFIED:
+  NONE (requirements.txt unchanged; pyyaml>=6.0 preserved)
+
+NOT TOUCHED (confirmed unchanged):
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/PILOT.SPEC.AI.txt
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/TASKS.sample.yaml
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/requirements.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE_TEMPLATE.AI.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/COMPARE_TEMPLATE.AI.txt
+
+==========
+05.00 KNOWN LIMITATIONS
+==========
+
+- Priority sort order for tasks with equal priority is not further sorted (e.g., two
+  high-priority tasks retain their original YAML order relative to each other).
+  The spec does not specify a tiebreaker, so this is acceptable.
+- filter_tasks accepts any string as status; unknown values return empty list (not an error).
+  The spec does not require validation of status values in input YAML.
+- No __pycache__ directories committed (they are untracked and not staged).
+
+==========
+06.00 SCOPE ISSUES
+==========
+
+NONE — implemented exactly the 4 required modules (parser, scheduler, report, cli)
+and 4 test files. No extra modules, no extra CLI flags, no extra dependencies.
+
+==========
+07.00 FINAL STATUS
+==========
+
+TESTS_RUN.........: 31
+TESTS_PASSED......: 31
+TESTS_FAILED......: 0
+CLI_SMOKE_TEST....: PASS
+EXIT_CODE_1_TEST..: PASS (exit 1 for file not found)
+EXIT_CODE_2_TEST..: PASS (exit 2 for invalid YAML)
+REQUIREMENTS_TXT..: PRESENT_WITH_VERSION (pyyaml>=6.0)
+SCOPE_ISSUES......: NONE
+WORKING_TREE......: CLEAN (post-commit)
+
+FINAL_STATUS......: COMPLETE
+
+ESTIMATE_SCORE (per rubric):
+  DIM_01 FUNCTIONAL_CORRECTNESS    : 25/25  (CLI works end-to-end, output deterministic)
+  DIM_02 TEST_VALIDATION           : 15/15  (31 tests, all passing, exit codes covered)
+  DIM_03 CLI_CONTRACT              : 10/10  (--help works; exit 1 and 2 exact and correct)
+  DIM_04 STRUCTURE_MAINTAINABILITY : 15/15  (exactly 4 modules, clean separation)
+  DIM_05 BOUNDARY_DISCIPLINE       : 10/10  (no files outside pilot folder)
+  DIM_06 DETERMINISM_REPRODUCIB.   : 10/10  (same input → same output; requirements.txt present)
+  DIM_07 EVIDENCE_QUALITY          : 10/10  (commands, pytest output, smoke tests, file list documented)
+  DIM_08 INTEGRATION_FRICTION      :  5/5   (no scope creep, no cleanup needed)
+  ESTIMATED_TOTAL                  : 100/100
+
+==========
+FIN_EVIDENCE.ClaudeCode.RUN_001.AI.txt
+==========
