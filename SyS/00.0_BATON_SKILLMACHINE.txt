@@ -1437,3 +1437,23 @@ NEXT_ACTION:
 - Define SkillsMachine first beta slice and roadmap using this gate.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R14C / AI_TAIL OUTPUT CONTRACT / 2026-06-22 19:43:07 -04:00
+================================================================================
+
+UPDATE:
+- Created CONTROL.SCRIPT_OUTPUT_AI_TAIL.
+- Future executable MB scripts should end with a compact AI_TAIL block.
+- AI_TAIL must be preceded by six blank lines and delimited with:
+  ********************** AI_TAIL_START **********************
+  ********************** AI_TAIL_END ************************
+
+RATIONALE:
+- TOVS/stdout/chat outputs can become too long or partially pasted.
+- The AI_TAIL block preserves enough state for the AI to continue safely from the final lines.
+
+NEXT_ACTION:
+- Apply AI_TAIL contract starting with R15 launcher implementation.
+
+================================================================================

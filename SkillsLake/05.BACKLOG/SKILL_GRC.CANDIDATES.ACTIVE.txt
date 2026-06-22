@@ -1044,3 +1044,17 @@ P1 / METHOD:
 - Each project must define its target user, entrypoint, action, output, repeatability, and five-minute demo.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R14C / BACKLOG UPDATE / AI_TAIL OUTPUT CONTRACT / 2026-06-22 19:43:07 -04:00
+================================================================================
+
+P0 / EXECUTION STANDARD:
+- Apply CONTROL.SCRIPT_OUTPUT_AI_TAIL to future MB scripts.
+- R15 launcher must include AI_TAIL.
+- Long outputs must write full logs/reports to Temp/Handoff and print compact stdout.
+
+ACCEPTANCE:
+- Final pasted lines must be sufficient to determine success, blocker, branch, head, dirty state, files changed, commit/push status, report path, and next action.
+
+================================================================================

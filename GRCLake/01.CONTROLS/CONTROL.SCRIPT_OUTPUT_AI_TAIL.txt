@@ -1,0 +1,133 @@
+# CONTROL.SCRIPT_OUTPUT_AI_TAIL
+
+CONTROL_ID.......: CONTROL.SCRIPT_OUTPUT_AI_TAIL
+DOMAIN...........: GRC / Script Execution / Human-AI Continuity
+STATUS...........: ACTIVE
+SCOPE............: ALL_PROJECTS
+CREATED_LOCAL....: 2026-06-22 19:43:07 -04:00
+SOURCE_MB........: MB-NS-004B-R14C_CREATE_AI_TAIL_OUTPUT_CONTRACT
+
+## 01. Purpose
+
+This control defines the mandatory final output contract for executable scripts used in project workflows.
+
+The goal is to preserve continuity when terminal output is long, truncated, visually wrapped, or partially pasted into an AI conversation.
+
+## 02. Rule
+
+Every future executable MB script should end with a compact AI_TAIL block.
+
+The AI_TAIL block must be:
+
+- located near the end of stdout;
+- preceded by exactly six blank lines;
+- delimited by visible AI_TAIL_START and AI_TAIL_END markers;
+- concise;
+- key-value based;
+- stable enough for an AI assistant to parse from the last pasted lines;
+- free of long prose, tables, stack dumps, or large inventories.
+
+## 03. Required Delimiters
+
+Use these exact delimiters:
+
+********************** AI_TAIL_START **********************
+********************** AI_TAIL_END ************************
+
+## 04. Required Layout
+
+The final stdout layout should be:
+
+1. START metadata.
+2. Execution output.
+3. Human summary.
+4. Six blank lines.
+5. AI_TAIL block.
+6. END marker.
+
+No material information should appear after AI_TAIL_END except the final END marker.
+
+## 05. Mandatory Minimum Fields
+
+Every AI_TAIL block must include:
+
+AI_TAIL_SCHEMA=v1
+MB_ID=<id>
+FINAL_STATUS=<status>
+BLOCKER=<none_or_reason>
+BRANCH=<git_branch_or_NA>
+HEAD=<git_head_or_NA>
+DIRTY=<true_or_false_or_NA>
+REPORT=<path_or_NONE>
+NEXT_ACTION=<next_action>
+
+## 06. Repository-Mutating Script Fields
+
+Scripts that modify files, commit, or push must also include:
+
+FILES_CHANGED=<count>
+FILES=<pipe_separated_paths_or_NONE>
+COMMIT=<hash_or_NONE>
+PUSH=<OK|NO|FAILED>
+
+## 07. Validation / Build Fields
+
+Validation, build, or compile scripts should include when applicable:
+
+VALIDATION=<PASS|FAIL|NA>
+TESTS=<PASS|FAIL|NA>
+BUILD_STATUS=<PASS|FAIL|NA>
+BUILD_OUTPUT=<path_or_NONE>
+BUILD_ERROR=<short_reason_or_NONE>
+ARTIFACT=<path_or_NONE>
+
+## 08. Beta / Launcher Fields
+
+Launcher or beta-readiness scripts should include when applicable:
+
+BETA_GATE=<PASS|FAIL|NA>
+USER_ENTRYPOINT=<path_or_command_or_NONE>
+DEMO_READY=<true|false>
+
+## 09. Example PASS
+
+********************** AI_TAIL_START **********************
+AI_TAIL_SCHEMA=v1
+MB_ID=MB-EXAMPLE
+FINAL_STATUS=PASS_COMMITTED_AND_PUSHED
+BLOCKER=NONE
+BRANCH=lab/example
+HEAD=abc1234 commit_message
+DIRTY=false
+FILES_CHANGED=2
+FILES=path/a.txt|path/b.txt
+COMMIT=abc1234
+PUSH=OK
+REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
+NEXT_ACTION=MB-NEXT
+********************** AI_TAIL_END ************************
+
+## 10. Example FAIL
+
+********************** AI_TAIL_START **********************
+AI_TAIL_SCHEMA=v1
+MB_ID=MB-EXAMPLE
+FINAL_STATUS=FAIL
+BLOCKER=WORKTREE_NOT_CLEAN
+BRANCH=lab/example
+HEAD=abc1234 commit_message
+DIRTY=true
+FILES_CHANGED=3
+FILES=path/a.txt|path/b.txt|path/c.txt
+COMMIT=NONE
+PUSH=NO
+REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
+NEXT_ACTION=CLEAN_WORKTREE_BEFORE_RETRY
+********************** AI_TAIL_END ************************
+
+## 11. Governance Consequence
+
+A script without an AI_TAIL block may still be technically valid, but it is not optimal for human-AI continuity.
+
+For long-running or verbose workflows, missing AI_TAIL should be treated as a workflow quality defect.
+
