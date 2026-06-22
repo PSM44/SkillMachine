@@ -26,3 +26,10 @@ Governed by GRCLake\01.CONTROLS\CONTROL.BETA_FUNCTIONALITY_GATE.txt.
 AI TAIL:
 Future MB scripts must follow GRCLake\01.CONTROLS\CONTROL.SCRIPT_OUTPUT_AI_TAIL.txt.
 
+
+READINESS EXIT SEMANTICS:
+The launcher distinguishes wrapper execution from readiness result.
+
+- Wrapper exits 0 when the readiness script runs and produces outputs with readiness_status OK or WARN.
+- Wrapper exits nonzero when the readiness script is missing, outputs are missing, JSON cannot be parsed, or readiness_status is FAIL.
+- The readiness status remains visible in stdout as READINESS_STATUS.
