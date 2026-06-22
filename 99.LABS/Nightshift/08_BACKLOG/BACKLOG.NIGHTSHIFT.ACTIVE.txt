@@ -204,3 +204,21 @@ PR_STATUS.........: PENDING — no PR before valid comparison/scoring
 NEXT_ACTION.......: MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
 ========== END_MB_NS_004B_R0_QUARANTINE_CODEX_MISRUN_BY_CLAUDE ==========
 
+========== BEGIN_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+STATUS............: DONE
+SUMMARY...........: Session close after Claude run, Claude Desktop lessons capture, and Codex-labelled misrun quarantine.
+STATE_HEAD........: f5b932b 20260621_MB-NS-004B-R0_quarantine_codex_misrun_by_claude
+P0_NEXT...........: MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
+P0_OPEN...........: MB-NS-005A_COMPARE_NS_PILOT_002
+P0_OPEN...........: Select promotion strategy after valid scoring.
+P1_OPEN...........: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL
+P1_OPEN...........: Create manager-facing Nightshift status brief after valid comparison.
+TECH_DEBT.........: Agent identity enforcement must be formalized before broad automation.
+TECH_DEBT.........: Evidence hash semantics must avoid self-referential final-hash loops.
+TECH_DEBT.........: Python agent runs must remove __pycache__/.pytest_cache before commit.
+PR_STATUS.........: PENDING — no PR before valid comparison/scoring.
+MAIN_PROMOTION....: NONE
+========== END_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+

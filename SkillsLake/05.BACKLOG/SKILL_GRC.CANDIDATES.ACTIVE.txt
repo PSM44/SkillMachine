@@ -982,3 +982,15 @@ RATIONALE.........: Simulated agent identity invalidates comparison evidence.
 RECOMMENDATION....: Formalize as a cross-agent execution control before broader Nightshift automation.
 ========== END_MB_NS_004B_R0_AGENT_IDENTITY_ENFORCEMENT_PROTOCOL ==========
 
+========== BEGIN_MB_CLOSE_004_NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL ==========
+CANDIDATE_FOR_SKILLSMACHINE
+ID................: NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL
+SOURCE............: MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+TYPE..............: Skill / GRC operating control candidate
+STATUS............: CANDIDATE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+RATIONALE.........: NS-PILOT-002 surfaced branch identity, evidence hash, runtime cleanup, and PR timing controls.
+RECOMMENDATION....: Formalize after real Codex run confirms cross-agent workflow.
+NEXT_ACTION.......: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL after MB-NS-005A comparison.
+========== END_MB_CLOSE_004_NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL ==========
+

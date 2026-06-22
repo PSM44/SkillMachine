@@ -921,3 +921,21 @@ DATE..............: 2026-06-21 01:57:47 -04:00
 CURRENT_STATE.....: Created SyS\PROJECT_CONTINUITY and SyS\PROJECT_CLOSE as SkillsMachine-dedicated self-continuity/self-close folders.
 BOUNDARY..........: 90.USECASE remains generic/exportable for any project.
 NEXT_ACTION.......: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+========== BEGIN_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+MB_ID.............: MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+STATE_SUMMARY_HEAD: f5b932b 20260621_MB-NS-004B-R0_quarantine_codex_misrun_by_claude
+BRANCH............: lab/ns-pilot-001-hybrid
+MAIN_HEAD.........: 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+CURRENT_STATE.....: NS-PILOT-002 Claude run valid; Codex-labelled misrun quarantined; real Codex run still pending.
+DONE..............: Claude run closed; Claude Desktop lessons captured; Codex misrun quarantined; misleading codex branch deleted local/remote; quarantine branch preserved.
+OPEN_P0...........: MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
+OPEN_P0...........: MB-NS-005A_COMPARE_NS_PILOT_002
+OPEN_P1...........: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL
+PR_STATUS.........: PENDING — no PR before valid comparison/scoring.
+MAIN_PROMOTION....: NONE — main remains untouched.
+NEXT_ACTION.......: Run real Codex using branch lab/ns-pilot-002-codex-real from lab/ns-pilot-001-hybrid.
+SESSION_CLOSE.....: Cierre solicitado por humano; continuity refreshed before final readiness.
+========== END_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+

@@ -1,0 +1,83 @@
+==========
+SESSION CLOSE — NIGHTSHIFT / SKILLSMACHINE
+==========
+ID................: SESSION_CLOSE.NIGHTSHIFT.20260621_2345
+MB_ID.............: MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+PROJECT...........: SkillsMachine / Nightshift
+BRANCH............: lab/ns-pilot-001-hybrid
+STATE_SUMMARY_HEAD: f5b932b 20260621_MB-NS-004B-R0_quarantine_codex_misrun_by_claude
+MAIN_HEAD.........: 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+PR_STATUS.........: PENDING
+MAIN_PROMOTION....: NONE
+
+==========
+01.00 WHAT WE DID
+==========
+- Closed the Claude Code Desktop run for NS-PILOT-002 on lab/ns-pilot-002-claude.
+- Captured and committed Claude Code Desktop operational lessons.
+- Identified that the Codex-labelled run was actually executed by Claude Code.
+- Quarantined that invalid Codex-labelled branch as lab/ns-pilot-002-claude-alt-from-codex-misrun.
+- Deleted the misleading lab/ns-pilot-002-codex branch locally and remotely.
+- Updated Nightshift operating model and candidates with agent identity enforcement.
+- Kept PR status pending; no PR or merge to main was performed.
+
+==========
+02.00 CURRENT STATE
+==========
+CONFIRMED:
+- lab/ns-pilot-001-hybrid is at f5b932b 20260621_MB-NS-004B-R0_quarantine_codex_misrun_by_claude.
+- main is at 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals.
+- lab/ns-pilot-002-claude exists at 06c2073.
+- lab/ns-pilot-002-claude-alt-from-codex-misrun exists at 788f253.
+- lab/ns-pilot-002-codex was deleted locally and remotely.
+- Working tree was clean before continuity refresh.
+
+IN PROGRESS:
+- NS-PILOT-002 still needs a real Codex execution.
+
+==========
+03.00 ACCUMULATED TECH DEBT
+==========
+TD-001_AGENT_IDENTITY_ENFORCEMENT: Agent-labelled branch/evidence must match the real tool.
+TD-002_SELF_REFERENTIAL_EVIDENCE_HASH: Evidence must avoid final-hash loops.
+TD-003_PYTHON_RUNTIME_ARTIFACTS: Python tests must clean __pycache__/.pytest_cache before commit.
+TD-004_BRANCH_NAME_SEMANTICS: Agent branch names must not misrepresent execution environment.
+TD-005_PR_DISCIPLINE: PR remains pending until valid comparison/scoring.
+TD-006_MAIN_DIVERGENCE: Nightshift lab remains intentionally outside main.
+TD-007_REAL_CODEX_EXECUTION_GAP: No valid Codex run exists yet for NS-PILOT-002.
+
+==========
+04.00 ACCUMULATED BACKLOG
+==========
+P0:
+- MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002.
+- MB-NS-005A_COMPARE_NS_PILOT_002.
+- Decide promotion strategy after scoring.
+
+P1:
+- MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL.
+- Convert agent identity enforcement into formal GRC/Skill candidate if repeated in real Codex run.
+- Create manager-facing Nightshift status brief after valid comparison.
+
+P2:
+- Draft PR review only after valid comparison.
+- Decide whether selected Nightshift controls should be promoted to main.
+
+==========
+05.00 PATH TO MANAGEMENT DELIVERABLE
+==========
+MINIBATTLE | OBJECTIVE | OUTPUT | BATTLE | MANAGEMENT_DELIVERABLE | STATUS
+MB-NS-004B-R1 | Execute real Codex run | lab/ns-pilot-002-codex-real + evidence | BATTLE_NS_PILOT_002_AGENT_COMPARISON | Valid second-agent evidence | NEXT
+MB-NS-005A | Compare Claude vs Codex | scoring report + recommendation | BATTLE_NS_PILOT_002_AGENT_COMPARISON | Evidence-based selection | PENDING
+MB-NS-005B | Select promotion strategy | promote/cherry-pick/fusion/discard decision | BATTLE_NS_PILOT_002_AGENT_COMPARISON | Controlled baseline decision | PENDING
+MB-MGMT-001 | Build management brief | short report/presentation for gerencia | BATTLE_MANAGEMENT_READINESS | Functional management deliverable | PENDING
+MB-GRC-037B | Formalize protocol | Skill/GRC candidate or canon patch | BATTLE_GRC_HARDENING | Repeatable agent workflow governance | PENDING
+
+==========
+06.00 NEXT ACTION
+==========
+MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
+==========
+FIN_SESSION_CLOSE.NIGHTSHIFT.20260621_2345.AI.txt
+==========
