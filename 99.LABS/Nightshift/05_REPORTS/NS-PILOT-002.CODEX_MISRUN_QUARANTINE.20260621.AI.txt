@@ -1,0 +1,70 @@
+==========
+NS-PILOT-002 CODEX MISRUN QUARANTINE
+==========
+ID................: NS-PILOT-002.CODEX_MISRUN_QUARANTINE.20260621
+MB_ID.............: MB-NS-004B-R0_QUARANTINE_CODEX_MISRUN_BY_CLAUDE
+DATE..............: 2026-06-21
+STATUS............: QUARANTINED
+PR_STATUS.........: PENDING — no PR before valid comparison/scoring
+
+==========
+01.00 SUMMARY
+==========
+The branch originally named lab/ns-pilot-002-codex was not a valid Codex run.
+It was executed by Claude Code / Claude Sonnet while simulating a Codex-labelled run.
+
+The result may be useful as an alternative Claude-generated implementation, but it is
+not valid evidence for Claude-vs-Codex comparison.
+
+==========
+02.00 MISRUN FACTS
+==========
+MISLEADING_BRANCH..: lab/ns-pilot-002-codex
+MISRUN_HEAD........: 788f253 20260621_MB-NS-004B_NS-PILOT-002_CODEX_RUN_001_seal_evidence_branch_head
+IMPLEMENTATION.....: 398255d 20260621_MB-NS-004B_NS-PILOT-002_CODEX_RUN_001_YAML_TASK_SCHEDULER
+EVIDENCE_FIX_1.....: 13dc281 20260621_MB-NS-004B_NS-PILOT-002_CODEX_RUN_001_fix_evidence_hash
+EVIDENCE_FIX_2.....: 788f253 20260621_MB-NS-004B_NS-PILOT-002_CODEX_RUN_001_seal_evidence_branch_head
+OBSERVED_AGENT.....: Claude Sonnet 4.6 / Claude Code
+INVALID_LABEL......: CODEX
+VALIDITY...........: INVALID_AS_CODEX_RUN
+FUNCTIONAL_STATUS..: likely usable as Claude alternative, not scored as Codex
+
+==========
+03.00 QUARANTINE ACTION
+==========
+PRESERVED_AS.......: lab/ns-pilot-002-claude-alt-from-codex-misrun
+PRESERVED_HEAD.....: 788f253 20260621_MB-NS-004B_NS-PILOT-002_CODEX_RUN_001_seal_evidence_branch_head
+DELETED_LOCAL......: lab/ns-pilot-002-codex
+DELETED_REMOTE.....: lab/ns-pilot-002-codex
+BASE_BRANCH........: lab/ns-pilot-001-hybrid
+BASE_HEAD..........: 530f072 20260621_MB-GRC-037A_capture_claude_code_desktop_lessons
+
+==========
+04.00 RULE LEARNED
+==========
+AGENT_ID must match the actual execution environment.
+A run cannot be labelled Codex if executed by Claude Code, even if the prompt asks
+Claude to simulate an independent Codex implementation.
+
+Branch names that include an agent identity must only be used by that real agent.
+
+==========
+05.00 NEXT ACTION
+==========
+Run a real Codex execution using a fresh branch name:
+
+  lab/ns-pilot-002-codex-real
+
+Expected base:
+
+  lab/ns-pilot-001-hybrid @ 530f072 20260621_MB-GRC-037A_capture_claude_code_desktop_lessons
+
+Do not read:
+- lab/ns-pilot-002-claude
+- lab/ns-pilot-002-claude-alt-from-codex-misrun
+- EVIDENCE.ClaudeCode.RUN_001.AI.txt
+- EVIDENCE.Codex.RUN_001.AI.txt from the quarantined misrun, if recovered from the quarantine branch
+
+==========
+FIN_NS-PILOT-002.CODEX_MISRUN_QUARANTINE.20260621.AI.txt
+==========

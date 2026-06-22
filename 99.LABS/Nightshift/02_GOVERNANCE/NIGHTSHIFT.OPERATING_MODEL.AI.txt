@@ -137,3 +137,19 @@ Rules:
 - Do not merge or promote agent outputs before scoring/comparison and human decision.
 ========== END_MB_GRC_037A_CLAUDE_CODE_DESKTOP_EXECUTION_LESSONS ==========
 
+========== BEGIN_MB_NS_004B_R0_AGENT_IDENTITY_ENFORCEMENT ==========
+AGENT_IDENTITY_ENFORCEMENT
+DATE..............: 2026-06-21
+SOURCE............: NS-PILOT-002 Codex-labelled misrun executed by Claude Code
+STATUS............: ACTIVE_RULES
+
+Rules:
+- AGENT_ID must match the actual execution environment.
+- Do not label a run Codex if it is executed by Claude Code.
+- Do not label a run Claude if it is executed by Codex.
+- Branch names that include agent identity are reserved for that actual agent.
+- If an agent-identity mismatch occurs, quarantine the branch before scoring.
+- Mislabelled runs may be preserved as alternate evidence branches, but must not enter agent comparison.
+- A real comparison requires real agent execution, not simulated identity.
+========== END_MB_NS_004B_R0_AGENT_IDENTITY_ENFORCEMENT ==========
+

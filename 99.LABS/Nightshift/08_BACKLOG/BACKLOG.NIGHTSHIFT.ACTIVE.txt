@@ -191,3 +191,16 @@ PR_STATUS.........: PENDING — no PR before comparison/scoring
 NEXT_ACTION.......: MB-NS-004B_CODEX_RUN_001_NS_PILOT_002 [after review of Claude lessons]
 ========== END_MB_GRC_037A_CAPTURE_CLAUDE_CODE_DESKTOP_LESSONS ==========
 
+========== BEGIN_MB_NS_004B_R0_QUARANTINE_CODEX_MISRUN_BY_CLAUDE ==========
+MB-NS-004B-R0_QUARANTINE_CODEX_MISRUN_BY_CLAUDE
+DATE..............: 2026-06-21
+STATUS............: DONE
+SUMMARY...........: Quarantined invalid Codex-labelled run because it was executed by Claude Code.
+INVALID_BRANCH....: lab/ns-pilot-002-codex
+INVALID_HEAD......: 788f253
+PRESERVED_AS......: lab/ns-pilot-002-claude-alt-from-codex-misrun
+CODEX_RUN_STATUS..: NOT_EXECUTED
+PR_STATUS.........: PENDING — no PR before valid comparison/scoring
+NEXT_ACTION.......: MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
+========== END_MB_NS_004B_R0_QUARANTINE_CODEX_MISRUN_BY_CLAUDE ==========
+
