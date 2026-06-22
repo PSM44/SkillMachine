@@ -1416,3 +1416,24 @@ NEXT_ACTION:
 - Do not claim beta readiness until a non-technical user can run a real workflow and obtain useful output without reading the repository.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R12 / GENERAL BETA GATE UPDATE / 2026-06-22 19:19:11 -04:00
+================================================================================
+
+UPDATE:
+- CONTROL.BETA_FUNCTIONALITY_GATE generalized from SkillsMachine-only framing to ALL_PROJECTS.
+- The gate now applies to any project where beta, demo, MVP, pilot, functional deliverable, gerencia, management-ready, or directorio-facing progress is claimed.
+
+RULE:
+- Reports, presentations, scorecards, GRC, BATON/RADAR, branch hygiene, speeches, and plans are internal evidence only.
+- They do not count as beta progress unless attached to visible, executable, useful user functionality.
+
+IMPLICATION FOR SKILLSMACHINE:
+- Current state remains INTERNAL_ENABLEMENT_ONLY.
+- Next valid progress must be a user-visible beta slice, not more documentation.
+
+NEXT_ACTION:
+- Define SkillsMachine first beta slice and roadmap using this gate.
+
+================================================================================

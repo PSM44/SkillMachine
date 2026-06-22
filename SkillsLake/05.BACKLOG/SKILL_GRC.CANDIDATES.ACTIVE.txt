@@ -1026,3 +1026,21 @@ DECISION:
 - Next project analysis must focus on when SkillsMachine can become functional for user beta.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R12 / BACKLOG UPDATE / GENERAL BETA GATE / 2026-06-22 19:19:11 -04:00
+================================================================================
+
+P0 / GRC:
+- Apply CONTROL.BETA_FUNCTIONALITY_GATE across all projects, not only SkillsMachine.
+- Any claim of beta, MVP, demo, management-ready, directorio-ready, or functional deliverable must be tied to visible user functionality.
+
+P0 / PRODUCT:
+- For SkillsMachine, stop treating internal evidence as product progress.
+- Next work must define and build the thinnest executable user-facing workflow.
+
+P1 / METHOD:
+- Use reports and scorecards only as supporting evidence, not as deliverables to management.
+- Each project must define its target user, entrypoint, action, output, repeatability, and five-minute demo.
+
+================================================================================
