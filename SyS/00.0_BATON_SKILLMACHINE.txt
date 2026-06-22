@@ -1389,3 +1389,30 @@ NEXT_ACTION.......: Run real Codex using branch lab/ns-pilot-002-codex-real from
 SESSION_CLOSE.....: Cierre solicitado por humano; continuity refreshed before final readiness.
 ========== END_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
 
+
+================================================================================
+MB-NS-004B-R10B / CONTINUITY UPDATE / 2026-06-22 15:29:15 -04:00
+================================================================================
+
+STATUS:
+- NS-PILOT-002 COVS run completed, validated, committed, pushed, and compared against ClaudeCode.
+- COVS branch: lab/ns-pilot-002-codex-real
+- Current HEAD at R9/R10A: 5d33941 20260622_MB-NS-004B-R7_compare_covs_vs_claude
+- COVS result: FUNCTIONAL_AND_OPERATIONALLY_STRONGER
+- ClaudeCode result: FUNCTIONAL_WITH_ENTRYPOINT_LIMITATION
+- PR readiness pack created in Temp/Handoff.
+
+IMPORTANT MANAGEMENT/BETA CORRECTION:
+- Nightshift/COVS produced valid internal enablement, not a user-facing SkillsMachine beta.
+- Reports, scorecards, BATON/RADAR/GRC artifacts, presentations, and speeches do not count as beta progress unless connected to visible user functionality.
+- Management interest is functional beta for user, not more internal proof.
+
+NEW ACTIVE CONTROL:
+- GRCLake\01.CONTROLS\CONTROL.BETA_FUNCTIONALITY_GATE.txt
+
+NEXT_ACTION:
+- Update backlog to pivot priority from agent benchmarking toward a visible SkillsMachine beta workflow.
+- Candidate first beta slice: launcher/command flow for continue session, generate upload/usecase package, close session with BATON/backlog/RADAR, and show project state/readiness.
+- Do not claim beta readiness until a non-technical user can run a real workflow and obtain useful output without reading the repository.
+
+================================================================================

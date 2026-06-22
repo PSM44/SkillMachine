@@ -994,3 +994,35 @@ RECOMMENDATION....: Formalize after real Codex run confirms cross-agent workflow
 NEXT_ACTION.......: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL after MB-NS-005A comparison.
 ========== END_MB_CLOSE_004_NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL ==========
 
+
+================================================================================
+MB-NS-004B-R10B / BACKLOG UPDATE / 2026-06-22 15:29:15 -04:00
+================================================================================
+
+NEW_PRIORITY_BLOCK: BETA_FUNCTIONALITY_PIVOT
+
+P0 / ACTIVE:
+- Define and build the thinnest user-visible SkillsMachine beta workflow.
+- Candidate beta slice:
+  1. Continue session.
+  2. Generate upload/usecase package.
+  3. Close session with BATON/backlog/RADAR.
+  4. Show project state/readiness.
+- Acceptance: non-technical user can execute the workflow and obtain useful output without reading the repo.
+
+P0 / GOVERNANCE:
+- Apply CONTROL.BETA_FUNCTIONALITY_GATE to all future claims of beta readiness.
+- Reclassify pure reports, scorecards, agent comparisons, and GRC-only work as INTERNAL_ENABLEMENT unless connected to working user functionality.
+
+P1 / INTERNAL_ENABLEMENT:
+- Keep COVS as preferred implementation agent candidate for next beta-oriented slice.
+- Use Nightshift/COVS learnings to harden agent execution, but do not continue benchmarking unless it directly unblocks beta functionality.
+
+P2 / DEFER:
+- Additional presentations, management speeches, scorecards, or proof documents not tied to visible functionality.
+
+DECISION:
+- COVS won NS-PILOT-002 technically, but this does not itself create a SkillsMachine beta.
+- Next project analysis must focus on when SkillsMachine can become functional for user beta.
+
+================================================================================
