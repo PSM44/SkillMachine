@@ -4,8 +4,9 @@ CONTROL_ID.......: CONTROL.SCRIPT_OUTPUT_AI_TAIL
 DOMAIN...........: GRC / Script Execution / Human-AI Continuity
 STATUS...........: ACTIVE
 SCOPE............: ALL_PROJECTS
-CREATED_LOCAL....: 2026-06-22 19:43:07 -04:00
-SOURCE_MB........: MB-NS-004B-R14C_CREATE_AI_TAIL_OUTPUT_CONTRACT
+VERSION..........: v1.1
+UPDATED_LOCAL....: 2026-06-22 19:47:44 -04:00
+SOURCE_MB........: MB-NS-004B-R15B_HARDEN_AI_TAIL_STANDARD_AND_SKILL
 
 ## 01. Purpose
 
@@ -13,7 +14,9 @@ This control defines the mandatory final output contract for executable scripts 
 
 The goal is to preserve continuity when terminal output is long, truncated, visually wrapped, or partially pasted into an AI conversation.
 
-## 02. Rule
+This control applies across all projects, not only SkillsMachine.
+
+## 02. Core Rule
 
 Every future executable MB script should end with a compact AI_TAIL block.
 
@@ -27,14 +30,22 @@ The AI_TAIL block must be:
 - stable enough for an AI assistant to parse from the last pasted lines;
 - free of long prose, tables, stack dumps, or large inventories.
 
-## 03. Required Delimiters
+## 03. Exact Printed Delimiters
 
-Use these exact delimiters:
+Scripts must print these exact delimiter lines:
 
 ********************** AI_TAIL_START **********************
 ********************** AI_TAIL_END ************************
 
-## 04. Required Layout
+## 04. Pasted Output Tolerance
+
+The script must print the exact delimiters.
+
+However, when reading user-pasted terminal output, an AI assistant may treat any line containing AI_TAIL_START as the beginning of the AI tail and any line containing AI_TAIL_END as the end of the AI tail.
+
+This tolerance exists because terminal copy/paste may visually truncate the leading asterisks.
+
+## 05. Required Final Layout
 
 The final stdout layout should be:
 
@@ -47,7 +58,7 @@ The final stdout layout should be:
 
 No material information should appear after AI_TAIL_END except the final END marker.
 
-## 05. Mandatory Minimum Fields
+## 06. Mandatory Minimum Fields
 
 Every AI_TAIL block must include:
 
@@ -61,7 +72,7 @@ DIRTY=<true_or_false_or_NA>
 REPORT=<path_or_NONE>
 NEXT_ACTION=<next_action>
 
-## 06. Repository-Mutating Script Fields
+## 07. Repository-Mutating Script Fields
 
 Scripts that modify files, commit, or push must also include:
 
@@ -70,7 +81,7 @@ FILES=<pipe_separated_paths_or_NONE>
 COMMIT=<hash_or_NONE>
 PUSH=<OK|NO|FAILED>
 
-## 07. Validation / Build Fields
+## 08. Validation / Build Fields
 
 Validation, build, or compile scripts should include when applicable:
 
@@ -81,15 +92,26 @@ BUILD_OUTPUT=<path_or_NONE>
 BUILD_ERROR=<short_reason_or_NONE>
 ARTIFACT=<path_or_NONE>
 
-## 08. Beta / Launcher Fields
+## 09. Beta / Launcher Fields
 
 Launcher or beta-readiness scripts should include when applicable:
 
-BETA_GATE=<PASS|FAIL|NA>
+BETA_GATE=<PASS|FAIL|PARTIAL|NA>
 USER_ENTRYPOINT=<path_or_command_or_NONE>
 DEMO_READY=<true|false>
 
-## 09. Example PASS
+## 10. Field Rules
+
+- Use one key per line.
+- Use uppercase field names.
+- Avoid prose inside values.
+- Use NONE, NA, OK, FAILED, true, false consistently.
+- Use pipe separators for path lists.
+- Do not put tables inside AI_TAIL.
+- Do not print JSON inside AI_TAIL unless explicitly required by a later schema.
+- Keep AI_TAIL short enough to paste as the final terminal excerpt.
+
+## 11. Example PASS
 
 ********************** AI_TAIL_START **********************
 AI_TAIL_SCHEMA=v1
@@ -107,7 +129,7 @@ REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
 NEXT_ACTION=MB-NEXT
 ********************** AI_TAIL_END ************************
 
-## 10. Example FAIL
+## 12. Example FAIL
 
 ********************** AI_TAIL_START **********************
 AI_TAIL_SCHEMA=v1
@@ -125,7 +147,7 @@ REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
 NEXT_ACTION=CLEAN_WORKTREE_BEFORE_RETRY
 ********************** AI_TAIL_END ************************
 
-## 11. Governance Consequence
+## 13. Governance Consequence
 
 A script without an AI_TAIL block may still be technically valid, but it is not optimal for human-AI continuity.
 

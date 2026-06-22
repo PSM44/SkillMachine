@@ -1058,3 +1058,17 @@ ACCEPTANCE:
 - Final pasted lines must be sufficient to determine success, blocker, branch, head, dirty state, files changed, commit/push status, report path, and next action.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R15B / BACKLOG UPDATE / AI_TAIL SKILL / 2026-06-22 19:47:44 -04:00
+================================================================================
+
+P0 / EXECUTION STANDARD:
+- Apply SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT to all future executable MB scripts.
+- Maintain CONTROL.SCRIPT_OUTPUT_AI_TAIL as the cross-project governance rule.
+- R16 and later scripts must use exact AI_TAIL delimiters and six blank lines before AI_TAIL_START.
+
+P1 / FUTURE HARDENING:
+- Consider adding validator support to detect missing AI_TAIL in generated one-shot scripts.
+
+================================================================================

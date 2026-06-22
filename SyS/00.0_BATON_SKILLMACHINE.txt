@@ -1457,3 +1457,18 @@ NEXT_ACTION:
 - Apply AI_TAIL contract starting with R15 launcher implementation.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R15B / AI_TAIL HARDENING / 2026-06-22 19:47:44 -04:00
+================================================================================
+
+UPDATE:
+- Hardened CONTROL.SCRIPT_OUTPUT_AI_TAIL to v1.1.
+- Created operational skill SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT.
+- Standard applies across all projects.
+- Scripts must print exact AI_TAIL delimiters, but AI may accept pasted lines containing AI_TAIL_START / AI_TAIL_END.
+
+NEXT_ACTION:
+- Continue with R16 launcher session-close-readiness wrapper using AI_TAIL contract.
+
+================================================================================
