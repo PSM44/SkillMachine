@@ -1,0 +1,155 @@
+# NS-PILOT-002 — COVS vs ClaudeCode Comparison
+
+## 01. Metadata
+
+DATE_LOCAL........: 2026-06-22
+PROJECT...........: PS.SkillsMachine / Nightshift
+PILOT.............: NS-PILOT-002 YAML Task Scheduler
+COMPARE_ID........: MB-NS-004B-R7_CREATE_SCORECARD_COVS_VS_CLAUDE
+
+COVS_DISPLAY_NAME.: COVS
+COVS_CANONICAL_ID.: CODEX_LOCAL_HARNESS_VSCODE_WORKSPACE
+COVS_BRANCH.......: lab/ns-pilot-002-codex-real
+COVS_HEAD.........: a446c74 20260622_MB-NS-004B-R5_covs_run_001_yaml_scheduler
+COVS_EVIDENCE.....: 99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.COVS.RUN_001.AI.txt
+
+CLAUDE_DISPLAY_NAME: ClaudeCode
+CLAUDE_CANONICAL_ID: CLAUDE_CODE_DESKTOP
+CLAUDE_BRANCH......: lab/ns-pilot-002-claude
+CLAUDE_HEAD........: 06c2073 NS-PILOT-002_CLAUDE_RUN_001_fix_evidence_and_clean_tree
+CLAUDE_EVIDENCE....: 99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.ClaudeCode.RUN_001.AI.txt
+
+VALIDATION_SOURCE..: TOVS
+VALIDATOR_ID.......: TERMINAL_VSCODE_INTEGRATED_POWERSHELL
+
+---
+
+## 02. Executive Verdict
+
+COVS is the technical winner for NS-PILOT-002.
+
+Reason: both agents passed their internal pytest suites, and Claude passed the module-mode CLI entrypoint, but COVS passed both supported execution modes:
+
+- python src/cli.py
+- python -m src.cli
+
+Claude failed the direct script entrypoint with:
+
+    ModuleNotFoundError: No module named 'src'
+
+Therefore, Claude is classified as functional with entrypoint limitation, while COVS is classified as functional and operationally stronger.
+
+---
+
+## 03. Validation Matrix
+
+| Dimension | COVS | ClaudeCode | Verdict |
+|---|---:|---:|---|
+| Pytest suite | PASS — 21 passed | PASS — 31 passed | Tie |
+| Direct script entrypoint: python src/cli.py --help | PASS | FAIL | COVS |
+| Direct script happy path | PASS | FAIL | COVS |
+| Direct script filter | PASS | FAIL | COVS |
+| Direct script sort | PASS | FAIL | COVS |
+| Direct script missing-file exit code | PASS | FAIL | COVS |
+| Direct script invalid-YAML exit code | PASS | FAIL | COVS |
+| Module entrypoint: python -m src.cli --help | PASS | PASS | Tie |
+| Module happy path | PASS | PASS | Tie |
+| Module filter | PASS | PASS | Tie |
+| Module sort | PASS | PASS | Tie |
+| Module missing-file exit code | PASS | PASS | Tie |
+| Module invalid-YAML exit code | PASS | PASS | Tie |
+| Determinism | PASS | PASS by module-mode inference; script-mode not executable | COVS |
+| Evidence presence | PASS | PASS | Tie |
+| Operational robustness | Stronger | Weaker | COVS |
+
+---
+
+## 04. Scoring
+
+Scale:
+- 0 = fail / absent
+- 1 = weak
+- 2 = acceptable
+- 3 = strong
+- 4 = excellent
+- 5 = best-in-class for this pilot
+
+| Rubric Dimension | COVS | ClaudeCode | Notes |
+|---|---:|---:|---|
+| Contract adherence | 5 | 4 | Claude satisfies module mode but fails direct script mode. |
+| Functional correctness | 5 | 4 | Both pass pytest; COVS passes full external CLI validation. |
+| CLI behavior | 5 | 3 | Claude's direct script CLI fails before argument handling. |
+| Error handling | 5 | 4 | Claude handles errors correctly in module mode only. |
+| Test coverage | 4 | 5 | Claude has more tests; both meet threshold. |
+| Simplicity / maintainability | 4 | 4 | Both appear maintainable; deeper code review not yet performed. |
+| Evidence quality | 5 | 4 | Both have evidence; COVS evidence includes TOVS addendum. |
+| Reproducibility | 5 | 4 | COVS reproducible across both entrypoints. |
+
+TOTAL_COVS.......: 38 / 40
+TOTAL_CLAUDE.....: 32 / 40
+
+---
+
+## 05. Technical Findings
+
+### 05.01 COVS
+
+COVS implementation passed:
+
+- python -m pytest tests/ -v
+- python src/cli.py --help
+- python src/cli.py --input TASKS.sample.yaml
+- python src/cli.py --input TASKS.sample.yaml --filter-status open
+- python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+- python src/cli.py --input DOES_NOT_EXIST.yaml with exit code 1
+- python src/cli.py --input invalid.yaml with exit code 2
+- python -m src.cli equivalents
+- determinism check
+
+### 05.02 ClaudeCode
+
+ClaudeCode implementation passed:
+
+- python -m pytest tests/ -v
+- python -m src.cli --help
+- python -m src.cli --input TASKS.sample.yaml
+- python -m src.cli --input TASKS.sample.yaml --filter-status open
+- python -m src.cli --input TASKS.sample.yaml --sort-by due_date
+- python -m src.cli --input DOES_NOT_EXIST.yaml with exit code 1
+- python -m src.cli --input invalid.yaml with exit code 2
+
+ClaudeCode failed:
+
+- python src/cli.py --help
+- python src/cli.py --input TASKS.sample.yaml
+- python src/cli.py --input TASKS.sample.yaml --filter-status open
+- python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+- python src/cli.py --input DOES_NOT_EXIST.yaml
+- python src/cli.py --input invalid.yaml
+
+Observed failure:
+
+    ModuleNotFoundError: No module named 'src'
+
+---
+
+## 06. Decision
+
+WINNER...........: COVS
+CLAUDE_STATUS....: FUNCTIONAL_WITH_ENTRYPOINT_LIMITATION
+COVS_STATUS......: FUNCTIONAL_AND_OPERATIONALLY_STRONGER
+
+Recommended next action:
+
+1. Keep COVS branch as the preferred implementation candidate.
+2. Do not merge yet without a formal PR/review step.
+3. Optionally preserve Claude branch as a valid alternative but mark the direct script entrypoint issue as technical debt or failed acceptance depending on final interpretation of the pilot spec.
+4. Proceed to PR/readiness only after updating BATON/backlog or session-close artifacts if required.
+
+---
+
+## 07. Notes
+
+- The branch lab/ns-pilot-002-claude-alt-from-codex-misrun is excluded from this scorecard because it is associated with the quarantined misrun path.
+- R6D corrected the earlier R6C diff issue and validated both entrypoint modes explicitly.
+- This scorecard is based on TOVS validation logs and not on subjective preference.
