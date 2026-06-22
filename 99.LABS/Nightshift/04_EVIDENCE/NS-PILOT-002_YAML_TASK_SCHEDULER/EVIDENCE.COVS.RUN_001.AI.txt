@@ -1,0 +1,272 @@
+==========
+EVIDENCE — NS-PILOT-002_YAML_TASK_SCHEDULER
+==========
+
+AGENT_DISPLAY_NAME: COVS
+AGENT_CANONICAL_ID: CODEX_LOCAL_HARNESS_VSCODE_WORKSPACE
+
+==========
+01.00 RUN METADATA
+==========
+
+PILOT_ID..........: NS-PILOT-002_YAML_TASK_SCHEDULER
+AGENT_ID..........: CODEX_LOCAL_HARNESS_VSCODE_WORKSPACE
+RUN_NUMBER........: 001
+DATE_RUN..........: 2026-06-22
+ROOT..............: C:\01. GitHub\Skills
+BRANCH............: lab/ns-pilot-002-codex-real
+HEAD_BEFORE.......: fc95da9
+HEAD_AFTER........: fc95da9
+COMMIT_STATUS.....: NO_COMMIT_DONE
+SPEC_VERSION......: PILOT.SPEC.AI.txt v1.0
+BRANCH_OVERRIDE...: Human instruction explicitly overrode older `lab/ns-pilot-002-codex` text; implementation remained on `lab/ns-pilot-002-codex-real`.
+
+PRE_AUTH_GIT_STATUS:
+  - TOVS reported `git status --short`: clean
+  - TOVS reported `git status --short -uall`: clean
+  - TOVS reported `git status --porcelain=v1 -uall`: clean
+  - TOVS reported `.claude/settings.local.json` exists and is not tracked as changed
+
+POST_RUN_GIT_STATUS:
+  - `git status --short`:
+      ?? .claude/
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/__init__.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/cli.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/parser.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/report.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/scheduler.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/__init__.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_cli.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_parser.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_report.py
+      ?? 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_scheduler.py
+  - Note: `.claude/` appeared as untracked in this harness even though pre-authorization evidence said clean.
+
+==========
+02.00 FILES CREATED / MODIFIED
+==========
+
+CREATED:
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/__init__.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/parser.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/scheduler.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/report.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/cli.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/__init__.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_parser.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_scheduler.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_report.py
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_cli.py
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.COVS.RUN_001.AI.txt
+
+MODIFIED:
+  [NONE]
+
+NOT TOUCHED:
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/PILOT.SPEC.AI.txt
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/AGENT_BRIEF.Codex.AI.txt
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/TASKS.sample.yaml
+  99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/requirements.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE_TEMPLATE.AI.txt
+  99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/COMPARE_TEMPLATE.AI.txt
+
+==========
+03.00 COMMANDS RUN
+==========
+
+Working directory for validation commands:
+  C:\01. GitHub\Skills\99.LABS\Nightshift\03_EXPERIMENTS\NS-PILOT-002_YAML_TASK_SCHEDULER
+
+Required validation commands attempted:
+  python --version
+  python -m pip install -r requirements.txt
+  python -m pytest tests/ -v
+  python src/cli.py --help
+  python src/cli.py --input TASKS.sample.yaml
+  python src/cli.py --input TASKS.sample.yaml --filter-status open
+  python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+  python src/cli.py --input nonexistent.yaml
+  python src/cli.py --input C:\Users\aazcl\AppData\Local\Temp\ns-pilot-002-invalid.yaml
+  python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+  python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+
+Runtime diagnostics executed after command failures:
+  cmd.exe /c where python
+  cmd.exe /c where py
+  py --version
+  python3 --version
+
+==========
+04.00 PYTEST OUTPUT
+==========
+
+Command: python -m pytest tests/ -v
+Actual result:
+  stdout: [empty]
+  stderr: [empty]
+  process launch error: spawn python ENOENT
+
+Interpretation:
+  The local environment does not expose a runnable `python` executable to this harness.
+  Therefore pytest could not be executed from the required command path.
+
+==========
+05.00 CLI SMOKE TEST OUTPUTS
+==========
+
+--- Smoke test 1: help ---
+Command: python src/cli.py --help
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+--- Smoke test 2: basic run ---
+Command: python src/cli.py --input TASKS.sample.yaml
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+--- Smoke test 3: with filter ---
+Command: python src/cli.py --input TASKS.sample.yaml --filter-status open
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+--- Smoke test 4: with sort ---
+Command: python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+--- Smoke test 5: exit code 1 ---
+Command: python src/cli.py --input nonexistent.yaml
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+--- Smoke test 6: exit code 2 ---
+Command: python src/cli.py --input C:\Users\aazcl\AppData\Local\Temp\ns-pilot-002-invalid.yaml
+stdout: [empty]
+stderr: [empty]
+launch error: spawn python ENOENT
+Exit code: UNVERIFIED
+
+==========
+06.00 DETERMINISM CHECK
+==========
+
+Command run twice:
+  python src/cli.py --input TASKS.sample.yaml --sort-by due_date
+
+Observed:
+  Both launch attempts failed identically with `spawn python ENOENT`.
+  No report output was produced.
+
+Determinism result:
+  UNVERIFIED due to missing runnable Python interpreter in the local harness environment.
+
+==========
+07.00 RUNTIME DIAGNOSTICS
+==========
+
+cmd.exe /c where python
+  stdout: [empty]
+  stderr: INFO: Could not find files for the given pattern(s).
+
+cmd.exe /c where py
+  stdout: C:\Windows\py.exe
+  stderr: [empty]
+
+py --version
+  stdout: [empty]
+  stderr: No installed Python found!
+
+python3 --version
+  stdout: [empty]
+  stderr: [empty]
+  launch error: spawn python3 ENOENT
+
+==========
+08.00 KNOWN LIMITATIONS
+==========
+
+- Validation is blocked in this harness because no runnable Python interpreter is installed or discoverable as `python`.
+- Because the runtime is unavailable, pytest, CLI smoke tests, exit-code checks, and determinism verification remain unverified.
+- Git status after implementation showed untracked `.claude/`, which conflicts with the pre-authorization cleanliness report.
+
+==========
+09.00 SCOPE ISSUES
+==========
+
+NONE
+
+==========
+10.00 FINAL STATUS
+==========
+
+TESTS_RUN.........: 0 verified
+TESTS_PASSED......: 0 verified
+TESTS_FAILED......: 0 test failures observed; validation blocked before execution
+CLI_SMOKE_TEST....: UNVERIFIED
+EXIT_CODE_1_TEST..: UNVERIFIED
+EXIT_CODE_2_TEST..: UNVERIFIED
+REQUIREMENTS_TXT..: PRESENT_WITH_VERSION
+SCOPE_ISSUES......: NONE
+WORKING_TREE......: DIRTY
+
+FINAL_STATUS......: PARTIAL
+ESTIMATE_SCORE....: BLOCKED pending Python runtime and validation pass
+
+==========
+11.00 IMPLEMENTATION SUMMARY
+==========
+
+- Implemented `parser.py` with YAML loading, root/schema validation, enum validation, and ISO date validation.
+- Implemented `scheduler.py` with status filtering and deterministic sorting for `priority` and `due_date`.
+- Implemented `report.py` with the required plain-text report structure and summary line.
+- Implemented `cli.py` with the exact required flags, stdout/file output behavior, and exact exit-code mapping intent.
+- Added a focused pytest suite covering parser, scheduler, report, and CLI behavior, including schema/date validation and `--help`/`--output`.
+
+==========
+FIN_EVIDENCE.COVS.RUN_001.AI.txt
+==========
+
+==========
+TOVS_VALIDATION_ADDENDUM_MB_NS_004B_R4C
+==========
+
+DATE_LOCAL........: 2026-06-22 11:43:22 -04:00
+VALIDATOR.........: TOVS
+VALIDATOR_ID......: TERMINAL_VSCODE_INTEGRATED_POWERSHELL
+AGENT_VALIDATED...: COVS
+AGENT_CANONICAL_ID: CODEX_LOCAL_HARNESS_VSCODE_WORKSPACE
+BRANCH............: lab/ns-pilot-002-codex-real
+HEAD..............: fc95da9 20260621_MB-CLOSE-004_session_close_after_ns_pilot_002_quarantine
+LOG_PATH..........: C:\01. GitHub\Skills\Temp\Handoff\MB-NS-004B-R4C_TOVS_CLEAN_VALIDATE_EVIDENCE.20260622_114319.log.txt
+VALIDATION_STATUS.: PASS
+
+COMMAND_SUMMARY:
+pip install requirements EXIT_CODE=0
+pytest EXIT_CODE=0
+cli help EXIT_CODE=0
+happy path EXIT_CODE=0
+filter open EXIT_CODE=0
+sort due_date EXIT_CODE=0
+missing input EXIT_CODE=1
+invalid yaml EXIT_CODE=2
+determinism PASS
+
+NOTES:
+- R4B reported false FAIL due PowerShell script return-object capture issue.
+- R4C reran validation with explicit LAST_RUN_CODE capture.
+- Runtime __pycache__ artifacts were removed before final status.
+- No commit or push was performed by this validation.
+
+==========
+END_TOVS_VALIDATION_ADDENDUM_MB_NS_004B_R4C
+==========
