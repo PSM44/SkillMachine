@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("help","status","radar-status")]
+  [ValidateSet("help","status","radar-status","session-close-readiness")]
   [string]$Action = "help"
 )
 
@@ -39,12 +39,14 @@ function Show-Help {
   Write-Host "USAGE:"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status"
-  Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status"
+  Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action session-close-readiness"
   Write-Host ""
   Write-Host "ACTIONS:"
   Write-Host "  help         Show this help."
   Write-Host "  status       Show repo and required artifact status."
-  Write-Host "  radar-status Show current RADAR output status without regenerating RADAR."
+  Write-Host "  radar-status Show current RADAR output status without regenerating RADAR.
+  session-close-readiness Run deterministic session-close readiness check."
   Write-Host "====================================================="
 }
 
@@ -125,5 +127,56 @@ if ($Action -eq "radar-status") {
   exit 0
 }
 
+function Invoke-SessionCloseReadiness {
+  $root = Get-RepoRoot
+  Set-Location $root
+
+  $scriptPath = Join-Path $root "SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+  $txtOut = Join-Path $root "SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt"
+  $jsonOut = Join-Path $root "SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json"
+
+  Write-Host "========== SKILLSMACHINE SESSION CLOSE READINESS =========="
+  Write-Host "ROOT.............: $root"
+  Write-Host "SCRIPT...........: $scriptPath"
+
+  if (-not (Test-Path -LiteralPath $scriptPath)) {
+    Write-Host "STATUS...........: FAIL"
+    Write-Host "ERROR............: readiness script not found"
+    exit 1
+  }
+
+  & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $scriptPath
+  $code = $LASTEXITCODE
+
+  Write-Host "READINESS_EXIT...: $code"
+  Write-Host "TXT_EXISTS.......: $(Test-Path -LiteralPath $txtOut)"
+  Write-Host "JSON_EXISTS......: $(Test-Path -LiteralPath $jsonOut)"
+  Write-Host "TXT_PATH.........: $txtOut"
+  Write-Host "JSON_PATH........: $jsonOut"
+
+  if (Test-Path -LiteralPath $jsonOut) {
+    try {
+      $json = Get-Content -LiteralPath $jsonOut -Raw -Encoding UTF8 | ConvertFrom-Json
+      Write-Host "READINESS_STATUS.: $($json.readiness_status)"
+      Write-Host "ISSUES_COUNT.....: $(@($json.issues).Count)"
+    } catch {
+      Write-Host "READINESS_STATUS.: UNKNOWN_JSON_PARSE_FAILED"
+    }
+  }
+
+  Write-Host "==========================================================="
+
+  if ($code -ne 0) {
+    exit $code
+  }
+
+  exit 0
+}
+if ($Action -eq "session-close-readiness") {
+  Invoke-SessionCloseReadiness
+  exit 0
+}
+
 Write-Host "ERROR: unsupported action: $Action"
 exit 1
+
