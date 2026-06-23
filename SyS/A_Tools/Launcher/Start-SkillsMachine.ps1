@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("help","status","radar-status","session-close-readiness")]
+  [ValidateSet("help","status","radar-status","session-close-readiness","package-upload")]
   [string]$Action = "help"
 )
 
@@ -41,12 +41,14 @@ function Show-Help {
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action session-close-readiness"
+  Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload"
   Write-Host ""
   Write-Host "ACTIONS:"
   Write-Host "  help                    Show this help."
   Write-Host "  status                  Show repo and required artifact status."
   Write-Host "  radar-status            Show current RADAR output status without regenerating RADAR."
   Write-Host "  session-close-readiness Run deterministic session-close readiness check."
+  Write-Host "  package-upload          Show and validate canonical IA upload package for session continuation."
   Write-Host "====================================================="
 }
 
@@ -70,7 +72,10 @@ function Show-Status {
     "SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1",
     "SyS\A_Tools\Radar\radar.manifest.json",
     "SyS\A_Tools\Radar\radar.lite.txt",
-    "SyS\A_Tools\Radar\radar.index.txt"
+    "SyS\A_Tools\Radar\radar.index.txt",
+    "90.USECASE\03.SESSION_CONTINUE\README.UPLOAD_THIS_USECASE.txt",
+    "90.USECASE\03.SESSION_CONTINUE\PROMPT.SESSION_CONTINUE.txt",
+    "90.USECASE\03.SESSION_CONTINUE\USECASE.MANIFEST.json"
   )
 
   Write-Host "========== SKILLSMACHINE STATUS =========="
@@ -178,6 +183,64 @@ function Invoke-SessionCloseReadiness {
   }
 }
 
+function Invoke-PackageUpload {
+  $root = Get-RepoRoot
+  Set-Location $root
+
+  $packageRel = "90.USECASE\03.SESSION_CONTINUE"
+  $packageAbs = Join-Path $root $packageRel
+
+  $required = @(
+    "README.UPLOAD_THIS_USECASE.txt",
+    "PROMPT.SESSION_CONTINUE.txt",
+    "00.BUNDLE.CORE.txt",
+    "01.BUNDLE.CONTINUITY.txt",
+    "02.BUNDLE.GOVERNANCE.txt",
+    "00.SKILL.MENU.ACTIVE.txt",
+    "SKILL_SET.MANIFEST.txt",
+    "USECASE.MANIFEST.json"
+  )
+
+  Write-Host "========== SKILLSMACHINE PACKAGE UPLOAD =========="
+  Write-Host "PROFILE..........: session-continue"
+  Write-Host "UPLOAD_FOLDER....: $packageAbs"
+  Write-Host "UPLOAD_RULE......: upload the full folder contents"
+
+  if (-not (Test-Path -LiteralPath $packageAbs)) {
+    Write-Host "WRAPPER_STATUS...: FAIL"
+    Write-Host "ERROR............: canonical usecase folder not found"
+    Write-Host "=================================================="
+    exit 1
+  }
+
+  $missing = New-Object System.Collections.Generic.List[string]
+  foreach ($file in $required) {
+    $full = Join-Path $packageAbs $file
+    $exists = Test-Path -LiteralPath $full
+    Write-Host ("REQUIRED_FILE....: {0}={1}" -f $file, $exists)
+    if (-not $exists) {
+      [void]$missing.Add($file)
+    }
+  }
+
+  $fileCount = @(Get-ChildItem -LiteralPath $packageAbs -File -ErrorAction SilentlyContinue).Count
+  Write-Host "PACKAGE_FILES....: $fileCount"
+
+  if ($missing.Count -gt 0) {
+    Write-Host "WRAPPER_STATUS...: FAIL"
+    Write-Host "MISSING_COUNT....: $($missing.Count)"
+    Write-Host "MISSING_FILES....: $($missing -join '|')"
+    Write-Host "=================================================="
+    exit 1
+  }
+
+  Write-Host "WRAPPER_STATUS...: PASS"
+  Write-Host "OUTPUT_ARTIFACT..: $packageAbs"
+  Write-Host "NEXT_STEP........: upload this full folder to the IA session"
+  Write-Host "=================================================="
+  exit 0
+}
+
 if ($Action -eq "help") {
   Show-Help
   exit 0
@@ -195,6 +258,11 @@ if ($Action -eq "radar-status") {
 
 if ($Action -eq "session-close-readiness") {
   Invoke-SessionCloseReadiness
+  exit 0
+}
+
+if ($Action -eq "package-upload") {
+  Invoke-PackageUpload
   exit 0
 }
 
