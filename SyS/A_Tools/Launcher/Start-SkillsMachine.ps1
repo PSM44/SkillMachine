@@ -1,6 +1,8 @@
 param(
-  [ValidateSet("help","status","radar-status","session-close-readiness","package-upload")]
-  [string]$Action = "help"
+  [ValidateSet("help","status","radar-status","session-close-readiness","package-upload","build-usecase")]
+  [string]$Action = "help",
+
+  [switch]$RunBuild
 )
 
 $ErrorActionPreference = "Stop"
@@ -42,6 +44,8 @@ function Show-Help {
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action session-close-readiness"
   Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload"
+  Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase"
+  Write-Host "  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase -RunBuild"
   Write-Host ""
   Write-Host "ACTIONS:"
   Write-Host "  help                    Show this help."
@@ -49,6 +53,7 @@ function Show-Help {
   Write-Host "  radar-status            Show current RADAR output status without regenerating RADAR."
   Write-Host "  session-close-readiness Run deterministic session-close readiness check."
   Write-Host "  package-upload          Show and validate canonical IA upload package for session continuation."
+  Write-Host "  build-usecase           Show build-usecase readiness. Use -RunBuild to execute the mutating build."
   Write-Host "====================================================="
 }
 
@@ -241,6 +246,52 @@ function Invoke-PackageUpload {
   exit 0
 }
 
+function Invoke-BuildUsecase {
+  param([switch]$RunBuild)
+
+  $root = Get-RepoRoot
+  Set-Location $root
+
+  $buildScript = Join-Path $root "90.USECASE\BUILD.ps1"
+
+  Write-Host "========== SKILLSMACHINE BUILD USECASE =========="
+  Write-Host "ROOT.............: $root"
+  Write-Host "BUILD_SCRIPT.....: $buildScript"
+  Write-Host "MODE.............: $(if ($RunBuild) { 'RUN_BUILD' } else { 'READINESS_ONLY' })"
+
+  if (-not (Test-Path -LiteralPath $buildScript)) {
+    Write-Host "WRAPPER_STATUS...: FAIL"
+    Write-Host "ERROR............: BUILD.ps1 not found"
+    Write-Host "================================================="
+    exit 1
+  }
+
+  Write-Host "BUILD_READY......: true"
+
+  if (-not $RunBuild) {
+    Write-Host "WRAPPER_STATUS...: PASS"
+    Write-Host "NOTE.............: build not executed. Add -RunBuild to execute 90.USECASE\BUILD.ps1."
+    Write-Host "COMMAND..........: pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase -RunBuild"
+    Write-Host "================================================="
+    exit 0
+  }
+
+  Write-Host "RUNNING_BUILD....: true"
+  & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $buildScript
+  $code = $LASTEXITCODE
+  Write-Host "BUILD_EXIT.......: $code"
+
+  if ($code -eq 0) {
+    Write-Host "WRAPPER_STATUS...: PASS"
+    Write-Host "================================================="
+    exit 0
+  }
+
+  Write-Host "WRAPPER_STATUS...: FAIL"
+  Write-Host "================================================="
+  exit 1
+}
+
 if ($Action -eq "help") {
   Show-Help
   exit 0
@@ -263,6 +314,11 @@ if ($Action -eq "session-close-readiness") {
 
 if ($Action -eq "package-upload") {
   Invoke-PackageUpload
+  exit 0
+}
+
+if ($Action -eq "build-usecase") {
+  Invoke-BuildUsecase -RunBuild:$RunBuild
   exit 0
 }
 

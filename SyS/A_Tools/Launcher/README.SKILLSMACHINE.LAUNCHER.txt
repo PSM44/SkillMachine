@@ -12,6 +12,7 @@ CURRENT ACTIONS:
 - radar-status
 - session-close-readiness
 - package-upload
+- build-usecase
 
 USAGE:
 pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
@@ -19,6 +20,8 @@ pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status
 pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status
 pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action session-close-readiness
 pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase -RunBuild
 
 PACKAGE UPLOAD:
 The package-upload action validates the canonical self-contained usecase folder for session continuation.
@@ -30,6 +33,22 @@ Upload rule:
 Upload the full folder contents.
 
 Do not use Temp\TO_UPLOAD_TO_IA as the default session-continuation package. That tool is for explicit IA-requested delta files, not the canonical usecase package.
+
+BUILD USECASE:
+The build-usecase action is safe by default.
+
+Default mode:
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase
+
+This validates build readiness and prints the explicit build command.
+
+Execution mode:
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase -RunBuild
+
+This executes:
+90.USECASE\BUILD.ps1
+
+Because BUILD.ps1 may regenerate usecase packages, execution requires the explicit -RunBuild flag.
 
 SESSION CLOSE READINESS:
 The session-close-readiness action runs:
@@ -44,7 +63,7 @@ The launcher distinguishes wrapper execution from readiness result.
 
 BETA STATUS:
 This is a functional launcher slice.
-It is not yet full Beta 0.1 because build-usecase wrapper and final demo/readme validation are still pending.
+It is not yet full Beta 0.1 until final demo/readme validation confirms a non-technical user can run the workflow without repo exploration.
 
 BETA GATE:
 Governed by GRCLake\01.CONTROLS\CONTROL.BETA_FUNCTIONALITY_GATE.txt.
