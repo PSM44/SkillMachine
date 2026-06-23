@@ -1,0 +1,179 @@
+# SkillsMachine Beta 0.1 Branch Status / PR Readiness
+
+STATUS............: PR_READY_WITH_LIMITATIONS
+DEMO_READY........: true
+BETA_GATE.........: PARTIAL
+CREATED_BY........: MB-NS-004B-R21_BRANCH_STATUS_PR_READINESS
+CREATED_LOCAL.....: 2026-06-23 08:56:12 -04:00
+BRANCH............: lab/ns-pilot-002-codex-real
+HEAD..............: 5472f05 20260623_MB-NS-004B-R20_beta_demo_guide_and_status
+BASE_COMMIT.......: fc95da9
+
+## 01. Executive Summary
+
+The branch lab/ns-pilot-002-codex-real now contains a demonstrable SkillsMachine operator launcher slice.
+
+This is no longer only governance, evidence, or internal documentation. The branch contains a real executable entrypoint that can be demonstrated in under five minutes.
+
+Main entrypoint:
+
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+## 02. What Is Ready To Show
+
+The current demo can show:
+
+1. A single operator launcher.
+2. Repository/artifact status.
+3. RADAR status without regenerating RADAR.
+4. Canonical session-continuation upload package discovery.
+5. Safe usecase build-readiness check.
+6. AI_TAIL execution continuity standard.
+
+Validated safe actions:
+
+- help: exit=0, lines=18
+- status: exit=0, lines=22
+- radar-status: exit=0, lines=13
+- package-upload: exit=0, lines=17
+- build-usecase: exit=0, lines=9
+
+
+## 03. What This Means For Management
+
+This branch provides a visible beta slice.
+
+Management can see:
+
+- where a user starts;
+- what command is executed;
+- what status the system reports;
+- what package should be uploaded to continue a session;
+- how the system avoids relying on long terminal output by using AI_TAIL;
+- how future scripts will preserve continuity.
+
+## 04. What Is Still Partial
+
+This is not yet full Beta 0.1 final because:
+
+- session-close has not been formally performed after the latest branch work;
+- the branch has not yet been merged;
+- build-usecase -RunBuild has not been executed in a controlled final validation;
+- no non-technical external user has independently executed the flow;
+- RADAR/BATON/WHOAMI freshness may still require final session close.
+
+## 05. PR / Merge Readiness
+
+Recommendation:
+
+PR_READY_WITH_LIMITATIONS
+
+The branch is ready for PR review as a beta demo slice, provided the PR description clearly states:
+
+- BETA_GATE=PARTIAL;
+- DEMO_READY=true;
+- full beta still requires final close/merge/readiness validation;
+- session-close-readiness may show WARN until BATON/WHOAMI/RADAR are refreshed.
+
+## 06. Main Files Added Or Updated
+
+Key user-facing files:
+
+- SyS\A_Tools\Launcher\Start-SkillsMachine.ps1
+- SyS\A_Tools\Launcher\README.SKILLSMACHINE.LAUNCHER.txt
+- HUMAN\SKILLSMACHINE.BETA_0_1.DEMO_GUIDE.txt
+- HUMAN\SKILLSMACHINE.BETA_0_1.BRANCH_STATUS_PR_READINESS.txt
+
+Key governance files:
+
+- GRCLake\01.CONTROLS\CONTROL.BETA_FUNCTIONALITY_GATE.txt
+- GRCLake\01.CONTROLS\CONTROL.SCRIPT_OUTPUT_AI_TAIL.txt
+- SkillsLake\01.SKILLS\SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT.txt
+
+## 07. Commit Summary Since Base
+
+Base:
+
+fc95da9
+
+Commits since base:
+
+- 5472f05 20260623_MB-NS-004B-R20_beta_demo_guide_and_status
+- f9c3394 20260623_MB-NS-004B-R18_launcher_build_usecase_wrapper
+- dfd0639 20260623_MB-NS-004B-R17C_launcher_package_upload_canonical_usecase
+- e619561 20260622_MB-NS-004B-R16C_launcher_readiness_exit_semantics
+- 9c74f46 20260622_MB-NS-004B-R16_launcher_session_close_readiness
+- fde7b9a 20260622_MB-NS-004B-R15B_harden_ai_tail_standard_and_skill
+- e919fd7 20260622_MB-NS-004B-R15_operator_launcher_status_radar
+- dfc4241 20260622_MB-NS-004B-R14C_ai_tail_output_contract
+- 62f1977 20260622_MB-NS-004B-R12_general_beta_gate_all_projects
+- 1a5201e 20260622_MB-NS-004B-R10B_beta_functionality_gate
+- 5d33941 20260622_MB-NS-004B-R7_compare_covs_vs_claude
+- a446c74 20260622_MB-NS-004B-R5_covs_run_001_yaml_scheduler
+
+
+## 08. Changed Files Since Base
+
+Changed file count: 21
+
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/__init__.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/cli.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/parser.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/report.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/src/scheduler.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/__init__.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_cli.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_parser.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_report.py
+- 99.LABS/Nightshift/03_EXPERIMENTS/NS-PILOT-002_YAML_TASK_SCHEDULER/tests/test_scheduler.py
+- 99.LABS/Nightshift/04_EVIDENCE/NS-PILOT-002_YAML_TASK_SCHEDULER/EVIDENCE.COVS.RUN_001.AI.txt
+- 99.LABS/Nightshift/05_REPORTS/NS-PILOT-002.COMPARE.COVS_VS_CLAUDE.20260622.AI.txt
+- GRCLake/01.CONTROLS/CONTROL.BETA_FUNCTIONALITY_GATE.txt
+- GRCLake/01.CONTROLS/CONTROL.SCRIPT_OUTPUT_AI_TAIL.txt
+- HUMAN/SKILLSMACHINE.BETA_0_1.DEMO_GUIDE.txt
+- SkillsLake/01.SKILLS/SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT.txt
+- SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
+- SyS/00.0_BATON_SKILLMACHINE.txt
+- SyS/01_WHOAMI_SKILLMACHINE.txt
+- SyS/A_Tools/Launcher/README.SKILLSMACHINE.LAUNCHER.txt
+- SyS/A_Tools/Launcher/Start-SkillsMachine.ps1
+
+
+## 09. Diff Stat Since Base
+
+ .../src/__init__.py                                |   1 +
+ .../NS-PILOT-002_YAML_TASK_SCHEDULER/src/cli.py    |  77 +++++
+ .../NS-PILOT-002_YAML_TASK_SCHEDULER/src/parser.py |  74 +++++
+ .../NS-PILOT-002_YAML_TASK_SCHEDULER/src/report.py |  32 ++
+ .../src/scheduler.py                               |  21 ++
+ .../tests/__init__.py                              |   1 +
+ .../tests/test_cli.py                              |  72 +++++
+ .../tests/test_parser.py                           |  81 +++++
+ .../tests/test_report.py                           |  50 ++++
+ .../tests/test_scheduler.py                        |  41 +++
+ .../EVIDENCE.COVS.RUN_001.AI.txt                   | 272 +++++++++++++++++
+ ...ILOT-002.COMPARE.COVS_VS_CLAUDE.20260622.AI.txt | 155 ++++++++++
+ .../CONTROL.BETA_FUNCTIONALITY_GATE.txt            | 158 ++++++++++
+ .../01.CONTROLS/CONTROL.SCRIPT_OUTPUT_AI_TAIL.txt  | 155 ++++++++++
+ HUMAN/SKILLSMACHINE.BETA_0_1.DEMO_GUIDE.txt        | 100 +++++++
+ .../SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT.txt       | 149 ++++++++++
+ .../05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt     |  95 ++++++
+ SyS/00.0_BATON_SKILLMACHINE.txt                    | 107 +++++++
+ SyS/01_WHOAMI_SKILLMACHINE.txt                     |  21 ++
+ .../Launcher/README.SKILLSMACHINE.LAUNCHER.txt     |  82 ++++++
+ SyS/A_Tools/Launcher/Start-SkillsMachine.ps1       | 326 +++++++++++++++++++++
+ 21 files changed, 2070 insertions(+)
+
+
+## 10. Recommended Next Step
+
+Option A:
+Create PR from lab/ns-pilot-002-codex-real to main.
+
+Option B:
+Perform formal session close first if the objective is to update BATON/WHOAMI/RADAR and leave a fully closed operational checkpoint.
+
+Recommended sequence:
+1. R22 prepare PR text / merge checklist.
+2. Formal session close only if explicitly requested with "cierra sesión".
+

@@ -1089,3 +1089,18 @@ NEXT:
 - Later: controlled test of build-usecase -RunBuild if required.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R21 / BACKLOG UPDATE / BRANCH STATUS PR READINESS / 2026-06-23 08:56:12 -04:00
+================================================================================
+
+DONE:
+- Branch status / PR readiness artifact created.
+- Demo-ready launcher slice formally documented.
+- PR readiness classified as PR_READY_WITH_LIMITATIONS.
+
+NEXT:
+- R22 prepare PR text / merge checklist.
+- Formal close only on explicit "cierra sesión".
+
+================================================================================
