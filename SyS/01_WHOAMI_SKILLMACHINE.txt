@@ -960,3 +960,24 @@ OPERATIONAL IMPLICATION:
 Future work should be ranked by direct contribution to visible beta functionality, not by volume of internal evidence.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R22 / WHOAMI UPDATE / FORMAL SESSION CLOSE / 2026-06-23 08:58:13 -04:00
+================================================================================
+
+CURRENT PROJECT POSITION:
+- SkillsMachine now has a demonstrable launcher beta slice.
+- Current branch: lab/ns-pilot-002-codex-real
+- Current head before close: 97badc5 20260623_MB-NS-004B-R21_branch_status_pr_readiness
+- Entry point:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+OPERATING RULES REINFORCED:
+- TOVS/Git/AI_TAIL are source of truth.
+- AI_TAIL must be used for future long/MB scripts.
+- Formal close only when user explicitly says "cierra sesión".
+
+NEXT:
+- R23 PR text / merge checklist.
+
+================================================================================

@@ -1,0 +1,147 @@
+# Session Close — SkillsMachine Beta Demo Slice
+
+USER_STATED_LOCAL.: 2026-06-22 08:54
+SYSTEM_LOCAL.......: 2026-06-23 08:58:13 -04:00
+MB_ID..............: MB-NS-004B-R22_FORMAL_SESSION_CLOSE_BETA_DEMO_SLICE
+BRANCH.............: lab/ns-pilot-002-codex-real
+HEAD_BEFORE_CLOSE..: 97badc5 20260623_MB-NS-004B-R21_branch_status_pr_readiness
+
+## 01. Current Status
+
+The current branch is lab/ns-pilot-002-codex-real.
+
+Confirmed status before close:
+
+- DEMO_READY=true
+- BETA_GATE=PARTIAL
+- PR_READY=YES_WITH_LIMITATIONS
+- Worktree clean before close
+- Main entrypoint:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+## 02. What Was Completed
+
+Completed during this workstream:
+
+1. Real COVS execution path validated.
+2. NS-PILOT-002 COVS implementation completed and compared against Claude.
+3. Beta functionality gate created and generalized across projects.
+4. AI_TAIL output standard created and operationalized as a skill.
+5. SkillsMachine operator launcher created.
+6. Launcher actions implemented:
+   - help
+   - status
+   - radar-status
+   - session-close-readiness
+   - package-upload
+   - build-usecase
+7. Readiness wrapper semantics corrected.
+8. Canonical session-continuation package validated:
+   90.USECASE\03.SESSION_CONTINUE
+9. Beta demo guide created:
+   HUMAN\SKILLSMACHINE.BETA_0_1.DEMO_GUIDE.txt
+10. Branch status / PR readiness created:
+   HUMAN\SKILLSMACHINE.BETA_0_1.BRANCH_STATUS_PR_READINESS.txt
+
+## 03. Technical Debt
+
+Accumulated technical debt:
+
+- Branch is not merged to main.
+- BETA_GATE remains PARTIAL, not full Beta 0.1.
+- build-usecase -RunBuild has not been executed in controlled final validation.
+- RADAR/BATON/WHOAMI may require freshness refresh after final close.
+- session-close-readiness may show WARN until continuity artifacts are refreshed against HEAD.
+- No non-technical external user has independently executed the demo.
+- CLI launcher exists, but no HTML/dashboard UI for non-technical management audience.
+- PR text / merge checklist still pending.
+
+## 04. Backlog
+
+Immediate backlog:
+
+- R23 prepare PR text / merge checklist.
+- Decide whether to merge lab/ns-pilot-002-codex-real into main.
+- Validate launcher after merge if merged.
+- Optionally run build-usecase -RunBuild in a controlled branch.
+- Refresh RADAR if full evidence package is required.
+- Prepare management-facing one-page summary.
+- Optional: create HTML/dashboard launcher for management demo.
+
+## 05. What Is Ready For Management
+
+A five-minute operational demo is ready.
+
+Demo sequence:
+
+1. Show commands:
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+2. Show current status:
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status
+
+3. Show RADAR status:
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status
+
+4. Show canonical upload package:
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload
+
+5. Show build readiness:
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase
+
+## 06. What Is Missing For Full Beta
+
+Still missing:
+
+- merge/PR decision;
+- final post-merge validation if applicable;
+- final refreshed session-close readiness;
+- management summary artifact;
+- controlled mutating build validation;
+- independent non-technical user test.
+
+## 07. Development Path To Functional Management Deliverable
+
+Recommended path:
+
+1. Finish this formal close.
+2. Prepare PR text / merge checklist.
+3. Merge or decide branch hold.
+4. Validate launcher from final target branch.
+5. Refresh RADAR/BATON/WHOAMI after merge or final branch decision.
+6. Prepare one-page management summary.
+7. Optional: create HTML launcher/dashboard if CLI is considered too technical.
+
+## 08. Safe Launcher Validation Results
+
+- help: exit=0, lines=18
+- status: exit=0, lines=22
+- radar-status: exit=0, lines=13
+- package-upload: exit=0, lines=17
+- build-usecase: exit=0, lines=9
+
+
+## 09. Recent Commits
+
+- 97badc5 20260623_MB-NS-004B-R21_branch_status_pr_readiness
+- 5472f05 20260623_MB-NS-004B-R20_beta_demo_guide_and_status
+- f9c3394 20260623_MB-NS-004B-R18_launcher_build_usecase_wrapper
+- dfd0639 20260623_MB-NS-004B-R17C_launcher_package_upload_canonical_usecase
+- e619561 20260622_MB-NS-004B-R16C_launcher_readiness_exit_semantics
+- 9c74f46 20260622_MB-NS-004B-R16_launcher_session_close_readiness
+- fde7b9a 20260622_MB-NS-004B-R15B_harden_ai_tail_standard_and_skill
+- e919fd7 20260622_MB-NS-004B-R15_operator_launcher_status_radar
+- dfc4241 20260622_MB-NS-004B-R14C_ai_tail_output_contract
+- 62f1977 20260622_MB-NS-004B-R12_general_beta_gate_all_projects
+- 1a5201e 20260622_MB-NS-004B-R10B_beta_functionality_gate
+- 5d33941 20260622_MB-NS-004B-R7_compare_covs_vs_claude
+
+
+## 10. Close Decision
+
+Session is being formally closed because the user explicitly requested: "cierra sesión".
+
+Next expected action after this close:
+
+R23_PREPARE_PR_TEXT_AND_MERGE_CHECKLIST
+
