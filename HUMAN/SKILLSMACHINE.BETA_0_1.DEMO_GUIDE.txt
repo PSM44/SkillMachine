@@ -1,0 +1,100 @@
+# SkillsMachine Beta 0.1 Demo Guide
+
+STATUS............: DEMO_READY
+BETA_GATE.........: PARTIAL
+CREATED_BY........: MB-NS-004B-R20_CREATE_BETA_DEMO_GUIDE_AND_STATUS_COMMIT
+CREATED_LOCAL.....: 2026-06-23 08:54:02 -04:00
+BRANCH............: lab/ns-pilot-002-codex-real
+HEAD..............: f9c3394 20260623_MB-NS-004B-R18_launcher_build_usecase_wrapper
+
+## 01. Purpose
+
+This guide defines the current demonstrable SkillsMachine beta slice.
+
+The goal is to show a real operator workflow that can be executed from one visible entrypoint without requiring the user to inspect the repository manually.
+
+## 02. Main Entry Point
+
+Run from repository root:
+
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+## 03. Current Demo Flow
+
+Recommended 5-minute demo sequence:
+
+1. Show available commands.
+
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+2. Show repository and artifact status.
+
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status
+
+3. Show RADAR status without regenerating RADAR.
+
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status
+
+4. Validate the canonical session-continuation upload package.
+
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload
+
+5. Validate usecase build readiness without executing mutating build.
+
+   pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase
+
+## 04. What This Demo Proves
+
+This demo proves that SkillsMachine now has:
+
+- a single visible operator entrypoint;
+- safe read-only status actions;
+- a canonical upload package discovery action;
+- a safe build-usecase readiness action;
+- documented execution commands;
+- AI_TAIL-compatible execution protocol for future scripts.
+
+## 05. What This Demo Does Not Yet Prove
+
+This is not yet full Beta 0.1 because the following are still pending:
+
+- final session-close after current branch work;
+- merge / PR readiness decision;
+- management-ready summary artifact;
+- optional execution test of build-usecase -RunBuild in a controlled branch;
+- final confirmation that a non-technical target user can run the flow without assistance.
+
+## 06. Current Safe Actions
+
+Safe actions:
+
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action status
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action radar-status
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action package-upload
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase
+
+Controlled mutating action:
+
+pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action build-usecase -RunBuild
+
+## 07. Canonical Upload Package
+
+The session-continuation upload package is:
+
+90.USECASE\03.SESSION_CONTINUE
+
+Upload rule:
+
+Upload the full folder contents.
+
+## 08. Demo Status
+
+DEMO_READY=true
+BETA_GATE=PARTIAL
+USER_ENTRYPOINT=pwsh -File SyS/A_Tools/Launcher/Start-SkillsMachine.ps1 -Action help
+
+## 09. Next Recommended Step
+
+R21 should prepare PR/readiness or formal session close, depending on whether the branch is ready to merge or needs one more management-facing status artifact.
+

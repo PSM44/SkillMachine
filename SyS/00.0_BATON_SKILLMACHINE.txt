@@ -1472,3 +1472,27 @@ NEXT_ACTION:
 - Continue with R16 launcher session-close-readiness wrapper using AI_TAIL contract.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R20 / BETA DEMO GUIDE / 2026-06-23 08:54:02 -04:00
+================================================================================
+
+UPDATE:
+- R19 validated the launcher demo slice successfully.
+- R20 created HUMAN\SKILLSMACHINE.BETA_0_1.DEMO_GUIDE.txt.
+- Current demo entrypoint:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+CURRENT STATUS:
+- DEMO_READY=true
+- BETA_GATE=PARTIAL
+- Safe actions validated: help, status, radar-status, package-upload, build-usecase.
+
+LIMIT:
+- This is a demonstrable beta slice, not full Beta 0.1 final.
+- Full beta still requires final management-ready status and/or PR/merge readiness decision.
+
+NEXT_ACTION:
+- R21 prepare PR/readiness or formal branch status package.
+
+================================================================================

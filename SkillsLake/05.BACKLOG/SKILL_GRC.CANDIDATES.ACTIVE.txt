@@ -1072,3 +1072,20 @@ P1 / FUTURE HARDENING:
 - Consider adding validator support to detect missing AI_TAIL in generated one-shot scripts.
 
 ================================================================================
+
+================================================================================
+MB-NS-004B-R20 / BACKLOG UPDATE / BETA DEMO GUIDE / 2026-06-23 08:54:02 -04:00
+================================================================================
+
+DONE / BETA DEMO SLICE:
+- Created user-facing demo guide for SkillsMachine launcher.
+- Confirmed demo entrypoint:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+- Confirmed safe demo actions:
+  help, status, radar-status, package-upload, build-usecase.
+
+NEXT:
+- R21 PR/readiness or management-facing branch status package.
+- Later: controlled test of build-usecase -RunBuild if required.
+
+================================================================================
