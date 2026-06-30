@@ -1,0 +1,93 @@
+==========
+SESSION_CLOSE.SKILLSMACHINE.MB-SM-038
+==========
+DATE_LOCAL........: 2026-06-30 11:43:00 -04:00
+ROOT..............: C:\01. GitHub\Skills
+BRANCH............: lab/ns-pilot-002-codex-real
+HEAD..............: c773ffb 20260630.1140_Add_usecase_temp_upload_staging_grc
+HEAD_HASH.........: c773ffbe2d48a21bb77cf5333353f97c7e7b8766
+REMOTE_HEAD.......: c773ffbe2d48a21bb77cf5333353f97c7e7b8766
+DIRTY.............: False
+FINAL_STATUS......: PASS_SESSION_CLOSED_USECASE_TEMP_UPLOAD_STAGING_GRC
+
+==========
+01.00 WHAT_WAS_DONE
+==========
+- Created GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt.
+- Registered GRC.USECASE_TEMP_UPLOAD_STAGING in GLOBAL.SKILL.VERSION.REGISTRY.json.
+- Injected GRC.USECASE_TEMP_UPLOAD_STAGING into GOVERNANCE bundles for:
+  - 01.NEW_PROJECT
+  - 02.SESSION_CLOSE
+  - 03.SESSION_CONTINUE
+  - 04.REPOSITORY_STRUCTURE_REPAIR
+- Regenerated 90.USECASE packages through BUILD.ps1.
+- Updated SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt.
+- Committed and pushed:
+  - c773ffb 20260630.1140_Add_usecase_temp_upload_staging_grc
+
+==========
+02.00 WHY_IT_MATTERS
+==========
+The user identified a practical friction point: when the IA recommends additional Skills or GRCs, the user should not manually collect files. The IA must provide exact paths and a one-shot script that clears 90.USECASE\Temp and consolidates the selected Skills/GRCs into upload-ready output.
+
+90.USECASE\Temp is now governed as disposable output, not canon.
+
+==========
+03.00 FILES_OF_INTEREST
+==========
+- GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+- 90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
+- 90.USECASE\USECASE.REGISTRY.json
+- 90.USECASE\01.NEW_PROJECT\02.BUNDLE.GOVERNANCE.txt
+- 90.USECASE\02.SESSION_CLOSE\02.BUNDLE.GOVERNANCE.txt
+- 90.USECASE\03.SESSION_CONTINUE\02.BUNDLE.GOVERNANCE.txt
+- 90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\02.BUNDLE.GOVERNANCE.txt
+- SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt
+
+==========
+04.00 TECHNICAL_DEBT_AND_BACKLOG
+==========
+P0/P1:
+- Implement an actual helper script generator for additional Skills/GRC upload bundles.
+- Ensure future IA recommendations always include exact Skill/GRC paths.
+- Consider adding a validation command that checks 90.USECASE\Temp is ignored or treated as disposable output.
+
+Known minor issue:
+- PowerShell scripts must normalize slash/backslash paths when reading git status.
+
+==========
+05.00 SKILL_GRC_IMPROVEMENT_OPPORTUNITIES
+==========
+EXISTING_SKILLS_TO_PERFECT:
+- SKILL.MANIFEST.PATH_SEMANTICS.txt should be considered for future work involving registry/schema patching.
+- SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt should be considered for future registry/build alignment.
+- SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt should be considered for formalizing Temp lifecycle behavior.
+
+EXISTING_GRCS_TO_PERFECT:
+- GRC.DRAGONFLYFOCUS.txt may later reference GRC.USECASE_TEMP_UPLOAD_STAGING as a support control for preventing file-hunting drift.
+
+CANDIDATE_SKILLS_TO_CREATE:
+- None now. The current control is better modeled as GRC, not Skill.
+
+CANDIDATE_GRCS_TO_CREATE:
+- Completed in this session: GRC.USECASE_TEMP_UPLOAD_STAGING.txt.
+
+SKILLS_GRCS_TO_CONSOLIDATE_OR_DEPRECATE:
+- None.
+
+CANDIDATE_BACKLOG_ENTRIES:
+- Add one-shot upload bundle generator for recommended additional Skills/GRCs.
+- Validate whether 90.USECASE\Temp should be explicitly ignored by git or cleaned by tooling.
+
+NO_OPPORTUNITY_DETECTED_REASON:
+- Not applicable. Opportunities were detected and one GRC was created.
+
+==========
+06.00 NEXT_ACTION
+==========
+NEXT_ACTION:
+- Resume with a clean repo at c773ffb and decide whether to implement the actual one-shot upload bundle generator, or return to MB-SM-037A_SESSION_LEARNING_REVIEW_OUTPUT_GATE.
+
+==========
+END
+==========
