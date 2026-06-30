@@ -1129,3 +1129,46 @@ CURRENT_LIMIT:
 - BETA_GATE remains PARTIAL until PR/merge/final validation and management artifact are complete.
 
 ================================================================================
+
+==========
+BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
+==========
+
+FECHA........................: 2026-06-30 10:45
+FUENTE.......................: MB-SM-036B_SESSION_CLOSE_CONTINUITY_UPDATE
+HEAD_CONFIRMADO..............: b3b89ed 20260630.1042_RADAR_v1_4_full_human_skills_contract
+
+P0_OPEN:
+- MB-SM-036C — Readiness final post-continuity.
+  Criterio: Git clean, Validate-System OK, BATON/WHOAMI frescos contra HEAD, RADAR fresco o WARN explícitamente aceptado.
+- MB-SM-037A — Regenerar 90.USECASE si RADAR v1.4 dejó bundles/manifests stale.
+  Criterio: BUILD.ps1 TOTAL_FAIL 0; diff revisado; commit separado si hay cambios reales.
+- MB-SM-038A — Preparar PR-readiness de lab/ns-pilot-002-codex-real.
+  Criterio: PR text, merge checklist, evidencia de commits y estado clean.
+- MB-SM-039A — Demo gerencial Beta 0.1.
+  Criterio: demo pack entendible por gerencia, con flujo, valor, límites y próximos pasos.
+
+P1_OPEN:
+- TD-SM-AITAIL-003 — Convertir patrón AI_TAIL en finally a regla/candidato formal si no está cubierto por Skill existente.
+- TD-SM-LOG-001 — Estandarizar salida TOVS KEY=VALUE, sin Format-Table para evidencia parseable.
+- TD-SM-PS-001 — Endurecer patrones PowerShell para evitar bugs de regex/interpolación.
+- TD-SM-MENU-001 — Evaluar registro de 31.SKILL.PROFESSIONAL_RECOMMENDATIONS.txt en menú/registry activo.
+- TD-SM-GENERATED-001 — Revisar si bloques manuales eliminados por build deben vivir en fuente canónica.
+
+P2_OPEN:
+- TD-SM-DRAGONFLY-002 — Evaluar incorporar DragonflyFocus en 02.SESSION_CLOSE.
+- TD-SM-LINEEND-001 — Revisar CRLF/LF sin churn innecesario.
+- Negative test formal de restore transaccional si sigue pendiente.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-033 — DragonflyFocus GRC usecase integration.
+- MB-SM-034 — Professional Recommendations canonical path.
+- MB-SM-035 — RADAR v1.4 full human/skills contract.
+
+PROXIMO_PASO.................:
+Cerrar MB-SM-036 con readiness final y luego avanzar a PR-readiness / demo gerencial Beta 0.1.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
+==========
+

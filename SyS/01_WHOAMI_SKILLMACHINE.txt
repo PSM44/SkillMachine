@@ -1,4 +1,46 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_SM_036B_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 10:45
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: b3b89ed 20260630.1042_RADAR_v1_4_full_human_skills_contract
+
+ESTADO_ACTUAL...............:
+SkillsMachine está en cierre formal posterior a una secuencia pushed y limpia:
+DragonflyFocus integrado, Professional Recommendations relocalizado a ruta canónica,
+y RADAR actualizado a v1.4 con archive v1.3. Preflight de cierre confirmó Git limpio
+y Validate-System OK. Falta completar readiness final después de refrescar BATON/WHOAMI
+y RADAR.
+
+QUE_SE_LOGRO................:
+- DragonflyFocus creado como GRC anti-drift y agregado a usecases 01, 03 y 04.
+- Professional Recommendations fue preservado y movido a SkillsLake\01.SKILLS.
+- RADAR fue actualizado a v1.4-DRAFT con FULL.HUMAN y FULL.SKILLS.
+- Los tres commits fueron pushed a origin/lab/ns-pilot-002-codex-real.
+- La sesión reforzó el patrón operativo TOVS: AI_TAIL en finally, evidencia KEY=VALUE,
+  commits separados por scope y no mezclar archivos externos.
+
+QUE_FALTA...................:
+- Readiness final post-continuity.
+- Revisar si 90.USECASE debe regenerarse por RADAR v1.4.
+- Preparar PR-readiness y demo gerencial Beta 0.1.
+- Decidir registro formal de Professional Recommendations en menú/registry.
+- Resolver o aceptar deuda CRLF/LF.
+- Evaluar DragonflyFocus para 02.SESSION_CLOSE.
+
+SIGUIENTE_ACCION............:
+Ejecutar readiness final. Si no hay blocker, cerrar sesión. Próxima sesión:
+PR-readiness y camino a entregable funcional a gerencia.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_036B_20260630
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_GRC_023B_FINAL_20260529
 ==========
 
@@ -981,3 +1023,4 @@ NEXT:
 - R23 PR text / merge checklist.
 
 ================================================================================
+

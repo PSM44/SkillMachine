@@ -1,4 +1,83 @@
 ==========
+LATEST_SESSION_CLOSE_MB_SM_036B_20260630
+==========
+
+FECHA........................: 2026-06-30 10:45
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: lab/ns-pilot-002-codex-real
+ULTIMO_COMMIT_CONFIRMADO.....: b3b89ed 20260630.1042_RADAR_v1_4_full_human_skills_contract
+SHELL_OPERATIVO..............: PowerShell VS Code / TOVS para esta secuencia
+
+ESTADO_EJECUTIVO.............:
+SkillsMachine queda en cierre formal posterior a la integración de DragonflyFocus,
+Professional Recommendations y RADAR v1.4. La rama lab/ns-pilot-002-codex-real fue
+actualizada y pushed hasta b3b89ed. Preflight de cierre confirmó Git limpio y
+Validate-System OK, pero readiness quedó WARN por frescura: RADAR, BATON y WHOAMI
+anteriores al HEAD. Este bloque refresca continuidad para cerrar sesión con evidencia.
+
+HECHO_CONFIRMADO.............:
+- MB-SM-033M: DragonflyFocus GRC integrado, commiteado y pushed.
+- Commit 827892f: 20260630.0925_DragonflyFocus_GRC_usecase_integration.
+- DragonflyFocus quedó en GRCLake\01.CONTROLS y registrado para usecases:
+  01.NEW_PROJECT, 03.SESSION_CONTINUE y 04.REPOSITORY_STRUCTURE_REPAIR.
+- MB-SM-034B: Professional Recommendations relocalizado a SkillsLake\01.SKILLS,
+  commiteado y pushed.
+- Commit b1433fd: 20260630.0931_Professional_recommendations_skill_canonical_path.
+- MB-SM-035B: RADAR v1.4 commiteado y pushed con archive v1.3 trazable.
+- Commit b3b89ed: 20260630.1042_RADAR_v1_4_full_human_skills_contract.
+- MB-SM-036A: preflight de cierre confirmó Git clean, Validate-System OK y readiness WARN
+  solo por frescura de continuidad.
+
+DEUDA_TECNICA_ABIERTA........:
+- TD-SM-AITAIL-003: formalizar patrón try/catch/finally para garantizar AI_TAIL_START/END.
+- TD-SM-LOG-001: evitar Format-Table en evidencia operativa; preferir KEY=VALUE.
+- TD-SM-PS-001: endurecer scripts PowerShell contra errores por interpolación/regex.
+- TD-SM-USECASE-STALE-001: revisar si 90.USECASE debe regenerarse tras RADAR v1.4.
+- TD-SM-MENU-001: decidir si Professional Recommendations debe registrarse en menú/registry activo.
+- TD-SM-SESSIONCLOSE-001: robustecer learning review de cierre para candidatos Skill/GRC.
+- TD-SM-LINEEND-001: revisar warnings CRLF/LF sin generar churn.
+- TD-SM-GENERATED-001: revisar bloques manuales antiguos eliminados por build generado.
+- TD-SM-DRAGONFLY-002: evaluar DragonflyFocus en 02.SESSION_CLOSE.
+
+BACKLOG_PRIORITARIO..........:
+- MB-SM-036C: verificar readiness final post-continuity y RADAR.
+- MB-SM-037A: regenerar usecase packages si quedaron stale tras RADAR v1.4.
+- MB-SM-038A: preparar PR text y merge checklist de lab/ns-pilot-002-codex-real.
+- MB-SM-039A: preparar demo gerencial Beta 0.1.
+- MB-SM-040A: merge/main o release candidate si se aprueba.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Ejecutar readiness final post-continuity. Si queda OK o WARN aceptado por razón explícita,
+cerrar sesión. La siguiente sesión debe partir por PR-readiness / demo gerencial Beta 0.1,
+no por nuevos cambios doctrinales.
+
+PATH_MINIBATTLES_BATTLES.....:
+MB-SM-033 DragonflyFocus -> MB-SM-034 Professional Recommendations canonical path ->
+MB-SM-035 RADAR v1.4 -> MB-SM-036 Session Close ->
+MB-SM-037 Usecase package refresh -> MB-SM-038 PR readiness ->
+MB-SM-039 Management demo -> MB-SM-040 release candidate/main.
+
+ENTREGABLE_GERENCIA..........:
+SkillsMachine Beta 0.1 Demo Pack:
+- usecases empaquetables;
+- GRC DragonflyFocus anti-drift;
+- cierre endurecido con readiness;
+- RADAR v1.4 con FULL.HUMAN/FULL.SKILLS;
+- evidencia Git/build/validación;
+- path a Beta 1.
+
+HUMAN.........................:
+No actualizado. No se detectó cambio doctrinal superior; los cambios son operativos,
+GRC/Skill y continuidad de sesión.
+
+==========
+FIN_LATEST_SESSION_CLOSE_MB_SM_036B_20260630
+==========
+
+==========
 LATEST_SESSION_CLOSE_MB_GRC_023B_FINAL_20260529
 ==========
 
@@ -1559,3 +1638,4 @@ NEXT_ACTION:
 - R23_PREPARE_PR_TEXT_AND_MERGE_CHECKLIST
 
 ================================================================================
+
