@@ -4,12 +4,12 @@ GRC.USECASE_TEMP_UPLOAD_STAGING
 
 ID_UNICO..........: GRC.USECASE_TEMP_UPLOAD_STAGING.0001
 NOMBRE............: UsecaseTempUploadStaging
-VERSION...........: v0.1-DRAFT
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
-SCOPE.............: SkillsMachine additional Skills/GRC upload staging
+SCOPE.............: SkillsMachine upload-ready context staging for IA, including additional Skills/GRC and compiled session context
 APPLIES_TO........: All usecases when IA recommends additional Skills/GRC context
 
 ==========
@@ -29,8 +29,8 @@ When the assistant recommends that the user upload additional Skills or GRCs, it
 - exact repository path for every recommended Skill/GRC;
 - reason for each recommendation;
 - a one-shot script executable from any location;
-- an output bundle written to C:\01. GitHub\Skills\90.USECASE\Temp;
-- cleanup of any previous content in C:\01. GitHub\Skills\90.USECASE\Temp before writing new output;
+- an output bundle written to C:\01. GitHub\Skills\SyS\Temp;
+- cleanup of any previous content in C:\01. GitHub\Skills\SyS\Temp before writing new output;
 - a manifest containing source paths, hashes and generation timestamp.
 
 ==========
@@ -38,7 +38,7 @@ When the assistant recommends that the user upload additional Skills or GRCs, it
 ==========
 
 PATH:
-C:\01. GitHub\Skills\90.USECASE\Temp
+C:\01. GitHub\Skills\SyS\Temp
 
 ROLE:
 Output-only staging area for upload-ready context bundles.
@@ -72,8 +72,8 @@ The one-shot script must:
 - be executable from any location;
 - set Root to C:\01. GitHub\Skills;
 - verify each requested source path exists;
-- clear C:\01. GitHub\Skills\90.USECASE\Temp;
-- recreate C:\01. GitHub\Skills\90.USECASE\Temp;
+- clear C:\01. GitHub\Skills\SyS\Temp;
+- recreate C:\01. GitHub\Skills\SyS\Temp;
 - consolidate selected Skills/GRCs into one TXT bundle;
 - write a JSON manifest with path, length and SHA256;
 - avoid modifying source files;
@@ -124,8 +124,71 @@ This GRC succeeds when:
 ==========
 
 2026-06-30, v0.1-DRAFT
-- Initial GRC created to govern upload staging for additional Skills/GRCs through 90.USECASE\Temp.
+- Initial GRC created to govern upload staging for additional Skills/GRCs through SyS\Temp.
 
 ==========
 END
 ==========
+
+==========
+MB-SM-039A0_SYS_TEMP_COMPILED_CONTEXT_RULE
+==========
+
+FECHA.............: 2026-06-30
+STATUS............: ACTIVE_RULE
+SOURCE............: MB-SM-039A0_CANONIZE_SYS_TEMP_UPLOAD_STAGING
+
+REGLA:
+SyS\Temp es la carpeta operativa preferida para staging de paquetes compilados de contexto IA dentro de SkillsMachine.
+
+PATH_CANONICO:
+C:\01. GitHub\Skills\SyS\Temp
+
+USO:
+- staging de archivos upload-ready;
+- contexto compilado en menor cantidad de archivos posible;
+- manifests de trazabilidad;
+- reportes temporales de preflight;
+- evidencia transitoria generada para subir a IA.
+
+REGLAS:
+- SyS\Temp no es canon.
+- SyS\Temp puede borrarse antes de cada nueva corrida de staging.
+- SyS\Temp debe contener outputs regenerables.
+- SyS\Temp no debe tratarse como source of truth.
+- SyS\Temp no debe commitearse salvo instruccion humana explicita.
+- Un paquete de upload debe preferir 1 TXT compilado + 1 JSON manifest.
+- Si el usuario no puede subir carpetas ni ZIP, el script debe compilar fuentes en archivo TXT unico o minimo.
+- El TXT compilado debe preservar:
+  - path original;
+  - tag;
+  - prioridad;
+  - motivo;
+  - tamano;
+  - SHA256;
+  - contenido completo cuando sea legible y razonable.
+- El JSON manifest debe preservar trazabilidad y conteos.
+
+CONTRATO_DE_SCRIPT:
+Un script compliant debe:
+- ser ejecutable desde cualquier ubicacion;
+- setear Root en C:\01. GitHub\Skills;
+- limpiar C:\01. GitHub\Skills\SyS\Temp antes de generar paquete nuevo, salvo que el objetivo sea preservar evidencia puntual;
+- no modificar archivos fuente, salvo que la minibattle sea explicitamente de canonizacion;
+- no hacer git commit;
+- no hacer git push;
+- imprimir TOVS o AI_TAIL con rutas y estado.
+
+MOTIVO:
+El humano no puede subir carpetas y prefiere evitar ZIP.
+La IA puede leer mejor un TXT consolidado y trazable que muchos archivos sueltos.
+Este patron reduce friccion de upload sin perder calidad de datos.
+
+EVIDENCIA_ORIGEN:
+- UPLOAD_CONTEXT_COMPILED.20260630_130225.txt funciono como paquete consolidado.
+- UPLOAD_CONTEXT_MANIFEST.20260630_130225.json preservo trazabilidad.
+- El uso real validado fue C:\01. GitHub\Skills\SyS\Temp.
+
+FIN_MB-SM-039A0_SYS_TEMP_COMPILED_CONTEXT_RULE
+==========
+
