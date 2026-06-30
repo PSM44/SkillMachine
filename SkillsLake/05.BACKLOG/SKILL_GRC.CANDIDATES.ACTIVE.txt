@@ -1303,3 +1303,35 @@ RELATIONSHIP_TO_EXISTING_CONTROLS:
 NEXT_ACTION:
 Draft canonical source only if the human approves MB-SM-040C as the next minibattle.
 
+==========
+BACKLOG_UPDATE_MB_SM_040F_FINAL_CONTINUITY_20260630
+==========
+
+FECHA........................: 2026-06-30 15:25
+FUENTE.......................: MB-SM-040F_FINAL_CONTINUITY_REFRESH_AFTER_SESSION_CLOSE_PREP
+HEAD_CONFIRMADO..............: 4130ad4 20260630.1515_Prepare_session_close_after_operational_learnings
+
+P0_OPEN:
+- MB-SM-040G - Commit/push final continuity refresh.
+- MB-SM-040H - Ejecutar RADAR y Test-SessionCloseReadiness despues del refresh final.
+
+P1_OPEN:
+- TD-SM-LINEEND-001 - Definir politica LF/CRLF sin churn innecesario.
+- TD-SM-RADAR-READY-001 - Confirmar frescura/readiness final de RADAR post continuity.
+- TD-SM-BETA02-PR-001 - Preparar PR/readiness package de Beta 0.2.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-040CDE - closed on HEAD 4130ad4.
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP now canonical.
+- SESSION_CLOSE hardened with structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook hardened for RADAR v1.4 six ACTIVE outputs.
+- Generated non-SESSION_CLOSE package diffs reviewed and classified as EXPECTED_REGENERATED_OUTPUTS.
+- Validation passed and repo was clean after commit/push.
+
+PROXIMO_PASO.................:
+Commit/push continuity refresh final, then run RADAR and Test-SessionCloseReadiness.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_040F_FINAL_CONTINUITY_20260630
+==========
+

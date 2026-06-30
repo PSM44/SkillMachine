@@ -1,4 +1,40 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_SM_040F_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 15:25
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: 4130ad4 20260630.1515_Prepare_session_close_after_operational_learnings
+
+ESTADO_ACTUAL...............:
+SkillsMachine opera sobre HEAD 4130ad4, pushed y sincronizado con origin, despues del cierre
+de MB-SM-040CDE. SESSION_CLOSE ya incorpora learning review estructurado y gate de seis
+ACTIVE outputs de RADAR v1.4. La validacion paso y el repo quedo limpio tras el commit/push.
+
+QUE_SE_LOGRO................:
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP ya es canonico.
+- SESSION_CLOSE fue endurecido con structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook exige los seis ACTIVE outputs de RADAR v1.4.
+- Los generated non-SESSION_CLOSE diffs fueron revisados y clasificados como
+  EXPECTED_REGENERATED_OUTPUTS.
+- El branch local coincide con origin en HEAD 4130ad4.
+
+QUE_FALTA...................:
+- Ejecutar RADAR final y Test-SessionCloseReadiness.
+- Resolver o aceptar politica LF/CRLF.
+- Preparar PR/readiness package de Beta 0.2.
+
+SIGUIENTE_ACCION............:
+Commit/push continuidad y luego ejecutar RADAR seguido de Test-SessionCloseReadiness.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_040F_20260630
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_SM_040B_20260630
 ==========
 
