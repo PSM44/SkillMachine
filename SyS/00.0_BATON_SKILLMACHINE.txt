@@ -1,4 +1,63 @@
 ==========
+LATEST_CONTINUITY_REFRESH_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+FECHA........................: 2026-06-30 17:45
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: main
+ULTIMO_COMMIT_CONFIRMADO.....: de91446 Merge pull request #1 from PSM44/pr/beta-0-2-core-rc
+SHELL_OPERATIVO..............: PowerShell VS Code / TOVS para esta secuencia
+
+ESTADO_EJECUTIVO.............:
+PR #1 fue merged a main y el Core Beta 0.2 Internal RC ya vive en la rama principal.
+La continuidad previa basada en lab/ns-pilot-002-codex-real / HEAD 4130ad4 queda superada por
+de91446. Este refresh deja constancia post-merge sin declarar beta completa todavia.
+
+HECHO_CONFIRMADO.............:
+- HEAD confirmado en main: de91446 Merge pull request #1 from PSM44/pr/beta-0-2-core-rc.
+- PR #1 merged.
+- Core Beta 0.2 Internal RC ahora esta en main.
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP ya forma parte del canon merged.
+- SESSION_CLOSE ya incluye structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook ya exige los seis ACTIVE outputs de RADAR v1.4.
+- Generated non-SESSION_CLOSE package diffs fueron revisados y clasificados como EXPECTED_REGENERATED_OUTPUTS.
+- Validation paso.
+- Repo estaba clean despues del commit/push de merge.
+
+DEUDA_TECNICA_ABIERTA........:
+- TD-SM-LINEEND-001: definir politica LF/CRLF sin churn innecesario.
+- TD-SM-RADAR-READY-001: ejecutar RADAR final y readiness final post-merge.
+- TD-SM-BETA02-PR-001: preparar paquete de PR/readiness o close formal Beta 0.2.
+
+BACKLOG_PRIORITARIO..........:
+- MB-SM-042C: decidir siguiente minibattle post-merge.
+- MB-SM-042D: ejecutar RADAR y Test-SessionCloseReadiness despues de refrescar continuidad.
+- MB-SM-042E: decidir entre Nightshift LAB PR, project continuity/close support PR, LF/CRLF policy, o formal Beta 0.2 close/acceptance.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Decidir siguiente minibattle; no declarar beta completa salvo que este ligada a funcionalidad visible y ejecutable para el usuario.
+
+PATH_MINIBATTLES_BATTLES.....:
+PR #1 Core Beta 0.2 Internal RC merged ->
+post-merge continuity refresh ->
+decision de siguiente minibattle ->
+RADAR + readiness final ->
+eventual close/acceptance de Beta 0.2.
+
+ENTREGABLE_GERENCIA..........:
+main contiene el Core Beta 0.2 Internal RC, pero el gate de beta sigue exigiendo funcionalidad visible ejecutable antes de una afirmacion de beta completa.
+
+HUMAN.........................:
+No actualizado doctrinalmente. Este bloque solo corrige continuidad post-merge.
+
+==========
+FIN_LATEST_CONTINUITY_REFRESH_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+==========
 LATEST_CONTINUITY_REFRESH_MB_SM_040F_20260630
 ==========
 

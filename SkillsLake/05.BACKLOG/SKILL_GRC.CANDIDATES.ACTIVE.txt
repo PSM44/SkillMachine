@@ -1131,6 +1131,30 @@ CURRENT_LIMIT:
 ================================================================================
 
 ==========
+BACKLOG_UPDATE_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+DONE:
+- PR #1 Core Beta 0.2 Internal RC merged to main.
+
+P0_NEXT:
+- choose next minibattle.
+
+P0_PRODUCT:
+- user-visible beta slice remains the next valid product-progress direction.
+
+P1:
+- Nightshift LAB PR can be separate.
+- project continuity/close PR can be separate.
+
+P2:
+- LF/CRLF policy remains debt.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+==========
 BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
 ==========
 

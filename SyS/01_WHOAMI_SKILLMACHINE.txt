@@ -1,4 +1,37 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 17:45
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: main
+HEAD_CONFIRMADO.............: de91446 Merge pull request #1 from PSM44/pr/beta-0-2-core-rc
+
+ESTADO_ACTUAL...............:
+SkillsMachine main ya contiene PR #1 Core Beta 0.2 Internal RC. Esto es enablement interno del core,
+no una beta completa orientada al usuario final.
+
+QUE_SE_LOGRO................:
+- PR #1 merged a main.
+- Governance core, RADAR v1.4, SESSION_CLOSE hardening y continuity core ya estan integrados en main.
+- SESSION_CLOSE ahora usa structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook ahora exige los seis ACTIVE outputs de RADAR v1.4.
+
+QUE_FALTA...................:
+- El beta gate sigue vigente: solo hay claim de beta cuando exista funcionalidad visible y ejecutable para el usuario.
+- Decidir si el siguiente trabajo va por Nightshift LAB PR, project continuity/close support PR, LF/CRLF, o formal Beta 0.2 close.
+- Ejecutar RADAR final y Test-SessionCloseReadiness despues de este refresh de continuidad.
+
+SIGUIENTE_ACCION............:
+Decidir la siguiente minibattle post-merge sin declarar beta completa hasta conectar el estado con funcionalidad visible para el usuario.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_042B_POST_PR1_MERGE_20260630
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_SM_040F_20260630
 ==========
 
