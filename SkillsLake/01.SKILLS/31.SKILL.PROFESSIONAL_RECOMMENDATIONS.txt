@@ -1,0 +1,461 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROFESSIONAL_RECOMMENDATIONS.01.00
+NOMBRE_SUGERIDO...: 31.SKILL.PROFESSIONAL_RECOMMENDATIONS.txt
+VERSION...........: v1.0-CANON
+FECHA.............: 2026-06-26
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: SkillsLake/01.SKILLS
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: RECOMENDACIONES, LINKEDIN, CARTA_REFERENCIA,
+                    MARCA_PERSONAL, EMPLEABILIDAD, EMPRENDIMIENTO
+
+ALCANCE...........:
+Define el método completo para solicitar, estructurar y entregar
+recomendaciones profesionales en LinkedIn y cartas de referencia.
+Cubre selección de contactos, criterios de contenido, formatos
+de entrega, tono por perfil del contacto, y empaquetado operativo.
+
+NO_CUBRE..........:
+No reemplaza la estrategia digital (PROMPT C / WINGS).
+No define el perfil profesional canónico (CORE CANON).
+No cubre recomendaciones académicas ni institucionales.
+No autoriza inventar experiencias o relaciones que no existieron.
+
+DEPENDENCIAS......:
+11.SKILL.HUMAN_README.txt
+23.SKILL.WHOAMI_POLICY.txt
+HUMAN_README_CAREER_BACKGROUND (del proyecto correspondiente)
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.10 Índice
+00.20 Contexto y objetivo
+
+01.00 Cuándo crear recomendaciones
+02.00 Selección estratégica de contactos
+03.00 Las 5 dimensiones que hacen una recomendación valiosa
+04.00 Formatos de entrega
+05.00 Estructura del paquete por persona
+06.00 Reglas de tono por perfil del contacto
+07.00 Framing correcto desde email corporativo
+08.00 Reglas de tipografía y presentación
+09.00 Reglas de envío
+10.00 Antipatrones
+11.00 Checklist de validación
+12.00 Changelog
+
+==========
+00.20_CONTEXTO_Y_OBJETIVO
+==========
+
+Una recomendación mal ejecutada es peor que ninguna.
+Valida atributos genéricos que el reclutador ignora.
+
+Una recomendación bien ejecutada valida EVIDENCIA:
+- situaciones reales,
+- resultados concretos,
+- competencias específicas observadas de cerca.
+
+Objetivo de este skill:
+Producir recomendaciones que un reclutador senior, hiring manager
+o inversor lea y diga "este candidato es diferente" — no que
+archive como cortesía.
+
+==========
+01.00_CUANDO_CREAR_RECOMENDACIONES
+==========
+
+Momentos óptimos:
+
+01.10 Antes de una campaña activa de búsqueda de empleo.
+      Las recomendaciones deben estar publicadas ANTES de postular,
+      no durante. El reclutador las ve al revisar el perfil.
+
+01.20 Al iniciar un proceso de emprendimiento o búsqueda de socios.
+      Una carta de referencia de un contacto reconocido abre puertas
+      que ningún pitch deck puede abrir.
+
+01.30 Después de un proyecto o transacción relevante.
+      El mejor momento para pedir es cuando el resultado está fresco
+      y la relación está activa — no años después.
+
+01.40 Antes de postular a roles internacionales.
+      Recomendaciones en inglés de contactos con credibilidad en el
+      mercado objetivo son un diferenciador crítico.
+
+REGLA:
+No pedir recomendaciones en período de urgencia económica.
+La urgencia se nota en el tono y resta credibilidad.
+
+==========
+02.00_SELECCIÓN_ESTRATÉGICA_DE_CONTACTOS
+==========
+
+02.10 PRINCIPIO RECTOR
+
+No cantidad — calidad y diversidad de perspectivas.
+4 a 6 recomendaciones bien seleccionadas superan a 15 genéricas.
+
+02.20 MATRIZ DE SELECCIÓN
+
+Seleccionar contactos que cubran dimensiones distintas:
+
+| Perfil del contacto        | Qué valida                                    |
+|---------------------------|-----------------------------------------------|
+| Alta dirección / CEO      | Exposición ejecutiva, resultados estratégicos |
+| Director / Senior Manager | Ejecución operacional, trabajo diario          |
+| Contraparte externa       | Profesionalismo, negociación, confiabilidad   |
+| Cliente o mandante        | Entrega de valor, orientación a resultados    |
+| Colega de otro país       | Inglés ejecutivo real, operación binacional   |
+
+02.30 REGLAS DE SELECCIÓN
+
+- No repetir el mismo nivel jerárquico más de 2 veces.
+- Incluir al menos 1 contacto internacional si aplica.
+- Priorizar contactos que hayan visto resultados concretos,
+  no solo relaciones cordiales.
+- Nunca pedir a alguien que no pueda hablar de trabajo real.
+
+02.40 CRITERIO DE DESCARTE
+
+No pedir recomendación a:
+- Contactos que no trabajaron directamente contigo.
+- Personas que solo te conocen socialmente.
+- Contactos con quienes la relación terminó en malos términos.
+- Personas que no recuerdan el trabajo específico que hicieron
+  juntos.
+
+==========
+03.00_LAS_5_DIMENSIONES_QUE_HACEN_UNA_RECOMENDACIÓN_VALIOSA
+==========
+
+Una recomendación es valiosa si valida al menos 3 de estas 5.
+Una recomendación que valida las 5 es excepcional.
+
+03.10 DIMENSIÓN 1 — OPERACIÓN EN EL IDIOMA DEL MERCADO OBJETIVO
+
+No "tiene buen inglés".
+Sí: "lideró negociaciones, coordinó con asesores legales y presentó
+ante inversores — todo en inglés — en un entorno de alta exigencia."
+
+Esto solo pueden decirlo contactos que te vieron operar en ese
+idioma en contextos reales.
+
+03.20 DIMENSIÓN 2 — DECISIONES CON DINERO REAL EN JUEGO
+
+No "gestiona proyectos".
+Sí: "estuvo en la mesa cuando se cerró una transacción de escala
+significativa y fue parte determinante del resultado."
+
+Esto separa a un ejecutor de un líder.
+Reclutadores senior e inversores leen esto diferente a cualquier
+otra línea del CV.
+
+03.30 DIMENSIÓN 3 — COORDINACIÓN DE COMPLEJIDAD REAL
+
+No "trabaja bien en equipo".
+Sí: "mantuvo alineados a equipos en dos países, con marcos legales
+distintos, múltiples asesores externos y plazos críticos —
+sin perder claridad ni momentum."
+
+Esto demuestra capacidad de ejecución en entornos de alta
+fricción, no en PowerPoint.
+
+03.40 DIMENSIÓN 4 — CONFIABILIDAD BAJO PRESIÓN
+
+No "es muy comprometido".
+Sí: "cuando surgieron complicaciones inesperadas, reestructuró el
+enfoque sin perder credibilidad con las partes involucradas."
+
+Esta dimensión es la más difícil de fabricar y la más creíble
+cuando viene de alguien que lo vivió.
+
+03.50 DIMENSIÓN 5 — SEÑAL DE CONFIANZA EJECUTIVA
+
+No "lo recomendaría para cualquier rol".
+Sí: "es alguien en quien confiaría con una transacción significativa
+o una iniciativa de negocio en este mercado."
+
+Esta frase, firmada por un CEO o Director reconocido, vale más
+que tres párrafos de elogios genéricos.
+
+==========
+04.00_FORMATOS_DE_ENTREGA
+==========
+
+04.10 RECOMENDACIÓN LINKEDIN
+
+Formato: texto publicado en el perfil del candidato.
+Longitud óptima: 3 a 4 párrafos.
+Visibilidad: pública, permanente, indexable por ATS.
+
+Cuándo es suficiente:
+- Contactos locales sin cargo institucional muy reconocido.
+- Contactos que no pueden emitir carta formal.
+
+04.20 CARTA DE REFERENCIA (PDF)
+
+Formato: documento en papel membretado de la empresa del
+recomendador, firmado, escaneado en PDF.
+Longitud óptima: 3 párrafos + bloque de firma.
+Uso: procesos formales, empresas internacionales, inversores.
+
+Cuándo es crítica:
+- Contactos en empresas reconocidas internacionalmente.
+- Procesos donde el reclutador pide referencias formales.
+- Emprendimiento: socios potenciales, inversores, bancos.
+
+04.30 REFERENCIA VERBAL
+
+No es un documento — es una persona preparada para responder
+cuando la llamen. Preparar al contacto con 2-3 puntos específicos
+que puede mencionar naturalmente.
+
+04.40 PAQUETE ÓPTIMO POR CONTACTO
+
+Para contactos de alto valor: LinkedIn + Carta + preparación verbal.
+Para contactos de valor medio: LinkedIn únicamente.
+Para contactos informales: no pedir carta — solo LinkedIn.
+
+==========
+05.00_ESTRUCTURA_DEL_PAQUETE_POR_PERSONA
+==========
+
+Cada contacto recibe un paquete individual con:
+
+05.10 ARCHIVO 1 — EMAIL DRAFT (.docx)
+
+Contiene:
+- Encabezado: Para / Asunto / Adjunto
+- Cuerpo del email completo listo para copiar
+- Borrador LinkedIn sugerido (editable)
+- Instrucciones para LinkedIn y carta
+- Cierre con nombre del solicitante
+
+05.20 ARCHIVO 2 — CARTA DE REFERENCIA DRAFT (.docx)
+
+Contiene:
+- Header con nombre de la empresa (placeholder para membretado)
+- Fecha placeholder
+- Cuerpo de 3 párrafos con las dimensiones relevantes
+- Bloque de firma del recomendador
+
+05.30 ARCHIVO 3 — REFERENCIA DE TEXTO PLANO (.txt)
+
+Contiene:
+- Todo el contenido del email en texto plano
+- Útil como respaldo y para copiar sin formato
+
+05.40 EMPAQUETADO
+
+Un ZIP por persona.
+Nombre: PAQUETE_{NOMBRE_APELLIDO}.zip
+Nunca combinar dos personas en el mismo ZIP.
+
+==========
+06.00_REGLAS_DE_TONO_POR_PERFIL_DEL_CONTACTO
+==========
+
+06.10 CEO / DIRECTOR GENERAL
+
+- Tono: cálido, personal, con peso ejecutivo.
+- Apertura: referencia al mercado o negocio compartido.
+- Cierre: reconocimiento genuino, no protocolar.
+- Borrador LinkedIn: énfasis en visión estratégica,
+  negociación de alto nivel y confiabilidad.
+- Ejemplo de cierre: "It means a lot coming from you."
+
+06.20 DIRECTOR / SENIOR MANAGER
+
+- Tono: directo, profesional, sin exceso de calidez.
+- Apertura: referencia al trabajo concreto compartido.
+- Cierre: simple y sin adornos.
+- Borrador LinkedIn: énfasis en ejecución operacional,
+  coordinación en terreno y fiabilidad diaria.
+- Ejemplo de cierre: "Really appreciate your time on this."
+
+06.30 GERENTE GENERAL / DIRECTORIO (Chile)
+
+- Tono: formal pero cercano, en español.
+- Referencia explícita a proyectos o resultados concretos.
+- Borrador LinkedIn: énfasis en liderazgo, resultados y
+  responsabilidad real sobre proyectos.
+
+06.40 CONTRAPARTE EXTERNA (banco, legal, consultor)
+
+- Tono: profesional y neutral.
+- Énfasis en confiabilidad, profesionalismo y cumplimiento.
+- No mencionar detalles confidenciales de la relación.
+
+REGLA GENERAL:
+Nunca usar el mismo tono para dos contactos distintos.
+El destinatario debe sentir que el email fue escrito para él,
+no que es una plantilla con el nombre cambiado.
+
+==========
+07.00_FRAMING_CORRECTO_DESDE_EMAIL_CORPORATIVO
+==========
+
+07.10 PROBLEMA
+
+Pedir recomendaciones desde email corporativo puede señalar
+búsqueda activa de empleo al empleador actual — especialmente
+si los contactos reenvían el email internamente.
+
+07.20 SOLUCIÓN — FRAMING NEUTRAL
+
+Usar siempre el framing de "fortalecimiento del perfil profesional"
+como práctica habitual — no como señal de transición.
+
+FRASES CORRECTAS:
+✓ "As part of maintaining and strengthening my professional profile"
+✓ "I'm in the process of updating and strengthening my LinkedIn
+   profile with recommendations from professionals I've worked with"
+✓ "This is entirely a personal initiative on my end"
+
+FRASES PROHIBIDAS:
+❌ "I'm currently exploring new professional opportunities"
+❌ "I'm looking for new challenges"
+❌ "As part of my job search"
+❌ Cualquier referencia a cambio de trabajo o emprendimiento
+
+07.30 MENCIONAR AUTORIZACIÓN
+
+No mencionar que tenés autorización del jefe.
+Hacerlo genera el efecto contrario — nadie que hace algo normal
+necesita aclarar que tiene permiso.
+El framing neutral ya maneja esto implícitamente.
+
+07.40 ENVÍO INDIVIDUAL
+
+Nunca enviar con copia a otro recomendador.
+- La solicitud es personal y privada.
+- Los borradores son distintos — si se copian entre sí,
+  ambos editan menos y las voces se homogenizan.
+- El contacto debe poder declinar sin incomodidad social.
+
+==========
+08.00_REGLAS_DE_TIPOGRAFÍA_Y_PRESENTACIÓN
+==========
+
+08.10 GUIÓN LARGO (EM DASH)
+
+Usar `—` (em dash) donde se quiere énfasis o contraste.
+NO usar `,` (coma) como sustituto.
+
+La coma conecta ideas de forma continua — prosaica.
+El em dash crea una pausa que introduce énfasis — ejecutiva.
+
+Cómo escribirlo:
+- Windows: Alt + 0151
+- Mac: Option + Shift + -
+- Copiar desde Word donde ya está correcto
+
+08.20 INSTRUCCIONES PARA EL RECOMENDADOR
+
+LinkedIn:
+✓ "Click the '···' button (three dots) below the profile header"
+✓ "Select 'Recommend' from the dropdown menu"
+❌ NO decir "Click More → Recommend" (el menú no dice 'More')
+
+Carta:
+✓ "The attached draft is ready for your review.
+   Please adjust as you see fit, add [empresa] letterhead,
+   and send back a signed copy whenever convenient."
+❌ NO listar pasos como "1. Open the file, 2. Replace the header..."
+   — trata al recomendador como si no supiera firmar una carta.
+
+08.30 NOMBRE DEL SOLICITANTE
+
+Siempre usar nombre completo en los borradores de LinkedIn
+y en la carta de referencia.
+Ejemplo: "Pablo Andrés San Martín Alvarado"
+— no "Pablo San Martín" ni "Pablo".
+
+En el cierre del email: solo el primer nombre es suficiente.
+
+==========
+09.00_REGLAS_DE_ENVÍO
+==========
+
+09.10 ORDEN DE ENVÍO
+
+Primero los contactos de mayor valor estratégico.
+Si uno responde rápido y publica la recomendación, eso puede
+motivar a los siguientes.
+
+09.20 SEGUIMIENTO
+
+Si no hay respuesta en 10 días hábiles:
+Un recordatorio breve y cordial por WhatsApp o llamada,
+NO por email — el email ya fue enviado.
+
+Nunca más de un seguimiento por contacto.
+Si no responde al seguimiento, no insistir.
+
+09.30 AGRADECIMIENTO
+
+Cuando publiquen la recomendación o envíen la carta:
+Responder de inmediato con agradecimiento genuino y breve.
+No protocolar — personal.
+
+==========
+10.00_ANTIPATRONES
+==========
+
+- Pedir recomendación genérica sin guiar el contenido.
+- Enviar el mismo borrador a todos los contactos.
+- Mezclar dos contactos en el mismo email o ZIP.
+- Mencionar búsqueda de empleo desde email corporativo.
+- Pedir con urgencia visible.
+- Listar instrucciones que tratan al recomendador como inexperto.
+- Usar "More → Recommend" cuando el menú de LinkedIn no lo dice.
+- Usar comas donde corresponde em dash en inglés ejecutivo.
+- Pedir a contactos que no pueden hablar de trabajo real.
+- Dejar el perfil de LinkedIn sin foto o sin titular antes de
+  pedirle a alguien que lo recomiende.
+
+==========
+11.00_CHECKLIST_DE_VALIDACIÓN
+==========
+
+Antes de enviar cada paquete:
+
+[ ] ¿El tono del email es correcto para el perfil del contacto?
+[ ] ¿El framing evita cualquier señal de búsqueda de empleo?
+[ ] ¿El borrador LinkedIn cubre al menos 3 de las 5 dimensiones?
+[ ] ¿El nombre completo aparece en el borrador y en la carta?
+[ ] ¿Los em dashes están correctos (no comas)?
+[ ] ¿Las instrucciones de LinkedIn dicen "···" y "Recommend"?
+[ ] ¿Las instrucciones de la carta respetan la inteligencia del
+    recomendador (sin pasos infantilizantes)?
+[ ] ¿El ZIP tiene exactamente los archivos correctos?
+[ ] ¿El ZIP está nombrado con el nombre del contacto?
+[ ] ¿El envío va a una sola persona, sin copia cruzada?
+[ ] ¿El email cierra con nombre del solicitante antes de la firma?
+
+==========
+12.00_CHANGELOG
+==========
+
+2026-06-26, v1.0-CANON
+- Creación inicial del skill a partir de sesión operativa
+  FitResumeMachine con Pablo San Martín Alvarado.
+- Incluye método completo desarrollado para contactos Gary Tasman
+  (CEO, CPS Fort Myers) y Shawn Stoneburner (Senior Director, CPS)
+  — Cushman & Wakefield Alliance, SW Florida.
+- Las 5 dimensiones de valor derivadas del análisis de qué
+  realmente diferencia una recomendación de alto impacto.
+- Reglas de framing desde email corporativo sin señalar transición.
+- Corrección tipográfica em dash vs coma en inglés ejecutivo.
+- Instrucciones de LinkedIn corregidas ("···" → "Recommend").
+
+==========
+FIN_DEL_DOCUMENTO
+==========
