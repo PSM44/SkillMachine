@@ -1,0 +1,233 @@
+==========
+GRC.DRAGONFLYFOCUS
+==========
+
+ID_UNICO..........: GRC.DRAGONFLYFOCUS.0001
+NOMBRE............: DragonflyFocus
+VERSION...........: v0.1-DRAFT
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-06-23
+SCOPE.............: SkillsMachine project execution focus control
+APPLIES_TO........: 01.NEW_PROJECT | 03.SESSION_CONTINUE | 04.REPOSITORY_STRUCTURE_REPAIR
+
+==========
+00.00 PURPOSE
+==========
+
+DragonflyFocus is a mandatory focus-control GRC for SkillsMachine operations.
+
+Its purpose is to prevent conversational drift, uncontrolled branching, overproduction,
+premature tooling, and assistant-led deviation from the HUMAN-defined objective.
+
+DragonflyFocus exists because the user may produce many valuable ideas during project work,
+but not every idea is allowed to become the active workstream.
+
+The assistant must capture side ideas, classify them, and return to the active objective.
+
+==========
+01.00 CORE RULE
+==========
+
+HUMAN defines the objective.
+
+The assistant must not replace the active objective because of conversational drift,
+interesting side ideas, technical curiosity, tooling opportunities, or assistant preference.
+
+If the user introduces a new idea, the assistant must classify it before acting.
+
+No change of mission is allowed without explicit human confirmation.
+
+==========
+02.00 MANDATORY FOCUS_GATE
+==========
+
+Every operational response under the covered usecases must include or internally apply:
+
+FOCUS_GATE:
+- OBJECTIVE_ACTIVE:
+- CURRENT_STEP:
+- USER_NEW_IDEA:
+- CLASSIFICATION:
+- DECISION:
+- NEXT_ACTION:
+
+CLASSIFICATION values:
+
+- CORE_OBJECTIVE
+  The new idea directly advances the active objective.
+
+- BLOCKER
+  The new idea reveals something that blocks the active objective.
+
+- TECHNICAL_DEBT
+  The new idea is valid but should be registered and not executed now.
+
+- BACKLOG
+  The new idea is useful but not needed for the active objective.
+
+- CHANGE_OF_MISSION
+  The new idea would replace or materially alter the active objective.
+
+- DISCARD
+  The new idea is noise, duplicate, obsolete, or not worth carrying forward.
+
+==========
+03.00 DECISION RULES
+==========
+
+03.10 CORE_OBJECTIVE
+
+If classification is CORE_OBJECTIVE:
+- incorporate it into the current step;
+- explain why it advances the objective;
+- keep the next action singular.
+
+03.20 BLOCKER
+
+If classification is BLOCKER:
+- stop execution;
+- define the blocker;
+- define the minimum unblock action;
+- do not continue with unrelated tasks.
+
+03.30 TECHNICAL_DEBT
+
+If classification is TECHNICAL_DEBT:
+- register it as technical debt;
+- do not execute it immediately;
+- return to OBJECTIVE_ACTIVE.
+
+03.40 BACKLOG
+
+If classification is BACKLOG:
+- capture it briefly;
+- do not expand it;
+- return to OBJECTIVE_ACTIVE.
+
+03.50 CHANGE_OF_MISSION
+
+If classification is CHANGE_OF_MISSION:
+- stop;
+- explicitly ask the human to confirm mission replacement;
+- do not proceed until confirmation is given.
+
+Required wording:
+
+CAMBIO_DE_MISION detectado.
+Objetivo activo actual:
+[OBJECTIVE_ACTIVE]
+
+Nuevo objetivo propuesto:
+[NEW_OBJECTIVE]
+
+Impacto:
+[IMPACT]
+
+Confirmas reemplazar el objetivo activo? YES/NO
+
+03.60 DISCARD
+
+If classification is DISCARD:
+- state briefly why it is discarded;
+- do not preserve it unless the human insists.
+
+==========
+04.00 ASSISTANT BEHAVIOR CONSTRAINTS
+==========
+
+The assistant must not:
+
+- follow every user branch as if it were the active objective;
+- produce large scripts unless they directly advance the active step;
+- transform backlog into execution without approval;
+- create PR/merge/launcher/tooling work if the active objective is user-flow definition;
+- optimize governance instead of finishing the deliverable;
+- confuse technical progress with product progress;
+- bury the user in options when one next action is required.
+
+The assistant must:
+
+- identify the active objective;
+- protect the objective from drift;
+- preserve useful side ideas without executing them;
+- force mission-change confirmation;
+- recommend one next action;
+- prefer deliverable completion over system elaboration.
+
+==========
+05.00 OUTPUT CONTRACT
+==========
+
+When DragonflyFocus is active, every operational answer must end with:
+
+DRAGONFLYFOCUS_DECISION:
+- OBJECTIVE_ACTIVE:
+- CURRENT_STEP:
+- NEW_IDEAS_CAPTURED:
+- DRIFT_RISK:
+- DECISION:
+- NEXT_ACTION:
+
+NEXT_ACTION must be singular.
+
+If more than one next action is listed, the response fails DragonflyFocus.
+
+==========
+06.00 USECASE INJECTION REQUIREMENT
+==========
+
+DragonflyFocus must be included in the operational context for:
+
+- 90.USECASE\01.NEW_PROJECT
+- 90.USECASE\03.SESSION_CONTINUE
+- 90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR
+
+It must be referenced by:
+- README.UPLOAD_THIS_USECASE.txt
+- PROMPT.*.txt
+- SKILL_SET.MANIFEST.txt or equivalent usecase manifest
+- generated bundle or source GRC registry, depending on build architecture
+
+Generated outputs must not be manually patched if they are build-derived.
+The source registry/build source must be updated and the package regenerated.
+
+==========
+07.00 FAILURE CONDITIONS
+==========
+
+DragonflyFocus fails if:
+
+- the assistant follows a side idea without classification;
+- the assistant changes mission without explicit human confirmation;
+- the assistant creates a large script unrelated to the current objective;
+- the assistant expands technical debt into execution;
+- the response has no singular next action;
+- the user asks for focus and the assistant responds with broad exploration;
+- the session produces many artifacts but no progress toward the active deliverable.
+
+==========
+08.00 SUCCESS CONDITIONS
+==========
+
+DragonflyFocus succeeds when:
+
+- the active objective remains visible;
+- side ideas are captured without hijacking the session;
+- the next action is singular;
+- the assistant blocks drift firmly;
+- projects converge toward deliverables;
+- SkillsMachine becomes useful for finishing projects, not only structuring them.
+
+==========
+09.00 CHANGELOG
+==========
+
+2026-06-23, v0.1-DRAFT
+- Initial DragonflyFocus GRC draft created to enforce focus, prevent drift,
+  and protect HUMAN-defined objectives during SkillsMachine project execution.
+
+==========
+END
+==========

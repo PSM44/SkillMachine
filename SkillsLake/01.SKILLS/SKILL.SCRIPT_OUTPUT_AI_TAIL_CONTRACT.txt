@@ -1,0 +1,149 @@
+# SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT
+
+SKILL_ID..........: SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT
+NAME..............: Script Output AI Tail Contract
+STATUS............: ACTIVE
+SCOPE.............: ALL_PROJECTS
+VERSION...........: v1.0
+CREATED_LOCAL.....: 2026-06-22 19:47:44 -04:00
+SOURCE_MB.........: MB-NS-004B-R15B_HARDEN_AI_TAIL_STANDARD_AND_SKILL
+RELATED_CONTROL...: GRCLake\01.CONTROLS\CONTROL.SCRIPT_OUTPUT_AI_TAIL.txt
+
+## 01. Purpose
+
+This skill defines how to implement the AI_TAIL output contract in executable project scripts.
+
+Use this skill whenever writing PowerShell, Bash, Python, or other automation scripts that a human may run in a terminal and then paste back into an AI conversation.
+
+## 02. Required Script Behavior
+
+Every long or state-changing script should:
+
+1. Write detailed logs or reports to a file under Temp/Handoff or the project-specific log folder.
+2. Print only the necessary human summary to stdout.
+3. End with six blank lines.
+4. Print the AI_TAIL block.
+5. Print the final END marker.
+
+## 03. Exact Delimiters
+
+Scripts must print:
+
+********************** AI_TAIL_START **********************
+********************** AI_TAIL_END ************************
+
+The AI assistant may accept pasted partial delimiter lines if they contain AI_TAIL_START or AI_TAIL_END.
+
+## 04. Minimum AI_TAIL Fields
+
+AI_TAIL_SCHEMA=v1
+MB_ID=<id>
+FINAL_STATUS=<status>
+BLOCKER=<none_or_reason>
+BRANCH=<branch_or_NA>
+HEAD=<head_or_NA>
+DIRTY=<true_or_false_or_NA>
+REPORT=<path_or_NONE>
+NEXT_ACTION=<next_action>
+
+## 05. Mutation Fields
+
+If the script writes files, commits, or pushes, add:
+
+FILES_CHANGED=<count>
+FILES=<pipe_separated_paths_or_NONE>
+COMMIT=<hash_or_NONE>
+PUSH=<OK|NO|FAILED>
+
+## 06. Build / Validation Fields
+
+If the script validates, builds, compiles, or tests, add:
+
+VALIDATION=<PASS|FAIL|NA>
+TESTS=<PASS|FAIL|NA>
+BUILD_STATUS=<PASS|FAIL|NA>
+BUILD_OUTPUT=<path_or_NONE>
+BUILD_ERROR=<short_reason_or_NONE>
+ARTIFACT=<path_or_NONE>
+
+## 07. Beta / Launcher Fields
+
+If the script affects a beta launcher, demo, or user-facing entrypoint, add:
+
+BETA_GATE=<PASS|FAIL|PARTIAL|NA>
+USER_ENTRYPOINT=<command_or_path_or_NONE>
+DEMO_READY=<true|false>
+
+## 08. PowerShell Implementation Pattern
+
+Define a helper function named Write-AiTail.
+
+The function should:
+- query current git branch/head/status when possible;
+- receive final status, blocker, next action, commit hash, push status, report path;
+- print six blank lines before AI_TAIL_START;
+- print one key-value pair per line;
+- avoid tables and long text.
+
+## 09. Recommended Final Script Shape
+
+START
+- metadata
+- execution
+- validation
+- human summary
+
+six blank lines
+
+AI_TAIL
+
+END
+
+## 10. Good AI_TAIL Values
+
+Use compact normalized values:
+
+FINAL_STATUS=PASS
+FINAL_STATUS=PASS_COMMITTED_AND_PUSHED
+FINAL_STATUS=PASS_WITH_WARNINGS
+FINAL_STATUS=FAIL
+FINAL_STATUS=COMMIT_FAILED
+FINAL_STATUS=COMMITTED_BUT_PUSH_FAILED
+
+BLOCKER=NONE
+BLOCKER=WORKTREE_NOT_CLEAN
+BLOCKER=VALIDATION_FAILED
+BLOCKER=FILE_SET_MISMATCH
+BLOCKER=COMMIT_FAILED
+BLOCKER=PUSH_FAILED
+
+DIRTY=true
+DIRTY=false
+
+PUSH=OK
+PUSH=NO
+PUSH=FAILED
+
+## 11. Anti-Patterns
+
+Do not:
+- paste large inventories into AI_TAIL;
+- include stack traces in AI_TAIL;
+- include tables in AI_TAIL;
+- put important next-step data only in the human summary;
+- print material information after AI_TAIL_END;
+- omit REPORT when a log/report file exists;
+- rely on terminal scrollback as the source of truth.
+
+## 12. Practical Rule
+
+If the user pastes only the last 20 lines, the AI should still be able to determine:
+
+- whether the run passed;
+- what blocked it if it failed;
+- whether the repo is dirty;
+- which files changed;
+- whether commit/push happened;
+- where the full report is;
+- what the next action is.
+

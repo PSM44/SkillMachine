@@ -1,7 +1,7 @@
 PROYECTO: Session Close
 
 OBJETIVO:
-Cerrar sesión dejando continuidad humana e IA consistente para la próxima ocasión.
+Cerrar sesion dejando continuidad humana e IA consistente para la proxima ocasion.
 
 INPUT:
 - requerimiento del usuario
@@ -16,45 +16,46 @@ INPUT:
 DEBES:
 1. revisar el estado actual
 2. actualizar BATON
-3. actualizar WhoAmI si cambió el estado humano operacional
-4. actualizar HUMAN solo si cambió el entendimiento profundo
+3. actualizar WhoAmI si cambio el estado humano operacional
+4. actualizar HUMAN solo si cambio el entendimiento profundo
 5. validar coherencia con RADAR
 6. identificar si algo aprendido amerita actualizar o crear skills
 
 OUTPUT:
 - BATON actualizado
 - WhoAmI actualizado si aplica
-- observación sobre HUMAN
-- siguiente acción exacta
-- observación sobre mejoras de skills si corresponde
+- observacion sobre HUMAN
+- siguiente accion exacta
+- bloque estructurado SKILL_GRC_LEARNING_REVIEW
 
 
 ==========
 MB-GRC-015_SESSION_CLOSE_HARDENING
 ==========
 
-Antes de declarar una sesión cerrada, ejecutar obligatoriamente:
+Antes de declarar una sesion cerrada, ejecutar obligatoriamente:
 
 powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
 
-El cierre debe reportar, como mínimo:
+El cierre debe reportar, como minimo:
 
 - Rama Git actual.
-- Último commit.
+- Ultimo commit.
 - Tags en HEAD.
 - Estado Git corto.
 - Diff stat.
 - Diff staged.
 - Archivos untracked.
 - Resultado de Validate-System.ps1.
-- Existencia y metadata básica de RADAR manifest.
+- Existencia y metadata basica de RADAR manifest.
+- Existencia de los seis outputs ACTIVE de RADAR v1.4.
 - Existencia y modified_at de BATON.
 - Existencia y modified_at de WHOAMI.
 - Ruta del reporte TXT y JSON generado.
 
 Regla:
 - OK permite cierre limpio.
-- WARN exige revisión humana.
+- WARN exige revision humana.
 - FAIL bloquea cierre limpio.
 
 
@@ -92,8 +93,9 @@ SESSION_LEARNING_REVIEW
 ==========
 
 Al cierre de sesion, revisar el chat activo y outputs relevantes para detectar oportunidades de:
-- crear o actualizar Skills;
-- crear o actualizar GRC;
+- crear GRC;
+- mejorar GRC;
+- mejorar Skills;
 - registrar candidatos en backlog;
 - identificar conflictos, omisiones, duplicidad o deuda tecnica;
 - proponer siguiente minibattle.
@@ -101,8 +103,22 @@ Al cierre de sesion, revisar el chat activo y outputs relevantes para detectar o
 Regla dura:
 No crear ni modificar canon automaticamente. Toda oportunidad se registra como candidato o se ejecuta solo si el humano lo instruye explicitamente.
 
+Bloque obligatorio de salida:
 
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_GRC_CANDIDATES:
+- GRC_IMPROVEMENT_CANDIDATES:
+- SKILL_IMPROVEMENT_CANDIDATES:
+- OPERATIONAL_RULES_TO_CANONIZE:
+- DO_NOT_CANONIZE:
+- CANDIDATES_REGISTER_UPDATED:
+- NEXT_GRC_OR_SKILL_ACTION:
 
+Reglas del bloque:
+- Si una categoria no aplica, declarar NONE con motivo breve.
+- CANDIDATES_REGISTER_UPDATED debe declarar YES o NO.
+- NEXT_GRC_OR_SKILL_ACTION debe recomendar una sola accion.
+- No canonizar automaticamente; registrar, proponer o escalar al humano.
 
 
 ==========
@@ -120,89 +136,4 @@ REGLAS:
 - No usar Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
-- Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
-
-==========
-MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
-==========
-
-STATUS............: ACTIVE
-LAYER.............: USECASE_UPLOAD_PACKAGE_CONTROL
-IMPORTANT.........:
-This file is part of a 90.USECASE upload package. It is operational upload guidance for the IA.
-It is not primary canon. If doctrine changes are needed, patch HUMAN, 00.CATALOG, SkillsLake,
-GRCLake, registry/build sources, or an approved canonical source, then rebuild packages if applicable.
-
-USECASE_FIRST_RULE:
-Before proposing development, scripts, branches, commits, RADAR, Nightshift work, refactors,
-or architecture changes, the IA must first identify and state the applicable usecase.
-
-REQUIRED_INITIAL_RESPONSE:
-The IA must start by declaring:
-
-1. USECASE_DETECTED
-2. USER_GOAL
-3. CONFIRMED_CONTEXT
-4. MISSING_CONTEXT
-5. RECOMMENDED_UPLOADS
-6. FOCUS_BOUNDARY
-7. NEXT_ACTION
-
-CONTEXT_RULE:
-Do not request the full repository by default.
-If context is missing, request exact paths or exact Skills/GRC/HUMAN/CATALOG/BATON/RADAR files.
-
-ANTI_DRIFT_RULES:
-- Do not treat 90.USECASE as primary canon.
-- Do not create or modify canon automatically.
-- Do not jump to technical execution before usecase framing.
-- Do not use RADAR FULL by default.
-- Do not confuse a lab/pilot workload with the central purpose of PS.SkillsMachine.
-- Register Skill/GRC improvements as candidates unless the human explicitly approves a minibattle.
-
-DONE_WHEN:
-The IA can explain why the current request belongs to this usecase, what context is sufficient,
-what context is missing, and the next minimal reversible action.
-
-==========
-FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
-==========
-
-==========
-MB-GRC-034D_SAFE_LAUNCHER_REMINDER_FOR_USECASE_EXECUTION
-==========
-
-STATUS............: ACTIVE
-LAYER.............: USECASE_PROMPT_EXECUTION_REMINDER
-PURPOSE...........:
-When this usecase requires scripts, patches, validation, commits, RADAR, or session-close automation,
-the IA must use the safe PowerShell launcher contract instead of pasting long interactive blocks.
-
-SAFE_LAUNCHER_RULE:
-For long PowerShell execution:
-
-1. Write the child script to Temp\<MB_ID>.<timestamp>.ps1.
-2. Run the child script with pwsh.exe -NoProfile -ExecutionPolicy Bypass -File <script_path>.
-3. The console launcher must not call exit.
-4. The launcher must print SCRIPT_EXIT and LAUNCHER_STATUS.
-5. Do not paste try/catch/finally blocks directly into the interactive terminal.
-6. Do not nest PowerShell here-strings inside launcher here-strings.
-7. Use arrays of lines or alternate construction for embedded patch blocks.
-8. Set GIT_PAGER=cat and PAGER=cat.
-9. Use git --no-pager for diff/log diagnostics.
-10. Do not run BUILD.ps1 unless generated outputs are explicitly in scope.
-11. Use explicit git add file whitelists.
-12. Never use git add -A by default in governance patches.
-13. If unexpected files become dirty, stop before commit.
-14. If generated outputs become dirty unexpectedly, restore or isolate them before continuing.
-
-REQUIRED_OUTPUT:
-The script must print START/END, validation exit, commit/push exit if applicable, final status,
-failure cause, and next action.
-
-DONE_WHEN:
-The terminal remains open, the worktree is clean, and the user can copy a self-contained status block.
-
-==========
-FIN_MB-GRC-034D_SAFE_LAUNCHER_REMINDER_FOR_USECASE_EXECUTION
-==========
+- Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automaticamente.

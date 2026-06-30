@@ -1,0 +1,194 @@
+==========
+GRC.USECASE_TEMP_UPLOAD_STAGING
+==========
+
+ID_UNICO..........: GRC.USECASE_TEMP_UPLOAD_STAGING.0001
+NOMBRE............: UsecaseTempUploadStaging
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-06-30
+SCOPE.............: SkillsMachine upload-ready context staging for IA, including additional Skills/GRC and compiled session context
+APPLIES_TO........: All usecases when IA recommends additional Skills/GRC context
+
+==========
+00.00 PURPOSE
+==========
+
+UsecaseTempUploadStaging governs how the assistant must help the user prepare additional Skills and GRCs for upload when the generic usecase package is not enough.
+
+The goal is to avoid manual file hunting, stale context, incomplete uploads, path ambiguity, and accidental contamination of canon.
+
+==========
+01.00 CORE RULE
+==========
+
+When the assistant recommends that the user upload additional Skills or GRCs, it must always provide:
+
+- exact repository path for every recommended Skill/GRC;
+- reason for each recommendation;
+- a one-shot script executable from any location;
+- an output bundle written to C:\01. GitHub\Skills\SyS\Temp;
+- cleanup of any previous content in C:\01. GitHub\Skills\SyS\Temp before writing new output;
+- a manifest containing source paths, hashes and generation timestamp.
+
+==========
+02.00 TEMP FOLDER CONTRACT
+==========
+
+PATH:
+C:\01. GitHub\Skills\SyS\Temp
+
+ROLE:
+Output-only staging area for upload-ready context bundles.
+
+RULES:
+- Temp is not canon.
+- Temp can be deleted without affecting SkillsMachine.
+- Temp must be cleared before every new staging run.
+- Temp must not be treated as source of truth.
+- Temp must not be committed unless a human explicitly asks for it, and default behavior is no commit.
+- Temp is allowed to contain generated upload bundles and manifests only.
+
+==========
+03.00 REQUIRED OUTPUTS
+==========
+
+A compliant staging script must generate at least:
+
+- SKILLS_GRC_UPLOAD_BUNDLE.<timestamp>.txt
+- SKILLS_GRC_UPLOAD_MANIFEST.<timestamp>.json
+
+The TXT bundle is for IA upload.
+The JSON manifest is for traceability.
+
+==========
+04.00 SCRIPT REQUIREMENTS
+==========
+
+The one-shot script must:
+
+- be executable from any location;
+- set Root to C:\01. GitHub\Skills;
+- verify each requested source path exists;
+- clear C:\01. GitHub\Skills\SyS\Temp;
+- recreate C:\01. GitHub\Skills\SyS\Temp;
+- consolidate selected Skills/GRCs into one TXT bundle;
+- write a JSON manifest with path, length and SHA256;
+- avoid modifying source files;
+- avoid git commit;
+- avoid git push;
+- print an AI_TAIL block.
+
+==========
+05.00 ASSISTANT BEHAVIOR
+==========
+
+The assistant must not say "upload this skill" without giving the exact path.
+
+The assistant must not ask the user to manually collect several files when a staging script can collect them.
+
+The assistant must not mix generated Temp outputs with canonical usecase packages.
+
+The assistant must not leave previous Temp content in place when generating a new upload bundle.
+
+==========
+06.00 FAILURE CONDITIONS
+==========
+
+This GRC fails if:
+
+- Skills/GRCs are recommended without exact paths;
+- the assistant recommends uploads but provides no staging script;
+- Temp is not cleared before new output;
+- generated bundles do not include a manifest;
+- source files are modified by the staging script;
+- Temp output is treated as canon.
+
+==========
+07.00 SUCCESS CONDITIONS
+==========
+
+This GRC succeeds when:
+
+- the user can execute one script from anywhere;
+- Temp is cleared and rebuilt;
+- all recommended Skills/GRCs are consolidated into one upload-ready TXT;
+- manifest records the exact source files and hashes;
+- no canon files are touched;
+- the IA receives complete additional context with minimal user friction.
+
+==========
+08.00 CHANGELOG
+==========
+
+2026-06-30, v0.1-DRAFT
+- Initial GRC created to govern upload staging for additional Skills/GRCs through SyS\Temp.
+
+==========
+END
+==========
+
+==========
+MB-SM-039A0_SYS_TEMP_COMPILED_CONTEXT_RULE
+==========
+
+FECHA.............: 2026-06-30
+STATUS............: ACTIVE_RULE
+SOURCE............: MB-SM-039A0_CANONIZE_SYS_TEMP_UPLOAD_STAGING
+
+REGLA:
+SyS\Temp es la carpeta operativa preferida para staging de paquetes compilados de contexto IA dentro de SkillsMachine.
+
+PATH_CANONICO:
+C:\01. GitHub\Skills\SyS\Temp
+
+USO:
+- staging de archivos upload-ready;
+- contexto compilado en menor cantidad de archivos posible;
+- manifests de trazabilidad;
+- reportes temporales de preflight;
+- evidencia transitoria generada para subir a IA.
+
+REGLAS:
+- SyS\Temp no es canon.
+- SyS\Temp puede borrarse antes de cada nueva corrida de staging.
+- SyS\Temp debe contener outputs regenerables.
+- SyS\Temp no debe tratarse como source of truth.
+- SyS\Temp no debe commitearse salvo instruccion humana explicita.
+- Un paquete de upload debe preferir 1 TXT compilado + 1 JSON manifest.
+- Si el usuario no puede subir carpetas ni ZIP, el script debe compilar fuentes en archivo TXT unico o minimo.
+- El TXT compilado debe preservar:
+  - path original;
+  - tag;
+  - prioridad;
+  - motivo;
+  - tamano;
+  - SHA256;
+  - contenido completo cuando sea legible y razonable.
+- El JSON manifest debe preservar trazabilidad y conteos.
+
+CONTRATO_DE_SCRIPT:
+Un script compliant debe:
+- ser ejecutable desde cualquier ubicacion;
+- setear Root en C:\01. GitHub\Skills;
+- limpiar C:\01. GitHub\Skills\SyS\Temp antes de generar paquete nuevo, salvo que el objetivo sea preservar evidencia puntual;
+- no modificar archivos fuente, salvo que la minibattle sea explicitamente de canonizacion;
+- no hacer git commit;
+- no hacer git push;
+- imprimir TOVS o AI_TAIL con rutas y estado.
+
+MOTIVO:
+El humano no puede subir carpetas y prefiere evitar ZIP.
+La IA puede leer mejor un TXT consolidado y trazable que muchos archivos sueltos.
+Este patron reduce friccion de upload sin perder calidad de datos.
+
+EVIDENCIA_ORIGEN:
+- UPLOAD_CONTEXT_COMPILED.20260630_130225.txt funciono como paquete consolidado.
+- UPLOAD_CONTEXT_MANIFEST.20260630_130225.json preservo trazabilidad.
+- El uso real validado fue C:\01. GitHub\Skills\SyS\Temp.
+
+FIN_MB-SM-039A0_SYS_TEMP_COMPILED_CONTEXT_RULE
+==========
+

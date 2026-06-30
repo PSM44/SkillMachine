@@ -1,0 +1,134 @@
+==========
+GRC.SCRIPT_EXECUTION_STAGING
+==========
+
+ID_UNICO..........: GRC.SCRIPT_EXECUTION_STAGING.0001
+NOMBRE............: ScriptExecutionStaging
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-06-30
+SCOPE.............: Cross-project control for staging long executable scripts before terminal execution
+APPLIES_TO........: SkillsMachine and any project where long scripts are safer from file than from terminal paste
+
+==========
+00.00 PURPOSE
+==========
+
+ScriptExecutionStaging governs the practice of saving long scripts into a project Temp or staging folder before execution instead of pasting the full script directly into an interactive terminal.
+
+The goal is to reduce copy/paste errors, quoting drift, wrapping damage, truncation, shell interpolation mistakes, and weak evidence capture.
+
+==========
+01.00 CORE RULE
+==========
+
+When a script is long enough that direct terminal paste increases operational risk, the script must be saved to a file first and then executed from that file.
+
+The file must use the appropriate extension for the shell or runtime in use, such as:
+
+- .ps1 for PowerShell;
+- .sh for shell scripts;
+- other project-appropriate executable script formats when justified.
+
+==========
+02.00 STAGING PATH CONTRACT
+==========
+
+For SkillsMachine, the default staging path is:
+
+C:\01. GitHub\Skills\SyS\Temp
+
+For other projects, the script must use that project's appropriate Temp or staging folder instead of assuming the SkillsMachine path.
+
+The staging folder is operational only. It is not canon by default.
+
+==========
+03.00 SCRIPT OUTPUT CONTRACT
+==========
+
+The staged script must print parseable operational output.
+
+Preferred formats are:
+
+- KEY=VALUE
+- TOVS
+- AI_TAIL when the execution protocol requires a final compact status block
+
+The script must avoid presentation-only output when parseable evidence is expected.
+
+==========
+04.00 EXECUTION CONSTRAINTS
+==========
+
+A compliant staged execution script must:
+
+- be written to the chosen Temp or staging folder before execution;
+- be executable from a short launcher command;
+- avoid git commit unless the human explicitly instructs it;
+- avoid git push unless the human explicitly instructs it;
+- avoid treating temporary script files as canonical source;
+- avoid committing temporary script files unless the human explicitly instructs it.
+
+==========
+05.00 ASSISTANT BEHAVIOR
+==========
+
+The assistant must prefer staged execution when a long script would otherwise be pasted directly into terminal.
+
+The assistant must identify the Temp or staging path it is using.
+
+The assistant must not silently convert temporary staged scripts into canon.
+
+The assistant must preserve the boundary between:
+
+- canonical source files;
+- generated outputs;
+- temporary execution helpers.
+
+==========
+06.00 FAILURE CONDITIONS
+==========
+
+This GRC fails if:
+
+- a long script is pasted directly into terminal when a staged file would be safer;
+- the script path is ambiguous;
+- the script emits non-parseable output where parseable evidence is required;
+- a temporary staged script is committed without explicit human instruction;
+- a temporary staged script is mistaken for canonical source;
+- the staged script performs commit or push without explicit human instruction.
+
+==========
+07.00 SUCCESS CONDITIONS
+==========
+
+This GRC succeeds when:
+
+- long scripts are authored in a Temp or staging folder before execution;
+- the executed file path is explicit;
+- the script output is parseable and reviewable;
+- operational errors from wrapping, quoting, truncation, or shell interpolation are reduced;
+- temporary execution helpers remain clearly non-canonical unless a human explicitly promotes them.
+
+==========
+08.00 RELATIONSHIP TO OTHER CONTROLS
+==========
+
+This GRC governs execution staging for long scripts.
+
+It does not govern upload-ready context packaging, compiled TXT context bundles, JSON manifests, or IA upload staging. Those concerns belong to:
+
+GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+
+==========
+09.00 CHANGELOG
+==========
+
+2026-06-30, v0.1-DRAFT_READY_FOR_TEST
+- Initial transversal GRC draft created for staging long scripts before execution.
+
+==========
+END
+==========

@@ -932,3 +932,406 @@ P1_DEBT...........: Avoid long nested here-strings in PowerShell interactive wri
 P2_BACKLOG........: Create managerial summary for Nightshift pilot.
 P2_BACKLOG........: Convert findings into candidate skill/core patches after review.
 PATH_TO_MGMT......: compare -> select -> promote -> summarize -> demo repeatable agent workflow.
+
+==========
+MB-CLOSE-002_CANDIDATE_FOR_SKILLSMACHINE_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+TIPO..............: CANDIDATE_FOR_SKILLSMACHINE
+SOURCE............: Nightshift NS-PILOT-001 + NS scoring rubric
+CANDIDATE.........: Evaluar promover rubrica de comparacion de agentes a skill global tras NS-PILOT-002.
+STATUS............: CANDIDATE_ONLY
+NEXT..............: Probar repetibilidad en NS-PILOT-002 antes de canonizar.
+==========
+FIN_MB-CLOSE-002_CANDIDATE_FOR_SKILLSMACHINE_20260621
+==========
+
+========== MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001 ==========
+DONE..............: PowerShell long payload / ParseFile safety rule promoted to main.
+DONE..............: NS-PILOT-001 closed as lab evidence.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+NOTE..............: Future long PowerShell scripts must be file-authored, then executed by short ParseFile launcher.
+
+========== MB-GRC-036B_CREATE_PROJECT_CONTINUITY_CLOSE_STRUCTURE ==========
+DONE..............: Created SkillsMachine-dedicated PROJECT_CONTINUITY and PROJECT_CLOSE folders under SyS.
+DONE..............: Clarified boundary between generic 90.USECASE and SkillsMachine self-continuity/self-close.
+P1_NEXT...........: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+========== BEGIN_MB_GRC_037A_CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL ==========
+CANDIDATE_FOR_SKILLSMACHINE
+ID................: CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL
+SOURCE............: NS-PILOT-002 Claude Code Desktop run
+TYPE..............: Skill / GRC operating rule candidate
+STATUS............: CANDIDATE
+DATE..............: 2026-06-21
+EVIDENCE..........: Claude Code Desktop successfully executed an agent branch, but required explicit gates, cleanup, evidence hash semantics, and PR discipline.
+LESSONS_REPORT....: 99.LABS\Nightshift\05_REPORTS\CLAUDE_CODE_DESKTOP.LESSONS.20260621.AI.txt
+RECOMMENDATION....: Convert repeated lessons into a formal skill or GRC control after Codex run confirms cross-agent relevance.
+RULES_TO_CAPTURE..: environment gate, branch discipline, allowed paths, evidence protocol, cleanup protocol, no dirty tree, no automatic PR, no main push.
+========== END_MB_GRC_037A_CLAUDE_CODE_DESKTOP_AGENT_EXECUTION_PROTOCOL ==========
+
+========== BEGIN_MB_NS_004B_R0_AGENT_IDENTITY_ENFORCEMENT_PROTOCOL ==========
+CANDIDATE_FOR_SKILLSMACHINE
+ID................: AGENT_IDENTITY_ENFORCEMENT_PROTOCOL
+SOURCE............: NS-PILOT-002 Codex-labelled misrun executed by Claude Code
+TYPE..............: GRC operating rule candidate
+STATUS............: CANDIDATE
+DATE..............: 2026-06-21
+RULE..............: Agent-labelled branches, evidence, and run reports must match the actual execution environment.
+RATIONALE.........: Simulated agent identity invalidates comparison evidence.
+RECOMMENDATION....: Formalize as a cross-agent execution control before broader Nightshift automation.
+========== END_MB_NS_004B_R0_AGENT_IDENTITY_ENFORCEMENT_PROTOCOL ==========
+
+========== BEGIN_MB_CLOSE_004_NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL ==========
+CANDIDATE_FOR_SKILLSMACHINE
+ID................: NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL
+SOURCE............: MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+TYPE..............: Skill / GRC operating control candidate
+STATUS............: CANDIDATE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+RATIONALE.........: NS-PILOT-002 surfaced branch identity, evidence hash, runtime cleanup, and PR timing controls.
+RECOMMENDATION....: Formalize after real Codex run confirms cross-agent workflow.
+NEXT_ACTION.......: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL after MB-NS-005A comparison.
+========== END_MB_CLOSE_004_NIGHTSHIFT_AGENT_RUN_CLOSE_AND_COMPARISON_PROTOCOL ==========
+
+
+================================================================================
+MB-NS-004B-R10B / BACKLOG UPDATE / 2026-06-22 15:29:15 -04:00
+================================================================================
+
+NEW_PRIORITY_BLOCK: BETA_FUNCTIONALITY_PIVOT
+
+P0 / ACTIVE:
+- Define and build the thinnest user-visible SkillsMachine beta workflow.
+- Candidate beta slice:
+  1. Continue session.
+  2. Generate upload/usecase package.
+  3. Close session with BATON/backlog/RADAR.
+  4. Show project state/readiness.
+- Acceptance: non-technical user can execute the workflow and obtain useful output without reading the repo.
+
+P0 / GOVERNANCE:
+- Apply CONTROL.BETA_FUNCTIONALITY_GATE to all future claims of beta readiness.
+- Reclassify pure reports, scorecards, agent comparisons, and GRC-only work as INTERNAL_ENABLEMENT unless connected to working user functionality.
+
+P1 / INTERNAL_ENABLEMENT:
+- Keep COVS as preferred implementation agent candidate for next beta-oriented slice.
+- Use Nightshift/COVS learnings to harden agent execution, but do not continue benchmarking unless it directly unblocks beta functionality.
+
+P2 / DEFER:
+- Additional presentations, management speeches, scorecards, or proof documents not tied to visible functionality.
+
+DECISION:
+- COVS won NS-PILOT-002 technically, but this does not itself create a SkillsMachine beta.
+- Next project analysis must focus on when SkillsMachine can become functional for user beta.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R12 / BACKLOG UPDATE / GENERAL BETA GATE / 2026-06-22 19:19:11 -04:00
+================================================================================
+
+P0 / GRC:
+- Apply CONTROL.BETA_FUNCTIONALITY_GATE across all projects, not only SkillsMachine.
+- Any claim of beta, MVP, demo, management-ready, directorio-ready, or functional deliverable must be tied to visible user functionality.
+
+P0 / PRODUCT:
+- For SkillsMachine, stop treating internal evidence as product progress.
+- Next work must define and build the thinnest executable user-facing workflow.
+
+P1 / METHOD:
+- Use reports and scorecards only as supporting evidence, not as deliverables to management.
+- Each project must define its target user, entrypoint, action, output, repeatability, and five-minute demo.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R14C / BACKLOG UPDATE / AI_TAIL OUTPUT CONTRACT / 2026-06-22 19:43:07 -04:00
+================================================================================
+
+P0 / EXECUTION STANDARD:
+- Apply CONTROL.SCRIPT_OUTPUT_AI_TAIL to future MB scripts.
+- R15 launcher must include AI_TAIL.
+- Long outputs must write full logs/reports to Temp/Handoff and print compact stdout.
+
+ACCEPTANCE:
+- Final pasted lines must be sufficient to determine success, blocker, branch, head, dirty state, files changed, commit/push status, report path, and next action.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R15B / BACKLOG UPDATE / AI_TAIL SKILL / 2026-06-22 19:47:44 -04:00
+================================================================================
+
+P0 / EXECUTION STANDARD:
+- Apply SKILL.SCRIPT_OUTPUT_AI_TAIL_CONTRACT to all future executable MB scripts.
+- Maintain CONTROL.SCRIPT_OUTPUT_AI_TAIL as the cross-project governance rule.
+- R16 and later scripts must use exact AI_TAIL delimiters and six blank lines before AI_TAIL_START.
+
+P1 / FUTURE HARDENING:
+- Consider adding validator support to detect missing AI_TAIL in generated one-shot scripts.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R20 / BACKLOG UPDATE / BETA DEMO GUIDE / 2026-06-23 08:54:02 -04:00
+================================================================================
+
+DONE / BETA DEMO SLICE:
+- Created user-facing demo guide for SkillsMachine launcher.
+- Confirmed demo entrypoint:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+- Confirmed safe demo actions:
+  help, status, radar-status, package-upload, build-usecase.
+
+NEXT:
+- R21 PR/readiness or management-facing branch status package.
+- Later: controlled test of build-usecase -RunBuild if required.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R21 / BACKLOG UPDATE / BRANCH STATUS PR READINESS / 2026-06-23 08:56:12 -04:00
+================================================================================
+
+DONE:
+- Branch status / PR readiness artifact created.
+- Demo-ready launcher slice formally documented.
+- PR readiness classified as PR_READY_WITH_LIMITATIONS.
+
+NEXT:
+- R22 prepare PR text / merge checklist.
+- Formal close only on explicit "cierra sesión".
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R22 / BACKLOG UPDATE / FORMAL SESSION CLOSE / 2026-06-23 08:58:13 -04:00
+================================================================================
+
+DONE:
+- Formal session close artifact created.
+- BATON updated.
+- WHOAMI updated.
+- Backlog updated.
+- Demo-ready launcher slice status preserved.
+
+ACCUMULATED_BACKLOG:
+- R23 prepare PR text / merge checklist.
+- Decide PR/merge into main.
+- Validate launcher after merge if merged.
+- Refresh RADAR/BATON/WHOAMI after final branch decision.
+- Prepare management one-page summary.
+- Optional UI/dashboard launcher.
+- Controlled validation of build-usecase -RunBuild.
+
+CURRENT_LIMIT:
+- BETA_GATE remains PARTIAL until PR/merge/final validation and management artifact are complete.
+
+================================================================================
+
+==========
+BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
+==========
+
+FECHA........................: 2026-06-30 10:45
+FUENTE.......................: MB-SM-036B_SESSION_CLOSE_CONTINUITY_UPDATE
+HEAD_CONFIRMADO..............: b3b89ed 20260630.1042_RADAR_v1_4_full_human_skills_contract
+
+P0_OPEN:
+- MB-SM-036C — Readiness final post-continuity.
+  Criterio: Git clean, Validate-System OK, BATON/WHOAMI frescos contra HEAD, RADAR fresco o WARN explícitamente aceptado.
+- MB-SM-037A — Regenerar 90.USECASE si RADAR v1.4 dejó bundles/manifests stale.
+  Criterio: BUILD.ps1 TOTAL_FAIL 0; diff revisado; commit separado si hay cambios reales.
+- MB-SM-038A — Preparar PR-readiness de lab/ns-pilot-002-codex-real.
+  Criterio: PR text, merge checklist, evidencia de commits y estado clean.
+- MB-SM-039A — Demo gerencial Beta 0.1.
+  Criterio: demo pack entendible por gerencia, con flujo, valor, límites y próximos pasos.
+
+P1_OPEN:
+- TD-SM-AITAIL-003 — Convertir patrón AI_TAIL en finally a regla/candidato formal si no está cubierto por Skill existente.
+- TD-SM-LOG-001 — Estandarizar salida TOVS KEY=VALUE, sin Format-Table para evidencia parseable.
+- TD-SM-PS-001 — Endurecer patrones PowerShell para evitar bugs de regex/interpolación.
+- TD-SM-MENU-001 — Evaluar registro de 31.SKILL.PROFESSIONAL_RECOMMENDATIONS.txt en menú/registry activo.
+- TD-SM-GENERATED-001 — Revisar si bloques manuales eliminados por build deben vivir en fuente canónica.
+
+P2_OPEN:
+- TD-SM-DRAGONFLY-002 — Evaluar incorporar DragonflyFocus en 02.SESSION_CLOSE.
+- TD-SM-LINEEND-001 — Revisar CRLF/LF sin churn innecesario.
+- Negative test formal de restore transaccional si sigue pendiente.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-033 — DragonflyFocus GRC usecase integration.
+- MB-SM-034 — Professional Recommendations canonical path.
+- MB-SM-035 — RADAR v1.4 full human/skills contract.
+
+PROXIMO_PASO.................:
+Cerrar MB-SM-036 con readiness final y luego avanzar a PR-readiness / demo gerencial Beta 0.1.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
+==========
+
+==========
+TD-SM-037A_SESSION_LEARNING_REVIEW_OUTPUT_GATE
+==========
+
+TYPE..............: TECHNICAL_DEBT
+STATUS............: PATCH_APPLIED_PENDING_VALIDATION
+PRIORITY..........: P0
+AREA..............: 02.SESSION_CLOSE
+TITLE.............: Mandatory Skill/GRC learning review output gate
+
+DESCRIPTION:
+SESSION_CLOSE must include an explicit Skill/GRC improvement discovery gate. At every formal close, the IA must evaluate whether the session revealed opportunities to create, improve, consolidate, deprecate, or promote Skills/GRCs. If opportunities exist, they must be registered as candidates, not applied to canon automatically. If none exist, the IA must state NONE with a brief reason.
+
+IMPACT:
+Without this gate, SkillsMachine can operate sessions but fails to learn systematically from real usage. Lessons remain in chat, BATON or generic backlog instead of becoming traceable improvement candidates.
+
+EXPECTED_OUTPUT_SECTION:
+SKILL_GRC_IMPROVEMENT_OPPORTUNITIES
+
+AFFECTED_USECASE:
+90.USECASE\02.SESSION_CLOSE
+
+SOURCE_EVENT:
+Detected during DragonflyFocus / Beta 0.1 focus recovery work, June 2026.
+
+NEXT_VALIDATION:
+Run SESSION_CLOSE package validation and confirm the prompt/readme contain MB-GRC-037A_SESSION_LEARNING_REVIEW_OUTPUT_GATE.
+
+==========
+TD-SM-USECASE-TEMP-001
+==========
+
+TYPE..............: TECHNICAL_DEBT
+STATUS............: GRC_SOURCE_CREATED_PENDING_REGISTRY_INJECTION
+PRIORITY..........: P1
+AREA..............: 90.USECASE\Temp
+TITLE.............: Upload helper for additional Skills/GRCs
+
+DESCRIPTION:
+When the IA recommends additional Skills/GRCs, it must provide exact source paths and a one-shot script that clears C:\01. GitHub\Skills\90.USECASE\Temp and consolidates the selected Skills/GRCs into an upload-ready bundle.
+
+IMPACT:
+Without this helper, the user must manually locate and upload multiple files, increasing friction, stale context, upload omissions and path mistakes.
+
+EXPECTED_BEHAVIOR:
+- Always show exact path for each recommended Skill/GRC.
+- Provide one-shot script executable from any location.
+- Clear previous 90.USECASE\Temp contents.
+- Generate upload TXT bundle and JSON manifest.
+- Treat Temp as disposable output.
+- Do not touch canon.
+
+SOURCE_GRC:
+GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+
+NEXT_ACTION:
+Inject GRC.USECASE_TEMP_UPLOAD_STAGING into relevant governance bundle/registry if approved.
+
+==========
+BACKLOG_UPDATE_MB_SM_040A_RC_GATE_20260630
+==========
+
+FECHA........................: 2026-06-30 14:55
+FUENTE.......................: MB-SM-040B_BATON_BACKLOG_REFRESH
+HEAD_CONFIRMADO..............: c3a3d0c 20260630.1445_Add_ai_code_agent_sequential_workflow_grc
+
+P0_OPEN:
+- MB-SM-040C - Decide whether to promote GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.
+  Criterio: control source drafted, boundary with AI workflow / script staging clear, and stop behavior explicit.
+- MB-SM-040D - Refresh canonical RADAR v1.4 contract if stale against implementation.
+  Criterio: six ACTIVE outputs, heuristic FULL.HUMAN/FULL.SKILLS note, generated output boundary, and manifest/readiness semantics aligned.
+- MB-SM-040E - Harden SESSION_CLOSE learning review output contract.
+  Criterio: structured block for Skill/GRC opportunities present in canonical source, not only generic review text.
+
+P1_OPEN:
+- MB-SM-041A - Review whether 90.USECASE should regenerate after RADAR v1.4 plus new GRC canon.
+- MB-SM-042A - Prepare PR-readiness / merge checklist for Beta 0.2 internal RC base.
+- MB-SM-043A - Prepare next functional / managerial package from the Beta 0.2 base.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-039A0 - SyS Temp upload staging GRC canonized in commit 425d2fe.
+- MB-SM-039A1 - RADAR v1.4 ACTIVE outputs implemented in commit cba476f.
+- MB-SM-039B / MB-SM-039C - demo preflight passed and demo pack ready.
+- MB-SM-040A - RC gate passed on HEAD c3a3d0c.
+- GRC.SCRIPT_EXECUTION_STAGING added in commit 7d9aa20.
+- GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW added in commit c3a3d0c.
+
+CANDIDATE_PENDING:
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+
+PROXIMO_PASO.................:
+Human review of continuity refresh diff, then choose whether MB-SM-040C, MB-SM-040D, or MB-SM-040E is the next canon minibattle.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_040A_RC_GATE_20260630
+==========
+
+==========
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+==========
+
+TYPE..............: GRC_CANDIDATE
+STATUS............: CANDIDATE_PENDING
+PRIORITY..........: P0
+AREA..............: Cross-project worktree safety
+TITLE.............: Unknown worktree state hard stop
+
+DESCRIPTION:
+If an unexpected file, modified file, untracked file, ignored-but-visible artifact,
+local config, generated output, or dependency state appears, the agent must stop
+the current task, classify the state, and avoid continuing until that state is understood.
+
+IMPACT:
+Without this control, long-task AI execution can silently continue on ambiguous
+worktree state, contaminating validation, staging scope, and final reporting.
+
+EXPECTED_BEHAVIOR:
+- run git status --short and git status -sb before each task;
+- classify unexpected state before continuing;
+- avoid stage/delete/revert/ignore actions until classified;
+- distinguish intentional local-only state from canonical or suspicious state;
+- require explicit human decision when classification remains ambiguous.
+
+RELATIONSHIP_TO_EXISTING_CONTROLS:
+- complements GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+- complements GRC.SCRIPT_EXECUTION_STAGING
+- should remain separate from upload staging concerns
+
+NEXT_ACTION:
+Draft canonical source only if the human approves MB-SM-040C as the next minibattle.
+
+==========
+BACKLOG_UPDATE_MB_SM_040F_FINAL_CONTINUITY_20260630
+==========
+
+FECHA........................: 2026-06-30 15:25
+FUENTE.......................: MB-SM-040F_FINAL_CONTINUITY_REFRESH_AFTER_SESSION_CLOSE_PREP
+HEAD_CONFIRMADO..............: 4130ad4 20260630.1515_Prepare_session_close_after_operational_learnings
+
+P0_OPEN:
+- MB-SM-040G - Commit/push final continuity refresh.
+- MB-SM-040H - Ejecutar RADAR y Test-SessionCloseReadiness despues del refresh final.
+
+P1_OPEN:
+- TD-SM-LINEEND-001 - Definir politica LF/CRLF sin churn innecesario.
+- TD-SM-RADAR-READY-001 - Confirmar frescura/readiness final de RADAR post continuity.
+- TD-SM-BETA02-PR-001 - Preparar PR/readiness package de Beta 0.2.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-040CDE - closed on HEAD 4130ad4.
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP now canonical.
+- SESSION_CLOSE hardened with structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook hardened for RADAR v1.4 six ACTIVE outputs.
+- Generated non-SESSION_CLOSE package diffs reviewed and classified as EXPECTED_REGENERATED_OUTPUTS.
+- Validation passed and repo was clean after commit/push.
+
+PROXIMO_PASO.................:
+Commit/push continuity refresh final, then run RADAR and Test-SessionCloseReadiness.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_040F_FINAL_CONTINUITY_20260630
+==========
+
