@@ -171,6 +171,11 @@
       "version": "01.00",
       "status": "ACTIVE",
       "description": "Efficient prompting skill for Claude Word Plugin as a document-operation executor."
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+      "version": "v0.1-DRAFT",
+      "sha256": "A54409F7FE12E001A566B5FD2EE8BEC43312946E639471A13C71ED9FC1294576"
     }
   ]
 }

@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-08 13:46:33",
+  "generated_at": "2026-06-29 12:28:44",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 38426,
       "delivery_size_kb": 37.53,
-      "delivery_sha256": "8D68D65B597DE79CA0182AC01FEB74BABEA30F2D0CBF4008ADD23FEABB5B1C6E",
+      "delivery_sha256": "6E948F5DE17D031F011847D85856BEB3FABCECD33D6DCC5D66D6D2E1669114C0",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -52,7 +52,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "483327EBFE8D29A8F35CB7AD9ABFC65D4B1EEC38FA00233841E2B6DC9CDE1924",
+      "delivery_sha256": "84CE83DE2BDB63EFD1EFA1456E7420945DA609EFF14A4F67E04956E4A662DAEA",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -80,7 +80,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt",
       "delivery_size_bytes": 46829,
       "delivery_size_kb": 45.73,
-      "delivery_sha256": "C7982F7E4B39B2F293DF7FBA87D7460B210E7333DE7A824426A7E05FFD35C7B3",
+      "delivery_sha256": "3F7E1FC1867D31D6E0218D5A9CF8A52F2A1C45C49A2384E0B21F28CAF26CD57D",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -98,7 +98,7 @@
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "DE2BBA1A0E19D4E4C5E62294CCDD0314B6B1709171018AD39D7C477A10DF32E3"
+          "source_sha256": "6B22C433ED71A089AECFF13805E283F3C1B438E224B640A96205CC4E96F15823"
         }
       ]
     }

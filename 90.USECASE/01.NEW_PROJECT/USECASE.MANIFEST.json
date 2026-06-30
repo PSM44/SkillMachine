@@ -1,7 +1,7 @@
 {
   "usecase": "01.NEW_PROJECT",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-08 13:46:33",
+  "generated_at": "2026-06-29 12:28:44",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 47961,
       "delivery_size_kb": 46.84,
-      "delivery_sha256": "2DB054FDE1BF28788864C364B04E25F4980BCC2851BF4B5D965141D982F96DBC",
+      "delivery_sha256": "4385E3BA929CEFF5CC27B3C91297B99F79D9D73AA5B97096AAA91DD0875721C0",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -58,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "483327EBFE8D29A8F35CB7AD9ABFC65D4B1EEC38FA00233841E2B6DC9CDE1924",
+      "delivery_sha256": "84CE83DE2BDB63EFD1EFA1456E7420945DA609EFF14A4F67E04956E4A662DAEA",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -84,9 +84,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 65827,
-      "delivery_size_kb": 64.28,
-      "delivery_sha256": "DA4E11D8F72B0BFC3D0FF8C42A0408ECC6C252C917A542B4FB528BB38F9EB61A",
+      "delivery_size_bytes": 72612,
+      "delivery_size_kb": 70.91,
+      "delivery_sha256": "E0F12C1D3755DE4364F83666C79D77FAF37E90F21D4B5AFAEB9414F4FE05CFEB",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -110,7 +110,7 @@
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "DE2BBA1A0E19D4E4C5E62294CCDD0314B6B1709171018AD39D7C477A10DF32E3"
+          "source_sha256": "6B22C433ED71A089AECFF13805E283F3C1B438E224B640A96205CC4E96F15823"
         },
         {
           "name": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
@@ -123,6 +123,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\AA.CONSTITUTION\\05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
           "version": "01.00",
           "source_sha256": "11EB71797C9E8E8D1DF3964E6C151DFBA8833242E8948A7F311E053FFEA314AB"
+        },
+        {
+          "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
+          "version": "v0.1-DRAFT",
+          "source_sha256": "A54409F7FE12E001A566B5FD2EE8BEC43312946E639471A13C71ED9FC1294576"
         }
       ]
     }
