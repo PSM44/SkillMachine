@@ -1,4 +1,124 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_SM_040F_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 15:25
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: 4130ad4 20260630.1515_Prepare_session_close_after_operational_learnings
+
+ESTADO_ACTUAL...............:
+SkillsMachine opera sobre HEAD 4130ad4, pushed y sincronizado con origin, despues del cierre
+de MB-SM-040CDE. SESSION_CLOSE ya incorpora learning review estructurado y gate de seis
+ACTIVE outputs de RADAR v1.4. La validacion paso y el repo quedo limpio tras el commit/push.
+
+QUE_SE_LOGRO................:
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP ya es canonico.
+- SESSION_CLOSE fue endurecido con structured SKILL_GRC_LEARNING_REVIEW.
+- SESSION_CLOSE runbook exige los seis ACTIVE outputs de RADAR v1.4.
+- Los generated non-SESSION_CLOSE diffs fueron revisados y clasificados como
+  EXPECTED_REGENERATED_OUTPUTS.
+- El branch local coincide con origin en HEAD 4130ad4.
+
+QUE_FALTA...................:
+- Ejecutar RADAR final y Test-SessionCloseReadiness.
+- Resolver o aceptar politica LF/CRLF.
+- Preparar PR/readiness package de Beta 0.2.
+
+SIGUIENTE_ACCION............:
+Commit/push continuidad y luego ejecutar RADAR seguido de Test-SessionCloseReadiness.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_040F_20260630
+==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_SM_040B_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 14:55
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: c3a3d0c 20260630.1445_Add_ai_code_agent_sequential_workflow_grc
+
+ESTADO_ACTUAL...............:
+SkillsMachine opera sobre una base Beta 0.2 internal RC ya validada en HEAD c3a3d0c.
+La rama esta sincronizada con origin, Validate-System pasa, y RADAR v1.4 tiene sus seis
+ACTIVE outputs presentes. Demo preflight y demo pack quedaron listos para revision interna.
+
+QUE_SE_LOGRO................:
+- Commit 425d2fe canonized GRC.USECASE_TEMP_UPLOAD_STAGING.
+- Commit cba476f implemented RADAR v1.4 ACTIVE outputs.
+- MB-SM-039B/039C passed with demo pack ready for internal managerial review.
+- Commit 7d9aa20 added GRC.SCRIPT_EXECUTION_STAGING.
+- Commit c3a3d0c added GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.
+- Active governance now covers upload staging, script staging, sequential AI code workflow,
+  and DragonflyFocus.
+- The operating pattern remains: human owns commit decisions; agent executes, validates,
+  reports, and stops at commit-ready gate unless explicitly delegated otherwise.
+
+QUE_FALTA...................:
+- Decidir si el candidate GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP debe promoverse a canon.
+- Revisar si 90.USECASE debe regenerarse por RADAR v1.4 y nuevos GRC.
+- Endurecer SESSION_CLOSE con learning review estructurado si se aprueba.
+- Preparar PR-readiness / merge checklist de la base Beta 0.2 internal RC.
+- Preparar siguiente entregable funcional / gerencial sobre esta base.
+
+SIGUIENTE_ACCION............:
+Cerrar continuidad MB-SM-040B y decidir la siguiente minibattle entre:
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP, refresh canonico de RADAR, o hardening de SESSION_CLOSE.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_040B_20260630
+==========
+
+==========
+LATEST_WHOAMI_UPDATE_MB_SM_036B_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 10:45
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: b3b89ed 20260630.1042_RADAR_v1_4_full_human_skills_contract
+
+ESTADO_ACTUAL...............:
+SkillsMachine está en cierre formal posterior a una secuencia pushed y limpia:
+DragonflyFocus integrado, Professional Recommendations relocalizado a ruta canónica,
+y RADAR actualizado a v1.4 con archive v1.3. Preflight de cierre confirmó Git limpio
+y Validate-System OK. Falta completar readiness final después de refrescar BATON/WHOAMI
+y RADAR.
+
+QUE_SE_LOGRO................:
+- DragonflyFocus creado como GRC anti-drift y agregado a usecases 01, 03 y 04.
+- Professional Recommendations fue preservado y movido a SkillsLake\01.SKILLS.
+- RADAR fue actualizado a v1.4-DRAFT con FULL.HUMAN y FULL.SKILLS.
+- Los tres commits fueron pushed a origin/lab/ns-pilot-002-codex-real.
+- La sesión reforzó el patrón operativo TOVS: AI_TAIL en finally, evidencia KEY=VALUE,
+  commits separados por scope y no mezclar archivos externos.
+
+QUE_FALTA...................:
+- Readiness final post-continuity.
+- Revisar si 90.USECASE debe regenerarse por RADAR v1.4.
+- Preparar PR-readiness y demo gerencial Beta 0.1.
+- Decidir registro formal de Professional Recommendations en menú/registry.
+- Resolver o aceptar deuda CRLF/LF.
+- Evaluar DragonflyFocus para 02.SESSION_CLOSE.
+
+SIGUIENTE_ACCION............:
+Ejecutar readiness final. Si no hay blocker, cerrar sesión. Próxima sesión:
+PR-readiness y camino a entregable funcional a gerencia.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_036B_20260630
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_GRC_023B_FINAL_20260529
 ==========
 
@@ -893,3 +1013,92 @@ WHERE_WE_ARE......: Pre-comparison stage. Next action is MB-NS-001G_COMPARE_CODE
 NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet.
 TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
 BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.
+
+==========
+MB-CLOSE-002_WHOAMI_REFRESH_20260621
+==========
+FECHA.............: 2026-06-21 00:51:08 -04:00
+BRANCH............: lab/ns-pilot-001-hybrid
+HEAD..............: b0fca43 20260621_MB-NS-002B_create_scoring_rubric
+ESTADO_ACTUAL.....: SkillsMachine operativo; Nightshift lab cerrado con baseline hibrido y rubrica de scoring.
+QUE_ES............: SkillsMachine gobierna skills/usecases; Nightshift es laboratorio para comparar agentes Codex/Claude/hibrido.
+QUE_SE_LOGRO......: Focus Gate, Safe Launcher, NS-PILOT-001, baseline hibrido y rubrica reusable.
+QUE_FALTA.........: RADAR/readiness final, decision sobre NS-PILOT-002 y entregable gerencial.
+SIGUIENTE_ACCION..: Ejecutar MB-CLOSE-003_RADAR_READINESS_FINAL.
+==========
+FIN_MB-CLOSE-002_WHOAMI_REFRESH_20260621
+==========
+
+========== MB-CLOSE-003_SESSION_CLOSE_AFTER_NS_PILOT_001 ==========
+DATE..............: 2026-06-21 01:41:17 -04:00
+CURRENT_STATE.....: NS-PILOT-001 closed as lab evidence; main contains promoted PowerShell safety rule.
+CURRENT_BRANCH....: lab/ns-pilot-001-hybrid
+MAIN_BRANCH.......: main updated through PowerShell safety promotion only.
+NEXT_ACTION.......: Design NS-PILOT-002 readonly before any further agent execution.
+
+========== MB-GRC-036B_CREATE_PROJECT_CONTINUITY_CLOSE_STRUCTURE ==========
+DATE..............: 2026-06-21 01:57:47 -04:00
+CURRENT_STATE.....: Created SyS\PROJECT_CONTINUITY and SyS\PROJECT_CLOSE as SkillsMachine-dedicated self-continuity/self-close folders.
+BOUNDARY..........: 90.USECASE remains generic/exportable for any project.
+NEXT_ACTION.......: MB-NS-003A_DESIGN_NS_PILOT_002_READONLY
+
+========== BEGIN_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+MB_ID.............: MB-CLOSE-004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE
+DATE_LOCAL........: 2026-06-21 23:45:00 -04:00
+STATE_SUMMARY_HEAD: f5b932b 20260621_MB-NS-004B-R0_quarantine_codex_misrun_by_claude
+BRANCH............: lab/ns-pilot-001-hybrid
+MAIN_HEAD.........: 8057823 20260621_MB-GRC-035C_repair_powershell_safety_patch_literals
+CURRENT_STATE.....: NS-PILOT-002 Claude run valid; Codex-labelled misrun quarantined; real Codex run still pending.
+DONE..............: Claude run closed; Claude Desktop lessons captured; Codex misrun quarantined; misleading codex branch deleted local/remote; quarantine branch preserved.
+OPEN_P0...........: MB-NS-004B-R1_CODEX_REAL_RUN_001_NS_PILOT_002
+OPEN_P0...........: MB-NS-005A_COMPARE_NS_PILOT_002
+OPEN_P1...........: MB-GRC-037B_FORMALIZE_AGENT_EXECUTION_PROTOCOL
+PR_STATUS.........: PENDING — no PR before valid comparison/scoring.
+MAIN_PROMOTION....: NONE — main remains untouched.
+NEXT_ACTION.......: Run real Codex using branch lab/ns-pilot-002-codex-real from lab/ns-pilot-001-hybrid.
+SESSION_CLOSE.....: Cierre solicitado por humano; continuity refreshed before final readiness.
+========== END_MB_CLOSE_004_SESSION_CLOSE_AFTER_NS_PILOT_002_QUARANTINE ==========
+
+
+================================================================================
+MB-NS-004B-R10B / WHOAMI UPDATE / 2026-06-22 15:29:15 -04:00
+================================================================================
+
+CURRENT POSITION:
+SkillsMachine has strong internal governance and agent-execution evidence, but it is not yet a management-visible beta product.
+
+USER/MANAGEMENT REALITY:
+Management will not value more reports, speeches, scorecards, or promises unless they are attached to working user-visible functionality.
+
+BETA DEFINITION:
+A SkillsMachine beta means a non-technical user can run a real workflow and receive a useful output without reading the repository or depending on the operator.
+
+ACTIVE GOVERNANCE:
+CONTROL.BETA_FUNCTIONALITY_GATE is now the controlling rule for beta claims.
+
+OPERATIONAL IMPLICATION:
+Future work should be ranked by direct contribution to visible beta functionality, not by volume of internal evidence.
+
+================================================================================
+
+================================================================================
+MB-NS-004B-R22 / WHOAMI UPDATE / FORMAL SESSION CLOSE / 2026-06-23 08:58:13 -04:00
+================================================================================
+
+CURRENT PROJECT POSITION:
+- SkillsMachine now has a demonstrable launcher beta slice.
+- Current branch: lab/ns-pilot-002-codex-real
+- Current head before close: 97badc5 20260623_MB-NS-004B-R21_branch_status_pr_readiness
+- Entry point:
+  pwsh -File SyS\A_Tools\Launcher\Start-SkillsMachine.ps1 -Action help
+
+OPERATING RULES REINFORCED:
+- TOVS/Git/AI_TAIL are source of truth.
+- AI_TAIL must be used for future long/MB scripts.
+- Formal close only when user explicitly says "cierra sesión".
+
+NEXT:
+- R23 PR text / merge checklist.
+
+================================================================================
+

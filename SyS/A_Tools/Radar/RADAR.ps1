@@ -70,17 +70,21 @@ foreach ($ex in $ExcludedPathsRaw) {
 
 $CoreExtensions = @(".txt", ".md", ".ps1", ".json", ".yml", ".yaml", ".xml", ".csv", ".js", ".ts", ".sql", ".py")
 
-$IndexFile = Join-Path -Path $OutputPath -ChildPath "radar.index.txt"
-$CoreFile = Join-Path -Path $OutputPath -ChildPath "radar.core.txt"
-$FullFile = Join-Path -Path $OutputPath -ChildPath "radar.full.txt"
-$LiteFile = Join-Path -Path $OutputPath -ChildPath "radar.lite.txt"
+$IndexFile = Join-Path -Path $OutputPath -ChildPath "RADAR_INDEX.ACTIVE.txt"
+$CoreFile = Join-Path -Path $OutputPath -ChildPath "RADAR_CORE.ACTIVE.txt"
+$FullFile = Join-Path -Path $OutputPath -ChildPath "RADAR_FULL.ACTIVE.txt"
+$LiteFile = Join-Path -Path $OutputPath -ChildPath "RADAR_LITE.ACTIVE.txt"
+$FullHumanFile = Join-Path -Path $OutputPath -ChildPath "RADAR_FULL.HUMAN.ACTIVE.txt"
+$FullSkillsFile = Join-Path -Path $OutputPath -ChildPath "RADAR_FULL.SKILLS.ACTIVE.txt"
 $ManifestFile = Join-Path -Path $OutputPath -ChildPath "radar.manifest.json"
 
 $CurrentOutputNames = @(
-    "radar.index.txt",
-    "radar.core.txt",
-    "radar.full.txt",
-    "radar.lite.txt",
+    "RADAR_INDEX.ACTIVE.txt",
+    "RADAR_CORE.ACTIVE.txt",
+    "RADAR_FULL.ACTIVE.txt",
+    "RADAR_LITE.ACTIVE.txt",
+    "RADAR_FULL.HUMAN.ACTIVE.txt",
+    "RADAR_FULL.SKILLS.ACTIVE.txt",
     "radar.manifest.json"
 )
 
@@ -689,6 +693,101 @@ try {
     }
 
     # ==============================
+    # 09.40 RADAR FULL.HUMAN / FULL.SKILLS
+    # ==============================
+
+    function Test-IsUnderPath {
+        param(
+            [string]$CandidatePath,
+            [string]$ParentPath
+        )
+
+        if ([string]::IsNullOrWhiteSpace($CandidatePath) -or [string]::IsNullOrWhiteSpace($ParentPath)) {
+            return $false
+        }
+
+        $candidateFull = [System.IO.Path]::GetFullPath($CandidatePath).TrimEnd('\', '/')
+        $parentFull = [System.IO.Path]::GetFullPath($ParentPath).TrimEnd('\', '/')
+
+        return $candidateFull.StartsWith($parentFull, [System.StringComparison]::OrdinalIgnoreCase)
+    }
+
+    function Write-RadarCompiledSubset {
+        param(
+            [string]$FilePath,
+            [string]$Title,
+            [string]$OutputType,
+            [object[]]$FilesToCompile,
+            [string]$ScopeNote
+        )
+
+        Write-RadarHeader -FilePath $FilePath -Title $Title -OutputType $OutputType
+
+        "SCOPE_NOTE: $ScopeNote" | Out-File -FilePath $FilePath -Append -Encoding utf8
+        "COMPILED_FILE_COUNT: $($FilesToCompile.Count)" | Out-File -FilePath $FilePath -Append -Encoding utf8
+        "" | Out-File -FilePath $FilePath -Append -Encoding utf8
+
+        if ($FilesToCompile.Count -eq 0) {
+            "[NONE]" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            return
+        }
+
+        foreach ($file in ($FilesToCompile | Sort-Object -Property FullName)) {
+            $relativePath = Get-RelativePathSafe -BasePath $RootPath -TargetPath $file.FullName
+
+            "--------------------------------------------------" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "FILE: $relativePath" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "FULL_PATH: $($file.FullName)" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "SIZE: $($file.Length) bytes" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "MODIFIED: $($file.LastWriteTime.ToString('yyyy-MM-dd HH:mm:ss'))" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "TYPE: $(Get-LogicalType -File $file)" | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "--------------------------------------------------" | Out-File -FilePath $FilePath -Append -Encoding utf8
+
+            if ([int64]$file.Length -gt [int64]$CoreMaxFileSizeBytes) {
+                "SKIPPED_TOO_LARGE" | Out-File -FilePath $FilePath -Append -Encoding utf8
+                "MAX_ALLOWED_BYTES: $CoreMaxFileSizeBytes" | Out-File -FilePath $FilePath -Append -Encoding utf8
+                "" | Out-File -FilePath $FilePath -Append -Encoding utf8
+                continue
+            }
+
+            Get-Content -LiteralPath $file.FullName -ErrorAction Stop | Out-File -FilePath $FilePath -Append -Encoding utf8
+            "" | Out-File -FilePath $FilePath -Append -Encoding utf8
+        }
+    }
+
+    $HumanFiles = @(
+        $CoreFiles |
+            Where-Object {
+                $rp = Get-RelativePathSafe -BasePath $RootPath -TargetPath $_.FullName
+                ($rp -match "(^|[\\/])HUMAN([\\/._-]|$)") -or
+                ($_.Name -match "HUMAN")
+            }
+    )
+
+    $SkillScopeRoots = @(
+        Join-Path $RootPath "SkillsLake"
+        Join-Path $RootPath "GRCLake"
+        Join-Path $RootPath "90.USECASE"
+        Join-Path $RootPath "00.CATALOG"
+    ) | Where-Object { Test-Path -LiteralPath $_ -PathType Container }
+
+    $SkillFilesList = [System.Collections.Generic.List[object]]::new()
+
+    foreach ($file in $CoreFiles) {
+        foreach ($scopeRoot in $SkillScopeRoots) {
+            if (Test-IsUnderPath -CandidatePath $file.FullName -ParentPath $scopeRoot) {
+                [void]$SkillFilesList.Add($file)
+                break
+            }
+        }
+    }
+
+    $SkillFiles = @($SkillFilesList)
+
+    Write-RadarCompiledSubset -FilePath $FullHumanFile -Title "RADAR FULL HUMAN" -OutputType "FULL.HUMAN" -FilesToCompile $HumanFiles -ScopeNote "Human-facing/canonical files detected by HUMAN path or filename convention."
+    Write-RadarCompiledSubset -FilePath $FullSkillsFile -Title "RADAR FULL SKILLS" -OutputType "FULL.SKILLS" -FilesToCompile $SkillFiles -ScopeNote "SkillsMachine governance/skill/usecase/catalog scopes: SkillsLake, GRCLake, 90.USECASE, 00.CATALOG."
+
+    # ==============================
     # 10.00 RADAR LITE
     # ==============================
 
@@ -705,7 +804,9 @@ try {
     "INDEX_PATH   : $IndexFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
     "CORE_PATH    : $CoreFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
     "FULL_PATH    : $FullFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
-    "MANIFEST_PATH: $ManifestFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
+    "FULL_HUMAN_PATH : $FullHumanFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
+    "FULL_SKILLS_PATH: $FullSkillsFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
+    "MANIFEST_PATH   : $ManifestFile" | Out-File -FilePath $LiteFile -Append -Encoding utf8
     "" | Out-File -FilePath $LiteFile -Append -Encoding utf8
 
     "++++++++++" | Out-File -FilePath $LiteFile -Append -Encoding utf8
@@ -749,7 +850,7 @@ try {
     # ==============================
 
     $SegmentMap = [ordered]@{}
-    foreach ($targetFile in @($IndexFile, $CoreFile, $FullFile, $LiteFile)) {
+    foreach ($targetFile in @($IndexFile, $CoreFile, $FullFile, $LiteFile, $FullHumanFile, $FullSkillsFile)) {
         $segments = New-SegmentsFromTextFile -SourceFilePath $targetFile -MaxBytes $SegmentMaxBytes
         $SegmentMap[$targetFile] = Convert-AnyToArray -InputObject $segments
     }
@@ -818,6 +919,8 @@ try {
             [ordered]@{ type = "CORE"; path = $CoreFile; segments = @($SegmentMap[$CoreFile]) },
             [ordered]@{ type = "FULL"; path = $FullFile; segments = @($SegmentMap[$FullFile]) },
             [ordered]@{ type = "LITE"; path = $LiteFile; segments = @($SegmentMap[$LiteFile]) },
+            [ordered]@{ type = "FULL.HUMAN"; path = $FullHumanFile; segments = @($SegmentMap[$FullHumanFile]) },
+            [ordered]@{ type = "FULL.SKILLS"; path = $FullSkillsFile; segments = @($SegmentMap[$FullSkillsFile]) },
             [ordered]@{ type = "MANIFEST"; path = $ManifestFile; segments = @() }
         )
         archived_files = $ArchivedFilesArray
@@ -833,7 +936,7 @@ try {
     $manifestJson = $Manifest | ConvertTo-Json -Depth 12 -ErrorAction Stop
     $manifestJson | Out-File -FilePath $ManifestFile -Encoding utf8
 
-    Test-OutputIntegrity -TextOutputs @($IndexFile, $CoreFile, $FullFile, $LiteFile) -ManifestPath $ManifestFile -ManifestObject $Manifest -AllCount $AllFiles.Count -NewCount $NewFiles.Count -ModifiedCount $ModifiedFiles.Count -DeletedCount $DeletedFiles.Count
+    Test-OutputIntegrity -TextOutputs @($IndexFile, $CoreFile, $FullFile, $LiteFile, $FullHumanFile, $FullSkillsFile) -ManifestPath $ManifestFile -ManifestObject $Manifest -AllCount $AllFiles.Count -NewCount $NewFiles.Count -ModifiedCount $ModifiedFiles.Count -DeletedCount $DeletedFiles.Count
 
     $ScriptSucceeded = $true
 
@@ -844,7 +947,9 @@ try {
     Write-Host "CORE    : $CoreFile"
     Write-Host "FULL    : $FullFile"
     Write-Host "LITE    : $LiteFile"
-    Write-Host "MANIFEST: $ManifestFile"
+    Write-Host "FULL_HUMAN : $FullHumanFile"
+    Write-Host "FULL_SKILLS: $FullSkillsFile"
+    Write-Host "MANIFEST   : $ManifestFile"
     Write-Host "FILES   : $($AllFiles.Count)"
     Write-Host "NEW     : $($NewFiles.Count)"
     Write-Host "MODIFIED: $($ModifiedFiles.Count)"
@@ -864,3 +969,4 @@ finally {
     if ($ScriptSucceeded) { exit 0 }
     exit 1
 }
+

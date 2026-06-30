@@ -4,8 +4,8 @@
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
 NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
+VERSION...........: v1.4-DRAFT
+FECHA.............: 2026-06-30
 HORA..............: HH:MM (actualizar al guardar)
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
@@ -13,8 +13,9 @@ AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
 
 ALCANCE...........:
 
-Define el contrato transversal RADAR (INDEX, CORE, FULL) para describir un proyecto en FS
-de forma IA-friendly y humano-friendly, sin depender de ningún “frame” (PF/WINGS/EVA/etc.).
+Define el contrato transversal RADAR (LITE, INDEX, CORE, FULL, FULL.HUMAN, FULL.SKILLS)
+para describir un proyecto en FS de forma IA-friendly y humano-friendly, sin depender
+de ningún "frame" (PF/WINGS/EVA/etc.).
 
 RADAR:
 
@@ -30,15 +31,20 @@ NO_CUBRE..........:
 
 No interpreta negocio (no KPIs, no conclusiones).
 
-No hace OCR de PDFs ni intenta “leer” binarios.
+No hace OCR de PDFs ni intenta "leer" binarios.
 
-No define rutas físicas obligatorias: cada proyecto decide dónde guarda outputs e históricos.
+No define rutas físicas obligatorias propias: para HUMAN/SKILLS consume rutas
+resueltas por la skill de arquitectura de archivos/carpetas del ecosistema
+(ver DEPENDENCIAS). Para el resto del proyecto, cada proyecto decide dónde
+guarda outputs e históricos.
 
 DEPENDENCIAS......:
 
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+[PENDIENTE: ID/nombre de la SKILL de arquitectura de archivos/carpetas del ecosistema
+— define las rutas canónicas de HUMAN y SKILLS que RADAR consume sin reinterpretar]
 
 NOTA_IMPORTANTE...:
 
@@ -46,15 +52,34 @@ RADAR es FRAME-AGNOSTICO:
 
 No pertenece ni depende de PFUNDATIONS, WINGS, EVA, etc.
 
-No menciona ni depende de BATON o HUMAN.
+No menciona ni depende de BATON o HUMAN (como frame; HUMAN como carpeta canónica
+del FS es un concepto distinto, ver 01.50/08.40).
 
 Otros sistemas pueden consumir outputs RADAR, pero eso no es parte del contrato.
+
+RADAR no define ni asume rutas de HUMAN/SKILLS; las consume desde la skill de
+arquitectura del ecosistema referenciada en DEPENDENCIAS.
+
+MEJORA_CLAVE_v1.4:
+
+- Agrega outputs FULL.HUMAN y FULL.SKILLS al contrato duro (ahora 6 outputs siempre).
+- Agrega campo HUMAN_CAMBIOS_DETECTADOS en RADAR_LITE (descriptivo, no decisorio).
+- Cierra regla de hash por defecto en INDEX (umbral configurable + marca explícita
+  si se omite).
+- Cierra naming determinista de históricos (timestamp compartido entre los 6 outputs
+  de una misma corrida).
+- Cierra tratamiento de symlinks (solo en INDEX, con TARGET_RUTA y TARGET_ESTADO).
+- Cierra comportamiento de RADAR_LITE en primera ejecución (version_0, sin diff).
+- Corrige duplicación de numeración 02.40 (Modo Local FS vs AI Upload pasa a 02.40;
+  Nota sobre consumidores pasa a 02.60).
+- Aclara alcance de la política cost-aware (02.55): aplica a qué se sube a IA cloud,
+  no a qué se genera en el FS local.
 
 MEJORA_CLAVE_v1.3:
 
 - Agrega modo RADAR_LITE (recomendado) para operación diaria y control de costos.
 - Refuerza política: default INDEX/LITE; CORE por módulo; FULL ocasional.
-- Refuerza contrato OK/FAIL binario real (anti “OK falso”) alineado a PROBLEM/TROUBLE.
+- Refuerza contrato OK/FAIL binario real (anti "OK falso") alineado a PROBLEM/TROUBLE.
 - Mantiene íntegro el contrato base INDEX/CORE/FULL (no se omiten secciones previas).
 
 ==========
@@ -66,18 +91,23 @@ MEJORA_CLAVE_v1.3:
 00.20 Contexto del problema y objetivos
 
 01.00 Definiciones básicas
-01.15 RADAR_LITE (NUEVO)
-02.00 Modos de RADAR (LITE/INDEX/CORE/FULL)
+01.15 RADAR_LITE
+01.50 HUMAN y SKILLS como carpetas canónicas (NUEVO)
+02.00 Modos de RADAR (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)
 02.40 Modo Local FS vs Modo AI Upload
 02.50 Política recomendada de uso (anti-cost)
+02.55 Alcance de la política cost-aware (NUEVO)
+02.60 Nota sobre consumidores (no parte del contrato)
 
 03.00 Principios de diseño
 04.00 Contrato duro (independencia, outputs, naming)
 
-05.00 Estándar RADAR_LITE (NUEVO)
+05.00 Estándar RADAR_LITE
 06.00 Estándar RADAR_INDEX
 07.00 Estándar RADAR_CORE
 08.00 Estándar RADAR_FULL
+08.40 Estándar RADAR_FULL.HUMAN (NUEVO)
+08.50 Estándar RADAR_FULL.SKILLS (NUEVO)
 
 09.00 Tamaño, segmentación y chunks IA/humano friendly
 10.00 Exclusiones e inclusiones (FS + tipos)
@@ -98,18 +128,25 @@ FIN del documento
 a) Proyectos crecen y se vuelven inmanejables sin inventario confiable.
 b) Tooling e IA fallan cuando el repositorio no tiene mapa.
 c) Auditorías, migraciones y refactors requieren trazabilidad.
-d) Archivos binarios (xlsx/pdf/png) rompen intentos de “leer todo”.
+d) Archivos binarios (xlsx/pdf/png) rompen intentos de "leer todo".
 e) Históricos sin disciplina generan caos; sin históricos no hay continuidad.
 f) En IA cloud, subir FULL/CORE completo puede disparar costos (COST_INCIDENT).
+g) El contenido canónico (HUMAN) y el contenido de skills (SKILLS) necesitan
+   compilarse aparte del resto del proyecto para que la IA los entienda como
+   unidad completa, sin mezclarlos con código/artefactos operativos.
 
 00.20.02_OBJETIVO_PRINCIPAL
 
 Definir un estándar único para producir vistas:
 
-LITE : Inventario resumido + diffs básicos (operación diaria).
-INDEX: Inventario total + metadata (para navegación y auditoría).
-CORE : Contenido legible (texto/código) para análisis por IA/humano.
-FULL : Consolidación (INDEX + CORE + extras de auditoría como tree-size).
+LITE       : Inventario resumido + diffs básicos (operación diaria).
+INDEX      : Inventario total + metadata (para navegación y auditoría).
+CORE       : Contenido legible (texto/código) para análisis por IA/humano.
+FULL       : Consolidación (INDEX + CORE + extras de auditoría como tree-size).
+FULL.HUMAN : Compilación completa del contenido canónico de HUMAN, optimizada
+             para lectura por IA.
+FULL.SKILLS: Compilación completa del contenido de la carpeta SKILLS, separada
+             del resto del proyecto, optimizada para lectura por IA.
 
 00.20.03_OBJETIVO_SECUNDARIO
 
@@ -121,7 +158,7 @@ Ser consumidos por IA (chunks y determinismo).
 
 Ser comparables entre ejecuciones (orden estable + formato consistente).
 
-Reducir fricción/costo en cloud evitando “leer todo” sin necesidad.
+Reducir fricción/costo en cloud evitando "leer todo" sin necesidad.
 
 ==========
 01.00_DEFINICIONES_BASICAS
@@ -129,7 +166,7 @@ Reducir fricción/costo en cloud evitando “leer todo” sin necesidad.
 
 01.10_RADAR
 
-RADAR es un estándar de “descripción del FS” (file system) de un proyecto, generado por tooling.
+RADAR es un estándar de "descripción del FS" (file system) de un proyecto, generado por tooling.
 
 Regla dura:
 
@@ -138,7 +175,7 @@ RADAR describe, no decide.
 RADAR no reemplaza decisiones humanas ni lógica de negocio.
 
 ----------
-01.15_RADAR_LITE_(NUEVO)
+01.15_RADAR_LITE
 ----------
 
 RADAR_LITE es una salida liviana para operación diaria:
@@ -147,6 +184,7 @@ RADAR_LITE es una salida liviana para operación diaria:
 - Puede incluir diffs básicos vs ejecución previa (NEW/MODIFIED/DELETED).
 - No incluye contenido (no es CORE).
 - No interpreta semántica (describe, no decide).
+- En primera ejecución (sin histórico previo), no calcula diffs (ver 05.30).
 
 01.20_RADAR_INDEX
 
@@ -162,7 +200,7 @@ tamaño
 
 tipo lógico
 
-hash (si aplica)
+hash (regla por defecto, ver 06.15)
 
 01.30_RADAR_CORE
 
@@ -178,6 +216,9 @@ binarios
 
 xlsx (no se leen celdas)
 
+Nota: la "estructura superficial" de xlsx (nombres de hojas) vive en INDEX (06.30),
+no en CORE. CORE nunca incluye contenido de xlsx bajo ninguna forma.
+
 01.40_RADAR_FULL
 
 Output que consolida:
@@ -188,12 +229,30 @@ y agrega extras de auditoría (ej.: tree-size por carpeta)
 
 FULL no agrega semántica de negocio; sigue siendo descriptivo.
 
+----------
+01.50_HUMAN_Y_SKILLS_COMO_CARPETAS_CANONICAS_(NUEVO)
+----------
+
+HUMAN y SKILLS son carpetas canónicas del ecosistema cuya ubicación física
+(ruta) NO es definida por RADAR. La ruta de ambas es resuelta vía la skill de
+arquitectura de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+
+RADAR solo:
+
+- Consume la ruta resuelta de HUMAN y SKILLS.
+- Compila su contenido en outputs dedicados (FULL.HUMAN, FULL.SKILLS).
+- Describe cambios detectados (ver 05.20), sin evaluarlos.
+
+HUMAN es contenido canónico de baja frecuencia de cambio; "de esa carpeta se
+desprende todo" y su edición debe evitarse salvo necesidad real. RADAR no
+impone ni bloquea esa regla (no decide), solo la hace visible (describe).
+
 ==========
 02.00_MODOS_DE_RADAR
 ==========
 
 ++++++++++
-02.10_MODO_LITE_(NUEVO)
+02.10_MODO_LITE
 ++++++++++
 
 Produce RADAR_LITE con inventario y diffs básicos.
@@ -220,6 +279,22 @@ INDEX + CORE + tree-size
 y cualquier metadata descriptiva adicional permitida por el proyecto.
 
 ++++++++++
+02.41_MODO_FULL_HUMAN_(NUEVO)
+++++++++++
+
+Produce RADAR_FULL.HUMAN: compilación completa, determinista, optimizada para
+lectura por IA, del contenido de la carpeta canónica HUMAN (ruta resuelta vía
+skill de arquitectura). Mismo tratamiento de formato que CORE.
+
+++++++++++
+02.42_MODO_FULL_SKILLS_(NUEVO)
+++++++++++
+
+Produce RADAR_FULL.SKILLS: compilación completa, determinista, optimizada para
+lectura por IA, del contenido de la carpeta SKILLS (ruta resuelta vía skill de
+arquitectura), separada del resto del proyecto. Mismo tratamiento que FULL.HUMAN.
+
+++++++++++
 02.40_MODO_LOCAL_FS_VS_MODO_AI_UPLOAD
 ++++++++++
 
@@ -244,21 +319,35 @@ Se suben segmentos (chunks) al chat para consumo por IA.
 El activo completo puede no subirse (pero existe localmente).
 
 ++++++++++
-02.50_POLITICA_RECOMENDADA_DE_USO_(ANTI-COST_INCIDENT)_(NUEVO)
+02.50_POLITICA_RECOMENDADA_DE_USO_(ANTI-COST_INCIDENT)
 ++++++++++
 
 Regla operativa recomendada:
 
 - Default diario: RADAR_LITE o RADAR_INDEX.
 - CORE: solo cuando vas a analizar/editar un módulo específico.
-- FULL: ocasional (auditoría o “foto completa”), no por costumbre.
+- FULL / FULL.HUMAN / FULL.SKILLS: ocasional (auditoría, "foto completa", o
+  análisis canónico puntual), no por costumbre.
 
 Si usas IA cloud:
-- Evitar subir FULL completo al chat salvo necesidad real.
+- Evitar subir FULL/FULL.HUMAN/FULL.SKILLS completos al chat salvo necesidad real.
 - Preferir subir segmentos CORE del módulo objetivo.
 
 ++++++++++
-02.50_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
+02.55_ALCANCE_DE_LA_POLITICA_COST_AWARE_(NUEVO)
+++++++++++
+
+Aclaración dura para evitar ambigüedad con el contrato de 04.30:
+
+- La política anti-costo (02.50) aplica a QUÉ SE SUBE a IA cloud (chat/upload).
+- NO aplica a qué se GENERA en el FS local: los 6 outputs (LITE/INDEX/CORE/FULL/
+  FULL.HUMAN/FULL.SKILLS) se generan siempre en cada ejecución, según el
+  contrato duro de 04.30.
+- Generar localmente es proceso (CPU/disco); subir a IA cloud es costo (tokens).
+  RADAR distingue ambos explícitamente.
+
+++++++++++
+02.60_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
 ++++++++++
 
 RADAR puede ser consumido por sistemas externos (ej: orquestadores IA)
@@ -274,7 +363,7 @@ Recomendación para consumidores:
 
 - Usar RADAR_INDEX como default.
 - Escalar a CORE por módulo.
-- FULL solo auditoría.
+- FULL/FULL.HUMAN/FULL.SKILLS solo auditoría o análisis canónico puntual.
 
 ==========
 03.00_PRINCIPIOS_DE_DISENO
@@ -301,10 +390,11 @@ Misma entrada -> mismo orden de salida (salvo cambios reales del FS).
 RADAR no modifica archivos del proyecto (solo lectura).
 Solo escribe outputs y mueve históricos RADAR.
 
-03.50_PRINCIPIO_5_COST_AWARE_(NUEVO)
+03.50_PRINCIPIO_5_COST_AWARE
 
-RADAR no optimiza por costo, pero el estándar recomienda LITE/INDEX
-para evitar consumo innecesario de tokens/costo en cloud.
+RADAR no optimiza por costo de generación local, pero el estándar recomienda
+LITE/INDEX como default de SUBIDA a IA cloud para evitar consumo innecesario
+de tokens/costo (ver 02.55).
 
 ==========
 04.00_CONTRATO_DURO
@@ -318,7 +408,7 @@ RADAR es FRAME-AGNOSTICO:
 
 No depende de PF/WINGS/EVA.
 
-No menciona BATON/HUMAN.
+No menciona BATON/HUMAN (como frame).
 
 Corre como herramienta standalone.
 
@@ -336,25 +426,30 @@ Aunque el estándar general recomienda ID_FS, este contrato permite excepción c
 cuando el humano fija el nombre operativo. La excepción debe documentarse en metadatos.
 
 ++++++++++
-04.30_TRES_OUTPUTS_SIEMPRE
+04.30_SEIS_OUTPUTS_SIEMPRE_(ACTUALIZADO_v1.4)
 ++++++++++
 
 Contrato duro:
 
-RADAR siempre produce 3 outputs por ejecución:
+RADAR siempre produce 6 outputs por ejecución (activos):
 
-RADAR_INDEX (activo)
+RADAR_LITE
 
-RADAR_CORE (activo)
+RADAR_INDEX
 
-RADAR_FULL (activo)
+RADAR_CORE
 
-Compatibilidad v1.3:
-- RADAR_LITE es recomendado, no “requisito duro” retroactivo.
-- Si el proyecto adopta LITE, se considera output adicional activo.
+RADAR_FULL
+
+RADAR_FULL.HUMAN
+
+RADAR_FULL.SKILLS
+
+Nota de alcance (ver 02.55): "siempre produce" se refiere a generación en el
+FS local. La política de qué se sube a IA cloud es independiente (02.50).
 
 ==========
-05.00_ESTANDAR_RADAR_LITE_(NUEVO)
+05.00_ESTANDAR_RADAR_LITE
 ==========
 
 05.10_OBJETIVO
@@ -362,23 +457,31 @@ Compatibilidad v1.3:
 - Reducir peso y frecuencia de CORE/FULL.
 - Entregar inventario y cambios básicos para navegación rápida.
 
-05.20_CONTENIDO_MINIMO
+05.20_CONTENIDO_MINIMO_(ACTUALIZADO_v1.4)
 
 RADAR_LITE debe incluir al menos:
 
+- ESTADO_CONTROL_CAMBIOS (ver 05.30: version_0 o referencia a ejecución previa)
 - Timestamp de ejecución
 - Root/base del análisis
 - Conteo total de archivos y carpetas (si aplica)
 - NEW_FILES (rutas)
 - MODIFIED_FILES (rutas)
 - DELETED_FILES (rutas) (si se puede inferir desde histórico)
-- Punteros a outputs activos INDEX/CORE/FULL (rutas exactas)
+- HUMAN_CAMBIOS_DETECTADOS: SI/NO + rutas específicas si es SI (campo
+  descriptivo neutro, no es una alerta de severidad; ver 01.50)
+- Punteros a outputs activos INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS (rutas exactas)
 
 05.30_REGLAS
 
 - No incluye contenido.
 - No interpreta semántica.
 - Diff basado en metadata (mtime/size/hash si existe).
+- Primera ejecución (sin histórico previo): no se calculan diffs. El campo
+  ESTADO_CONTROL_CAMBIOS debe indicar exactamente:
+  "version_0 — no aplica control de cambios (sin ejecución previa para comparar)"
+- Ejecuciones siguientes: ESTADO_CONTROL_CAMBIOS indica la ejecución previa
+  contra la cual se comparó (timestamp).
 
 ==========
 06.00_ESTANDAR_RADAR_INDEX
@@ -396,9 +499,23 @@ MODIFICADO (timestamp)
 
 EXT (extensión)
 
-TIPO_LOGICO (texto / binario / media / xlsx / etc.)
+TIPO_LOGICO (texto / binario / media / xlsx / symlink / etc.)
 
-SHA256 (cuando el proyecto lo exige)
+SHA256 (ver regla por defecto en 06.15)
+
+----------
+06.15_REGLA_DE_HASH_POR_DEFECTO_(NUEVO)
+----------
+
+Para evitar ambigüedad y mantener determinismo entre proyectos:
+
+- SHA256 es OBLIGATORIO para todo archivo listado en INDEX cuyo tamaño sea
+  menor al umbral configurable (default sugerido: 50 MB).
+- Sobre ese umbral, el hash es OPCIONAL por costo de cómputo, pero el campo
+  NUNCA queda vacío sin explicación: debe registrarse como
+  "HASH_OMITIDO_POR_TAMANO".
+- El umbral es configurable por proyecto, pero debe quedar documentado en los
+  metadatos de la ejecución (mismo patrón que la excepción de 04.20).
 
 06.20_BINARIOS_E_ILEGIBLES
 
@@ -406,9 +523,21 @@ Se listan en INDEX con metadata y hash.
 
 No se intenta leer contenido.
 
+----------
+06.25_SYMLINKS_Y_REFERENCIAS_CIRCULARES_(NUEVO)
+----------
+
+Symlinks se listan SOLO en INDEX (nunca se siguen para CORE/FULL/FULL.HUMAN/
+FULL.SKILLS, evitando loops).
+
+Campos adicionales para TIPO_LOGICO = symlink:
+
+- TARGET_RUTA: ruta a la que apunta el symlink.
+- TARGET_ESTADO: uno de "válido" / "roto" / "circular".
+
 06.30_XLSX
 
-INDEX puede incluir “estructura superficial”:
+INDEX puede incluir "estructura superficial":
 
 nombres de hojas
 
@@ -436,8 +565,8 @@ pero el script debe reflejar estado final (OK real vs FAIL)
 07.30_CONTROL_DE_TAMANO_(RECOMENDADO)
 
 Para evitar CORE obeso:
-- permitir exclusión por tamaño (ej.: > 2MB) con registro en CORE “SKIPPED_TOO_LARGE”
-- sin ocultarlo: debe aparecer en INDEX y en CORE como “skipped”.
+- permitir exclusión por tamaño (ej.: > 2MB) con registro en CORE "SKIPPED_TOO_LARGE"
+- sin ocultarlo: debe aparecer en INDEX y en CORE como "skipped".
 
 ==========
 08.00_ESTANDAR_RADAR_FULL
@@ -457,11 +586,55 @@ TREE-SIZE por carpeta (bytes totales)
 
 Lista directorios y tamaño total por carpeta.
 
-Sirve para auditoría (identificar “carpetas obesas”).
+Sirve para auditoría (identificar "carpetas obesas").
 
 08.30_NO_NEGOCIO
 
 FULL no agrega KPIs ni conclusiones.
+
+----------
+08.40_ESTANDAR_RADAR_FULL.HUMAN_(NUEVO)
+----------
+
+08.41_DEFINICION
+
+Compilación completa, determinista y optimizada para lectura por IA (no
+prioriza lectura humana, pese al nombre de la carpeta de origen) del
+contenido de la carpeta canónica HUMAN.
+
+08.42_RUTA
+
+La ruta de HUMAN NO la define RADAR; se resuelve vía la skill de arquitectura
+de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+
+08.43_TRATAMIENTO
+
+Mismo formato/reglas que CORE (lista blanca de extensiones legibles, sin
+binarios, sin OCR, determinista, UTF-8).
+
+08.44_NATURALEZA_DEL_CONTENIDO
+
+HUMAN es canónico y de baja frecuencia de cambio. Cualquier modificación
+detectada es señal relevante para visibilidad (ver HUMAN_CAMBIOS_DETECTADOS
+en 05.20), sin que RADAR emita juicio sobre si el cambio es correcto o no.
+
+----------
+08.50_ESTANDAR_RADAR_FULL.SKILLS_(NUEVO)
+----------
+
+08.51_DEFINICION
+
+Compilación completa, determinista y optimizada para lectura por IA del
+contenido de la carpeta SKILLS del ecosistema, separada del resto del proyecto.
+
+08.52_RUTA
+
+La ruta de SKILLS NO la define RADAR; se resuelve vía la skill de arquitectura
+de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+
+08.53_TRATAMIENTO
+
+Mismo tratamiento que FULL.HUMAN (formato CORE, determinista, UTF-8).
 
 ==========
 09.00_TAMANO_SEGMENTACION_Y_CHUNKS
@@ -471,7 +644,7 @@ FULL no agrega KPIs ni conclusiones.
 09.10_REGLA_DE_8_MB
 ++++++++++
 
-Si cualquier output ACTIVE supera 8 MB:
+Si cualquier output ACTIVE supera 8 MB (incluye FULL.HUMAN y FULL.SKILLS):
 
 El archivo ACTIVE se mantiene intacto.
 
@@ -483,12 +656,33 @@ Se crean copias segmentadas <= 8 MB.
 
 Determinístico.
 
-Sin la palabra “part”.
+Sin la palabra "part".
 
 Ejemplo:
 RADAR_FULL.ACTIVE.txt.seg.001
 RADAR_FULL.ACTIVE.txt.seg.002
 ...
+
+----------
+09.25_NAMING_DE_HISTORICOS_(NUEVO)
+----------
+
+Determinístico, basado en timestamp ISO sin separadores ambiguos (formato
+AAAAMMDD-HHMMSS).
+
+El ACTIVE de cada output siempre se sobrescribe en la ejecución más reciente.
+El HIST nunca se sobrescribe: al generarse un nuevo ACTIVE, el ACTIVE anterior
+se mueve a histórico con el siguiente naming:
+
+RADAR_<TIPO>.HIST.<timestamp>.txt
+
+Ejemplo:
+RADAR_FULL.HIST.20260226-143000.txt
+RADAR_FULL.HUMAN.HIST.20260226-143000.txt
+RADAR_FULL.SKILLS.HIST.20260226-143000.txt
+
+Los 6 outputs de una misma corrida comparten el mismo timestamp, permitiendo
+agruparlos por prefijo como pertenecientes a una única ejecución.
 
 ++++++++++
 09.30_SEGMENTACION_HIBRIDA
@@ -566,7 +760,7 @@ No mezclar encodings dentro del output si se puede evitar.
 
 DONE cuando:
 
-Existen los activos requeridos (INDEX/CORE/FULL; y LITE si el proyecto lo habilita)
+Existen los 6 activos requeridos (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)
 
 Y el script termina sin excepción no controlada.
 
@@ -574,7 +768,7 @@ Y el script termina sin excepción no controlada.
 
 Regla dura:
 
-No imprimir “OK/COMPLETADO” si hubo error no controlado.
+No imprimir "OK/COMPLETADO" si hubo error no controlado.
 
 Ante excepción no controlada: exit 1.
 
@@ -586,7 +780,7 @@ Registrar:
 - comando exacto
 - root
 - exclusiones
-- outputs generados (paths)
+- outputs generados (paths, incluyendo FULL.HUMAN y FULL.SKILLS)
 - estado final OK/FAIL
 
 ==========
@@ -597,7 +791,7 @@ Registrar:
 
 Ejecutar RADAR.ps1
 
-Obtener outputs en carpeta de RADAR del proyecto
+Obtener los 6 outputs en carpeta de RADAR del proyecto
 
 Subir al chat solo segmentos .seg.* si se requiere AI_UPLOAD
 
@@ -608,6 +802,10 @@ FULL para tree-size
 INDEX para inventario + hash
 
 LITE para operación diaria y diffs
+
+FULL.HUMAN para análisis puntual del contenido canónico
+
+FULL.SKILLS para análisis puntual de las skills del ecosistema
 
 ==========
 14.00_ANTIPATRONES
@@ -623,11 +821,19 @@ Subir archivos gigantes al chat sin segmentar = fricción + fallos.
 
 14.30_ANTIPATRON_OK_FALSO
 
-Imprimir “OK” con errores = destruye confianza operacional.
+Imprimir "OK" con errores = destruye confianza operacional.
 
-14.40_ANTIPATRON_FULL_DIARIO_(NUEVO)
+14.40_ANTIPATRON_FULL_DIARIO
 
-Generar FULL por hábito (costo/tiempo), cuando bastaba LITE/INDEX.
+Generar FULL/FULL.HUMAN/FULL.SKILLS por hábito de SUBIDA a IA cloud (costo/tiempo
+de tokens), cuando bastaba LITE/INDEX o CORE puntual. No confundir con la
+generación local, que siempre ocurre (ver 02.55).
+
+14.50_ANTIPATRON_RADAR_DEFINIENDO_RUTAS_(NUEVO)
+
+Que RADAR asuma o hardcodee la ruta de HUMAN/SKILLS en vez de resolverla vía
+la skill de arquitectura del ecosistema = acoplamiento indebido y duplicación
+de responsabilidad.
 
 ==========
 15.00_CHECKLIST_RAPIDO
@@ -635,27 +841,51 @@ Generar FULL por hábito (costo/tiempo), cuando bastaba LITE/INDEX.
 
 ¿RADAR es independiente y no menciona frames?
 
-¿Produce SIEMPRE INDEX/CORE/FULL?
+¿Produce SIEMPRE los 6 outputs (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)?
 
-¿Si el proyecto habilita LITE, se genera LITE?
-
-¿INDEX incluye hash si es requerido?
+¿INDEX incluye hash según la regla por defecto (06.15)?
 
 ¿CORE incluye solo texto/código?
 
 ¿FULL incluye tree-size?
 
-¿Si ACTIVE >8MB, existen .seg.001..N?
+¿FULL.HUMAN y FULL.SKILLS usan rutas resueltas por la skill de arquitectura
+(y no rutas hardcodeadas)?
+
+¿LITE incluye HUMAN_CAMBIOS_DETECTADOS de forma descriptiva, no evaluativa?
+
+¿Si ACTIVE >8MB, existen .seg.001..N (incluyendo FULL.HUMAN/FULL.SKILLS)?
+
+¿Symlinks aparecen solo en INDEX, con TARGET_RUTA y TARGET_ESTADO?
+
+¿Históricos usan naming con timestamp compartido entre los 6 outputs?
 
 ¿Orden estable por ruta?
 
-¿No hay “OK falso” si ocurrió error?
+¿No hay "OK falso" si ocurrió error?
 
-¿Se respetó la política de uso (LITE/INDEX default; CORE por módulo; FULL ocasional)?
+¿Se respetó la política de uso de SUBIDA a IA (LITE/INDEX default; CORE por
+módulo; FULL/FULL.HUMAN/FULL.SKILLS ocasional), distinta de la generación local?
+
+¿Primera ejecución de LITE indica "version_0" sin intentar calcular diffs?
 
 ==========
 16.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-06-30, v1.4-DRAFT
+- Agregados outputs FULL.HUMAN y FULL.SKILLS (contrato duro pasa de 3 a 6 outputs).
+- Agregado campo HUMAN_CAMBIOS_DETECTADOS en RADAR_LITE (descriptivo, no decisorio).
+- Cerrada regla de hash por defecto en INDEX (umbral configurable + marca explícita).
+- Cerrado naming determinista de históricos (timestamp compartido entre 6 outputs).
+- Cerrado tratamiento de symlinks (solo INDEX, TARGET_RUTA, TARGET_ESTADO).
+- Cerrado comportamiento de LITE en primera ejecución (version_0, sin diff).
+- Corregida duplicación de numeración 02.40.
+- Agregada sección 02.55 aclarando alcance de la política cost-aware (subida a
+  IA cloud, no generación local).
+- Agregada dependencia pendiente: skill de arquitectura de archivos/carpetas
+  del ecosistema (define rutas de HUMAN/SKILLS).
+- Agregado antipatrón 14.50 (RADAR no debe definir rutas de HUMAN/SKILLS).
 
 2026-02-26, v1.3-DRAFT
 - Agregado: RADAR_LITE (recomendado) y política de uso anti-cost.

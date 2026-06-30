@@ -1,0 +1,209 @@
+==========
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+==========
+
+ID_UNICO..........: GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.0001
+NOMBRE............: UnknownWorktreeStateHardStop
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-06-30
+SCOPE.............: Cross-project control for hard-stop handling of unexpected worktree state during AI-assisted execution
+APPLIES_TO........: SkillsMachine and any project where AI agents operate on Git worktrees
+
+==========
+00.00 PURPOSE
+==========
+
+UnknownWorktreeStateHardStop governs how an AI agent must react when the observed Git worktree state is not fully understood at task entry or during task execution.
+
+The goal is to prevent silent continuation on ambiguous repository state, accidental staging scope expansion, invalid validation evidence, and contamination of human commit decisions.
+
+==========
+01.00 CORE RULE
+==========
+
+UNKNOWN_WORKTREE_STATE = HARD_STOP_UNTIL_CLASSIFIED
+
+If unexpected worktree state appears, the agent must stop the current task and classify the state before proceeding.
+
+The default response is not:
+
+unknown state detected -> continue anyway
+
+The required response is:
+
+unknown state detected -> classify -> decide whether safe to continue
+
+==========
+02.00 WHAT COUNTS AS UNKNOWN WORKTREE STATE
+==========
+
+Unknown worktree state includes, but is not limited to:
+
+- unexpected modified tracked files;
+- unexpected untracked files;
+- ignored-but-visible files;
+- local tool configuration such as .claude/settings.local.json;
+- generated outputs that appear in the worktree unexpectedly;
+- dependency or configuration artifacts;
+- discrepancies between expected ignore behavior and actual Git status output;
+- discrepancies between global gitignore behavior and repo-local exclude behavior.
+
+==========
+03.00 REQUIRED HARD STOP BEHAVIOR
+==========
+
+Until classification is complete, the agent must not:
+
+- stage the file or state;
+- delete it;
+- revert it;
+- ignore it;
+- continue to the next task.
+
+If classification remains ambiguous, human decision is required before continuation.
+
+==========
+04.00 REQUIRED CLASSIFICATION FIELDS
+==========
+
+Unknown worktree state must be classified using explicit fields such as:
+
+- UNKNOWN_FILE_PATH
+- GIT_STATUS_CODE
+- TRACKED
+- IGNORED
+- IGNORE_SOURCE
+- FILE_EXISTS
+- FILE_SIZE_BYTES
+- LAST_WRITE_TIME
+- SUSPECTED_SOURCE
+- CONTAINS_LOCAL_CONFIG
+- CONTAINS_SECRET_OR_TOKEN
+- RECOMMENDED_CLASSIFICATION
+- RECOMMENDED_ACTION
+- HUMAN_DECISION_REQUIRED
+
+Valid classifications include:
+
+- EXPECTED_FOR_CURRENT_TASK
+- INTENTIONAL_LOCAL_ONLY
+- GENERATED_REGENERABLE
+- CANONICAL_SOURCE
+- IGNORED_SAFE_TO_LEAVE
+- TRACKED_CHANGE_INTENDED
+- UNTRACKED_SHOULD_IGNORE
+- UNTRACKED_SHOULD_TRACK
+- SUSPICIOUS
+- BLOCKED_NEEDS_HUMAN_DECISION
+
+==========
+05.00 LOCAL CONFIG AND IGNORE POLICY
+==========
+
+If a local-only tool configuration file is intentionally present and should remain local, the preferred control is:
+
+- confirm it is not tracked;
+- confirm it contains no secret or token risk that requires escalation;
+- confirm Git status is clean when ignore behavior is active;
+- prefer repo-local .git/info/exclude when the ignore rule is local-only and should not be committed.
+
+If global gitignore behavior is not visible to an agent, or cannot be relied on consistently in the current execution environment, prefer repo-local .git/info/exclude for local-only config instead of modifying tracked .gitignore, unless the human explicitly wants the ignore rule committed.
+
+==========
+06.00 SPECIFIC LESSON LEARNED
+==========
+
+.claude/settings.local.json was classified as local-only Claude Code configuration.
+
+When global gitignore was not visible to the agent, the safer resolution was:
+
+- keep the file untracked;
+- avoid modifying tracked .gitignore;
+- use repo-local .git/info/exclude;
+- continue only after git status --short became clean and the file was confirmed intentionally local-only.
+
+==========
+07.00 REPO-LOCAL EXCLUDE VS TRACKED GITIGNORE
+==========
+
+Use .git/info/exclude when:
+
+- the rule is local to one operator or workstation;
+- the file is local-only tool configuration;
+- the human does not want the ignore rule committed;
+- the file should not affect shared repo policy.
+
+Use tracked .gitignore only when:
+
+- the ignore rule is intended as shared repository policy;
+- the human explicitly wants the rule committed for all collaborators;
+- the file class is broadly non-canonical across the project, not only local to one machine.
+
+==========
+08.00 GENERATED OUTPUTS AND DEPENDENCY ARTIFACTS
+==========
+
+Generated outputs and dependency/config artifacts must not be assumed safe by default.
+
+The agent must determine whether they are:
+
+- expected runtime artifacts;
+- regenerable output;
+- canonical source;
+- accidental contamination;
+- ambiguous enough to require human review.
+
+==========
+09.00 FAILURE CONDITIONS
+==========
+
+This GRC fails if the agent:
+
+- continues after detecting unknown worktree state without classification;
+- stages or deletes ambiguous files before classification;
+- changes ignore policy without understanding whether it is local-only or shared policy;
+- treats local tool config as canonical source without evidence;
+- hides ambiguity from the human;
+- reports success while leaving unclassified dirty state.
+
+==========
+10.00 SUCCESS CONDITIONS
+==========
+
+This GRC succeeds when:
+
+- unknown worktree state triggers a hard stop;
+- the state is classified explicitly;
+- local-only configuration remains local when appropriate;
+- repo-local exclude is used for local-only ignore behavior when shared policy is not intended;
+- human approval is required when classification remains ambiguous;
+- task continuation happens only after the worktree state is known.
+
+==========
+11.00 RELATIONSHIP TO OTHER CONTROLS
+==========
+
+Related controls:
+
+GRCLake\01.CONTROLS\GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt
+- Governs sequential agent execution and commit-ready stopping.
+
+GRCLake\01.CONTROLS\GRC.SCRIPT_EXECUTION_STAGING.txt
+- Governs safe staging of long scripts before execution.
+
+GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+- Governs upload-ready context staging, not worktree ambiguity handling.
+
+==========
+12.00 CHANGELOG
+==========
+
+2026-06-30, v0.1-DRAFT_READY_FOR_TEST
+- Initial GRC draft created to enforce hard-stop behavior for unknown worktree state and local-only ignore handling.
+
+==========
+END
+==========

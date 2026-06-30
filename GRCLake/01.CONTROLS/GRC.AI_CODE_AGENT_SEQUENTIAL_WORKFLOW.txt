@@ -1,0 +1,243 @@
+==========
+GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+==========
+
+ID_UNICO..........: GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.0001
+NOMBRE............: AiCodeAgentSequentialWorkflow
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-06-30
+SCOPE.............: Cross-project control for Codex and Claude Code task execution in VS Code
+APPLIES_TO........: SkillsMachine and any project where AI code agents execute long-running development tasks
+
+==========
+00.00 PURPOSE
+==========
+
+AiCodeAgentSequentialWorkflow governs how AI code agents such as Codex and Claude Code should execute development tasks inside VS Code or similar IDE workflows.
+
+The goal is to allow AI agents to perform long development tasks while preserving human control over commit decisions, task boundaries, worktree integrity, validation, and final reporting.
+
+==========
+01.00 CORE PRINCIPLE
+==========
+
+AI code agents may develop, validate, and report long-running tasks, but the human owns commit decisions unless explicitly delegated.
+
+Operational form:
+
+IA develops -> IA validates -> IA reports -> IA stops at commit-ready gate -> human reviews -> human commits
+
+The default operating model is not:
+
+IA develops -> IA commits automatically
+
+==========
+02.00 SEQUENTIAL TASK EXECUTION
+==========
+
+Agents must execute tasks sequentially.
+
+A compliant agent must:
+
+- start one task at a time;
+- restate task ID and objective before work;
+- identify expected files to inspect or modify;
+- avoid parallel task execution;
+- avoid mixing changes from different tasks;
+- avoid opportunistic edits outside task scope;
+- finish, validate, and classify the current task before starting the next one.
+
+Valid per-task result classifications:
+
+- PASS
+- PASS_WITH_WARNINGS
+- BLOCKED
+- FAILED
+- SKIPPED_DEPENDENCY_BLOCKED
+
+==========
+03.00 HUMAN COMMIT OWNERSHIP
+==========
+
+By default, Codex and Claude Code must not commit.
+
+Agents may prepare a commit-ready state, but the human performs the commit unless the human explicitly delegates commit authority.
+
+At a commit-ready gate, the agent must report:
+
+- exact files changed;
+- exact files recommended for staging;
+- exact files not to stage;
+- validation result;
+- suggested commit message;
+- known warnings;
+- unresolved blockers;
+- whether push is recommended or not.
+
+Agents must not use:
+
+- git add .
+- git add -A
+- git commit --no-verify
+
+unless the human explicitly instructs otherwise.
+
+==========
+04.00 UNKNOWN WORKTREE STATE
+==========
+
+If an unexpected file, change, dependency, local tool config, generated artifact, or worktree state appears, the agent must stop before continuing.
+
+Unknown worktree state must be classified before the agent proceeds.
+
+The agent must not:
+
+- stage it;
+- delete it;
+- revert it;
+- ignore it;
+- continue to the next task;
+
+until the state is classified.
+
+Valid classifications include:
+
+- EXPECTED_FOR_CURRENT_TASK
+- INTENTIONAL_LOCAL_ONLY
+- GENERATED_REGENERABLE
+- CANONICAL_SOURCE
+- IGNORED_SAFE_TO_LEAVE
+- TRACKED_CHANGE_INTENDED
+- UNTRACKED_SHOULD_IGNORE
+- UNTRACKED_SHOULD_TRACK
+- SUSPICIOUS
+- BLOCKED_NEEDS_HUMAN_DECISION
+
+==========
+05.00 SCRIPT STAGING
+==========
+
+When a task requires a long executable script, the agent should follow:
+
+GRCLake\01.CONTROLS\GRC.SCRIPT_EXECUTION_STAGING.txt
+
+For SkillsMachine, long scripts should be staged in:
+
+C:\01. GitHub\Skills\SyS\Temp
+
+Temporary scripts are not canon by default.
+
+Long scripts should emit visible parseable progress:
+
+- START
+- STEP
+- HEARTBEAT when useful
+- FINAL_STATUS
+- REPORT
+
+If PowerShell enters continuation mode `>>` unexpectedly, stop with Ctrl+C and inspect whether the script file was actually created.
+
+==========
+06.00 VALIDATION CONTRACT
+==========
+
+After each task, the agent must run relevant validation.
+
+For SkillsMachine, the baseline validation is:
+
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "SyS\A_Tools\Validation\Validate-System.ps1"
+
+The agent must also run:
+
+git status --short
+
+and inspect whether only expected files changed.
+
+==========
+07.00 FINAL REPORT CONTRACT
+==========
+
+After executing a sequence of tasks, the agent must produce a final consolidated report.
+
+The report must include:
+
+- overall status;
+- task-by-task status;
+- files changed;
+- validation results;
+- blockers;
+- warnings;
+- questions for the human;
+- commit-ready recommendation;
+- exact do-not-commit files;
+- exactly one recommended next action.
+
+Valid final statuses:
+
+- ALL_PASS
+- PASS_WITH_WARNINGS
+- PARTIAL
+- BLOCKED
+- FAILED
+
+==========
+08.00 RELATIONSHIP TO OTHER CONTROLS
+==========
+
+Related controls:
+
+GRCLake\01.CONTROLS\GRC.SCRIPT_EXECUTION_STAGING.txt
+- Governs staging long scripts before execution.
+
+GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+- Governs upload-ready context packaging and SyS\Temp context bundles.
+
+Candidate future control:
+
+GRCLake\01.CONTROLS\GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt
+- Should govern unknown worktree state in more detail if promoted.
+
+==========
+09.00 FAILURE CONDITIONS
+==========
+
+This GRC fails if an AI code agent:
+
+- works tasks in parallel without instruction;
+- mixes unrelated tasks;
+- modifies files outside task scope;
+- hides validation failures;
+- continues after unknown worktree state;
+- commits without explicit human delegation;
+- stages broad file sets with git add . or git add -A;
+- omits final task status;
+- reports success while leaving unclassified dirty state.
+
+==========
+10.00 SUCCESS CONDITIONS
+==========
+
+This GRC succeeds when:
+
+- Codex or Claude Code completes tasks sequentially;
+- each task has an explicit result;
+- the worktree state is known;
+- validation is run and reported;
+- temporary files are separated from canon;
+- commit decisions remain with the human;
+- blockers and doubts are surfaced rather than hidden;
+- the final report lets the human decide the next action.
+
+==========
+11.00 CHANGELOG
+==========
+
+2026-06-30, v0.1-DRAFT_READY_FOR_TEST
+- Initial GRC draft created to capture sequential Codex / Claude Code workflow with human-owned commits.
+
+==========
+END
+==========

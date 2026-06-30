@@ -1,0 +1,158 @@
+# CONTROL.BETA_FUNCTIONALITY_GATE
+
+CONTROL_ID.......: CONTROL.BETA_FUNCTIONALITY_GATE
+DOMAIN...........: GRC / Product Readiness / Management Readiness
+STATUS...........: ACTIVE
+SCOPE............: ALL_PROJECTS
+UPDATED_LOCAL....: 2026-06-22 19:19:11 -04:00
+SOURCE_MB........: MB-NS-004B-R12_GENERALIZE_BETA_GATE_ALL_PROJECTS
+
+## 01. Purpose
+
+This control defines what counts as beta functionality for any project.
+
+It is not limited to SkillsMachine.
+
+It applies to all projects where progress may be reported to management, directors, sponsors, clients, or non-technical stakeholders.
+
+The purpose is to prevent internal governance artifacts, reports, scorecards, speeches, slide decks, planning documents, or agent experiments from being misclassified as product progress.
+
+## 02. General Management Interest Rule
+
+Management-facing progress must be tied to visible functionality.
+
+The following items are internal evidence only and do not count as beta functionality by themselves:
+
+- reports;
+- presentations;
+- speeches;
+- promises;
+- scorecards;
+- governance artifacts;
+- BATON updates;
+- RADAR outputs;
+- GRC documents;
+- AI-agent comparison logs;
+- branch hygiene;
+- backlog grooming;
+- internal architecture documents;
+- implementation plans without executable user flow.
+
+These artifacts are useful only when they support, verify, or unblock a working user-visible workflow.
+
+## 03. General Beta Functional Definition
+
+A beta is accepted only when a target user can execute a real workflow and obtain a useful output without reading the repository and without depending on the project owner to manually explain each step.
+
+BETA_FUNCTIONALITY_GATE:
+A beta candidate must satisfy all of the following:
+
+1. Clear user entrypoint:
+   The user knows where to start.
+
+2. Observable action:
+   The system performs a real operation.
+
+3. Useful output:
+   The system produces a file, screen, command result, package, dashboard, checklist, calculation, state update, or business output that the user can understand.
+
+4. Repeatability:
+   The same workflow can be repeated by another user with consistent results.
+
+5. Five-minute demo:
+   Management can see problem -> action -> output in a short live demonstration.
+
+6. No source-code or repository-reading dependency:
+   The user does not need to inspect source folders, internal governance files, logs, or implementation notes to operate the beta.
+
+7. Business relevance:
+   The output must be connected to a real user need, operational decision, business process, or management concern.
+
+## 04. Non-Beta Classification
+
+If a work item only improves internal governance, documentation, agent benchmarking, branch hygiene, planning, evidence quality, or internal architecture, classify it as:
+
+INTERNAL_ENABLEMENT
+
+not:
+
+BETA_FUNCTIONALITY
+
+unless it directly ships or unlocks a user-executable workflow.
+
+## 05. Application to SkillsMachine
+
+As of this control update, SkillsMachine has strong internal enablement but no accepted user-facing beta yet.
+
+NS-PILOT-002 / COVS is classified as:
+
+DIRECT_BETA_IMPACT....: LOW
+INDIRECT_BETA_IMPACT..: MEDIUM
+CLASSIFICATION........: INTERNAL_ENABLEMENT
+
+Reason:
+COVS validates that an AI agent can implement scoped tasks under Nightshift governance. It does not yet provide a user-facing SkillsMachine beta workflow.
+
+## 06. Application to Future Projects
+
+For every project, before presenting beta progress, answer:
+
+- What does the user click, open, run, or submit?
+- What input does the user provide?
+- What visible action happens?
+- What output does the user receive?
+- Why is that output useful?
+- Can another user repeat it?
+- Can management understand it in five minutes?
+- Is the result functionality or only internal evidence?
+
+If any answer is missing, the work item is not beta-ready.
+
+## 07. Preferred Beta Slice Standard
+
+The first credible beta slice should be narrow, visible, and executable.
+
+It should not begin with a presentation.
+
+It should begin with a user flow.
+
+For SkillsMachine, the preferred first beta slice remains a visible launcher or command workflow for:
+
+1. Continue session;
+2. Generate upload/usecase package;
+3. Close session with BATON/backlog/RADAR updates;
+4. Show current project state/readiness.
+
+For other projects, the first beta slice must be defined around that project's concrete user and business output.
+
+## 08. Acceptance Gate
+
+Before claiming beta status, the workstream must pass:
+
+BETA_GATE_PASS:
+- user entrypoint exists;
+- workflow executes;
+- output is useful;
+- output is visible;
+- workflow is repeatable;
+- management demo is possible in five minutes;
+- no dependency on repository reading or operator explanation.
+
+If this is not true, the correct status is:
+
+NOT_BETA_YET
+
+or:
+
+INTERNAL_ENABLEMENT_ONLY
+
+## 09. Governance Consequence
+
+A project may be well-governed and still not be beta-ready.
+
+A project may have many reports and still have no management-visible progress.
+
+A project may have strong AI-agent evidence and still not have a usable product.
+
+This control must be applied whenever the term beta, demo, gerencia, management-ready, directorio, MVP, pilot, or functional deliverable is used.
+
