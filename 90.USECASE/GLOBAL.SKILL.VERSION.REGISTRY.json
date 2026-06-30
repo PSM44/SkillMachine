@@ -180,6 +180,18 @@
     {
       "file": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
       "version": "v0.1-DRAFT"
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
+      "version": "v0.1-DRAFT_READY_FOR_TEST"
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
+      "version": "v0.1-DRAFT_READY_FOR_TEST"
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
+      "version": "v0.1-DRAFT_READY_FOR_TEST"
     }
   ]
 }
