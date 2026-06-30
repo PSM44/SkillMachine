@@ -57,7 +57,8 @@
             "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
             "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt"
+            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt"
           ]
         }
       ]
@@ -97,7 +98,8 @@
           "source_files": [
             "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
             "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt"
+            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt"
           ]
         }
       ]
@@ -140,7 +142,8 @@
             "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
             "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt"
+            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt"
           ]
         }
       ]
@@ -178,7 +181,8 @@
             "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
             "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt"
+            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt"
           ]
         }
       ],

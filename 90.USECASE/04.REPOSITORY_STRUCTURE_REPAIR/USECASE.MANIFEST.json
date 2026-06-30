@@ -1,7 +1,7 @@
 {
   "usecase": "04.REPOSITORY_STRUCTURE_REPAIR",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-29 12:28:45",
+  "generated_at": "2026-06-30 11:39:00",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 47961,
       "delivery_size_kb": 46.84,
-      "delivery_sha256": "5143B31130A18ADB88FAC6253DBCB9060919E9DD21E053ADD3528DEE3716D358",
+      "delivery_sha256": "4754132CBC1E332D1E3423C7045B4376744ED77C3A6A0296CEFAF8AF2873C804",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -58,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "DD07043AF1DADD5AB7B14B265B57C526AAB68881D5F4B89F67649113460DEC7B",
+      "delivery_sha256": "5DFCE92F35F6A17557F506EAC5DE6E41E222E813A49979C1750D6355620DDF09",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -84,15 +84,15 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 69427,
-      "delivery_size_kb": 67.8,
-      "delivery_sha256": "46AC25003ACEC0C123B01A3A030DFD8DCB650765DC09A63516E8A11FB16C83CD",
+      "delivery_size_bytes": 83967,
+      "delivery_size_kb": 82.0,
+      "delivery_sha256": "B77F7DD48DDA32B70352A05F50982F778A816868F82B35E6C93E07E26E494060",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
           "version": "UNKNOWN",
-          "source_sha256": "8E4BDF940457DC5415F9EB8EBCEF34302E55C6EA15BA18D55F08E750F3FF094E"
+          "source_sha256": "8902E9F62C1D44BE116761607B1F58E29698A83C339BB4473BDE2B5B956C805E"
         },
         {
           "name": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
@@ -123,6 +123,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
           "version": "v0.1-DRAFT",
           "source_sha256": "A54409F7FE12E001A566B5FD2EE8BEC43312946E639471A13C71ED9FC1294576"
+        },
+        {
+          "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+          "version": "v0.1-DRAFT",
+          "source_sha256": "766F9366ECB87473CEA6C1CBF51E54E213BAAEA5C0783FFB0B734BD93F98F44F"
         }
       ]
     }

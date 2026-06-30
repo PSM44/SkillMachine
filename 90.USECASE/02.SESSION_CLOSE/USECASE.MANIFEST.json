@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-06-29 12:28:44",
+  "generated_at": "2026-06-30 11:38:59",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 38426,
       "delivery_size_kb": 37.53,
-      "delivery_sha256": "6E948F5DE17D031F011847D85856BEB3FABCECD33D6DCC5D66D6D2E1669114C0",
+      "delivery_sha256": "918875BC920B195F286390A5FC04F20A666816A415BF973E0FF2EFEB202ACBB9",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -52,7 +52,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "84CE83DE2BDB63EFD1EFA1456E7420945DA609EFF14A4F67E04956E4A662DAEA",
+      "delivery_sha256": "1DF51F3E0AFCDEAFFA368C8B0EAA86BD62A5E84D67CEADCA579DB4719D24BF31",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -78,15 +78,15 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 46829,
-      "delivery_size_kb": 45.73,
-      "delivery_sha256": "3F7E1FC1867D31D6E0218D5A9CF8A52F2A1C45C49A2384E0B21F28CAF26CD57D",
+      "delivery_size_bytes": 61369,
+      "delivery_size_kb": 59.93,
+      "delivery_sha256": "5AB250ABB8A3F757E60F3D5468F202F46398BA025F00A6119A94F0DDB185F5B6",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
           "version": "UNKNOWN",
-          "source_sha256": "8E4BDF940457DC5415F9EB8EBCEF34302E55C6EA15BA18D55F08E750F3FF094E"
+          "source_sha256": "8902E9F62C1D44BE116761607B1F58E29698A83C339BB4473BDE2B5B956C805E"
         },
         {
           "name": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
@@ -99,6 +99,12 @@
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
           "source_sha256": "6B22C433ED71A089AECFF13805E283F3C1B438E224B640A96205CC4E96F15823"
+        },
+        {
+          "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+          "version": "v0.1-DRAFT",
+          "source_sha256": "766F9366ECB87473CEA6C1CBF51E54E213BAAEA5C0783FFB0B734BD93F98F44F"
         }
       ]
     }

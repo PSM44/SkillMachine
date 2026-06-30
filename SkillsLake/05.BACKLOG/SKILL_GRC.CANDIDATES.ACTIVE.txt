@@ -1172,3 +1172,61 @@ Cerrar MB-SM-036 con readiness final y luego avanzar a PR-readiness / demo geren
 FIN_BACKLOG_UPDATE_MB_SM_036B_SESSION_CLOSE_20260630
 ==========
 
+==========
+TD-SM-037A_SESSION_LEARNING_REVIEW_OUTPUT_GATE
+==========
+
+TYPE..............: TECHNICAL_DEBT
+STATUS............: PATCH_APPLIED_PENDING_VALIDATION
+PRIORITY..........: P0
+AREA..............: 02.SESSION_CLOSE
+TITLE.............: Mandatory Skill/GRC learning review output gate
+
+DESCRIPTION:
+SESSION_CLOSE must include an explicit Skill/GRC improvement discovery gate. At every formal close, the IA must evaluate whether the session revealed opportunities to create, improve, consolidate, deprecate, or promote Skills/GRCs. If opportunities exist, they must be registered as candidates, not applied to canon automatically. If none exist, the IA must state NONE with a brief reason.
+
+IMPACT:
+Without this gate, SkillsMachine can operate sessions but fails to learn systematically from real usage. Lessons remain in chat, BATON or generic backlog instead of becoming traceable improvement candidates.
+
+EXPECTED_OUTPUT_SECTION:
+SKILL_GRC_IMPROVEMENT_OPPORTUNITIES
+
+AFFECTED_USECASE:
+90.USECASE\02.SESSION_CLOSE
+
+SOURCE_EVENT:
+Detected during DragonflyFocus / Beta 0.1 focus recovery work, June 2026.
+
+NEXT_VALIDATION:
+Run SESSION_CLOSE package validation and confirm the prompt/readme contain MB-GRC-037A_SESSION_LEARNING_REVIEW_OUTPUT_GATE.
+
+==========
+TD-SM-USECASE-TEMP-001
+==========
+
+TYPE..............: TECHNICAL_DEBT
+STATUS............: GRC_SOURCE_CREATED_PENDING_REGISTRY_INJECTION
+PRIORITY..........: P1
+AREA..............: 90.USECASE\Temp
+TITLE.............: Upload helper for additional Skills/GRCs
+
+DESCRIPTION:
+When the IA recommends additional Skills/GRCs, it must provide exact source paths and a one-shot script that clears C:\01. GitHub\Skills\90.USECASE\Temp and consolidates the selected Skills/GRCs into an upload-ready bundle.
+
+IMPACT:
+Without this helper, the user must manually locate and upload multiple files, increasing friction, stale context, upload omissions and path mistakes.
+
+EXPECTED_BEHAVIOR:
+- Always show exact path for each recommended Skill/GRC.
+- Provide one-shot script executable from any location.
+- Clear previous 90.USECASE\Temp contents.
+- Generate upload TXT bundle and JSON manifest.
+- Treat Temp as disposable output.
+- Do not touch canon.
+
+SOURCE_GRC:
+GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
+
+NEXT_ACTION:
+Inject GRC.USECASE_TEMP_UPLOAD_STAGING into relevant governance bundle/registry if approved.
+
