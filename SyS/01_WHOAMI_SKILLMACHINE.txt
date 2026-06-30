@@ -1,4 +1,46 @@
 ==========
+LATEST_WHOAMI_UPDATE_MB_SM_040B_20260630
+==========
+
+FECHA_ACTUALIZACION.........: 2026-06-30 14:55
+PROYECTO....................: SkillsMachine
+ROOT........................: C:\01. GitHub\Skills
+ROOT_WSL....................: /mnt/c/01. GitHub/Skills
+BRANCH......................: lab/ns-pilot-002-codex-real
+HEAD_CONFIRMADO.............: c3a3d0c 20260630.1445_Add_ai_code_agent_sequential_workflow_grc
+
+ESTADO_ACTUAL...............:
+SkillsMachine opera sobre una base Beta 0.2 internal RC ya validada en HEAD c3a3d0c.
+La rama esta sincronizada con origin, Validate-System pasa, y RADAR v1.4 tiene sus seis
+ACTIVE outputs presentes. Demo preflight y demo pack quedaron listos para revision interna.
+
+QUE_SE_LOGRO................:
+- Commit 425d2fe canonized GRC.USECASE_TEMP_UPLOAD_STAGING.
+- Commit cba476f implemented RADAR v1.4 ACTIVE outputs.
+- MB-SM-039B/039C passed with demo pack ready for internal managerial review.
+- Commit 7d9aa20 added GRC.SCRIPT_EXECUTION_STAGING.
+- Commit c3a3d0c added GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.
+- Active governance now covers upload staging, script staging, sequential AI code workflow,
+  and DragonflyFocus.
+- The operating pattern remains: human owns commit decisions; agent executes, validates,
+  reports, and stops at commit-ready gate unless explicitly delegated otherwise.
+
+QUE_FALTA...................:
+- Decidir si el candidate GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP debe promoverse a canon.
+- Revisar si 90.USECASE debe regenerarse por RADAR v1.4 y nuevos GRC.
+- Endurecer SESSION_CLOSE con learning review estructurado si se aprueba.
+- Preparar PR-readiness / merge checklist de la base Beta 0.2 internal RC.
+- Preparar siguiente entregable funcional / gerencial sobre esta base.
+
+SIGUIENTE_ACCION............:
+Cerrar continuidad MB-SM-040B y decidir la siguiente minibattle entre:
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP, refresh canonico de RADAR, o hardening de SESSION_CLOSE.
+
+==========
+FIN_LATEST_WHOAMI_UPDATE_MB_SM_040B_20260630
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_SM_036B_20260630
 ==========
 

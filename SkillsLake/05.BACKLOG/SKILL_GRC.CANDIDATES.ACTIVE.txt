@@ -1230,3 +1230,76 @@ GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 NEXT_ACTION:
 Inject GRC.USECASE_TEMP_UPLOAD_STAGING into relevant governance bundle/registry if approved.
 
+==========
+BACKLOG_UPDATE_MB_SM_040A_RC_GATE_20260630
+==========
+
+FECHA........................: 2026-06-30 14:55
+FUENTE.......................: MB-SM-040B_BATON_BACKLOG_REFRESH
+HEAD_CONFIRMADO..............: c3a3d0c 20260630.1445_Add_ai_code_agent_sequential_workflow_grc
+
+P0_OPEN:
+- MB-SM-040C - Decide whether to promote GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.
+  Criterio: control source drafted, boundary with AI workflow / script staging clear, and stop behavior explicit.
+- MB-SM-040D - Refresh canonical RADAR v1.4 contract if stale against implementation.
+  Criterio: six ACTIVE outputs, heuristic FULL.HUMAN/FULL.SKILLS note, generated output boundary, and manifest/readiness semantics aligned.
+- MB-SM-040E - Harden SESSION_CLOSE learning review output contract.
+  Criterio: structured block for Skill/GRC opportunities present in canonical source, not only generic review text.
+
+P1_OPEN:
+- MB-SM-041A - Review whether 90.USECASE should regenerate after RADAR v1.4 plus new GRC canon.
+- MB-SM-042A - Prepare PR-readiness / merge checklist for Beta 0.2 internal RC base.
+- MB-SM-043A - Prepare next functional / managerial package from the Beta 0.2 base.
+
+IMPLEMENTED_THIS_SESSION:
+- MB-SM-039A0 - SyS Temp upload staging GRC canonized in commit 425d2fe.
+- MB-SM-039A1 - RADAR v1.4 ACTIVE outputs implemented in commit cba476f.
+- MB-SM-039B / MB-SM-039C - demo preflight passed and demo pack ready.
+- MB-SM-040A - RC gate passed on HEAD c3a3d0c.
+- GRC.SCRIPT_EXECUTION_STAGING added in commit 7d9aa20.
+- GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW added in commit c3a3d0c.
+
+CANDIDATE_PENDING:
+- GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+
+PROXIMO_PASO.................:
+Human review of continuity refresh diff, then choose whether MB-SM-040C, MB-SM-040D, or MB-SM-040E is the next canon minibattle.
+
+==========
+FIN_BACKLOG_UPDATE_MB_SM_040A_RC_GATE_20260630
+==========
+
+==========
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+==========
+
+TYPE..............: GRC_CANDIDATE
+STATUS............: CANDIDATE_PENDING
+PRIORITY..........: P0
+AREA..............: Cross-project worktree safety
+TITLE.............: Unknown worktree state hard stop
+
+DESCRIPTION:
+If an unexpected file, modified file, untracked file, ignored-but-visible artifact,
+local config, generated output, or dependency state appears, the agent must stop
+the current task, classify the state, and avoid continuing until that state is understood.
+
+IMPACT:
+Without this control, long-task AI execution can silently continue on ambiguous
+worktree state, contaminating validation, staging scope, and final reporting.
+
+EXPECTED_BEHAVIOR:
+- run git status --short and git status -sb before each task;
+- classify unexpected state before continuing;
+- avoid stage/delete/revert/ignore actions until classified;
+- distinguish intentional local-only state from canonical or suspicious state;
+- require explicit human decision when classification remains ambiguous.
+
+RELATIONSHIP_TO_EXISTING_CONTROLS:
+- complements GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+- complements GRC.SCRIPT_EXECUTION_STAGING
+- should remain separate from upload staging concerns
+
+NEXT_ACTION:
+Draft canonical source only if the human approves MB-SM-040C as the next minibattle.
+

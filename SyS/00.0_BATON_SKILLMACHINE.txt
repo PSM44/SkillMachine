@@ -1,4 +1,88 @@
 ==========
+LATEST_CONTINUITY_REFRESH_MB_SM_040B_20260630
+==========
+
+FECHA........................: 2026-06-30 14:55
+CIUDAD.......................: Santiago, Chile
+PROYECTO_ACTIVO..............: SkillsMachine
+REPO_ROOT....................: C:\01. GitHub\Skills
+REPO_ROOT_WSL................: /mnt/c/01. GitHub/Skills
+BRANCH.......................: lab/ns-pilot-002-codex-real
+ULTIMO_COMMIT_CONFIRMADO.....: c3a3d0c 20260630.1445_Add_ai_code_agent_sequential_workflow_grc
+SHELL_OPERATIVO..............: PowerShell VS Code / TOVS para esta secuencia
+
+ESTADO_EJECUTIVO.............:
+SkillsMachine queda sobre una base Beta 0.2 internal release candidate en HEAD c3a3d0c.
+La rama lab/ns-pilot-002-codex-real esta sincronizada con origin y conserva Validate-System OK,
+RADAR v1.4 con seis ACTIVE outputs presentes, demo preflight y demo pack listos, y continuidad
+gobernada por upload staging, script staging, workflow secuencial de agentes IA y DragonflyFocus.
+
+HECHO_CONFIRMADO.............:
+- MB-SM-039A0: SyS\Temp upload staging GRC canonized, committed and pushed.
+- Commit 425d2fe: 20260630.1312_Canonize_SyS_Temp_upload_staging_grc.
+- MB-SM-039A1: RADAR v1.4 ACTIVE outputs implemented, committed and pushed.
+- Commit cba476f: 20260630.1320_Add_RADAR_v1_4_active_outputs.
+- MB-SM-039B and MB-SM-039C: demo preflight passed and demo pack ready.
+- Demo verdict confirmed:
+  FINAL_STATUS=PASS_DEMO_PACK_READY
+  MANAGEMENT_VERDICT=BETA_0_1_DEMO_READY_INTERNAL_MANAGERIAL_REVIEW
+- MB-SM-040A: release candidate gate passed on HEAD c3a3d0c.
+- Commit 7d9aa20: 20260630.1430_Add_script_execution_staging_grc.
+- GRC.SCRIPT_EXECUTION_STAGING created, canonized and pushed.
+- Commit c3a3d0c: 20260630.1445_Add_ai_code_agent_sequential_workflow_grc.
+- GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW created, canonized and pushed.
+- Active governance now includes:
+  GRC.USECASE_TEMP_UPLOAD_STAGING
+  GRC.SCRIPT_EXECUTION_STAGING
+  GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+  GRC.DRAGONFLYFOCUS
+
+DEUDA_TECNICA_ABIERTA........:
+- TD-SM-UNKNOWN-WORKTREE-001: formalizar candidate GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.
+- TD-SM-USECASE-STALE-001: revisar si 90.USECASE debe regenerarse tras RADAR v1.4.
+- TD-SM-SESSIONCLOSE-001: robustecer learning review de cierre para candidatos Skill/GRC.
+- TD-SM-DRAGONFLY-002: evaluar DragonflyFocus en 02.SESSION_CLOSE.
+- TD-SM-LOG-001: preferir evidencia parseable KEY=VALUE / TOVS.
+
+BACKLOG_PRIORITARIO..........:
+- MB-SM-040C: decidir si GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP se promueve a canon.
+- MB-SM-040D: refrescar contrato canonico de RADAR v1.4 si aplica.
+- MB-SM-040E: endurecer SESSION_CLOSE con bloque estructurado de learning review.
+- MB-SM-041A: revisar si 90.USECASE requiere regeneracion post RADAR / nuevos GRC.
+- MB-SM-042A: preparar PR-readiness / merge checklist de la base Beta 0.2 internal RC.
+- MB-SM-043A: preparar entregable funcional / gerencial sobre la base Beta 0.2.
+
+SIGUIENTE_ACCION_RECOMENDADA.:
+Cerrar MB-SM-040B con commit supervisado y luego decidir si la siguiente minibattle
+prioriza el candidate GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP o el refresh canonico de RADAR /
+SESSION_CLOSE antes de PR-readiness.
+
+PATH_MINIBATTLES_BATTLES.....:
+MB-SM-039A0 Upload staging canon ->
+MB-SM-039A1 RADAR ACTIVE outputs ->
+MB-SM-039B/039C demo readiness ->
+MB-SM-040A RC gate ->
+MB-SM-040B continuity refresh ->
+MB-SM-040C unknown worktree hard stop candidate ->
+MB-SM-040D RADAR contract refresh ->
+MB-SM-040E SESSION_CLOSE learning review hardening.
+
+ENTREGABLE_GERENCIA..........:
+SkillsMachine Beta 0.2 internal RC base:
+- upload staging GRC canonized;
+- RADAR v1.4 ACTIVE outputs present;
+- demo preflight and demo pack ready;
+- script staging and sequential AI workflow controls canonized;
+- path abierto a hardening de unknown worktree, RADAR y SESSION_CLOSE.
+
+HUMAN.........................:
+No actualizado doctrinalmente. Los cambios son de continuidad, governance y estado operativo.
+
+==========
+FIN_LATEST_CONTINUITY_REFRESH_MB_SM_040B_20260630
+==========
+
+==========
 LATEST_SESSION_CLOSE_MB_SM_036B_20260630
 ==========
 
