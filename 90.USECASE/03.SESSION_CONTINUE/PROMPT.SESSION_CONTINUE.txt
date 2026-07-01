@@ -58,7 +58,7 @@ C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
 
 REGLAS:
 - Subir el contenido completo de la carpeta del usecase correspondiente.
-- No usar Temp\TO_UPLOAD_TO_IA.
+- No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
@@ -69,8 +69,8 @@ MB-GRC-031E_MARKDOWN_FILE_CREATION_SAFETY
 
 Cuando la sesión requiera crear o modificar archivos .md, Mermaid, fences Markdown o scripts largos:
 - aplicar 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt;
-- usar Temp/TempScript.sh como archivo local reutilizable para scripts largos;
-- copiar Temp/TempScript.sh a /tmp antes de ejecutar;
+- usar SyS/Temp/TempScript.sh como archivo local reutilizable para scripts largos;
+- copiar SyS/Temp/TempScript.sh a /tmp antes de ejecutar;
 - normalizar BOM/CRLF antes de bash;
 - no borrar TempScript.sh por defecto;
 - no entregar scripts IA con triple backtick literal;
@@ -153,7 +153,7 @@ the IA must use the safe PowerShell launcher contract instead of pasting long in
 SAFE_LAUNCHER_RULE:
 For long PowerShell execution:
 
-1. Write the child script to Temp\<MB_ID>.<timestamp>.ps1.
+1. Write the child script to SyS\Temp\<MB_ID>.<timestamp>.ps1.
 2. Run the child script with pwsh.exe -NoProfile -ExecutionPolicy Bypass -File <script_path>.
 3. The console launcher must not call exit.
 4. The launcher must print SCRIPT_EXIT and LAUNCHER_STATUS.

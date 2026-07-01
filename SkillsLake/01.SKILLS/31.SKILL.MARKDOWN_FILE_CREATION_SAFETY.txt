@@ -199,7 +199,7 @@ No escribir el fence real en el script entregado por IA.
 
 Para scripts largos en SkillMachine:
 
-C:\01. GitHub\Skills\Temp\TempScript.sh
+C:\01. GitHub\Skills\SyS\SyS\Temp\TempScript.sh
 
 08.20 Regla
 
@@ -213,15 +213,15 @@ No debe ser canon del repo.
 
 El wrapper debe:
 
-1. copiar Temp/TempScript.sh a /tmp;
+1. copiar SyS/Temp/TempScript.sh a /tmp;
 2. remover BOM si existe;
 3. convertir CRLF/CR a LF;
 4. ejecutar desde /tmp;
-5. conservar Temp/TempScript.sh para uso futuro.
+5. conservar SyS/Temp/TempScript.sh para uso futuro.
 
 08.40 Git
 
-La carpeta Temp/ debe estar ignorada en Git.
+La carpeta SyS/Temp/ debe estar ignorada en Git.
 
 ==========
 09.00_CRLF_BOM
@@ -272,7 +272,7 @@ A9. Esconder errores de formato como si fueran cambios de contenido.
 12.00_CHECKLIST_RAPIDO
 ==========
 
-[ ] ¿El script largo se pegó en Temp/TempScript.sh?
+[ ] ¿El script largo se pegó en SyS/Temp/TempScript.sh?
 [ ] ¿El wrapper copió a /tmp?
 [ ] ¿Se normalizó BOM/CRLF antes de bash?
 [ ] ¿El script entregado por IA evita triple backtick literal?
@@ -292,8 +292,8 @@ A9. Esconder errores de formato como si fueran cambios de contenido.
 - Corrige la primera estrategia: no basta con placeholder dentro del archivo final.
 - Agrega regla dura: ningún triple backtick literal debe aparecer en scripts entregados por IA.
 - Formaliza generación de fences mediante chr(96) * 3.
-- Formaliza Temp/TempScript.sh como archivo local reutilizable de operador.
-- Declara Temp/ como workspace local ignorado por Git.
+- Formaliza SyS/Temp/TempScript.sh como archivo local reutilizable de operador.
+- Declara SyS/Temp/ como workspace local ignorado por Git.
 
 ==========
 FIN_DEL_DOCUMENTO

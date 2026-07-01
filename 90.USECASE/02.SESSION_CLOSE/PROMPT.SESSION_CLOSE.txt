@@ -133,7 +133,7 @@ C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
 
 REGLAS:
 - Subir el contenido completo de la carpeta del usecase correspondiente.
-- No usar Temp\TO_UPLOAD_TO_IA.
+- No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automaticamente.

@@ -125,7 +125,7 @@ FILES_CHANGED=2
 FILES=path/a.txt|path/b.txt
 COMMIT=abc1234
 PUSH=OK
-REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
+REPORT=SyS/Temp/Handoff/MB-EXAMPLE.REPORT.txt
 NEXT_ACTION=MB-NEXT
 ********************** AI_TAIL_END ************************
 
@@ -143,7 +143,7 @@ FILES_CHANGED=3
 FILES=path/a.txt|path/b.txt|path/c.txt
 COMMIT=NONE
 PUSH=NO
-REPORT=Temp/Handoff/MB-EXAMPLE.REPORT.txt
+REPORT=SyS/Temp/Handoff/MB-EXAMPLE.REPORT.txt
 NEXT_ACTION=CLEAN_WORKTREE_BEFORE_RETRY
 ********************** AI_TAIL_END ************************
 

@@ -32,7 +32,7 @@ Canonical upload folder:
 Upload rule:
 Upload the full folder contents.
 
-Do not use Temp\TO_UPLOAD_TO_IA as the default session-continuation package. That tool is for explicit IA-requested delta files, not the canonical usecase package.
+Do not use SyS\Temp\TO_UPLOAD_TO_IA as the default session-continuation package. That tool is for explicit IA-requested delta files, not the canonical usecase package.
 
 BUILD USECASE:
 The build-usecase action is safe by default.

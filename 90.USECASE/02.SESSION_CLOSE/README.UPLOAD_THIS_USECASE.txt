@@ -30,7 +30,7 @@ Esto incluye, según corresponda:
 ==========
 
 - Esta carpeta es el paquete operativo de subida del usecase.
-- No usar Temp\TO_UPLOAD_TO_IA.
+- No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, la IA debe pedir paths exactos adicionales.
 - La IA debe distinguir estado confirmado, inferido y duda.

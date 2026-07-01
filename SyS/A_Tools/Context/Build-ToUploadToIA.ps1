@@ -1,7 +1,7 @@
 param(
     [string[]]$Include = @(),
     [string]$IncludeFile = "",
-    [string]$OutputRel = "Temp/TO_UPLOAD_TO_IA",
+    [string]$OutputRel = "SyS/Temp/TO_UPLOAD_TO_IA",
     [switch]$AllowMissing
 )
 

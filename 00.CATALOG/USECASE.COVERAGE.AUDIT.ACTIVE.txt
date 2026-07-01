@@ -113,7 +113,7 @@ CATALOG_FILE | IN_USECASE_MANIFESTS | IN_GLOBAL_REGISTRY
 - No se incorporan todos los skills a todos los bundles.
 - No se crean nuevos Skills/GRC en esta minibattle.
 - No se modifica estructura de 90.USECASE.
-- No se crea todavia Temp/TO_UPLOAD_TO_IA.
+- No se crea todavia SyS/Temp/TO_UPLOAD_TO_IA.
 - No se crea todavia 29.SKILL.CRITICAL_FEEDBACK.txt.
 
 ==========
@@ -121,7 +121,7 @@ CATALOG_FILE | IN_USECASE_MANIFESTS | IN_GLOBAL_REGISTRY
 ==========
 
 - MB-GRC-026C: build/validate/RADAR/readiness close de coverage.
-- MB-GRC-026D: diseño de context selection + Temp/TO_UPLOAD_TO_IA.
+- MB-GRC-026D: diseño de context selection + SyS/Temp/TO_UPLOAD_TO_IA.
 - MB-GRC-026E: SESSION_LEARNING_REVIEW para SESSION_CLOSE.
 - MB-GRC-026F: candidato 29.SKILL.CRITICAL_FEEDBACK.txt.
 - MB-GRC-025C-2: boundary patch entre 05.SKILL.ROUTING_POLICY y 27.SKILL.MODEL_ROUTING_POLICY.

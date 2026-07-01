@@ -1203,7 +1203,7 @@ SUMMARY...........: Added context selection / TO_UPLOAD_TO_IA temporary upload p
 ARTIFACTS.........:
 - 00.CATALOG/CONTEXT.SELECTION.TO_UPLOAD_TO_IA.ACTIVE.txt
 - SyS/A_Tools/Context/Build-ToUploadToIA.ps1
-- Temp/TO_UPLOAD_TO_IA generated package (temporary, not canon)
+- SyS/Temp/TO_UPLOAD_TO_IA generated package (temporary, not canon)
 NEXT_ACTION........: MB-GRC-026E session learning review / feedback skill decision, or close session.
 
 ----------
@@ -1218,7 +1218,7 @@ MB-GRC-026D3_CONTINUITY_REFRESH
 DATE................: 2026-06-03 16:34:26 -0400
 HEAD_REFERENCE......: 3b739c3 20260603_MB-GRC-026D2_ignore_to_upload_request_temp
 STATUS..............: CONTINUITY_REFRESH
-SUMMARY.............: Refreshed continuity after MB-GRC-026D2 ignored Temp/TO_UPLOAD_REQUEST*.txt and removed transient request residue.
+SUMMARY.............: Refreshed continuity after MB-GRC-026D2 ignored SyS/Temp/TO_UPLOAD_REQUEST*.txt and removed transient request residue.
 NEXT_ACTION.........: MB-GRC-026E_SESSION_LEARNING_REVIEW_AND_CRITICAL_FEEDBACK, unless human decides to close session first.
 
 ----------
@@ -1319,7 +1319,7 @@ DATE..............: 2026-06-04 19:35:23 -04
 STATUS............: DONE
 SUMMARY...........: Added TO_UPLOAD_TO_IA context package generator.
 TOOL..............: 90.USECASE/Prepare-ToUploadToIA.ps1
-OUTPUT............: Temp/TO_UPLOAD_TO_IA
+OUTPUT............: SyS/Temp/TO_UPLOAD_TO_IA
 RULE..............: Output is temporary, ignored, regenerable and not canon.
 NEXT_ACTION.......: Decide whether 01.NEW_PROJECT, 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR prompts should instruct IA to request this package when context is insufficient.
 
@@ -1330,7 +1330,7 @@ DATE..............: 2026-06-04 19:37:59 -04
 STATUS............: DONE
 SUMMARY...........: Fixed IncludePath parsing in TO_UPLOAD_TO_IA context package generator.
 TOOL..............: 90.USECASE/Prepare-ToUploadToIA.ps1
-OUTPUT............: Temp/TO_UPLOAD_TO_IA
+OUTPUT............: SyS/Temp/TO_UPLOAD_TO_IA
 NEXT_ACTION.......: Decide whether to patch usecase prompts to reference TO_UPLOAD_TO_IA.
 
 ==========
@@ -1338,7 +1338,7 @@ MB-GRC-026G2_FINAL_UPDATE
 ==========
 DATE..............: 2026-06-04 19:44:33 -04
 STATUS............: DONE
-SUMMARY...........: RADAR exclusion for Temp/TO_UPLOAD_TO_IA finalized with RootPath and section-aware verification.
+SUMMARY...........: RADAR exclusion for SyS/Temp/TO_UPLOAD_TO_IA finalized with RootPath and section-aware verification.
 HEAD_BASE.........: 681a719 20260604_MB-GRC-026G_to_upload_to_ia_context_package
 FILES.............:
 - SyS/A_Tools/Radar/RADAR.ps1
@@ -1352,7 +1352,7 @@ MB-GRC-026H_UPDATE
 ==========
 DATE..............: 2026-06-04 19:47:10 -04
 STATUS............: DONE
-SUMMARY...........: Patched usecase prompts/docs to request Temp/TO_UPLOAD_TO_IA package when context is insufficient.
+SUMMARY...........: Patched usecase prompts/docs to request SyS/Temp/TO_UPLOAD_TO_IA package when context is insufficient.
 RULE..............: IA should request exact missing paths and package generation; no broad repo upload by default.
 NEXT_ACTION.......: Run readiness and decide whether to close session or execute end-to-end blank-IA package test.
 
@@ -1391,7 +1391,7 @@ MB-GRC-026J_STATE_BACKLOG_CLOSE_UPDATE
 DATE..............: 2026-06-04 20:10:37 -04
 STATUS............: CLOSED
 HEAD_AT_UPDATE....: 6ea1334 20260604_MB-GRC-026_final_session_close_after_i
-SUMMARY...........: Corroborated post-MB-GRC-026I model. Each 90.USECASE/<USECASE_ID> folder is the direct IA upload package. Temp/TO_UPLOAD_TO_IA remains retired.
+SUMMARY...........: Corroborated post-MB-GRC-026I model. Each 90.USECASE/<USECASE_ID> folder is the direct IA upload package. SyS/Temp/TO_UPLOAD_TO_IA remains retired.
 TECH_DEBT.........: Manifest/package alignment, blank-IA terminology, sufficiency test, RADAR source ignore friction, line endings, package divergence risk.
 NEXT_ACTION.......: MB-GRC-026J_USECASE_FOLDER_SUFFICIENCY_TEST.
 CLOSE_ARTIFACT....: SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-GRC-026J.STATE_BACKLOG_CLOSE.20260604_201037.txt
@@ -1509,8 +1509,8 @@ DATE..............: 2026-06-08 12:46:55 -04
 STATUS............: DONE
 SUMMARY...........: Added 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt and integrated safe Markdown/Mermaid/TempScript workflow.
 KEY_DECISIONS.....:
-- Temp/ is ignored in Git as local operator workspace.
-- Temp/TempScript.sh is preserved locally and not deleted by wrappers by default.
+- SyS/Temp/ is ignored in Git as local operator workspace.
+- SyS/Temp/TempScript.sh is preserved locally and not deleted by wrappers by default.
 - Markdown-sensitive syntax must use placeholders before conversion to real fences.
 - Delivered IA scripts must not contain literal triple backtick fences; final fences must be generated programmatically.
 NEXT_ACTION.......: Validate build/readiness and then continue with blank-IA package test or apply constitution to a real project.
@@ -1521,7 +1521,7 @@ MB-GRC-031F_SESSION_CLOSE_AFTER_031E
 DATE..............: 2026-06-08 13:20:40 -04
 STATUS............: DONE
 LAST_CONFIRMED....: 1c515cf 20260608_MB-GRC-031E_safe_markdown_creation_skill
-SUMMARY...........: Markdown file creation safety skill completed; Temp/ ignored; repository recovered and clean after push.
+SUMMARY...........: Markdown file creation safety skill completed; SyS/Temp/ ignored; repository recovered and clean after push.
 NEXT_ACTION.......: MB-GRC-031G blank-IA package test, or apply constitution to HIA/Nightshift if human chooses to skip package test.
 CAUTION...........: Future usecase registry edits must be schema-aware; do not blindly inject skills into every source_files list.
 
@@ -1584,7 +1584,7 @@ MB-GRC-032C_FORMALIZE_TEMP_ONESHOT_EXECUTION_PROTOCOL
 ==========
 DATE..............: 2026-06-15 11:16:31 -04:00
 STATUS............: DONE
-SUMMARY...........: Formalized governed long one-shot workflow in existing skill and mandatory usecase content. Future long scripts must live in Temp/<MB_ID> and run via short activator.
+SUMMARY...........: Formalized governed long one-shot workflow in existing skill and mandatory usecase content. Future long scripts must live in SyS/Temp/<MB_ID> and run via short activator.
 NEXT_ACTION.......: MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD.
 
 ==========
@@ -1690,7 +1690,7 @@ STATUS:
 - Current HEAD at R9/R10A: 5d33941 20260622_MB-NS-004B-R7_compare_covs_vs_claude
 - COVS result: FUNCTIONAL_AND_OPERATIONALLY_STRONGER
 - ClaudeCode result: FUNCTIONAL_WITH_ENTRYPOINT_LIMITATION
-- PR readiness pack created in Temp/Handoff.
+- PR readiness pack created in SyS/Temp/Handoff.
 
 IMPORTANT MANAGEMENT/BETA CORRECTION:
 - Nightshift/COVS produced valid internal enablement, not a user-facing SkillsMachine beta.

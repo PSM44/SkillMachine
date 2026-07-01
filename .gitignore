@@ -37,7 +37,7 @@ SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.txt
 SyS/A_Tools/SessionClose/SESSION_CLOSE.READINESS.ACTIVE.json
 
 # Temporary IA upload packages
-Temp/TO_UPLOAD_REQUEST*.txt
+SyS/Temp/TO_UPLOAD_REQUEST*.txt
 
 # Local reusable operator workspace for long scripts; never canonical.
-Temp/
+SyS/Temp/

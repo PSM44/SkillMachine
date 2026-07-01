@@ -29,7 +29,7 @@ C:\01. GitHub\Skills\90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR
 
 REGLAS:
 - Subir el contenido completo de la carpeta del usecase correspondiente.
-- No usar Temp\TO_UPLOAD_TO_IA.
+- No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
@@ -66,9 +66,9 @@ Rules:
 - Use placeholder markers for Markdown-sensitive syntax.
 - Do not deliver IA scripts containing literal triple backtick fences.
 - Convert placeholders after file creation using character-code generation, for example chr(96) multiplied by 3.
-- Use `Temp/TempScript.sh` as reusable local paste/edit script file.
+- Use `SyS/Temp/TempScript.sh` as reusable local paste/edit script file.
 - Copy to `/tmp`, normalize BOM/CRLF, then execute.
-- Do not delete `Temp/TempScript.sh` by default.
+- Do not delete `SyS/Temp/TempScript.sh` by default.
 
 ==========
 MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE

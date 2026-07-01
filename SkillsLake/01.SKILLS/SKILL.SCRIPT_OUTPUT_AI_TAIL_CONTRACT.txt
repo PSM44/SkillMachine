@@ -19,7 +19,7 @@ Use this skill whenever writing PowerShell, Bash, Python, or other automation sc
 
 Every long or state-changing script should:
 
-1. Write detailed logs or reports to a file under Temp/Handoff or the project-specific log folder.
+1. Write detailed logs or reports to a file under SyS/Temp/Handoff or the project-specific log folder.
 2. Print only the necessary human summary to stdout.
 3. End with six blank lines.
 4. Print the AI_TAIL block.

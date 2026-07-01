@@ -49,7 +49,7 @@ El BUILD debe generar:
 - Solo preparar contexto y siguiente acción.
 
 - 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
-  - Uso: aplicar cuando el usecase cree o modifique archivos .md, Mermaid, fences Markdown o scripts largos mediante Temp/TempScript.sh. Regla dura: no entregar scripts IA con triple backtick literal; generar fences finales mediante código de carácter.
+  - Uso: aplicar cuando el usecase cree o modifique archivos .md, Mermaid, fences Markdown o scripts largos mediante SyS/Temp/TempScript.sh. Regla dura: no entregar scripts IA con triple backtick literal; generar fences finales mediante código de carácter.
 
 ==========
 MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_SKILLSET_PATCH

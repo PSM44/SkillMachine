@@ -966,7 +966,7 @@ SAFE_LAUNCHER_GATE:
 Before running a long PowerShell operation, the IA must use the safe launcher pattern:
 
 1. TEMP_SCRIPT_FILE:
-   Write long logic to Temp/<MB_ID>.<timestamp>.ps1.
+   Write long logic to SyS/Temp/<MB_ID>.<timestamp>.ps1.
 
 2. SHORT_CONSOLE_LAUNCHER:
    The interactive console only creates the .ps1 file, runs pwsh -File, captures LASTEXITCODE,

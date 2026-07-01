@@ -422,7 +422,7 @@ DECISION..........:
 
 NEXT_ACTIONS......:
 - MB-GRC-026C build/validate/RADAR/readiness close.
-- MB-GRC-026D context selection + Temp/TO_UPLOAD_TO_IA.
+- MB-GRC-026D context selection + SyS/Temp/TO_UPLOAD_TO_IA.
 - MB-GRC-026E SESSION_LEARNING_REVIEW para SESSION_CLOSE.
 - MB-GRC-026F 29.SKILL.CRITICAL_FEEDBACK.txt.
 
@@ -491,7 +491,7 @@ ESTADO............: ACTIVE_BACKLOG_UPDATE
 
 P1_OPEN:
 - MB-GRC-026F2_GENERATED_OUTPUT_POLICY_TEST: formalizar y probar politica de outputs generados, manifests e ignored outputs.
-- MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST: probar flujo real IA pide delta -> IncludeFile -> Temp/TO_UPLOAD_TO_IA -> IA confirma suficiencia.
+- MB-GRC-026F3_REAL_TO_UPLOAD_TO_IA_DELTA_TEST: probar flujo real IA pide delta -> IncludeFile -> SyS/Temp/TO_UPLOAD_TO_IA -> IA confirma suficiencia.
 - MB-GRC-026F4_FORMAL_SESSION_LEARNING_REVIEW_RUN: ejecutar primer SESSION_LEARNING_REVIEW formal durante cierre real.
 - MB-GRC-027_TRANSACTION_GUARD_NEGATIVE_TEST: probar guardas de transaccion/rollback con caso negativo.
 - MB-GRC-028_GERENCIA_DEMO: preparar demo funcional a gerencia.
@@ -527,12 +527,12 @@ MB-GRC-026G_TO_UPLOAD_TO_IA_CONTEXT_PACKAGE
 ==========
 DATE..............: 2026-06-04 19:35:23 -04
 STATUS............: DONE
-DECISION..........: Create controlled context package generator for Temp/TO_UPLOAD_TO_IA.
+DECISION..........: Create controlled context package generator for SyS/Temp/TO_UPLOAD_TO_IA.
 RATIONALE.........: IA-in-blank workflows need a repeatable way to collect selected usecase, skill, GRC and catalog files without contaminating canon.
 OUTPUTS...........:
 - 90.USECASE/Prepare-ToUploadToIA.ps1
 - 90.USECASE/CONTEXT.PACKAGE.TO_UPLOAD_TO_IA.README.txt
-- Temp/TO_UPLOAD_TO_IA generated package ignored by Git
+- SyS/Temp/TO_UPLOAD_TO_IA generated package ignored by Git
 NEXT..............: Test with SESSION_CONTINUE and then decide whether usecase prompts should explicitly mention this tool.
 
 ==========
@@ -548,8 +548,8 @@ MB-GRC-026G2_FINALIZE_RADAR_EXCLUSION_CORRECT_VERIFICATION
 ==========
 DATE..............: 2026-06-04 19:44:33 -04
 STATUS............: DONE
-DECISION..........: Finalized RADAR exclusion for Temp/TO_UPLOAD_TO_IA using RootPath and section-aware verification.
-RATIONALE.........: Temp/TO_UPLOAD_TO_IA is generated upload context, not canonical repository content. It must appear in EXCLUDED_PATHS but not in RADAR file list sections.
+DECISION..........: Finalized RADAR exclusion for SyS/Temp/TO_UPLOAD_TO_IA using RootPath and section-aware verification.
+RATIONALE.........: SyS/Temp/TO_UPLOAD_TO_IA is generated upload context, not canonical repository content. It must appear in EXCLUDED_PATHS but not in RADAR file list sections.
 LESSON............: Grepping the whole RADAR LITE file creates false negatives because excluded paths intentionally appear in the header.
 NEXT..............: MB-GRC-026H patch usecase prompts to request TO_UPLOAD_TO_IA when context is insufficient.
 
@@ -558,7 +558,7 @@ MB-GRC-026H_PATCH_USECASE_PROMPTS_CONTEXT_REQUEST
 ==========
 DATE..............: 2026-06-04 19:47:10 -04
 STATUS............: DONE
-DECISION..........: Usecase prompts/docs now instruct IA to request Temp/TO_UPLOAD_TO_IA when attached context is insufficient.
+DECISION..........: Usecase prompts/docs now instruct IA to request SyS/Temp/TO_UPLOAD_TO_IA when attached context is insufficient.
 RATIONALE.........: IA-in-blank workflows need an explicit escalation path for missing context instead of guessing or asking for broad repo uploads.
 OUTPUTS...........:
 - 90.USECASE/01.NEW_PROJECT/PROMPT.NEW_PROJECT.txt
@@ -574,7 +574,7 @@ MB-GRC-026I_END_TO_END_BLANK_IA_CONTEXT_PACKAGE_TEST
 DATE_REGISTERED...: 2026-06-04 19:49:22 -04
 STATUS............: NEXT
 TYPE..............: TEST / VALIDATION
-OBJECTIVE.........: Validate that an IA in blank state can operate with Temp/TO_UPLOAD_TO_IA package for SESSION_CONTINUE without broad repo upload.
+OBJECTIVE.........: Validate that an IA in blank state can operate with SyS/Temp/TO_UPLOAD_TO_IA package for SESSION_CONTINUE without broad repo upload.
 ACCEPTANCE........:
 - Package generated successfully.
 - IA receives package and identifies sufficiency/gaps.
@@ -587,12 +587,12 @@ MB-GRC-026I_USECASE_FOLDER_IS_UPLOAD_PACKAGE
 ==========
 DATE..............: 2026-06-04 20:01:58 -04
 STATUS............: DONE
-DECISION..........: Retire Temp/TO_UPLOAD_TO_IA model. Each 90.USECASE/<USECASE_ID> folder is the direct upload package for IA context.
+DECISION..........: Retire SyS/Temp/TO_UPLOAD_TO_IA model. Each 90.USECASE/<USECASE_ID> folder is the direct upload package for IA context.
 RATIONALE.........: Human operator wants to take the corresponding usecase folder directly. Repetition across usecases is acceptable because usecase folders are self-contained operational packages.
 REMOVED...........:
 - 90.USECASE/Prepare-ToUploadToIA.ps1
 - 90.USECASE/CONTEXT.PACKAGE.TO_UPLOAD_TO_IA.README.txt
-- Temp/TO_UPLOAD_TO_IA workflow
+- SyS/Temp/TO_UPLOAD_TO_IA workflow
 NEXT..............: Test sufficiency by uploading one complete 90.USECASE folder to IA and verifying exact missing-path behavior.
 
 ==========
@@ -797,7 +797,7 @@ DATE..............: 2026-06-08 12:46:55 -04
 STATUS............: DONE
 DECISION..........: Created dedicated Markdown file creation safety skill and integrated it into selected usecases.
 SKILL.............: SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
-GITIGNORE.........: Temp/ is ignored as local reusable operator workspace.
+GITIGNORE.........: SyS/Temp/ is ignored as local reusable operator workspace.
 RATIONALE.........: Prevent Markdown/Mermaid/fence rendering issues, shell paste failures and CRLF/BOM execution failures.
 CORRECTION........: Previous strategy was incomplete because scripts still contained literal triple backtick fences. New rule prohibits literal triple backticks in delivered IA scripts and requires character-code fence generation.
 USECASES_UPDATED..:
@@ -902,7 +902,7 @@ SUMMARY...........: Perfected existing skill with temporary executable one-shot 
 SKILL.............: SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
 USECASE_01........: 90.USECASE\01.NEW_PROJECT\00.BUNDLE.CORE.txt
 USECASE_04........: 90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\00.BUNDLE.CORE.txt
-RATIONALE.........: Long one-shot scripts are valid for fast first-pass progress but must be run from Temp/<MB_ID>, produce START/END output, and support max-three-attempt escalation to Codex/Claude Desktop.
+RATIONALE.........: Long one-shot scripts are valid for fast first-pass progress but must be run from SyS/Temp/<MB_ID>, produce START/END output, and support max-three-attempt escalation to Codex/Claude Desktop.
 NEXT_ACTION.......: Continue MB-NS-001D_CREATE_NS_PILOT_001_SCAFFOLD using the formalized Temp one-shot protocol.
 
 ==========
@@ -1052,7 +1052,7 @@ MB-NS-004B-R14C / BACKLOG UPDATE / AI_TAIL OUTPUT CONTRACT / 2026-06-22 19:43:07
 P0 / EXECUTION STANDARD:
 - Apply CONTROL.SCRIPT_OUTPUT_AI_TAIL to future MB scripts.
 - R15 launcher must include AI_TAIL.
-- Long outputs must write full logs/reports to Temp/Handoff and print compact stdout.
+- Long outputs must write full logs/reports to SyS/Temp/Handoff and print compact stdout.
 
 ACCEPTANCE:
 - Final pasted lines must be sufficient to determine success, blocker, branch, head, dirty state, files changed, commit/push status, report path, and next action.

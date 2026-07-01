@@ -276,7 +276,7 @@ governance patches, validation, commit/push flows, session close, session contin
 SAFE_LAUNCHER_RULES:
 
 1. TEMP_PS1_REQUIRED:
-   Long PowerShell logic must be written to Temp\<MB_ID>.<timestamp>.ps1 or an equivalent Temp path.
+   Long PowerShell logic must be written to SyS\Temp\<MB_ID>.<timestamp>.ps1 or an equivalent Temp path.
    The interactive console must only run a short launcher that creates and invokes that .ps1 file.
 
 2. NO_LONG_INTERACTIVE_PASTE:

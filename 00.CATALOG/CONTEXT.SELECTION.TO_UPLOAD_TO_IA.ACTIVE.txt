@@ -19,7 +19,7 @@ No crea canon.
 No decide qué Skill o GRC debe modificarse.
 No reemplaza RADAR.
 No reemplaza BUILD de usecases.
-No debe commitear Temp/TO_UPLOAD_TO_IA.
+No debe commitear SyS/Temp/TO_UPLOAD_TO_IA.
 
 DEPENDENCIAS......:
 SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
@@ -38,7 +38,7 @@ El flujo es:
 1. La IA revisa menú/resumen disponible.
 2. La IA pide Skills/GRC/Catalog/Usecase necesarios.
 3. El humano ejecuta el generador con los archivos requeridos.
-4. El generador copia archivos a Temp/TO_UPLOAD_TO_IA.
+4. El generador copia archivos a SyS/Temp/TO_UPLOAD_TO_IA.
 5. El humano sube el paquete a la IA.
 6. La IA confirma suficiencia o pide delta.
 
@@ -47,10 +47,10 @@ El flujo es:
 ==========
 
 RUTA_CANONICA_TEMPORAL:
-C:\01. GitHub\Skills\Temp\TO_UPLOAD_TO_IA
+C:\01. GitHub\Skills\SyS\SyS\Temp\TO_UPLOAD_TO_IA
 
 Regla:
-Temp/TO_UPLOAD_TO_IA no es canon y puede regenerarse.
+SyS/Temp/TO_UPLOAD_TO_IA no es canon y puede regenerarse.
 
 ==========
 03.00_BUCKETS
@@ -77,7 +77,7 @@ Archivos útiles que no caen en buckets anteriores.
 
 - Copiar, no mover.
 - No modificar archivos fuente.
-- No hacer git add de Temp/TO_UPLOAD_TO_IA.
+- No hacer git add de SyS/Temp/TO_UPLOAD_TO_IA.
 - Manifest obligatorio.
 - README de subida obligatorio.
 - Si falta contexto, regenerar con delta.

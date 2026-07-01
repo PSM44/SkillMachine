@@ -718,13 +718,13 @@ SIGUIENTE.........: MB-GRC-026C build/validate/RADAR/readiness close; luego cont
 ----------
 MB-GRC-026D_CONTEXT_SELECTION_TO_UPLOAD_TO_IA
 ----------
-SkillsMachine now has a controlled mechanism to build a temporary upload package at Temp/TO_UPLOAD_TO_IA for IA context transfer. Temp output is not canon.
+SkillsMachine now has a controlled mechanism to build a temporary upload package at SyS/Temp/TO_UPLOAD_TO_IA for IA context transfer. Temp output is not canon.
 
 ----------
 MB-GRC-026D-1_UPDATE
 ----------
 2026-06-02 14:13:01 -0400
-Context upload tool corrected: Temp/TO_UPLOAD_TO_IA is for additional IA-requested files only, not default bootstrap context.
+Context upload tool corrected: SyS/Temp/TO_UPLOAD_TO_IA is for additional IA-requested files only, not default bootstrap context.
 
 ==========
 MB-GRC-026D3_CONTINUITY_REFRESH
@@ -825,7 +825,7 @@ MB-GRC-026G_UPDATE
 ==========
 DATE..............: 2026-06-04 19:35:23 -04
 WHAT_CHANGED......: Added controlled package builder for uploading selected context to IA.
-OPERATOR_NOTE.....: Use 90.USECASE/Prepare-ToUploadToIA.ps1 to generate Temp/TO_UPLOAD_TO_IA; do not edit or commit generated package.
+OPERATOR_NOTE.....: Use 90.USECASE/Prepare-ToUploadToIA.ps1 to generate SyS/Temp/TO_UPLOAD_TO_IA; do not edit or commit generated package.
 
 ==========
 MB-GRC-026G_INCLUDEPATH_RECOVERY
@@ -838,14 +838,14 @@ OPERATOR_NOTE.....: If manifest reports missing paths, check whether the source 
 MB-GRC-026G2_FINAL_UPDATE
 ==========
 DATE..............: 2026-06-04 19:44:33 -04
-WHAT_CHANGED......: Temp/TO_UPLOAD_TO_IA is now excluded from RADAR scans while remaining visible only in EXCLUDED_PATHS.
+WHAT_CHANGED......: SyS/Temp/TO_UPLOAD_TO_IA is now excluded from RADAR scans while remaining visible only in EXCLUDED_PATHS.
 OPERATOR_NOTE.....: A path appearing in RADAR EXCLUDED_PATHS is expected and must not be classified as indexed content.
 
 ==========
 MB-GRC-026H_UPDATE
 ==========
 DATE..............: 2026-06-04 19:47:10 -04
-WHAT_CHANGED......: Usecase prompts/docs now tell IA how to request generated context package Temp/TO_UPLOAD_TO_IA.
+WHAT_CHANGED......: Usecase prompts/docs now tell IA how to request generated context package SyS/Temp/TO_UPLOAD_TO_IA.
 OPERATOR_NOTE.....: Use 90.USECASE/Prepare-ToUploadToIA.ps1 when IA needs selected missing context.
 
 ==========
@@ -860,7 +860,7 @@ NEXT_SESSION......: Test blank-IA context package workflow using MB-GRC-026I.
 MB-GRC-026I_UPDATE
 ==========
 DATE..............: 2026-06-04 20:01:58 -04
-WHAT_CHANGED......: 90.USECASE folders are now the direct IA upload packages. Temp/TO_UPLOAD_TO_IA is retired.
+WHAT_CHANGED......: 90.USECASE folders are now the direct IA upload packages. SyS/Temp/TO_UPLOAD_TO_IA is retired.
 OPERATOR_NOTE.....: For IA context, upload the relevant 90.USECASE/<USECASE_ID> folder contents.
 
 ==========
@@ -956,8 +956,8 @@ OPERATOR_NOTE.....: Future IT projects must choose DEPLOY_DONE or DELIVERABLE_DO
 MB-GRC-031E-R_UPDATE
 ==========
 DATE..............: 2026-06-08 12:46:55 -04
-WHAT_CHANGED......: Markdown file creation safety skill added; Temp/ is now local ignored workspace.
-OPERATOR_NOTE.....: For long scripts, use Temp/TempScript.sh, copy to /tmp, normalize BOM/CRLF, execute from /tmp, and preserve TempScript.sh. Scripts delivered by IA must avoid literal triple backtick fences.
+WHAT_CHANGED......: Markdown file creation safety skill added; SyS/Temp/ is now local ignored workspace.
+OPERATOR_NOTE.....: For long scripts, use SyS/Temp/TempScript.sh, copy to /tmp, normalize BOM/CRLF, execute from /tmp, and preserve TempScript.sh. Scripts delivered by IA must avoid literal triple backtick fences.
 
 ==========
 MB-GRC-031F_SESSION_CLOSE_AFTER_031E
