@@ -1474,3 +1474,22 @@ IDEAS:
 - Preserve audit-plan-apply-post-audit-refresh minibattle chain as standard.
 - Prepare a gerencia-facing demo/report once Nightshift and package drift are clean.
 ==========
+
+========== MB-SM-051B_SESSION_CLOSE_HARDENING_SOURCE_PATCH ==========
+DATE_LOCAL=2026-07-01
+STATUS=OPEN
+TYPE=SKILL_GRC_IMPROVEMENT
+SOURCE=MB-SM-051A_SESSION_CLOSE_USECASE_SOURCE_AUDIT_READONLY
+FINDING:
+02.SESSION_CLOSE package behavior did not reliably force accumulated debt, backlog, ideas/opportunities,
+saved-vs-pending state, readiness blocker reporting, and visible DragonflyFocus.
+
+ACTIONS:
+- MB-SM-051B patch source lifecycle and DragonflyFocus rules.
+- Rebuild 90.USECASE packages using BUILD.ps1.
+- Validate with a post-rebuild audit.
+- Do not manually patch generated outputs in 90.USECASE\02.SESSION_CLOSE.
+
+STATUS_AFTER_051B:
+Pending validation and commit.
+==========

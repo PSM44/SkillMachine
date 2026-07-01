@@ -1023,3 +1023,42 @@ commits, and with deterministic validation/stage/commit/push/final-clean evidenc
 ==========
 FIN_MB-GRC-034C_MINIBATTLE_SAFE_LAUNCHER_GATE
 ==========
+
+========== MB-SM-051B_SESSION_CLOSE_HARDENING_SOURCE_PATCH ==========
+DATE_LOCAL=2026-07-01
+STATUS=ACTIVE_RULE
+LAYER=PROJECT_LIFECYCLE_POLICY
+PURPOSE:
+Prevent formal session close from omitting accumulated status, saved/pending state, DragonflyFocus,
+or Skill/GRC learning review when the user explicitly asks to close the session.
+
+TRIGGER:
+The exact phrase "cierra sesión" activates formal close.
+
+MANDATORY_VISIBLE_CLOSE_OUTPUT:
+Before declaring closure or giving only commit commands, the assistant must visibly provide:
+1. DEUDA_TECNICA_ACUMULADA.
+2. BACKLOG_ACUMULADO.
+3. IDEAS_Y_OPORTUNIDADES_ACUMULADAS.
+4. QUE_HEMOS_HECHO.
+5. QUE_FALTA.
+6. EN_QUE_ESTAMOS.
+7. PATH_MINIBATTLES_BATTLES_ENTREGABLE_FUNCIONAL_A_GERENCIA.
+8. ESTADO_GUARDADO:
+   - written locally;
+   - staged;
+   - committed;
+   - pushed;
+   - readiness-clean;
+   - readiness WARN/FAIL blocker if applicable.
+9. SKILL_GRC_LEARNING_REVIEW.
+10. DRAGONFLYFOCUS_DECISION when DragonflyFocus is present in the usecase context.
+
+READINESS_RULE:
+If Test-SessionCloseReadiness.ps1 returns WARN or FAIL, the assistant must not declare clean closure.
+It must state the exact blocker and the minimum next action.
+
+GENERATED_OUTPUT_RULE:
+If the failing behavior is in a generated 90.USECASE package, do not patch the generated delivery output manually.
+Patch source Skills/GRC/registries/build inputs and then rebuild the package.
+==========

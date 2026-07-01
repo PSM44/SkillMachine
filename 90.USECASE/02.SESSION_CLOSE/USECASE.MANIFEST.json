@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-01 12:25:37",
+  "generated_at": "2026-07-01 16:15:16",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 38426,
       "delivery_size_kb": 37.53,
-      "delivery_sha256": "EF97DAD48095C66C90F196CFC61220758FA523B132B50E4D9925F219F8DDA721",
+      "delivery_sha256": "43F8E0C8E006061B2DD6799447FB074C61552712B97596B5FADFB576D665A09D",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -52,7 +52,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "4A84B1D6D5F271C6142EF7E3C576390FEDA135C00437409D7E4C0C9575E3A0F8",
+      "delivery_sha256": "18723BD7318EDECF77FCA1A1122805962E55D2F8435CF4BDB06EA9517EC7D895",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -78,9 +78,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 92451,
-      "delivery_size_kb": 90.28,
-      "delivery_sha256": "6E75831E03358496F39418098171EAF2922A67D2A0B0684E866CC62DB832C337",
+      "delivery_size_bytes": 94796,
+      "delivery_size_kb": 92.57,
+      "delivery_sha256": "907216BD388156EBEEE21DFD46C67893E0EF1812C7A78408F3FD273C8D11FA1F",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -98,13 +98,13 @@
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "0E3ED8806FE6C7870CE149FB19C1C5F6C949FA4938487D155012910FCE7C76A3"
+          "source_sha256": "12D1BC002A646A7772B3BBCA02D2C0928AE5A312B5ED587ED4F2133AD3E9449E"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
           "version": "v0.1-DRAFT",
-          "source_sha256": "5433EFDAEBCECBDA0F4F0507EEA5DEBCABAD42228B0E231DF30AF8BC03570CA1"
+          "source_sha256": "BC20D6D27B9366854B653850DB35C1DA4F13BEA14A0004AD07732FC81DFB5C47"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",

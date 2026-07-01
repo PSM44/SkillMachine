@@ -1,7 +1,7 @@
 {
   "usecase": "03.SESSION_CONTINUE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-01 12:25:37",
+  "generated_at": "2026-07-01 16:15:16",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -22,9 +22,9 @@
       "bundle_name": "CORE",
       "delivery_file": "00.BUNDLE.CORE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\00.BUNDLE.CORE.txt",
-      "delivery_size_bytes": 47961,
-      "delivery_size_kb": 46.84,
-      "delivery_sha256": "AE48B255416E16F3F19A4EAEFFAB41BE3CD141A468387CDD58753AD0BAB16772",
+      "delivery_size_bytes": 47993,
+      "delivery_size_kb": 46.87,
+      "delivery_sha256": "BD0314F190E8264929A99CB0BBD7E0BE6E88C392D02399BED2D8C162BD0BDDAC",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -48,7 +48,7 @@
           "name": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
           "version": "v0.2-DRAFT_READY_FOR_TEST",
-          "source_sha256": "CA1E375E4B8971BAD14CDB6987DB16E0133E137AFE7F2F222564F9001586560F"
+          "source_sha256": "C46DDA5341D53B3F15A8ED8509C3D93F243539D98C9D47B8225F96552B13CCDC"
         }
       ]
     },
@@ -58,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "4A84B1D6D5F271C6142EF7E3C576390FEDA135C00437409D7E4C0C9575E3A0F8",
+      "delivery_sha256": "18723BD7318EDECF77FCA1A1122805962E55D2F8435CF4BDB06EA9517EC7D895",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -84,9 +84,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 79217,
-      "delivery_size_kb": 77.36,
-      "delivery_sha256": "C26CF9B871FB09DF04BDFE21E8C36D554D7685C2E236D797595FA6ED46B6CC09",
+      "delivery_size_bytes": 81562,
+      "delivery_size_kb": 79.65,
+      "delivery_sha256": "C55D3E7F6D76A75BFAC2BF58DAEC24AFE1B59A4E0E30D1B129F07DC1E90B224B",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -104,7 +104,7 @@
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "0E3ED8806FE6C7870CE149FB19C1C5F6C949FA4938487D155012910FCE7C76A3"
+          "source_sha256": "12D1BC002A646A7772B3BBCA02D2C0928AE5A312B5ED587ED4F2133AD3E9449E"
         },
         {
           "name": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
@@ -116,7 +116,7 @@
           "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
           "version": "v0.1-DRAFT",
-          "source_sha256": "5433EFDAEBCECBDA0F4F0507EEA5DEBCABAD42228B0E231DF30AF8BC03570CA1"
+          "source_sha256": "BC20D6D27B9366854B653850DB35C1DA4F13BEA14A0004AD07732FC81DFB5C47"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",

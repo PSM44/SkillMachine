@@ -231,3 +231,31 @@ DragonflyFocus succeeds when:
 ==========
 END
 ==========
+
+========== MB-SM-051B_SESSION_CLOSE_HARDENING_SOURCE_PATCH ==========
+DATE_LOCAL=2026-07-01
+STATUS=ACTIVE_RULE
+LAYER=DRAGONFLYFOCUS
+PURPOSE:
+Make DragonflyFocus mandatory and visible in formal session close when the active usecase includes this GRC.
+
+SESSION_CLOSE_EXTENSION:
+For 02.SESSION_CLOSE or equivalent formal closure usecases, the assistant must include:
+
+DRAGONFLYFOCUS_DECISION:
+- OBJECTIVE_ACTIVE:
+- CURRENT_STEP:
+- NEW_IDEAS_CAPTURED:
+- DRIFT_RISK:
+- DECISION:
+- NEXT_ACTION:
+
+The decision must classify user side requests such as:
+- fix the usecase;
+- update Skills/GRC;
+- generate management deliverable;
+- continue another minibattle.
+
+If the worktree is dirty or readiness is WARN/FAIL, NEXT_ACTION must remain singular and focused on resolving that blocker.
+Do not proceed to new development while closure state is not saved and classified.
+==========

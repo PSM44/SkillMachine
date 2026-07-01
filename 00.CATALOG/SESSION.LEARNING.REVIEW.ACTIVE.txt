@@ -269,3 +269,15 @@ SKILL_GRC_LEARNING_REVIEW:
 - CANDIDATES_REGISTER_UPDATED: YES, via backlog/status refresh in this minibattle.
 - NEXT_GRC_OR_SKILL_ACTION: MB-SM-046D_REAUDIT_SKILL_GRC_METHOD_COVERAGE_READONLY, optional after close.
 ==========
+
+========== MB-SM-051B_SESSION_CLOSE_HARDENING_SOURCE_PATCH ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_GRC_CANDIDATES: NONE. Existing GRC.DRAGONFLYFOCUS and Project Lifecycle are the correct owners.
+- GRC_IMPROVEMENT_CANDIDATES: GRC.DRAGONFLYFOCUS requires explicit Session Close visible-decision rule.
+- SKILL_IMPROVEMENT_CANDIDATES: 22.SKILL.PROJECT_LIFECYCLE_POLICY requires mandatory accumulated-close output rule.
+- OPERATIONAL_RULES_TO_CANONIZE: Formal close must show accumulated debt/backlog/ideas/done/missing/current/path and saved-vs-pending status.
+- DO_NOT_CANONIZE: Do not patch generated 90.USECASE delivery files manually.
+- CANDIDATES_REGISTER_UPDATED: YES.
+- NEXT_GRC_OR_SKILL_ACTION: Run post-rebuild audit MB-SM-051C to confirm 02.SESSION_CLOSE coverage.
+==========
