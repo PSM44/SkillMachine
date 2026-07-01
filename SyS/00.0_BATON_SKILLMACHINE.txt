@@ -1884,3 +1884,18 @@ NEXT:
 - Choose next debt: TD-SM-LINEEND-001 or TD-SM-NIGHTSHIFT-TEMP-001.
 - Keep using Validate-System before commit; it now includes the PowerShell syntax gate.
 ==========
+
+========== MB-SM-046C_SESSION_STATE_REFRESH_AFTER_SKILL_GRC_PATCH ==========
+DATE_LOCAL=2026-07-01
+BRANCH=main
+BASE_COMMIT=40814a6 20260701.1534_Formalize_powershell_method_skills_grcs
+STATUS=POWERSHELL_METHOD_SKILL_GRC_FORMALIZED
+SUMMARY:
+- MB-SM-046A audited existing Skills/GRCs for PowerShell execution methodology coverage: 10 files checked, 0 missing, 107 gaps, validation pass.
+- MB-SM-046B patched existing Skills/GRCs instead of creating new files.
+- Formalized method now covers downloadable .ps1 artifacts, SyS\Temp execution, SyS\Temp cleanup, Write-Progress, hard-stop clean-git precheck, AI_TAIL_START/END, five blank lines before tail, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, no auto-commit/push, Validate-System, PowerShell syntax gate, allowlists and forbidden-path checks.
+- Commit pushed: 40814a6 20260701.1534_Formalize_powershell_method_skills_grcs.
+NEXT:
+- Resume line-ending session-state refresh if still needed.
+- Then proceed to Nightshift Temp reference audit as separate scope.
+==========

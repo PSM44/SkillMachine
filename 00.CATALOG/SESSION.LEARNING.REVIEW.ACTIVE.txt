@@ -229,3 +229,17 @@ DECISION:
 - TD-SM-SCRIPT-VALIDATE-002 is closed.
 - Next strategic choice is line endings versus Nightshift Temp references.
 ==========
+
+========== MB-SM-046C_SESSION_STATE_REFRESH_AFTER_SKILL_GRC_PATCH ==========
+DATE_LOCAL=2026-07-01
+LEARNINGS:
+1. The existing Skills/GRC architecture was sufficient; no new Skill/GRC was required for the PowerShell method.
+2. Patch-first is preferred over creating new Skills/GRCs when an existing owner naturally exists.
+3. The PowerShell method must be explicit in both Skill-level behavior and GRC/control-level evidence requirements.
+4. AI Tail is not only a formatting convention; it is an audit/control surface.
+5. Write-Progress is now part of the expected human-observable execution contract.
+6. Commit-ready gate must remain separate from actual commit/push.
+DECISION:
+- PowerShell methodology has been formalized in existing Skills/GRCs.
+- Continue using downloadable scripts with SyS\Temp and AI Tail standard for this repo.
+==========
