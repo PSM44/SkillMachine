@@ -1961,3 +1961,20 @@ CURRENT_WARNING_TO_RESOLVE:
 NEXT_ACTION:
 - Commit this BATON/WHOAMI continuity refresh, then regenerate RADAR and rerun Test-SessionCloseReadiness.ps1.
 ==========
+
+========== MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT ==========
+DATE_LOCAL=2026-07-01
+STATUS=CANON_CREATED_AND_USECASE_REBUILD_REQUESTED
+WHAT_CHANGED:
+- Added cross-runtime execution Skill.
+- Added cross-runtime execution GRC.
+- Canonized the A-D workflow:
+  A. AI provides executable.
+  B. Human saves/downloads to project TEMP.
+  C. Human executes exact command from VS Code/terminal from any location.
+  D. Human returns AI_TAIL and/or relevant TEMP outputs.
+RATIONALE:
+The working PowerShell method is portable, but must be expressed as runtime adapters under a generic human-controlled execution contract.
+NEXT_ACTION:
+Review diff and generated 90.USECASE outputs, then manual commit/push if accepted.
+==========

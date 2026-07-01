@@ -281,3 +281,15 @@ SKILL_GRC_LEARNING_REVIEW:
 - CANDIDATES_REGISTER_UPDATED: YES.
 - NEXT_GRC_OR_SKILL_ACTION: Run post-rebuild audit MB-SM-051C to confirm 02.SESSION_CLOSE coverage.
 ==========
+
+========== MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_SKILL_CREATED: SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
+- NEW_GRC_CREATED: GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
+- RATIONALE: PowerShell method must be expressed as a shell/runtime-agnostic human-controlled execution contract.
+- OPERATIONAL_RULE_CANONIZED: AI gives executable, human saves in project TEMP, human runs from VS Code/terminal, AI_TAIL is returned, AI proceeds from evidence.
+- ADAPTER_RULE_CANONIZED: Tools that cannot emit AI_TAIL must declare limitations and recommend wrappers/adapters.
+- DO_NOT_CANONIZE: Do not treat PowerShell-specific implementation details as sufficient for Python/Bash/Node/Power Query without adapter declaration.
+- NEXT_GRC_OR_SKILL_ACTION: Run a future compliance audit over project scripts for cross-runtime AI_TAIL conformance.
+==========

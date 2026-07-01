@@ -1,0 +1,232 @@
+# SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
+
+MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
+VERSION: v1
+STATUS: ACTIVE
+LAYER: SKILL
+OWNER_DOMAIN: SkillsMachine
+PURPOSE: Define a shell/runtime-agnostic execution method for AI-delivered executable files.
+
+==========
+00.00 PRINCIPLE
+==========
+
+This methodology is not a PowerShell-only method.
+
+It is a human-controlled local execution contract:
+
+AI prepares an executable artifact.
+Human saves it in the project TEMP path.
+Human executes it locally from VS Code or terminal.
+The executable emits AI_TAIL_START / AI_TAIL_END.
+Human returns the AI_TAIL and any relevant TEMP outputs.
+AI interprets evidence and provides the next single action.
+
+PowerShell, Python, Bash, Node, SQL wrappers, Docker wrappers, Excel helpers, and Power Query generators are runtime adapters.
+
+==========
+01.00 DEFAULT WORKFLOW
+==========
+
+A. AI provides the executable file content or downloadable executable artifact:
+   - .ps1
+   - .py
+   - .sh
+   - .js
+   - .sql runner wrapper
+   - other executable/script file
+
+B. Human saves it in the project TEMP path.
+
+C. Human executes the exact command provided by the AI.
+   The command must work from any current directory.
+
+D. Human returns:
+   - AI_TAIL_START through AI_TAIL_END; and/or
+   - specific files created in TEMP that the AI explicitly requested.
+
+==========
+02.00 TEMP PATH RULE
+==========
+
+The AI must not invent a TEMP path.
+
+The TEMP path must come from project canon:
+- BATON
+- WHOAMI
+- HUMAN
+- README
+- active usecase instructions
+- explicit user instruction
+
+If TEMP path is missing and execution requires it, ask or declare a safe project-local TEMP path before script delivery.
+
+Examples:
+- SkillsMachine: C:\01. GitHub\Skills\SyS\Temp
+- CloseReport: C:\01. GitHub\CloseReport\99.TEMP
+
+==========
+03.00 EXECUTION COMMAND RULE
+==========
+
+The AI must provide a command executable from any location.
+
+PowerShell example:
+pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\temp\script.ps1"
+
+Python example:
+python "C:\path\to\temp\script.py"
+
+Bash example:
+bash "/mnt/c/path/to/temp/script.sh"
+
+The script itself must resolve PROJECT_ROOT and TEMP_PATH explicitly.
+
+==========
+04.00 AI_TAIL RULE
+==========
+
+AI_TAIL is mandatory for every executable artifact unless the runtime cannot support stdout or file output.
+
+Minimum AI_TAIL fields:
+- AI_TAIL_SCHEMA=v1
+- MB_ID or TASK_ID
+- RUNTIME
+- ROOT
+- TEMP_PATH
+- FINAL_STATUS
+- BLOCKER
+- FILES_CREATED
+- FILES_MODIFIED
+- VALIDATION_STATUS
+- COMMIT_PUSH_PERFORMED=NO unless explicitly authorized otherwise
+- NEXT_ACTION
+
+The script must not report success unless the relevant operation actually passed.
+
+==========
+05.00 IF TOOL DOES NOT SUPPORT THE METHOD
+==========
+
+If a tool/runtime cannot produce AI_TAIL, exit code, stdout, or auditable file output, the AI must not pretend compliance.
+
+It must declare:
+- CAN_USE_METHOD_FULLY: NO
+- CAN_USE_METHOD_PARTIALLY: YES/NO
+- MISSING_CAPABILITIES
+- SAFE_ADAPTER
+- RECOMMENDATION
+
+Examples:
+Power Query M cannot emit AI_TAIL directly.
+Recommendation: generate M code with Python or PowerShell and validate outputs externally.
+
+Excel manual operations cannot guarantee exit code.
+Recommendation: use a PowerShell/Python validator around the workbook.
+
+SQL alone may not support the contract.
+Recommendation: execute SQL through Python/PowerShell wrapper that emits AI_TAIL.
+
+==========
+06.00 DELIVERY MODE
+==========
+
+Default delivery mode:
+- AI provides code or a downloadable file.
+- Human saves to TEMP.
+- Human executes locally.
+- Human returns AI_TAIL.
+
+ZIPs or multi-file bundles are allowed only when they reduce token cost or complexity and remain explicit, reviewable, and project-local.
+
+The AI must not rely on invisible tool-side execution for final delivery unless explicitly requested.
+
+==========
+07.00 GIT RULE
+==========
+
+Scripts may inspect Git status and produce commit-ready reports.
+
+Scripts must not commit or push unless the user explicitly delegates that action.
+
+Prohibited by default:
+- git add .
+- git add -A
+- automatic commit
+- automatic push
+- hiding dirty state
+- continuing after unknown dirty worktree
+
+==========
+08.00 ADAPTER MINIMUMS
+==========
+
+PowerShell:
+- Prefer pwsh when available.
+- Use PS 5.1-compatible constructs when Windows PowerShell is expected.
+- Avoid scalar .Count hazards by wrapping collections with @(...).
+- Avoid Write-Host "=" * 60 ambiguity.
+- Use GIT_PAGER=cat.
+- Emit AI_TAIL in controlled final path.
+
+Python:
+- Use pathlib.
+- Use try/except/finally or equivalent tail guarantee.
+- Print AI_TAIL before sys.exit.
+- Explicit encoding for CSV/text.
+- Do not write outside project root or TEMP unless declared.
+
+Bash:
+- Use set -Eeuo pipefail.
+- Use trap for tail.
+- Use printf.
+- Preserve exit code.
+- Use git --no-pager.
+
+Node:
+- Capture uncaughtException and unhandledRejection.
+- Emit tail before process.exit.
+
+Docker:
+- Use wrapper script to build/run/capture logs and emit AI_TAIL.
+
+Power Query / Excel / VBA:
+- Use generator/installer/validator wrapper when direct AI_TAIL is unavailable.
+
+==========
+09.00 COMPLIANCE GATE
+==========
+
+Before delivering executable code, the AI must be able to answer:
+
+EXECUTION_CONTRACT_GATE:
+- PROJECT:
+- PROJECT_ROOT:
+- TEMP_PATH:
+- SCRIPT_NAME:
+- SCRIPT_RUNTIME:
+- TARGET_SHELL:
+- MIN_VERSION:
+- CAN_RUN_FROM_ANY_LOCATION:
+- AI_TAIL_SUPPORTED:
+- EXIT_CODE_SUPPORTED:
+- FILE_OUTPUT_SUPPORTED:
+- GIT_AWARE:
+- AUTO_COMMIT_ALLOWED:
+- USER_EXECUTES_LOCALLY:
+- LIMITATION:
+- RECOMMENDATION:
+- DECISION: PROCEED / ADAPT / BLOCK
+
+If the gate cannot be completed, do not deliver executable code.
+
+==========
+10.00 FAILURE MODE
+==========
+
+If the script fails, the AI must request only:
+- AI_TAIL_START through AI_TAIL_END, if present;
+- otherwise the minimal terminal segment needed to diagnose;
+- specific TEMP outputs if relevant.
+
+Do not ask for broad logs or full repo uploads by default.

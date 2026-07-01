@@ -1493,3 +1493,16 @@ ACTIONS:
 STATUS_AFTER_051B:
 Pending validation and commit.
 ==========
+
+========== MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT ==========
+DATE_LOCAL=2026-07-01
+STATUS=CLOSED_BY_CANON_CREATION
+TYPE=SKILL_GRC_CREATION
+DECISION:
+Created A+B:
+- SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
+- GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
+FOLLOW_UP:
+- Derive to 90.USECASE via BUILD.ps1.
+- Future optional audit: cross-runtime script compliance checker.
+==========

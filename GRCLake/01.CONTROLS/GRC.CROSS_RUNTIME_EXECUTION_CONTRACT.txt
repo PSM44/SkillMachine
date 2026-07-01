@@ -1,0 +1,190 @@
+# GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
+
+MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
+VERSION: v1
+STATUS: ACTIVE
+LAYER: GRC
+CONTROL_TYPE: EXECUTION_GOVERNANCE
+PURPOSE: Enforce the human-controlled script execution method across all runtimes, not only PowerShell.
+
+==========
+00.00 CONTROL STATEMENT
+==========
+
+Any AI agent delivering an executable artifact must comply with the cross-runtime execution contract.
+
+This applies to:
+- PowerShell
+- Python
+- Bash
+- Node
+- SQL wrappers
+- Docker wrappers
+- Excel/VBA helpers
+- Power Query generators
+- any other executable/scripted runtime
+
+==========
+01.00 MANDATORY USER FLOW
+==========
+
+The canonical flow is:
+
+A. AI gives the executable file or file content.
+B. Human saves/downloads it into the project TEMP path.
+C. Human runs the exact command from VS Code/terminal from any location.
+D. Human returns AI_TAIL_START through AI_TAIL_END and/or explicit TEMP outputs requested by the AI.
+
+The AI must design scripts around this flow.
+
+==========
+02.00 EXECUTION_CONTRACT_GATE
+==========
+
+Before executable delivery, the AI must satisfy:
+
+- PROJECT
+- PROJECT_ROOT
+- TEMP_PATH
+- SCRIPT_NAME
+- SCRIPT_RUNTIME
+- TARGET_SHELL
+- MIN_VERSION
+- CAN_RUN_FROM_ANY_LOCATION
+- AI_TAIL_SUPPORTED
+- EXIT_CODE_SUPPORTED
+- FILE_OUTPUT_SUPPORTED
+- GIT_AWARE
+- AUTO_COMMIT_ALLOWED
+- USER_EXECUTES_LOCALLY
+- LIMITATION
+- RECOMMENDATION
+- DECISION
+
+Allowed decisions:
+- PROCEED: full contract can be implemented.
+- ADAPT: wrapper/adapter required.
+- BLOCK: unsafe or insufficient context.
+
+==========
+03.00 HARD FAIL CONDITIONS
+==========
+
+The response or script is non-compliant if it:
+
+- delivers executable code without AI_TAIL when the runtime supports AI_TAIL;
+- omits TEMP path;
+- cannot run from any location;
+- auto-commits or pushes without explicit authorization;
+- uses git add . or git add -A by default;
+- hides or ignores dirty worktree state;
+- reports PASS while validation failed;
+- continues after UNKNOWN_WORKTREE_STATE;
+- asks the user to upload broad logs when a narrow AI_TAIL or TEMP output is enough;
+- edits generated outputs directly when source/rebuild flow is required;
+- treats PowerShell-specific rules as sufficient for other runtimes without an adapter.
+
+==========
+04.00 TOOL CAPABILITY DECLARATION
+==========
+
+If a runtime cannot support the full method, the AI must say so.
+
+Required format:
+
+TOOL_CAPABILITY:
+- TOOL:
+- CAN_USE_METHOD_FULLY:
+- CAN_USE_METHOD_PARTIALLY:
+- MISSING:
+- SAFE_ADAPTER:
+- RECOMMENDATION:
+
+Examples:
+Power Query M:
+- CAN_USE_METHOD_FULLY: NO
+- MISSING: stdout, exit code, AI_TAIL
+- SAFE_ADAPTER: Python or PowerShell generator/validator
+- RECOMMENDATION: generate .m files via wrapper and validate externally.
+
+Python:
+- CAN_USE_METHOD_FULLY: YES
+- REQUIREMENTS: pathlib, try/except/finally, print_ai_tail, explicit exit code
+- RECOMMENDATION: proceed.
+
+==========
+05.00 AI_TAIL MINIMUM CONTRACT
+==========
+
+AI_TAIL must be machine-readable and concise.
+
+Minimum fields:
+AI_TAIL_SCHEMA=v1
+MB_ID=<id>
+RUNTIME=<runtime>
+ROOT=<project root>
+TEMP_PATH=<temp path>
+FINAL_STATUS=<PASS|FAIL|PASS_WITH_WARNINGS|COMMIT_READY>
+BLOCKER=<NONE|specific blocker>
+FILES_CREATED=<count or list>
+FILES_MODIFIED=<count or list>
+VALIDATION_STATUS=<PASS|FAIL|NOT_RUN>
+COMMIT_PUSH_PERFORMED=NO
+NEXT_ACTION=<single next action>
+
+Additional fields are allowed when useful.
+
+==========
+06.00 GENERATED OUTPUT RULE
+==========
+
+If the target artifact is generated output, the AI must not patch it manually unless explicitly instructed.
+
+Required sequence:
+- patch canonical source;
+- run generator/build;
+- validate;
+- report generated outputs in AI_TAIL or summary.
+
+==========
+07.00 TOKEN AND DELIVERY ECONOMY
+==========
+
+To reduce token use:
+- prefer one executable script over large inline patches;
+- prefer downloadable/single file when available;
+- prefer AI_TAIL over long terminal logs;
+- request only relevant TEMP files;
+- avoid ZIP unless multi-file delivery is materially simpler or cheaper.
+
+==========
+08.00 AGENT-SPECIFIC APPLICATION
+==========
+
+For Claude, Codex, ChatGPT or other agents:
+- receiving Skills/GRC context is not enough;
+- the agent must explicitly pass EXECUTION_CONTRACT_GATE;
+- the agent must choose the correct runtime adapter;
+- the agent must stop and recommend an adapter if full compliance is impossible.
+
+==========
+09.00 REVIEW GATE
+==========
+
+A project using this GRC should periodically run a compliance audit over:
+- .ps1
+- .py
+- .sh
+- .js
+- build scripts
+- validators
+- generated-helper scripts
+
+Audit checks:
+- AI_TAIL present;
+- tail emitted on failure path;
+- no hidden auto-commit;
+- root/temp explicit;
+- validation gate present when applicable;
+- dirty state hard stop when Git-aware;
+- generated output not manually patched.

@@ -1,7 +1,7 @@
 {
   "usecase": "04.REPOSITORY_STRUCTURE_REPAIR",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-01 16:15:16",
+  "generated_at": "2026-07-01 16:40:30",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 47993,
       "delivery_size_kb": 46.87,
-      "delivery_sha256": "BD0314F190E8264929A99CB0BBD7E0BE6E88C392D02399BED2D8C162BD0BDDAC",
+      "delivery_sha256": "5CC433483FCF2335A17C2DBB9BE8B19BE2DCD966C228E4F73FD56F1F72B9012E",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -58,7 +58,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\01.BUNDLE.CONTINUITY.txt",
       "delivery_size_bytes": 29656,
       "delivery_size_kb": 28.96,
-      "delivery_sha256": "18723BD7318EDECF77FCA1A1122805962E55D2F8435CF4BDB06EA9517EC7D895",
+      "delivery_sha256": "92C64C4802CC7581A3443C6A149B4BC13D0404F83768063C0B20B0AFB5F46326",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -86,7 +86,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
       "delivery_size_bytes": 91890,
       "delivery_size_kb": 89.74,
-      "delivery_sha256": "5E2B52DEF5319B2D40B13EF4204FD11963000D6E3914098B098006C045D9038E",
+      "delivery_sha256": "919AE773047022EDE8428CB295F4CAA88CD736EE81959166CC8BE6B28B154A76",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
