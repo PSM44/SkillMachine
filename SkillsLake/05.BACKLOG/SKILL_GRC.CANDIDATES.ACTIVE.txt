@@ -1506,3 +1506,42 @@ FOLLOW_UP:
 - Derive to 90.USECASE via BUILD.ps1.
 - Future optional audit: cross-runtime script compliance checker.
 ==========
+
+========== MB-SM-052C_PATCH_USECASE_REGISTRY_CROSS_RUNTIME ==========
+DATE_LOCAL=2026-07-01
+STATUS=PATCHED_PENDING_COMMIT
+TYPE=USECASE_PROPAGATION_FIX
+SOURCE=MB-SM-052B_VERIFY_USECASE_PROPAGATION_AND_REFRESH_WHOAMI
+FINDING:
+A+B were created and committed, but 90.USECASE outputs had USECASE_MATCH_COUNT=0.
+ACTION:
+Patched registry and rebuilt outputs.
+NEXT:
+Commit/push if diff accepted; then refresh WHOAMI/readiness.
+==========
+
+========== MB-SM-052D_PATCH_GLOBAL_SKILL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+STATUS=PATCHED_PENDING_COMMIT
+TYPE=GLOBAL_VERSION_REGISTRY_FIX
+SOURCE=MB-SM-052C_BUILD_PREFLIGHT
+FINDING:
+BUILD.ps1 failed preflight because SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION was not registered in GLOBAL.SKILL.VERSION.REGISTRY.json.
+ACTION:
+Patched global version registry and reran build/validation.
+NEXT:
+Commit/push if gates pass.
+==========
+
+========== MB-SM-052E_TEXT_PATCH_GLOBAL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+STATUS=PATCHED_PENDING_COMMIT
+TYPE=GLOBAL_REGISTRY_TEXT_PATCH_FIX
+SOURCE=MB-SM-052D_FAILED_BUILD
+FINDING:
+GLOBAL.SKILL.VERSION.REGISTRY.json patch reported REGISTRY_ENTRIES_ADDED=2 but diff showed no entries; build still failed.
+ACTION:
+Text-patched registry with explicit Skill/GRC entries.
+NEXT:
+Commit/push if gates pass.
+==========

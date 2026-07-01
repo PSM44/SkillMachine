@@ -293,3 +293,32 @@ SKILL_GRC_LEARNING_REVIEW:
 - DO_NOT_CANONIZE: Do not treat PowerShell-specific implementation details as sufficient for Python/Bash/Node/Power Query without adapter declaration.
 - NEXT_GRC_OR_SKILL_ACTION: Run a future compliance audit over project scripts for cross-runtime AI_TAIL conformance.
 ==========
+
+========== MB-SM-052C_PATCH_USECASE_REGISTRY_CROSS_RUNTIME ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- FINDING: New cross-runtime Skill/GRC existed in source but did not propagate to generated 90.USECASE outputs.
+- ROOT_CAUSE: USECASE.REGISTRY.json did not include the new source artifacts in usecase bundle inputs.
+- ACTION: Registry patched and BUILD.ps1 rerun.
+- RULE: Source Skill/GRC creation is not complete until generated usecase outputs contain the intended contract markers.
+- NEXT_GRC_OR_SKILL_ACTION: Verify propagation and refresh WHOAMI after commit.
+==========
+
+========== MB-SM-052D_PATCH_GLOBAL_SKILL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- FINDING: USECASE.REGISTRY propagation requires GLOBAL.SKILL.VERSION.REGISTRY registration first.
+- ROOT_CAUSE: New Skill/GRC were created and committed, but global version registry was not updated in MB-SM-052A.
+- ACTION: Patch global registry and rerun BUILD.ps1.
+- RULE: Creating a new Skill/GRC requires source file + global version registry + usecase registry/build propagation.
+- NEXT_GRC_OR_SKILL_ACTION: Add future checklist/gate for new Skill/GRC creation.
+==========
+
+========== MB-SM-052E_TEXT_PATCH_GLOBAL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- FINDING: Object-clone patch did not persist new entries in GLOBAL.SKILL.VERSION.REGISTRY.json; diff showed only newline.
+- ACTION: Apply direct text patch anchored before GRC.DRAGONFLYFOCUS and validate JSON.
+- RULE: When registry patch reports entries added, verify diff contains actual new file paths before trusting build.
+- NEXT_GRC_OR_SKILL_ACTION: Add registry patch verification to future new Skill/GRC creation workflow.
+==========

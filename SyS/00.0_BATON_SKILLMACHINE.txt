@@ -1978,3 +1978,49 @@ The working PowerShell method is portable, but must be expressed as runtime adap
 NEXT_ACTION:
 Review diff and generated 90.USECASE outputs, then manual commit/push if accepted.
 ==========
+
+========== MB-SM-052C_PATCH_USECASE_REGISTRY_CROSS_RUNTIME ==========
+DATE_LOCAL=2026-07-01
+STATUS=USECASE_REGISTRY_PATCHED_FOR_CROSS_RUNTIME_CONTRACT
+BASE_COMMIT=59778cf 20260701.1640_Create_cross_runtime_execution_contract
+REGISTRY_ADDITIONS=12
+WHAT_CHANGED:
+- Patched 90.USECASE\USECASE.REGISTRY.json to include the new cross-runtime execution Skill/GRC in generated usecase bundles.
+- Rebuilt 90.USECASE outputs using BUILD.ps1.
+REASON:
+MB-SM-052B confirmed SOURCE_MATCH_COUNT=16 but USECASE_MATCH_COUNT=0, so A+B were created in source but not propagated to generated usecase outputs.
+NEXT_ACTION:
+Review generated diff, commit/push if accepted, refresh WHOAMI, regenerate RADAR and rerun readiness.
+==========
+
+========== MB-SM-052D_PATCH_GLOBAL_SKILL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+STATUS=GLOBAL_SKILL_VERSION_REGISTRY_PATCHED
+BASE_COMMIT=59778cf 20260701.1640_Create_cross_runtime_execution_contract
+DIRTY_PRECHECK=EXPECTED_DIRTY_FROM_052C
+REGISTRY_PATH=C:\01. GitHub\Skills\90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json
+REGISTRY_ENTRIES_ADDED=2
+WHY:
+90.USECASE build preflight failed because SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION was referenced by USECASE.REGISTRY.json but missing from GLOBAL.SKILL.VERSION.REGISTRY.json.
+ACTION:
+Patched the global version registry, then reran BUILD.ps1 and Validate-System.
+NEXT_ACTION:
+If build and validation pass, commit the full 052C/052D dirty set together.
+==========
+
+========== MB-SM-052E_TEXT_PATCH_GLOBAL_VERSION_REGISTRY ==========
+DATE_LOCAL=2026-07-01
+STATUS=GLOBAL_VERSION_REGISTRY_TEXT_PATCHED
+BASE_COMMIT=59778cf 20260701.1640_Create_cross_runtime_execution_contract
+DIRTY_PRECHECK=EXPECTED_DIRTY_FROM_052C_052D
+ENTRIES_ADDED=2
+WHY:
+MB-SM-052D rewrote the global registry but did not add the intended entries. Diff showed only newline change and build still failed preflight.
+ACTION:
+Text-patched GLOBAL.SKILL.VERSION.REGISTRY.json before GRC.DRAGONFLYFOCUS anchor with:
+- SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
+- GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
+Then reran BUILD.ps1 and Validate-System.
+NEXT_ACTION:
+If build and validation pass, commit full accumulated 052C/052D/052E set.
+==========
