@@ -1186,3 +1186,19 @@ SQL, Power Query, Excel/VBA, Docker or other tools must declare limitations and 
 NEXT_ACTION:
 Commit/push this WHOAMI refresh, regenerate RADAR, then rerun Test-SessionCloseReadiness.
 ==========
+
+========== MB-SM-052H_REFRESH_BATON_AND_WHOAMI_SAME_HEAD::SyS\01_WHOAMI_SKILLMACHINE.txt ==========
+DATE_LOCAL=2026-07-01
+STATUS=BATON_AND_WHOAMI_REFRESHED_SAME_HEAD
+BASE_COMMIT=a8612e8 20260701.1708_Refresh_baton_after_cross_runtime_propagation
+WHY:
+Session close readiness requires WHOAMI and BATON to be fresh against the same HEAD. The previous alternating single-file refreshes left one artifact stale after each new commit.
+WHAT_CHANGED:
+- Cross-runtime execution contract is now canonical in source and generated usecase outputs.
+- The operational method is human-controlled, runtime-agnostic, and adapter-based.
+- BATON and WHOAMI are being updated together to close readiness cleanly.
+ACTIVE_RULE:
+For future final continuity refreshes, update BATON and WHOAMI in the same commit when readiness requires both to be fresh.
+NEXT_ACTION:
+Commit BATON and WHOAMI together, regenerate RADAR, rerun Test-SessionCloseReadiness.
+==========
