@@ -1868,3 +1868,19 @@ NEXT:
 - Keep Nightshift Temp references as separate backlog, not part of core SkillsMachine patch.
 - Fix PowerShell script syntax validation debt before more downloadable script-heavy work.
 ==========
+
+========== MB-SM-044C_SESSION_STATE_REFRESH_AFTER_POWERSHELL_GATE ==========
+DATE_LOCAL=2026-07-01
+BRANCH=main
+BASE_COMMIT=ee699c7 20260701.1458_Add_powershell_syntax_validation_gate
+STATUS=POWERSHELL_SYNTAX_GATE_ADDED_AND_PUSHED
+SUMMARY:
+- MB-SM-044A audited repository PowerShell syntax read-only: 21 files scanned, 21 pass, 0 fail, clean final.
+- MB-SM-044B added SyS\A_Tools\Validation\Test-PowerShellSyntax.ps1.
+- MB-SM-044B integrated the PowerShell syntax gate into SyS\A_Tools\Validation\Validate-System.ps1.
+- Post-commit validation passed and now reports: OK: PowerShell syntax validation passed (22 files).
+- Commit pushed: ee699c7 20260701.1458_Add_powershell_syntax_validation_gate.
+NEXT:
+- Choose next debt: TD-SM-LINEEND-001 or TD-SM-NIGHTSHIFT-TEMP-001.
+- Keep using Validate-System before commit; it now includes the PowerShell syntax gate.
+==========

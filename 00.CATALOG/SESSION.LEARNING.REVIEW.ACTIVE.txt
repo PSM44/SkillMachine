@@ -215,3 +215,17 @@ LEARNINGS:
 6. Scripts must not count Temp\ inside SyS\Temp\ as a legacy root Temp hit.
 7. User manually commits and pushes; scripts may prepare commit-ready gate but must not commit/push.
 ==========
+
+========== MB-SM-044C_SESSION_STATE_REFRESH_AFTER_POWERSHELL_GATE ==========
+DATE_LOCAL=2026-07-01
+LEARNINGS:
+1. Downloadable PowerShell script generation must be backed by repository syntax validation.
+2. Validate-System is the right enforcement point because it already runs at pre-commit.
+3. PowerShell parser-based validation detects syntax errors without executing audited scripts.
+4. SyS\Temp outputs should remain excluded from repository syntax scans.
+5. IA.History should remain excluded from tooling scans unless explicitly needed.
+6. After this gate, repeated Sort-Object/parser-error regressions should be caught before commit.
+DECISION:
+- TD-SM-SCRIPT-VALIDATE-002 is closed.
+- Next strategic choice is line endings versus Nightshift Temp references.
+==========

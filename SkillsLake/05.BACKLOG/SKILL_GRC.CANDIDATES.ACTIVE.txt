@@ -1403,3 +1403,19 @@ DECISION:
 - IA.History is human-owned AI chat history. KEEP. Do not rename/delete/migrate unless human explicitly requests.
 - old was manually deleted by human. No tracked action needed.
 ==========
+
+========== MB-SM-044C_SESSION_STATE_REFRESH_AFTER_POWERSHELL_GATE ==========
+DATE_LOCAL=2026-07-01
+CLOSED:
+- TD-SM-SCRIPT-VALIDATE-002: CLOSED. Repository now has a reusable PowerShell syntax validator and Validate-System hook.
+EVIDENCE:
+- SyS\A_Tools\Validation\Test-PowerShellSyntax.ps1 created.
+- SyS\A_Tools\Validation\Validate-System.ps1 now runs the PowerShell syntax gate.
+- Commit pushed: ee699c7 20260701.1458_Add_powershell_syntax_validation_gate.
+OPEN:
+- TD-SM-LINEEND-001: LF -> CRLF warnings remain.
+- TD-SM-NIGHTSHIFT-TEMP-001: Nightshift Temp references remain separate from core SkillsMachine standardization.
+NEXT_OPTIONS:
+- MB-SM-045A_LINE_ENDING_AUDIT_READONLY
+- MB-SM-046A_NIGHTSHIFT_TEMP_REFERENCE_AUDIT_READONLY
+==========
