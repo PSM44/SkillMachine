@@ -1202,3 +1202,36 @@ For future final continuity refreshes, update BATON and WHOAMI in the same commi
 NEXT_ACTION:
 Commit BATON and WHOAMI together, regenerate RADAR, rerun Test-SessionCloseReadiness.
 ==========
+
+========== MB-SM-052I_FORMAL_SESSION_CLOSE_STATUS_BATON_BACKLOG::SyS\01_WHOAMI_SKILLMACHINE.txt ==========
+DATE_LOCAL=2026-07-01 17:15
+STATUS=FORMAL_SESSION_CLOSE_READY
+BASE_COMMIT=a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime
+HUMAN_SUMMARY:
+SkillsMachine now has a canonical cross-runtime execution method:
+- AI provides executable artifact.
+- Human saves/downloads it into project TEMP.
+- Human executes exact command locally.
+- Human returns AI_TAIL and requested TEMP outputs.
+WHAT_IS_DONE:
+- SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION created.
+- GRC.CROSS_RUNTIME_EXECUTION_CONTRACT created.
+- Both artifacts propagated to generated 90.USECASE outputs.
+- Session close readiness reached OK after BATON+WHOAMI same-head refresh.
+WHAT_IS_NEXT:
+- Use the contract in CloseReport.
+- Add checker/templates/gate improvements as backlog, not as blockers.
+CURRENT_HEAD_BEFORE_COMMIT:
+a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime
+==========
+
+========== MB-SM-052J_ENRICH_SKILL_GRC_LEARNING_CANDIDATES::SyS\01_WHOAMI_SKILLMACHINE.txt ==========
+DATE_LOCAL=2026-07-01 17:20
+STATUS=NEXT_SKILL_GRC_CANDIDATES_VISIBLE
+BASE_COMMIT=a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime
+HUMAN_VISIBLE_NOTE:
+Before closing, explicit Skill/GRC improvement candidates were captured for future development.
+The next recommended SkillsMachine governance task is MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY.
+CURRENT_FOCUS:
+Close this session cleanly, then move next productive work to CloseReport or a future SkillsMachine governance session.
+==========

@@ -1545,3 +1545,63 @@ Text-patched registry with explicit Skill/GRC entries.
 NEXT:
 Commit/push if gates pass.
 ==========
+
+========== MB-SM-052I_FORMAL_SESSION_CLOSE_STATUS_BATON_BACKLOG::SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt ==========
+DATE_LOCAL=2026-07-01 17:15
+STATUS=ACTIVE_BACKLOG_REFRESH
+SESSION_CONTEXT:
+Formal close after cross-runtime execution contract creation and usecase propagation.
+CLOSED_ITEMS:
+- Cross-runtime human-controlled execution Skill created and propagated.
+- Cross-runtime execution GRC created and propagated.
+- GLOBAL.SKILL.VERSION.REGISTRY and USECASE.REGISTRY propagation gap resolved.
+- BATON/WHOAMI same-HEAD readiness semantics resolved operationally.
+OPEN_BACKLOG:
+1. MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY
+   PURPOSE: audit and formalize new Skill/GRC creation checklist.
+   WHY: creation requires source + global registry + usecase registry + build propagation + readiness.
+2. MB-SM-053B_SCRIPT_COMPLIANCE_CHECKER_READONLY
+   PURPOSE: audit scripts for AI_TAIL, root/temp, failure tail, no git add dot, no auto-commit.
+   WHY: prevent future Claude/Codex/ChatGPT script drift.
+3. MB-SM-053C_CROSS_RUNTIME_TEMPLATES
+   PURPOSE: create PowerShell, Python, Bash and Node AI_TAIL templates.
+   WHY: reduce per-session script generation risk and token cost.
+4. MB-CR-NEXT_CLOSE_REPORT_EXECUTION_UNDER_NEW_CONTRACT
+   PURPOSE: apply the newly canonized method to CloseReport.
+   WHY: deliver manager-facing functional beta flow.
+WATCHLIST:
+- LF/CRLF warnings are recurring but non-blocking; evaluate .gitattributes normalization later.
+==========
+
+========== MB-SM-052J_ENRICH_SKILL_GRC_LEARNING_CANDIDATES::SkillsLake\05.BACKLOG\SKILL_GRC.CANDIDATES.ACTIVE.txt ==========
+DATE_LOCAL=2026-07-01 17:20
+STATUS=NEXT_INSTANCE_CANDIDATES_REGISTERED
+SOURCE=USER_EXPLICIT_REQUEST_FOR_SKILL_GRC_SUGGESTIONS
+CANDIDATE_01:
+ID=MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY
+TYPE=NEW_GRC_OR_SKILL_GATE
+PRIORITY=P1
+OUTPUT=Recommendation/patch plan for a formal new Skill/GRC creation gate.
+CANDIDATE_02:
+ID=MB-SM-053B_SCRIPT_COMPLIANCE_CHECKER_READONLY
+TYPE=TOOLING_CHECKER
+PRIORITY=P1
+OUTPUT=Read-only checker design for AI_TAIL and unsafe Git/script patterns.
+CANDIDATE_03:
+ID=MB-SM-053C_CROSS_RUNTIME_TEMPLATES
+TYPE=SKILL_TEMPLATE_SET
+PRIORITY=P2
+OUTPUT=PowerShell/Python/Bash/Node AI_TAIL templates.
+CANDIDATE_04:
+ID=MB-SM-053D_IMPROVE_CROSS_RUNTIME_EXECUTION_CONTRACT
+TYPE=GRC_IMPROVEMENT
+PRIORITY=P2
+OUTPUT=Patch proposal for adapter limitations and wrapper patterns.
+CANDIDATE_05:
+ID=MB-SM-053E_REGISTRY_PATCH_VERIFICATION_RULE
+TYPE=SKILL_GRC_IMPROVEMENT
+PRIORITY=P2
+OUTPUT=Patch proposal requiring diff evidence after registry mutation.
+NEXT_RECOMMENDED:
+MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY
+==========

@@ -2060,3 +2060,45 @@ a8612e8 20260701.1708_Refresh_baton_after_cross_runtime_propagation
 NEXT_ACTION:
 Commit BATON and WHOAMI together, regenerate RADAR, rerun Test-SessionCloseReadiness.
 ==========
+
+========== MB-SM-052I_FORMAL_SESSION_CLOSE_STATUS_BATON_BACKLOG::SyS\00.0_BATON_SKILLMACHINE.txt ==========
+DATE_LOCAL=2026-07-01 17:15
+STATUS=FORMAL_SESSION_CLOSE_READY
+BASE_COMMIT=a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime
+SESSION_RESULT:
+- Cross-runtime human-controlled execution contract was created, registered and propagated to 90.USECASE.
+- Session close readiness was confirmed OK after refreshing BATON and WHOAMI in the same HEAD.
+- Git was clean and origin/main was aligned.
+TECHNICAL_DEBT_ACCUMULATED:
+- CLOSED: PowerShell-only execution method replaced by runtime-agnostic execution contract.
+- CLOSED: new Skill/GRC propagation to 90.USECASE fixed through USECASE.REGISTRY and GLOBAL.SKILL.VERSION.REGISTRY.
+- CLOSED: readiness ping-pong fixed by BATON+WHOAMI same-HEAD refresh.
+- WATCHLIST: LF/CRLF warnings remain non-blocking.
+- BACKLOG: script compliance checker for AI_TAIL and unsafe Git patterns.
+- BACKLOG: new Skill/GRC creation gate.
+- BACKLOG: cross-runtime AI_TAIL templates.
+BACKLOG_ACCUMULATED:
+- MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY.
+- MB-SM-053B_SCRIPT_COMPLIANCE_CHECKER_READONLY.
+- MB-SM-053C_CROSS_RUNTIME_TEMPLATES.
+- MB-CR-NEXT_CLOSE_REPORT_EXECUTION_UNDER_NEW_CONTRACT.
+CURRENT_STATE:
+- HEAD before this update: a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime.
+- Validate-System passed in the previous readiness sequence.
+- Readiness was OK before this formal close update.
+NEXT_ACTION:
+Commit/push BATON, WHOAMI, backlog and learning review together; regenerate RADAR; rerun readiness.
+==========
+
+========== MB-SM-052J_ENRICH_SKILL_GRC_LEARNING_CANDIDATES::SyS\00.0_BATON_SKILLMACHINE.txt ==========
+DATE_LOCAL=2026-07-01 17:20
+STATUS=SKILL_GRC_CANDIDATES_CAPTURED_FOR_NEXT_INSTANCE
+BASE_COMMIT=a518927 20260701.1712_Refresh_baton_whoami_same_head_after_cross_runtime
+SUMMARY:
+Human requested explicit recommendations to update, improve or create Skills/GRCs before closing.
+Registered next-instance candidates in SESSION.LEARNING.REVIEW.ACTIVE and SKILL_GRC.CANDIDATES.ACTIVE.
+NEXT_INSTANCE_RECOMMENDED:
+MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY
+DO_NOT_EXECUTE_NOW:
+Do not start MB-SM-053A in this closing session. Finish closure first.
+==========

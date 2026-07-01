@@ -322,3 +322,57 @@ SKILL_GRC_LEARNING_REVIEW:
 - RULE: When registry patch reports entries added, verify diff contains actual new file paths before trusting build.
 - NEXT_GRC_OR_SKILL_ACTION: Add registry patch verification to future new Skill/GRC creation workflow.
 ==========
+
+========== MB-SM-052I_FORMAL_SESSION_CLOSE_STATUS_BATON_BACKLOG::00.CATALOG\SESSION.LEARNING.REVIEW.ACTIVE.txt ==========
+DATE_LOCAL=2026-07-01 17:15
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_GRC_CANDIDATES: NONE. GRC.CROSS_RUNTIME_EXECUTION_CONTRACT was already created and propagated in this session.
+- GRC_IMPROVEMENT_CANDIDATES: Consider enhancing new Skill/GRC creation workflow to require source + GLOBAL.SKILL.VERSION.REGISTRY + USECASE.REGISTRY + BUILD + generated-output match verification.
+- SKILL_IMPROVEMENT_CANDIDATES: Consider adding runtime templates for PowerShell, Python, Bash and Node under a formal templates location.
+- OPERATIONAL_RULES_TO_CANONIZE: Future close/minibattle continuity commits should update BATON and WHOAMI together when readiness checks both against HEAD.
+- DO_NOT_CANONIZE: Do not turn every one-off script into canon; keep SyS\Temp scripts operational unless promoted explicitly.
+- CANDIDATES_REGISTER_UPDATED: YES.
+- NEXT_GRC_OR_SKILL_ACTION: Run MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY.
+==========
+
+========== MB-SM-052J_ENRICH_SKILL_GRC_LEARNING_CANDIDATES::00.CATALOG\SESSION.LEARNING.REVIEW.ACTIVE.txt ==========
+DATE_LOCAL=2026-07-01 17:20
+STATUS=LEARNING_CANDIDATES_ENRICHED_FOR_NEXT_INSTANCE
+CONTEXT:
+The human explicitly requested visible recommendations to update, improve, or create Skills/GRCs and to save them for a future instance.
+NEW_GRC_CANDIDATES:
+1. GRC.NEW_SKILL_GRC_CREATION_GATE
+   PURPOSE: Enforce that any new Skill/GRC creation includes source file, GLOBAL.SKILL.VERSION.REGISTRY.json, USECASE.REGISTRY.json, BUILD.ps1 run, generated-output match verification, Validate-System, RADAR, BATON+WHOAMI same-head refresh and readiness.
+   REASON: MB-SM-052B/052C/052D/052E showed that creating source files alone is insufficient.
+2. GRC.AI_TAIL_SCRIPT_COMPLIANCE_GATE
+   PURPOSE: Read-only gate to detect scripts without AI_TAIL, without failure-tail, with git add dot, auto-commit, auto-push, ambiguous TEMP, or no dirty-set gate.
+   REASON: Prevent runtime/tool drift across ChatGPT, Codex and Claude.
+GRC_IMPROVEMENT_CANDIDATES:
+1. GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
+   IMPROVEMENT: Add mandatory evidence fields for adapter limitation declarations and examples for SQL, Power Query, Excel/VBA and Docker wrapper patterns.
+2. GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
+   IMPROVEMENT: Add explicit classification flow for generated 90.USECASE outputs vs source registries when build dirties generated files.
+3. GRC.DRAGONFLYFOCUS
+   IMPROVEMENT: Add session-close exception language allowing multiple closure sections while keeping one active NEXT_ACTION.
+SKILL_IMPROVEMENT_CANDIDATES:
+1. SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
+   IMPROVEMENT: Add canonical templates per runtime and explicit command examples for pwsh, python, bash and node.
+2. SKILL.PROJECT_LIFECYCLE_POLICY
+   IMPROVEMENT: Clarify that final continuity refresh should update BATON and WHOAMI in one commit when readiness checks both against HEAD.
+3. SKILL.RADAR
+   IMPROVEMENT: Add a note that RADAR freshness can be satisfied after final commit even when BATON/WHOAMI are committed together.
+4. SKILL.MANIFEST_PATH_SEMANTICS
+   IMPROVEMENT: Add a warning against object-clone registry patching without diff-path verification.
+OPERATIONAL_RULES_TO_CANONIZE:
+- Source-created is not done until generated usecase outputs contain the intended markers.
+- Registry patch success requires diff evidence of actual path additions.
+- BATON and WHOAMI must be refreshed together for final readiness when both are required fresh against HEAD.
+- Runtime adapters are allowed, but they must declare AI_TAIL support or wrapper limitation explicitly.
+DO_NOT_CANONIZE:
+- Do not canonize every temporary SyS\Temp script.
+- Do not canonize session-specific timestamps as doctrine.
+- Do not overfit SkillsMachine governance work into CloseReport delivery scope.
+CANDIDATES_REGISTER_UPDATED: YES
+NEXT_GRC_OR_SKILL_ACTION:
+Run MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY in the next SkillsMachine governance session.
+==========
