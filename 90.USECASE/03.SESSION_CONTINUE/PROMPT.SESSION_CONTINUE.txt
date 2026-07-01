@@ -178,3 +178,63 @@ The terminal remains open, the worktree is clean, and the user can copy a self-c
 ==========
 FIN_MB-GRC-034D_SAFE_LAUNCHER_REMINDER_FOR_USECASE_EXECUTION
 ==========
+
+==========
+MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT
+==========
+
+STATUS............: ACTIVE
+LAYER.............: USECASE_STARTUP_CONTRACT
+APPLIES_TO........: 03.SESSION_CONTINUE and all projects using it as transversal continuity standard
+
+RULE:
+03.SESSION_CONTINUE is a transversal usecase package. It is not sufficient by itself to start project-specific work.
+
+MINIMUM_PROJECT_CONTEXT:
+After uploading 03.SESSION_CONTINUE, the human must also provide a project BATON, WHOAMI, or equivalent file that contains at least:
+- PROJECT_ROOT
+- TEMP_PATH
+
+If PROJECT_ROOT is present but TEMP_PATH is missing, the assistant must not invent it. It must state TEMP_PATH_NOT_FOUND and suggest creating a Temp folder for the project.
+
+If both PROJECT_ROOT and TEMP_PATH are present, the assistant must immediately provide a safe launcher/child-script that:
+- clears TEMP_PATH before generating new upload context;
+- consolidates all relevant project files into up to 10 IA-readable files, generating fewer when sufficient;
+- may include BATON, WHOAMI, HUMAN files referenced by BATON, RADAR_LITE/RADAR_INDEX, backlog, registries, manifests, Skills, GRC, git evidence, and other relevant project files;
+- must not run build by default;
+- must not run RADAR_FULL by default;
+- may regenerate RADAR_LITE/RADAR_INDEX only if absent or stale and if this is safe/read-only for canon;
+- must not execute Codex, Claude, or other agents;
+- must not generate Codex/Claude prompts until explicitly authorized by the human;
+- must not commit or push.
+
+TERMINAL_OUTPUT_RULE:
+Terminal output must be human-identifiable and compact.
+Before the final AI_TAIL_START block, print five blank lines.
+The final block must be parseable and include:
+- AI_TAIL_SCHEMA
+- MB_ID
+- FINAL_STATUS
+- PROJECT_ROOT
+- TEMP_PATH
+- OUTPUT_COUNT
+- CANON_MODIFIED
+- COMMIT_PUSH_PERFORMED
+- NEXT_ACTION
+
+DRAGONFLYFOCUS_RULE:
+DragonflyFocus must be shown in the first operational response of SESSION_CONTINUE and in the final SESSION_CLOSE response.
+For intermediate responses, DragonflyFocus may be applied internally unless there is drift, mission change, or a decision requiring explicit visibility.
+
+BACKLOG_AND_LEARNING_RULE:
+Any missed requirement, technical debt, unresolved question, useful idea, or candidate improvement discovered during SESSION_CONTINUE must be registered for later human decision.
+The assistant must not execute backlog items unless the human explicitly approves the minibattle.
+
+USECASE_PACKAGE_SIZE_RULE:
+90.USECASE packages are upload packages. They must remain compact and should not exceed 8 functional files unless explicitly approved.
+Generated/copied usecase outputs must be regenerated from their source/build mechanism when possible, not manually patched as canon.
+
+==========
+FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT
+==========
+

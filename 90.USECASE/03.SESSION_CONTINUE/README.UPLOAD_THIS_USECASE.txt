@@ -117,3 +117,19 @@ what context is missing, and the next minimal reversible action.
 ==========
 FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
 ==========
+
+==========
+MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
+==========
+
+03.SESSION_CONTINUE is transversal.
+After uploading this usecase package, the human must also provide the project BATON, WHOAMI, or equivalent continuity file containing PROJECT_ROOT and TEMP_PATH.
+
+If TEMP_PATH is missing, the assistant must stop and ask for it or suggest creating a project Temp folder.
+
+The assistant must then provide an immediate safe script to consolidate relevant project context into up to 10 IA-readable files inside TEMP_PATH.
+
+==========
+FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
+==========
+

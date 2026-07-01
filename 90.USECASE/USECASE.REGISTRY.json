@@ -13,7 +13,7 @@
     "fail_on_missing_file": true,
     "fail_on_duplicate_file": true,
     "generate_bundles": true,
-    "max_delivery_files_per_usecase": 5,
+    "max_delivery_files_per_usecase": 8,
     "max_bundle_size_kb": 1024
   },
   "usecases": [

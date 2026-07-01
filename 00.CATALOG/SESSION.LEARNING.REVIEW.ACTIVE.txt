@@ -188,3 +188,15 @@ sin crear canon automáticamente y sin convertir cada incidente en microSkill.
 ==========
 FIN_MB-GRC-033D_FOCUS_DRIFT_LEARNING_SIGNAL
 ==========
+
+----------
+SESSION_LEARNING_MB_SM_043C
+----------
+
+FECHA........................: 2026-07-01
+ORIGEN.......................: SESSION_CONTINUE startup correction
+LEARNING_TYPE................: OPERATIONAL_FAILURE_REVIEW
+SUMMARY......................: SESSION_CONTINUE startup must be driven by usecase package plus project BATON/WHOAMI/equivalent containing PROJECT_ROOT and TEMP_PATH. The assistant must generate an immediate compact context-pack script, clear TEMP_PATH, consolidate relevant files into up to 10 IA-readable files, emit compact AI_TAIL output, and not proceed to agents without human authorization.
+STATUS.......................: CAPTURED_PENDING_HUMAN_PRIORITIZATION
+
+

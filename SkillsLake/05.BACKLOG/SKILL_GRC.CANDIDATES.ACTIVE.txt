@@ -1359,3 +1359,34 @@ Commit/push continuity refresh final, then run RADAR and Test-SessionCloseReadin
 FIN_BACKLOG_UPDATE_MB_SM_040F_FINAL_CONTINUITY_20260630
 ==========
 
+----------
+MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_FIX
+----------
+
+CANDIDATE_ID.................: MB-SM-043C
+FECHA........................: 2026-07-01
+ORIGEN.......................: SESSION_CONTINUE startup failure review
+IDEA.........................: Fix transversal SESSION_CONTINUE startup contract after failures in initial context sync.
+DOMINIO_AFECTADO.............: SESSION_MANAGEMENT | USECASE_PACKAGING | AI_CONTEXT_SYNC
+ARTEFACTO_RECTOR_AFECTADO....: 90.USECASE\03.SESSION_CONTINUE
+TIPO_DE_CAMBIO...............: USECASE_PATCH_AND_BACKLOG_CAPTURE
+PRIORIDAD....................: P0
+DECISION.....................: APPROVED_BY_HUMAN
+ESTADO.......................: IN_PROGRESS_PATCHED_PENDING_VALIDATION
+MOTIVO.......................: The assistant failed to deliver immediate compact context sync correctly, misphrased the max-file rule, produced verbose console output, omitted required state/backlog/Dragonfly context, and did not treat BATON/WHOAMI TEMP_PATH as the true project-specific trigger.
+PROXIMO_PASO.................: Build if required, validate, inspect diff, stop at commit-ready gate.
+APROBACION_HUMANA............: SI, Pablo approved Option C on 2026-07-01.
+
+PUNTOS_INCUMPLIDOS_A_CONSERVAR:
+- TD-SM-SC-START-001: 03.SESSION_CONTINUE alone is not enough; project BATON/WHOAMI/equivalent with PROJECT_ROOT and TEMP_PATH is required.
+- TD-SM-SC-START-002: Say "consolidate relevant files into up to 10 IA-readable files", not "upload max 10 files".
+- TD-SM-SC-START-003: Long scripts must use launcher/child-script, not interactive paste.
+- TD-SM-SC-START-004: Terminal output must be compact and human-identifiable; five blank lines before AI_TAIL_START.
+- TD-SM-SC-START-005: First continue response must include done/current/missing/Dragonfly/debt/backlog.
+- TD-SM-SC-START-006: Context sync must include all relevant project files, not only Skills/GRC.
+- TD-SM-SC-START-007: Git capture must use explicit calls; prior wrapper produced git usage/help.
+- BL-SM-SC-START-001: Store missed points, technical doubts, and ideas; human decides when to resolve them.
+- BL-SM-SC-START-002: Codex/Claude blocked until human authorization after sync.
+- BL-SM-SC-START-003: 90.USECASE packages should remain compact, target maximum 8 functional files.
+
+
