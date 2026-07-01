@@ -2024,3 +2024,24 @@ Then reran BUILD.ps1 and Validate-System.
 NEXT_ACTION:
 If build and validation pass, commit full accumulated 052C/052D/052E set.
 ==========
+
+========== MB-SM-052G_REFRESH_BATON_AFTER_WHOAMI_CROSS_RUNTIME_PROPAGATION ==========
+DATE_LOCAL=2026-07-01
+STATUS=UPDATED_AFTER_WHOAMI_CROSS_RUNTIME_PROPAGATION
+BASE_COMMIT=f8737a1 20260701.1705_Refresh_whoami_after_cross_runtime_propagation
+WHAT_CHANGED:
+- WHOAMI was refreshed and committed after cross-runtime execution contract propagation.
+- Commit f8737a1 refreshed WHOAMI after commit ebdfb81.
+- RADAR was regenerated after f8737a1.
+- Readiness warning now reports BATON freshness only.
+CURRENT_STATE:
+- Cross-runtime execution contract is source-created, globally registered, usecase-registry included, rebuilt into 90.USECASE, committed and pushed.
+- Validate-System passes.
+- Git is clean before this BATON refresh.
+ACTIVE_RULE:
+A+B are now canonical:
+A. SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION defines the runtime-agnostic method.
+B. GRC.CROSS_RUNTIME_EXECUTION_CONTRACT enforces the gate and adapter declaration.
+NEXT_ACTION:
+Commit/push this BATON refresh, regenerate RADAR, rerun Test-SessionCloseReadiness, then close session only if readiness is OK.
+==========
