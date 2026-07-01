@@ -1899,3 +1899,20 @@ NEXT:
 - Resume line-ending session-state refresh if still needed.
 - Then proceed to Nightshift Temp reference audit as separate scope.
 ==========
+
+========== MB-SM-045E_SESSION_STATE_REFRESH_AFTER_LINE_ENDING_CORE_CLEANUP ==========
+DATE_LOCAL=2026-07-01
+BRANCH=main
+BASE_COMMIT=e9cb31f 20260701.1541_Refresh_state_after_powershell_method_formalization
+STATUS=LINE_ENDING_CORE_CLEANUP_FORMALLY_CLOSED
+SUMMARY:
+- MB-SM-045A audited line endings read-only: 334 files scanned; LF_ONLY=58; CRLF_ONLY=176; MIXED=100; validation pass.
+- MB-SM-045B produced policy plan read-only: NORMALIZE_NOW_CORE=47; REVIEW=22; DO_NOT_TOUCH_HISTORY=31; DEFER_NIGHTSHIFT=7; generated bundles deferred=15.
+- MB-SM-045C applied selective normalization to 47 planned core files but Git produced no persistent commit because final working tree was equivalent under current .gitattributes/core.autocrlf behavior.
+- MB-SM-045D post-normalization audit confirmed MIXED_COUNT=53 and CORE_MIXED_COUNT=0 with validation pass and clean final.
+- TD-SM-LINEEND-001 is CLOSED_FOR_CORE, not CLOSED_GLOBAL.
+NEXT:
+- Do not run git add --renormalize .
+- Leave remaining mixed files in BACKUP_HISTORY, LOG_HISTORY, GENERATED_USECASE_BUNDLE, and NIGHTSHIFT_LAB out of core cleanup.
+- Proceed to Nightshift Temp reference audit when ready.
+==========

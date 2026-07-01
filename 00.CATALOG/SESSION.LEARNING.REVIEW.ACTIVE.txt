@@ -243,3 +243,17 @@ DECISION:
 - PowerShell methodology has been formalized in existing Skills/GRCs.
 - Continue using downloadable scripts with SyS\Temp and AI Tail standard for this repo.
 ==========
+
+========== MB-SM-045E_SESSION_STATE_REFRESH_AFTER_LINE_ENDING_CORE_CLEANUP ==========
+DATE_LOCAL=2026-07-01
+LEARNINGS:
+1. Line-ending cleanup must be audit-first and scope-segmented.
+2. In this repository, core.autocrlf=true plus .gitattributes can make byte-level normalization produce no Git commit even when working-tree bytes are rewritten.
+3. The reliable success criterion is not whether a commit is produced; it is post-audit CORE_MIXED_COUNT=0 with Validate-System PASS and clean final.
+4. Never use git add --renormalize . in this repo without a specific minibattle and explicit human authorization.
+5. Generated bundles, logs, backups and labs must be excluded from core line-ending normalization.
+6. Ignored CORE_CLONE files must not be forced into Git merely because they appeared in a normalization allowlist.
+DECISION:
+- TD-SM-LINEEND-001 = CLOSED_FOR_CORE.
+- Remaining mixed line endings are deferred by scope, not blockers.
+==========
