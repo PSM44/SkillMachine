@@ -257,3 +257,15 @@ DECISION:
 - TD-SM-LINEEND-001 = CLOSED_FOR_CORE.
 - Remaining mixed line endings are deferred by scope, not blockers.
 ==========
+
+========== MB-SM-048A_SESSION_CLOSE_STATUS_REFRESH ==========
+DATE_LOCAL=2026-07-01
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_GRC_CANDIDATES: NONE. Existing Skills/GRCs were sufficient after MB-SM-046B patch.
+- GRC_IMPROVEMENT_CANDIDATES: Review whether GRC.SCRIPT_EXECUTION_STAGING should explicitly reference AI Tail and Write-Progress in a future patch.
+- SKILL_IMPROVEMENT_CANDIDATES: Re-audit Skill/GRC method coverage after MB-SM-046B if strict coverage is desired.
+- OPERATIONAL_RULES_TO_CANONIZE: Already canonized/formalized in MB-SM-046B.
+- DO_NOT_CANONIZE: Do not global-normalize historical/generated/lab line endings now.
+- CANDIDATES_REGISTER_UPDATED: YES, via backlog/status refresh in this minibattle.
+- NEXT_GRC_OR_SKILL_ACTION: MB-SM-046D_REAUDIT_SKILL_GRC_METHOD_COVERAGE_READONLY, optional after close.
+==========

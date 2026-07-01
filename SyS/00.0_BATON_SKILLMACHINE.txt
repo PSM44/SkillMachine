@@ -1916,3 +1916,30 @@ NEXT:
 - Leave remaining mixed files in BACKUP_HISTORY, LOG_HISTORY, GENERATED_USECASE_BUNDLE, and NIGHTSHIFT_LAB out of core cleanup.
 - Proceed to Nightshift Temp reference audit when ready.
 ==========
+
+========== MB-SM-048A_SESSION_CLOSE_STATUS_REFRESH ==========
+DATE_LOCAL=2026-07-01
+LOCAL_TIME_CONTEXT=17:58 America/Santiago provided by human
+BRANCH=main
+BASE_COMMIT=5ebec69 20260701.1546_Refresh_state_after_line_ending_core_cleanup
+STATUS=SESSION_CLOSE_REFRESH_PREPARED
+CURRENT_STATE:
+- SkillsMachine governance/tooling stabilization is clean and pushed as of BASE_COMMIT.
+- SyS\Temp is the canonical operational Temp.
+- PowerShell method is formalized in Skills/GRCs.
+- Validate-System includes PowerShell syntax gate.
+- Line-ending debt is CLOSED_FOR_CORE.
+- Remaining open technical debt is TD-SM-NIGHTSHIFT-TEMP-001.
+WHAT_WE_DID:
+- Standardized Temp.
+- Added PowerShell syntax validation gate.
+- Formalized PowerShell execution method, Write-Progress and AI Tail.
+- Audited and closed core line-ending cleanup.
+WHAT_REMAINS:
+- Nightshift Temp reference audit and possible patch.
+- Optional Skill/GRC re-audit.
+- Possible usecase package rebuild check.
+- Management deliverable path definition and build.
+NEXT_ACTION:
+- Commit this session close refresh, then run hardened session close readiness.
+==========

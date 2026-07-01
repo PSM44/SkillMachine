@@ -1454,3 +1454,23 @@ NEXT_OPTIONS:
 - MB-SM-046D_REAUDIT_SKILL_GRC_METHOD_COVERAGE_READONLY, optional quality gate.
 - MB-SM-047A_NIGHTSHIFT_TEMP_REFERENCE_AUDIT_READONLY.
 ==========
+
+========== MB-SM-048A_SESSION_CLOSE_STATUS_REFRESH ==========
+DATE_LOCAL=2026-07-01
+TECHNICAL_DEBT_STATUS:
+- TD-SM-TEMP-ROOT-001: CLOSED.
+- TD-SM-SCRIPT-VALIDATE-002: CLOSED.
+- TD-SM-LINEEND-001: CLOSED_FOR_CORE.
+- TD-SM-NIGHTSHIFT-TEMP-001: OPEN.
+BACKLOG:
+- P0 MB-SM-047A_NIGHTSHIFT_TEMP_REFERENCE_AUDIT_READONLY.
+- P1 MB-SM-049A_USECASE_BUILD_REGEN_AFTER_GRC_PATCH if package drift is detected.
+- P1 MB-SM-046D_REAUDIT_SKILL_GRC_METHOD_COVERAGE_READONLY optional.
+- P2 MB-SM-050A_MANAGERIAL_DEMO_SLICE_PLAN.
+- P2 MB-SM-050B_MANAGERIAL_DEMO_SLICE_BUILD.
+IDEAS:
+- Treat AI Tail as audit/control evidence.
+- Use Write-Progress as mandatory human-visible execution signal.
+- Preserve audit-plan-apply-post-audit-refresh minibattle chain as standard.
+- Prepare a gerencia-facing demo/report once Nightshift and package drift are clean.
+==========
