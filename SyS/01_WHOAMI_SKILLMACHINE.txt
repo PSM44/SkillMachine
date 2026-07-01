@@ -1148,3 +1148,18 @@ NEXT_HUMAN_ACTION:
 - Review, commit and push this close refresh.
 - Then run session close readiness.
 ==========
+
+========== MB-SM-051C_REFRESH_CONTINUITY_AFTER_SESSION_CLOSE_HARDENING ==========
+DATE_LOCAL=2026-07-01
+PROJECT=SkillsMachine
+STATUS=UPDATED_AFTER_SESSION_CLOSE_HARDENING
+STATE_FOR_HUMAN:
+- The session close usecase defect was confirmed and patched at source.
+- 02.SESSION_CLOSE generated outputs were not manually edited; BUILD.ps1 regenerated packages after source changes.
+- Current required close behavior now includes accumulated debt, backlog, ideas/opportunities, done/missing/current state, managerial path, saved-vs-pending status, learning review and DragonflyFocus decision.
+- Remaining closure blocker is readiness freshness: regenerate RADAR after this continuity commit.
+NEXT_HUMAN_ACTION:
+- Commit/push this continuity refresh.
+- Run RADAR.
+- Run Validate-System and Test-SessionCloseReadiness.
+==========
