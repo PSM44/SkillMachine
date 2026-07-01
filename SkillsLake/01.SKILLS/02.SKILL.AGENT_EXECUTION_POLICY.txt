@@ -337,3 +337,19 @@ does not trap the user in pager output, does not close the terminal, and stops o
 ==========
 FIN_MB-GRC-034B_SAFE_POWERSHELL_LAUNCHER_CONTRACT
 ==========
+
+========== MB-SM-046B_POWERSHELL_METHOD_STANDARD ==========
+TITLE=Agent execution policy extension for repository scripts
+STATUS=ACTIVE
+RULES:
+1. Human commits manually by default. AI-generated scripts must not commit or push.
+2. UNKNOWN_WORKTREE_STATE or unexpected dirty files are HARD_STOP conditions.
+3. Scripts that mutate canon must report the exact files changed and a suggested commit message only after validation passes.
+4. The AI should prefer saved .ps1 artifacts over long pasted commands for complex PowerShell work.
+5. The AI must use read-only audit minibattles before broad transformations.
+6. Apply minibattles must be allowlist-based and must reject forbidden scopes.
+7. Validation gate is mandatory before commit-ready status.
+8. If a script creates outputs for upload, those outputs belong in SyS\Temp.
+9. If a script scans many files, it must use Write-Progress.
+10. If a script produces terminal output for AI continuation, it must end with the standard AI_TAIL block.
+==========

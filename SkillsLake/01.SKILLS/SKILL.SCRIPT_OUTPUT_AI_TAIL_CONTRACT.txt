@@ -147,3 +147,33 @@ If the user pastes only the last 20 lines, the AI should still be able to determ
 - where the full report is;
 - what the next action is.
 
+========== MB-SM-046B_POWERSHELL_METHOD_STANDARD ==========
+TITLE=AI Tail contract extension for PowerShell scripts
+STATUS=ACTIVE
+PURPOSE:
+- Standardize terminal-copy output so the human can paste only the tail block back to the AI.
+
+REQUIRED_AI_TAIL_FIELDS:
+- AI_TAIL_SCHEMA=v1
+- MB_ID
+- FINAL_STATUS
+- ROOT
+- OUTPUT_TEMP when applicable
+- SUMMARY_TXT when a summary file is produced
+- MODIFIED_FILES_TXT or equivalent when canon changes are prepared
+- VALIDATE_RUN and VALIDATE_STATUS when validation is run
+- CANON_MODIFIED
+- COMMIT_PUSH_PERFORMED
+- NEXT_ACTION
+
+FORMAT_RULES:
+1. Print exactly five blank lines before the AI_TAIL_START delimiter.
+2. Use the exact delimiters:
+   ========== AI_TAIL_START ==========
+   ========== AI_TAIL_END ==========
+3. Do not put extra narrative after AI_TAIL_END.
+4. For read-only scripts, CANON_MODIFIED=NO and COMMIT_PUSH_PERFORMED=NO.
+5. For mutating scripts, CANON_MODIFIED=YES and COMMIT_PUSH_PERFORMED=NO unless the human explicitly authorized a different flow.
+6. FINAL_STATUS must distinguish PASS, PASS_WITH_REVIEW_REQUIRED, and FAIL.
+7. NEXT_ACTION must be operational: upload output, review diff, commit manually, or stop.
+==========

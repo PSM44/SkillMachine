@@ -704,3 +704,29 @@ A PowerShell long-script delivery is acceptable only when:
 
 ========== SKILL UPDATE MB-GRC-035B POWERSHELL LONG PAYLOAD PARSE GATE END ==========
 
+========== MB-SM-046B_POWERSHELL_METHOD_STANDARD ==========
+TITLE=PowerShell repository workflow method
+STATUS=ACTIVE
+SCOPE:
+- Applies to PowerShell scripts generated for this repository and for SkillsMachine-style project/repository operations.
+- Applies especially to downloadable .ps1 scripts copied to SyS\Temp and executed by the human operator.
+
+MANDATORY_METHOD:
+1. Prefer downloadable scripts for long or fragile PowerShell operations.
+2. Generate the script as an artifact; the human copies it to C:\01. GitHub\Skills\SyS\Temp and executes it from there.
+3. Every script that writes outputs to SyS\Temp must clean SyS\Temp first while preserving itself when it is executing from that folder.
+4. Every long-running scan or mutation script must use Write-Progress with percent-complete status.
+5. Every repository-mutating script must hard-stop before mutation unless git status --short is clean.
+6. Mutating scripts must use explicit allowlists and forbidden-path checks for broad transformations.
+7. Scripts must not commit or push. They may produce a commit-ready gate; the human commits manually.
+8. Scripts must run Validate-System.ps1 after mutation when validation is available.
+9. Validate-System.ps1 includes Test-PowerShellSyntax.ps1; new .ps1 files must parse before commit.
+10. Avoid parser-prone constructs. Prefer explicit hashtable sort expressions over abbreviated multi-key Sort-Object syntax.
+11. Do not use broad repository transforms such as git add --renormalize . unless explicitly authorized for that minibattle.
+12. For line-ending work, separate core live files from backups, logs, generated bundles, and labs before any apply step.
+
+AI_TAIL_REQUIREMENT:
+- Print exactly five blank lines before AI_TAIL_START.
+- Emit AI_TAIL_START and AI_TAIL_END.
+- Include at minimum: AI_TAIL_SCHEMA, MB_ID, FINAL_STATUS, ROOT, OUTPUT_TEMP, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, VALIDATE_STATUS when applicable, and NEXT_ACTION.
+==========

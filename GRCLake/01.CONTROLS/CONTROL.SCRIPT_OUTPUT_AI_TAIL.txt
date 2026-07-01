@@ -153,3 +153,28 @@ A script without an AI_TAIL block may still be technically valid, but it is not 
 
 For long-running or verbose workflows, missing AI_TAIL should be treated as a workflow quality defect.
 
+========== MB-SM-046B_POWERSHELL_METHOD_STANDARD ==========
+TITLE=Control extension: PowerShell AI Tail and execution observability
+STATUS=ACTIVE
+CONTROL_OBJECTIVE:
+- Ensure that PowerShell automation used by AI/human repository workflows is observable, auditable, and safe.
+
+CONTROL_REQUIREMENTS:
+1. Long-running PowerShell scripts must use Write-Progress so the human sees execution progress.
+2. Scripts writing to SyS\Temp must clean SyS\Temp before producing outputs and must preserve the executing script when located inside SyS\Temp.
+3. Repository-mutating scripts must check git status --short before mutation and hard-stop on unexpected dirty state.
+4. Scripts must not stage, commit, push, delete, rename, or normalize broad paths without explicit allowlist and forbidden-path checks.
+5. Mutating scripts must run Validate-System.ps1 after mutation when available.
+6. PowerShell syntax validation is mandatory through Test-PowerShellSyntax.ps1 as part of Validate-System.ps1.
+7. AI tail output must use the standard AI_TAIL_START / AI_TAIL_END block with the mandatory fields.
+8. The AI tail must be preceded by exactly five blank lines.
+9. The script must state CANON_MODIFIED and COMMIT_PUSH_PERFORMED explicitly.
+10. Any failure must end in FINAL_STATUS=FAIL and include ERROR.
+
+EVIDENCE:
+- Terminal AI_TAIL block.
+- Summary file in SyS\Temp.
+- Modified files list when applicable.
+- Validate-System output.
+- Git status and log after human commit when applicable.
+==========

@@ -1419,3 +1419,21 @@ NEXT_OPTIONS:
 - MB-SM-045A_LINE_ENDING_AUDIT_READONLY
 - MB-SM-046A_NIGHTSHIFT_TEMP_REFERENCE_AUDIT_READONLY
 ==========
+
+========== MB-SM-046B_POWERSHELL_METHOD_STANDARD ==========
+DATE_LOCAL=2026-07-01
+CLOSED_OR_FORMALIZED:
+- TD-SM-SCRIPT-VALIDATE-002: Repository has Test-PowerShellSyntax.ps1 and Validate-System hook.
+- TD-SM-LINEEND-001: CLOSED_FOR_CORE; remaining mixed files are deferred history/log/generated/lab scopes.
+FORMALIZED_METHOD:
+- Downloadable PowerShell scripts copied to SyS\Temp.
+- SyS\Temp cleanup before output generation, preserving the executing script.
+- Write-Progress percent-complete required for long-running scripts.
+- AI_TAIL_START / AI_TAIL_END standard with five blank lines before tail.
+- CANON_MODIFIED and COMMIT_PUSH_PERFORMED required in AI tail.
+- Hard-stop on dirty worktree before mutation.
+- No auto-commit or auto-push.
+- Validate-System and PowerShell syntax gate required before commit-ready.
+OPEN:
+- TD-SM-NIGHTSHIFT-TEMP-001 remains open and should be handled in a separate Nightshift minibattle.
+==========
