@@ -199,4 +199,19 @@ LEARNING_TYPE................: OPERATIONAL_FAILURE_REVIEW
 SUMMARY......................: SESSION_CONTINUE startup must be driven by usecase package plus project BATON/WHOAMI/equivalent containing PROJECT_ROOT and TEMP_PATH. The assistant must generate an immediate compact context-pack script, clear TEMP_PATH, consolidate relevant files into up to 10 IA-readable files, emit compact AI_TAIL output, and not proceed to agents without human authorization.
 STATUS.......................: CAPTURED_PENDING_HUMAN_PRIORITIZATION
 
-
+========== MB-SM-043K_POST_TEMP_PATCH_SESSION_STATE_REFRESH ==========
+DATE_LOCAL=2026-07-01
+LEARNINGS:
+1. Root naming changes require live reference maps, not raw historical maps.
+2. Generated, historical, log, backup and clone outputs must be excluded from rename decision maps unless explicitly audited.
+3. Temp root cleanup path:
+   - audit root state,
+   - patch live references,
+   - validate precise references excluding SyS\Temp false positives,
+   - commit patch,
+   - remove empty root Temp only after commit/push confirmation.
+4. Write-Progress is sufficient for long PowerShell scripts in the user's TOVS workflow.
+5. PowerShell scripts must avoid ambiguous Sort-Object syntax; use explicit hashtable sort expressions.
+6. Scripts must not count Temp\ inside SyS\Temp\ as a legacy root Temp hit.
+7. User manually commits and pushes; scripts may prepare commit-ready gate but must not commit/push.
+==========

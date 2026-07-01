@@ -1850,3 +1850,21 @@ NEXT_ACTION:
 
 ================================================================================
 
+========== MB-SM-043K_POST_TEMP_PATCH_SESSION_STATE_REFRESH ==========
+DATE_LOCAL=2026-07-01
+BRANCH=main
+BASE_COMMIT=703ecc6 20260701.1435_Update_temp_staging_references_to_sys_temp
+STATUS=TEMP_ROOT_REMOVED_AND_SYS_TEMP_CONFIRMED
+SUMMARY:
+- Root Temp was removed by human after patch and remained git-clean.
+- SyS\Temp is confirmed as the only operational Temp for SkillsMachine.
+- old was removed by human and produced no tracked Git delta.
+- IA.History is preserved as HUMAN_AI_CHAT_HISTORY and is not a cleanup/rename candidate.
+- MB-SM-043I patched 25 canonical files and replaced root Temp references with SyS\Temp.
+- MB-SM-043J precise validation confirmed PRECISE_LEGACY_HITS=0, UNEXPECTED_DIRTY_COUNT=0, VALIDATE_STATUS=PASS.
+- Commit pushed: 703ecc6 20260701.1435_Update_temp_staging_references_to_sys_temp.
+NEXT:
+- Preserve SyS\Temp-only standard.
+- Keep Nightshift Temp references as separate backlog, not part of core SkillsMachine patch.
+- Fix PowerShell script syntax validation debt before more downloadable script-heavy work.
+==========
