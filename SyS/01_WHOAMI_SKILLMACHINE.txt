@@ -1163,3 +1163,26 @@ NEXT_HUMAN_ACTION:
 - Run RADAR.
 - Run Validate-System and Test-SessionCloseReadiness.
 ==========
+
+========== MB-SM-052F_REFRESH_WHOAMI_AFTER_CROSS_RUNTIME_PROPAGATION ==========
+DATE_LOCAL=2026-07-01
+STATUS=UPDATED_AFTER_CROSS_RUNTIME_PROPAGATION
+BASE_COMMIT=ebdfb81 20260701.1703_Propagate_cross_runtime_execution_contract_to_usecases
+WHAT_CHANGED:
+- Created SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.
+- Created GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.
+- Patched USECASE.REGISTRY.json and GLOBAL.SKILL.VERSION.REGISTRY.json.
+- Rebuilt 90.USECASE outputs.
+- Commit ebdfb81 propagated the cross-runtime execution contract to generated usecase bundles.
+ACTIVE_RULE:
+The execution method is no longer PowerShell-only. It is human-controlled and runtime-agnostic:
+A. AI delivers executable.
+B. Human saves/downloads it into project TEMP.
+C. Human executes exact command from VS Code/terminal from any location.
+D. Human returns AI_TAIL and/or requested TEMP outputs.
+ADAPTER_RULE:
+PowerShell, Python, Bash and Node can implement the full contract directly.
+SQL, Power Query, Excel/VBA, Docker or other tools must declare limitations and use wrappers/adapters when direct AI_TAIL is not available.
+NEXT_ACTION:
+Commit/push this WHOAMI refresh, regenerate RADAR, then rerun Test-SessionCloseReadiness.
+==========
