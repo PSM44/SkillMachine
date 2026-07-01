@@ -34,6 +34,19 @@ if ($LASTEXITCODE -ne 0) { exit 1 }
 Write-Host "VALIDATION: GRC repository architecture"
 powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\Validation\Validate-GRC-RepositoryArchitecture.ps1"
 if ($LASTEXITCODE -ne 0) { exit 1 }
+
+# MB-SM-044B_POWERSHELL_SYNTAX_GATE
+Write-Host "VALIDATION: PowerShell syntax gate"
+$PowerShellSyntaxValidator = Join-Path $PSScriptRoot "Test-PowerShellSyntax.ps1"
+if (-not (Test-Path -LiteralPath $PowerShellSyntaxValidator -PathType Leaf)) {
+    Write-Host "FAIL: missing PowerShell syntax validator: $PowerShellSyntaxValidator"
+    exit 1
+}
+& pwsh.exe -NoProfile -ExecutionPolicy Bypass -File $PowerShellSyntaxValidator
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
 Write-Host "OK: system pre-commit validation passed"
 exit 0
 
