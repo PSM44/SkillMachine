@@ -188,3 +188,52 @@ Audit checks:
 - validation gate present when applicable;
 - dirty state hard stop when Git-aware;
 - generated output not manually patched.
+
+==========
+MB-SM-054B_P0_AITAIL_STRICT_AND_CHILD_PROCESS_FAIL_RULE
+==========
+DATE_LOCAL........: 2026-07-04
+STATUS............: ACTIVE_RULE
+LAYER.............: CROSS_RUNTIME_EXECUTION_CONTRACT
+SOURCE_EVIDENCE...: CloseReport runner failures and recovery flows, MB-SM-054A
+PURPOSE...........:
+Prevent false PASS, lost terminal evidence, ambiguous output counts and unrecoverable local runs.
+
+AI_TAIL_STRICT_CONTRACT:
+Every lifecycle runner or executable package must:
+- print AI_TAIL_START / AI_TAIL_END to console;
+- persist the same AI_TAIL to a file under the project Temp path;
+- include AI_TAIL_SCHEMA;
+- include MB_ID;
+- include FINAL_STATUS;
+- include BLOCKER when status is not PASS;
+- include PROJECT_ROOT;
+- include TEMP_PATH;
+- include OUTPUT_COUNT or separate UPLOAD_OUTPUT_COUNT and TOTAL_OUTPUT_COUNT when appropriate;
+- include CANON_MODIFIED;
+- include USECASE_OUTPUTS_MODIFIED when relevant;
+- include COMMIT_PUSH_PERFORMED;
+- include CODEX_CLAUDE_EXECUTED when relevant;
+- include NEXT_ACTION.
+
+OUTPUT_COUNT_RULE:
+If AI_TAIL includes AI_TAIL itself in totals, the runner must distinguish:
+- UPLOAD_OUTPUT_COUNT
+- TOTAL_OUTPUT_COUNT_INCLUDING_AITAIL
+
+CHILD_PROCESS_FAIL_PROPAGATION:
+If a required child process, validator, build, RADAR, Python analyzer, git command, or readiness gate fails:
+- the parent runner must fail;
+- FINAL_STATUS must not be PASS;
+- BLOCKER must include the failing command or minimum actionable error;
+- output packages generated after the failure must be marked partial or invalid.
+
+FALSE_PASS_PROHIBITION:
+A runner that logs parse/runtime failure in a required subprocess and still reports PASS fails this GRC.
+
+DONE_WHEN:
+The human can recover state from AI_TAIL alone and no required subprocess failure is hidden behind PASS.
+==========
+FIN_MB-SM-054B_P0_AITAIL_STRICT_AND_CHILD_PROCESS_FAIL_RULE
+==========
+

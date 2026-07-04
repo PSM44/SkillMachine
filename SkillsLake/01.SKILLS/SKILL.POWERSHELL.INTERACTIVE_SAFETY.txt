@@ -730,3 +730,49 @@ AI_TAIL_REQUIREMENT:
 - Emit AI_TAIL_START and AI_TAIL_END.
 - Include at minimum: AI_TAIL_SCHEMA, MB_ID, FINAL_STATUS, ROOT, OUTPUT_TEMP, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, VALIDATE_STATUS when applicable, and NEXT_ACTION.
 ==========
+
+==========
+MB-SM-054B_P0_POWERSHELL_RUNNER_HARDENING_RULE
+==========
+DATE_LOCAL........: 2026-07-04
+STATUS............: ACTIVE_RULE
+LAYER.............: POWERSHELL_INTERACTIVE_SAFETY
+SOURCE_EVIDENCE...: CloseReport PowerShell/openpyxl/.Count failures, MB-SM-054A
+PURPOSE...........:
+Prevent recurring PowerShell runner failures in VS Code terminal workflows.
+
+ARRAY_AND_COUNT_RULE:
+When a value may be scalar, null, or array, wrap it before using Count:
+$items = @(<expression>)
+Then use $items.Count.
+
+Do not assume .Count exists on arbitrary objects.
+
+PYTHON_CHILD_PROCESS_RULE:
+When running Python from PowerShell, especially with openpyxl or libraries that may write warnings:
+- avoid 2>&1 | Tee-Object for required child process execution;
+- prefer Start-Process with RedirectStandardOutput and RedirectStandardError;
+- capture exit code explicitly;
+- inspect stderr separately;
+- filter known non-blocking warnings only when intentionally documented;
+- fail on unexpected stderr if the command is required.
+
+OPENPYXL_WARNING_RULE:
+Known warning pattern:
+"Conditional Formatting extension is not supported and will be removed"
+
+This may be non-blocking for read-only analysis, but must not be allowed to become a PowerShell NativeCommandError through unsafe redirection.
+
+FALSE_PASS_RULE:
+If child process exit code is non-zero, or if expected output files are missing, parent PowerShell runner must fail.
+
+INTERACTIVE_PROMPT_RULE:
+If PowerShell enters continuation prompt >>, stop with Ctrl+C and do not keep pasting.
+Treat it as unclosed string/block/parenthesis.
+
+DONE_WHEN:
+Runner scripts survive scalar/array ambiguity, Python warning noise, stderr capture and child-process failure propagation.
+==========
+FIN_MB-SM-054B_P0_POWERSHELL_RUNNER_HARDENING_RULE
+==========
+

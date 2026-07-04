@@ -1,7 +1,7 @@
 {
   "usecase": "04.REPOSITORY_STRUCTURE_REPAIR",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-01 17:03:02",
+  "generated_at": "2026-07-04 00:57:39",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -24,7 +24,7 @@
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\00.BUNDLE.CORE.txt",
       "delivery_size_bytes": 47993,
       "delivery_size_kb": 46.87,
-      "delivery_sha256": "65452E7E5195D1DAC9A6B4BF651E466A0BDCDAB5EAADF518A895C5D2E6CEC626",
+      "delivery_sha256": "525380719FBABAC085B15B052B42CF266C7CDBB7CB2B44EB0BFB739B97573BAC",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -56,9 +56,9 @@
       "bundle_name": "CONTINUITY",
       "delivery_file": "01.BUNDLE.CONTINUITY.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 36166,
-      "delivery_size_kb": 35.32,
-      "delivery_sha256": "B7660C9E0B6DD014B61DBE5373D0CB7B389027D5D804FAC85D19CEA1BC5AABFC",
+      "delivery_size_bytes": 37681,
+      "delivery_size_kb": 36.8,
+      "delivery_sha256": "A2CD70E36A17E75D2C07E76A2F3BB0E1CFE47DC7801F11EB8AF2675F55EC878B",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -82,7 +82,7 @@
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "321BEC461EF10721606F1E94616A2923E5D28150030793E21E04903FE45D9D7A"
+          "source_sha256": "AD7316C1D488A068740F6B29D4EE0F82D2CF0A93AB8875B0BFA3F5D497A94E70"
         }
       ]
     },
@@ -90,9 +90,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 103719,
-      "delivery_size_kb": 101.29,
-      "delivery_sha256": "4B526E336FCAC8D55270027D6C14256181872926B58594DE4466ADD2F3151093",
+      "delivery_size_bytes": 109704,
+      "delivery_size_kb": 107.13,
+      "delivery_sha256": "88F7E798B8D459549AE7E0B2DD391AF57C19FE50004E1EA6B4CA7CD36856ABE3",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -134,19 +134,19 @@
           "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
           "version": "v0.1-DRAFT",
-          "source_sha256": "F2012D7F968637C933BC87FD9DC9BC5C86BD4707D8B170B36ACEFAC38DC71950"
+          "source_sha256": "66EE173572BB3FF2E3D1069DC182C8D189FBCC1B15C0216E0CF9644B57FB265C"
         },
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "321BEC461EF10721606F1E94616A2923E5D28150030793E21E04903FE45D9D7A"
+          "source_sha256": "AD7316C1D488A068740F6B29D4EE0F82D2CF0A93AB8875B0BFA3F5D497A94E70"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "CAF6C550F0E9215CDF5E39AE24099E0719E439DB94F1BE4734305C5A18EAEF89"
+          "source_sha256": "75AD623E1DF7A4812AEB57D3F271E935D884DD9F4CBAF409384B99A88887C46E"
         }
       ]
     }

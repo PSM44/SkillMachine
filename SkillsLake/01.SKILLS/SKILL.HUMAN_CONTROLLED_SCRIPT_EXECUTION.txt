@@ -230,3 +230,42 @@ If the script fails, the AI must request only:
 - specific TEMP outputs if relevant.
 
 Do not ask for broad logs or full repo uploads by default.
+
+==========
+MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
+==========
+DATE_LOCAL........: 2026-07-04
+STATUS............: ACTIVE_RULE
+LAYER.............: HUMAN_CONTROLLED_SCRIPT_EXECUTION
+SOURCE_EVIDENCE...: CloseReport and SkillsMachine runner UX incidents, MB-SM-054A
+PURPOSE...........:
+Align AI-delivered executables with the user's VS Code / terminal workflow and prevent lost evidence.
+
+DELIVERY_PREFERENCE:
+For this workflow, prefer:
+1. a script file saved or downloadable for placement under the project Temp path; or
+2. a VS Code terminal PowerShell code block when the human asks for code directly.
+
+Avoid:
+- .cmd launchers that auto-close;
+- .exe wrappers unless explicitly requested;
+- long paste-only scripts that are unsafe for an interactive prompt;
+- console flows that do not persist AI_TAIL.
+
+VS_CODE_TERMINAL_RULE:
+The executable must run from any current terminal location by using absolute PROJECT_ROOT and TEMP_PATH values.
+
+REQUIRED_RUNNER_BEHAVIOR:
+- clear Temp before generation unless declared repair/split/repack exception applies;
+- set GIT_PAGER=cat and PAGER=cat when using git;
+- use git --no-pager for diagnostics;
+- do not commit or push unless explicitly approved;
+- persist AI_TAIL to Temp;
+- print singular NEXT_ACTION.
+
+DONE_WHEN:
+The human can run the script from VS Code PowerShell without losing terminal evidence or relying on an auto-closing wrapper.
+==========
+FIN_MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
+==========
+

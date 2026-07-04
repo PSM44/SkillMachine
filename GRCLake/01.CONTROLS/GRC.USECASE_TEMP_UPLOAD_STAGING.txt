@@ -192,3 +192,60 @@ EVIDENCIA_ORIGEN:
 FIN_MB-SM-039A0_SYS_TEMP_COMPILED_CONTEXT_RULE
 ==========
 
+==========
+MB-SM-054B_P0_UPLOAD_TEMP_GENERATED_OUTPUT_HARDENING
+==========
+DATE_LOCAL........: 2026-07-04
+STATUS............: ACTIVE_RULE
+LAYER.............: USECASE_UPLOAD_PACKAGE_CONTROL
+SOURCE_EVIDENCE...: CloseReport operational evidence package, MB-SM-054A
+PURPOSE...........:
+Harden upload-package, Temp, and generated-output handling for SkillsMachine usecases.
+
+RULE_01_IA_UPLOAD_PACK:
+Any package intended for upload to IA/chat must be flat and IA-readable.
+
+Required:
+- No folders as final handoff.
+- Prefer text-first files.
+- Consolidate all relevant files the assistant considers necessary into a maximum of 10 files, perfectly understandable for the IA.
+- Include manifest with file names, sizes, purpose, source scope and next action.
+- Split oversized files deterministically.
+- Do not include raw sensitive binaries unless explicitly requested.
+
+RULE_02_LOCAL_EVIDENCE_VS_IA_UPLOAD:
+Distinguish:
+- LOCAL_EVIDENCE_DIR: complete local evidence, may contain many files/folders.
+- IA_UPLOAD_PACK: compressed, flat, maximum 5-10 uploadable files.
+
+The assistant must not ask the human to upload a folder when the UI does not support folder upload.
+
+RULE_03_TEMP_CLEAN_FIRST:
+Before generating new Temp/SyS\Temp package outputs, clear the Temp folder first.
+
+Exception:
+Temp preservation is allowed only when the active task is to split, repair, or repack existing Temp evidence.
+The exception must be explicitly stated in the manifest or AI_TAIL.
+
+RULE_04_GENERATED_OUTPUT_SOURCE:
+90.USECASE folders are generated operational packages, not primary canon.
+
+If a defect or improvement is found in a generated usecase output:
+- register it as candidate/backlog;
+- patch the core/source-of-truth layer, such as SkillsLake, GRCLake, 00.CATALOG, registries, build inputs or approved canon source;
+- rebuild generated outputs from source when explicitly in scope.
+
+Manual patching of 90.USECASE generated outputs is prohibited unless the human explicitly approves a documented override.
+
+FAIL_CONDITIONS:
+- Final IA upload package contains an unbounded folder tree.
+- New package generation mixes stale Temp evidence without declared exception.
+- Generated output is manually patched instead of core/build source.
+- The assistant asks for a full repository upload by default.
+
+DONE_WHEN:
+The human can upload a small, flat, deterministic context package, and any generated-output improvement has a core-source patch path.
+==========
+FIN_MB-SM-054B_P0_UPLOAD_TEMP_GENERATED_OUTPUT_HARDENING
+==========
+
