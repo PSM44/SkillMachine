@@ -1235,3 +1235,54 @@ The next recommended SkillsMachine governance task is MB-SM-053A_NEW_SKILL_GRC_C
 CURRENT_FOCUS:
 Close this session cleanly, then move next productive work to CloseReport or a future SkillsMachine governance session.
 ==========
+
+==========
+MB-SM-055B_WHOAMI_REFRESH_AFTER_6240141
+==========
+
+UPDATED_AT........: 2026-07-04 12:34:56 -04:00
+PROJECT_ROOT......: C:\01. GitHub\Skills
+CURRENT_HEAD......: 6240141 20260704.0101_SkillsMachine_operational_hardening_ai_tail_upload_temp_runner
+TEMP_SCRATCH......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+STATUS............: ACTIVE_PROJECT_SNAPSHOT_REFRESH
+
+WHAT_THIS_PROJECT_IS:
+SkillsMachine is a governance, continuity and improvement system for Skills and GRCs so that a blank IA can acquire the user's accumulated operational experience, continue work with sufficient context, improve processes, and maintain a recurrent memory of work, analysis and execution.
+
+CURRENT_OBJECTIVE:
+Validate SkillsMachine functionally through a complete lab lifecycle:
+01.NEW_PROJECT -> physical lab creation -> SESSION_CONTINUE -> SESSION_CLOSE -> score/backlog/improvements.
+
+OFFICIAL_FIRST_LAB:
+C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+
+SUCCESS_FOCUS:
+The lab must prove usecase behavior, especially administration, control, creation, refinement and updating of Skills/GRCs. The dummy product is minimal and secondary.
+
+CURRENT_OPERATIONAL_RULES:
+- Use C:\Users\aazcl\Downloads\Temp.SkillMachine as disposable scratch path when requested.
+- Clean Temp.SkillMachine at script start.
+- Do not store canon in Temp.SkillMachine.
+- Do not patch generated 90.USECASE outputs manually.
+- Commit and push are separate approvals.
+- Use terminology compatible with PMP, Agile, Scrum and industry practice where appropriate.
+- Skill = capability/method/procedure.
+- GRC = control/policy/gate/prohibition/permission/quality rule.
+- Backlog = candidate not yet validated.
+
+RECENT_HARDENING:
+Commit 6240141 strengthened AI_TAIL, child-process failure propagation, Temp clean-first, IA upload packaging, generated-output protection and PowerShell runner safety.
+
+OPEN_CANDIDATE:
+Formalize accumulated project registers:
+A. Questions and answers accumulated.
+B. Project-related ideas accumulated.
+C. Non-project-related ideas accumulated.
+D. Skill/GRC creation or improvement opportunities accumulated.
+
+NEXT_ACTION:
+Complete readiness refresh, then proceed either to explicit push authorization or to MB-SM-055C_CREATE_BASIC_NOTES_APP_LAB.
+==========
+FIN_MB-SM-055B_WHOAMI_REFRESH_AFTER_6240141
+==========
+
