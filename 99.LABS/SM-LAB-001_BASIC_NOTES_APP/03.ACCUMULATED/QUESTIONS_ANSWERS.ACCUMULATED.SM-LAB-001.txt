@@ -1,0 +1,21 @@
+==========
+QUESTIONS_ANSWERS.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+OPEN_QUESTIONS:
+- Q001: Should accumulated registers A/B/C/D be mandatory for every project or only non-trivial projects?
+- Q002: Should lab artifacts be committed before SESSION_CONTINUE or only after SESSION_CLOSE?
+- Q003: What is the minimum artifact set for a lightweight project?
+
+ANSWERED_QUESTIONS:
+- A001: First official lab is SM-LAB-001_BASIC_NOTES_APP.
+- A002: Nightshift is excluded from this first lab.
+- A003: Success is functional validation of SkillsMachine, not product sophistication.
+- A004: Temp.SkillMachine is disposable and cleaned at script start.
+
+DECISIONS_FROM_QA:
+- Use minimal dummy product.
+- Include accumulated registers as candidate practice.
+- Use industry terminology where possible.

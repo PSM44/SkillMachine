@@ -1,0 +1,19 @@
+==========
+LAB.SUCCESS_CRITERIA.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+SUCCESS_01: 01.NEW_PROJECT creates physical lab structure.
+SUCCESS_02: Lab includes governance and continuity artifacts.
+SUCCESS_03: Lab includes accumulated registers A/B/C/D.
+SUCCESS_04: SESSION_CONTINUE can restore context from files.
+SUCCESS_05: SESSION_CLOSE can produce formal close with debt, backlog, state and next action.
+SUCCESS_06: Temp.SkillMachine is cleaned and used as disposable scratch.
+SUCCESS_07: AI_TAIL is visible and persisted in each runner.
+SUCCESS_08: No generated usecase output is manually patched.
+SUCCESS_09: Skill vs GRC vs backlog distinction is tested.
+SUCCESS_10: Final lifecycle score is >= 85/100.
+
+INITIAL_SCORE:
+Not scored yet. Score after SESSION_CLOSE.

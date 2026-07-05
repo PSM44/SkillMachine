@@ -1,0 +1,30 @@
+==========
+BATON.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+UPDATED_AT.........: 2026-07-04 14:12:33 -04:00
+STATUS.............: LAB_CREATED_PENDING_SESSION_CONTINUE
+PROJECT_ROOT.......: C:\01. GitHub\Skills
+LAB_ROOT...........: C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+TEMP_SCRATCH.......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+
+CURRENT_STATE:
+- Lab physical directory has been created.
+- Minimal governance and continuity artifacts have been created.
+- No session continue has been run yet.
+- No session close has been run yet.
+- No commit has been performed for the lab.
+
+KEY_DECISIONS:
+- Nightshift is excluded from the first validation lab.
+- Product scope is intentionally minimal.
+- Main success is SkillsMachine behavior, not app sophistication.
+- Accumulated registers A/B/C/D are included from the start.
+
+NEXT_ACTION:
+Run MB-SM-055F_SESSION_CONTINUE_ON_BASIC_NOTES_APP_LAB.
+
+OPEN_RISKS:
+- Usecase may be too governance-heavy for a minimal project.
+- Some artifacts may need renaming to align with PMP/Agile terminology.
+- Criteria for when to create Skill vs GRC needs empirical validation during lab close.

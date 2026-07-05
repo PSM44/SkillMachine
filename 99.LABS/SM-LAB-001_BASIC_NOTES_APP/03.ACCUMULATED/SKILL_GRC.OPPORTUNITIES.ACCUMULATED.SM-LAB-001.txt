@@ -1,0 +1,22 @@
+==========
+SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+NEW_SKILL_CANDIDATES:
+- CAND-LAB-SKILL-ACCUMULATED-REGISTERS-001: Skill for maintaining accumulated Q&A, related ideas, unrelated ideas, and Skill/GRC opportunities.
+
+NEW_GRC_CANDIDATES:
+- CAND-LAB-GRC-ACCUMULATED-REGISTERS-001: GRC requiring meaningful projects to maintain explicit accumulated registers or justify omission.
+
+SKILL_IMPROVEMENT_CANDIDATES:
+- Improve HUMAN_README / project lifecycle skills to include accumulated registers when useful.
+
+GRC_IMPROVEMENT_CANDIDATES:
+- Improve SESSION_CLOSE and SESSION_CONTINUE controls to read/write accumulated registers.
+
+CLASSIFICATION_RULE_UNDER_TEST:
+Skill = capability / method / procedure.
+GRC = control / policy / gate / prohibition / permission / quality rule.
+Backlog = candidate not yet validated.

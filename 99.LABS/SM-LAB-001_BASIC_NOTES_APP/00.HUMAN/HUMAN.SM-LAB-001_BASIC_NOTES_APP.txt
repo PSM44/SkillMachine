@@ -1,0 +1,29 @@
+==========
+HUMAN.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+PROJECT_NAME......: SM-LAB-001_BASIC_NOTES_APP
+CREATED_AT........: 2026-07-04 14:12:33 -04:00
+HUMAN_INTENT......: Validate SkillsMachine functionally.
+PRIMARY_DELIVERABLE: A lab created and later closed correctly.
+
+CONTEXT:
+The human wants SkillsMachine to govern Skills and GRCs so that any blank IA can acquire prior user experience, operate with context, and improve both IA execution and the user's work processes over time.
+
+SUCCESS_DEFINITION:
+This lab succeeds if it proves:
+- 01.NEW_PROJECT can create a minimally governed project.
+- SESSION_CONTINUE can restore context from files.
+- SESSION_CLOSE can close with debt, backlog, decisions and next actions.
+- Accumulated questions, ideas and Skill/GRC opportunities are explicitly captured.
+- Temp.SkillMachine is used only as disposable scratch.
+- No generated usecase output is manually patched.
+
+INDUSTRY_TERMINOLOGY_PREFERENCE:
+Use recognized terminology where possible:
+- Project charter / project brief
+- Handoff / transition brief
+- Product backlog / issue log
+- Technical debt register
+- Governance control / policy / gate
+- Runbook / playbook / workflow

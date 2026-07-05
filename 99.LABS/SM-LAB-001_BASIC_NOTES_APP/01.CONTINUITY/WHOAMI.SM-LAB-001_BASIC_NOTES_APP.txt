@@ -1,0 +1,29 @@
+==========
+WHOAMI.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+PROJECT_ID.........: SM-LAB-001_BASIC_NOTES_APP
+PROJECT_TYPE.......: Functional validation lab
+CREATED_AT.........: 2026-07-04 14:12:33 -04:00
+CURRENT_STATUS.....: Created, not yet continued or closed.
+PROJECT_ROOT.......: C:\01. GitHub\Skills
+LAB_ROOT...........: C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+TEMP_SCRATCH.......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+
+ONE_LINE:
+Minimal lab to prove that SkillsMachine can create, continue, close and improve a governed project.
+
+CURRENT_OBJECTIVE:
+Run a full lifecycle:
+01.NEW_PROJECT -> SESSION_CONTINUE -> SESSION_CLOSE -> score/backlog/improvements.
+
+KEY_RULES:
+- Temp.SkillMachine is disposable and must be cleaned at script start.
+- 90.USECASE outputs are generated; do not patch manually.
+- Commit and push require explicit authorization.
+- Skill = capability/method/procedure.
+- GRC = control/policy/gate/prohibition/permission/quality rule.
+- Backlog = candidate not yet validated.
+
+NEXT_ACTION:
+Run SESSION_CONTINUE on this lab using only its files and required repo context.

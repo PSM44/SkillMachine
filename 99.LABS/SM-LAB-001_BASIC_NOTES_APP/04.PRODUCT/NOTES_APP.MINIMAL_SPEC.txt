@@ -1,0 +1,26 @@
+==========
+NOTES_APP.MINIMAL_SPEC
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+PRODUCT_SCOPE:
+Minimal notes app concept used only as dummy subject for SkillsMachine validation.
+
+MINIMUM_FEATURES:
+- Create a text note.
+- List notes.
+- Mark note as archived.
+- No database required.
+- No UI required.
+- No authentication required.
+
+OUT_OF_SCOPE:
+- Production software.
+- Deployment.
+- Security model.
+- Multi-user behavior.
+- Rich editor.
+
+WHY_THIS_PRODUCT_EXISTS:
+To give SkillsMachine a concrete but low-complexity project object.

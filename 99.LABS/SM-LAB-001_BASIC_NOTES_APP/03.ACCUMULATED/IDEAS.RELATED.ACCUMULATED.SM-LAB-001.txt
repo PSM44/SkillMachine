@@ -1,0 +1,18 @@
+==========
+IDEAS.RELATED.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+PROJECT_RELATED_IDEAS:
+- IDEA-R001: Use the lab to regression-test 01.NEW_PROJECT, SESSION_CONTINUE and SESSION_CLOSE.
+- IDEA-R002: Score each usecase separately and then score the lifecycle globally.
+- IDEA-R003: Convert accumulated registers into optional project scaffold modules.
+- IDEA-R004: Add a Skill/GRC decision tree after evidence from lab close.
+
+ACCEPTED_IDEAS:
+- Include accumulated registers A/B/C/D in the lab.
+
+DEFERRED_IDEAS:
+- Build an actual runnable notes app.
+- Create dashboard/scorecard UI.

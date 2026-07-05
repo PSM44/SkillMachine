@@ -1,0 +1,20 @@
+==========
+TECH_DEBT.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+TD-LAB-001:
+DESCRIPTION: Accumulated registers A/B/C/D are included in lab but not yet formalized in core Skills/GRCs.
+STATUS: OPEN
+DISPOSITION: Evaluate after SESSION_CLOSE.
+
+TD-LAB-002:
+DESCRIPTION: Need objective standard for when to create a Skill vs modify an existing Skill vs create/modify GRC vs leave backlog.
+STATUS: OPEN
+DISPOSITION: Use lab close to propose decision tree.
+
+TD-LAB-003:
+DESCRIPTION: Need industry terminology alignment for HUMAN/BATON/WHOAMI/BACKLOG.
+STATUS: OPEN
+DISPOSITION: Compare against PMP/Agile/Scrum practices during scoring.

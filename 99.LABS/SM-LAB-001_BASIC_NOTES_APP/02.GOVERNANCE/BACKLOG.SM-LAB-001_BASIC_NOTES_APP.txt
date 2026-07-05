@@ -1,0 +1,19 @@
+==========
+BACKLOG.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+P0_NEXT:
+- BL-LAB-001: Run SESSION_CONTINUE using this lab context.
+- BL-LAB-002: Run SESSION_CLOSE and verify formal closure sections.
+- BL-LAB-003: Score lab against success criteria.
+- BL-LAB-004: Decide whether accumulated registers become core Skill/GRC requirement.
+
+P1:
+- BL-LAB-005: Map HUMAN/BATON/WHOAMI terminology to PMP/Agile/Scrum equivalents.
+- BL-LAB-006: Evaluate whether the lab scaffold is too heavy or appropriate.
+- BL-LAB-007: Determine commit policy for lab artifacts.
+
+P2:
+- BL-LAB-008: Convert dummy notes app into a simple actual executable only if useful.

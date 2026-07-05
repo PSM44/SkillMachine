@@ -1,0 +1,11 @@
+==========
+IDEAS.UNRELATED.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+UNRELATED_IDEAS:
+- None at creation.
+
+PARKING_LOT:
+- Use this file to prevent unrelated ideas from contaminating active project scope.
