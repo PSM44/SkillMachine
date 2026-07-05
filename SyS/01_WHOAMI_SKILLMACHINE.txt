@@ -1322,3 +1322,47 @@ After this refresh is committed, proceed to push or directly to MB-SM-055G_SESSI
 FIN_MB-SM-055F-R1_WHOAMI_REFRESH_AFTER_LAB_COMMIT_F541046
 ==========
 
+==========
+MB-SM-055I-R1_WHOAMI_REFRESH_AFTER_CLOSE_COMMIT_87A5BAD
+==========
+
+UPDATED_AT........: 2026-07-05 00:45:36 -04:00
+CURRENT_HEAD......: 87a5bad 20260704.2217_SkillsMachine_close_basic_notes_app_lab
+PROJECT_ROOT......: C:\01. GitHub\Skills
+TEMP_SCRATCH......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+TEMP_OUTPUT_POLICY: COMPACT_UPLOAD_PACK_ONLY
+STATUS............: ACTIVE_PROJECT_SNAPSHOT_REFRESH
+
+CURRENT_STATE:
+SkillsMachine has completed the first official lab lifecycle to a reviewable close artifact.
+
+RECENT_COMMITS:
+- 6240141 operational hardening.
+- be11cd2 BATON/WHOAMI refresh after operational hardening.
+- f541046 create basic notes app lab.
+- 681d6cd BATON/WHOAMI refresh after lab commit.
+- 87a5bad close basic notes app lab.
+
+CURRENT_RESULT:
+- SM-LAB-001_BASIC_NOTES_APP exists.
+- SESSION_CONTINUE reconstructed context with score 100/100.
+- SESSION_CLOSE artifact exists and was committed locally.
+- Preliminary lab score is 92/100.
+- Repo-level continuity is being refreshed after close commit.
+
+CURRENT_OBJECTIVE:
+Stabilize the closed lab checkpoint, then promote lab learnings into core Skills/GRCs.
+
+OPERATIONAL RULE NOW ACTIVE:
+All future runners must use COMPACT_UPLOAD_PACK_ONLY:
+- no raw logs left in Temp.SkillMachine;
+- maximum 10 UPLOAD_*.txt files;
+- AI_TAIL pasted in chat;
+- .ps1 executable preserved when stored in Temp.SkillMachine.
+
+NEXT_ACTION:
+After this refresh is committed and pushed, proceed to core hardening for COMPACT_UPLOAD_PACK_ONLY and accumulated registers.
+==========
+FIN_MB-SM-055I-R1_WHOAMI_REFRESH_AFTER_CLOSE_COMMIT_87A5BAD
+==========
+

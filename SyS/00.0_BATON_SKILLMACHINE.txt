@@ -2190,3 +2190,44 @@ Review this refresh, then authorize local commit of BATON/WHOAMI refresh if acce
 FIN_MB-SM-055F-R1_REFRESH_AFTER_LAB_COMMIT_F541046
 ==========
 
+==========
+MB-SM-055I-R1_REFRESH_AFTER_CLOSE_COMMIT_87A5BAD
+==========
+
+UPDATED_AT........: 2026-07-05 00:45:36 -04:00
+HEAD..............: 87a5bad 20260704.2217_SkillsMachine_close_basic_notes_app_lab
+PROJECT_ROOT......: C:\01. GitHub\Skills
+TEMP_SCRATCH......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+TEMP_OUTPUT_POLICY: COMPACT_UPLOAD_PACK_ONLY
+STATUS............: ACTIVE_CONTINUITY_REFRESH
+
+SUMMARY:
+Commit 87a5bad created the formal SESSION_CLOSE artifact for the official functional lab:
+C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\06.CLOSE\SESSION_CLOSE.SM-LAB-001_BASIC_NOTES_APP.20260704_221720.txt
+
+LAB_LIFECYCLE_STATUS:
+- 01.NEW_PROJECT: PASS. Lab physically created.
+- 03.SESSION_CONTINUE: PASS. Context reconstruction score 100/100.
+- 02.SESSION_CLOSE: PASS_PENDING_REVIEW. Close artifact created and committed locally.
+- Preliminary lab score: 92/100.
+- Repo working tree was clean after commit 87a5bad.
+- Readiness warning after 87a5bad was expected because BATON/WHOAMI needed refresh against the new HEAD.
+
+KEY_LEARNINGS:
+- COMPACT_UPLOAD_PACK_ONLY must be promoted into core Skill/GRC hardening.
+- Accumulated project registers are useful and should be evaluated for canonical scaffold status.
+- Session close artifacts should be accepted as expected dirty before commit.
+- Long runners should be delivered as .ps1 executables saved under Temp.SkillMachine.
+
+CURRENT_DEBT:
+- COMPACT_UPLOAD_PACK_ONLY is operationally enforced in recent runners but not yet formalized in core.
+- Accumulated registers A/B/C/D are lab-proven but not yet canonical.
+- Skill vs GRC vs backlog decision tree remains pending.
+- Lab-level close does not auto-refresh lab BATON/WHOAMI.
+
+NEXT_ACTION:
+Review this refresh, then authorize local commit of BATON/WHOAMI refresh if accepted. After readiness passes, push.
+==========
+FIN_MB-SM-055I-R1_REFRESH_AFTER_CLOSE_COMMIT_87A5BAD
+==========
+
