@@ -2153,3 +2153,40 @@ Review this refresh, validate readiness, then explicitly authorize commit of BAT
 FIN_MB-SM-055B_REFRESH_AFTER_6240141
 ==========
 
+==========
+MB-SM-055F-R1_REFRESH_AFTER_LAB_COMMIT_F541046
+==========
+
+UPDATED_AT........: 2026-07-04 20:38:04 -04:00
+HEAD..............: f541046 20260704.1412_SkillsMachine_create_basic_notes_app_lab
+PROJECT_ROOT......: C:\01. GitHub\Skills
+TEMP_SCRATCH......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+STATUS............: ACTIVE_CONTINUITY_REFRESH
+
+SUMMARY:
+Commit f541046 created the official functional lab:
+C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+
+LAB_COMMIT:
+f541046 20260704.1412_SkillsMachine_create_basic_notes_app_lab
+
+LAB_CREATED:
+- 12 lab files were committed.
+- Validate-System passed before and after commit.
+- RADAR passed after commit.
+- Readiness warning after commit indicated continuity artifacts needed refresh against the new HEAD.
+
+KEY_DECISIONS:
+- Use executable .ps1 files saved under C:\Users\aazcl\Downloads\Temp.SkillMachine for longer runners.
+- Temp.SkillMachine is disposable and must be cleaned at script start.
+- Upload packs must compile relevant outputs into a maximum of 10 files.
+- Lab creation should be committed before running SESSION_CONTINUE.
+- Do not push without explicit authorization.
+- Next functional step is SESSION_CONTINUE on SM-LAB-001_BASIC_NOTES_APP after continuity refresh is committed.
+
+NEXT_ACTION:
+Review this refresh, then authorize local commit of BATON/WHOAMI refresh if accepted.
+==========
+FIN_MB-SM-055F-R1_REFRESH_AFTER_LAB_COMMIT_F541046
+==========
+

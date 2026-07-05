@@ -1286,3 +1286,39 @@ Complete readiness refresh, then proceed either to explicit push authorization o
 FIN_MB-SM-055B_WHOAMI_REFRESH_AFTER_6240141
 ==========
 
+==========
+MB-SM-055F-R1_WHOAMI_REFRESH_AFTER_LAB_COMMIT_F541046
+==========
+
+UPDATED_AT........: 2026-07-04 20:38:04 -04:00
+CURRENT_HEAD......: f541046 20260704.1412_SkillsMachine_create_basic_notes_app_lab
+PROJECT_ROOT......: C:\01. GitHub\Skills
+TEMP_SCRATCH......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+STATUS............: ACTIVE_PROJECT_SNAPSHOT_REFRESH
+
+CURRENT_STATE:
+SkillsMachine has now created and locally committed the first official functional lab:
+SM-LAB-001_BASIC_NOTES_APP.
+
+RECENT_COMMITS:
+- 6240141 operational hardening for AI_TAIL, upload/temp, generated-output discipline and PowerShell runner safety.
+- be11cd2 BATON/WHOAMI refresh after operational hardening.
+- f541046 basic notes app lab creation.
+
+CURRENT_OBJECTIVE:
+Run full lifecycle validation:
+01.NEW_PROJECT -> SESSION_CONTINUE -> SESSION_CLOSE -> score/backlog/improvements.
+
+OPERATIONAL PREFERENCE:
+For long scripts, deliver executable .ps1 files for the human to save in:
+C:\Users\aazcl\Downloads\Temp.SkillMachine
+
+UPLOAD PACKAGE RULE:
+Any generated upload context must be compiled into a maximum of 10 files. Avoid asking the human to upload more than 10 files.
+
+NEXT_ACTION:
+After this refresh is committed, proceed to push or directly to MB-SM-055G_SESSION_CONTINUE_ON_BASIC_NOTES_APP_LAB according to explicit human authorization.
+==========
+FIN_MB-SM-055F-R1_WHOAMI_REFRESH_AFTER_LAB_COMMIT_F541046
+==========
+
