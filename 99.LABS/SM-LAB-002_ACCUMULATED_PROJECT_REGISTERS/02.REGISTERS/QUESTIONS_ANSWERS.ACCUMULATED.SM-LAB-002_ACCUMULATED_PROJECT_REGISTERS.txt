@@ -1,0 +1,30 @@
+==========
+QUESTIONS_ANSWERS.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: QA-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: user question
+CATEGORY: system capability
+STATUS: ANSWERED
+TITLE: Should SkillsMachine store and accumulate ideas, backlog, technical debt, improvement opportunities, Skills and GRCs?
+DETAIL: User asked whether the system should accumulate these categories.
+DECISION: Yes. This lab tests the mechanism.
+PROMOTION_TARGET: SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+OWNER: SkillsMachine
+NEXT_ACTION: Validate the register mechanism.
+
+ENTRY_ID: QA-002_SESSION_CONTINUE_SKILL_GRC_MENU_NOT_REVIEWED
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: user feedback
+CATEGORY: session continue quality gap
+STATUS: OPEN
+TITLE: SessionContinue did not review the Skills/GRC menu or suggest uploading relevant Skills/GRCs.
+DETAIL: User observed that after SessionContinue the IA did not inspect the Skills/GRC menu/catalogue and did not suggest uploading any relevant Skill or GRC artifact.
+DECISION: Treat as evidence that accumulated registers and SessionContinue must explicitly surface relevant Skills/GRCs.
+PROMOTION_TARGET: IMPROVEMENT_OPPORTUNITY
+OWNER: SkillsMachine
+NEXT_ACTION: Define a SessionContinue checklist item: review available Skills/GRCs and suggest relevant upload/context files.
+LINKED_FILES: 02.REGISTERS\IMPROVEMENT_OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: This is a core lab finding.
+

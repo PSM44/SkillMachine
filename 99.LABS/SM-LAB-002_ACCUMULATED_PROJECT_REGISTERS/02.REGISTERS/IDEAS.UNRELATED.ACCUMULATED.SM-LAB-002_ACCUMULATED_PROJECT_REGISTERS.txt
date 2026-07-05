@@ -1,0 +1,30 @@
+==========
+IDEAS.UNRELATED.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: IU-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: lab seed
+CATEGORY: parking lot
+STATUS: OPEN
+TITLE: Use unrelated ideas register as cross-project parking lot.
+DETAIL: Preserve useful ideas without polluting active project scope.
+DECISION: Open for testing.
+PROMOTION_TARGET: FUTURE_PROJECT_OR_GLOBAL_BACKLOG
+OWNER: SkillsMachine
+NEXT_ACTION: Verify separation from active backlog.
+
+ENTRY_ID: IU-002_CLOSEREPORT_TRANSFERRED_SKILL_GRC_CANDIDATES
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: cross-project transfer
+STATUS: PROMOTED
+TITLE: CloseReport generated reusable Skill/GRC candidates for SkillsMachine.
+DETAIL: User provided a CloseReport accumulated candidates file as a recommendation from another project to implement here.
+DECISION: Promote relevant items into Skill/GRC opportunities and improvement opportunities for this lab.
+PROMOTION_TARGET: SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+OWNER: SkillsMachine
+NEXT_ACTION: Keep source trace and evaluate which items become core hardening.
+LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: This is an example of unrelated/cross-project idea being transferred into active project scope.
+

@@ -1,0 +1,44 @@
+==========
+BACKLOG.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: BL-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: final status
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Operationalize accumulated project registers.
+DETAIL: Define structure, schema, rules, session continue and session close behavior.
+DECISION: Accepted as SM-LAB-002 scope.
+PROMOTION_TARGET: LAB_TASK
+OWNER: SkillsMachine
+NEXT_ACTION: Run session continue reconstruction.
+
+ENTRY_ID: BL-003_SESSION_CONTINUE_SKILL_GRC_MENU_REVIEW
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: QA-002 / TD-002
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Add SessionContinue Skill/GRC menu review gate.
+DETAIL: SessionContinue should inspect available Skills/GRCs or their menu/index and recommend relevant artifacts to upload or load.
+DECISION: Added to lab backlog.
+PROMOTION_TARGET: FUTURE_CORE_PATCH
+OWNER: SkillsMachine
+NEXT_ACTION: Test in 056B whether current lab context can tell a blank IA to ask for or inspect Skills/GRC menu.
+LINKED_FILES: 02.REGISTERS\QUESTIONS_ANSWERS.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: Could become GRC if mandatory.
+
+ENTRY_ID: BL-004_EXECUTABLE_DELIVERY_STANDARD_REINFORCEMENT
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: TD-003
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Reinforce executable delivery standard for long scripts.
+DETAIL: Long scripts should be delivered as downloadable .ps1 files for saving in Temp.SkillMachine, not pasted directly into interactive terminal.
+DECISION: Added to lab backlog.
+PROMOTION_TARGET: SKILL_IMPROVEMENT
+OWNER: SkillsMachine
+NEXT_ACTION: Verify current Skill/GRC sources already cover this; patch if insufficient.
+LINKED_FILES: SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
+NOTES: Include troubleshooting when file is not found in Temp.
+

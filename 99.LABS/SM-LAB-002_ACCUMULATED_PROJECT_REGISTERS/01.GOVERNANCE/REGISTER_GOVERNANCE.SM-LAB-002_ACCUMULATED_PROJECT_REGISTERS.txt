@@ -1,0 +1,11 @@
+==========
+REGISTER_GOVERNANCE
+==========
+RULE_01_SINGLE_PURPOSE=Each register has one clear purpose.
+RULE_02_APPEND_ONLY_DEFAULT=Append-first; preserve decision trail.
+RULE_03_STATUS_REQUIRED=OPEN|ANSWERED|ACCEPTED|REJECTED|DEFERRED|DUPLICATE|PROMOTED|CLOSED.
+RULE_04_PROMOTION_TRACE=Record target when idea/debt/opportunity becomes backlog, task, Skill/GRC candidate or core patch.
+RULE_05_SOURCE_TRACE=Every entry identifies SOURCE.
+RULE_06_SESSION_CLOSE=Formal close must review accumulated registers.
+RULE_07_SESSION_CONTINUE=Session continue must include register state when relevant.
+RULE_08_COMPACT_UPLOAD=Evidence must comply with COMPACT_UPLOAD_PACK_ONLY.

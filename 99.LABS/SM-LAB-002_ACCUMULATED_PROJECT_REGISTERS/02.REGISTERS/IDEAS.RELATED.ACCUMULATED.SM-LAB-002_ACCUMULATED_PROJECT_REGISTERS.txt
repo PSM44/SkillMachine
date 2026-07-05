@@ -1,0 +1,16 @@
+==========
+IDEAS.RELATED.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: IR-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: lab design
+CATEGORY: accumulated registers
+STATUS: ACCEPTED
+TITLE: Use physical accumulated registers per project/lab.
+DETAIL: Create durable text registers readable by a blank IA.
+DECISION: Accepted for SM-LAB-002.
+PROMOTION_TARGET: LAB_ARTIFACT
+OWNER: SkillsMachine
+NEXT_ACTION: Test continuation and close.
+

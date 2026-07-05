@@ -1,0 +1,44 @@
+==========
+TECHNICAL_DEBT.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: TD-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: final status
+CATEGORY: operationalization gap
+STATUS: OPEN
+TITLE: Accumulated registers are formalized but not proven end-to-end.
+DETAIL: Needs lab evidence for creation, update, continuation and close.
+DECISION: Accepted as technical debt to resolve in SM-LAB-002.
+PROMOTION_TARGET: LAB_SCOPE
+OWNER: SkillsMachine
+NEXT_ACTION: Execute lab tests.
+
+ENTRY_ID: TD-002_SESSION_CONTINUE_DID_NOT_LOAD_SKILL_GRC_MENU
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: user feedback
+CATEGORY: context reconstruction debt
+STATUS: OPEN
+TITLE: SessionContinue did not load or reason over Skills/GRC menu.
+DETAIL: SessionContinue reconstructed project continuity but failed to inspect or propose relevant Skills/GRC material.
+DECISION: Accepted as technical debt in SessionContinue behavior.
+PROMOTION_TARGET: BACKLOG
+OWNER: SkillsMachine
+NEXT_ACTION: Add backlog item to test Skill/GRC menu review in a future SessionContinue run.
+LINKED_FILES: 02.REGISTERS\BACKLOG.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: A blank IA may continue without knowing available governance/capability artifacts unless this is explicit.
+
+ENTRY_ID: TD-003_EXECUTABLE_DELIVERY_METHOD_NOT_UNDERSTOOD
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: user feedback
+CATEGORY: execution methodology debt
+STATUS: OPEN
+TITLE: IA did not understand methodology for delivering executables to save in Temp.SkillMachine.
+DETAIL: User observed the IA did not initially understand the method: deliver downloadable .ps1 files for saving under Temp.SkillMachine rather than requiring long console paste.
+DECISION: Accepted as technical debt already partially mitigated by later script delivery behavior.
+PROMOTION_TARGET: SKILL_IMPROVEMENT
+OWNER: SkillsMachine
+NEXT_ACTION: Strengthen HUMAN_CONTROLLED_SCRIPT_EXECUTION / compact upload pack workflow with explicit executable-delivery instructions.
+LINKED_FILES: SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
+NOTES: This relates to prior PowerShell continuation/hanging risk.
+

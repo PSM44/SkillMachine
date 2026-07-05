@@ -1,0 +1,44 @@
+==========
+IMPROVEMENT_OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: IO-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: lab design
+CATEGORY: session close improvement
+STATUS: OPEN
+TITLE: Session close should review accumulated registers.
+DETAIL: Formal close should state new ideas, backlog, debt, opportunities and Skill/GRC candidates.
+DECISION: Candidate improvement.
+PROMOTION_TARGET: SKILL_OR_GRC_CANDIDATE
+OWNER: SkillsMachine
+NEXT_ACTION: Observe during lab close.
+
+ENTRY_ID: IO-002_SESSION_CONTINUE_SHOULD_RECOMMEND_SKILL_GRC_UPLOADS
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: user feedback
+CATEGORY: session continue improvement
+STATUS: OPEN
+TITLE: SessionContinue should recommend relevant Skills/GRC uploads.
+DETAIL: When continuing a project, IA should identify which Skill/GRC files or index/menu should be uploaded or consulted.
+DECISION: Candidate improvement.
+PROMOTION_TARGET: GRC_CANDIDATE
+OWNER: SkillsMachine
+NEXT_ACTION: Evaluate as GRC.SESSION_CONTINUE_SKILL_GRC_CONTEXT_REVIEW_REQUIRED.
+LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: This prevents reconstructing only project state while missing method/governance context.
+
+ENTRY_ID: IO-003_LONG_RUNNING_ANALYSIS_BUDGET_AND_HEARTBEAT
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: long-running execution improvement
+STATUS: OPEN
+TITLE: Add execution budget, heartbeat, elapsed time and progress indicators.
+DETAIL: CloseReport candidate file recommends GRC.LONG_RUNNING_ANALYSIS_BUDGET and HUMAN_CONTROLLED_SCRIPT_EXECUTION heartbeat/elapsed/progress.
+DECISION: Accepted as cross-project transferable improvement candidate.
+PROMOTION_TARGET: SKILL_GRC_CANDIDATE
+OWNER: SkillsMachine
+NEXT_ACTION: Consider core patch after lab validates accumulation mechanism.
+LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: Directly relevant because original 056A appeared hung with no heartbeat.
+

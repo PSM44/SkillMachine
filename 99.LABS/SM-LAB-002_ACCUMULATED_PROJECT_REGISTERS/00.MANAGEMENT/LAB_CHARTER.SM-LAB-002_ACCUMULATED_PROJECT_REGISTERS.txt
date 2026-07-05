@@ -1,0 +1,10 @@
+==========
+LAB_CHARTER
+==========
+LAB_ID=SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+CREATED_AT=2026-07-05 10:48:23 -04:00
+HEAD_AT_CREATION=ab055da 20260705.0145_SkillsMachine_refresh_baton_whoami_after_core_hardening
+PURPOSE=Operationalize accumulated project registers as a testable SkillsMachine capability.
+PROBLEM=Important ideas, questions, debt, backlog and Skill/GRC opportunities can be lost across sessions if not accumulated in durable registers.
+HYPOTHESIS=Project-level accumulated registers preserve operational context and improve session continue/session close.
+PRIMARY_ACCEPTANCE_GATE=A blank IA can read the registers and continue the lab without relying on chat memory.

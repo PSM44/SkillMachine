@@ -1,0 +1,112 @@
+==========
+SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+==========
+
+ENTRY_ID: SG-001
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: 055J-055M hardening
+CATEGORY: Skill candidate
+STATUS: ACCEPTED
+TITLE: SKILL.ACCUMULATED_PROJECT_REGISTERS
+DETAIL: Reusable method for creating, maintaining and using accumulated project registers.
+DECISION: Accepted as lab subject; not yet final operating standard.
+PROMOTION_TARGET: CORE_SKILL_IF_LAB_PASS
+OWNER: SkillsMachine
+NEXT_ACTION: Test in SM-LAB-002.
+
+ENTRY_ID: SG-002
+DATE: 2026-07-05 10:48:23 -04:00
+SOURCE: lab design
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.SESSION_CLOSE_REGISTER_REVIEW_REQUIRED
+DETAIL: Formal close should require register review when registers exist.
+DECISION: Candidate only.
+PROMOTION_TARGET: CORE_GRC_IF_LAB_PASS
+OWNER: SkillsMachine
+NEXT_ACTION: Validate in close gate.
+
+ENTRY_ID: SG-003_GRC_LONG_RUNNING_ANALYSIS_BUDGET
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.LONG_RUNNING_ANALYSIS_BUDGET
+DETAIL: Scripts/tools that may run long must define budget, timeout, visible stage output and failure behavior.
+DECISION: Candidate accepted for evaluation.
+PROMOTION_TARGET: CORE_GRC_IF_ACCEPTED
+OWNER: SkillsMachine
+NEXT_ACTION: Compare against existing CROSS_RUNTIME_EXECUTION_CONTRACT and SCRIPT_EXECUTION_STAGING controls.
+LINKED_FILES: GRCLake\01.CONTROLS
+NOTES: Triggered by both CloseReport evidence and 056A hang.
+
+ENTRY_ID: SG-004_SKILL_IMPROVEMENT_HUMAN_CONTROLLED_SCRIPT_HEARTBEAT
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: Skill improvement
+STATUS: OPEN
+TITLE: HUMAN_CONTROLLED_SCRIPT_EXECUTION should require heartbeat/elapsed/progress.
+DETAIL: Long-running scripts should print visible stages, elapsed time, and/or heartbeat messages so the user can distinguish progress from hang.
+DECISION: Candidate accepted for evaluation.
+PROMOTION_TARGET: CORE_SKILL_PATCH_IF_ACCEPTED
+OWNER: SkillsMachine
+NEXT_ACTION: Patch SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION if current coverage is insufficient.
+LINKED_FILES: SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
+NOTES: 056A silence for 30 minutes is direct evidence.
+
+ENTRY_ID: SG-005_SKILL_IMPROVEMENT_RADAR_SEMANTIC_ATLAS_SEPARATION
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: Skill improvement
+STATUS: OPEN
+TITLE: RADAR should be separated from Workbook/PDF semantic atlas.
+DETAIL: CloseReport candidate recommends separating RADAR from semantic atlas concerns for heavy Workbook/PDF analysis.
+DECISION: Candidate accepted for later evaluation; not immediate SM-LAB-002 scope unless duplicate debt appears.
+PROMOTION_TARGET: FUTURE_SKILL_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Park in Skill/GRC opportunities until relevant to analysis-heavy projects.
+LINKED_FILES: none
+NOTES: Cross-project candidate preserved.
+
+ENTRY_ID: SG-006_GRC_IMPROVEMENT_SCRIPT_STAGING_BACKTICK_FENCE_WARNING
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: GRC improvement
+STATUS: OPEN
+TITLE: SCRIPT_EXECUTION_STAGING should warn about PowerShell backticks and Markdown fences.
+DETAIL: Generated PowerShell scripts should avoid Markdown triple-backtick fences and handle PowerShell backticks carefully to prevent parser/continuation errors.
+DECISION: Candidate accepted for evaluation.
+PROMOTION_TARGET: CORE_GRC_PATCH_IF_ACCEPTED
+OWNER: SkillsMachine
+NEXT_ACTION: Compare against existing PowerShell interactive safety and staging controls.
+LINKED_FILES: GRCLake\01.CONTROLS
+NOTES: Supports safe executable generation.
+
+ENTRY_ID: SG-007_GRC_SESSION_CONTINUE_SKILL_GRC_CONTEXT_REVIEW_REQUIRED
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: user feedback
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.SESSION_CONTINUE_SKILL_GRC_CONTEXT_REVIEW_REQUIRED
+DETAIL: SessionContinue should require checking whether Skill/GRC menu/index/context is needed and should suggest relevant files to upload.
+DECISION: Candidate accepted for evaluation.
+PROMOTION_TARGET: CORE_GRC_IF_LAB_PASS
+OWNER: SkillsMachine
+NEXT_ACTION: Test in 056B and decide whether to patch core SessionContinue controls.
+LINKED_FILES: 02.REGISTERS\IMPROVEMENT_OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: Directly addresses user-reported failure.
+
+ENTRY_ID: SG-008_OPERATIONAL_RULE_NO_MARKDOWN_FENCES_INSIDE_POWERSHELL
+DATE: 2026-07-05 14:42:05 -04:00
+SOURCE: ACCUMULATED_SKILL_GRC_CANDIDATES.CloseReport.md
+CATEGORY: operational rule / GRC candidate
+STATUS: OPEN
+TITLE: Do not use Markdown triple-backtick fences inside generated PowerShell scripts.
+DETAIL: Markdown fences inside scripts can create parser issues or accidental text injection when copied incorrectly.
+DECISION: Candidate accepted for evaluation.
+PROMOTION_TARGET: CORE_GRC_PATCH_IF_ACCEPTED
+OWNER: SkillsMachine
+NEXT_ACTION: Confirm if already covered; otherwise patch script generation controls.
+LINKED_FILES: GRCLake\01.CONTROLS
+NOTES: Cross-project recommendation preserved.
+

@@ -1,0 +1,5 @@
+TEST_ID: T-001 | Physical register creation | STATUS: PENDING
+TEST_ID: T-002 | Register semantic separation | STATUS: PENDING
+TEST_ID: T-003 | Promotion trace | STATUS: PENDING
+TEST_ID: T-004 | Session continue reconstruction | STATUS: PENDING
+TEST_ID: T-005 | Session close register review | STATUS: PENDING
