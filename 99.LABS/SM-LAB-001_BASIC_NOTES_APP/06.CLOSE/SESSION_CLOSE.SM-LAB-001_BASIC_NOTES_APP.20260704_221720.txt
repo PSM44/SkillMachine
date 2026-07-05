@@ -1,0 +1,528 @@
+==========
+SESSION_CLOSE.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+CLOSE_ID................: MB-SM-055H_SESSION_CLOSE_ON_BASIC_NOTES_APP_LAB
+CREATED_AT..............: 2026-07-04 22:17:20 -04:00
+PROJECT_ROOT............: C:\01. GitHub\Skills
+LAB_ID..................: SM-LAB-001_BASIC_NOTES_APP
+LAB_ROOT................: C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+USECASE_UNDER_TEST......: C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+HEAD....................: 681d6cd 20260704.2038_SkillsMachine_refresh_baton_whoami_after_lab_commit
+TEMP_SCRATCH............: C:\Users\aazcl\Downloads\Temp.SkillMachine
+TEMP_OUTPUT_POLICY......: COMPACT_UPLOAD_PACK_ONLY
+COMMIT_PERFORMED........: NO
+PUSH_PERFORMED..........: NO
+
+==========
+01. EXECUTIVE CLOSE
+==========
+
+The lab reached the minimum functional lifecycle state required for this phase.
+
+Done:
+- Operational hardening was committed and pushed.
+- Repo-level BATON/WHOAMI were refreshed and pushed.
+- The official first lab SM-LAB-001_BASIC_NOTES_APP was created.
+- The lab was committed locally and pushed.
+- SESSION_CONTINUE was validated with context reconstruction score 100/100.
+- SESSION_CLOSE artifact is now being generated.
+
+Not done:
+- The close artifact has not yet been committed.
+- Lab findings have not yet been converted into core Skill/GRC changes.
+- Final lifecycle score has not yet been institutionalized in core registries.
+- The candidate accumulated-register pattern has not yet been promoted to canonical Skill/GRC.
+
+Current state:
+- Repo is expected clean before this close artifact.
+- This close artifact intentionally creates a new dirty file under 99.LABS only.
+- Next step is review, then commit this session close artifact if accepted.
+
+==========
+02. WHAT WE DID
+==========
+
+1. Created the first official functional lab:
+   C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+
+2. Included governance and continuity artifacts:
+   - HUMAN
+   - WHOAMI
+   - BATON
+   - BACKLOG
+   - TECH_DEBT
+   - SCORECARD
+
+3. Included accumulated registers:
+   - QUESTIONS_ANSWERS
+   - IDEAS.RELATED
+   - IDEAS.UNRELATED
+   - SKILL_GRC.OPPORTUNITIES
+
+4. Validated SESSION_CONTINUE:
+   - context reconstruction status PASS
+   - reconstruction score 100
+   - missing key files 0
+   - missing reconstruction terms 0
+
+5. Hardened operating practice:
+   - long scripts delivered as .ps1 executables;
+   - Temp.SkillMachine cleaned at start;
+   - compact upload pack only;
+   - maximum 10 upload files;
+   - no raw logs left in Temp;
+   - commit/push only with explicit authorization.
+
+==========
+03. TECHNICAL DEBT ACCUMULATED
+==========
+
+TD-001: Accumulated registers are proven useful in the lab but not yet canonical.
+Disposition: Convert into Skill/GRC candidate after lab close review.
+
+TD-002: Skill vs GRC vs Backlog decision rule remains conceptual, not yet encoded as formal decision tree.
+Disposition: Create or patch a core Skill/GRC after scoring.
+
+TD-003: Session close generates a close artifact, but automatic promotion into BATON/WHOAMI is not yet implemented for lab-level close.
+Disposition: Evaluate whether SESSION_CLOSE should update lab-level BATON automatically.
+
+TD-004: Compact upload policy was corrected midstream after excessive raw logs appeared in Temp.SkillMachine.
+Disposition: Promote COMPACT_UPLOAD_PACK_ONLY into a GRC or runner standard.
+
+TD-005: Lab is documentation-first and product-dummy minimal.
+Disposition: Accept for governance validation; product execution can remain P2 unless needed.
+
+==========
+04. BACKLOG ACCUMULATED
+==========
+
+P0:
+- BL-001: Review this close artifact.
+- BL-002: Commit the close artifact if accepted.
+- BL-003: Score the full lab lifecycle.
+- BL-004: Decide whether accumulated registers A/B/C/D become required or optional project scaffold.
+- BL-005: Patch core Skill/GRC for COMPACT_UPLOAD_PACK_ONLY.
+
+P1:
+- BL-006: Create a decision tree for Skill vs GRC vs Backlog.
+- BL-007: Align HUMAN/BATON/WHOAMI terminology with PMP/Agile/Scrum terms.
+- BL-008: Decide whether SESSION_CLOSE should auto-refresh lab-level BATON/WHOAMI.
+- BL-009: Prepare a management-readable evidence package.
+
+P2:
+- BL-010: Build a minimal executable notes app if product behavior becomes relevant.
+- BL-011: Add dashboard/scorecard UI later.
+
+==========
+05. IDEAS AND OPPORTUNITIES
+==========
+
+Accepted:
+- Use SM-LAB-001 as the first official functional validation lab.
+- Exclude Nightshift from first lab.
+- Use accumulated registers A/B/C/D as lab practice.
+- Use .ps1 executable delivery for long runners.
+- Use compact upload pack only.
+
+Deferred:
+- Actual runnable notes app.
+- Dashboard/scorecard UI.
+- Full industry terminology refactor.
+
+Rejected or not pursued now:
+- Manual patching of generated 90.USECASE outputs.
+- Continuing with dirty repo checkpoints.
+- Uploading raw log sprawl.
+
+==========
+06. SKILL / GRC LEARNING
+==========
+
+Skill candidates:
+- SKILL.CANDIDATE.COMPACT_UPLOAD_PACK_EXECUTION:
+  Method for runners to capture tool outputs, consolidate them into UPLOAD files, and leave Temp clean.
+
+- SKILL.CANDIDATE.ACCUMULATED_PROJECT_REGISTERS:
+  Method for maintaining Q&A, related ideas, unrelated ideas, and Skill/GRC opportunities.
+
+- SKILL.CANDIDATE.SESSION_LAB_LIFECYCLE_VALIDATION:
+  Method for validating NEW_PROJECT, SESSION_CONTINUE, SESSION_CLOSE as a lifecycle.
+
+GRC candidates:
+- GRC.CANDIDATE.COMPACT_UPLOAD_PACK_ONLY:
+  No runner may leave raw logs in Temp.SkillMachine; upload pack must be <=10 files.
+
+- GRC.CANDIDATE.EXPLICIT_COMMIT_PUSH_AUTHORIZATION:
+  Commit/push remain prohibited unless explicitly authorized.
+
+- GRC.CANDIDATE.NO_MANUAL_PATCH_GENERATED_USECASE_OUTPUTS:
+  Generated 90.USECASE outputs must not be manually patched.
+
+- GRC.CANDIDATE.TEMP_CLEAN_AT_START:
+  Temp.SkillMachine must be cleaned at script start while preserving current .ps1 if stored there.
+
+==========
+07. SCORE
+==========
+
+Lifecycle score at close artifact generation:
+
+SUCCESS_01 physical lab structure: PASS
+SUCCESS_02 governance and continuity artifacts: PASS
+SUCCESS_03 accumulated registers A/B/C/D: PASS
+SUCCESS_04 SESSION_CONTINUE restores context: PASS, score 100/100
+SUCCESS_05 SESSION_CLOSE formal close: PASS_PENDING_REVIEW
+SUCCESS_06 Temp.SkillMachine compact scratch: PASS_AFTER_CORRECTION
+SUCCESS_07 AI_TAIL persisted: PASS
+SUCCESS_08 no generated output manual patch: PASS
+SUCCESS_09 Skill/GRC/backlog distinction tested: PARTIAL_PASS
+SUCCESS_10 final lifecycle score >=85: PASS_PRELIMINARY
+
+Preliminary score: 92/100
+
+Reasoning:
+- Strong evidence on creation, continuity, governance, AI_TAIL and repo hygiene.
+- Deduction for compact upload policy correction occurring midstream rather than being correct from first runner.
+- Deduction because Skill/GRC candidates are not yet formalized in core.
+
+==========
+08. DEVELOPMENT PATH TO FUNCTIONAL MANAGEMENT DELIVERABLE
+==========
+
+Minibattles:
+1. Complete lab close artifact.
+2. Commit close artifact.
+3. Run final readiness/RADAR.
+4. Convert learned rules into core Skill/GRC candidates.
+5. Rebuild affected usecase packages if core sources change.
+6. Validate and commit/push final hardening.
+
+Battles:
+1. Lifecycle proof:
+   NEW_PROJECT -> SESSION_CONTINUE -> SESSION_CLOSE.
+
+2. Governance proof:
+   Skill/GRC/backlog decisions are captured, classified and promoted or deferred.
+
+3. Operational proof:
+   A blank IA can continue using files, not chat memory.
+
+4. Management proof:
+   A concise evidence package explains what was validated, what risk was reduced, and what remains.
+
+Functional management deliverable:
+- One management-readable evidence package:
+  - executive summary;
+  - lifecycle score;
+  - screenshots/paths if needed;
+  - commits;
+  - risks;
+  - technical debt;
+  - recommended next investments;
+  - policy changes implemented.
+
+==========
+09. DRAGONFLYFOCUS
+==========
+
+Focus:
+Validate SkillsMachine as a governance/continuity engine for AI-assisted execution, not as a demo app generator.
+
+Next single focus:
+Review and commit this SESSION_CLOSE artifact, then promote the two strongest learnings:
+1. COMPACT_UPLOAD_PACK_ONLY.
+2. Accumulated project registers.
+
+Avoid:
+- Expanding the notes app.
+- Premature dashboard work.
+- Manual generated-output edits.
+- Running multiple branches of work before committing close evidence.
+
+==========
+10. RAW CONTEXT SNAPSHOT
+==========
+
+--- HUMAN ---
+==========
+HUMAN.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+PROJECT_NAME......: SM-LAB-001_BASIC_NOTES_APP
+CREATED_AT........: 2026-07-04 14:12:33 -04:00
+HUMAN_INTENT......: Validate SkillsMachine functionally.
+PRIMARY_DELIVERABLE: A lab created and later closed correctly.
+
+CONTEXT:
+The human wants SkillsMachine to govern Skills and GRCs so that any blank IA can acquire prior user experience, operate with context, and improve both IA execution and the user's work processes over time.
+
+SUCCESS_DEFINITION:
+This lab succeeds if it proves:
+- 01.NEW_PROJECT can create a minimally governed project.
+- SESSION_CONTINUE can restore context from files.
+- SESSION_CLOSE can close with debt, backlog, decisions and next actions.
+- Accumulated questions, ideas and Skill/GRC opportunities are explicitly captured.
+- Temp.SkillMachine is used only as disposable scratch.
+- No generated usecase output is manually patched.
+
+INDUSTRY_TERMINOLOGY_PREFERENCE:
+Use recognized terminology where possible:
+- Project charter / project brief
+- Handoff / transition brief
+- Product backlog / issue log
+- Technical debt register
+- Governance control / policy / gate
+- Runbook / playbook / workflow
+
+
+--- LAB WHOAMI ---
+==========
+WHOAMI.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+PROJECT_ID.........: SM-LAB-001_BASIC_NOTES_APP
+PROJECT_TYPE.......: Functional validation lab
+CREATED_AT.........: 2026-07-04 14:12:33 -04:00
+CURRENT_STATUS.....: Created, not yet continued or closed.
+PROJECT_ROOT.......: C:\01. GitHub\Skills
+LAB_ROOT...........: C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+TEMP_SCRATCH.......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+
+ONE_LINE:
+Minimal lab to prove that SkillsMachine can create, continue, close and improve a governed project.
+
+CURRENT_OBJECTIVE:
+Run a full lifecycle:
+01.NEW_PROJECT -> SESSION_CONTINUE -> SESSION_CLOSE -> score/backlog/improvements.
+
+KEY_RULES:
+- Temp.SkillMachine is disposable and must be cleaned at script start.
+- 90.USECASE outputs are generated; do not patch manually.
+- Commit and push require explicit authorization.
+- Skill = capability/method/procedure.
+- GRC = control/policy/gate/prohibition/permission/quality rule.
+- Backlog = candidate not yet validated.
+
+NEXT_ACTION:
+Run SESSION_CONTINUE on this lab using only its files and required repo context.
+
+
+--- LAB BATON ---
+==========
+BATON.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+UPDATED_AT.........: 2026-07-04 14:12:33 -04:00
+STATUS.............: LAB_CREATED_PENDING_SESSION_CONTINUE
+PROJECT_ROOT.......: C:\01. GitHub\Skills
+LAB_ROOT...........: C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP
+TEMP_SCRATCH.......: C:\Users\aazcl\Downloads\Temp.SkillMachine
+
+CURRENT_STATE:
+- Lab physical directory has been created.
+- Minimal governance and continuity artifacts have been created.
+- No session continue has been run yet.
+- No session close has been run yet.
+- No commit has been performed for the lab.
+
+KEY_DECISIONS:
+- Nightshift is excluded from the first validation lab.
+- Product scope is intentionally minimal.
+- Main success is SkillsMachine behavior, not app sophistication.
+- Accumulated registers A/B/C/D are included from the start.
+
+NEXT_ACTION:
+Run MB-SM-055F_SESSION_CONTINUE_ON_BASIC_NOTES_APP_LAB.
+
+OPEN_RISKS:
+- Usecase may be too governance-heavy for a minimal project.
+- Some artifacts may need renaming to align with PMP/Agile terminology.
+- Criteria for when to create Skill vs GRC needs empirical validation during lab close.
+
+
+--- BACKLOG ---
+==========
+BACKLOG.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+P0_NEXT:
+- BL-LAB-001: Run SESSION_CONTINUE using this lab context.
+- BL-LAB-002: Run SESSION_CLOSE and verify formal closure sections.
+- BL-LAB-003: Score lab against success criteria.
+- BL-LAB-004: Decide whether accumulated registers become core Skill/GRC requirement.
+
+P1:
+- BL-LAB-005: Map HUMAN/BATON/WHOAMI terminology to PMP/Agile/Scrum equivalents.
+- BL-LAB-006: Evaluate whether the lab scaffold is too heavy or appropriate.
+- BL-LAB-007: Determine commit policy for lab artifacts.
+
+P2:
+- BL-LAB-008: Convert dummy notes app into a simple actual executable only if useful.
+
+
+--- TECH DEBT ---
+==========
+TECH_DEBT.SM-LAB-001_BASIC_NOTES_APP
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+TD-LAB-001:
+DESCRIPTION: Accumulated registers A/B/C/D are included in lab but not yet formalized in core Skills/GRCs.
+STATUS: OPEN
+DISPOSITION: Evaluate after SESSION_CLOSE.
+
+TD-LAB-002:
+DESCRIPTION: Need objective standard for when to create a Skill vs modify an existing Skill vs create/modify GRC vs leave backlog.
+STATUS: OPEN
+DISPOSITION: Use lab close to propose decision tree.
+
+TD-LAB-003:
+DESCRIPTION: Need industry terminology alignment for HUMAN/BATON/WHOAMI/BACKLOG.
+STATUS: OPEN
+DISPOSITION: Compare against PMP/Agile/Scrum practices during scoring.
+
+
+--- Q&A ---
+==========
+QUESTIONS_ANSWERS.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+OPEN_QUESTIONS:
+- Q001: Should accumulated registers A/B/C/D be mandatory for every project or only non-trivial projects?
+- Q002: Should lab artifacts be committed before SESSION_CONTINUE or only after SESSION_CLOSE?
+- Q003: What is the minimum artifact set for a lightweight project?
+
+ANSWERED_QUESTIONS:
+- A001: First official lab is SM-LAB-001_BASIC_NOTES_APP.
+- A002: Nightshift is excluded from this first lab.
+- A003: Success is functional validation of SkillsMachine, not product sophistication.
+- A004: Temp.SkillMachine is disposable and cleaned at script start.
+
+DECISIONS_FROM_QA:
+- Use minimal dummy product.
+- Include accumulated registers as candidate practice.
+- Use industry terminology where possible.
+
+
+--- IDEAS RELATED ---
+==========
+IDEAS.RELATED.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+PROJECT_RELATED_IDEAS:
+- IDEA-R001: Use the lab to regression-test 01.NEW_PROJECT, SESSION_CONTINUE and SESSION_CLOSE.
+- IDEA-R002: Score each usecase separately and then score the lifecycle globally.
+- IDEA-R003: Convert accumulated registers into optional project scaffold modules.
+- IDEA-R004: Add a Skill/GRC decision tree after evidence from lab close.
+
+ACCEPTED_IDEAS:
+- Include accumulated registers A/B/C/D in the lab.
+
+DEFERRED_IDEAS:
+- Build an actual runnable notes app.
+- Create dashboard/scorecard UI.
+
+
+--- IDEAS UNRELATED ---
+==========
+IDEAS.UNRELATED.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+UNRELATED_IDEAS:
+- None at creation.
+
+PARKING_LOT:
+- Use this file to prevent unrelated ideas from contaminating active project scope.
+
+
+--- SKILL/GRC OPPORTUNITIES ---
+==========
+SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+NEW_SKILL_CANDIDATES:
+- CAND-LAB-SKILL-ACCUMULATED-REGISTERS-001: Skill for maintaining accumulated Q&A, related ideas, unrelated ideas, and Skill/GRC opportunities.
+
+NEW_GRC_CANDIDATES:
+- CAND-LAB-GRC-ACCUMULATED-REGISTERS-001: GRC requiring meaningful projects to maintain explicit accumulated registers or justify omission.
+
+SKILL_IMPROVEMENT_CANDIDATES:
+- Improve HUMAN_README / project lifecycle skills to include accumulated registers when useful.
+
+GRC_IMPROVEMENT_CANDIDATES:
+- Improve SESSION_CLOSE and SESSION_CONTINUE controls to read/write accumulated registers.
+
+CLASSIFICATION_RULE_UNDER_TEST:
+Skill = capability / method / procedure.
+GRC = control / policy / gate / prohibition / permission / quality rule.
+Backlog = candidate not yet validated.
+
+
+--- SCORECARD ---
+==========
+LAB.SUCCESS_CRITERIA.SM-LAB-001
+==========
+
+CREATED_AT=2026-07-04 14:12:33 -04:00
+
+SUCCESS_01: 01.NEW_PROJECT creates physical lab structure.
+SUCCESS_02: Lab includes governance and continuity artifacts.
+SUCCESS_03: Lab includes accumulated registers A/B/C/D.
+SUCCESS_04: SESSION_CONTINUE can restore context from files.
+SUCCESS_05: SESSION_CLOSE can produce formal close with debt, backlog, state and next action.
+SUCCESS_06: Temp.SkillMachine is cleaned and used as disposable scratch.
+SUCCESS_07: AI_TAIL is visible and persisted in each runner.
+SUCCESS_08: No generated usecase output is manually patched.
+SUCCESS_09: Skill vs GRC vs backlog distinction is tested.
+SUCCESS_10: Final lifecycle score is >= 85/100.
+
+INITIAL_SCORE:
+Not scored yet. Score after SESSION_CLOSE.
+
+
+==========
+11. FILE INDEX BEFORE CLOSE
+==========
+
+1178	2026-07-04 14:12:33	9DC540FD58DD84241C8528532088C239B79B143820F3282BA96DB368F38A404F	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\00.HUMAN\HUMAN.SM-LAB-001_BASIC_NOTES_APP.txt
+1136	2026-07-04 14:12:33	28C8E132B15FB2E4E9D9B13E38CDC5D84248B09A64D9381C784FDBEB9425ADDF	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\01.CONTINUITY\BATON.SM-LAB-001_BASIC_NOTES_APP.txt
+1111	2026-07-04 14:12:33	F57E066DF834C63048C7F85B99AB73F952DB8826602CABF919BB878340E44EEC	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\01.CONTINUITY\WHOAMI.SM-LAB-001_BASIC_NOTES_APP.txt
+681	2026-07-04 14:12:33	92E498EF67E2D3C8D432BAB8ADC561112E121C7E13880217BDD1D3FA5C078F6F	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\02.GOVERNANCE\BACKLOG.SM-LAB-001_BASIC_NOTES_APP.txt
+663	2026-07-04 14:12:33	9095097F60691DE2A901401C5A305B30A7D6CE285B0450064FE86F86B0FB951A	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\02.GOVERNANCE\TECH_DEBT.SM-LAB-001_BASIC_NOTES_APP.txt
+615	2026-07-04 14:12:33	DB99A39C36C2804E95F5BADB8879474077E6D2F96AE7A4793DBF6438A2D2EE23	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\03.ACCUMULATED\IDEAS.RELATED.ACCUMULATED.SM-LAB-001.txt
+237	2026-07-04 14:12:33	42A1BEB4C607A6A0C1B5466DC87A2D522E453ABFCE83147288FFF1A44B634EEF	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\03.ACCUMULATED\IDEAS.UNRELATED.ACCUMULATED.SM-LAB-001.txt
+823	2026-07-04 14:12:33	AE0AA8AE9B4D429DFDBA1165382940571C62E7DC838DE111F86D81278E99F91D	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\03.ACCUMULATED\QUESTIONS_ANSWERS.ACCUMULATED.SM-LAB-001.txt
+870	2026-07-04 14:12:33	CE5E8E3C9C72003C34E3C7469DFD94A0AAEF0F9648C474C61EA6E84BB133E0B7	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\03.ACCUMULATED\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-001.txt
+538	2026-07-04 14:12:33	C34992FACC77A5E431360DC9D85136D3ED4E8E67256A8466283CF6D6AB1F2268	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\04.PRODUCT\NOTES_APP.MINIMAL_SPEC.txt
+788	2026-07-04 14:12:33	EB3779FE1BB1C776D1AC037280DF084962088D3C17C56B683FC4369C902CABDA	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\05.SCORECARD\LAB.SUCCESS_CRITERIA.SM-LAB-001.txt
+1092	2026-07-04 14:12:33	D421908462148B51687E779B410F93527081B716BE6585C5904B98635216282D	C:\01. GitHub\Skills\99.LABS\SM-LAB-001_BASIC_NOTES_APP\README.SM-LAB-001_BASIC_NOTES_APP.txt
+
+==========
+12. USECASE SESSION_CLOSE PACKAGE INDEX
+==========
+
+38946	2026-07-04 00:57:39	44903D5958F24B670B861EACA17B66B8BB22238E566E8E31D0109587ECE8E970	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\00.BUNDLE.CORE.txt
+14757	2026-07-04 00:57:39	032CA023BFCFCCAA2FA8F0E117622B4CA1E3428228D6E89D562E47D89AF2D7D6	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\00.SKILL.MENU.ACTIVE.txt
+38207	2026-07-04 00:57:39	80E9DBDFAD518512A72804FA1EAB2C64BC7A7EF8521CADFEBBC8E7E17A08ED02	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\01.BUNDLE.CONTINUITY.txt
+113146	2026-07-04 00:57:39	13276248ACDB1DDF6194313B4BE95E2F5C54AEDDF9CF3E13F68DE108C5B2F6A6	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\02.BUNDLE.GOVERNANCE.txt
+3816	2026-07-01 14:31:10	3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\PROMPT.SESSION_CLOSE.txt
+3763	2026-07-01 14:31:10	925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\README.UPLOAD_THIS_USECASE.txt
+6085	2026-06-30 17:41:53	85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\RUNBOOK.SESSION_CLOSE.HARDENED.txt
+972	2026-06-03 16:36:40	1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\SKILL_SET.MANIFEST.txt
+8240	2026-07-04 00:57:39	A600CAC3295A1FC698D0F8D1AD27B050BC5266A7296B90085149B75F77BD9137	C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.MANIFEST.json
+
+==========
+END SESSION_CLOSE.SM-LAB-001_BASIC_NOTES_APP
+==========
