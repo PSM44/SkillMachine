@@ -1,0 +1,32 @@
+==========
+GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
+==========
+
+GRC_ID: GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
+SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+MARKER: SM-055J-SESSION-CLOSE-DIRTY-SCOPE-CONTROL
+STATUS: ACTIVE_CANDIDATE_CORE
+UPDATED_AT: 2026-07-05 01:04:17 -04:00
+
+CONTROL:
+Session close runners must distinguish expected close-artifact dirty state from unexpected dirty state.
+
+RULES:
+1. Before SESSION_CLOSE artifact generation, the repo should be clean unless the runner explicitly declares a controlled exception.
+2. After SESSION_CLOSE artifact generation, dirty files are allowed only inside the declared close output scope.
+3. Git may report a new untracked directory rather than the exact new file. The runner must accept both:
+   - the declared close directory;
+   - files under the declared close directory.
+4. Any dirty file outside the declared close scope is a blocker.
+5. The runner must not declare a clean closure while readiness is WARN/FAIL.
+6. The runner may declare review-required closure when the only dirty state is the expected close artifact.
+
+AI_TAIL REQUIREMENTS:
+- CLOSE_ARTIFACT_CREATED.
+- CLOSE_FILE or CLOSE_DIR.
+- UNEXPECTED_DIRTY_COUNT.
+- READINESS_STATUS.
+- COMMIT_PERFORMED.
+- PUSH_PERFORMED.
+- NEXT_ACTION.
+

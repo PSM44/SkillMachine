@@ -1,0 +1,33 @@
+==========
+GRC.COMPACT_UPLOAD_PACK_ONLY
+==========
+
+GRC_ID: GRC.COMPACT_UPLOAD_PACK_ONLY
+SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+MARKER: SM-055J-GRC-COMPACT-UPLOAD-PACK-ONLY
+STATUS: ACTIVE_CANDIDATE_CORE
+UPDATED_AT: 2026-07-05 01:04:17 -04:00
+
+CONTROL:
+When a runner uses Temp.SkillMachine or equivalent Temp upload staging, it MUST leave a compact upload pack only.
+
+MANDATORY RULES:
+1. TEMP_OUTPUT_POLICY must be stated as COMPACT_UPLOAD_PACK_ONLY in AI_TAIL.
+2. Temp must be cleaned at script start.
+3. Raw logs must not remain in Temp at the end.
+4. The upload evidence set must not exceed 10 UPLOAD_*.txt files.
+5. AI_TAIL must be persisted and printed.
+6. Tool stdout/stderr must be consolidated into UPLOAD files.
+7. The executing .ps1 may remain when it is stored in Temp.
+8. No generated-output manual patching may be hidden inside upload staging.
+
+BLOCKERS:
+- More than 10 UPLOAD_*.txt files.
+- Raw POSTPUSH/PREPUSH/RADAR/READINESS/VALIDATE logs left loose in Temp.
+- Missing AI_TAIL.
+- Missing TEMP_CLEANED_AT_START=YES.
+- Missing or false TEMP_OUTPUT_POLICY.
+
+EXCEPTION:
+A runner may leave an explicitly declared exception file only if the AI_TAIL declares why it is needed.
+

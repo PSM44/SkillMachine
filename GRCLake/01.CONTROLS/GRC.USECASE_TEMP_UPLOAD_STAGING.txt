@@ -249,3 +249,28 @@ The human can upload a small, flat, deterministic context package, and any gener
 FIN_MB-SM-054B_P0_UPLOAD_TEMP_GENERATED_OUTPUT_HARDENING
 ==========
 
+==========
+SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
+==========
+
+UPDATED_AT: 2026-07-05 01:04:17 -04:00
+SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+
+SUPPORTING_RULE:
+Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
+- clean Temp at start;
+- preserve current .ps1 if executing from Temp;
+- consolidate tool output into UPLOAD_*.txt;
+- leave no raw logs;
+- keep upload count <=10;
+- persist and print AI_TAIL.
+
+RELATED_CORE:
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.ACCUMULATED_PROJECT_REGISTERS
+- GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
+==========
+FIN_SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
+==========
+

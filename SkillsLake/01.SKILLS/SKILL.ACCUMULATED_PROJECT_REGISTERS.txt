@@ -1,0 +1,37 @@
+==========
+SKILL.ACCUMULATED_PROJECT_REGISTERS
+==========
+
+SKILL_ID: SKILL.ACCUMULATED_PROJECT_REGISTERS
+SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+MARKER: SM-055J-ACCUMULATED-PROJECT-REGISTERS
+STATUS: ACTIVE_CANDIDATE_CORE
+UPDATED_AT: 2026-07-05 01:04:17 -04:00
+
+PURPOSE:
+Maintain project-level accumulated registers so future IA instances can reconstruct decisions, unresolved questions, ideas, and Skill/GRC opportunities without relying on chat memory.
+
+REGISTER SET:
+1. QUESTIONS_ANSWERS.ACCUMULATED.<ProjectName>.txt
+   Captures open questions, answered questions, decision-producing Q&A, and questions to revisit.
+
+2. IDEAS.RELATED.ACCUMULATED.<ProjectName>.txt
+   Captures project-related ideas, accepted/rejected/deferred ideas, and ideas converted to backlog.
+
+3. IDEAS.UNRELATED.ACCUMULATED.<ProjectName>.txt
+   Captures unrelated ideas, future projects, parking-lot items, and organizational/personal ideas not in current scope.
+
+4. SKILL_GRC.OPPORTUNITIES.ACCUMULATED.<ProjectName>.txt
+   Captures Skill candidates, Skill improvements, GRC candidates, GRC improvements, duplicates, rejected proposals, and deferred hardening opportunities.
+
+CLASSIFICATION RULE:
+- Skill: a method, procedure, capability or repeatable way to perform work.
+- GRC: a control, prohibition, gate, policy, allowed/forbidden condition, or quality rule.
+- Backlog: useful work not yet validated or not yet approved for implementation.
+- Accumulated register: historical project memory that may later be promoted into Skill/GRC/backlog.
+
+MINIMUM PRACTICE:
+- Keep the registers flat and IA-readable.
+- Include date/time, source event, status, decision, and next action.
+- Do not treat a register entry as canon until promoted through review.
+
