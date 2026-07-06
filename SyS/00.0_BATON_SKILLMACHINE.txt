@@ -2283,3 +2283,57 @@ Review this refresh, then authorize local commit of BATON/WHOAMI. After readines
 FIN_MB-SM-055M-R1_REFRESH_AFTER_CORE_HARDENING_COMMIT_8A6A55C
 ==========
 
+==========
+CONTINUITY_UPDATE_MB-SM-056D-R1
+==========
+
+DATE: 2026-07-05 21:56:56 -04:00
+HEAD: 24e2fb4 20260705.1450_SkillsMachine_create_accumulated_project_registers_lab
+HEAD_SHORT: 24e2fb4
+PROJECT_ROOT: C:\01. GitHub\Skills
+TEMP_PATH: C:\Users\aazcl\Downloads\Temp.SkillMachine
+TEMP_OUTPUT_POLICY: COMPACT_UPLOAD_PACK_ONLY
+
+RECENT_COMMIT:
+24e2fb4 20260705.1450_SkillsMachine_create_accumulated_project_registers_lab
+
+SM-LAB-002 STATUS:
+- Lab created/recovered/enriched.
+- SessionContinue reconstruction passed 100/100.
+- Final review gate passed 95/100.
+- Local commit completed with clean working tree.
+- Push not performed yet.
+
+LAB_ID:
+SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+
+LAB_ROOT:
+C:\01. GitHub\Skills\99.LABS\SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+
+REGISTER OUTCOME:
+SM-LAB-002 validated the need and mechanism for accumulated project registers:
+- Q&A;
+- related project ideas;
+- unrelated/cross-project ideas;
+- backlog;
+- technical debt;
+- improvement opportunities;
+- Skill/GRC opportunities.
+
+KEY FINDINGS TO CARRY FORWARD:
+1. SessionContinue must review or request the Skills/GRC menu/index when relevant.
+2. SessionContinue must suggest relevant Skills/GRC artifacts for upload/context.
+3. Long scripts must be delivered as downloadable .ps1 files for Temp.SkillMachine, not as long paste blocks.
+4. Long-running scripts need timeout, heartbeat/progress, and visible stages.
+5. Cross-project recommendations such as CloseReport candidates can be transferred into SkillsMachine registers.
+6. AGENTS.md must be evaluated as an auxiliary agent-instruction layer; it must not replace BATON, WHOAMI, Skills, GRCs or usecase bundles.
+
+AGENTS_MD_STATUS:
+NOT_FOUND
+
+AGENTS_MD_FILES:
+
+
+NEXT_ACTION:
+Commit BATON/WHOAMI refresh, then push if readiness passes after that commit.
+

@@ -1411,3 +1411,25 @@ DO NOT:
 FIN_MB-SM-055M-R1_WHOAMI_REFRESH_AFTER_CORE_HARDENING_COMMIT_8A6A55C
 ==========
 
+==========
+WHOAMI_UPDATE_MB-SM-056D-R1
+==========
+
+DATE: 2026-07-05 21:56:56 -04:00
+CURRENT_HEAD: 24e2fb4
+CURRENT_LAB: SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+CURRENT_OPERATIONAL_STATE:
+SM-LAB-002 accumulated project registers lab is locally committed at 24e2fb4. Repo was clean before this BATON/WHOAMI refresh.
+
+NEW BEHAVIOR TO PRESERVE:
+When SessionContinue or equivalent context reconstruction starts, the IA should consider whether Skills/GRC menu/index files are needed and should recommend upload/context files if relevant.
+
+EXECUTABLE DELIVERY STANDARD:
+For long scripts, provide downloadable .ps1 files to be saved under Temp.SkillMachine. Do not require the user to paste long scripts into the interactive console.
+
+AGENTS_MD_NOTE:
+AGENTS.md is considered a candidate/auxiliary instruction carrier for agent behavior. It should be inspected when present, but authoritative project continuity remains BATON/WHOAMI plus Skills/GRCs/usecase bundles.
+
+NEXT STEP:
+Commit this continuity refresh, then push after readiness is green.
+
