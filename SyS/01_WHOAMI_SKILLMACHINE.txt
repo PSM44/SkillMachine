@@ -1433,3 +1433,18 @@ AGENTS.md is considered a candidate/auxiliary instruction carrier for agent beha
 NEXT STEP:
 Commit this continuity refresh, then push after readiness is green.
 
+==========
+SESSION_CLOSE_WHOAMI_UPDATE_MB-SM-056E
+==========
+
+DATE: 2026-07-05 22:16:17 -04:00
+STATE:
+User is validating SkillsMachine through governed labs. SM-LAB-002 proved accumulated registers. User explicitly wants the system to preserve project ideas, other-project ideas, backlog, technical debt, improvement opportunities, Skills and GRCs.
+
+OPERATIONAL PREFERENCES REINFORCED:
+- Do not rely on memory when corroboration is requested.
+- Inspect Skill menu/index and recommend relevant Skills/GRC uploads.
+- Long scripts must be downloadable .ps1 files saved in Temp.SkillMachine.
+- Compact upload packs only.
+- AGENTS.md is under consideration as an auxiliary instruction layer.
+

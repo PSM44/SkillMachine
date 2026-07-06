@@ -14,3 +14,17 @@ PROMOTION_TARGET: LAB_ARTIFACT
 OWNER: SkillsMachine
 NEXT_ACTION: Test continuation and close.
 
+ENTRY_ID: IR-002_MANAGEMENT_VISIBLE_EVIDENCE_PACK
+DATE: 2026-07-05 22:16:17 -04:00
+SOURCE: user request
+CATEGORY: management deliverable
+STATUS: OPEN
+TITLE: Build visible and functional management evidence pack.
+DETAIL: User asked for path to visible and functional management deliverable.
+DECISION: Carry forward as next battle after close.
+PROMOTION_TARGET: BACKLOG
+OWNER: SkillsMachine
+NEXT_ACTION: Define management demo/evidence pack scope.
+LINKED_FILES: none
+NOTES: Must be understandable by gerencia without reading raw repo internals.
+

@@ -42,3 +42,17 @@ NEXT_ACTION: Strengthen HUMAN_CONTROLLED_SCRIPT_EXECUTION / compact upload pack 
 LINKED_FILES: SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
 NOTES: This relates to prior PowerShell continuation/hanging risk.
 
+ENTRY_ID: TD-004_SESSION_CONTINUE_SKILL_GRC_MENU_GATE_NOT_CORE_PATCHED
+DATE: 2026-07-05 22:16:17 -04:00
+SOURCE: session close review
+CATEGORY: core behavior debt
+STATUS: OPEN
+TITLE: SessionContinue Skill/GRC menu review is validated as needed but not yet core-patched.
+DETAIL: SM-LAB-002 detected and preserved the gap; core hardening still needs implementation.
+DECISION: Carry forward as P0/P1 hardening candidate.
+PROMOTION_TARGET: BACKLOG
+OWNER: SkillsMachine
+NEXT_ACTION: Patch SessionContinue usecase/source controls in a later minibattle.
+LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
+NOTES: Do not lose this item.
+

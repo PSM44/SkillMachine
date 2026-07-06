@@ -42,3 +42,17 @@ NEXT_ACTION: Consider core patch after lab validates accumulation mechanism.
 LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
 NOTES: Directly relevant because original 056A appeared hung with no heartbeat.
 
+ENTRY_ID: IO-004_AGENTS_MD_AUXILIARY_INSTRUCTION_LAYER
+DATE: 2026-07-05 22:16:17 -04:00
+SOURCE: user question
+CATEGORY: instruction architecture improvement
+STATUS: OPEN
+TITLE: Evaluate AGENTS.md as auxiliary instruction layer.
+DETAIL: User asked whether the system is leaving AGENTS.md. Script found AGENTS.md status: NOT_FOUND.
+DECISION: Treat AGENTS.md as auxiliary, not replacement for BATON/WHOAMI/Skills/GRCs.
+PROMOTION_TARGET: BACKLOG_OR_GRC_CANDIDATE
+OWNER: SkillsMachine
+NEXT_ACTION: Create AGENTS.md proposal if approved.
+LINKED_FILES: none
+NOTES: Must not become competing continuity source.
+

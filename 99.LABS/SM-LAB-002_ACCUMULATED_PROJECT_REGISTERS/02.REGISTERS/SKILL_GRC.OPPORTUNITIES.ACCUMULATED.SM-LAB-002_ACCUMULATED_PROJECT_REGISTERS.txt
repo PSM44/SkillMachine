@@ -110,3 +110,17 @@ NEXT_ACTION: Confirm if already covered; otherwise patch script generation contr
 LINKED_FILES: GRCLake\01.CONTROLS
 NOTES: Cross-project recommendation preserved.
 
+ENTRY_ID: SG-009_AGENTS_MD_INSTRUCTION_LAYER_POLICY
+DATE: 2026-07-05 22:16:17 -04:00
+SOURCE: session close review
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.AGENTS_MD_AUXILIARY_INSTRUCTION_LAYER
+DETAIL: Define how AGENTS.md should coexist with BATON, WHOAMI, Skills, GRCs and usecase bundles.
+DECISION: Candidate for later evaluation.
+PROMOTION_TARGET: CORE_GRC_IF_ACCEPTED
+OWNER: SkillsMachine
+NEXT_ACTION: Decide whether to create AGENTS.md and governing GRC.
+LINKED_FILES: none
+NOTES: Triggered by user question during close.
+

@@ -2337,3 +2337,36 @@ AGENTS_MD_FILES:
 NEXT_ACTION:
 Commit BATON/WHOAMI refresh, then push if readiness passes after that commit.
 
+==========
+SESSION_CLOSE_UPDATE_MB-SM-056E
+==========
+
+DATE: 2026-07-05 22:16:17 -04:00
+HEAD: f7443be 20260705.2156_SkillsMachine_refresh_baton_whoami_after_accumulated_registers_lab
+HEAD_SHORT: f7443be
+ORIGIN_MAIN_SHORT: f7443be
+PROJECT_ROOT: C:\01. GitHub\Skills
+TEMP_PATH: C:\Users\aazcl\Downloads\Temp.SkillMachine
+TEMP_OUTPUT_POLICY: COMPACT_UPLOAD_PACK_ONLY
+
+CURRENT_STATUS:
+- SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS completed, committed and pushed.
+- Latest pushed HEAD: f7443be.
+- Repo was clean at start of this close update.
+- Validate/RADAR/Readiness are checked by MB-SM-056E.
+
+ACCUMULATED DEBT / BACKLOG TO CARRY:
+- Implement core SessionContinue gate to inspect/request Skill/GRC menu/index.
+- Implement or harden long-running script budget, heartbeat, elapsed time, progress and timeout expectations.
+- Reinforce downloadable .ps1 delivery standard for long scripts under Temp.SkillMachine.
+- Evaluate AGENTS.md as auxiliary agent-instruction layer.
+- Prepare visible functional management deliverable.
+
+NEXT DEVELOPMENT PATH:
+1. Commit this session-close update.
+2. Push after readiness is green.
+3. Create/standardize AGENTS.md if approved.
+4. Patch core SessionContinue Skill/GRC menu review.
+5. Patch long-running script heartbeat/budget controls if not already covered.
+6. Build management-visible demo/evidence pack.
+

@@ -1,0 +1,56 @@
+==========
+SESSION_CLOSE.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS
+==========
+
+DATE: 2026-07-05 22:16:17 -04:00
+ROOT: C:\01. GitHub\Skills
+HEAD: f7443be 20260705.2156_SkillsMachine_refresh_baton_whoami_after_accumulated_registers_lab
+ORIGIN_MAIN_SHORT: f7443be
+
+STATUS CORROBORATED BY SCRIPT:
+BRANCH=main
+HEAD_SHORT=f7443be
+STATUS_BEFORE_COUNT=0
+
+DONE:
+- SM-LAB-001 created/continued/closed.
+- Operational hardening completed and pushed earlier.
+- SM-LAB-002 created/recovered/enriched.
+- SM-LAB-002 session-continue reconstruction passed 100/100.
+- SM-LAB-002 final review gate passed 95/100.
+- SM-LAB-002 committed at 24e2fb4.
+- BATON/WHOAMI refresh committed at f7443be.
+- f7443be pushed and origin/main synchronized.
+- AGENTS.md checked: NOT_FOUND.
+
+ACCUMULATED TECHNICAL DEBT:
+- SessionContinue does not yet have a proven mandatory Skill/GRC menu review gate.
+- Long-running scripts need explicit budget/heartbeat/progress standard.
+- Executable delivery standard must be made impossible to miss.
+- AGENTS.md needs architectural decision.
+- Management-visible deliverable not yet built.
+
+ACCUMULATED BACKLOG:
+- Create AGENTS.md proposal / decision.
+- Patch SessionContinue Skill/GRC menu review if approved.
+- Patch long-running execution GRC/Skill if needed.
+- Commit/push this close update.
+- Prepare management-visible evidence/demo pack.
+- Continue with SM-LAB-003 or management pack.
+
+ACCUMULATED IDEAS:
+- Cross-project candidate transfer works and should become a standard pattern.
+- Accumulated registers should become mandatory in serious projects.
+- AGENTS.md can serve as auxiliary agent instruction layer, not replacement for BATON/WHOAMI.
+- Management deliverable should show a visible functional cycle, not only files.
+
+PATH TO MANAGEMENT-VISIBLE FUNCTIONAL DELIVERABLE:
+MINIBATTLE 01: Close and push this session update.
+MINIBATTLE 02: Decide and create AGENTS.md.
+MINIBATTLE 03: Patch SessionContinue to inspect Skill/GRC menu/index.
+MINIBATTLE 04: Patch heartbeat/budget controls.
+MINIBATTLE 05: Create management-visible evidence pack.
+BATTLE: SkillsMachine v0.1 Management Ready.
+
+NEXT_ACTION:
+Commit and push this close update, then start AGENTS.md / SessionContinue hardening.
