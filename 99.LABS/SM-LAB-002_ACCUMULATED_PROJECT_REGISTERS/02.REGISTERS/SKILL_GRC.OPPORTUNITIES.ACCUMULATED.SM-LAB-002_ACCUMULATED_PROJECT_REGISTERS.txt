@@ -124,3 +124,31 @@ NEXT_ACTION: Decide whether to create AGENTS.md and governing GRC.
 LINKED_FILES: none
 NOTES: Triggered by user question during close.
 
+
+---
+ID: SG-009_GPT_UPLOAD_LOCK_WORKFLOW
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057A-R5_REGISTER_GPT_UPLOAD_LOCK_SKILL_CANDIDATE_NO_COMMIT
+DATE: 20260706_165157
+TYPE: SKILL_GRC_CANDIDATE
+TITLE: GPT.Upload.Lock methodology for no-upload / paste-only continuity
+DETAIL:
+Register a reusable Skill and GRC candidate for GPT.Upload.Lock. The methodology requires runners to emit a compact TOVS_SUMMARY block <=9000 chars and prevents default dependency on uploaded files.
+CANDIDATE_FILES:
+- SkillsLake\99.CANDIDATES\SKILL.GPT_UPLOAD_LOCK_WORKFLOW.CANDIDATE.txt
+- GRCLake\99.CANDIDATES\GRC.GPT_UPLOAD_LOCK_CONTEXT_DELIVERY.CANDIDATE.txt
+---
+
+---
+ID: SG-010_GPT_UPLOAD_LOCK_TEMPORARY_DETU_FALLBACK
+STATUS: CANDIDATE_REFINEMENT
+SOURCE_MB: MB-SM-057A-R8_REFINE_GPT_UPLOAD_LOCK_DETU_FALLBACK_TOVS_NO_COMMIT
+DATE: 20260706_171504
+TYPE: SKILL_GRC_CANDIDATE_REFINEMENT
+TITLE: GPT.Upload.Lock is temporary fallback; return to DETU when uploads are available
+DETAIL:
+User clarified that GPT.Upload.Lock is a work methodology with GPT only while file upload is blocked or upload limit is exhausted. Once uploads are restored, the project returns to DETU: Download executable, execute locally, Upload maximum 10 consolidated files from Temp.
+AFFECTED_CANDIDATE_FILES:
+- SkillsLake\99.CANDIDATES\SKILL.GPT_UPLOAD_LOCK_WORKFLOW.CANDIDATE.txt
+- GRCLake\99.CANDIDATES\GRC.GPT_UPLOAD_LOCK_CONTEXT_DELIVERY.CANDIDATE.txt
+---

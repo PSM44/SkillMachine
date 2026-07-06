@@ -1,0 +1,84 @@
+SKILL_ID: SKILL.GPT_UPLOAD_LOCK_WORKFLOW.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057A-R8_REFINE_GPT_UPLOAD_LOCK_DETU_FALLBACK_TOVS_NO_COMMIT
+UPDATED_AT: 20260706_171504
+MODE_NAME: GPT.Upload.Lock
+PRIMARY_METHOD_WHEN_UPLOADS_AVAILABLE: DETU
+DETU_MEANING: Download executable, execute locally, Upload maximum 10 consolidated files from Temp.
+MODE_SCOPE: TEMPORARY_FALLBACK_WHEN_UPLOADS_ARE_UNAVAILABLE_OR_LIMIT_EXHAUSTED
+
+PURPOSE:
+Define a temporary no-upload / low-upload operating method for SkillsMachine and adjacent projects when file uploads are unavailable, exhausted, unreliable, blocked, or operationally undesirable.
+
+IMPORTANT MODE BOUNDARY:
+GPT.Upload.Lock is not the default permanent methodology.
+When file upload is available again, the workflow must return to DETU:
+- Download executable.
+- Save executable in Temp path.
+- Execute locally.
+- Generate consolidated outputs in Temp.
+- Upload maximum 10 consolidated files.
+- Use those files for normal IA continuity and audit.
+
+WHEN TO ACTIVATE GPT.Upload.Lock:
+- The human cannot upload files.
+- The upload limit is exhausted.
+- Attachments are unreliable or temporarily unavailable.
+- The human explicitly activates GPT.Upload.Lock.
+
+WHEN TO DEACTIVATE GPT.Upload.Lock:
+- Upload is available again.
+- The human explicitly returns to DETU.
+- The workflow requires normal artifact review and upload is possible.
+
+OPERATING CONTEXT UNDER GPT.Upload.Lock:
+- Human can paste text blocks only.
+- Maximum paste budget: 9000 characters per response.
+- Assistant must not depend on attachments by default.
+- Scripts and runners must emit a compact pasteable final block.
+
+REQUIRED FINAL BLOCK:
+TOVS_SUMMARY_START
+...
+TOVS_SUMMARY_END
+
+MINIMUM REQUIRED FIELDS:
+- AI_TAIL_SCHEMA
+- MB_ID
+- FINAL_STATUS
+- BLOCKER
+- PROJECT_ROOT
+- TEMP_PATH
+- TOVS_ONLY_MODE=ON
+- MAX_PASTE_CHARS=9000
+- DB_MODIFIED
+- CANON_MODIFIED
+- COMMIT_PUSH_PERFORMED
+- BUILD_EXECUTED
+- WARNINGS
+- KEY_FINDINGS
+- DECISIONS_NEEDED
+- NEXT_ACTION
+
+RULES:
+1. Do not request uploads by default while GPT.Upload.Lock is active.
+2. Do not request the full repository.
+3. Do not request complete files unless explicitly authorized.
+4. Every runner must print a final pasteable TOVS block <=9000 chars.
+5. Generated files may remain local on the human computer; do not require upload.
+6. If evidence is missing, request a specific pasted block <=9000 chars.
+7. Tables must be summarized to max 20 critical rows/columns.
+8. Errors must still emit FINAL_STATUS=FAIL and BLOCKER=<exact cause>.
+9. Use PASS_WITH_REVIEW only for intermediate deliverables.
+10. Before asking, inspect available context, accumulated registers, Q&A, decisions and previous AI_TAIL/TOVS.
+11. Runners must not clean Temp if they depend on previous outputs unless explicitly authorized or they preserve needed outputs first.
+12. Runners must state whether DB, canon, Git, build or agents were modified.
+13. Detected opportunities for Skills/GRC under this mode are candidates, not automatic canon.
+
+ACCEPTANCE TESTS:
+- Runner completes and prints TOVS_SUMMARY_START/END.
+- Summary is <=9000 characters.
+- Summary includes required fields.
+- The assistant can decide next action from summary alone.
+- No upload is required to continue.
+- When upload is restored, next runner or response explicitly returns to DETU.

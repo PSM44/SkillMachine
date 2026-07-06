@@ -1,0 +1,38 @@
+GRC_ID: GRC.GPT_UPLOAD_LOCK_CONTEXT_DELIVERY.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057A-R8_REFINE_GPT_UPLOAD_LOCK_DETU_FALLBACK_TOVS_NO_COMMIT
+UPDATED_AT: 20260706_171504
+MODE_NAME: GPT.Upload.Lock
+PRIMARY_METHOD_WHEN_UPLOADS_AVAILABLE: DETU
+DETU_MEANING: Download executable, execute locally, Upload maximum 10 consolidated files from Temp.
+MODE_SCOPE: TEMPORARY_FALLBACK_WHEN_UPLOADS_ARE_UNAVAILABLE_OR_LIMIT_EXHAUSTED
+
+CONTROL_OBJECTIVE:
+Prevent operational blockage when uploads are unavailable while preserving a clear return path to DETU when uploads are available.
+
+MANDATORY CONTROLS UNDER GPT.Upload.Lock:
+- TOVS_ONLY_MODE must be ON.
+- MAX_PASTE_CHARS must be 9000 or lower.
+- Runners must emit TOVS_SUMMARY_START/END.
+- The assistant must not require attachments by default.
+- The assistant must not request full repo or full files unless explicitly authorized.
+- Scripts must disclose DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED and BUILD_EXECUTED.
+- If generated files exist, they can remain local; continuation must rely on TOVS unless specific evidence is missing.
+- Missing evidence must be requested as a specific block <=9000 chars.
+- Skill/GRC opportunities detected in this mode must be registered as candidates, not canon automatic.
+
+DEACTIVATION CONTROL:
+When uploads are available again, GPT.Upload.Lock must be deactivated and workflow must return to DETU unless the human explicitly extends GPT.Upload.Lock.
+
+BLOCK CONDITIONS:
+- A runner produces only files and no TOVS block while GPT.Upload.Lock is active.
+- A response requires upload for normal continuation while GPT.Upload.Lock is active.
+- A response asks for full repo or full file without explicit authorization.
+- A response remains in GPT.Upload.Lock after uploads are restored without explicit human instruction.
+- A final PASS is declared without required evidence in TOVS or available context.
+
+EVIDENCE REQUIRED:
+- TOVS block pasted by human while GPT.Upload.Lock is active.
+- Optional local output path for audit.
+- Dirty state / modification flags when repo operations are involved.
+- Explicit return to DETU when upload capability is restored.
