@@ -1448,3 +1448,21 @@ OPERATIONAL PREFERENCES REINFORCED:
 - Compact upload packs only.
 - AGENTS.md is under consideration as an auxiliary instruction layer.
 
+
+==========
+MB-SM-057A-R11_UPDATE_BATON_WHOAMI_GPT_UPLOAD_LOCK
+==========
+UPDATED_AT........: 2026-07-06 17:44:06 -04:00
+CURRENT_PROJECT...: PS.SkillsMachine
+CURRENT_REPO......: C:\01. GitHub\Skills
+CURRENT_HEAD......: c40cae0
+CURRENT_MODE......: GPT.Upload.Lock temporary fallback.
+NORMAL_METHOD.....: DETU once upload is available.
+DETU_DEFINITION...: Download executable, execute locally, Upload maximum 10 consolidated files from Temp.
+ACTIVE_SCOPE......: Continue toward SM-LAB-003 guardrails and agent instructions after continuity update.
+RECENT_DECISION...: User clarified GPT.Upload.Lock is temporary with GPT until upload unlocks; then return to DETU.
+RECENT_COMMIT.....: 20260706.1705_SkillsMachine_add_gpt_upload_lock_candidates.
+NEXT_ACTION.......: Commit/push this BATON/WHOAMI update, then run 057B.
+==========
+END_MB-SM-057A-R11_UPDATE_BATON_WHOAMI_GPT_UPLOAD_LOCK
+==========

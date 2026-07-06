@@ -2370,3 +2370,20 @@ NEXT DEVELOPMENT PATH:
 5. Patch long-running script heartbeat/budget controls if not already covered.
 6. Build management-visible demo/evidence pack.
 
+
+==========
+MB-SM-057A-R11_UPDATE_BATON_WHOAMI_GPT_UPLOAD_LOCK
+==========
+UPDATED_AT........: 2026-07-06 17:44:06 -04:00
+HEAD..............: c40cae0
+ORIGIN_MAIN.......: c40cae0
+CONTEXT...........: GPT.Upload.Lock candidate docs were committed and pushed.
+MODE_STATUS.......: GPT.Upload.Lock active only while uploads are unavailable or exhausted.
+DEFAULT_RETURN....: DETU when uploads are available again.
+DETU..............: Download executable -> execute locally -> Upload max 10 consolidated files from Temp.
+VALIDATION........: Validate-System PASS; RADAR PASS; Readiness WARN only due BATON/WHOAMI freshness before this update.
+NEXT_ACTION.......: Commit and push BATON/WHOAMI continuity update, then proceed to 057B STATUS AND SCOPE SM-LAB-003.
+NOTES.............: GPT.Upload.Lock is candidate methodology, not canon automatic; SM-LAB-003 should include transition gate GPT.Upload.Lock -> DETU.
+==========
+END_MB-SM-057A-R11_UPDATE_BATON_WHOAMI_GPT_UPLOAD_LOCK
+==========
