@@ -1,0 +1,100 @@
+GRC_ID: GRC.GUARDRAILS.CORE.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057E_CREATE_GRC_AND_SKILL_GUARDRAIL_CANDIDATES_NO_COMMIT_NO_PUSH
+CREATED_AT: 20260707_111322
+SCOPE: PS.SkillsMachine agent and repo-operation guardrails
+CANON_PROMOTION: Requires explicit human authorization.
+
+PURPOSE:
+Provide core governance, risk, and control rules for AI-assisted execution in PS.SkillsMachine.
+
+CONTROL OBJECTIVES:
+1. Prevent unapproved repo mutation.
+2. Prevent uncontrolled upload/file evidence scope.
+3. Preserve DETU as default when uploads are available.
+4. Preserve GPT.Upload.Lock as temporary fallback when uploads are unavailable.
+5. Enforce Temp cleanup and upload-only final packaging.
+6. Enforce maximum 10 upload files, not exactly 10.
+7. Enforce explicit dirty-scope validation.
+8. Enforce quote-safe execution of paths with spaces.
+9. Enforce no git add -A.
+10. Enforce candidate-before-canon workflow.
+
+MANDATORY CONTROLS:
+GRC-CORE-001 DETU DEFAULT:
+When uploads are available, use DETU:
+Download executable -> execute locally -> upload a consolidated evidence package from Temp.
+
+GRC-CORE-002 GPT.UPLOAD.LOCK FALLBACK:
+Use GPT.Upload.Lock only when uploads are unavailable, blocked, exhausted, unreliable, or explicitly activated.
+
+GRC-CORE-003 TEMP CLEAN BEFORE USE:
+Before generating or adding files under Temp, delete existing Temp contents.
+
+GRC-CORE-004 TEMP FINAL UPLOAD-ONLY:
+At the end of a DETU runner, Temp must contain only files intended for upload.
+
+GRC-CORE-005 MAX 10 UPLOAD FILES:
+The assistant must consolidate all files it considers necessary into a maximum of 10 upload files. This is an upper limit, not a target.
+
+GRC-CORE-006 CONSOLIDATE BEFORE UPLOAD:
+If raw evidence would exceed 10 files, merge stdout/stderr/logs/diffs/reports into consolidated review bundles before asking the human to upload.
+
+GRC-CORE-007 DO NOT INCLUDE EMPTY EVIDENCE FILES:
+Do not include empty diff/log/evidence files in DETU packages. For untracked files, use full file copies plus status evidence; do not rely on git diff alone.
+
+GRC-CORE-008 DIRTY SCOPE:
+Use git status --short --untracked-files=all before and after repo-affecting actions. Hard stop on unexpected dirty scope.
+
+GRC-CORE-009 STAGING:
+Never use git add -A. Stage only explicitly whitelisted paths.
+
+GRC-CORE-010 HUMAN AUTHORIZATION:
+Commit, push, build, destructive actions, canon promotion, and broad rewrites require exact human authorization.
+
+GRC-CORE-011 PATH QUOTING:
+Quote all paths with spaces when invoking tools and scripts, especially C:\01. GitHub\Skills.
+
+GRC-CORE-012 VALIDATION:
+Run and report Validate-System, RADAR, and Readiness where appropriate. Dirty uncommitted files may cause Readiness WARN/FAIL; this must be explained and resolved before session close.
+
+GRC-CORE-013 CANDIDATE BEFORE CANON:
+New Skill/GRC opportunities are candidates unless explicitly promoted.
+
+GRC-CORE-014 FAILURE SEMANTICS:
+FAIL requires exact actionable BLOCKER. PASS_WITH_REVIEW is only acceptable for intermediate reviewable states.
+
+ACCEPTANCE EVIDENCE:
+- DETU manifest or summary shows TEMP_WAS_CLEANED_BEFORE_USE=YES.
+- Final Temp contains only upload files.
+- Upload file count is 1..10.
+- Dirty scope has no unexpected files.
+- Validation bundle exists and is consolidated.
+- No empty evidence file is requested for upload.
+- Repo mutation status explicitly declares DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, BUILD_EXECUTED.
+
+FAILURE MODES:
+- Asking the human to upload more than 10 files.
+- Leaving stale Temp files after runner completion.
+- Uploading random Temp contents rather than a deliberate package.
+- Including empty git diff files for untracked files.
+- Relying on memory instead of current repo evidence.
+- Creating canon artifacts from candidates without authorization.
+
+## DETU single upload subfolder rule
+
+Marker: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE
+
+For DETU workflows in this project:
+
+- Use Temp root exactly as C:\Users\aazcl\Downloads\Temp.SkillMachine.
+- Before using Temp, delete its existing contents.
+- After the runner finishes, Temp root must contain exactly one upload subfolder.
+- That upload subfolder must contain every file the assistant wants uploaded.
+- Do not leave loose files directly under Temp.
+- Do not leave multiple package folders under Temp.
+- Do not leave nested subfolders inside the upload subfolder unless explicitly authorized.
+- The upload subfolder must contain 1 to 10 files.
+- If more evidence is needed, consolidate/merge before finishing.
+- The human uploads the contents of that one subfolder, not arbitrary files from Temp.
+This rule is a core GRC control for upload evidence scope.

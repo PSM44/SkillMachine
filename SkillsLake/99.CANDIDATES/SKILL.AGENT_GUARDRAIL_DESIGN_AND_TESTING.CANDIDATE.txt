@@ -1,0 +1,121 @@
+SKILL_ID: SKILL.AGENT_GUARDRAIL_DESIGN_AND_TESTING.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057E_CREATE_GRC_AND_SKILL_GUARDRAIL_CANDIDATES_NO_COMMIT_NO_PUSH
+CREATED_AT: 20260707_111322
+SCOPE: Designing, implementing, testing, and reviewing AI-agent guardrails for PS.SkillsMachine.
+CANON_PROMOTION: Requires explicit human authorization.
+
+PURPOSE:
+Provide a practical method for translating Skills/GRC rules into executable agent guardrails, tests, evidence packages, and failure blockers.
+
+WHEN TO USE:
+- Creating or reviewing AGENTS.md.
+- Creating GRC/Skill guardrail candidates.
+- Building runner preflight checks.
+- Designing DETU upload packages.
+- Diagnosing repo-operation failures.
+- Preparing commit/push readiness.
+
+CORE METHOD:
+1. Identify the source rule.
+2. Convert it into a guardrail.
+3. Define the preflight check.
+4. Define the post-action check.
+5. Define evidence required for review.
+6. Define failure mode.
+7. Define exact human authorization needed.
+8. Keep output package <=10 files.
+9. Clean Temp before use.
+10. Leave only upload files in Temp.
+
+GUARDRAIL MATRIX COLUMNS:
+- ID
+- Domain
+- Source Skill/GRC
+- Guardrail
+- Preflight test
+- Post-action test
+- Evidence
+- Failure mode
+- Required authorization
+- Candidate/canon impact
+- Commit/push/build impact
+
+REQUIRED RUNNER PATTERNS:
+- Guard against runner execution from Temp if runner cleans Temp.
+- Clean Temp before generating/upload package files.
+- Capture validation output into consolidated bundles.
+- Avoid empty files in final upload package.
+- For untracked files, copy the full file into the upload package.
+- Include git status --short --untracked-files=all evidence.
+- Include DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, BUILD_EXECUTED.
+- Use explicit allowlists for dirty scope and staging.
+- Use exact BLOCKER values on FAIL.
+
+DETU PACKAGE STANDARD:
+A valid DETU package:
+- is generated under C:\Users\aazcl\Downloads\Temp.SkillMachine;
+- contains only files intended for upload;
+- contains 1 to 10 files;
+- includes a manifest or summary;
+- contains complete review evidence;
+- does not require the human to infer which files to upload;
+- does not include stale or empty evidence files.
+
+GPT.UPLOAD.LOCK STANDARD:
+Use only as fallback. Under GPT.Upload.Lock:
+- no upload dependency by default;
+- request compact TOVS or exact excerpts only;
+- keep pasted evidence <=9000 characters;
+- return to DETU when uploads become available.
+
+TEST CASES:
+TC-001 Temp contains old files before runner.
+Expected: runner deletes them before creating new package.
+
+TC-002 Runner creates 14 raw outputs.
+Expected: runner merges them into <=10 upload files.
+
+TC-003 A new untracked AGENTS.md exists.
+Expected: package includes full AGENTS.md copy and git status; does not rely on git diff alone.
+
+TC-004 git diff output for untracked file is empty.
+Expected: empty diff is not included in final upload package.
+
+TC-005 unexpected dirty file appears.
+Expected: runner FAIL with BLOCKER=UNEXPECTED_DIRTY_*.
+
+TC-006 human authorizes commit.
+Expected: runner stages exact whitelist only; no git add -A.
+
+TC-007 uploads unavailable.
+Expected: use GPT.Upload.Lock and TOVS <=9000.
+
+TC-008 uploads available again.
+Expected: return to DETU.
+
+DONE WHEN:
+- Guardrail artifacts exist as candidates.
+- AGENTS.md references operational guardrails.
+- Validate-System and RADAR pass.
+- Readiness status is understood and explainable.
+- Temp package contains only intended upload files.
+- Repo dirty scope contains only expected files.
+
+## DETU single upload subfolder rule
+
+Marker: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE
+
+For DETU workflows in this project:
+
+- Use Temp root exactly as C:\Users\aazcl\Downloads\Temp.SkillMachine.
+- Before using Temp, delete its existing contents.
+- After the runner finishes, Temp root must contain exactly one upload subfolder.
+- That upload subfolder must contain every file the assistant wants uploaded.
+- Do not leave loose files directly under Temp.
+- Do not leave multiple package folders under Temp.
+- Do not leave nested subfolders inside the upload subfolder unless explicitly authorized.
+- The upload subfolder must contain 1 to 10 files.
+- If more evidence is needed, consolidate/merge before finishing.
+- The human uploads the contents of that one subfolder, not arbitrary files from Temp.
+This rule is a testable guardrail design requirement.

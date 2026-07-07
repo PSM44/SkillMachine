@@ -1,0 +1,78 @@
+SKILL_ID: SKILL.DETU_UPLOAD_PACK_MAX10_WORKFLOW.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057D-R2_REGISTER_DETU_MAX10_UPLOAD_PACK_SKILL_PATCH_AGENTS_NO_COMMIT_NO_PUSH
+CREATED_AT: 20260706_190755
+MODE_NAME: DETU
+PRIMARY_METHOD_WHEN_UPLOADS_AVAILABLE: DETU
+FALLBACK_METHOD_WHEN_UPLOADS_UNAVAILABLE: GPT.Upload.Lock
+
+PURPOSE:
+Define the mandatory DETU upload-package rule for SkillsMachine and adjacent workflows.
+
+DETU DEFINITION:
+Download executable -> execute locally -> upload a consolidated evidence package from Temp.
+
+NON-NEGOTIABLE RULE:
+The assistant must consolidate all files it considers necessary into a maximum of 10 upload files.
+
+CLARIFICATION:
+The target is not exactly 10 files. The package may contain 1 to 10 files.
+If evidence, logs, CSVs, manifests, diffs, stdout, stderr, and reports would exceed 10 files, the runner must merge/fuse them into fewer consolidated files before asking the human to upload.
+
+REQUIRED RUNNER BEHAVIOR:
+1. Produce a package under Temp.
+2. Emit a manifest listing only the files that must be uploaded.
+3. Keep UPLOAD_FILES_COUNT <= 10.
+4. Do not ask the human to upload files outside the manifest.
+5. If more than 10 files are needed, consolidate first.
+6. If consolidation is impossible, fail with BLOCKER=UPLOAD_PACK_OVER_LIMIT.
+7. The manifest must state MAX_UPLOAD_FILES=10 and FILES_COUNT=<n>.
+8. Raw stdout/stderr files should be merged into a validation/evidence bundle unless they are among the listed upload files.
+9. Package files should be self-explanatory for the IA.
+10. Temp can contain extra local files, but only manifest-listed files are upload-required.
+
+ACCEPTANCE TESTS:
+- FILES_COUNT is between 1 and 10.
+- Manifest lists every required upload file.
+- No additional upload request is needed to continue.
+- The assistant can review the package from the uploaded files alone.
+- The runner states DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED and BUILD_EXECUTED.
+
+FAILURE MODES:
+- More than 10 files requested for upload.
+- Extra logs requested after manifest upload when they could have been merged.
+- Asking for exactly 10 files instead of up to 10.
+- Asking for full repo or unconsolidated raw folders.
+
+TEMP CLEANUP AND UPLOAD-ONLY RULE
+Marker: MB-SM-057D-R3_TEMP_CLEAN_UPLOAD_ONLY_RULE
+
+Before generating or adding files under Temp, the runner must delete existing Temp contents.
+
+The final Temp content must be upload-ready:
+- only files intended for upload;
+- no stale package folders;
+- no extra stdout/stderr fragments unless they are explicitly part of a consolidated upload file;
+- no intermediate files;
+- no previous-run artifacts.
+
+If more than 10 files would be needed, consolidate/merge first.
+If Temp was not cleaned before use, that is an operational non-compliance and must be corrected in the next iteration.
+
+## DETU single upload subfolder rule
+
+Marker: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE
+
+For DETU workflows in this project:
+
+- Use Temp root exactly as C:\Users\aazcl\Downloads\Temp.SkillMachine.
+- Before using Temp, delete its existing contents.
+- After the runner finishes, Temp root must contain exactly one upload subfolder.
+- That upload subfolder must contain every file the assistant wants uploaded.
+- Do not leave loose files directly under Temp.
+- Do not leave multiple package folders under Temp.
+- Do not leave nested subfolders inside the upload subfolder unless explicitly authorized.
+- The upload subfolder must contain 1 to 10 files.
+- If more evidence is needed, consolidate/merge before finishing.
+- The human uploads the contents of that one subfolder, not arbitrary files from Temp.
+This rule is part of the DETU upload-pack workflow Skill candidate.
