@@ -161,30 +161,4 @@ NEXT_ACTION.......: Compare Codex vs Claude outputs without merging branches yet
 TECH_DEBT.........: pycache cleanup after tests; Python test cwd/PYTHONPATH; Claude Code isolated workspace/push permissions; RADAR transient failure capture; PowerShell here-string fragility.
 BACKLOG_ACTIVE....: compare branches; select candidate; promote or merge; register findings; prepare managerial demo path.
 
----
-CONTINUITY_UPDATE_ID: MB-SM-057H_R2_UPDATE_BATON_WHOAMI_AFTER_SM_LAB_003_COMMIT_NO_PUSH
-UPDATED_AT: 20260707_185925
-HEAD_AFTER_SM_LAB_003_COMMIT: 943b7f0
-ORIGIN_MAIN_AT_UPDATE: 652fd01
-SESSION_CONTEXT:
-- SM-LAB-003 guardrails/AGENTS layer was committed locally.
-- Commit: 943b7f0f6851aa3925d9c3ee7830953914c8e9a5
-- Commit message: 20260706.1915_SkillsMachine_sm_lab_003_guardrails_agents
-- Created/committed:
-  - AGENTS.md
-  - GRCLake/99.CANDIDATES/GRC.GUARDRAILS.CORE.CANDIDATE.txt
-  - SkillsLake/99.CANDIDATES/SKILL.AGENT_GUARDRAIL_DESIGN_AND_TESTING.CANDIDATE.txt
-  - SkillsLake/99.CANDIDATES/SKILL.DETU_UPLOAD_PACK_MAX10_WORKFLOW.CANDIDATE.txt
-- DETU upload workflow standard corrected:
-  - Temp root: C:\Users\aazcl\Downloads\Temp.SkillMachine
-  - Clean Temp before use.
-  - Leave exactly one upload subfolder under Temp.
-  - Place all requested upload files inside that subfolder.
-  - Maximum 10 upload files.
-  - Use full copies/status for untracked files; do not rely on empty git diff.
-- GPT.Upload.Lock remains fallback only when uploads are unavailable.
-- No push has been performed after the SM-LAB-003 commit.
 
-NEXT_ACTION:
-- Run post-continuity validation.
-- If clean and Readiness passes, authorize push of local commits.
