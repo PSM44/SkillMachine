@@ -1,0 +1,72 @@
+SKILL_ID: SKILL.POWERSHELL_SCRIPT_PARSER_SAFETY.CANDIDATE
+STATUS: CANDIDATE
+SOURCE_MB: MB-SM-057J_CREATE_POWERSHELL_PARSER_SAFETY_SKILL_CANDIDATE_NO_COMMIT_NO_PUSH
+SCOPE: Safety controls for generated PowerShell .ps1 runners in PS.SkillsMachine.
+CANON_PROMOTION: Requires explicit human authorization.
+
+PURPOSE:
+Prevent recurring PowerShell parser failures in generated runners before the human executes them.
+
+PRIMARY FAILURE PATTERN:
+PowerShell treats a variable immediately followed by a colon as a scoped or drive-qualified variable reference.
+This Skill refers to the unsafe form as: dollar-sign + variable-name + colon.
+
+Safe forms:
+  ${HeadAfter}:
+  ${OriginBefore}:
+  ${AnyVariable}:
+
+MANDATORY CONTROLS:
+1. Do not place a plain variable reference immediately before a colon inside expandable strings or here-strings unless it is a valid PowerShell scoped variable.
+2. When a variable is followed by a colon, delimit it with braces, as shown in the safe forms above.
+3. Before delivering any long .ps1 runner, run a static scan for risky variable-colon patterns.
+4. Exclude valid PowerShell scoped variables from the scan:
+   - $env:
+   - $script:
+   - $global:
+   - $local:
+   - $private:
+5. Treat any remaining plain variable-colon match as a blocker until corrected.
+6. Run a PowerShell parser check when feasible before delivering the script.
+7. Do not ask the human to paste long scripts into an interactive terminal. Provide a .ps1 file.
+8. If the runner cleans Temp, the runner must refuse to execute from Temp.
+9. Preserve DETU packaging:
+   - Temp root: C:\Users\aazcl\Downloads\Temp.SkillMachine
+   - Clean Temp before use.
+   - Leave exactly one upload subfolder.
+   - Maximum 10 upload files.
+10. If PowerShell enters continuation prompt >>, stop with Ctrl+C instead of pasting more code.
+
+STATIC SCAN SPEC:
+Regex:
+  \$[A-Za-z_][A-Za-z0-9_]*:
+
+Allowed matches:
+  $env:
+  $script:
+  $global:
+  $local:
+  $private:
+
+Blocker when non-allowed matches exist:
+  POWERSHELL_RISKY_VARIABLE_COLON_PATTERN
+
+PARSER CHECK:
+Use the PowerShell parser API:
+  [System.Management.Automation.Language.Parser]::ParseFile(path, tokens-ref, errors-ref)
+
+ACCEPTANCE CRITERIA:
+- Generated runner file exists.
+- Static scan returns zero risky variable-colon patterns outside allowed scopes.
+- Parser check returns zero errors.
+- Runner is delivered as file, not as long paste.
+- DETU package follows one-subfolder Temp standard.
+- Script output declares DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED, BUILD_EXECUTED.
+
+KNOWN INCIDENTS:
+- 057H initially failed due Sort-Object syntax.
+- 057I initially failed due variable-colon text inside a here-string.
+- The issue is recurrent enough to require a permanent Skill candidate.
+
+STATUS:
+Candidate only. Do not promote to canon without explicit human authorization.

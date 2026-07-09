@@ -81,7 +81,7 @@ Commits, pushes, builds, destructive actions, and canon promotion require explic
 ```
 Quote paths containing spaces, especially under:
 ```
-`	ext
+```text
 C:\01. GitHub\Skills
 ```
 ```
@@ -95,7 +95,7 @@ If an interactive PowerShell prompt enters >>, stop with Ctrl+C instead of conti
 ```
 Use:
 ```
-`	ext
+```text
 C:\Users\aazcl\Downloads\Temp.SkillMachine
 ```
 ```
@@ -127,7 +127,7 @@ New Skill/GRC opportunities are candidates unless the human explicitly authorize
 ```
 Use candidate locations such as:
 ```
-`	ext
+```text
 SkillsLake\99.CANDIDATES
 GRCLake\99.CANDIDATES
 ```
@@ -202,7 +202,7 @@ Before generating or adding files under the project Temp path, the runner must d
 ```
 For SkillsMachine the current Temp path is:
 ```
-`	ext
+```text
 C:\Users\aazcl\Downloads\Temp.SkillMachine
 ```
 ```
@@ -223,7 +223,7 @@ Marker: MB-SM-057E_GUARDRAIL_CANDIDATES_REFERENCE
 ```
 SM-LAB-003 adds two guardrail candidates:
 ```
-`	ext
+```text
 GRCLake\99.CANDIDATES\GRC.GUARDRAILS.CORE.CANDIDATE.txt
 SkillsLake\99.CANDIDATES\SKILL.AGENT_GUARDRAIL_DESIGN_AND_TESTING.CANDIDATE.txt
 ```
@@ -260,3 +260,25 @@ For DETU workflows in this project:
 - If more evidence is needed, consolidate/merge before finishing.
 - The human uploads the contents of that one subfolder, not arbitrary files from Temp.
 ```
+## PowerShell parser safety for generated runners
+
+Marker: MB-SM-057J_POWERSHELL_PARSER_SAFETY_SKILL_REFERENCE
+
+PowerShell `.ps1` runners must follow the candidate Skill:
+
+```text
+SkillsLake\99.CANDIDATES\SKILL.POWERSHELL_SCRIPT_PARSER_SAFETY.CANDIDATE.txt
+```
+Required controls before delivering long PowerShell runners:
+
+- Scan for risky variable-colon patterns using regex `\$[A-Za-z_][A-Za-z0-9_]*:`.
+- Exclude valid scoped variables only: `$env:`, `$script:`, `$global:`, `$local:`, `$private:`.
+- Rewrite unsafe variable-colon cases using braces, for example `${HeadAfter}:`.
+- Run a parser check when feasible before delivery.
+- Deliver long scripts as `.ps1` files, not pasted console blocks.
+- If a runner cleans Temp, it must refuse to run from Temp.
+- Preserve DETU one-subfolder packaging under `C:\Users\aazcl\Downloads\Temp.SkillMachine`.
+
+Any non-allowed variable-colon match is a blocker before handing the runner to the human.
+
+
