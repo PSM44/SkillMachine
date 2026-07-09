@@ -1499,3 +1499,18 @@ SESSION_CONTEXT:
 NEXT_ACTION:
 - Run post-correction validation.
 - If clean and readiness is acceptable, authorize push of local commits.
+
+========== MB-SM-057L_UPDATE_CONTINUITY_AFTER_PARSER_SAFETY_SKILL ==========
+DATE_LOCAL=2026-07-06
+HEAD_BEFORE_CONTINUITY_UPDATE=571239e
+ORIGIN_MAIN_AT_START=eef1649
+CONTEXT=After 057K local commit, PowerShell parser safety Skill candidate was added and AGENTS.md parser-safety reference / markdown normalization were committed locally.
+COMMIT_057K=571239e
+COMMIT_057K_MESSAGE=20260706.2000_SkillsMachine_add_powershell_parser_safety_skill
+FILES_COMMITTED_IN_057K=AGENTS.md | SkillsLake/99.CANDIDATES/SKILL.POWERSHELL_SCRIPT_PARSER_SAFETY.CANDIDATE.txt
+CURRENT_PROJECT_STATE=SM-LAB-003 guardrails layer plus parser-safety prevention is locally committed; push is still pending.
+IMPORTANT_OPERATING_RULE=Before delivering generated long PowerShell runners, scan for risky variable-colon patterns and rewrite unsafe variable-colon cases using braced variables.
+EXPECTED_NEXT_ACTION=Run post-continuity validation. If clean and Readiness PASS, authorize push of local commits.
+COMMIT_PUSH_PERFORMED_IN_THIS_STEP=NO_PUSH_PLANNED
+BUILD_EXECUTED_IN_THIS_STEP=NO
+========== END MB-SM-057L_UPDATE_CONTINUITY_AFTER_PARSER_SAFETY_SKILL ==========
