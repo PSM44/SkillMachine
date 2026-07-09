@@ -56,3 +56,39 @@ NEXT_ACTION: Patch SessionContinue usecase/source controls in a later minibattle
 LINKED_FILES: 02.REGISTERS\SKILL_GRC.OPPORTUNITIES.ACCUMULATED.SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS.txt
 NOTES: Do not lose this item.
 
+
+ENTRY_ID: TD-005_VISIBLE_FUNCTIONAL_DELIVERABLE_NOT_YET_BUILT
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 status review
+CATEGORY: productization debt
+STATUS: OPEN
+TITLE: System is governance-rich but not yet packaged as a visible functional deliverable for management.
+DETAIL: Core Beta 0.2 and guardrails are stable, but gerencia needs a visible artifact or runner showing what the system does, why it matters, and how it reduces operational risk.
+DECISION: Treat as highest product debt.
+PROMOTION_TARGET: NEXT_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Build Gerencia Evidence Pack and functional demo runner.
+
+ENTRY_ID: TD-006_CANDIDATE_TO_CANON_PROMOTION_BACKLOG
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 skill review
+CATEGORY: governance debt
+STATUS: OPEN
+TITLE: Multiple useful Skill/GRC candidates exist but are not yet reviewed for canon promotion or deprecation.
+DETAIL: Parser safety, DETU max-10 workflow, agent guardrail design/testing, and guardrails core candidates are useful but still candidate-layer artifacts.
+DECISION: Preserve candidate status until formal review.
+PROMOTION_TARGET: CANON_REVIEW_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Run candidate review matrix: promote, merge, keep candidate, or deprecate.
+
+ENTRY_ID: TD-007_LONG_RUNNING_RUNNER_HEARTBEAT_NOT_CORE_PATCHED
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 register review
+CATEGORY: runner reliability debt
+STATUS: OPEN
+TITLE: Long-running execution budget and heartbeat remain open improvements.
+DETAIL: Prior sessions detected apparent hangs and poor progress visibility; this has not yet been fully core-patched.
+DECISION: Carry forward for execution safety hardening.
+PROMOTION_TARGET: SKILL_GRC_PATCH
+OWNER: SkillsMachine
+NEXT_ACTION: Patch HUMAN_CONTROLLED_SCRIPT_EXECUTION or create GRC.LONG_RUNNING_ANALYSIS_BUDGET after review.

@@ -56,3 +56,27 @@ NEXT_ACTION: Create AGENTS.md proposal if approved.
 LINKED_FILES: none
 NOTES: Must not become competing continuity source.
 
+
+ENTRY_ID: IO-005_ISSUE_STYLE_STATUS_NORMALIZATION
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 review
+CATEGORY: backlog hygiene improvement
+STATUS: OPEN
+TITLE: Add issue-style state transitions for accumulated registers.
+DETAIL: Current registers preserve entries but do not consistently transition OPEN to DONE, SUPERSEDED, PARTIAL, or PROMOTED.
+DECISION: Recommended improvement before scale.
+PROMOTION_TARGET: REGISTER_SKILL_OR_GRC
+OWNER: SkillsMachine
+NEXT_ACTION: Define allowed statuses and evidence requirements.
+
+ENTRY_ID: IO-006_MANAGEMENT_EVIDENCE_PACK_STANDARD
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: user request
+CATEGORY: delivery improvement
+STATUS: OPEN
+TITLE: Standardize management evidence pack for technical governance projects.
+DETAIL: Gerencia needs a concise visible artifact, not raw logs. Include executive state, risk controls, what changed, how to run, and next decisions.
+DECISION: Recommended for 060A.
+PROMOTION_TARGET: SKILL_OR_TEMPLATE
+OWNER: SkillsMachine
+NEXT_ACTION: Create template in next battle.

@@ -152,3 +152,27 @@ AFFECTED_CANDIDATE_FILES:
 - SkillsLake\99.CANDIDATES\SKILL.GPT_UPLOAD_LOCK_WORKFLOW.CANDIDATE.txt
 - GRCLake\99.CANDIDATES\GRC.GPT_UPLOAD_LOCK_CONTEXT_DELIVERY.CANDIDATE.txt
 ---
+
+ENTRY_ID: SG-010_SKILL_MANAGEMENT_EVIDENCE_PACK
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 review
+CATEGORY: Skill candidate
+STATUS: OPEN
+TITLE: SKILL.MANAGEMENT_EVIDENCE_PACK
+DETAIL: Standardize how to convert technical repo state into gerencia-readable evidence.
+DECISION: Candidate opportunity; do not create canon automatically.
+PROMOTION_TARGET: CANDIDATE_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Evaluate after 060A demo pack.
+
+ENTRY_ID: SG-011_GRC_CANDIDATE_PROMOTION_REVIEW_GATE
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 review
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.CANDIDATE_PROMOTION_REVIEW_GATE
+DETAIL: Require periodic review of candidate Skills/GRCs to avoid accumulation without promotion, merge, or deprecation.
+DECISION: Candidate opportunity.
+PROMOTION_TARGET: CANDIDATE_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Use matrix in 059A or 060A.

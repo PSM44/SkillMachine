@@ -28,3 +28,27 @@ NEXT_ACTION: Define management demo/evidence pack scope.
 LINKED_FILES: none
 NOTES: Must be understandable by gerencia without reading raw repo internals.
 
+
+ENTRY_ID: IR-003_GERENCIA_CONTROL_PANEL_DEMO
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: user request and 058A-R1 review
+CATEGORY: management deliverable
+STATUS: OPEN
+TITLE: Create a management control panel style demo for SkillsMachine.
+DETAIL: Convert internal repo health, Skills/GRC governance, RADAR, readiness, and backlog state into a management-readable package.
+DECISION: Recommended as visible deliverable path.
+PROMOTION_TARGET: NEXT_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Design output as HTML/Markdown evidence pack plus one executable runner.
+
+ENTRY_ID: IR-004_AGENT_FACTORY_GOLDEN_PATH
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: global feedback
+CATEGORY: product strategy
+STATUS: OPEN
+TITLE: Define a golden path from prompt to governed artifact to evidence to session close.
+DETAIL: Reduce meta-governance sprawl by showing one canonical end-to-end flow a manager can understand.
+DECISION: Use as product narrative for gerencia.
+PROMOTION_TARGET: PRODUCT_ROADMAP
+OWNER: SkillsMachine
+NEXT_ACTION: Encode golden path into demo pack and README.

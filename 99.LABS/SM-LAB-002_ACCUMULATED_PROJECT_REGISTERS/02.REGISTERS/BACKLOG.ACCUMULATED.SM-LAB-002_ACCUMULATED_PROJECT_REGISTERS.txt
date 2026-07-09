@@ -56,3 +56,41 @@ NEXT_ACTION: Authorize final close commit and push after AI_TAIL PASS.
 LINKED_FILES: SyS\00.0_BATON_SKILLMACHINE.txt; SyS\01_WHOAMI_SKILLMACHINE.txt; 99.LABS\SM-LAB-002_ACCUMULATED_PROJECT_REGISTERS\06.CLOSE
 NOTES: Created by MB-SM-056E.
 
+
+ENTRY_ID: BL-006_MANAGEMENT_VISIBLE_EVIDENCE_PACK
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 status review and user request
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Build visible and functional management deliverable.
+DETAIL: Current repo is technically clean and synchronized, but management-visible functionality is not yet packaged as an executable/demo artifact.
+DECISION: Next product-facing battle should produce a Gerencia Evidence Pack and/or functional demo runner.
+PROMOTION_TARGET: NEXT_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Define 060A scope: executive one-pager, demo script, generated evidence, acceptance checklist.
+LINKED_FILES: SyS\00.0_BATON_SKILLMACHINE.txt; SyS\01_WHOAMI_SKILLMACHINE.txt
+NOTES: This supersedes vague beta-complete claims; visible functionality is the acceptance gate.
+
+ENTRY_ID: BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 backlog review
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Core-patch SessionContinue to inspect Skill/GRC menu and recommend relevant uploads.
+DETAIL: Existing backlog and debt already identify the gap. 058A-R1 confirms it remains open.
+DECISION: Preserve as hardening battle after management demo path.
+PROMOTION_TARGET: CORE_PATCH
+OWNER: SkillsMachine
+NEXT_ACTION: Create minibattle to patch SessionContinue prompt/runbook behavior.
+
+ENTRY_ID: BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION
+DATE: 2026-07-09 17:24 -04:00
+SOURCE: 058A-R1 review
+CATEGORY: P1
+STATUS: OPEN
+TITLE: Normalize accumulated register statuses after SM-LAB-002 and SM-LAB-003.
+DETAIL: Several entries remain OPEN even though later work partially or fully addressed them.
+DECISION: Add register hygiene battle to close stale items, mark superseded items, and preserve still-open items.
+PROMOTION_TARGET: MAINTENANCE_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Review BL/TD/IR/IO/SG entries and update statuses with evidence.
