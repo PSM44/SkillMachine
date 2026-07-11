@@ -41,3 +41,6 @@ SyS/Temp/TO_UPLOAD_REQUEST*.txt
 
 # Local reusable operator workspace for long scripts; never canonical.
 SyS/Temp/
+
+# Private human-AI chat history; excluded from Git.
+/IA.History/

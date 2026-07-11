@@ -49,6 +49,7 @@ $ExcludedPathsRaw = @(
     $OutputPath
     (Join-Path $RootPath "SyS\A_Tools\Radar")
     (Join-Path $RootPath "SyS\A_Tools\OneShots\Backups")
+    (Join-Path $RootPath "IA.History")
 )
 
 $ExcludedPaths = @()

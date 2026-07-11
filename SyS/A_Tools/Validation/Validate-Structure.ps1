@@ -29,11 +29,51 @@ $globalRegistryPath = "90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json"
 Test-JsonFile $registryPath
 Test-JsonFile $globalRegistryPath
 
-$usecaseDirs = Get-ChildItem -LiteralPath "90.USECASE" -Directory |
-    Where-Object { $_.Name -match '^\d{2}\.' }
+$registry = Get-Content -Raw -LiteralPath $registryPath | ConvertFrom-Json
 
-if (-not $usecaseDirs) {
-    Fail "No usecase directories found under 90.USECASE"
+if (-not $registry.usecases) {
+    Fail "Registry does not declare primary usecases: $registryPath"
+}
+
+$usecaseDirs = @()
+foreach ($uc in @($registry.usecases)) {
+    $name = [string]$uc.name
+    if ([string]::IsNullOrWhiteSpace($name)) {
+        Fail "Registry contains primary usecase without name: $registryPath"
+    }
+
+    $dirPath = Join-Path "90.USECASE" $name
+    if (-not (Test-Path -LiteralPath $dirPath -PathType Container)) {
+        Fail "Declared primary usecase directory missing: $dirPath"
+    }
+
+    $usecaseDirs += Get-Item -LiteralPath $dirPath
+}
+
+$supportPackageNames = @()
+if ($registry.PSObject.Properties["support_packages"] -and $registry.support_packages) {
+    $supportPackageNames = @(
+        $registry.support_packages |
+        ForEach-Object { [string]$_.name } |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+    )
+}
+
+$registeredNames = @(
+    @($registry.usecases | ForEach-Object { [string]$_.name }) +
+    @($supportPackageNames)
+)
+
+$unregisteredNumberedDirs = @(
+    Get-ChildItem -LiteralPath "90.USECASE" -Directory |
+    Where-Object {
+        $_.Name -match '^\d{2}\.' -and
+        $registeredNames -notcontains $_.Name
+    }
+)
+
+foreach ($dir in $unregisteredNumberedDirs) {
+    Write-Host "WARN: unregistered numbered 90.USECASE directory: $($dir.FullName)"
 }
 
 foreach ($dir in $usecaseDirs) {

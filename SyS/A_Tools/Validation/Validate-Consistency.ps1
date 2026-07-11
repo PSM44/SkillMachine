@@ -69,15 +69,61 @@ if (@($registryUsecases).Count -eq 0) {
 $folderUsecaseNames = @($usecaseDirs | ForEach-Object { [string]$_.Name })
 $registryUsecaseNames = @($registryUsecases | ForEach-Object { [string]$_.name })
 
+$registrySupportPackages = @()
+if ($null -ne $registry.PSObject.Properties['support_packages']) {
+    $registrySupportPackages = @(Normalize-ToArray $registry.support_packages)
+}
+$registrySupportPackageNames = @(
+    $registrySupportPackages |
+    ForEach-Object { [string]$_.name } |
+    Where-Object { -not [string]::IsNullOrWhiteSpace($_) }
+)
+
+$allRegisteredFolderNames = @(
+    @($registryUsecaseNames) +
+    @($registrySupportPackageNames)
+)
+
+$duplicateRegisteredNames = @(
+    $allRegisteredFolderNames |
+    Group-Object |
+    Where-Object { $_.Count -gt 1 } |
+    ForEach-Object { $_.Name }
+)
+if (@($duplicateRegisteredNames).Count -gt 0) {
+    Fail "Duplicate names across usecases/support_packages: $($duplicateRegisteredNames -join ', ')"
+}
+
 foreach ($folderName in $folderUsecaseNames) {
-    if ($folderName -notin $registryUsecaseNames) {
-        Fail "Usecase folder not declared in registry: $folderName"
+    if ($folderName -notin $allRegisteredFolderNames) {
+        Fail "Numbered folder not declared in registry usecases/support_packages: $folderName"
     }
 }
 
 foreach ($usecaseName in $registryUsecaseNames) {
     if ($usecaseName -notin $folderUsecaseNames) {
         Fail "Usecase declared in registry has no folder: $usecaseName"
+    }
+}
+
+foreach ($supportPackage in $registrySupportPackages) {
+    $supportName = [string]$supportPackage.name
+    if ($supportName -notin $folderUsecaseNames) {
+        Fail "Support package declared in registry has no folder: $supportName"
+    }
+
+    $buildEnabled = $false
+    if ($supportPackage.PSObject.Properties['build_enabled']) {
+        $buildEnabled = [bool]$supportPackage.build_enabled
+    }
+
+    $lifecycleStatus = ""
+    if ($supportPackage.PSObject.Properties['lifecycle_status']) {
+        $lifecycleStatus = [string]$supportPackage.lifecycle_status
+    }
+
+    if ($buildEnabled -eq $false -and $lifecycleStatus -eq "PLANNED") {
+        Write-Host "OK: planned support package registered without primary-usecase manifest: $supportName"
     }
 }
 
@@ -98,7 +144,12 @@ $allowList = @(
     "SKILL_SET.MANIFEST.txt"
 )
 
-foreach ($dir in $usecaseDirs) {
+$primaryUsecaseDirs = @(
+    $usecaseDirs |
+    Where-Object { $_.Name -in $registryUsecaseNames }
+)
+
+foreach ($dir in $primaryUsecaseDirs) {
     $usecaseName = [string]$dir.Name
     $manifestPath = Join-Path $dir.FullName "USECASE.MANIFEST.json"
     $manifest = Read-Json $manifestPath

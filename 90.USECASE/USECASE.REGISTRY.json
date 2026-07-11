@@ -227,5 +227,17 @@
         "SKILL.md"
       ]
     }
+  ],
+  "support_packages": [
+    {
+      "name": "05.SkillsMachineUpdate",
+      "package_type": "SUPPORT_PACKAGE",
+      "lifecycle_status": "PLANNED",
+      "build_enabled": false,
+      "generated_output_target": true,
+      "primary_usecase": false,
+      "source_of_truth": "CORE_ONLY",
+      "description": "Paquete de soporte planificado para actualizar una instalación SkillsMachine existente. No es un quinto use case primario."
+    }
   ]
 }

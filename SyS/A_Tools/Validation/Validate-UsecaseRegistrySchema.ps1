@@ -49,6 +49,47 @@ function HasProp([object]$obj,[string]$prop){
 $failCount = 0
 $warnCount = 0
 
+# Optional support_packages contract.
+# Support packages are not primary usecases and are not processed by BUILD.ps1
+# until build_enabled becomes true and an explicit builder contract exists.
+$supportNames = @{}
+foreach ($sp in @(SafeArray $registry "support_packages")) {
+  if (-not (HasProp $sp "name") -or [string]::IsNullOrWhiteSpace([string]$sp.name)) {
+    $failCount++
+    Write-Host "FAIL: support package missing name"
+    continue
+  }
+
+  $spName = [string]$sp.name
+  $key = $spName.ToUpperInvariant()
+  if ($supportNames.ContainsKey($key)) {
+    $failCount++
+    Write-Host ("FAIL: duplicate support package name: {0}" -f $spName)
+  } else {
+    $supportNames[$key] = $true
+  }
+
+  foreach ($req in @("package_type","lifecycle_status","build_enabled","generated_output_target","primary_usecase","source_of_truth")) {
+    if (-not (HasProp $sp $req)) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} missing required property: {1}" -f $spName,$req)
+    }
+  }
+
+  if ((HasProp $sp "package_type") -and [string]$sp.package_type -ne "SUPPORT_PACKAGE") {
+    $failCount++
+    Write-Host ("FAIL: support package {0} has invalid package_type: {1}" -f $spName,$sp.package_type)
+  }
+
+  if ((HasProp $sp "primary_usecase") -and [bool]$sp.primary_usecase -ne $false) {
+    $failCount++
+    Write-Host ("FAIL: support package {0} must have primary_usecase=false" -f $spName)
+  }
+
+  if ((HasProp $sp "build_enabled") -and [bool]$sp.build_enabled -eq $true) {
+    Warn ("support package {0} has build_enabled=true but BUILD.ps1 support-package execution is not implemented" -f $spName)
+  }
+}
 foreach ($uc in @(SafeArray $registry "usecases")) {
 
   if (-not (HasProp $uc "name") -or -not [string]$uc.name) { $failCount++; Write-Host "FAIL: usecase missing name"; continue }
