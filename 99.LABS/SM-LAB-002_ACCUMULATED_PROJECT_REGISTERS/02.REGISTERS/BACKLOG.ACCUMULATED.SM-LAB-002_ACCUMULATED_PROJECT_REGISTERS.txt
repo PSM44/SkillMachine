@@ -94,3 +94,31 @@ DECISION: Add register hygiene battle to close stale items, mark superseded item
 PROMOTION_TARGET: MAINTENANCE_BATTLE
 OWNER: SkillsMachine
 NEXT_ACTION: Review BL/TD/IR/IO/SG entries and update statuses with evidence.
+
+ENTRY_ID: BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: MB-SM-060D/060E/060F and formal session close review
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Build 05.SkillsMachineUpdate as a functional support package MVP.
+DETAIL: The support package is formally registered but remains empty and disabled. Define contract, version detection, compatibility, preflight, dry-run, backup, update, rollback, validation and report.
+DECISION: Accepted as next product battle.
+PROMOTION_TARGET: NEXT_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: MB-SM-062A_DEFINE_SKILLSMACHINE_UPDATE_MVP_CONTRACT.
+LINKED_FILES: 90.USECASE\USECASE.REGISTRY.json; 90.USECASE\05.SkillsMachineUpdate
+NOTES: Core changes only; generated outputs must not be manually patched.
+
+ENTRY_ID: BL-010_MANAGEMENT_VISIBLE_UPDATE_DEMO
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: formal session close review
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Build management-visible SkillsMachine Update demo.
+DETAIL: Convert the update MVP into a 5-10 minute gerencia demo showing initial state, risk, dry-run, backup, update, validation, rollback and executive result.
+DECISION: Follow immediately after updater MVP acceptance.
+PROMOTION_TARGET: MANAGEMENT_DELIVERABLE
+OWNER: SkillsMachine
+NEXT_ACTION: Define MB-SM-063 after MB-SM-062 passes golden installation test.
+LINKED_FILES: BL-006_MANAGEMENT_VISIBLE_EVIDENCE_PACK; IR-003_GERENCIA_CONTROL_PANEL_DEMO
+NOTES: Do not claim management readiness before visible execution evidence.

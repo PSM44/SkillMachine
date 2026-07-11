@@ -176,3 +176,27 @@ DECISION: Candidate opportunity.
 PROMOTION_TARGET: CANDIDATE_REVIEW
 OWNER: SkillsMachine
 NEXT_ACTION: Use matrix in 059A or 060A.
+
+ENTRY_ID: SG-012_SKILL_SUPPORT_PACKAGE_UPDATE_WORKFLOW
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: MB-SM-060D/061 close review
+CATEGORY: Skill candidate
+STATUS: OPEN
+TITLE: SKILL.SUPPORT_PACKAGE_UPDATE_WORKFLOW
+DETAIL: Reusable method for version detection, compatibility, dry-run, backup, update, validation, rollback and reporting.
+DECISION: Candidate only. Prefer first proving behavior inside 05.SkillsMachineUpdate before canon promotion.
+PROMOTION_TARGET: CANDIDATE_REVIEW_AFTER_MVP
+OWNER: SkillsMachine
+NEXT_ACTION: Implement MVP first; evaluate extraction after evidence.
+
+ENTRY_ID: SG-013_GRC_UPDATE_ROLLBACK_EVIDENCE_GATE
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: updater risk review
+CATEGORY: GRC candidate
+STATUS: OPEN
+TITLE: GRC.UPDATE_ROLLBACK_EVIDENCE_GATE
+DETAIL: Require successful backup, post-update validation and tested rollback evidence before declaring an update package production-ready.
+DECISION: Candidate only; existing checkpoint/rollback controls may already cover most of it.
+PROMOTION_TARGET: MERGE_OR_NEW_GRC_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Compare against 16.SKILL.CHECKPOINT_ROLLBACK and existing GRCs before promotion.

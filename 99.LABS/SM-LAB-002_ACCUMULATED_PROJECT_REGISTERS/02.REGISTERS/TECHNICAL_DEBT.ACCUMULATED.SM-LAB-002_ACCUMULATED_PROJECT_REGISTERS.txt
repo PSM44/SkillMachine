@@ -92,3 +92,51 @@ DECISION: Carry forward for execution safety hardening.
 PROMOTION_TARGET: SKILL_GRC_PATCH
 OWNER: SkillsMachine
 NEXT_ACTION: Patch HUMAN_CONTROLLED_SCRIPT_EXECUTION or create GRC.LONG_RUNNING_ANALYSIS_BUDGET after review.
+
+ENTRY_ID: TD-008_SUPPORT_PACKAGE_05_FUNCTIONAL_CONTRACT_MISSING
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: MB-SM-060D support package registration
+CATEGORY: productization debt
+STATUS: OPEN
+TITLE: 05.SkillsMachineUpdate has governance registration but no functional implementation.
+DETAIL: No input/output contract, compatibility model, builder, preflight, dry-run, backup, rollback, post-update validation or golden test exists yet.
+DECISION: Highest next technical/product debt after session close.
+PROMOTION_TARGET: BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP
+OWNER: SkillsMachine
+NEXT_ACTION: Define updater MVP contract.
+
+ENTRY_ID: TD-009_GENERATED_UPLOAD_MANIFEST_COMPACT_POLICY_DRIFT
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: SESSION_CLOSE package review
+CATEGORY: generated-output alignment debt
+STATUS: OPEN
+TITLE: Generated usecase manifests retain full-folder upload semantics while core governance requires compact flat upload packs.
+DETAIL: Reconcile folder_upload_required/full-folder language with COMPACT_UPLOAD_PACK_ONLY and maximum-10-file policy through core/build source, not manual generated-output edits.
+DECISION: Carry after updater MVP or include if required by update packaging.
+PROMOTION_TARGET: CORE_BUILD_PATCH
+OWNER: SkillsMachine
+NEXT_ACTION: Audit source fields and build behavior.
+
+ENTRY_ID: TD-010_TEMP_BOUNDARY_CONTRACT_DRIFT
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: session close review
+CATEGORY: operational architecture debt
+STATUS: OPEN
+TITLE: SyS\Temp and C:\Users\aazcl\Downloads\Temp.SkillMachine have overlapping staging semantics.
+DETAIL: Define authoritative matrix for internal repo staging, external disposable execution scripts, upload packs, evidence and preservation rules.
+DECISION: Keep open; do not change doctrine during close.
+PROMOTION_TARGET: SKILL_GRC_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Reconcile existing Skills/GRCs before creating new control.
+
+ENTRY_ID: TD-011_RADAR_SOURCE_UNDER_IGNORE_RULE
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: MB-SM-060E git add diagnosis
+CATEGORY: repository hygiene debt
+STATUS: OPEN
+TITLE: Canonical RADAR.ps1 requires force-add because its parent path is ignored.
+DETAIL: Code can be versioned but operational commits require git add -f. Review ignore rule granularity without deleting or exposing runtime RADAR outputs.
+DECISION: Defer until after updater MVP unless it blocks normal development.
+PROMOTION_TARGET: REPO_HYGIENE_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Audit ignore provenance and propose narrow exception.

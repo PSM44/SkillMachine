@@ -52,3 +52,39 @@ DECISION: Use as product narrative for gerencia.
 PROMOTION_TARGET: PRODUCT_ROADMAP
 OWNER: SkillsMachine
 NEXT_ACTION: Encode golden path into demo pack and README.
+
+ENTRY_ID: IR-005_SKILLSMACHINE_UPDATE_ASSISTANT
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: formal session close review
+CATEGORY: product strategy
+STATUS: ACCEPTED
+TITLE: Turn 05.SkillsMachineUpdate into a controlled update assistant.
+DETAIL: Golden path: detect version -> compatibility -> dry-run -> backup -> update -> validate -> rollback -> executive report.
+DECISION: Accepted as next product-facing battle.
+PROMOTION_TARGET: BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP
+OWNER: SkillsMachine
+NEXT_ACTION: Define MVP contract.
+
+ENTRY_ID: IR-006_SKILLSMACHINE_DOCTOR
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: formal session close review
+CATEGORY: future product capability
+STATUS: DEFERRED
+TITLE: Create SkillsMachine Doctor diagnostics.
+DETAIL: Diagnose installation health, missing usecases, stale registries, validation failures and required repairs.
+DECISION: Valuable but defer until updater MVP is proven.
+PROMOTION_TARGET: PRODUCT_ROADMAP
+OWNER: SkillsMachine
+NEXT_ACTION: Reassess after MB-SM-062.
+
+ENTRY_ID: IR-007_SKILLSMACHINE_CLI_GOLDEN_PATH
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: industry feedback review
+CATEGORY: product roadmap
+STATUS: DEFERRED
+TITLE: Consolidate new, continue, close, repair, update and doctor into one CLI.
+DETAIL: Reduce manual scripts and make the governed workflow visible and repeatable.
+DECISION: Defer until individual commands have proven contracts.
+PROMOTION_TARGET: PRODUCT_ROADMAP
+OWNER: SkillsMachine
+NEXT_ACTION: Reassess after updater and management demo.

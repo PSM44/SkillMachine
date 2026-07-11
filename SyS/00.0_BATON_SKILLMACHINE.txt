@@ -2453,3 +2453,69 @@ RECOMMENDED_PATH=058B update registers -> 058C commit/push close update -> 059A 
 NO_BUILD_EXECUTED=YES
 COMMIT_PUSH_PERFORMED_IN_THIS_STEP=NO
 ========== END MB-SM-058B_20260709_STATUS_BACKLOG_IDEAS_CLOSE_UPDATE ==========
+
+==========
+MB-SM-061B_FINAL_SESSION_CLOSE_20260711
+==========
+DATE_LOCAL...................: 2026-07-11 00:05 -04:00
+PROJECT......................: SkillsMachine
+PROJECT_ROOT.................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_BASE....................: d1079fc 20260710_SkillsMachine_exclude_IA_History_and_register_support_packages
+STATUS.......................: FINAL_SESSION_CLOSE_CONTINUITY_REFRESH
+
+ESTADO_EJECUTIVO:
+- main y origin/main estaban sincronizados en d1079fc; ahead/behind 0/0.
+- Worktree estaba limpio.
+- Validate-System paso: naming, structure, consistency, registry schema, GRC architecture y PowerShell syntax gate.
+- IA.History quedo excluido de Git y del inventario fisico RADAR sin modificar su evidencia.
+- 05.SkillsMachineUpdate quedo registrado como SUPPORT_PACKAGE planificado, no como quinto usecase primario.
+- 05.SkillsMachineUpdate permanece vacio, build_enabled=false y source_of_truth=CORE_ONLY.
+- BUILD no fue ejecutado en esta secuencia.
+- Readiness previo quedo WARN solo por frescura de RADAR, BATON y WHOAMI.
+
+QUE_SE_HIZO:
+- Se diagnosticaron y corrigieron validadores para distinguir primary usecases de support packages.
+- Se verifico UTF-8 real del registry.
+- Se resolvio staging de RADAR.ps1 mediante force-add quirurgico por regla de ignore.
+- Se creo commit d1079fc y se verifico push a origin/main.
+- Se revisaron deuda, backlogs, ideas, indice de Skills y path a entregable gerencial.
+
+DEUDA_TECNICA_PRIORITARIA:
+- TD-005_VISIBLE_FUNCTIONAL_DELIVERABLE_NOT_YET_BUILT sigue siendo la principal deuda de producto.
+- TD-004_SESSION_CONTINUE_SKILL_GRC_MENU_GATE_NOT_CORE_PATCHED sigue abierto.
+- TD-006_CANDIDATE_TO_CANON_PROMOTION_BACKLOG sigue abierto.
+- TD-007_LONG_RUNNING_RUNNER_HEARTBEAT_NOT_CORE_PATCHED sigue abierto.
+- Nueva deuda: definir contrato funcional, compatibilidad, backup, rollback y builder de 05.SkillsMachineUpdate.
+- Nueva deuda: alinear manifests generados de upload con COMPACT_UPLOAD_PACK_ONLY.
+- Nueva deuda: resolver boundary definitivo SyS\Temp vs Temp.SkillMachine.
+- Nueva deuda: revisar regla de ignore que obliga force-add para RADAR.ps1.
+
+BACKLOG_PRIORITARIO:
+- BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP.
+- BL-010_MANAGEMENT_VISIBLE_UPDATE_DEMO.
+- BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE.
+- BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION.
+- Revisión controlada de candidatos Skill/GRC para promover, fusionar, diferir o descartar.
+
+PATH_A_GERENCIA:
+MB-SM-061 cierre limpio ->
+MB-SM-062 contrato y MVP de 05.SkillsMachineUpdate ->
+preflight + dry-run ->
+backup + update + rollback ->
+golden installation test ->
+MB-SM-063 Gerencia Evidence Pack ->
+demo ejecutable de 5-10 minutos.
+
+ENTREGABLE_GERENCIA_OBJETIVO:
+SkillsMachine Update MVP demostrable:
+detectar version -> dry-run -> backup -> actualizar -> validar -> rollback -> reporte ejecutivo.
+
+HUMAN:
+No actualizado. No hubo cambio doctrinal superior; los cambios son operativos, de continuidad y backlog.
+
+NEXT_ACTION:
+Iniciar MB-SM-062A_DEFINE_SKILLSMACHINE_UPDATE_MVP_CONTRACT en la proxima sesion.
+==========
+FIN_MB-SM-061B_FINAL_SESSION_CLOSE_20260711
+==========

@@ -80,3 +80,27 @@ DECISION: Recommended for 060A.
 PROMOTION_TARGET: SKILL_OR_TEMPLATE
 OWNER: SkillsMachine
 NEXT_ACTION: Create template in next battle.
+
+ENTRY_ID: IO-007_SUPPORT_PACKAGE_RELEASE_ENGINEERING
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: formal session close review
+CATEGORY: release engineering improvement
+STATUS: OPEN
+TITLE: Add release engineering discipline to SkillsMachine support packages.
+DETAIL: Introduce semantic versions, release manifest, checksums, migration notes, compatibility, smoke tests, rollback evidence and release notes.
+DECISION: Incorporate minimum subset into updater MVP; defer full release pipeline.
+PROMOTION_TARGET: MB-SM-062
+OWNER: SkillsMachine
+NEXT_ACTION: Select MVP subset during contract design.
+
+ENTRY_ID: IO-008_SKILL_MENU_STRUCTURED_COVERAGE_MATRIX
+DATE: 2026-07-11 00:05 -04:00
+SOURCE: Skill menu review
+CATEGORY: catalogue improvement
+STATUS: OPEN
+TITLE: Generate structured Skill-to-usecase-to-bundle coverage matrix.
+DETAIL: Current menu is useful but mixed numbering, ACTIVE/DRAFT coexistence and appended patches make automatic selection harder.
+DECISION: Preserve as catalogue improvement after updater MVP.
+PROMOTION_TARGET: MAINTENANCE_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: Define structured registry or generated matrix without duplicating canon.
