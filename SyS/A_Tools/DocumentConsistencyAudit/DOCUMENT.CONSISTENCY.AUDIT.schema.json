@@ -1,0 +1,164 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "DOCUMENT.CONSISTENCY.AUDIT.schema.json",
+  "title": "Document Consistency Audit Result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "project_root",
+    "requested_mode",
+    "effective_mode",
+    "documents_reviewed",
+    "document_roles",
+    "issues",
+    "summary",
+    "update_assessment",
+    "state_path",
+    "state_written",
+    "state_snapshot"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0" },
+    "project_id": { "type": "string", "minLength": 1 },
+    "project_root": { "type": "string", "minLength": 1 },
+    "requested_mode": { "enum": ["focused", "full"] },
+    "effective_mode": { "enum": ["focused", "full"] },
+    "audit_trigger": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "full_scan_exclusions": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "documents_reviewed": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["relative_path", "sha256", "source"],
+        "properties": {
+          "relative_path": { "type": "string" },
+          "sha256": { "type": "string", "minLength": 64, "maxLength": 64 },
+          "source": { "type": "string" }
+        }
+      }
+    },
+    "document_roles": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["role", "status", "candidates"],
+        "properties": {
+          "role": { "enum": ["HUMAN", "WHOAMI", "BATON"] },
+          "status": { "enum": ["RESOLVED", "NOT_FOUND", "HARD_CONFLICT"] },
+          "best_precedence_rank": { "type": ["integer", "null"] },
+          "selected_path": { "type": ["string", "null"] },
+          "candidates": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["role", "relative_path", "file_name", "precedence_rank", "sha256"],
+              "properties": {
+                "role": { "type": "string" },
+                "relative_path": { "type": "string" },
+                "file_name": { "type": "string" },
+                "precedence_rank": { "type": "integer", "minimum": 1, "maximum": 3 },
+                "sha256": { "type": "string", "minLength": 64, "maxLength": 64 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "issue_id",
+          "issue_class",
+          "severity",
+          "status",
+          "title",
+          "authority_layer"
+        ],
+        "properties": {
+          "issue_id": { "type": "string" },
+          "issue_class": { "enum": ["MISSING_REQUIRED_ROLE", "DUPLICATE_SOURCE_OF_TRUTH"] },
+          "severity": { "enum": ["INFO", "WARNING", "HARD_CONFLICT", "BLOCKER"] },
+          "status": { "const": "OPEN" },
+          "title": { "type": "string" },
+          "document_path": { "type": "string" },
+          "related_path": { "type": "string" },
+          "observed_value": { "type": "string" },
+          "expected_value": { "type": "string" },
+          "authority_layer": { "type": "string" }
+        }
+      }
+    },
+    "summary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "conflicts_found",
+        "warnings_found",
+        "documents_reviewed_count",
+        "projected_session_continue_count",
+        "next_full_audit_due_session_number",
+        "mandatory_human_status"
+      ],
+      "properties": {
+        "conflicts_found": { "type": "integer", "minimum": 0 },
+        "warnings_found": { "type": "integer", "minimum": 0 },
+        "documents_reviewed_count": { "type": "integer", "minimum": 0 },
+        "projected_session_continue_count": { "type": "integer", "minimum": 0 },
+        "next_full_audit_due_session_number": { "type": "integer", "minimum": 1 },
+        "mandatory_human_status": { "type": "string" }
+      }
+    },
+    "update_assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "recommended_support_package",
+        "automatic_execution",
+        "blocked_by_hard_conflict"
+      ],
+      "properties": {
+        "recommended_support_package": { "const": "05.SkillsMachineUpdate" },
+        "automatic_execution": { "const": false },
+        "blocked_by_hard_conflict": { "type": "boolean" }
+      }
+    },
+    "state_path": { "type": "string" },
+    "state_written": { "type": "boolean" },
+    "state_snapshot": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "session_continue_count",
+        "focused_audit_count",
+        "full_audit_count",
+        "next_full_audit_due_session_number",
+        "unresolved_conflict_count",
+        "unresolved_doubt_count",
+        "last_audit_result"
+      ],
+      "properties": {
+        "session_continue_count": { "type": "integer", "minimum": 0 },
+        "focused_audit_count": { "type": "integer", "minimum": 0 },
+        "full_audit_count": { "type": "integer", "minimum": 0 },
+        "next_full_audit_due_session_number": { "type": "integer", "minimum": 1 },
+        "unresolved_conflict_count": { "type": "integer", "minimum": 0 },
+        "unresolved_doubt_count": { "type": "integer", "minimum": 0 },
+        "last_audit_result": { "enum": ["PASS", "CONFLICTS_FOUND", "BLOCKED"] }
+      }
+    }
+  }
+}
