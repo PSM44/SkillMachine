@@ -1605,3 +1605,46 @@ OUTPUT=Patch proposal requiring diff evidence after registry mutation.
 NEXT_RECOMMENDED:
 MB-SM-053A_NEW_SKILL_GRC_CREATION_GATE_READONLY
 ==========
+
+==========
+MB-SM-064A_BACKLOG_REFRESH_AFTER_063D
+==========
+UPDATED_AT...................: 2026-07-14 16:36:53 -04:00
+HEAD_CONFIRMED...............: f11002f08efaeb31869d440aec434c71024b3953
+STATUS.......................: ACTIVE_BACKLOG_REFRESH
+
+DONE:
+- MB-SM-063C_DOCUMENT_CONSISTENCY_AUDIT_CORE_HARDENING.
+- MB-SM-063D_PROJECT_SCOPED_DOCUMENT_AUDIT.
+- MB-SM-063D_CANONICAL_USECASE_SOURCE_MIGRATION.
+- MB-SM-063D_NESTED_COPIED_FILE_SUPPORT.
+- BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP: CORE_AND_PACKAGE_IMPLEMENTED.
+
+BL-009_ACCEPTANCE_REMAINDER:
+- Execute a golden installation/update test against a controlled target.
+- Verify version detection, preflight, dry-run, backup, update, validation and report.
+- Execute rollback and injected-failure cases.
+- Do not classify BL-009 as fully accepted until those tests pass.
+
+P0_OPEN:
+- MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+- MB-SM-064C_UPDATE_ROLLBACK_AND_FAILURE_TEST.
+- MB-SM-065A_MANAGEMENT_VISIBLE_SKILLSMACHINE_UPDATE_DEMO.
+
+P1_OPEN:
+- BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE.
+- BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION.
+- TD-006_CANDIDATE_TO_CANON_PROMOTION_BACKLOG.
+- TD-007_LONG_RUNNING_RUNNER_HEARTBEAT_NOT_CORE_PATCHED.
+
+WATCHLIST:
+- LF/CRLF warning noise.
+- Generated-output/source parity.
+- Cross-runtime validation behavior.
+- Document authority ambiguity tests.
+- Support-package compatibility/versioning evolution.
+
+NEXT_ACTION:
+Commit continuity refresh, regenerate RADAR, run readiness, then start MB-SM-064B.
+==========
+END_MB-SM-064A_BACKLOG_REFRESH_AFTER_063D

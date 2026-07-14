@@ -2519,3 +2519,71 @@ Iniciar MB-SM-062A_DEFINE_SKILLSMACHINE_UPDATE_MVP_CONTRACT en la proxima sesion
 ==========
 FIN_MB-SM-061B_FINAL_SESSION_CLOSE_20260711
 ==========
+
+==========
+MB-SM-064A_CONTINUITY_REFRESH_AFTER_063D
+==========
+UPDATED_AT...................: 2026-07-14 16:36:53 -04:00
+PROJECT......................: SkillsMachine
+PROJECT_ROOT.................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_CONFIRMED...............: f11002f08efaeb31869d440aec434c71024b3953
+REMOTE.......................: origin/main synchronized
+STATUS.......................: CONTINUITY_REFRESH_AFTER_MB_SM_063D
+
+ESTADO_EJECUTIVO:
+- MB-SM-063C DocumentConsistencyAudit core hardening was completed and published.
+- MB-SM-063D integrated project-scoped document authority, canonical usecase sources, nested copied-file support and the functional 05.SkillsMachineUpdate support package.
+- BUILD passed three consecutive idempotence runs with zero hash drift.
+- Validate-System passed in PowerShell 7 and Windows PowerShell 5.1 execution contexts.
+- main and origin/main are synchronized at f11002f.
+- Worktree was clean before this continuity refresh.
+
+COMMITS_CERRADOS:
+- aa82f527ee301813504d41b00e4d05dadc39072a — MB-SM-063C DocumentConsistencyAudit core hardening.
+- 60288e6c08925dbad318410d1dbdb66a169c3a79 — project-scoped DocumentConsistencyAudit hardening.
+- f11002f08efaeb31869d440aec434c71024b3953 — canonical usecase sources and SkillsMachineUpdate integration.
+
+CAPACIDADES_INTEGRADAS:
+- 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR now use canonical source directories under SyS\A_Tools\UseCaseSources.
+- 04.REPOSITORY_STRUCTURE_REPAIR preserves and rebuilds EXAMPLES\EXAMPLE.REPO_REPAIR.txt from canonical source.
+- BUILD supports nested copied-file paths.
+- 05.SkillsMachineUpdate is now a built support package backed by SyS\A_Tools\Update.
+- DocumentConsistencyAudit isolates project authority by project scope and excludes README/internal/generated subproject role candidates.
+- Validation is independent of caller working directory and SHA-256 no longer depends on Get-FileHash availability.
+
+DEUDA_TECNICA_ACTUAL:
+- TD-005_VISIBLE_FUNCTIONAL_DELIVERABLE_NOT_YET_BUILT remains open.
+- TD-004_SESSION_CONTINUE_SKILL_GRC_MENU_GATE_NOT_CORE_PATCHED remains open.
+- TD-006_CANDIDATE_TO_CANON_PROMOTION_BACKLOG remains open.
+- TD-007_LONG_RUNNING_RUNNER_HEARTBEAT_NOT_CORE_PATCHED remains open.
+- SkillsMachineUpdate still needs a controlled golden installation/update/rollback acceptance test.
+- Management-visible 5-10 minute demonstration remains open.
+- LF/CRLF warnings remain a non-blocking watch item.
+
+BACKLOG_PRIORITARIO:
+- MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+- MB-SM-064C_UPDATE_ROLLBACK_AND_FAILURE_TEST.
+- MB-SM-065A_MANAGEMENT_VISIBLE_SKILLSMACHINE_UPDATE_DEMO.
+- BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE.
+- BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION.
+
+PATH_A_GERENCIA:
+MB-SM-063D integrated updater and audit foundation ->
+MB-SM-064A continuity refresh ->
+MB-SM-064B golden installation/update test ->
+MB-SM-064C rollback/failure test ->
+MB-SM-065A management-visible 5-10 minute demo ->
+acceptance package and executive decision.
+
+ENTREGABLE_GERENCIA_OBJETIVO:
+SkillsMachine Update demonstrator:
+detect version -> preflight -> dry-run -> backup -> update -> validate -> rollback -> executive result.
+
+HUMAN:
+Not updated. No higher-order doctrinal change was detected.
+
+NEXT_ACTION:
+Commit this BATON/WHOAMI/backlog/executive refresh together, then regenerate RADAR and run final readiness.
+==========
+END_MB-SM-064A_CONTINUITY_REFRESH_AFTER_063D

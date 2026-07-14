@@ -1575,3 +1575,33 @@ Sin cambio doctrinal.
 ==========
 FIN_MB-SM-061B_FINAL_SESSION_CLOSE_20260711
 ==========
+
+==========
+MB-SM-064A_WHOAMI_REFRESH_AFTER_063D
+==========
+UPDATED_AT...................: 2026-07-14 16:36:53 -04:00
+PROJECT......................: SkillsMachine
+ROOT.........................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_CONFIRMED...............: f11002f08efaeb31869d440aec434c71024b3953
+STATUS.......................: ACTIVE
+
+CURRENT_POSITION:
+SkillsMachine now has a canonical updater support package and a project-scoped document consistency audit integrated into main.
+
+WHAT_CHANGED:
+- 05.SkillsMachineUpdate is generated from core source under SyS\A_Tools\Update.
+- 03 and 04 usecase operational documents are sourced canonically from SyS\A_Tools\UseCaseSources.
+- Nested copied files are supported and validated.
+- DocumentConsistencyAudit resolves HUMAN/WHOAMI/BATON authority inside the audited project scope.
+- Validate-System operates correctly from external working directories and under PowerShell 7/5.1.
+
+CURRENT_BOUNDARY:
+- The updater foundation is integrated, but golden installation, failure and rollback acceptance tests are still required.
+- No claim of management-ready functional delivery until visible execution evidence exists.
+- Generated outputs remain non-canonical; changes belong in source/core and must be rebuilt.
+
+NEXT_ACTION:
+MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+==========
+END_MB-SM-064A_WHOAMI_REFRESH_AFTER_063D

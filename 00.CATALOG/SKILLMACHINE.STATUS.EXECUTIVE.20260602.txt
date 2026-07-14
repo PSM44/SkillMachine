@@ -1,98 +1,112 @@
 ==========
-SKILLMACHINE.STATUS.EXECUTIVE.20260602
+SKILLMACHINE.STATUS.EXECUTIVE.20260714
 ==========
 
-FECHA........................: 2026-06-02 11:00:21 -04
+FECHA........................: 2026-07-14 16:36:53 -04:00
 PROYECTO.....................: SkillsMachine
 ROOT_WIN.....................: C:\01. GitHub\Skills
 ROOT_WSL.....................: /mnt/c/01. GitHub/Skills
 BRANCH.......................: main
-HEAD.........................: 477b620 20260529_MB-GRC-025C_routing_policy_deep_review
-LOCAL_HASH...................: 477b6207a73a04eac180eb03ed3c0eb81b3bfd21
-REMOTE_HASH..................: 477b6207a73a04eac180eb03ed3c0eb81b3bfd21
+HEAD.........................: f11002f 20260714.1531_MB-SM-063D_Integrate_Canonical_UseCase_Sources_And_Update_Package
+LOCAL_HASH...................: f11002f08efaeb31869d440aec434c71024b3953
+REMOTE_HASH..................: f11002f08efaeb31869d440aec434c71024b3953
 
 ==========
 01.00_ESTADO_ACTUAL
 ==========
 
-SkillMachine se encuentra en MVP operativo técnico, con:
-- estructura SkillsLake / GRCLake / 00.CATALOG / 90.USECASE;
-- build de usecases operativo;
-- Validate-System operativo;
-- RADAR operativo;
-- readiness de cierre operativo;
-- Bash WSL2 como shell preferente;
-- continuidad BATON/WHOAMI/backlog activa.
+SkillsMachine is a governed technical MVP with:
+- canonical SkillsLake / GRCLake / 00.CATALOG / 90.USECASE architecture;
+- idempotent usecase and support-package build;
+- canonical sources for SESSION_CONTINUE and REPOSITORY_STRUCTURE_REPAIR;
+- functional 05.SkillsMachineUpdate support package foundation;
+- project-scoped DocumentConsistencyAudit;
+- PowerShell 7 and 5.1 validation compatibility;
+- main synchronized with origin/main and a clean worktree before this refresh.
 
-Ultimo bloque de trabajo completado:
-- MB-GRC-025C routing policy deep review.
+Latest completed block:
+- MB-SM-063D canonical source, updater support package and document-audit integration.
 
 ==========
-02.00_DEUDA_TECNICA_ACUMULADA
+02.00_LOGROS_RECIENTES
 ==========
+
+- DocumentConsistencyAudit now isolates root-project HUMAN/WHOAMI/BATON authority.
+- README, generated outputs, internal source trees and nested labs do not compete as root authority.
+- Genuine equal-precedence ambiguity remains a HARD_CONFLICT.
+- 03.SESSION_CONTINUE and 04.REPOSITORY_STRUCTURE_REPAIR are rebuilt from canonical source directories.
+- Nested copied-file paths are supported and validated.
+- 05.SkillsMachineUpdate is built from SyS\A_Tools\Update and validated as a support package.
+- BUILD passed three consecutive runs with zero hash drift.
+- Validate-System passed and the changes were committed and pushed.
+
+==========
+03.00_DEUDA_TECNICA_ACUMULADA
+==========
+
+P0:
+- Golden installation/update acceptance test for SkillsMachineUpdate.
+- Rollback and injected-failure acceptance test.
+- Management-visible functional demonstration.
 
 P1:
-- MB-GRC-026A: auditar cobertura de 90.USECASE contra SkillsLake, GRCLake y 00.CATALOG.
-- MB-GRC-026B: corregir coverage si hay gaps.
-- MB-GRC-025C-2: boundary patch entre 05.SKILL.ROUTING_POLICY y 27.SKILL.MODEL_ROUTING_POLICY.
-- MB-GRC-025D: boundary patch entre MANIFEST_PATH_SEMANTICS y REGISTRY_ALIGNMENT_AFTER_MIGRATION.
-- MB-GRC-025E: evaluar validator documental semiautomatico de duplicidad semantica.
+- SessionContinue Skill/GRC menu/context gate.
+- Accumulated register lifecycle/status normalization.
+- Candidate-to-canon promotion decision process.
+- Long-running runner heartbeat/time-budget hardening.
 
-P2:
-- Negative test formal de restore transaccional.
-- Normalizacion EOL controlada solo si vuelve a generar friccion real.
-- Homologacion menor de registry shape si se decide limpiar diffs historicos.
+WATCH:
+- LF/CRLF warning noise remains non-blocking.
+- Continue monitoring generated/source parity and cross-runtime validation.
 
 ==========
-03.00_BACKLOG_ACUMULADO
+04.00_BACKLOG_ACTIVO
 ==========
 
 DONE:
-- MB-GRC-022 transaction guard.
-- MB-GRC-023B idempotencia real de manifests/bundles.
-- MB-GRC-024A integracion de 28.SKILL.BASH.WSL2.txt.
-- MB-GRC-024B continuidad post WSL2.
-- MB-GRC-024C decision line endings.
-- MB-GRC-025A duplicate semantic discovery.
-- MB-GRC-025B duplicate semantic review report.
-- MB-GRC-025C routing policy deep review.
+- MB-SM-063C DocumentConsistencyAudit core hardening.
+- MB-SM-063D project-scoped authority hardening.
+- MB-SM-063D canonical usecase source migration.
+- MB-SM-063D updater support package integration.
+- BL-009 implementation phase: core and package built.
 
 OPEN:
-- MB-GRC-026A USECASE coverage audit.
-- MB-GRC-026B coverage patch.
-- MB-GRC-026C rebuild/validate/readiness cierre coverage.
-- MB-GRC-025C-2 routing boundary patch.
-- MB-GRC-025D manifest/registry boundary patch.
-- MB-GRC-025E semantic duplicate validator.
-- MB-GRC-027 transaction guard negative test.
-- MB-GRC-028 gerencia demo.
+- MB-SM-064B golden installation/update test.
+- MB-SM-064C rollback/failure test.
+- MB-SM-065A management-visible SkillsMachineUpdate demo.
+- BL-007 SessionContinue Skill/GRC context gate.
+- BL-008 accumulated register status normalization.
 
 ==========
-04.00_EN_QUE_ESTAMOS
+05.00_EN_QUE_ESTAMOS
 ==========
 
-Estamos saliendo de hardening documental/operativo y entrando a auditoria sistemica:
-verificar si 90.USECASE realmente empaqueta el canon vigente de SkillsLake, GRCLake y 00.CATALOG.
+The updater and document-governance foundation is integrated and published.
+The project is now at acceptance-testing stage, not additional architecture-definition stage.
 
 ==========
-05.00_PATH_A_ENTREGABLE_FUNCIONAL_GERENCIA
+06.00_PATH_A_ENTREGABLE_FUNCIONAL_GERENCIA
 ==========
 
-MB-GRC-026A -> coverage audit.
-MB-GRC-026B -> coverage patch.
-MB-GRC-026C -> build/validate/readiness.
-MB-GRC-027 -> negative test transaction guard.
-MB-GRC-028 -> demo gerencial de IA gobernada.
+MB-SM-064A continuity refresh.
+MB-SM-064B golden installation/update test.
+MB-SM-064C rollback and injected-failure test.
+MB-SM-065A 5-10 minute management-visible demo.
+MB-SM-065B acceptance package and executive decision.
 
-Entregable gerencial:
-Demo o memo ejecutivo que muestre una IA en blanco usando un usecase, cargando bundles, entendiendo estado, ejecutando una minibattle controlada, validando, actualizando continuidad y cerrando con readiness OK.
+Management deliverable:
+A visible execution showing version detection, dry-run, backup, update, validation,
+rollback and an executive result without requiring management to read repository internals.
 
 ==========
-06.00_DECISIONES
+07.00_DECISIONES
 ==========
 
-HUMAN no se actualiza en este cierre salvo decision humana posterior.
-Motivo: no hay cambio doctrinal nuevo; hay continuidad operacional y backlog.
+- HUMAN remains unchanged.
+- 90.USECASE remains generated output.
+- Improvements must be made in core/source and rebuilt.
+- Internal reports alone do not count as product completion.
+- Management readiness requires visible executable evidence.
 
 ==========
 FIN_DEL_DOCUMENTO
