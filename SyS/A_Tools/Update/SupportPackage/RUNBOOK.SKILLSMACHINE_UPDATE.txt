@@ -1,0 +1,10 @@
+FLOW: compatibility -> baseline load -> preflight -> dry-run -> dry-run fingerprint review -> explicit human approval -> checkpoint -> apply -> validation -> baseline update.
+
+Rules:
+- Use Invoke-SkillsMachineUpdate.ps1 from SyS\A_Tools\Update.
+- Prefer -UseDocumentAuditPreflight as the document-consistency gate before mutation.
+- If DocumentConsistencyAudit reports HARD_CONFLICT, stop and require explicit human resolution before update.
+- Keep PROJECT_ROOT as a hard boundary.
+- Require clean Git before apply.
+- Use rollback when any apply step fails.
+- Re-run validation after apply and after rollback when triggered.

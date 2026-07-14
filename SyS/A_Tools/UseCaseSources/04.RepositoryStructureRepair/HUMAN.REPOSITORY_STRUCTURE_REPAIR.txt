@@ -1,34 +1,26 @@
 ==========================================
-USECASE — 04.REPOSITORY_STRUCTURE_REPAIR
+HUMAN — REPOSITORY STRUCTURE REPAIR (UC04)
 ==========================================
 
-01) MODE (default): PLAN_ONLY
-   - Snapshot first (RADAR)
-   - Full DocumentConsistencyAudit before repair proposal
-   - Propose target structure
-   - Write CIS plan + rollback
-   - APPLY only after approval
+ID_UNICO..........: HUMAN.UC04.REPO_REPAIR.0001
+VERSION...........: v0.1
+FECHA.............: 2026-04-30
+AUTOR_HUMANO......: PABLO
 
-02) FLOW
-   2.1 Snapshot (read-only)
-   2.2 Full DocumentConsistencyAudit on the declared PROJECT_ROOT
-   2.3 Diagnose + propose structure
-   2.4 CIS migration plan
-   2.5 Apply safely (no hard delete)
-   2.6 Validate + evidence
-   2.7 Handoff (BATON)
+PROPOSITO.........:
+Este usecase existe para reparar repositorios desordenados con governance:
+snapshot -> propuesta -> CIS -> apply -> validate.
 
-03) AUDIT CONTRACT
-   - HUMAN is authoritative intent, not infallible truth.
-   - Detect contradictions across HUMAN, WHOAMI, BATON, registries, manifests, scripts and docs.
-   - References to other repositories/projects must be tagged as [REF_CRUZADA: <project>].
-   - HARD_CONFLICT blocks destructive or mutating repair until human approval.
-   - 05.SkillsMachineUpdate is never auto-executed from this flow.
+REGLAS_DURAS.......:
+- HUMAN manda.
+- No hard delete.
+- No refactor funcional (solo estructura).
+- No cambios sin CIS + rollback.
 
-03) DONE
-   - Validate-System PASS
-   - Validate-Release PASS
-   - Evidence paths recorded
+DONE...............:
+- Validate-System PASS
+- Validate-Release PASS
+- Evidencia registrada
 
 ==========
 MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE

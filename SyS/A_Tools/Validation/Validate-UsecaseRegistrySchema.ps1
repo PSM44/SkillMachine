@@ -49,9 +49,7 @@ function HasProp([object]$obj,[string]$prop){
 $failCount = 0
 $warnCount = 0
 
-# Optional support_packages contract.
-# Support packages are not primary usecases and are not processed by BUILD.ps1
-# until build_enabled becomes true and an explicit builder contract exists.
+# Support package contract.
 $supportNames = @{}
 foreach ($sp in @(SafeArray $registry "support_packages")) {
   if (-not (HasProp $sp "name") -or [string]::IsNullOrWhiteSpace([string]$sp.name)) {
@@ -86,8 +84,65 @@ foreach ($sp in @(SafeArray $registry "support_packages")) {
     Write-Host ("FAIL: support package {0} must have primary_usecase=false" -f $spName)
   }
 
-  if ((HasProp $sp "build_enabled") -and [bool]$sp.build_enabled -eq $true) {
-    Warn ("support package {0} has build_enabled=true but BUILD.ps1 support-package execution is not implemented" -f $spName)
+  if ($spName -eq "05.SkillsMachineUpdate") {
+    if ((HasProp $sp "package_type") -and [string]$sp.package_type -ne "SUPPORT_PACKAGE") {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must have package_type=SUPPORT_PACKAGE" -f $spName)
+    }
+    if ((HasProp $sp "build_enabled") -and [bool]$sp.build_enabled -ne $true) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must have build_enabled=true" -f $spName)
+    }
+    if ((HasProp $sp "generated_output_target") -and [bool]$sp.generated_output_target -ne $true) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must have generated_output_target=true" -f $spName)
+    }
+    if ((HasProp $sp "source_of_truth") -and [string]$sp.source_of_truth -ne "CORE_ONLY") {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must have source_of_truth=CORE_ONLY" -f $spName)
+    }
+    if (-not (HasProp $sp "source_directory") -or [string]$sp.source_directory -ne "SyS/A_Tools/Update/SupportPackage") {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must declare source_directory=SyS/A_Tools/Update/SupportPackage" -f $spName)
+    }
+    if (-not (HasProp $sp "target_directory") -or [string]$sp.target_directory -ne "90.USECASE/05.SkillsMachineUpdate") {
+      $failCount++
+      Write-Host ("FAIL: support package {0} must declare target_directory=90.USECASE/05.SkillsMachineUpdate" -f $spName)
+    }
+
+    $copiedFiles = @(SafeArray $sp "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedCopied = @(
+      "PROMPT.SKILLSMACHINE_UPDATE.txt",
+      "README.UPLOAD_THIS_PACKAGE.txt",
+      "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+      "UPDATE.EXAMPLE.MANIFEST.json"
+    )
+    $expectedCopiedSorted = @($expectedCopied | Sort-Object -Unique)
+    if (($copiedFiles -join "|") -ne ($expectedCopiedSorted -join "|")) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} copied_files contract mismatch" -f $spName)
+    }
+
+    $deliveryFiles = @(SafeArray $sp "delivery_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedDelivery = @(
+      "00.BUNDLE.UPDATE_CONTEXT.txt",
+      "01.BUNDLE.UPDATE_METHOD.txt",
+      "02.BUNDLE.UPDATE_GOVERNANCE.txt",
+      "PROMPT.SKILLSMACHINE_UPDATE.txt",
+      "README.UPLOAD_THIS_PACKAGE.txt",
+      "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+      "SUPPORT_PACKAGE.MANIFEST.json",
+      "UPDATE.EXAMPLE.MANIFEST.json"
+    )
+    $expectedDeliverySorted = @($expectedDelivery | Sort-Object -Unique)
+    if (($deliveryFiles -join "|") -ne ($expectedDeliverySorted -join "|")) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} delivery_files contract mismatch" -f $spName)
+    }
+    if ($maxDelivery -ne $null -and $expectedDeliverySorted.Count -gt $maxDelivery) {
+      $failCount++
+      Write-Host ("FAIL: support package {0} exceeds max delivery file count" -f $spName)
+    }
   }
 }
 foreach ($uc in @(SafeArray $registry "usecases")) {
@@ -119,7 +174,7 @@ foreach ($uc in @(SafeArray $registry "usecases")) {
   }
 
   # optional arrays (Option B): if present, must be an array/scalar convertible; never false-positive null.
-foreach ($opt in @("preserve_files","delivery_files_extra")) {
+foreach ($opt in @("preserve_files","delivery_files_extra","copied_files")) {
   if (HasProp $uc $opt) {
     # If value is truly $null, SafeArray returns @() AND direct value equals $null.
     $val = $uc.$opt
@@ -142,13 +197,66 @@ foreach ($opt in @("preserve_files","delivery_files_extra")) {
   }
 
   # path hygiene for preserve/delivery extras (no absolute, no traversal)
-  foreach ($pname in @("preserve_files","delivery_files_extra")) {
+  foreach ($pname in @("preserve_files","delivery_files_extra","copied_files")) {
     if (HasProp $uc $pname -and $null -ne $uc.$pname) {
       foreach ($x in @(SafeArray $uc $pname)) {
         $s = [string]$x
         if ($s -match '^[A-Za-z]:\\') { $failCount++; Write-Host ("FAIL: {0} {1} contains absolute path: {2}" -f $name,$pname,$s) }
         if ($s -match '\.\.') { $failCount++; Write-Host ("FAIL: {0} {1} contains traversal '..': {2}" -f $name,$pname,$s) }
       }
+    }
+  }
+
+  if (HasProp $uc "source_directory") {
+    $sourceDirectory = [string]$uc.source_directory
+    if ([string]::IsNullOrWhiteSpace($sourceDirectory)) {
+      $failCount++
+      Write-Host ("FAIL: {0} source_directory must not be blank" -f $name)
+    } else {
+      if ($sourceDirectory -match '^[A-Za-z]:\\') { $failCount++; Write-Host ("FAIL: {0} source_directory contains absolute path: {1}" -f $name,$sourceDirectory) }
+      if ($sourceDirectory -match '\.\.') { $failCount++; Write-Host ("FAIL: {0} source_directory contains traversal '..': {1}" -f $name,$sourceDirectory) }
+    }
+  }
+
+  if ($name -eq "03.SESSION_CONTINUE") {
+    if (-not (HasProp $uc "source_directory") -or [string]$uc.source_directory -ne "SyS/A_Tools/UseCaseSources/03.SessionContinue") {
+      $failCount++
+      Write-Host "FAIL: 03.SESSION_CONTINUE must declare source_directory=SyS/A_Tools/UseCaseSources/03.SessionContinue"
+    }
+    $copiedFiles = @(SafeArray $uc "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedCopied = @(
+      "PROMPT.SESSION_CONTINUE.txt",
+      "README.UPLOAD_THIS_USECASE.txt",
+      "SKILL_SET.MANIFEST.txt"
+    ) | Sort-Object -Unique
+    if (($copiedFiles -join "|") -ne ($expectedCopied -join "|")) {
+      $failCount++
+      Write-Host "FAIL: 03.SESSION_CONTINUE copied_files contract mismatch"
+    }
+  }
+
+  if ($name -eq "04.REPOSITORY_STRUCTURE_REPAIR") {
+    if (-not (HasProp $uc "source_directory") -or [string]$uc.source_directory -ne "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair") {
+      $failCount++
+      Write-Host "FAIL: 04.REPOSITORY_STRUCTURE_REPAIR must declare source_directory=SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair"
+    }
+    $copiedFiles = @(SafeArray $uc "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedCopied = @(
+      "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
+      "README.EXECUTION.txt",
+      "README.UPLOAD_THIS_USECASE.txt",
+      "SKILL.md",
+      "SKILL_SET.MANIFEST.txt",
+      "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
+      "EXAMPLES/EXAMPLE.REPO_REPAIR.txt"
+    ) | Sort-Object -Unique
+    if (($copiedFiles -join "|") -ne ($expectedCopied -join "|")) {
+      $failCount++
+      Write-Host "FAIL: 04.REPOSITORY_STRUCTURE_REPAIR copied_files contract mismatch"
+    }
+    if (HasProp $uc "preserve_files") {
+      $failCount++
+      Write-Host "FAIL: 04.REPOSITORY_STRUCTURE_REPAIR must not use preserve_files as source contract"
     }
   }
 }

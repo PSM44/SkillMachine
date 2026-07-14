@@ -21,6 +21,12 @@ function Test-JsonFile($Path) {
     }
 }
 
+function Normalize-ToArray($Value) {
+    if ($null -eq $Value) { return @() }
+    if ($Value -is [System.Array]) { return @($Value) }
+    return @($Value)
+}
+
 Write-Host "VALIDATION: structure"
 
 $registryPath = "90.USECASE\USECASE.REGISTRY.json"
@@ -132,6 +138,53 @@ foreach ($dir in $usecaseDirs) {
     }
 }
 
+$useCaseSourceContracts = @(
+    [pscustomobject]@{
+        Name = "03.SESSION_CONTINUE"
+        SourceDirectory = "SyS/A_Tools/UseCaseSources/03.SessionContinue"
+        ExpectedFiles = @(
+            "PROMPT.SESSION_CONTINUE.txt",
+            "README.UPLOAD_THIS_USECASE.txt",
+            "SKILL_SET.MANIFEST.txt"
+        )
+    },
+    [pscustomobject]@{
+        Name = "04.REPOSITORY_STRUCTURE_REPAIR"
+        SourceDirectory = "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair"
+        ExpectedFiles = @(
+            "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
+            "README.EXECUTION.txt",
+            "README.UPLOAD_THIS_USECASE.txt",
+            "SKILL.md",
+            "SKILL_SET.MANIFEST.txt",
+            "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt"
+        )
+    }
+)
+
+foreach ($contract in $useCaseSourceContracts) {
+    $sourceDir = $contract.SourceDirectory
+    if (-not (Test-Path -LiteralPath $sourceDir -PathType Container)) {
+        Fail "Usecase source directory missing: $sourceDir"
+    }
+
+    $actualFiles = @(
+        Get-ChildItem -LiteralPath $sourceDir -File -Force |
+            Select-Object -ExpandProperty Name |
+            Sort-Object
+    )
+    $expectedFiles = @($contract.ExpectedFiles | Sort-Object)
+    $missingFiles = @($expectedFiles | Where-Object { $_ -notin $actualFiles })
+    $unexpectedFiles = @($actualFiles | Where-Object { $_ -notin $expectedFiles })
+
+    if ($missingFiles.Count -gt 0) {
+        Fail "Usecase source files missing in ${sourceDir}: $($missingFiles -join ', ')"
+    }
+    if ($unexpectedFiles.Count -gt 0) {
+        Fail "Unexpected usecase source files in ${sourceDir}: $($unexpectedFiles -join ', ')"
+    }
+}
+
 $legacy = git grep "STANDARD\." -- `
     ":(exclude)SyS/A_Tools/Validation" `
     ":(exclude).git" `
@@ -144,6 +197,114 @@ if ($LASTEXITCODE -eq 0 -and $legacy) {
         Fail "Legacy naming references detected"
     }
 }
+# MB-SM-062D-D: updater core structure validation
+$skillsMachineRootForUpdater = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\.."))
+$updaterCoreRoot = Join-Path $skillsMachineRootForUpdater "SyS\A_Tools\Update"
+$expectedUpdaterCoreFiles = @(
+    "Invoke-SkillsMachineUpdate.ps1",
+    "README.SKILLSMACHINE.UPDATE.txt",
+    "SKILLSMACHINE.PROJECT.BASELINE.schema.json",
+    "SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
+    "Test-SkillsMachineUpdate.ps1"
+)
+
+if (-not (Test-Path -LiteralPath $updaterCoreRoot -PathType Container)) {
+    throw "Updater core folder missing: $updaterCoreRoot"
+}
+
+$actualUpdaterCoreFiles = @(
+    Get-ChildItem -LiteralPath $updaterCoreRoot -File -Force |
+        Select-Object -ExpandProperty Name |
+        Sort-Object
+)
+$expectedUpdaterCoreFilesSorted = @($expectedUpdaterCoreFiles | Sort-Object)
+
+$missingUpdaterCoreFiles = @(
+    $expectedUpdaterCoreFilesSorted |
+        Where-Object { $_ -notin $actualUpdaterCoreFiles }
+)
+$unexpectedUpdaterCoreFiles = @(
+    $actualUpdaterCoreFiles |
+        Where-Object { $_ -notin $expectedUpdaterCoreFilesSorted }
+)
+
+if ($missingUpdaterCoreFiles.Count -gt 0) {
+    throw "Updater core files missing: $($missingUpdaterCoreFiles -join ', ')"
+}
+if ($unexpectedUpdaterCoreFiles.Count -gt 0) {
+    throw "Unexpected updater core files: $($unexpectedUpdaterCoreFiles -join ', ')"
+}
+if ($actualUpdaterCoreFiles.Count -ne 5) {
+    throw "Updater core file count must be exactly 5; actual=$($actualUpdaterCoreFiles.Count)"
+}
+
+Write-Host "OK: updater core structure validated (5 files)"
+
+$supportPackageName = "05.SkillsMachineUpdate"
+$supportDir = Join-Path "90.USECASE" $supportPackageName
+$supportManifestPath = Join-Path $supportDir "SUPPORT_PACKAGE.MANIFEST.json"
+$expectedSupportFiles = @(
+    "00.BUNDLE.UPDATE_CONTEXT.txt",
+    "01.BUNDLE.UPDATE_METHOD.txt",
+    "02.BUNDLE.UPDATE_GOVERNANCE.txt",
+    "PROMPT.SKILLSMACHINE_UPDATE.txt",
+    "README.UPLOAD_THIS_PACKAGE.txt",
+    "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+    "SUPPORT_PACKAGE.MANIFEST.json",
+    "UPDATE.EXAMPLE.MANIFEST.json"
+) | Sort-Object
+
+if (-not (Test-Path -LiteralPath $supportDir -PathType Container)) {
+    throw "Support package folder missing: $supportDir"
+}
+
+Test-JsonFile $supportManifestPath
+$supportManifest = Get-Content -Raw -LiteralPath $supportManifestPath | ConvertFrom-Json
+$actualSupportFiles = @(
+    Get-ChildItem -LiteralPath $supportDir -File -Force |
+        Select-Object -ExpandProperty Name |
+        Sort-Object
+)
+
+$missingSupportFiles = @($expectedSupportFiles | Where-Object { $_ -notin $actualSupportFiles })
+$unexpectedSupportFiles = @($actualSupportFiles | Where-Object { $_ -notin $expectedSupportFiles })
+
+if ($missingSupportFiles.Count -gt 0) {
+    throw "Support package files missing: $($missingSupportFiles -join ', ')"
+}
+if ($unexpectedSupportFiles.Count -gt 0) {
+    throw "Unexpected support package files: $($unexpectedSupportFiles -join ', ')"
+}
+if ($actualSupportFiles.Count -ne 8) {
+    throw "Support package file count must be exactly 8; actual=$($actualSupportFiles.Count)"
+}
+
+$supportSourceRoot = Join-Path $skillsMachineRootForUpdater "SyS\A_Tools\Update\SupportPackage"
+$expectedSupportSourceFiles = @(
+    "PROMPT.SKILLSMACHINE_UPDATE.txt",
+    "README.UPLOAD_THIS_PACKAGE.txt",
+    "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+    "UPDATE.EXAMPLE.MANIFEST.json"
+) | Sort-Object
+$actualSupportSourceFiles = @(
+    Get-ChildItem -LiteralPath $supportSourceRoot -File -Force |
+        Select-Object -ExpandProperty Name |
+        Sort-Object
+)
+if (($expectedSupportSourceFiles -join "|") -ne ($actualSupportSourceFiles -join "|")) {
+    throw "Support package source folder mismatch"
+}
+
+if (-not $supportManifest.delivery_files) {
+    throw "Support package manifest missing delivery_files: $supportManifestPath"
+}
+$supportDeliveryFiles = @($supportManifest.delivery_files | ForEach-Object { [string]$_ } | Sort-Object)
+if (($supportDeliveryFiles -join "|") -ne ($expectedSupportFiles -join "|")) {
+    throw "Support package manifest delivery_files mismatch"
+}
+
+Write-Host "OK: support package structure validated (8 files)"
+
 
 Write-Host "OK: structure validation passed"
 exit 0

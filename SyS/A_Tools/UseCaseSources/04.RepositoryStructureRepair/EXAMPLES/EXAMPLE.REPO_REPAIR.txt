@@ -1,0 +1,11 @@
+EXAMPLE — REPOSITORY STRUCTURE REPAIR
+
+1) Snapshot BEFORE
+2) Diagnosis
+3) Target structure proposal
+4) CIS plan
+5) Apply (safe)
+6) Validate + evidence
+7) Handoff
+
+(Placeholder)

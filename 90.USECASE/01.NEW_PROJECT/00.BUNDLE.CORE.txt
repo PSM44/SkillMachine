@@ -6,9 +6,10 @@ GENERATION_MODE.............: BUILD_BUNDLE_CORE
 REGENERATION_CONTRACT.......: Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills
 HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 ========== END_GENERATED_OUTPUT_POLICY ==========
+
 ==============================
 BUNDLE: CORE
-GENERATED_AT: 2026-07-05 01:10:16
+GENERATED_AT: 2026-07-13 16:02:31
 ==============================
 
 --------------------------------------------------
@@ -1861,5 +1862,3 @@ A9. Esconder errores de formato como si fueran cambios de contenido.
 ==========
 FIN_DEL_DOCUMENTO
 ==========
-
-

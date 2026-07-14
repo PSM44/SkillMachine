@@ -16,8 +16,8 @@ Set-StrictMode -Version Latest
 # 00.00 CONFIG
 # ==========================================================
 
-$UseCaseRoot = "C:\01. GitHub\Skills\90.USECASE"
-$SkillsRoot = "C:\01. GitHub\Skills"
+$SkillsRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
+$UseCaseRoot = Join-Path $SkillsRoot "90.USECASE"
 $RegistryPath = Join-Path $UseCaseRoot "USECASE.REGISTRY.json"
 $VersionRegistryPath = Join-Path $UseCaseRoot "GLOBAL.SKILL.VERSION.REGISTRY.json"
 
@@ -110,6 +110,15 @@ function Get-Sha256Safe {
     finally {
         if ($null -ne $sha) { $sha.Dispose() }
     }
+}
+
+function Has-Property {
+    param(
+        [AllowNull()]$Object,
+        [Parameter(Mandatory = $true)][string]$Name
+    )
+
+    return ($null -ne $Object -and $null -ne $Object.PSObject.Properties[$Name])
 }
 
 function Find-CanonicalFile {
@@ -228,6 +237,49 @@ function Validate-UseCaseOutput {
     return @($missing)
 }
 
+function Validate-SupportPackageOutput {
+    param(
+        [Parameter(Mandatory = $true)][string]$TargetDir,
+        [Parameter(Mandatory = $true)]$DeliveryFiles
+    )
+
+    $missing = @()
+
+    foreach ($name in @(Normalize-ToArray $DeliveryFiles)) {
+        if (!(Test-Path -LiteralPath (Join-Path $TargetDir ([string]$name)) -PathType Leaf)) {
+            $missing += [string]$name
+        }
+    }
+
+    return @($missing)
+}
+
+function Get-UseCaseSourceDirectoryPath {
+    param(
+        [Parameter(Mandatory = $true)]$UseCase,
+        [Parameter(Mandatory = $true)][string]$SkillsRoot
+    )
+
+    $sourceDirectory = ""
+    if (Has-Property $UseCase "source_directory") {
+        $sourceDirectory = [string]$UseCase.source_directory
+    }
+
+    if ([string]::IsNullOrWhiteSpace($sourceDirectory)) {
+        return $null
+    }
+
+    return (Join-Path $SkillsRoot $sourceDirectory)
+}
+
+function Get-UseCaseCopiedFiles {
+    param(
+        [Parameter(Mandatory = $true)]$UseCase
+    )
+
+    return @(Safe-GetArray $UseCase "copied_files" | ForEach-Object { [string]$_ })
+}
+
 function New-BundleFile {
     param(
         [Parameter(Mandatory = $true)][string]$BundlePath,
@@ -260,14 +312,69 @@ function New-BundleFile {
         [void]$lines.Add("")
     }
 
-    $newRaw = [string]::Join([Environment]::NewLine, @($lines)) + [Environment]::NewLine
+    $bundleBodyRaw = [string]::Join([Environment]::NewLine, @($lines)) + [Environment]::NewLine
+
+    $bundleKey = ([string]$BundleName).ToUpperInvariant()
+
+    $policyContract = switch ($bundleKey) {
+
+        "CORE" { [pscustomobject]@{ SourceOfTruth="SkillsLake/01.SKILLS + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_BUNDLE_CORE" } }
+
+        "CONTINUITY" { [pscustomobject]@{ SourceOfTruth="SkillsLake/01.SKILLS + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_BUNDLE_CONTINUITY" } }
+
+        "GOVERNANCE" { [pscustomobject]@{ SourceOfTruth="SkillsLake/01.SKILLS + GRCLake + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/GLOBAL.SKILL.VERSION.REGISTRY.json + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_BUNDLE_GOVERNANCE" } }
+
+        "UPDATE_CONTEXT" { [pscustomobject]@{ SourceOfTruth="SyS/A_Tools/Update + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_UPDATE_CONTEXT" } }
+
+        "UPDATE_METHOD" { [pscustomobject]@{ SourceOfTruth="SyS/A_Tools/Update + SkillsLake/01.SKILLS + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_UPDATE_METHOD" } }
+
+        "UPDATE_GOVERNANCE" { [pscustomobject]@{ SourceOfTruth="SyS/A_Tools/Update + GRCLake + 90.USECASE/BUILD.ps1"; GenerationMode="BUILD_UPDATE_GOVERNANCE" } }
+
+        default { throw "Unsupported bundle name for generated-output policy: $BundleName" }
+
+    }
+
+    $headerLines=@(
+
+        "========== GENERATED_OUTPUT_POLICY ==========",
+
+        "GENERATED_OUTPUT_ONLY.......: YES",
+
+        "DO_NOT_EDIT_MANUALLY........: YES",
+
+        "SOURCE_OF_TRUTH.............: $($policyContract.SourceOfTruth)",
+
+        "GENERATION_MODE.............: $($policyContract.GenerationMode)",
+
+        "REGENERATION_CONTRACT.......: Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills",
+
+        "HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional",
+
+        "========== END_GENERATED_OUTPUT_POLICY =========="
+
+    )
+
+    $headerLf=[string]::Join("`n",$headerLines)
+
+    $bodyLf=($bundleBodyRaw-replace"`r`n","`n").TrimStart([char[]]"`r`n").TrimEnd([char[]]"`r`n")
+
+    $newRawLf=($headerLf+"`n`n"+$bodyLf).TrimEnd([char[]]"`r`n")+"`n"
+
+    $newRaw=$newRawLf-replace"`n",[Environment]::NewLine
 
     if (Test-Path -LiteralPath $BundlePath -PathType Leaf) {
         $existingRaw = Get-Content -LiteralPath $BundlePath -Raw -Encoding utf8
         $normalizeForCompare = {
             param([string]$raw)
             $normalized = $raw -replace "`r`n", "`n"
+            $normalized = $normalized.TrimStart([char]0xFEFF)
+            $normalized = [regex]::Replace(
+                $normalized,
+                "(?s)^(?:=+\s*GENERATED_OUTPUT_POLICY\s*=+.*?=+\s*END_GENERATED_OUTPUT_POLICY\s*=+\n\n?)+",
+                ""
+            )
             $normalized = $normalized -replace "(?m)^GENERATED_AT:\s.*$", "GENERATED_AT: __PRESERVED__"
+            $normalized = $normalized.TrimEnd("`n")
             return $normalized
         }
 
@@ -326,51 +433,191 @@ function Validate-ManifestIntegrity {
     }
 }
 
-function ConvertTo-ManifestComparableJson {
-    param(
-        [Parameter(Mandatory = $true)]$ManifestObject
-    )
+function ConvertTo-ManifestCanonicalNode {
+    param([AllowNull()][object]$Value,[switch]$ExcludeGeneratedAt)
 
-    $clone = ($ManifestObject | ConvertTo-Json -Depth 20 | ConvertFrom-Json)
-    if ($clone.PSObject.Properties['generated_at']) {
-        $clone.PSObject.Properties.Remove('generated_at')
+    if ($null -eq $Value) { return $null }
+
+    if ($Value -is [string] -or $Value -is [char] -or $Value -is [bool] -or
+        $Value -is [byte] -or $Value -is [sbyte] -or
+        $Value -is [int16] -or $Value -is [uint16] -or
+        $Value -is [int32] -or $Value -is [uint32] -or
+        $Value -is [int64] -or $Value -is [uint64] -or
+        $Value -is [single] -or $Value -is [double] -or
+        $Value -is [decimal] -or $Value -is [datetime]) {
+        return $Value
     }
-    return ($clone | ConvertTo-Json -Depth 20)
+
+    if ($Value -is [System.Collections.IDictionary]) {
+        $o=[ordered]@{}
+        foreach($ko in @($Value.Keys|Sort-Object {[string]$_})) {
+            $k=[string]$ko
+            if($ExcludeGeneratedAt -and $k -eq 'generated_at'){continue}
+            $o[$k]=ConvertTo-ManifestCanonicalNode -Value $Value[$ko] -ExcludeGeneratedAt:$ExcludeGeneratedAt
+        }
+        return [pscustomobject]$o
+    }
+
+    if ($Value -is [System.Collections.IEnumerable] -and -not ($Value -is [string])) {
+        $l=[Collections.Generic.List[object]]::new()
+        foreach($item in $Value){
+            [void]$l.Add((ConvertTo-ManifestCanonicalNode -Value $item -ExcludeGeneratedAt:$ExcludeGeneratedAt))
+        }
+        return @($l)
+    }
+
+    $props=@($Value.PSObject.Properties|Where-Object{$_.MemberType-match'Property'}|Sort-Object Name)
+    if($props.Count){
+        $o=[ordered]@{}
+        foreach($prop in $props){
+            if($ExcludeGeneratedAt -and $prop.Name -eq 'generated_at'){continue}
+            $o[$prop.Name]=ConvertTo-ManifestCanonicalNode -Value $prop.Value -ExcludeGeneratedAt:$ExcludeGeneratedAt
+        }
+        return [pscustomobject]$o
+    }
+
+    return $Value
+}
+
+function ConvertTo-ManifestComparableJson {
+    param([Parameter(Mandatory=$true)]$ManifestObject)
+    $c=ConvertTo-ManifestCanonicalNode -Value $ManifestObject -ExcludeGeneratedAt
+    return ($c|ConvertTo-Json -Depth 100 -Compress)
 }
 
 function Write-ManifestIfChanged {
     param(
-        [Parameter(Mandatory = $true)][string]$ManifestPath,
-        [Parameter(Mandatory = $true)]$ManifestObject
+        [Parameter(Mandatory=$true)][string]$ManifestPath,
+        [Parameter(Mandatory=$true)]$ManifestObject
     )
 
-    $finalManifest = ($ManifestObject | ConvertTo-Json -Depth 20 | ConvertFrom-Json)
-    $shouldWrite = $true
+    $finalManifest=($ManifestObject|ConvertTo-Json -Depth 100|ConvertFrom-Json)
 
-    if (Test-Path -LiteralPath $ManifestPath -PathType Leaf) {
-        $existingRaw = Get-Content -LiteralPath $ManifestPath -Raw -Encoding utf8
-        $existing = $existingRaw | ConvertFrom-Json
+    if(Test-Path -LiteralPath $ManifestPath -PathType Leaf){
+        $existingRaw=Get-Content -LiteralPath $ManifestPath -Raw -Encoding UTF8
+        $existing=$existingRaw|ConvertFrom-Json -ErrorAction Stop
+        $a=ConvertTo-ManifestComparableJson -ManifestObject $existing
+        $b=ConvertTo-ManifestComparableJson -ManifestObject $finalManifest
+        if($a -ceq $b){ return $existing }
+    }
 
-        $existingComparable = ConvertTo-ManifestComparableJson -ManifestObject $existing
-        $newComparable = ConvertTo-ManifestComparableJson -ManifestObject $finalManifest
+    $json=$finalManifest|ConvertTo-Json -Depth 100
+    $canonical=$json.TrimEnd([char[]]"`r`n")+[Environment]::NewLine
+    [IO.File]::WriteAllText($ManifestPath,$canonical,[Text.UTF8Encoding]::new($false))
+    return $finalManifest
+}
 
-        if ($existingComparable -eq $newComparable) {
-            if ($existing.PSObject.Properties['generated_at']) {
-                $finalManifest.generated_at = [string]$existing.generated_at
-            }
+function Invoke-SupportPackagePreflight {
+    param(
+        [Parameter(Mandatory = $true)]$SupportPackage,
+        [Parameter(Mandatory = $true)][string]$SkillsRoot,
+        [Parameter(Mandatory = $true)]$VersionRegistry,
+        [Parameter(Mandatory = $true)]$ExcludedRoots,
+        [Parameter(Mandatory = $true)][int]$MaxDeliveryFiles
+    )
 
-            $finalRaw = ($finalManifest | ConvertTo-Json -Depth 12)
-            if ($finalRaw -eq $existingRaw) {
-                $shouldWrite = $false
-            }
+    $name = [string]$SupportPackage.name
+    $sourceDirectory = [string]$SupportPackage.source_directory
+    $targetDirectory = [string]$SupportPackage.target_directory
+    $copiedFiles = @(Safe-GetArray $SupportPackage "copied_files")
+    $declaredDeliveryFiles = @(Safe-GetArray $SupportPackage "delivery_files")
+    $bundleDefinitions = @(Safe-GetArray $SupportPackage "bundle_definitions")
+
+    if ([string]::IsNullOrWhiteSpace($sourceDirectory)) {
+        throw "Support package '$name' missing source_directory"
+    }
+    if ([string]::IsNullOrWhiteSpace($targetDirectory)) {
+        throw "Support package '$name' missing target_directory"
+    }
+    if ($copiedFiles.Count -eq 0) {
+        throw "Support package '$name' missing copied_files"
+    }
+    if ($bundleDefinitions.Count -eq 0) {
+        throw "Support package '$name' missing bundle_definitions"
+    }
+
+    $sourceDir = Join-Path $SkillsRoot $sourceDirectory
+    $targetDir = Join-Path $SkillsRoot $targetDirectory
+    if (!(Test-Path -LiteralPath $sourceDir -PathType Container)) {
+        throw "Support package source directory missing: $sourceDir"
+    }
+    if (!(Test-Path -LiteralPath $targetDir -PathType Container)) {
+        throw "Support package target directory missing: $targetDir"
+    }
+
+    foreach ($fileName in @($copiedFiles)) {
+        $sourcePath = Join-Path $sourceDir ([string]$fileName)
+        if (!(Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+            throw "Support package copied file missing: $sourcePath"
         }
     }
 
-    if ($shouldWrite) {
-        $finalManifest | ConvertTo-Json -Depth 12 | Set-Content -Path $ManifestPath -Encoding utf8
+    $expectedDeliveryFiles = @(
+        @($copiedFiles | ForEach-Object { [string]$_ }) +
+        @($bundleDefinitions | ForEach-Object { [string]$_.output_file }) +
+        @("SUPPORT_PACKAGE.MANIFEST.json")
+    ) | Sort-Object -Unique
+
+    if (@($expectedDeliveryFiles).Count -gt $MaxDeliveryFiles) {
+        throw "Support package '$name' exceeds max delivery files ($(@($expectedDeliveryFiles).Count) > $MaxDeliveryFiles)"
     }
 
-    return $finalManifest
+    $declaredSorted = @($declaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    if (($expectedDeliveryFiles -join '|') -ne ($declaredSorted -join '|')) {
+        throw "Support package '$name' delivery_files contract mismatch"
+    }
+
+    foreach ($bundleDef in @($bundleDefinitions)) {
+        $sourceFiles = @(Normalize-ToArray $bundleDef.source_files)
+        if ($sourceFiles.Count -eq 0) {
+            throw "Support package '$name' bundle '$($bundleDef.name)' missing source_files"
+        }
+
+        foreach ($sourceFile in @($sourceFiles)) {
+            [void](Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
+            [void](Get-TrackedSourceInfo -VersionRegistry $VersionRegistry -FileName ([string]$sourceFile))
+        }
+    }
+}
+
+function Build-SupportPackageManifest {
+    param(
+        [Parameter(Mandatory = $true)]$SupportPackage,
+        [Parameter(Mandatory = $true)][string]$SkillsRoot,
+        [Parameter(Mandatory = $true)][string]$TargetDir,
+        [Parameter(Mandatory = $true)]$DeliveryFiles,
+        [Parameter(Mandatory = $true)]$BundleManifest
+    )
+
+    return [ordered]@{
+        schema_version = "1.0"
+        package_name = [string]$SupportPackage.name
+        package_type = [string]$SupportPackage.package_type
+        source_root = $SkillsRoot
+        source_directory = [string]$SupportPackage.source_directory
+        target_directory = [string]$SupportPackage.target_directory
+        lifecycle_status = [string]$SupportPackage.lifecycle_status
+        build_enabled = [bool]$SupportPackage.build_enabled
+        generated_output_target = [bool]$SupportPackage.generated_output_target
+        primary_usecase = [bool]$SupportPackage.primary_usecase
+        source_of_truth = [string]$SupportPackage.source_of_truth
+        generated_output_only = $true
+        do_not_edit_manually = $true
+        regeneration_contract = "Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills"
+        delivery_files = @($DeliveryFiles)
+        delivery_file_count = @($DeliveryFiles).Count
+        upload_package_model = "SELF_CONTAINED_SUPPORT_PACKAGE_FOLDER"
+        upload_package_root = $TargetDir
+        upload_instruction_file = "README.UPLOAD_THIS_PACKAGE.txt"
+        upload_package_scope = "FULL_SUPPORT_PACKAGE_FOLDER"
+        folder_upload_required = $true
+        bundles = @($BundleManifest)
+        validation = [ordered]@{
+            status = "OK"
+            missing_files = @()
+            max_delivery_files_allowed = [int]$registry.build_policy.max_delivery_files_per_usecase
+        }
+    }
 }
 
 function Start-UseCaseTransactionBackup {
@@ -429,6 +676,8 @@ function Invoke-BuildPreflight {
     foreach ($uc in @(Normalize-ToArray $Registry.usecases)) {
         $useCaseName = [string]$uc.name
         $targetDir = Join-Path $UseCaseRoot $useCaseName
+        $sourceDir = Get-UseCaseSourceDirectoryPath -UseCase $uc -SkillsRoot $SkillsRoot
+        $copiedFiles = @(Get-UseCaseCopiedFiles -UseCase $uc)
         if (!(Test-Path -LiteralPath $targetDir -PathType Container)) {
             throw "PREFLIGHT: carpeta de use case no existe: $targetDir"
         }
@@ -437,10 +686,33 @@ function Invoke-BuildPreflight {
         $menuFiles = @(Safe-GetArray $uc "menu_files")
         $bundleDefinitions = @(Safe-GetArray $uc "bundle_definitions")
 
+        if ($null -ne $sourceDir) {
+            if (!(Test-Path -LiteralPath $sourceDir -PathType Container)) {
+                throw "PREFLIGHT: source_directory faltante en '$useCaseName': $sourceDir"
+            }
+
+            if ($copiedFiles.Count -eq 0) {
+                throw "PREFLIGHT: copied_files faltante en '$useCaseName'"
+            }
+
+            foreach ($copiedFile in @($copiedFiles)) {
+                $copiedSourcePath = Join-Path $sourceDir $copiedFile
+                if (!(Test-Path -LiteralPath $copiedSourcePath -PathType Leaf)) {
+                    throw "PREFLIGHT: copied_file faltante en '$useCaseName': $copiedSourcePath"
+                }
+            }
+        }
+
         foreach ($p in @($promptFiles)) {
             if ([string]::IsNullOrWhiteSpace([string]$p)) { continue }
-            if (!(Test-Path -LiteralPath (Join-Path $targetDir ([string]$p)) -PathType Leaf)) {
-                throw "PREFLIGHT: prompt faltante en '$useCaseName': $p"
+            $promptName = [string]$p
+            if (($null -ne $sourceDir) -and ($promptName -in $copiedFiles)) {
+                if (!(Test-Path -LiteralPath (Join-Path $sourceDir $promptName) -PathType Leaf)) {
+                    throw "PREFLIGHT: prompt source faltante en '$useCaseName': $promptName"
+                }
+            }
+            elseif (!(Test-Path -LiteralPath (Join-Path $targetDir $promptName) -PathType Leaf)) {
+                throw "PREFLIGHT: prompt faltante en '$useCaseName': $promptName"
             }
         }
 
@@ -456,6 +728,24 @@ function Invoke-BuildPreflight {
                 [void](Get-TrackedSourceInfo -VersionRegistry $VersionRegistry -FileName ([string]$sourceFile))
             }
         }
+    }
+
+    foreach ($sp in @(Normalize-ToArray $Registry.support_packages)) {
+        $buildEnabled = $false
+        if (Has-Property $sp "build_enabled") {
+            $buildEnabled = [bool]$sp.build_enabled
+        }
+
+        if ($buildEnabled -ne $true) {
+            continue
+        }
+
+        Invoke-SupportPackagePreflight `
+            -SupportPackage $sp `
+            -SkillsRoot $SkillsRoot `
+            -VersionRegistry $VersionRegistry `
+            -ExcludedRoots $ExcludedRoots `
+            -MaxDeliveryFiles ([int]$Registry.build_policy.max_delivery_files_per_usecase)
     }
 }
 
@@ -499,6 +789,8 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
     # Capture rich-usecase arrays early; later code may project/override $uc.
     $UC_PreserveFiles = @(Safe-GetArray $uc "preserve_files")
     $UC_DeliveryFilesExtra = @(Safe-GetArray $uc "delivery_files_extra")
+    $SourceDir = Get-UseCaseSourceDirectoryPath -UseCase $uc -SkillsRoot $SkillsRoot
+    $CopiedFiles = @(Get-UseCaseCopiedFiles -UseCase $uc)
 
     $UseCaseName = [string]$uc.name
     $UseCaseVersion = [string]$uc.version
@@ -533,7 +825,12 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         foreach ($p in @($PromptFiles)) {
-            if (!(Test-Path -LiteralPath (Join-Path $TargetDir $p) -PathType Leaf)) {
+            if (($null -ne $SourceDir) -and ([string]$p -in $CopiedFiles)) {
+                if (!(Test-Path -LiteralPath (Join-Path $SourceDir ([string]$p)) -PathType Leaf)) {
+                    throw "Prompt source faltante en use case: $p"
+                }
+            }
+            elseif (!(Test-Path -LiteralPath (Join-Path $TargetDir $p) -PathType Leaf)) {
                 throw "Prompt faltante en use case: $p"
             }
         }
@@ -552,9 +849,6 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             $preserveFiles = @($preserveFiles)
             if ($UC_PreserveFiles -and @($UC_PreserveFiles).Count -gt 0) { $preserveFiles += @($UC_PreserveFiles) }
             if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) { $preserveFiles += @($UC_DeliveryFilesExtra) }
-            if ($UseCaseName -eq "04.REPOSITORY_STRUCTURE_REPAIR") {
-                $preserveFiles += @("SKILL.md","USECASE.MANIFEST.json")
-            }
             $preserveFiles = @($preserveFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
             $txn = Start-UseCaseTransactionBackup -UseCaseName $UseCaseName -TargetDir $TargetDir -PreserveFiles $preserveFiles -TransactionRoot $BuildTxnRoot
             $txnBackupRoot = [string]$txn.BackupRoot
@@ -582,6 +876,24 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             $deliveryFiles += @($DeliveryFilesExtra)
         }
         $bundleManifest = @()
+
+        if ($null -ne $SourceDir) {
+            foreach ($copiedFile in @($CopiedFiles)) {
+                $sourcePath = Join-Path $SourceDir $copiedFile
+                $targetPath = Join-Path $TargetDir $copiedFile
+                $targetParent = Split-Path -Parent $targetPath
+                if (-not (Test-Path -LiteralPath $targetParent -PathType Container)) {
+                    New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
+                }
+                Copy-Item -LiteralPath $sourcePath -Destination $targetPath -Force
+
+                if (!(Test-Path -LiteralPath $targetPath -PathType Leaf)) {
+                    throw "No se pudo copiar copied_file '$copiedFile' a '$targetPath'"
+                }
+
+                Write-Host ("COPIED SOURCE: {0} -> {1}" -f $sourcePath, $copiedFile)
+            }
+        }
 
         foreach ($menuFile in @($MenuFiles)) {
             $menuMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName $menuFile -ExcludedRoots $ExcludedRoots)
@@ -703,6 +1015,10 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
                 max_delivery_files_allowed = [int]$registry.build_policy.max_delivery_files_per_usecase
                 status = "OK"
             }
+            generated_output_only = $true
+            do_not_edit_manually = $true
+            source_of_truth = "90.USECASE/BUILD.ps1 + source registries/manifests"
+            regeneration_contract = "Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills"
         }
 
         $manifestPath = Join-Path $TargetDir "USECASE.MANIFEST.json"
@@ -736,6 +1052,134 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         $results = @($results)
 
         Write-Host "FAIL en $UseCaseName"
+        Write-Host $errMsg
+    }
+}
+
+foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
+    $buildEnabled = $false
+    if (Has-Property $sp "build_enabled") {
+        $buildEnabled = [bool]$sp.build_enabled
+    }
+
+    if ($buildEnabled -ne $true) {
+        continue
+    }
+
+    $SupportPackageName = [string]$sp.name
+    $SourceDir = Join-Path $SkillsRoot ([string]$sp.source_directory)
+    $TargetDir = Join-Path $SkillsRoot ([string]$sp.target_directory)
+    $CopiedFiles = @(Safe-GetArray $sp "copied_files")
+    $DeclaredDeliveryFiles = @(Safe-GetArray $sp "delivery_files")
+    $BundleDefinitions = @(Safe-GetArray $sp "bundle_definitions")
+
+    Write-Host ""
+    Write-Host "=============================="
+    Write-Host "BUILD SUPPORT PACKAGE: $SupportPackageName"
+    Write-Host "=============================="
+
+    try {
+        $preserveFiles = @(
+            @($CopiedFiles | ForEach-Object { [string]$_ }) +
+            @($BundleDefinitions | ForEach-Object { [string]$_.output_file }) +
+            @("SUPPORT_PACKAGE.MANIFEST.json")
+        ) | Sort-Object -Unique
+
+        if ($registry.build_policy.clean_generated_files_first -eq $true) {
+            $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
+            Write-Host "LIMPIEZA: archivos eliminados = $(@($removed).Count)"
+            foreach ($f in @($removed)) {
+                Write-Host ("  - removed: {0}" -f $f.Name)
+            }
+        }
+
+        foreach ($fileName in @($CopiedFiles)) {
+            $sourcePath = Join-Path $SourceDir ([string]$fileName)
+            $targetPath = Join-Path $TargetDir ([string]$fileName)
+            $targetParent = Split-Path -Parent $targetPath
+            if (-not (Test-Path -LiteralPath $targetParent -PathType Container)) {
+                New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
+            }
+            Copy-Item -LiteralPath $sourcePath -Destination $targetPath -Force
+            Write-Host ("COPIED FILE: {0}" -f $fileName)
+        }
+
+        $bundleManifest = @()
+        foreach ($bundleDef in @($BundleDefinitions)) {
+            $bundleName = [string]$bundleDef.name
+            $bundleOutput = [string]$bundleDef.output_file
+            $bundleSourceFiles = @(Normalize-ToArray $bundleDef.source_files)
+            $sourceEntries = @()
+
+            foreach ($sourceFile in @($bundleSourceFiles)) {
+                $sourceMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
+                $source = $sourceMatches[0]
+                $tracked = Get-TrackedSourceInfo -VersionRegistry $versionRegistry -FileName ([string]$sourceFile)
+                $sourceHash = Get-Sha256Safe -Path $source.FullName
+
+                $sourceEntries += [ordered]@{
+                    name = [string]$sourceFile
+                    source_path = $source.FullName
+                    version = [string]$tracked.version
+                    source_sha256 = [string]$sourceHash
+                }
+            }
+
+            $bundlePath = Join-Path $TargetDir $bundleOutput
+            New-BundleFile -BundlePath $bundlePath -BundleName $bundleName -SourceEntries $sourceEntries
+            $bundleInfo = Get-Item -LiteralPath $bundlePath
+            $bundleSizeKb = [math]::Round(([double]$bundleInfo.Length / 1KB), 2)
+            if ($bundleSizeKb -gt [double]$registry.build_policy.max_bundle_size_kb) {
+                throw "Bundle '$bundleOutput' excede max_bundle_size_kb ($bundleSizeKb KB > $($registry.build_policy.max_bundle_size_kb) KB)"
+            }
+
+            $bundleManifest += [ordered]@{
+                bundle_name = $bundleName
+                delivery_file = $bundleOutput
+                delivery_path = $bundlePath
+                delivery_size_bytes = [int64]$bundleInfo.Length
+                delivery_size_kb = [double]$bundleSizeKb
+                delivery_sha256 = (Get-Sha256Safe -Path $bundlePath)
+                source_files = @($sourceEntries)
+            }
+
+            Write-Host ("BUNDLE GENERATED: {0} ({1} KB)" -f $bundleOutput, $bundleSizeKb)
+        }
+
+        $deliveryFiles = @($DeclaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+        $validationMissing = @(Validate-SupportPackageOutput -TargetDir $TargetDir -DeliveryFiles $deliveryFiles)
+        if (@($validationMissing).Count -gt 0) {
+            throw "Validación de salida falló en '$SupportPackageName'. Faltantes: $($validationMissing -join ', ')"
+        }
+
+        $manifestPath = Join-Path $TargetDir "SUPPORT_PACKAGE.MANIFEST.json"
+        $manifest = Build-SupportPackageManifest `
+            -SupportPackage $sp `
+            -SkillsRoot $SkillsRoot `
+            -TargetDir $TargetDir `
+            -DeliveryFiles $deliveryFiles `
+            -BundleManifest $bundleManifest
+        $manifest = Write-ManifestIfChanged -ManifestPath $manifestPath -ManifestObject $manifest
+
+        $results += [pscustomobject]@{
+            usecase = $SupportPackageName
+            status = "OK"
+            copied = @($deliveryFiles).Count
+            error = ""
+        }
+        $results = @($results)
+        Write-Host "OK - delivery files: $(@($deliveryFiles).Count)"
+    }
+    catch {
+        $errMsg = $_.Exception.Message
+        $results += [pscustomobject]@{
+            usecase = $SupportPackageName
+            status = "FAIL"
+            copied = 0
+            error = $errMsg
+        }
+        $results = @($results)
+        Write-Host "FAIL en $SupportPackageName"
         Write-Host $errMsg
     }
 }

@@ -1,7 +1,7 @@
 {
   "usecase": "04.REPOSITORY_STRUCTURE_REPAIR",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-05 01:10:17",
+  "generated_at": "2026-07-13 19:42:20",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -22,9 +22,9 @@
       "bundle_name": "CORE",
       "delivery_file": "00.BUNDLE.CORE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\00.BUNDLE.CORE.txt",
-      "delivery_size_bytes": 47993,
-      "delivery_size_kb": 46.87,
-      "delivery_sha256": "F64AF4516C837B0F30996ED959FE7AAB5C71DE586AA14D79C0C7151B5488D4E8",
+      "delivery_size_bytes": 48519,
+      "delivery_size_kb": 47.38,
+      "delivery_sha256": "71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
@@ -56,9 +56,9 @@
       "bundle_name": "CONTINUITY",
       "delivery_file": "01.BUNDLE.CONTINUITY.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 38419,
-      "delivery_size_kb": 37.52,
-      "delivery_sha256": "752BEF1A241E528222C7DEC7D1093AAF7DCF5D79456BA848231EBA8B959317BA",
+      "delivery_size_bytes": 38949,
+      "delivery_size_kb": 38.04,
+      "delivery_sha256": "4A214B306E959296E784B888F06AC0C4AE74B06050055D72F164284EF6C8E7A4",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -90,9 +90,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 111918,
-      "delivery_size_kb": 109.29,
-      "delivery_sha256": "4A14E736B6F720F75BD8A7E18270D378D6E9B75A9AF93A7061A3A6691933B897",
+      "delivery_size_bytes": 112458,
+      "delivery_size_kb": 109.82,
+      "delivery_sha256": "D78BEBB0B171B78A83F31E22ED4DDAD5C6FA4651B7A2307A4095CA8EDF00A590",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -157,8 +157,8 @@
     "max_delivery_files_allowed": 8,
     "status": "OK"
   },
-  "generated_output_only": true,
-  "do_not_edit_manually": true,
   "source_of_truth": "90.USECASE/BUILD.ps1 + source registries/manifests",
-  "regeneration_contract": "Re-run 90.USECASE/BUILD.ps1 from C:\\01. GitHub\\Skills"
+  "regeneration_contract": "Re-run 90.USECASE/BUILD.ps1 from C:\\01. GitHub\\Skills",
+  "generated_output_only": true,
+  "do_not_edit_manually": true
 }

@@ -198,6 +198,43 @@
     {
       "file": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
       "version": "v0.1-DRAFT_READY_FOR_TEST"
+    },
+    {
+      "file": "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1",
+      "version": "v1.1-CORE"
+    },
+    {
+      "file": "SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt",
+      "version": "v1.1-CORE"
+    },
+    {
+      "file": "SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json",
+      "version": "v1.1-CORE"
+    },
+    {
+      "file": "SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
+      "version": "v1.1-CORE"
+    },
+    {
+      "file": "SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1",
+      "version": "v1.1-CORE"
+    },
+    {
+      "file": "SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt",
+      "version": "v1.0-MVP"
+    },
+    {
+      "file": "SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+      "version": "v1.0-MVP"
+    }
+    ,
+    {
+      "file": "SyS/A_Tools/Update/SupportPackage/README.UPLOAD_THIS_PACKAGE.txt",
+      "version": "v1.0-MVP"
+    },
+    {
+      "file": "SyS/A_Tools/Update/SupportPackage/UPDATE.EXAMPLE.MANIFEST.json",
+      "version": "v1.0-MVP"
     }
   ]
 }

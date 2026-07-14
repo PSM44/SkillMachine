@@ -2,8 +2,8 @@
 README.UPLOAD_THIS_USECASE
 ==========
 
-USECASE............: 03.SESSION_CONTINUE
-PURPOSE............: Continuar una sesión operativa sin inventar estado y con contexto vigente.
+USECASE............: 04.REPOSITORY_STRUCTURE_REPAIR
+PURPOSE............: Reparar estructura de repositorio con governance, snapshot, CIS, validación y rollback.
 STATUS.............: ACTIVE
 PACKAGE_MODEL......: SELF_CONTAINED_USECASE_FOLDER
 
@@ -13,7 +13,7 @@ PACKAGE_MODEL......: SELF_CONTAINED_USECASE_FOLDER
 
 Subir el contenido completo de esta carpeta:
 
-C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+C:\01. GitHub\Skills\90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR
 
 Esto incluye, según corresponda:
 
@@ -36,11 +36,6 @@ Esto incluye, según corresponda:
 - La IA debe distinguir estado confirmado, inferido y duda.
 - La IA no debe crear o modificar canon automáticamente.
 - Si detecta oportunidad de crear/mejorar Skill o GRC, debe registrarla como candidato.
-- Este usecase debe consumir auditoría documental del proyecto antes de aceptar continuidad.
-- El primer audit se ejecuta con AcceptedSessionContinue=false para no adelantar contador.
-- Solo después de aceptación humana se reejecuta con AcceptedSessionContinue=true para persistir cadence/state del proyecto.
-- Si el audit devuelve HARD_CONFLICT, SESSION_CONTINUE debe detener aceptación y emitir REVIEW_REQUIRED.
-- SESSION_CONTINUE no debe ejecutar automáticamente 04.REPOSITORY_STRUCTURE_REPAIR ni 05.SkillsMachineUpdate.
 
 ==========
 03.00_PROMPT_DE_ARRANQUE_SUGERIDO
@@ -51,15 +46,15 @@ Hoy es [fecha/hora local], Santiago Chile.
 Estoy trabajando con SkillsMachine.
 Adjunto el contenido de:
 
-C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+C:\01. GitHub\Skills\90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR
 
 Objetivo:
-Ejecutar el usecase 03.SESSION_CONTINUE.
+Ejecutar el usecase 04.REPOSITORY_STRUCTURE_REPAIR.
 
 Instrucciones:
 1. Lee primero README.UPLOAD_THIS_USECASE.txt.
 2. Lee USECASE.MANIFEST.json y SKILL_SET.MANIFEST.txt si existen.
-3. Lee el prompt principal: PROMPT.SESSION_CONTINUE.txt.
+3. Lee el prompt principal: SKILL.md.
 4. Usa los bundles adjuntos como contexto operativo.
 5. No asumas que tienes todo el repo.
 6. Si falta contexto, pide paths exactos adicionales.
@@ -76,6 +71,25 @@ DONE when:
 - IA can identify whether context is sufficient.
 - IA requests only exact missing paths if needed.
 - IA does not request broad repository upload by default.
+
+==========
+05.00_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+If repository repair is part of an IT project, the IA must read and apply:
+C:\01. GitHub\Skills\GRCLake\AA.CONSTITUTION
+
+Repository repair must not become an excuse to delay DEPLOY_DONE or DELIVERABLE_DONE.
+
+Allowed before first output:
+- repair that directly unblocks deploy/deliverable;
+- minimum structure required for execution, validation or continuity;
+- rollback/safety needed to avoid damaging the repo.
+
+Not allowed before first output unless explicitly justified:
+- broad restructuring;
+- aesthetic reorganization;
+- governance expansion;
+- non-critical architecture cleanup.
 
 ==========
 MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
@@ -121,19 +135,4 @@ what context is missing, and the next minimal reversible action.
 
 ==========
 FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
-==========
-
-==========
-MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
-==========
-
-03.SESSION_CONTINUE is transversal.
-After uploading this usecase package, the human must also provide the project BATON, WHOAMI, or equivalent continuity file containing PROJECT_ROOT and TEMP_PATH.
-
-If TEMP_PATH is missing, the assistant must stop and ask for it or suggest creating a project Temp folder.
-
-The assistant must then provide an immediate safe script to consolidate relevant project context into up to 10 IA-readable files inside TEMP_PATH.
-
-==========
-FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
 ==========

@@ -1,0 +1,111 @@
+{
+  "schema_version": "1.0",
+  "package_name": "05.SkillsMachineUpdate",
+  "package_type": "SUPPORT_PACKAGE",
+  "source_root": "C:\\01. GitHub\\Skills",
+  "source_directory": "SyS/A_Tools/Update/SupportPackage",
+  "target_directory": "90.USECASE/05.SkillsMachineUpdate",
+  "lifecycle_status": "MVP",
+  "build_enabled": true,
+  "generated_output_target": true,
+  "primary_usecase": false,
+  "source_of_truth": "CORE_ONLY",
+  "regeneration_contract": "Re-run 90.USECASE/BUILD.ps1 from C:\\01. GitHub\\Skills",
+  "delivery_files": [
+    "00.BUNDLE.UPDATE_CONTEXT.txt",
+    "01.BUNDLE.UPDATE_METHOD.txt",
+    "02.BUNDLE.UPDATE_GOVERNANCE.txt",
+    "PROMPT.SKILLSMACHINE_UPDATE.txt",
+    "README.UPLOAD_THIS_PACKAGE.txt",
+    "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+    "SUPPORT_PACKAGE.MANIFEST.json",
+    "UPDATE.EXAMPLE.MANIFEST.json"
+  ],
+  "delivery_file_count": 8,
+  "upload_package_model": "SELF_CONTAINED_SUPPORT_PACKAGE_FOLDER",
+  "upload_package_root": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate",
+  "upload_instruction_file": "README.UPLOAD_THIS_PACKAGE.txt",
+  "upload_package_scope": "FULL_SUPPORT_PACKAGE_FOLDER",
+  "folder_upload_required": true,
+  "bundles": [
+    {
+      "bundle_name": "UPDATE_CONTEXT",
+      "delivery_file": "00.BUNDLE.UPDATE_CONTEXT.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\00.BUNDLE.UPDATE_CONTEXT.txt",
+      "delivery_size_bytes": 5855,
+      "delivery_size_kb": 5.72,
+      "delivery_sha256": "5DDF40F80374BE176508EA2C25802CCC07B151C5B14D73A256296ED6C4FAD24D",
+      "source_files": [
+        {
+          "name": "SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\README.SKILLSMACHINE.UPDATE.txt",
+          "version": "v1.1-CORE",
+          "source_sha256": "109CE370DD3346C576730DCC646C5FF304E8EC1674F23E2DFD3CAAE1DFCA7FE8"
+        },
+        {
+          "name": "SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\SKILLSMACHINE.PROJECT.BASELINE.schema.json",
+          "version": "v1.1-CORE",
+          "source_sha256": "C614E7F4C5F3A9EACCBEA8FB316503E1A0601BF227C7EBA7FD7DDE10E86F8849"
+        }
+      ]
+    },
+    {
+      "bundle_name": "UPDATE_METHOD",
+      "delivery_file": "01.BUNDLE.UPDATE_METHOD.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\01.BUNDLE.UPDATE_METHOD.txt",
+      "delivery_size_bytes": 66093,
+      "delivery_size_kb": 64.54,
+      "delivery_sha256": "0D21E2436F5F433289829DCA0EF9EAA192127F5C67EF6853EFBE0FFC56D17A39",
+      "source_files": [
+        {
+          "name": "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\Invoke-SkillsMachineUpdate.ps1",
+          "version": "v1.1-CORE",
+          "source_sha256": "76DBF8F0483915037A4F10D478EB211659BD8E1BC51B77F28833F3B82C42EED2"
+        },
+        {
+          "name": "SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\Test-SkillsMachineUpdate.ps1",
+          "version": "v1.1-CORE",
+          "source_sha256": "CC3F3758E0F11F61C65EA57F76DBCA27D31316919C7A56365C7F0A15E27FE196"
+        }
+      ]
+    },
+    {
+      "bundle_name": "UPDATE_GOVERNANCE",
+      "delivery_file": "02.BUNDLE.UPDATE_GOVERNANCE.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\02.BUNDLE.UPDATE_GOVERNANCE.txt",
+      "delivery_size_bytes": 7278,
+      "delivery_size_kb": 7.11,
+      "delivery_sha256": "54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27",
+      "source_files": [
+        {
+          "name": "SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
+          "version": "v1.1-CORE",
+          "source_sha256": "A31DAA3F347FE745B70D6D422ED1BA12E29A11541CE391E62865A4D890EAFBEE"
+        },
+        {
+          "name": "SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\SupportPackage\\PROMPT.SKILLSMACHINE_UPDATE.txt",
+          "version": "v1.0-MVP",
+          "source_sha256": "8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B"
+        },
+        {
+          "name": "SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+          "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\SupportPackage\\RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+          "version": "v1.0-MVP",
+          "source_sha256": "E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE"
+        }
+      ]
+    }
+  ],
+  "validation": {
+    "status": "OK",
+    "missing_files": [],
+    "max_delivery_files_allowed": 8
+  },
+  "generated_output_only": true,
+  "do_not_edit_manually": true
+}
