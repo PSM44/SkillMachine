@@ -104,3 +104,25 @@ DECISION: Preserve as catalogue improvement after updater MVP.
 PROMOTION_TARGET: MAINTENANCE_BATTLE
 OWNER: SkillsMachine
 NEXT_ACTION: Define structured registry or generated matrix without duplicating canon.
+
+==========
+ENTRY_ID: IO-007_ACCEPTANCE_MATRIX_BEFORE_MORE_ARCHITECTURE
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B critical review
+CATEGORY: delivery discipline
+STATUS: OPEN
+TITLE: Freeze new architecture work until updater acceptance matrix is executed.
+DETAIL: Prioritize happy path, rollback, induced failure, tamper, interruption and concurrency evidence over additional conceptual expansion.
+BENEFIT: Converts governance-heavy progress into product confidence.
+NEXT_ACTION: Build and execute acceptance matrix.
+
+ENTRY_ID: IO-008_EXECUTIVE_EVIDENCE_AS_PRODUCT_OUTPUT
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: management deliverable review
+CATEGORY: productization
+STATUS: OPEN
+TITLE: Generate a concise executive evidence report from updater runs.
+DETAIL: Translate technical evidence into risk avoided, files affected, rollback readiness, elapsed time and final decision.
+BENEFIT: Makes value visible without exposing repository internals.
+NEXT_ACTION: Define executive report schema for MB-SM-065A.
+==========

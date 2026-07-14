@@ -2587,3 +2587,68 @@ NEXT_ACTION:
 Commit this BATON/WHOAMI/backlog/executive refresh together, then regenerate RADAR and run final readiness.
 ==========
 END_MB-SM-064A_CONTINUITY_REFRESH_AFTER_063D
+
+==========
+MB-SM-064B_FORMAL_SESSION_CLOSE
+==========
+UPDATED_AT...................: 2026-07-14 17:32:17 -04:00
+PROJECT......................: SkillsMachine
+PROJECT_ROOT.................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_BASE....................: da0b1fe075cc2997fb016842859829d05f5b985c
+STATUS.......................: GOLDEN_UPDATE_ACCEPTANCE_DISCOVERY_COMPLETE
+
+CURRENT_STATE:
+- 05.SkillsMachineUpdate core and generated support package are integrated.
+- Runner supports preflight, dry-run, apply and rollback.
+- Human approval and approved dry-run fingerprint are mandatory for apply.
+- Checkpoint ZIP and manifest are produced before mutation.
+- Automatic rollback exists for apply failures.
+- Project-scoped DocumentConsistencyAudit can be enabled as preflight.
+- Synthetic tests cover ADD, REPLACE, DELETE, explicit rollback, induced failure and rollback guard.
+- Repository was clean and synchronized before this close update.
+
+COMPLETED_THIS_SESSION:
+- Hardened DocumentConsistencyAudit for project-scoped authority.
+- Migrated SESSION_CONTINUE and REPOSITORY_STRUCTURE_REPAIR to canonical source directories.
+- Added nested copied-file support and canonical EXAMPLES content.
+- Integrated 05.SkillsMachineUpdate core, schemas, support package and validators.
+- Hardened validation for external working directories and PowerShell 7/5.1.
+- Committed and pushed MB-SM-063D.
+- Refreshed and pushed BATON, WHOAMI, backlog and executive status in MB-SM-064A.
+- Created consolidated golden-test discovery context for MB-SM-064B.
+
+TECHNICAL_DEBT:
+- TD-005_VISIBLE_FUNCTIONAL_DELIVERABLE_NOT_YET_BUILT remains open.
+- TD-004_SESSION_CONTINUE_SKILL_GRC_MENU_GATE_NOT_CORE_PATCHED remains open.
+- TD-006_CANDIDATE_TO_CANON_PROMOTION_BACKLOG remains open.
+- TD-007_LONG_RUNNING_RUNNER_HEARTBEAT_NOT_CORE_PATCHED remains open.
+- TD-010_TEMP_BOUNDARY_CONTRACT_DRIFT remains open.
+- TD-011_RADAR_SOURCE_UNDER_IGNORE_RULE remains open.
+- GOLDEN_UPDATE_TEST_ON_CONTROLLED_REAL_PROJECT remains open.
+- UPDATE_PACKAGE_AUTHENTICITY_AND_PROVENANCE_VERIFICATION remains open.
+- UPDATE_TRANSACTION_LOCK_AND_INTERRUPTION_RECOVERY remains open.
+- BASELINE_COMPONENT_TYPE_PRESERVATION remains open.
+- JSON_SCHEMA_RUNTIME_VALIDATION remains open.
+- SEMVER_PRERELEASE_AND_BUILD_METADATA_SUPPORT remains open.
+
+ACTIVE_BACKLOG:
+- MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+- MB-SM-064C_UPDATE_ROLLBACK_AND_FAILURE_TEST.
+- MB-SM-065A_MANAGEMENT_VISIBLE_SKILLSMACHINE_UPDATE_DEMO.
+- MB-SM-065B_MANAGEMENT_ACCEPTANCE_PACKAGE.
+- BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE.
+- BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION.
+- BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP: implementation complete, acceptance pending.
+- BL-010_MANAGEMENT_VISIBLE_UPDATE_DEMO.
+
+PATH_TO_MANAGEMENT:
+MB-SM-064B golden install/update on controlled project ->
+MB-SM-064C rollback, failure, tamper and interruption tests ->
+MB-SM-065A 5-10 minute visible demo ->
+MB-SM-065B executive evidence and acceptance package.
+
+NEXT_ACTION:
+Start MB-SM-064B golden installation/update test on a controlled SkillsMachine-created project clone.
+==========
+END_MB-SM-064B_FORMAL_SESSION_CLOSE

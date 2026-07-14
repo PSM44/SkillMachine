@@ -1605,3 +1605,25 @@ NEXT_ACTION:
 MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
 ==========
 END_MB-SM-064A_WHOAMI_REFRESH_AFTER_063D
+
+==========
+MB-SM-064B_WHOAMI_SESSION_CLOSE
+==========
+UPDATED_AT...................: 2026-07-14 17:32:17 -04:00
+PROJECT......................: SkillsMachine
+HEAD_BASE....................: da0b1fe075cc2997fb016842859829d05f5b985c
+STATUS.......................: ACTIVE_ACCEPTANCE_TEST_STAGE
+
+CURRENT_POSITION:
+The updater architecture and governance foundation are integrated.
+The project is now in acceptance testing and demonstration, not conceptual design.
+
+NEXT_ACTION:
+Run MB-SM-064B golden installation/update test on a disposable controlled project clone.
+
+BOUNDARY:
+Do not claim management readiness until golden apply/rollback evidence and a visible demo exist.
+Do not patch generated 90.USECASE outputs manually.
+Do not modify HUMAN because no new doctrine was approved in this close.
+==========
+END_MB-SM-064B_WHOAMI_SESSION_CLOSE

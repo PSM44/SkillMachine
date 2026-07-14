@@ -122,3 +122,30 @@ OWNER: SkillsMachine
 NEXT_ACTION: Define MB-SM-063 after MB-SM-062 passes golden installation test.
 LINKED_FILES: BL-006_MANAGEMENT_VISIBLE_EVIDENCE_PACK; IR-003_GERENCIA_CONTROL_PANEL_DEMO
 NOTES: Do not claim management readiness before visible execution evidence.
+
+==========
+ENTRY_ID: BL-011_GOLDEN_UPDATE_INSTALLATION_ACCEPTANCE
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B discovery and formal session close
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Execute SkillsMachineUpdate golden installation and update acceptance.
+DETAIL: Run preflight, dry-run, approval fingerprint, checkpoint, apply, validation and explicit rollback on a controlled SkillsMachine-created project clone.
+DECISION: Accepted as immediate next minibattle.
+PROMOTION_TARGET: NEXT_BATTLE
+OWNER: SkillsMachine
+NEXT_ACTION: MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+NOTES: Synthetic tests exist; this item requires controlled realistic acceptance evidence.
+
+ENTRY_ID: BL-012_UPDATE_RESILIENCE_AND_PROVENANCE
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+CATEGORY: P0
+STATUS: OPEN
+TITLE: Harden updater resilience, provenance and runtime contract validation.
+DETAIL: Cover package authenticity, runtime JSON Schema validation, transaction locking, interruption recovery, checkpoint tampering and baseline inventory semantics.
+DECISION: Execute after golden happy-path acceptance and before management readiness.
+PROMOTION_TARGET: MB-SM-064C
+OWNER: SkillsMachine
+NEXT_ACTION: Design negative and resilience acceptance matrix.
+==========

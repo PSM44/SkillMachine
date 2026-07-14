@@ -140,3 +140,53 @@ DECISION: Defer until after updater MVP unless it blocks normal development.
 PROMOTION_TARGET: REPO_HYGIENE_BATTLE
 OWNER: SkillsMachine
 NEXT_ACTION: Audit ignore provenance and propose narrow exception.
+
+==========
+ENTRY_ID: TD-012_GOLDEN_REALISTIC_ACCEPTANCE_NOT_EXECUTED
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B discovery
+CATEGORY: product acceptance debt
+STATUS: OPEN
+TITLE: Updater has synthetic tests but no controlled realistic golden installation evidence.
+DETAIL: Existing tests use temporary synthetic repositories. A SkillsMachine-created project clone must prove the complete operational flow.
+IMPACT: Management readiness and production confidence cannot be claimed.
+RISK: Hidden integration assumptions may remain undetected.
+NEXT_ACTION: MB-SM-064B_GOLDEN_UPDATE_INSTALLATION_TEST.
+PRIORITY: P0
+
+ENTRY_ID: TD-013_UPDATE_PACKAGE_PROVENANCE_NOT_VERIFIED
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+CATEGORY: supply chain security debt
+STATUS: OPEN
+TITLE: Update source_commit and payload hashes are declared but package authenticity is not independently verified.
+DETAIL: Hashes protect file integrity relative to the manifest, but there is no signature, trusted publisher identity or verified source-commit binding.
+IMPACT: A malicious or wrongly generated package could be internally consistent.
+RISK: Update supply-chain compromise or wrong-source deployment.
+NEXT_ACTION: Define signed-manifest or trusted-release provenance contract.
+PRIORITY: P1
+
+ENTRY_ID: TD-014_UPDATE_INTERRUPTION_AND_CONCURRENCY_CONTROL
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+CATEGORY: transactional robustness debt
+STATUS: OPEN
+TITLE: No explicit project lock or crash-resume contract exists.
+DETAIL: Automatic rollback covers caught apply failures, but process termination or concurrent updater execution is not governed.
+IMPACT: Partial mutation or competing runs may require manual recovery.
+RISK: Baseline/project divergence.
+NEXT_ACTION: Add lock file, transaction state and startup recovery detection.
+PRIORITY: P1
+
+ENTRY_ID: TD-015_BASELINE_SCHEMA_AND_INVENTORY_SEMANTICS
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+CATEGORY: data contract debt
+STATUS: OPEN
+TITLE: Runtime validation is manual and updated inventory normalizes component_type to updated_file.
+DETAIL: JSON schemas exist, but the runner performs selected checks instead of complete schema validation; component semantics may be lost after updates.
+IMPACT: Contract drift and reduced inventory fidelity.
+RISK: Future tooling may misclassify components.
+NEXT_ACTION: Add runtime schema validation and preserve or explicitly migrate component_type.
+PRIORITY: P1
+==========

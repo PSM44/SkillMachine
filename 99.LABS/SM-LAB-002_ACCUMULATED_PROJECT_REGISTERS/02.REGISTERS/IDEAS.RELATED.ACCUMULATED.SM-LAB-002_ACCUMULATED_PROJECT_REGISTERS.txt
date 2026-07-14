@@ -88,3 +88,29 @@ DECISION: Defer until individual commands have proven contracts.
 PROMOTION_TARGET: PRODUCT_ROADMAP
 OWNER: SkillsMachine
 NEXT_ACTION: Reassess after updater and management demo.
+
+==========
+ENTRY_ID: IR-005_GOLDEN_PROJECT_UPDATE_DEMONSTRATOR
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B review
+CATEGORY: management deliverable
+STATUS: ACCEPTED
+TITLE: Use one controlled project clone as both acceptance target and management demonstrator.
+DETAIL: Capture before state, dry-run, approval, checkpoint, apply, validation, rollback and executive result in a single repeatable scenario.
+DECISION: Accepted as preferred product path.
+PROMOTION_TARGET: MB-SM-064B_AND_MB-SM-065A
+OWNER: SkillsMachine
+NEXT_ACTION: Select controlled target and define visible scenario.
+
+ENTRY_ID: IR-006_SINGLE_CONSOLIDATED_AI_UPLOAD_OUTPUT
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: explicit human operational decision
+CATEGORY: upload efficiency
+STATUS: ACCEPTED
+TITLE: Consolidate all requested Temp.SkillMachine outputs into one IA-readable file.
+DETAIL: Avoid multiple lightweight uploads because ChatGPT may limit upload count.
+DECISION: Operational rule accepted and already used.
+PROMOTION_TARGET: SKILL_GRC_REVIEW
+OWNER: SkillsMachine
+NEXT_ACTION: Evaluate canonization in upload/output policy.
+==========

@@ -200,3 +200,35 @@ DECISION: Candidate only; existing checkpoint/rollback controls may already cove
 PROMOTION_TARGET: MERGE_OR_NEW_GRC_REVIEW
 OWNER: SkillsMachine
 NEXT_ACTION: Compare against 16.SKILL.CHECKPOINT_ROLLBACK and existing GRCs before promotion.
+
+==========
+ENTRY_ID: CAND-SM-UPDATE-SUPPLY-CHAIN-001
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+TYPE: GRC_CANDIDATE
+STATUS: CANDIDATE
+TITLE: Update package provenance and trusted publisher control.
+DETAIL: Govern signature, source-commit binding, trusted release identity and payload integrity.
+DO_NOT_CANONIZE_YET: Validate against golden and tamper tests first.
+NEXT_ACTION: Review after MB-SM-064C.
+
+ENTRY_ID: CAND-SM-UPDATE-TRANSACTION-001
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: MB-SM-064B technical review
+TYPE: SKILL_GRC_CANDIDATE
+STATUS: CANDIDATE
+TITLE: Transaction lock, interruption recovery and resumability.
+DETAIL: Define lock acquisition, stale lock handling, transaction state, crash detection and safe recovery.
+DO_NOT_CANONIZE_YET: Derive from actual failure tests.
+NEXT_ACTION: Review after MB-SM-064C.
+
+ENTRY_ID: CAND-SM-CONSOLIDATED-UPLOAD-001
+DATE: 2026-07-14 17:32:17 -04:00
+SOURCE: explicit human decision
+TYPE: OPERATIONAL_RULE_CANDIDATE
+STATUS: CANDIDATE_ALREADY_PRACTICED
+TITLE: Single consolidated output for requested Temp.SkillMachine uploads.
+DETAIL: One file must preserve summary, metadata, separators and complete relevant outputs.
+DO_NOT_CANONIZE_YET: Align with existing upload-pack and operational-artifact policies.
+NEXT_ACTION: Compare against current Skills/GRCs and promote only if non-duplicative.
+==========
