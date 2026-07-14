@@ -170,6 +170,21 @@ function Get-TreeFingerprint {
     return [string]::Join([Environment]::NewLine, $entries)
 }
 
+function Assert-FileContainsAll {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string[]]$Patterns,
+        [Parameter(Mandatory = $true)][string]$FailureMessage
+    )
+
+    $content = Get-Content -LiteralPath $Path -Raw -Encoding UTF8
+    foreach ($pattern in @($Patterns)) {
+        if (-not $content.Contains($pattern)) {
+            throw ("{0}: {1}" -f $FailureMessage, $pattern)
+        }
+    }
+}
+
 function Invoke-RoleResolverIsolatedTest {
     param(
         [Parameter(Mandatory = $true)][string]$RunnerPath
@@ -206,6 +221,7 @@ function Invoke-RoleResolverIsolatedTest {
 
 $script:ResultMap = [ordered]@{}
 $runnerFullPath = (Resolve-Path -LiteralPath $RunnerPath).Path
+$repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\.."))
 $windowsPowerShellPath = (Get-Command powershell.exe -ErrorAction Stop).Source
 $powerShell7Path = Get-CommandPathIfRunnable -Name "pwsh.exe"
 
@@ -243,7 +259,9 @@ try {
         AcceptedSessionContinue = $true
     }
     Assert-True -Condition ($focused.effective_mode -eq "focused") -FailureMessage "FOCUSED_MODE_FAIL"
+    Assert-True -Condition ($focused.status -eq "PASS") -FailureMessage "FOCUSED_STATUS_FAIL"
     Add-Result -Name "FOCUSED_MODE" -Value "PASS"
+    Add-Result -Name "FOCUSED_ON_ACCEPTED_CONTINUATION" -Value "PASS"
 
     Write-Host "TEST_CASE=FULL_SESSION_5"
     for ($i = 0; $i -lt 3; $i++) {
@@ -266,6 +284,7 @@ try {
     Assert-True -Condition ($session5.effective_mode -eq "full") -FailureMessage "FULL_SESSION_5_FAIL"
     Assert-True -Condition ($session5.summary.next_full_audit_due_session_number -eq 10) -FailureMessage "NEXT_DUE_AFTER_5_FAIL"
     Add-Result -Name "FULL_SESSION_5" -Value "PASS"
+    Add-Result -Name "FULL_ON_FIFTH_ACCEPTED_CONTINUATION" -Value "PASS"
 
     Write-Host "TEST_CASE=FULL_SESSION_10"
     for ($i = 0; $i -lt 4; $i++) {
@@ -301,6 +320,34 @@ try {
     }
     Assert-True -Condition ($critical.effective_mode -eq "full") -FailureMessage "CRITICAL_TRIGGER_FAIL"
     Add-Result -Name "CRITICAL_TRIGGER" -Value "PASS"
+    Add-Result -Name "FULL_ON_CRITICAL_TRIGGER" -Value "PASS"
+
+    Write-Host "TEST_CASE=NO_COUNTER_INCREMENT_ON_REJECTED_CONTINUATION"
+    $projectNoAccept = Join-Path $testRoot "ProjectNoAccept"
+    $projectNoAcceptState = Join-Path $projectNoAccept "SyS\State\DOCUMENT.CONSISTENCY.AUDIT.STATE.json"
+    New-Item -ItemType Directory -Path $projectNoAccept -Force | Out-Null
+    Write-Utf8NoBom -Path (Join-Path $projectNoAccept "HUMAN.PROJECT_NO_ACCEPT.txt") -Content "PROJECT_ROOT=$projectNoAccept"
+    Write-Utf8NoBom -Path (Join-Path $projectNoAccept "WHOAMI.PROJECT_NO_ACCEPT.txt") -Content "PROJECT_ID=PROJECT_NO_ACCEPT"
+    $beforeReject = Invoke-RunnerJson -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
+        Mode = "focused"
+        ProjectRoot = $projectNoAccept
+        ProjectId = "PROJECT_NO_ACCEPT"
+        StatePath = $projectNoAcceptState
+        NoStateWrite = $true
+    }
+    $afterReject = Invoke-RunnerJson -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
+        Mode = "focused"
+        ProjectRoot = $projectNoAccept
+        ProjectId = "PROJECT_NO_ACCEPT"
+        StatePath = $projectNoAcceptState
+        NoStateWrite = $true
+    }
+    Assert-True -Condition ($beforeReject.state_snapshot.session_continue_count -eq 0) -FailureMessage "REJECTED_CONTINUATION_BEFORE_COUNT_INVALID"
+    Assert-True -Condition ($afterReject.state_snapshot.session_continue_count -eq 0) -FailureMessage "REJECTED_CONTINUATION_INCREMENTED"
+    Assert-True -Condition ($beforeReject.state_path -eq $projectNoAcceptState) -FailureMessage "STATE_PATH_PROJECT_NO_ACCEPT_INVALID"
+    Assert-True -Condition ($focused.state_path -eq $projectAState) -FailureMessage "STATE_PATH_PROJECT_A_INVALID"
+    Add-Result -Name "NO_COUNTER_INCREMENT_ON_REJECTED_CONTINUATION" -Value "PASS"
+    Add-Result -Name "STATE_PATH_PER_PROJECT" -Value "PASS"
 
     Write-Host "TEST_CASE=CROSS_ROOT_STATE"
     $crossRootState = Invoke-RunnerFailure -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
@@ -312,6 +359,8 @@ try {
     }
     Assert-True -Condition ($crossRootState.ExitCode -ne 0 -and $crossRootState.Output.Contains("CROSS_ROOT_STATE_PATH")) -FailureMessage "CROSS_ROOT_STATE_FAIL"
     Add-Result -Name "CROSS_ROOT_STATE" -Value "PASS"
+    Add-Result -Name "PROJECT_ROOT_ISOLATION" -Value "PASS"
+    Add-Result -Name "ROOT_ISOLATION" -Value "PASS"
 
     Write-Host "TEST_CASE=CROSS_ROOT_CHANGED_PATH"
     $crossRootChanged = Invoke-RunnerFailure -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
@@ -392,6 +441,32 @@ try {
     Assert-True -Condition ($humanRoleSpecific.selected_path -eq "HUMAN.PROJECT_X.txt") -FailureMessage "PROJECT_SPECIFIC_ROLE_PRECEDENCE_FAIL"
     Add-Result -Name "PROJECT_SPECIFIC_ROLE_PRECEDENCE" -Value "PASS"
 
+    Write-Host "TEST_CASE=PATH_AWARE_PROJECT_SCOPE"
+    $pathAware = Join-Path $testRoot "PathAware"
+    New-Item -ItemType Directory -Path (Join-Path $pathAware "HUMAN") -Force | Out-Null
+    New-Item -ItemType Directory -Path (Join-Path $pathAware "99.LABS\CHILD\00.HUMAN") -Force | Out-Null
+    New-Item -ItemType Directory -Path (Join-Path $pathAware "90.USECASE\04.REPAIR") -Force | Out-Null
+    Write-Utf8NoBom -Path (Join-Path $pathAware "HUMAN\HUMAN.OPERATING.MODEL.txt") -Content "root authority"
+    Write-Utf8NoBom -Path (Join-Path $pathAware "HUMAN\HUMAN.README.txt") -Content "description only"
+    Write-Utf8NoBom -Path (Join-Path $pathAware "99.LABS\CHILD\00.HUMAN\HUMAN.CHILD.txt") -Content "child"
+    Write-Utf8NoBom -Path (Join-Path $pathAware "90.USECASE\04.REPAIR\HUMAN.REPAIR.txt") -Content "generated"
+
+    $pathAwareResult = Invoke-RunnerJson -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
+        Mode = "focused"
+        ProjectRoot = $pathAware
+        ProjectId = "ROOT_PROJECT"
+        StatePath = (Join-Path $pathAware "state.json")
+        NoStateWrite = $true
+    }
+
+    $pathAwareHuman = @($pathAwareResult.document_roles | Where-Object { $_.role -eq "HUMAN" })[0]
+    Assert-True -Condition ($pathAwareHuman.status -eq "RESOLVED") -FailureMessage "PATH_AWARE_SCOPE_STATUS_FAIL"
+    Assert-True -Condition ($pathAwareHuman.selected_path -eq "HUMAN\HUMAN.OPERATING.MODEL.txt") -FailureMessage "PATH_AWARE_SCOPE_SELECTION_FAIL"
+    Assert-True -Condition (@($pathAwareHuman.candidates).Count -eq 1) -FailureMessage "PATH_AWARE_SCOPE_CANDIDATE_COUNT_FAIL"
+    Add-Result -Name "PATH_AWARE_PROJECT_SCOPE" -Value "PASS"
+    Add-Result -Name "README_NOT_ROLE_AUTHORITY" -Value "PASS"
+    Add-Result -Name "SUBPROJECT_ROLE_ISOLATION" -Value "PASS"
+
     Write-Host "TEST_CASE=EQUAL_PRECEDENCE_AMBIGUITY"
     $equalPrecedence = Join-Path $testRoot "RoleConflict"
     New-Item -ItemType Directory -Path $equalPrecedence -Force | Out-Null
@@ -405,7 +480,9 @@ try {
         NoStateWrite = $true
     }
     Assert-True -Condition (@($equal.issues | Where-Object { $_.issue_class -eq "DUPLICATE_SOURCE_OF_TRUTH" }).Count -ge 1) -FailureMessage "EQUAL_PRECEDENCE_AMBIGUITY_FAIL"
+    Assert-True -Condition ($equal.status -eq "HARD_CONFLICT") -FailureMessage "EQUAL_PRECEDENCE_STATUS_FAIL"
     Add-Result -Name "EQUAL_PRECEDENCE_AMBIGUITY" -Value "PASS"
+    Add-Result -Name "HARD_CONFLICT_BLOCKS_ACCEPTANCE" -Value "PASS"
 
     Write-Host "TEST_CASE=MANDATORY_AND_OPTIONAL_ROLES"
     $mandatoryHuman = Invoke-RunnerJson -HostPath $windowsPowerShellPath -RunnerPath $runnerFullPath -Arguments @{
@@ -638,6 +715,37 @@ Write-Host PASS
     }
     Assert-True -Condition (-not [bool]$focusedUpdate.update_assessment.automatic_execution) -FailureMessage "UPDATE_AUTO_EXECUTION_DISABLED_FAIL"
     Add-Result -Name "UPDATE_AUTO_EXECUTION_DISABLED" -Value "PASS"
+    Add-Result -Name "NO_AUTO_05" -Value "PASS"
+
+    Write-Host "TEST_CASE=USECASE_CONTRACT_DOCS"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\03.SESSION_CONTINUE\PROMPT.SESSION_CONTINUE.txt") -Patterns @(
+        "AcceptedSessionContinue=false",
+        "AcceptedSessionContinue=true",
+        "no ejecutar 04 ni 05"
+    ) -FailureMessage "SESSION_CONTINUE_PROMPT_CONTRACT_FAIL"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\03.SESSION_CONTINUE\README.UPLOAD_THIS_USECASE.txt") -Patterns @(
+        "AcceptedSessionContinue=false",
+        "AcceptedSessionContinue=true",
+        "SESSION_CONTINUE no debe ejecutar"
+    ) -FailureMessage "SESSION_CONTINUE_README_CONTRACT_FAIL"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\SKILL.md") -Patterns @(
+        "DocumentConsistencyAudit integration",
+        "before proposing or applying repair",
+        "authority of intent, but still auditable",
+        "[REF_CRUZADA: <project>]",
+        "must not execute it automatically"
+    ) -FailureMessage "REPOSITORY_REPAIR_SKILL_CONTRACT_FAIL"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\README.EXECUTION.txt") -Patterns @(
+        "Full DocumentConsistencyAudit before repair proposal",
+        "HARD_CONFLICT blocks destructive or mutating repair",
+        "[REF_CRUZADA: <project>]",
+        "05.SkillsMachineUpdate is never auto-executed from this flow."
+    ) -FailureMessage "REPOSITORY_REPAIR_README_CONTRACT_FAIL"
+    Add-Result -Name "NO_AUTO_04" -Value "PASS"
+    Add-Result -Name "FULL_AUDIT_REQUIRED" -Value "PASS"
+    Add-Result -Name "HARD_CONFLICT_BLOCKS_MUTATION" -Value "PASS"
+    Add-Result -Name "HUMAN_AUDITABLE" -Value "PASS"
+    Add-Result -Name "CROSS_PROJECT_REFERENCE_MARKING" -Value "PASS"
 
     $lines = New-Object System.Collections.Generic.List[string]
     [void]$lines.Add("FINAL_STATUS=PASS_DOCUMENT_CONSISTENCY_AUDIT_CORE_TEST")

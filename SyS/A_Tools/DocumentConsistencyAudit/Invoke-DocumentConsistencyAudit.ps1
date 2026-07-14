@@ -264,6 +264,42 @@ function Get-CandidatePrecedence {
     return 0
 }
 
+function Test-RoleCandidateInProjectScope {
+    param(
+        [Parameter(Mandatory = $true)][string]$RelativePath,
+        [Parameter(Mandatory = $true)][ValidateSet("HUMAN", "WHOAMI", "BATON")][string]$Role
+    )
+
+    $normalized = $RelativePath.Replace("/", "\").TrimStart("\")
+    $fileName = [System.IO.Path]::GetFileName($normalized)
+    $baseName = [System.IO.Path]::GetFileNameWithoutExtension($fileName)
+
+    if ($baseName -match '(?i)(^README$|\.README$|^README\.|\.README\.)') {
+        return $false
+    }
+
+    $segments = @($normalized -split '\\' | Where-Object { $_ -ne "" })
+
+    if ($segments.Count -eq 1) {
+        return $true
+    }
+
+    $first = $segments[0].ToUpperInvariant()
+    $roleUpper = $Role.ToUpperInvariant()
+
+    if ($first -eq $roleUpper) {
+        return $true
+    }
+
+    $allowedTopLevel = switch ($roleUpper) {
+        "HUMAN" { @("00.HUMAN", "00_HUMAN", "01_HUMAN") }
+        "WHOAMI" { @("00.STATE", "00_STATE", "01.CONTINUITY", "01_CONTINUITY") }
+        "BATON" { @("00.STATE", "00_STATE", "01.CONTINUITY", "01_CONTINUITY") }
+    }
+
+    return ($allowedTopLevel -contains $first)
+}
+
 function Resolve-DocumentRole {
     param(
         [Parameter(Mandatory = $true)][string]$RootFull,
@@ -286,9 +322,15 @@ function Resolve-DocumentRole {
             -CrossRootCode "CROSS_ROOT_ROLE_PATH" `
             -ReparseCode "REPARSE_POINT_ROLE_PATH"
 
+        $relativePath = Get-RelativePathSafe -RootFull $RootFull -PathFull $full
+
+        if (-not (Test-RoleCandidateInProjectScope -RelativePath $relativePath -Role $Role)) {
+            continue
+        }
+
         [void]$candidates.Add([pscustomobject][ordered]@{
             role = $Role
-            relative_path = Get-RelativePathSafe -RootFull $RootFull -PathFull $full
+            relative_path = $relativePath
             file_name = $file.Name
             precedence_rank = $precedence
             sha256 = Get-Sha256File -Path $full
@@ -779,8 +821,19 @@ function Invoke-DocumentConsistencyAuditCore {
         Write-Utf8NoBom -Path $stateFull -Content (ConvertTo-JsonStable -InputObject ([pscustomobject]$updatedState))
     }
 
+    $consumerStatus = if (@($sortedIssues | Where-Object { $_.severity -in @("HARD_CONFLICT", "BLOCKER") }).Count -gt 0) {
+        "HARD_CONFLICT"
+    }
+    elseif (@($sortedIssues | Where-Object { $_.severity -eq "WARNING" }).Count -gt 0) {
+        "WARNING"
+    }
+    else {
+        "PASS"
+    }
+
     return [ordered]@{
         schema_version = "1.0"
+        status = $consumerStatus
         project_id = $ProjectId
         project_root = $rootFull
         requested_mode = $Mode
