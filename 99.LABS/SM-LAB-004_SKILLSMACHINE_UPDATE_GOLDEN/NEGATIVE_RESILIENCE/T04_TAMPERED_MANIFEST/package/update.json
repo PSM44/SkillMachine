@@ -1,0 +1,31 @@
+{
+  "schema_version": "1.1",
+  "update_id": "SM-UPD-000103",
+  "update_version": "0.3.2",
+  "source_commit": "0000000000000000000000000000000000000000",
+  "created_at": "2026-07-16T17:55:39.1487403Z",
+  "minimum_project_version": "0.3.0",
+  "maximum_project_version": "0.3.x",
+  "reversible": true,
+  "human_approval_required": true,
+  "affected_components": [
+    "metadata"
+  ],
+  "operations": [
+    {
+      "operation_id": "OP-REPLACE-001",
+      "action": "REPLACE",
+      "source_path": "payload/item.txt",
+      "target_path": "docs/item.txt",
+      "expected_pre_hash": "f5a1e30a9f19402878d9183a46fae2baa7b64496bf586dfee8f4a47f541f2ce5",
+      "expected_post_hash": "24da5f810252a02471f545aeeda18716faa591d68a36ba1c03f20e608755a6af",
+      "backup_required": true,
+      "reversible": true
+    }
+  ],
+  "rollback_contract": {
+    "mode": "CHECKPOINT_AND_INVERSE_PLAN",
+    "verify_hashes": true,
+    "restore_baseline": true
+  }
+}

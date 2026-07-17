@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.1",
+  "project_id": "TEST_CRASH_RECOVERY",
+  "created_by_skillsmachine": true,
+  "skillsmachine_version": "0.3.0",
+  "skillsmachine_commit": "0000000000000000000000000000000000000000",
+  "last_update_id": null,
+  "baseline_generated_at": "2026-07-17T02:30:23.8766544Z",
+  "component_inventory": [
+    {
+      "component_type": "metadata",
+      "relative_path": "docs/item01.txt",
+      "sha256": "b88e586815d61f6abd51707f69f845a96e5a4618bfc3d1d8baab736da4e32528",
+      "version": "0.3.0"
+    },
+    {
+      "component_type": "metadata",
+      "relative_path": "docs/item02.txt",
+      "sha256": "e2f3dba9de77cd806c1743826d52e88f785380a1d52fa6444c406d1093aaf0a3",
+      "version": "0.3.0"
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "dry-run",
+  "status": "PASS",
+  "generated_at": "2026-07-17T02:40:59.5778309Z",
+  "data": {
+    "project_id": "TEST_SM-LAB-005_SKILLSMACHINE_UPDATE_FULL_REGRESSION",
+    "current_version": "0.3.0",
+    "target_version": "0.3.1",
+    "update_id": "SM-UPD-000004",
+    "compatibility_status": "COMPATIBLE",
+    "dry_run_fingerprint": "68C8DBA1621578A7C7AE957CED75E3BA23950465E7E4262A8AC9217A671F2584",
+    "files_add": 1,
+    "files_modify": 1,
+    "files_delete": 1,
+    "operations": [
+      {
+        "operation_id": "OP-ADD-001",
+        "action": "ADD",
+        "source_path": "payload/added.txt",
+        "target_path": "docs/added.txt",
+        "expected_pre_hash": null,
+        "expected_post_hash": "46707730acb51a04365b61c03c353545092006784a8909c96c1d84487eabfe8e",
+        "actual_pre_hash": null,
+        "actual_source_hash": "46707730ACB51A04365B61C03C353545092006784A8909C96C1D84487EABFE8E",
+        "target_exists": false
+      },
+      {
+        "operation_id": "OP-REPLACE-001",
+        "action": "REPLACE",
+        "source_path": "payload/replace.txt",
+        "target_path": "docs/replace.txt",
+        "expected_pre_hash": "56595ff64aa4ce4ee6d39802fc294e1685d2bebe50fa00d0bf60f96d6dab214e",
+        "expected_post_hash": "2df53af9de34f588874fb8118716bd3d55607f9f1376c41e155549db386becd3",
+        "actual_pre_hash": "56595FF64AA4CE4EE6D39802FC294E1685D2BEBE50FA00D0BF60F96D6DAB214E",
+        "actual_source_hash": "2DF53AF9DE34F588874FB8118716BD3D55607F9F1376C41E155549DB386BECD3",
+        "target_exists": true
+      },
+      {
+        "operation_id": "OP-DELETE-001",
+        "action": "DELETE",
+        "source_path": null,
+        "target_path": "docs/delete.txt",
+        "expected_pre_hash": "aee0243820847fac3ebc28757ef37167bb240c1aadd9726836f3e2d1808da20c",
+        "expected_post_hash": null,
+        "actual_pre_hash": "AEE0243820847FAC3EBC28757EF37167BB240C1AADD9726836F3E2D1808DA20C",
+        "actual_source_hash": null,
+        "target_exists": true
+      }
+    ],
+    "repository_mutation": false,
+    "document_audit": null
+  }
+}

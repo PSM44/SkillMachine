@@ -1,0 +1,43 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "dry-run",
+  "status": "PASS",
+  "generated_at": "2026-07-17T02:30:12.7557371Z",
+  "data": {
+    "project_id": "TEST_TRANSACTION_LOCK",
+    "current_version": "0.3.0",
+    "target_version": "0.3.1",
+    "update_id": "SM-UPD-000201",
+    "compatibility_status": "COMPATIBLE",
+    "dry_run_fingerprint": "2AB5DDA0B9FAD84136FAB8C7B1EB2DB8A111C176F0FBCC837E0B1A99729F82AA",
+    "files_add": 0,
+    "files_modify": 2,
+    "files_delete": 0,
+    "operations": [
+      {
+        "operation_id": "OP-01",
+        "action": "REPLACE",
+        "source_path": "payload/item01.txt",
+        "target_path": "docs/item01.txt",
+        "expected_pre_hash": "b88e586815d61f6abd51707f69f845a96e5a4618bfc3d1d8baab736da4e32528",
+        "expected_post_hash": "f2d31717cf9b0c927d9b182e602d553122abc8d4632e03c2a5c099c75a2ca754",
+        "actual_pre_hash": "B88E586815D61F6ABD51707F69F845A96E5A4618BFC3D1D8BAAB736DA4E32528",
+        "actual_source_hash": "F2D31717CF9B0C927D9B182E602D553122ABC8D4632E03C2A5C099C75A2CA754",
+        "target_exists": true
+      },
+      {
+        "operation_id": "OP-02",
+        "action": "REPLACE",
+        "source_path": "payload/item02.txt",
+        "target_path": "docs/item02.txt",
+        "expected_pre_hash": "e2f3dba9de77cd806c1743826d52e88f785380a1d52fa6444c406d1093aaf0a3",
+        "expected_post_hash": "d0444873885235b976b208abc621057bc0290e83d85cdcc7560b136f8b48c127",
+        "actual_pre_hash": "E2F3DBA9DE77CD806C1743826D52E88F785380A1D52FA6444C406D1093AAF0A3",
+        "actual_source_hash": "D0444873885235B976B208ABC621057BC0290E83D85CDCC7560B136F8B48C127",
+        "target_exists": true
+      }
+    ],
+    "repository_mutation": false,
+    "document_audit": null
+  }
+}

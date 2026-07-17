@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.1",
+  "update_id": "SM-UPD-000201",
+  "update_version": "0.3.1",
+  "source_commit": "1111111111111111111111111111111111111111",
+  "created_at": "2026-07-17T02:30:11.6272878Z",
+  "minimum_project_version": "0.3.0",
+  "maximum_project_version": "0.3.x",
+  "reversible": true,
+  "human_approval_required": true,
+  "affected_components": [
+    "metadata"
+  ],
+  "operations": [
+    {
+      "operation_id": "OP-01",
+      "action": "REPLACE",
+      "source_path": "payload/item01.txt",
+      "target_path": "docs/item01.txt",
+      "expected_pre_hash": "b88e586815d61f6abd51707f69f845a96e5a4618bfc3d1d8baab736da4e32528",
+      "expected_post_hash": "f2d31717cf9b0c927d9b182e602d553122abc8d4632e03c2a5c099c75a2ca754",
+      "backup_required": true,
+      "reversible": true
+    },
+    {
+      "operation_id": "OP-02",
+      "action": "REPLACE",
+      "source_path": "payload/item02.txt",
+      "target_path": "docs/item02.txt",
+      "expected_pre_hash": "e2f3dba9de77cd806c1743826d52e88f785380a1d52fa6444c406d1093aaf0a3",
+      "expected_post_hash": "d0444873885235b976b208abc621057bc0290e83d85cdcc7560b136f8b48c127",
+      "backup_required": true,
+      "reversible": true
+    }
+  ],
+  "rollback_contract": {
+    "mode": "CHECKPOINT_AND_INVERSE_PLAN",
+    "verify_hashes": true,
+    "restore_baseline": true
+  }
+}

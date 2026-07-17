@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "project_root": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T02_CRASH_RECOVERY\\project",
+  "update_id": "SM-UPD-000202",
+  "dry_run_fingerprint": "8E20275698E3B506E644D141BD82C4B18AB56F82C84691529E876EE0509E515B",
+  "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T02_CRASH_RECOVERY\\evidence\\UPDATE.CHECKPOINT.SM-UPD-000202.20260716_223025.zip",
+  "baseline_path": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T02_CRASH_RECOVERY\\project\\SKILLSMACHINE.PROJECT.BASELINE.json",
+  "baseline_pre_hash": "E7B59C6D5B54F32C3DE5A6BA64A128087DE8D252B72F7B33B433C0C834ACAC85",
+  "entries": [
+    {
+      "operation_id": "OP-01",
+      "target_path": "docs/item01.txt",
+      "pre_exists": true,
+      "pre_hash": "B88E586815D61F6ABD51707F69F845A96E5A4618BFC3D1D8BAAB736DA4E32528",
+      "backup_relative_path": "files\\OP-01.bin"
+    },
+    {
+      "operation_id": "OP-02",
+      "target_path": "docs/item02.txt",
+      "pre_exists": true,
+      "pre_hash": "E2F3DBA9DE77CD806C1743826D52E88F785380A1D52FA6444C406D1093AAF0A3",
+      "backup_relative_path": "files\\OP-02.bin"
+    }
+  ]
+}

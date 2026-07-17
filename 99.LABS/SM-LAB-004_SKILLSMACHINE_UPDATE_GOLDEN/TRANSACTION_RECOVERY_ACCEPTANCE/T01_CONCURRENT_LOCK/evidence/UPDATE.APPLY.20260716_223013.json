@@ -1,0 +1,17 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "apply",
+  "status": "PASS",
+  "generated_at": "2026-07-17T02:30:22.1635464Z",
+  "data": {
+    "project_id": "TEST_TRANSACTION_LOCK",
+    "update_id": "SM-UPD-000201",
+    "dry_run_fingerprint": "2AB5DDA0B9FAD84136FAB8C7B1EB2DB8A111C176F0FBCC837E0B1A99729F82AA",
+    "approval_recorded": true,
+    "checkpoint_manifest": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T01_CONCURRENT_LOCK\\evidence\\UPDATE.CHECKPOINT.SM-UPD-000201.20260716_223013.json",
+    "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T01_CONCURRENT_LOCK\\evidence\\UPDATE.CHECKPOINT.SM-UPD-000201.20260716_223013.zip",
+    "applied_operations": 2,
+    "baseline_updated": true,
+    "document_audit": null
+  }
+}

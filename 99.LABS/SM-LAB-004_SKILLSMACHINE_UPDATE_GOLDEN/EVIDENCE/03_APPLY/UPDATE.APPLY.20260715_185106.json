@@ -1,0 +1,17 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "apply",
+  "status": "PASS",
+  "generated_at": "2026-07-15T22:51:06.7516473Z",
+  "data": {
+    "project_id": "TEST_SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN",
+    "update_id": "SM-UPD-000004",
+    "dry_run_fingerprint": "9CD325A95EEE5C5D09DB848F26A28F3500A5FAEABBD5910E8BD10E4D5CEC1050",
+    "approval_recorded": true,
+    "checkpoint_manifest": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260715_185106.json",
+    "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260715_185106.zip",
+    "applied_operations": 3,
+    "baseline_updated": true,
+    "document_audit": null
+  }
+}

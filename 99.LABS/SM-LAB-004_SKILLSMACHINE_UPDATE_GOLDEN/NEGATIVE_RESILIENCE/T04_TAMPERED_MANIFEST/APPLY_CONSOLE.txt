@@ -1,0 +1,5 @@
+[31;1mException: [0mC:\01. GitHub\Skills\SyS\A_Tools\Update\Invoke-SkillsMachineUpdate.ps1:683[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 683 | [0m         [36;1mthrow "DRY_RUN_FINGERPRINT_MISMATCH"[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mDRY_RUN_FINGERPRINT_MISMATCH[0m

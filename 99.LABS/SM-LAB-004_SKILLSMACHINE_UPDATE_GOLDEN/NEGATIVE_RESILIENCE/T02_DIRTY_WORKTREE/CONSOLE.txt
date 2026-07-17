@@ -1,0 +1,5 @@
+[31;1mException: [0mC:\01. GitHub\Skills\SyS\A_Tools\Update\Invoke-SkillsMachineUpdate.ps1:98[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m  98 | [0m         [36;1mthrow "BLOCKED_DIRTY_WORKTREE: $($lines -join ' | ')"[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mBLOCKED_DIRTY_WORKTREE:  M docs/item.txt[0m

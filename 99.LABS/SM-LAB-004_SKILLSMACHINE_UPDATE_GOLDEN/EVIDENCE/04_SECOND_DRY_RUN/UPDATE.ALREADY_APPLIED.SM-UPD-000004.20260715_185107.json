@@ -1,0 +1,10 @@
+{
+  "action": "dry-run",
+  "project_id": "TEST_SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN",
+  "update_id": "SM-UPD-000004",
+  "current_version": "0.3.1",
+  "target_version": "0.3.1",
+  "already_applied": true,
+  "mutation_performed": false,
+  "checked_at": "2026-07-15T22:51:07.5521966Z"
+}

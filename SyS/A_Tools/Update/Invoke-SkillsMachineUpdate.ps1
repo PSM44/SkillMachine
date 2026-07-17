@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet("preflight", "dry-run", "apply", "rollback")]
+    [ValidateSet("preflight", "dry-run", "apply", "rollback", "recover")]
     [string]$Action,
 
     [Parameter(Mandatory = $true)]
@@ -96,6 +96,206 @@ function Test-GitClean {
     $lines = @($status | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
     if ($lines.Count -gt 0) {
         throw "BLOCKED_DIRTY_WORKTREE: $($lines -join ' | ')"
+    }
+}
+
+# MB-SM-065A-5B TRANSACTION HELPERS
+function Get-UpdateTransactionPaths {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $transactionRoot = Join-Path $Root ".git\skillsmachine-update"
+    return [ordered]@{
+        root = $transactionRoot
+        state = Join-Path $transactionRoot "UPDATE.TRANSACTION.STATE.json"
+    }
+}
+
+function Get-ProjectMutexName {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $normalized = [System.IO.Path]::GetFullPath($Root).ToUpperInvariant()
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($normalized)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $hash = ([System.BitConverter]::ToString($sha.ComputeHash($bytes))).Replace("-", "")
+    }
+    finally {
+        $sha.Dispose()
+    }
+
+    return "Local\SkillsMachine.Update.$hash"
+}
+
+function Enter-UpdateTransactionMutex {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$TransactionAction
+    )
+
+    $name = Get-ProjectMutexName -Root $Root
+    $mutex = [System.Threading.Mutex]::new($false, $name)
+    $acquired = $false
+
+    try {
+        $acquired = $mutex.WaitOne(0)
+    }
+    catch [System.Threading.AbandonedMutexException] {
+        $acquired = $true
+    }
+
+    if (-not $acquired) {
+        $mutex.Dispose()
+        throw "BLOCKED_UPDATE_TRANSACTION_ACTIVE: action=$TransactionAction"
+    }
+
+    return $mutex
+}
+
+function Exit-UpdateTransactionMutex {
+    param([System.Threading.Mutex]$Mutex)
+
+    if ($null -eq $Mutex) {
+        return
+    }
+
+    try {
+        $Mutex.ReleaseMutex()
+    }
+    catch {
+    }
+    finally {
+        $Mutex.Dispose()
+    }
+}
+
+function Write-AtomicJson {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][object]$Value
+    )
+
+    $parent = Split-Path -Parent $Path
+    if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+        New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    }
+
+    $temporary = "$Path.tmp.$([guid]::NewGuid().ToString('N'))"
+    try {
+        Write-Utf8NoBom -Path $temporary -Content ($Value | ConvertTo-Json -Depth 30)
+        Move-Item -LiteralPath $temporary -Destination $Path -Force
+    }
+    finally {
+        if (Test-Path -LiteralPath $temporary) {
+            Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
+function Write-UpdateTransactionState {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Phase,
+        [Parameter(Mandatory = $true)][string]$TransactionId,
+        [Parameter(Mandatory = $true)][string]$TransactionAction,
+        [string]$UpdateId,
+        [string]$CheckpointManifestPath,
+        [string]$LastOperationId,
+        [string]$Failure
+    )
+
+    $state = [ordered]@{
+        schema_version = "1.0"
+        transaction_id = $TransactionId
+        process_id = $PID
+        host = [Environment]::MachineName
+        action = $TransactionAction
+        phase = $Phase
+        update_id = $UpdateId
+        checkpoint_manifest = $CheckpointManifestPath
+        last_operation_id = $LastOperationId
+        failure = $Failure
+        updated_at = (Get-Date).ToUniversalTime().ToString("o")
+    }
+
+    Write-AtomicJson -Path $Path -Value $state
+}
+
+function Remove-UpdateTransactionState {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    if (Test-Path -LiteralPath $Path -PathType Leaf) {
+        Remove-Item -LiteralPath $Path -Force
+    }
+}
+
+function Restore-UpdateCheckpoint {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$BaselineFile,
+        [Parameter(Mandatory = $true)][string]$CheckpointFile
+    )
+
+    $checkpoint = Read-JsonFile -Path $CheckpointFile
+    $zipPath = [string]$checkpoint.checkpoint_zip
+    if (-not (Test-Path -LiteralPath $zipPath -PathType Leaf)) {
+        throw "CHECKPOINT_ZIP_NOT_FOUND"
+    }
+
+    $extractRoot = Join-Path $env:TEMP (
+        "SkillsMachineCheckpointRestore.{0}" -f ([guid]::NewGuid().ToString("N"))
+    )
+    New-Item -ItemType Directory -Path $extractRoot -Force | Out-Null
+
+    try {
+        Expand-Archive -LiteralPath $zipPath -DestinationPath $extractRoot -Force
+
+        foreach ($entry in @($checkpoint.entries)) {
+            $targetFull = Resolve-SafeRelativePath `
+                -Root $Root `
+                -RelativePath ([string]$entry.target_path)
+
+            if ([bool]$entry.pre_exists) {
+                $backupFull = Join-Path $extractRoot ([string]$entry.backup_relative_path)
+                if (-not (Test-Path -LiteralPath $backupFull -PathType Leaf)) {
+                    throw "ROLLBACK_BACKUP_FILE_MISSING: $backupFull"
+                }
+
+                $parent = Split-Path -Parent $targetFull
+                if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+                    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+                }
+
+                Copy-Item -LiteralPath $backupFull -Destination $targetFull -Force
+                if ((Get-Sha256 -Path $targetFull) -ne [string]$entry.pre_hash) {
+                    throw "ROLLBACK_HASH_MISMATCH: $($entry.target_path)"
+                }
+            }
+            elseif (Test-Path -LiteralPath $targetFull) {
+                Remove-Item -LiteralPath $targetFull -Force
+            }
+        }
+
+        $baselineBackup = Join-Path $extractRoot "__baseline.json"
+        if (-not (Test-Path -LiteralPath $baselineBackup -PathType Leaf)) {
+            throw "ROLLBACK_BASELINE_BACKUP_MISSING"
+        }
+
+        Copy-Item -LiteralPath $baselineBackup -Destination $BaselineFile -Force
+        if ((Get-Sha256 -Path $BaselineFile) -ne [string]$checkpoint.baseline_pre_hash) {
+            throw "ROLLBACK_BASELINE_HASH_MISMATCH"
+        }
+
+        return [ordered]@{
+            checkpoint_manifest = $CheckpointFile
+            checkpoint_zip = $zipPath
+            restored_entries = @($checkpoint.entries).Count
+            baseline_restored = $true
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $extractRoot) {
+            Remove-Item -LiteralPath $extractRoot -Recurse -Force
+        }
     }
 }
 
@@ -500,66 +700,108 @@ else {
     $BaselinePath = [System.IO.Path]::GetFullPath($BaselinePath)
 }
 
-if ($Action -eq "rollback") {
-    if ([string]::IsNullOrWhiteSpace($CheckpointManifest)) {
-        throw "CHECKPOINT_MANIFEST_REQUIRED"
-    }
+$transactionPaths = Get-UpdateTransactionPaths -Root $ProjectRoot
+$transactionStatePath = [string]$transactionPaths.state
+$transactionMutex = $null
+$transactionId = [guid]::NewGuid().ToString("N")
 
-    $checkpoint = Read-JsonFile -Path $CheckpointManifest
-    $zipPath = [string]$checkpoint.checkpoint_zip
-    if (-not (Test-Path -LiteralPath $zipPath -PathType Leaf)) {
-        throw "CHECKPOINT_ZIP_NOT_FOUND"
-    }
+if ($Action -eq "recover") {
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "recover"
 
-    $extractRoot = Join-Path $env:TEMP ("SkillsMachineRollback.{0}" -f ([guid]::NewGuid().ToString("N")))
-    New-Item -ItemType Directory -Path $extractRoot -Force | Out-Null
     try {
-        Expand-Archive -LiteralPath $zipPath -DestinationPath $extractRoot -Force
-
-        foreach ($entry in @($checkpoint.entries)) {
-            $targetFull = Resolve-SafeRelativePath -Root $ProjectRoot -RelativePath ([string]$entry.target_path)
-
-            if ([bool]$entry.pre_exists) {
-                $backupFull = Join-Path $extractRoot ([string]$entry.backup_relative_path)
-                if (-not (Test-Path -LiteralPath $backupFull -PathType Leaf)) {
-                    throw "ROLLBACK_BACKUP_FILE_MISSING: $backupFull"
-                }
-                $parent = Split-Path -Parent $targetFull
-                if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
-                    New-Item -ItemType Directory -Path $parent -Force | Out-Null
-                }
-                Copy-Item -LiteralPath $backupFull -Destination $targetFull -Force
-                if ((Get-Sha256 -Path $targetFull) -ne [string]$entry.pre_hash) {
-                    throw "ROLLBACK_HASH_MISMATCH: $($entry.target_path)"
-                }
-            }
-            else {
-                if (Test-Path -LiteralPath $targetFull) {
-                    Remove-Item -LiteralPath $targetFull -Force
-                }
-            }
+        if (-not (Test-Path -LiteralPath $transactionStatePath -PathType Leaf)) {
+            Write-Host "FINAL_STATUS=NO_RECOVERY_REQUIRED"
+            exit 0
         }
 
-        $baselineBackup = Join-Path $extractRoot "__baseline.json"
-        Copy-Item -LiteralPath $baselineBackup -Destination $BaselinePath -Force
-        if ((Get-Sha256 -Path $BaselinePath) -ne [string]$checkpoint.baseline_pre_hash) {
-            throw "ROLLBACK_BASELINE_HASH_MISMATCH"
+        $state = Read-JsonFile -Path $transactionStatePath
+        $recoverablePhases = @(
+            "CHECKPOINT_CREATED",
+            "APPLYING",
+            "ROLLING_BACK",
+            "FAILED_ROLLBACK_FAIL"
+        )
+
+        if ([string]$state.phase -notin $recoverablePhases) {
+            throw "TRANSACTION_STATE_NOT_RECOVERABLE: $($state.phase)"
+        }
+        if ([string]::IsNullOrWhiteSpace([string]$state.checkpoint_manifest)) {
+            throw "TRANSACTION_CHECKPOINT_REQUIRED_FOR_RECOVERY"
         }
 
-        $data = [ordered]@{
-            checkpoint_manifest = $CheckpointManifest
-            checkpoint_zip = $zipPath
-            restored_entries = @($checkpoint.entries).Count
-            baseline_restored = $true
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLING_BACK" `
+            -TransactionId ([string]$state.transaction_id) `
+            -TransactionAction "recover" `
+            -UpdateId ([string]$state.update_id) `
+            -CheckpointManifestPath ([string]$state.checkpoint_manifest) `
+            -LastOperationId ([string]$state.last_operation_id)
+
+        $data = Restore-UpdateCheckpoint `
+            -Root $ProjectRoot `
+            -BaselineFile $BaselinePath `
+            -CheckpointFile ([string]$state.checkpoint_manifest)
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLED_BACK" `
+            -TransactionId ([string]$state.transaction_id) `
+            -TransactionAction "recover" `
+            -UpdateId ([string]$state.update_id) `
+            -CheckpointManifestPath ([string]$state.checkpoint_manifest)
+
+        [void](Write-ActionEvidence -Status "PASS_RECOVERY" -Data $data)
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
+        Write-Host "RECOVERY_STATUS=PASS"
+        Write-Host "FINAL_STATUS=PASS_RECOVERY"
+        exit 0
+    }
+    finally {
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
+    }
+}
+
+if ($Action -eq "rollback") {
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "rollback"
+
+    try {
+        if ([string]::IsNullOrWhiteSpace($CheckpointManifest)) {
+            throw "CHECKPOINT_MANIFEST_REQUIRED"
         }
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLING_BACK" `
+            -TransactionId $transactionId `
+            -TransactionAction "rollback" `
+            -CheckpointManifestPath $CheckpointManifest
+
+        $data = Restore-UpdateCheckpoint `
+            -Root $ProjectRoot `
+            -BaselineFile $BaselinePath `
+            -CheckpointFile $CheckpointManifest
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLED_BACK" `
+            -TransactionId $transactionId `
+            -TransactionAction "rollback" `
+            -CheckpointManifestPath $CheckpointManifest
+
         [void](Write-ActionEvidence -Status "PASS" -Data $data)
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
         Write-Host "FINAL_STATUS=PASS_ROLLBACK"
         exit 0
     }
     finally {
-        if (Test-Path -LiteralPath $extractRoot) {
-            Remove-Item -LiteralPath $extractRoot -Recurse -Force
-        }
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
     }
 }
 
@@ -585,6 +827,58 @@ if (-not (Test-VersionCompatible `
     -Minimum ([string]$manifest.minimum_project_version) `
     -Maximum ([string]$manifest.maximum_project_version))) {
     throw "BLOCKED_UNSUPPORTED_BASELINE"
+}
+
+# MB-SM-065A-3R IDEMPOTENCY GATE
+# A project whose baseline already records this exact update and target version is
+# already compliant. Return before operation evaluation so ADD/REPLACE/DELETE are
+# not re-applied and no approval fingerprint or checkpoint is required.
+$alreadyApplied = (
+    [string]$baseline.last_update_id -eq [string]$manifest.update_id -and
+    [string]$baseline.skillsmachine_version -eq [string]$manifest.update_version
+)
+
+if ($alreadyApplied -and $Action -in @("preflight", "dry-run", "apply")) {
+    Test-GitClean -Root $ProjectRoot
+
+    New-Item -ItemType Directory -Force -Path $EvidencePath | Out-Null
+    $alreadyAppliedEvidence = [ordered]@{
+        action = $Action
+        project_id = [string]$baseline.project_id
+        update_id = [string]$manifest.update_id
+        current_version = [string]$baseline.skillsmachine_version
+        target_version = [string]$manifest.update_version
+        already_applied = $true
+        mutation_performed = $false
+        checked_at = (Get-Date).ToUniversalTime().ToString("o")
+    }
+    $alreadyAppliedEvidencePath = Join-Path $EvidencePath (
+        "UPDATE.ALREADY_APPLIED.{0}.{1}.json" -f $manifest.update_id, $RunStamp
+    )
+    Write-Utf8NoBom -Path $alreadyAppliedEvidencePath -Content (
+        $alreadyAppliedEvidence | ConvertTo-Json -Depth 10
+    )
+
+    Write-Host "ALREADY_APPLIED=True"
+    Write-Host "UPDATE_ID=$($manifest.update_id)"
+    Write-Host "CURRENT_VERSION=$($baseline.skillsmachine_version)"
+    Write-Host "EVIDENCE_FILE=$alreadyAppliedEvidencePath"
+    Write-Host "FINAL_STATUS=ALREADY_APPLIED"
+    exit 0
+}
+if (
+    $Action -eq "apply" -and
+    (Test-Path -LiteralPath $transactionStatePath -PathType Leaf)
+) {
+    $pendingState = Read-JsonFile -Path $transactionStatePath
+    if ([string]$pendingState.phase -in @(
+        "CHECKPOINT_CREATED",
+        "APPLYING",
+        "ROLLING_BACK",
+        "FAILED_ROLLBACK_FAIL"
+    )) {
+        throw "INTERRUPTED_UPDATE_RECOVERY_REQUIRED: phase=$($pendingState.phase)"
+    }
 }
 
 Test-GitClean -Root $ProjectRoot
@@ -646,6 +940,30 @@ if ($Action -eq "apply") {
         throw "DRY_RUN_FINGERPRINT_MISMATCH"
     }
 
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "apply"
+
+    Write-UpdateTransactionState `
+        -Path $transactionStatePath `
+        -Phase "PREPARED" `
+        -TransactionId $transactionId `
+        -TransactionAction "apply" `
+        -UpdateId ([string]$manifest.update_id)
+
+    if (
+        $TestMode -and
+        -not [string]::IsNullOrWhiteSpace($env:SKILLSMACHINE_TEST_HOLD_LOCK_SECONDS)
+    ) {
+        $testProjectId = [string]$baseline.project_id
+        if (
+            $testProjectId.StartsWith("TEST_", [System.StringComparison]::OrdinalIgnoreCase) -or
+            $testProjectId.StartsWith("NEGATIVE_TEST_", [System.StringComparison]::OrdinalIgnoreCase)
+        ) {
+            Start-Sleep -Seconds ([int]$env:SKILLSMACHINE_TEST_HOLD_LOCK_SECONDS)
+        }
+    }
+
     $checkpointWork = Join-Path $env:TEMP ("SkillsMachineCheckpoint.{0}" -f ([guid]::NewGuid().ToString("N")))
     $checkpointManifestPath = $null
     $checkpointZip = $null
@@ -699,6 +1017,22 @@ if ($Action -eq "apply") {
         $checkpointManifestPath = Join-Path $EvidencePath ("UPDATE.CHECKPOINT.{0}.{1}.json" -f $manifest.update_id, $RunStamp)
         Write-Utf8NoBom -Path $checkpointManifestPath -Content ($checkpointObject | ConvertTo-Json -Depth 20)
 
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "CHECKPOINT_CREATED" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "APPLYING" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
         foreach ($operation in @($manifest.operations)) {
             $targetFull = Resolve-SafeRelativePath -Root $ProjectRoot -RelativePath ([string]$operation.target_path)
             $actionName = [string]$operation.action
@@ -718,6 +1052,46 @@ if ($Action -eq "apply") {
                 Remove-Item -LiteralPath $targetFull -Force
                 if (Test-Path -LiteralPath $targetFull) {
                     throw "POST_DELETE_TARGET_STILL_EXISTS: $($operation.operation_id)"
+                }
+            }
+
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "APPLYING" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -LastOperationId ([string]$operation.operation_id)
+
+            if (
+                -not [string]::IsNullOrWhiteSpace(
+                    $env:SKILLSMACHINE_TEST_CRASH_AFTER_OPERATION_ID
+                )
+            ) {
+                if (-not $TestMode) {
+                    throw "TEST_CRASH_HOOK_BLOCKED_WITHOUT_TEST_MODE"
+                }
+
+                $testProjectId = [string]$baseline.project_id
+                if (
+                    -not $testProjectId.StartsWith(
+                        "TEST_",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    ) -and
+                    -not $testProjectId.StartsWith(
+                        "NEGATIVE_TEST_",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    )
+                ) {
+                    throw "TEST_CRASH_HOOK_BLOCKED_FOR_NON_TEST_PROJECT: $testProjectId"
+                }
+
+                if (
+                    $env:SKILLSMACHINE_TEST_CRASH_AFTER_OPERATION_ID -eq
+                    [string]$operation.operation_id
+                ) {
+                    Stop-Process -Id $PID -Force
                 }
             }
 
@@ -756,6 +1130,17 @@ if ($Action -eq "apply") {
             document_audit = $documentAudit
         }
         [void](Write-ActionEvidence -Status "PASS" -Data $data)
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "APPLIED" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
         Write-Host "CHECKPOINT_MANIFEST=$checkpointManifestPath"
         Write-Host "FINAL_STATUS=PASS_APPLY"
         exit 0
@@ -766,6 +1151,15 @@ if ($Action -eq "apply") {
         $rollbackError = $null
 
         try {
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "ROLLING_BACK" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -Failure $applyError.Exception.Message
+
             if ($null -eq $checkpointManifestPath -or -not (Test-Path -LiteralPath $checkpointManifestPath -PathType Leaf)) {
                 throw "AUTOMATIC_ROLLBACK_CHECKPOINT_MANIFEST_UNAVAILABLE"
             }
@@ -819,6 +1213,17 @@ if ($Action -eq "apply") {
                 }
 
                 $rollbackStatus = "PASS"
+
+                Write-UpdateTransactionState `
+                    -Path $transactionStatePath `
+                    -Phase "ROLLED_BACK" `
+                    -TransactionId $transactionId `
+                    -TransactionAction "apply" `
+                    -UpdateId ([string]$manifest.update_id) `
+                    -CheckpointManifestPath $checkpointManifestPath `
+                    -Failure $applyError.Exception.Message
+
+                Remove-UpdateTransactionState -Path $transactionStatePath
             }
             finally {
                 if (Test-Path -LiteralPath $rollbackExtractRoot) {
@@ -829,6 +1234,15 @@ if ($Action -eq "apply") {
         catch {
             $rollbackStatus = "FAIL"
             $rollbackError = $_.Exception.Message
+
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "FAILED_ROLLBACK_FAIL" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -Failure $rollbackError
         }
 
         $failureData = [ordered]@{
@@ -860,6 +1274,8 @@ if ($Action -eq "apply") {
         if (Test-Path -LiteralPath $checkpointWork) {
             Remove-Item -LiteralPath $checkpointWork -Recurse -Force
         }
+
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
     }
 }
 

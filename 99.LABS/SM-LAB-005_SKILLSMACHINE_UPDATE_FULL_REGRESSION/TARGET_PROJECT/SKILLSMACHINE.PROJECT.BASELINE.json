@@ -1,0 +1,23 @@
+{
+  "schema_version": "1.1",
+  "project_id": "TEST_SM-LAB-005_SKILLSMACHINE_UPDATE_FULL_REGRESSION",
+  "created_by_skillsmachine": true,
+  "skillsmachine_version": "0.3.0",
+  "skillsmachine_commit": "d9876bcaacd66563a651a96c8ddc8e347ae54fb3",
+  "last_update_id": null,
+  "baseline_generated_at": "2026-07-17T02:40:57.8522022Z",
+  "component_inventory": [
+    {
+      "component_type": "metadata",
+      "relative_path": "docs/replace.txt",
+      "sha256": "56595ff64aa4ce4ee6d39802fc294e1685d2bebe50fa00d0bf60f96d6dab214e",
+      "version": "0.3.0"
+    },
+    {
+      "component_type": "metadata",
+      "relative_path": "docs/delete.txt",
+      "sha256": "aee0243820847fac3ebc28757ef37167bb240c1aadd9726836f3e2d1808da20c",
+      "version": "0.3.0"
+    }
+  ]
+}

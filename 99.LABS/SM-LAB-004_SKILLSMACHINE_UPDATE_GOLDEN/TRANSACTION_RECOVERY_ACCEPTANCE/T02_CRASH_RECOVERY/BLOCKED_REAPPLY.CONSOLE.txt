@@ -1,0 +1,5 @@
+[31;1mException: [0mC:\01. GitHub\Skills\SyS\A_Tools\Update\Invoke-SkillsMachineUpdate.ps1:880[0m
+[31;1m[0m[36;1mLine |[0m
+[31;1m[0m[36;1m[36;1m 880 | [0m         [36;1mthrow "INTERRUPTED_UPDATE_RECOVERY_REQUIRED: phase=$($pending[0m .[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m     | [31;1m         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~[0m
+[31;1m[0m[36;1m[36;1m[0m[36;1m[0m[36;1m[31;1m[31;1m[36;1m     | [31;1mINTERRUPTED_UPDATE_RECOVERY_REQUIRED: phase=APPLYING[0m

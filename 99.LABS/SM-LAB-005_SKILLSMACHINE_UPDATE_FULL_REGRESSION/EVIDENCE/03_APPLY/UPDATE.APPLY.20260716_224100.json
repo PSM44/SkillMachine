@@ -1,0 +1,17 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "apply",
+  "status": "PASS",
+  "generated_at": "2026-07-17T02:41:00.8420317Z",
+  "data": {
+    "project_id": "TEST_SM-LAB-005_SKILLSMACHINE_UPDATE_FULL_REGRESSION",
+    "update_id": "SM-UPD-000004",
+    "dry_run_fingerprint": "68C8DBA1621578A7C7AE957CED75E3BA23950465E7E4262A8AC9217A671F2584",
+    "approval_recorded": true,
+    "checkpoint_manifest": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-005_SKILLSMACHINE_UPDATE_FULL_REGRESSION\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260716_224100.json",
+    "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-005_SKILLSMACHINE_UPDATE_FULL_REGRESSION\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260716_224100.zip",
+    "applied_operations": 3,
+    "baseline_updated": true,
+    "document_audit": null
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "schema_version": "1.0",
+  "project_root": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TARGET_PROJECT",
+  "update_id": "SM-UPD-000004",
+  "dry_run_fingerprint": "9CD325A95EEE5C5D09DB848F26A28F3500A5FAEABBD5910E8BD10E4D5CEC1050",
+  "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260715_185106.zip",
+  "baseline_path": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TARGET_PROJECT\\SKILLSMACHINE.PROJECT.BASELINE.json",
+  "baseline_pre_hash": "E3625BFC90C769A8A6B9D8884E5B38F18EB1F8C342D90C3097ED2BDB295461A5",
+  "entries": [
+    {
+      "operation_id": "OP-ADD-001",
+      "target_path": "docs/added.txt",
+      "pre_exists": false,
+      "pre_hash": null,
+      "backup_relative_path": null
+    },
+    {
+      "operation_id": "OP-REPLACE-001",
+      "target_path": "docs/replace.txt",
+      "pre_exists": true,
+      "pre_hash": "56595FF64AA4CE4EE6D39802FC294E1685D2BEBE50FA00D0BF60F96D6DAB214E",
+      "backup_relative_path": "files\\OP-REPLACE-001.bin"
+    },
+    {
+      "operation_id": "OP-DELETE-001",
+      "target_path": "docs/delete.txt",
+      "pre_exists": true,
+      "pre_hash": "AEE0243820847FAC3EBC28757EF37167BB240C1AADD9726836F3E2D1808DA20C",
+      "backup_relative_path": "files\\OP-DELETE-001.bin"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "dry-run",
+  "status": "PASS",
+  "generated_at": "2026-07-16T17:55:40.0195190Z",
+  "data": {
+    "project_id": "TEST_TAMPERED_MANIFEST",
+    "current_version": "0.3.0",
+    "target_version": "0.3.1",
+    "update_id": "SM-UPD-000103",
+    "compatibility_status": "COMPATIBLE",
+    "dry_run_fingerprint": "14478D73611A6E752BDF4FEEEA83C208A36BDF46C0027822EA44829EF98A3D23",
+    "files_add": 0,
+    "files_modify": 1,
+    "files_delete": 0,
+    "operations": [
+      {
+        "operation_id": "OP-REPLACE-001",
+        "action": "REPLACE",
+        "source_path": "payload/item.txt",
+        "target_path": "docs/item.txt",
+        "expected_pre_hash": "f5a1e30a9f19402878d9183a46fae2baa7b64496bf586dfee8f4a47f541f2ce5",
+        "expected_post_hash": "24da5f810252a02471f545aeeda18716faa591d68a36ba1c03f20e608755a6af",
+        "actual_pre_hash": "F5A1E30A9F19402878D9183A46FAE2BAA7B64496BF586DFEE8F4A47F541F2CE5",
+        "actual_source_hash": "24DA5F810252A02471F545AEEDA18716FAA591D68A36BA1C03F20E608755A6AF",
+        "target_exists": true
+      }
+    ],
+    "repository_mutation": false,
+    "document_audit": null
+  }
+}

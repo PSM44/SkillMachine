@@ -1,0 +1,17 @@
+{
+  "schema_version": "1.1",
+  "project_id": "TEST_TAMPERED_MANIFEST",
+  "created_by_skillsmachine": true,
+  "skillsmachine_version": "0.3.0",
+  "skillsmachine_commit": "0000000000000000000000000000000000000000",
+  "last_update_id": null,
+  "baseline_generated_at": "2026-07-16T17:55:39.1467438Z",
+  "component_inventory": [
+    {
+      "component_type": "metadata",
+      "relative_path": "docs/item.txt",
+      "sha256": "f5a1e30a9f19402878d9183a46fae2baa7b64496bf586dfee8f4a47f541f2ce5",
+      "version": "0.3.0"
+    }
+  ]
+}

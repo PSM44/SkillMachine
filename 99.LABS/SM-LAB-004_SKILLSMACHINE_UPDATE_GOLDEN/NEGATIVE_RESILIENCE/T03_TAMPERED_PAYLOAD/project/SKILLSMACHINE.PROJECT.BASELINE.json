@@ -1,0 +1,10 @@
+{
+  "schema_version": "1.1",
+  "project_id": "TEST_TAMPERED_PAYLOAD",
+  "created_by_skillsmachine": true,
+  "skillsmachine_version": "0.3.0",
+  "skillsmachine_commit": "0000000000000000000000000000000000000000",
+  "last_update_id": null,
+  "baseline_generated_at": "2026-07-16T17:55:37.3458926Z",
+  "component_inventory": []
+}

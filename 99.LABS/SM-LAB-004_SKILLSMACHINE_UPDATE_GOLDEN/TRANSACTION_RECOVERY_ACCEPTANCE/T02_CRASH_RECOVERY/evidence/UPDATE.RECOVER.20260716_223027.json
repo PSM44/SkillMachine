@@ -1,0 +1,12 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "recover",
+  "status": "PASS_RECOVERY",
+  "generated_at": "2026-07-17T02:30:27.6026215Z",
+  "data": {
+    "checkpoint_manifest": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T02_CRASH_RECOVERY\\evidence\\UPDATE.CHECKPOINT.SM-UPD-000202.20260716_223025.json",
+    "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\TRANSACTION_RECOVERY_ACCEPTANCE\\T02_CRASH_RECOVERY\\evidence\\UPDATE.CHECKPOINT.SM-UPD-000202.20260716_223025.zip",
+    "restored_entries": 2,
+    "baseline_restored": true
+  }
+}

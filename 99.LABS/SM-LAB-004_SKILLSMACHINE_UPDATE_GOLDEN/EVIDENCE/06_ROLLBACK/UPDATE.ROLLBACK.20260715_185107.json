@@ -1,0 +1,12 @@
+{
+  "runner_version": "0.1.0-MVP",
+  "action": "rollback",
+  "status": "PASS",
+  "generated_at": "2026-07-15T22:51:08.3018729Z",
+  "data": {
+    "checkpoint_manifest": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260715_185106.json",
+    "checkpoint_zip": "C:\\01. GitHub\\Skills\\99.LABS\\SM-LAB-004_SKILLSMACHINE_UPDATE_GOLDEN\\EVIDENCE\\03_APPLY\\UPDATE.CHECKPOINT.SM-UPD-000004.20260715_185106.zip",
+    "restored_entries": 3,
+    "baseline_restored": true
+  }
+}
