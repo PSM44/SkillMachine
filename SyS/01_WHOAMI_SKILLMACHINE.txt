@@ -1642,3 +1642,56 @@ UPDATER_MB_SM_065A=COMMITTED_AND_PUSHED
 UPDATER_COMMIT=b0ef2e92a96a6700b02c1252f7ddbaa067e60d66
 NEXT_ACTION=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
 ========== END MB-SM-066B_BACKLOG_DEBT_ROADMAP_NORMALIZATION ==========
+
+========== MB-SM-067A_SESSION_CLOSE_CONTINUITY_20260718 ==========
+RECORDED_AT=2026-07-18 12:31:14 -04:00
+PROJECT_ROOT=C:\01. GitHub\Skills
+BRANCH=main
+HEAD_BASE=93c55f0cbcf08a667c69d6ba9539d1e3e6a73380
+STATUS=SESSION_CLOSED_WITH_MB_IN_PROGRESS_PENDING_COMMIT
+
+CURRENT_POSITION:
+- MB-SM-066B backlog/debt/roadmap normalization is committed and pushed.
+- Updater core, idempotency, mutex, transaction journal, crash recovery and rollback acceptance are complete.
+- MB-SM-067A human runbook/operator UX has started but is not complete.
+- Current-state discovery passed against clean synchronized main.
+- Operator-contract discovery R1 failed at parser stage; repository was not modified.
+- R2 discovery exists but has not yet produced accepted evidence.
+
+ACTIVE_PRODUCT_BACKLOG:
+- BL-PROD-003 is IN_PROGRESS.
+- BL-PROD-001 real-project acceptance remains OPEN.
+- BL-PROD-002 management-visible demo remains OPEN.
+- BL-PROD-004 package pipeline remains OPEN.
+- BL-PROD-005 beta/release readiness remains BLOCKED.
+
+ACTIVE_TECHNICAL_DEBT:
+- TD-004 SessionContinue context gate acceptance.
+- TD-005 management-visible functionality.
+- TD-006 candidate-to-canon promotion.
+- TD-007 long-running heartbeat and execution budget.
+- TD-008 residual line-ending scope.
+- TD-009 evidence retention and repository weight.
+- TD-011 runtime schema and component semantics.
+- TD-012 trusted release provenance.
+- TD-013 one-shot automation reliability.
+
+ACCUMULATED_IDEAS_AND_OPPORTUNITIES:
+- Eleven accumulated registers exist under SM-LAB-001 and SM-LAB-002.
+- They remain LAB evidence and do not override the four active SyS registers.
+- Relevant promoted ideas: optional accumulated-register scaffold, lifecycle scoring, Skill/GRC decision matrix, common automation module, Pester tests, structured operator CLI and management metrics.
+
+PATH_TO_VISIBLE_MANAGEMENT_DELIVERABLE:
+MB-SM-067A human runbook/operator UX ->
+MB-SM-067B real project candidate selection ->
+MB-SM-067C real preflight and dry-run ->
+MB-SM-067D controlled real apply ->
+MB-SM-067E validate, rollback or accept permanence ->
+MB-SM-068A management-visible demo pack.
+
+NEXT_ACTION:
+Resume MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN.
+
+COMMIT_PUSH_STATUS:
+Not performed in this update. Explicit authorization remains required.
+========== END MB-SM-067A_SESSION_CLOSE_CONTINUITY_20260718 ==========

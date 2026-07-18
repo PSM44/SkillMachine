@@ -1690,3 +1690,35 @@ HISTORICAL_ENTRIES=Preserved; stale OPEN values do not override the active regis
 TD_006_CANDIDATE_TO_CANON_PROMOTION=OPEN
 NEXT_ACTION=MB-SM-069B_CANDIDATE_TO_CANON_DECISION_MATRIX
 ========== END MB-SM-066B_ACTIVE_BACKLOG_SOURCE_OF_TRUTH_NORMALIZATION ==========
+
+========== MB-SM-067A_SKILL_GRC_LEARNING_REVIEW_20260718 ==========
+RECORDED_AT=2026-07-18 12:31:14 -04:00
+STATUS=CANDIDATES_RECORDED_NOT_CANONIZED
+
+CANDIDATE_ID=CAND-SM-AUTOMATION-COMMON-MODULE-001
+TYPE=IMPROVE_EXISTING_TOOLING
+PRIORITY=P0
+PROPOSAL=Create SyS/A_Tools/Common/SkillsMachine.Automation.psm1 with tested Git, evidence, UTF-8, restore and validation helpers.
+RATIONALE=Repeated one-shot defects show copied helper code is now a systemic reliability risk.
+
+CANDIDATE_ID=CAND-SM-PESTER-ONESHOT-CONTRACT-001
+TYPE=NEW_TEST_SUITE_CANDIDATE
+PRIORITY=P0
+PROPOSAL=Add Pester tests for parser safety, native Git argument composition, tracked/untracked classification, exact dirty scope, post-push verification and output schema.
+RATIONALE=The PowerShell syntax gate validates repository scripts but not downloadable one-shots before delivery.
+
+CANDIDATE_ID=CAND-SM-OPERATOR-CLI-001
+TYPE=PRODUCT_UX_CANDIDATE
+PRIORITY=P1
+PROPOSAL=Expose updater operations through a stable operator CLI instead of MB-specific scripts.
+TARGET_COMMANDS=preflight;dry-run;apply;already-applied;rollback;recover;status
+RATIONALE=Nontechnical operators should not interpret source code or compose low-level parameters.
+
+CANDIDATE_ID=CAND-SM-MANAGEMENT-METRICS-001
+TYPE=MANAGEMENT_DEMO_CANDIDATE
+PRIORITY=P1
+PROPOSAL=Measure time saved, controls automated, rollback success, recovery time, compatible projects and update error reduction.
+RATIONALE=Management-visible value requires outcome metrics, not only technical evidence.
+
+NEXT_ACTION=Evaluate these candidates under MB-SM-069B candidate-to-canon decision matrix.
+========== END MB-SM-067A_SKILL_GRC_LEARNING_REVIEW_20260718 ==========

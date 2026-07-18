@@ -75,6 +75,17 @@ TITLE=Hashes protect integrity but do not establish publisher authenticity or tr
 RISK=Internally consistent but malicious or wrong-source update package.
 NEXT_ACTION=Define signed-manifest or trusted-release provenance contract.
 
+ENTRY_ID=TD-013_ONESHOT_AUTOMATION_RELIABILITY
+PRIORITY=P0
+STATUS=OPEN
+TITLE=One-shot control scripts have repeated parser, native-argument and post-verification defects.
+DETAIL=Recent MB scripts failed on invalid Sort-Object syntax, PowerShell output-object precedence, tracked/untracked diff classification and post-push status capture.
+RISK=Operator friction, false failure states, repeated retries and avoidable risk around otherwise valid repository operations.
+DISPOSITION=Create a reusable tested automation module instead of copying helper functions into every one-shot.
+NEXT_ACTION=After MB-SM-067A, create SkillsMachine.Automation.psm1 and Pester coverage for parser, Git scope, tracked/untracked evidence and post-push verification.
+SOURCE=MB-SM-066C;MB-SM-066D;MB-SM-067A
+RECORDED_AT=2026-07-18 12:31:14 -04:00
+
 ============================================================================
 02.00_CLOSED_OR_LIMITED
 ============================================================================

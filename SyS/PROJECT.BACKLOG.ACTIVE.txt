@@ -39,12 +39,14 @@ NEXT_ACTION=MB-SM-068A_MANAGEMENT_VISIBLE_DEMO_PACK
 
 ENTRY_ID=BL-PROD-003_UPDATER_HUMAN_RUNBOOK
 PRIORITY=P0
-STATUS=OPEN
+STATUS=IN_PROGRESS
 TITLE=Create the human operator runbook and recover UX.
 DETAIL=Document preflight, dry-run, approval fingerprint, apply, ALREADY_APPLIED, rollback, recover, concurrency block and interrupted-update recovery.
 DEPENDENCIES=MB-SM-065A_DONE
 SUCCESS_GATE=Nontechnical operator can execute and recover without interpreting source code.
-NEXT_ACTION=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
+CURRENT_MB=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
+SESSION_PROGRESS=Current-state discovery completed; operator-contract source discovery still pending after one parser failure and controlled R2 preparation.
+NEXT_ACTION=MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN
 
 ENTRY_ID=BL-PROD-004_REAL_UPDATE_PACKAGE_PIPELINE
 PRIORITY=P0
