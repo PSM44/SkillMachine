@@ -1,0 +1,100 @@
+PROJECT.BACKLOG.ACTIVE
+SCHEMA_VERSION=1.0
+PROJECT=PS.SkillsMachine
+CREATED_AT=2026-07-17 23:03:49 -04:00
+SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
+AUTHORITATIVE_FOR=ACTIVE_PRODUCT_BACKLOG
+HISTORICAL_SOURCES_REMAIN_READ_ONLY=YES
+
+============================================================================
+01.00_GOVERNANCE
+============================================================================
+PURPOSE=Maintain the current product implementation backlog only.
+EXCLUDES=LAB-only work; Skill/GRC candidates; historical close actions; generated 90.USECASE outputs.
+STATUS_VALUES=OPEN;IN_PROGRESS;BLOCKED;DONE;SUPERSEDED;DEFERRED
+PRIORITY_VALUES=P0;P1;P2
+SINGLE_NEXT_ACTION_RULE=YES
+
+============================================================================
+02.00_P0_ACTIVE
+============================================================================
+
+ENTRY_ID=BL-PROD-001_REAL_PROJECT_UPDATE_ACCEPTANCE
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Execute the first controlled update on a real eligible project.
+DETAIL=Select a real project, define the safety contract, execute preflight and dry-run, obtain human approval, apply a visible update, validate, and either rollback or accept permanence.
+DEPENDENCIES=MB-SM-065A_DONE
+SUCCESS_GATE=Real project remains controlled, auditable and recoverable.
+NEXT_ACTION=MB-SM-067B_REAL_PROJECT_CANDIDATE_SELECTION
+
+ENTRY_ID=BL-PROD-002_MANAGEMENT_VISIBLE_DEMO
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Create a management-visible 5-10 minute updater demonstration.
+DETAIL=Produce an executive one-pager, demo runner, before/after evidence, idempotency proof, recovery/rollback proof and acceptance checklist.
+DEPENDENCIES=BL-PROD-001
+SUCCESS_GATE=Nontechnical manager can understand value, control points and recovery.
+NEXT_ACTION=MB-SM-068A_MANAGEMENT_VISIBLE_DEMO_PACK
+
+ENTRY_ID=BL-PROD-003_UPDATER_HUMAN_RUNBOOK
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Create the human operator runbook and recover UX.
+DETAIL=Document preflight, dry-run, approval fingerprint, apply, ALREADY_APPLIED, rollback, recover, concurrency block and interrupted-update recovery.
+DEPENDENCIES=MB-SM-065A_DONE
+SUCCESS_GATE=Nontechnical operator can execute and recover without interpreting source code.
+NEXT_ACTION=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
+
+ENTRY_ID=BL-PROD-004_REAL_UPDATE_PACKAGE_PIPELINE
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Operationalize the production update-package pipeline.
+DETAIL=Define change selection, manifest generation, payload hashes, compatibility, release provenance, publication and project consumption.
+DEPENDENCIES=BL-PROD-003
+SUCCESS_GATE=Real packages are reproducible, traceable and consumable.
+NEXT_ACTION=Define pipeline contract after real-project dry-run.
+
+ENTRY_ID=BL-PROD-005_BETA_RELEASE_READINESS
+PRIORITY=P0
+STATUS=BLOCKED
+TITLE=Decide beta and release readiness.
+DETAIL=Evaluate product only after real-project acceptance, human runbook, management demo and trusted package provenance.
+DEPENDENCIES=BL-PROD-001;BL-PROD-002;BL-PROD-003;BL-PROD-004
+SUCCESS_GATE=Formal GO, CONDITIONAL_GO or NO_GO decision.
+NEXT_ACTION=MB-SM-068B_BETA_RELEASE_READINESS_GATE
+
+============================================================================
+03.00_P1_ACTIVE
+============================================================================
+
+ENTRY_ID=BL-PROD-006_SESSION_CONTINUE_CONTEXT_GATE_ACCEPTANCE
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Validate SessionContinue Skill/GRC context selection end to end.
+DETAIL=Confirm use-case detection, menu/registry review, relevant upload recommendation, minimal missing-context request and focus protection.
+DEPENDENCIES=BL-PROD-002
+NEXT_ACTION=MB-SM-069A_SESSION_CONTINUE_CONTEXT_GATE_ACCEPTANCE
+
+ENTRY_ID=BL-PROD-007_CANDIDATE_TO_CANON_DECISION_MATRIX
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Define objective Skill/GRC/candidate/backlog promotion rules.
+DETAIL=Create evidence-based decisions for create, modify, merge, keep candidate, backlog, deprecate or discard.
+DEPENDENCIES=BL-PROD-006
+NEXT_ACTION=MB-SM-069B_CANDIDATE_TO_CANON_DECISION_MATRIX
+
+============================================================================
+04.00_P2_DEFERRED
+============================================================================
+ENTRY_ID=BL-PROD-008_TERMINOLOGY_ALIGNMENT
+PRIORITY=P2
+STATUS=DEFERRED
+TITLE=Map HUMAN, BATON, WHOAMI and backlog terms to industry terminology.
+NEXT_ACTION=Reassess after beta readiness.
+
+ENTRY_ID=BL-PROD-009_LIGHTWEIGHT_PROJECT_SCAFFOLD
+PRIORITY=P2
+STATUS=DEFERRED
+TITLE=Evaluate whether the current project scaffold is too heavy.
+NEXT_ACTION=Reassess after real-project evidence.

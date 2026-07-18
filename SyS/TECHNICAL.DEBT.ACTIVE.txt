@@ -1,0 +1,87 @@
+TECHNICAL.DEBT.ACTIVE
+SCHEMA_VERSION=1.0
+PROJECT=PS.SkillsMachine
+CREATED_AT=2026-07-17 23:03:49 -04:00
+SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
+AUTHORITATIVE_FOR=ACTIVE_TECHNICAL_DEBT
+
+============================================================================
+01.00_OPEN_DEBT
+============================================================================
+
+ENTRY_ID=TD-004_SESSION_CONTINUE_CONTEXT_GATE
+PRIORITY=P1
+STATUS=PARTIALLY_IMPLEMENTED_NEEDS_ACCEPTANCE
+TITLE=SessionContinue Skill/GRC context gate requires end-to-end proof.
+DETAIL=Source and generated use case include relevant controls, but complete behavioral acceptance remains unproven.
+DISPOSITION=Track implementation work in BL-PROD-006.
+NEXT_ACTION=MB-SM-069A_SESSION_CONTINUE_CONTEXT_GATE_ACCEPTANCE
+
+ENTRY_ID=TD-005_MANAGEMENT_VISIBLE_FUNCTIONALITY
+PRIORITY=P0
+STATUS=OPEN_PROMOTED_TO_PRODUCT_BACKLOG
+TITLE=Technical evidence is not yet packaged as management-visible functionality.
+DISPOSITION=Execution is tracked in BL-PROD-002 to avoid duplicate work.
+NEXT_ACTION=BL-PROD-002_MANAGEMENT_VISIBLE_DEMO
+
+ENTRY_ID=TD-006_CANDIDATE_TO_CANON_PROMOTION
+PRIORITY=P1
+STATUS=OPEN
+TITLE=No objective promotion matrix exists for Skill, GRC, candidate and backlog dispositions.
+RISK=Candidate accumulation, duplicate controls and inconsistent canonization.
+NEXT_ACTION=MB-SM-069B_CANDIDATE_TO_CANON_DECISION_MATRIX
+
+ENTRY_ID=TD-007_LONG_RUNNING_HEARTBEAT_AND_BUDGET
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Long-running automation lacks a reusable heartbeat and execution-budget contract.
+RISK=Apparently stalled processes, weak stop-loss and poor operator visibility.
+NEXT_ACTION=Define heartbeat, phase, elapsed time, last progress, timeout and stop-loss contract.
+
+ENTRY_ID=TD-008_LINE_ENDING_RESIDUAL_SCOPE
+PRIORITY=P2
+STATUS=OPEN_LIMITED_SCOPE
+TITLE=Core line-ending policy is closed, but historical, generated and LAB scopes still emit normalization warnings.
+RISK=Noise and accidental mass normalization.
+NEXT_ACTION=Verify .gitattributes and document expected behavior without mass rewrite.
+
+ENTRY_ID=TD-009_EVIDENCE_RETENTION_AND_REPOSITORY_WEIGHT
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Evidence, ZIPs, one-shot backups and logs lack a unified retention policy.
+RISK=Repository growth, duplicate historical evidence and noisy discovery.
+NEXT_ACTION=Define versioned evidence, consolidation, size limits, retention and archival policy.
+
+ENTRY_ID=TD-010_BACKLOG_SOURCE_OF_TRUTH_FRAGMENTATION
+PRIORITY=P0
+STATUS=CLOSED_BY_MB-SM-066B
+TITLE=Backlog and debt were fragmented across BATON, WHOAMI, LAB registers and candidate files.
+RISK=Contradictory status, stale OPEN items and noisy search.
+DISPOSITION=The four active SyS registers are now authoritative; historical sources remain evidence only.
+NEXT_ACTION=Maintain the four active registers as the canonical source of truth.
+CLOSED_AT=2026-07-17 23:43:34 -04:00
+
+ENTRY_ID=TD-011_RUNTIME_SCHEMA_AND_COMPONENT_SEMANTICS
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Updater runtime validation is selective and inventory component_type semantics may be normalized away.
+RISK=Contract drift and reduced inventory fidelity.
+NEXT_ACTION=Add full runtime schema validation and preserve or explicitly migrate component_type.
+
+ENTRY_ID=TD-012_TRUSTED_RELEASE_PROVENANCE
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Hashes protect integrity but do not establish publisher authenticity or trusted source binding.
+RISK=Internally consistent but malicious or wrong-source update package.
+NEXT_ACTION=Define signed-manifest or trusted-release provenance contract.
+
+============================================================================
+02.00_CLOSED_OR_LIMITED
+============================================================================
+TD_ID=TD-014_UPDATE_INTERRUPTION_AND_CONCURRENCY_CONTROL
+STATUS=CLOSED_BY_MB-SM-065A
+EVIDENCE=Project-scoped mutex, persistent transaction journal, recover action and crash acceptance.
+
+TD_ID=CORE_LINE_ENDING_POLICY
+STATUS=CLOSED_FOR_CORE
+REMAINDER=TD-008_LINE_ENDING_RESIDUAL_SCOPE

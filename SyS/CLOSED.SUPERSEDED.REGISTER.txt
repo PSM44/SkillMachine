@@ -1,0 +1,70 @@
+CLOSED.SUPERSEDED.REGISTER
+SCHEMA_VERSION=1.0
+PROJECT=PS.SkillsMachine
+CREATED_AT=2026-07-17 23:03:49 -04:00
+SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
+AUTHORITATIVE_FOR=CLOSED_SUPERSEDED_AND_HISTORICAL_DISPOSITIONS
+
+============================================================================
+01.00_CLOSED
+============================================================================
+ITEM_ID=BL-005_SESSION_CLOSE_COMMIT_PUSH_UPDATE
+DISPOSITION=CLOSED
+EVIDENCE=Historical commit and push completed.
+
+ITEM_ID=BL-009_BUILD_SUPPORT_PACKAGE_05_UPDATE_MVP
+DISPOSITION=CLOSED
+EVIDENCE=Support package, updater runner, idempotency, transaction recovery and golden regression committed in b0ef2e92a96a6700b02c1252f7ddbaa067e60d66.
+
+ITEM_ID=UPDATER_GOLDEN_INSTALL_UPDATE_ROLLBACK
+DISPOSITION=CLOSED
+EVIDENCE=SM-LAB-004 and SM-LAB-005 PASS.
+
+ITEM_ID=UPDATER_IDEMPOTENCY
+DISPOSITION=CLOSED
+EVIDENCE=Second dry-run returns ALREADY_APPLIED and second apply is skipped.
+
+ITEM_ID=UPDATER_DIRTY_WORKTREE_PROTECTION
+DISPOSITION=CLOSED
+EVIDENCE=Negative resilience acceptance PASS.
+
+ITEM_ID=UPDATER_PAYLOAD_AND_MANIFEST_TAMPER_REJECTION
+DISPOSITION=CLOSED
+EVIDENCE=Negative resilience acceptance PASS.
+
+ITEM_ID=UPDATER_TRANSACTION_MUTEX
+DISPOSITION=CLOSED
+EVIDENCE=Concurrent mutating process blocked.
+
+ITEM_ID=UPDATER_CRASH_JOURNAL_AND_RECOVERY
+DISPOSITION=CLOSED
+EVIDENCE=Forced termination preserved checkpoint journal and recover restored exact pre-state.
+
+ITEM_ID=POWERSHELL_SYNTAX_VALIDATION_GATE
+DISPOSITION=CLOSED
+EVIDENCE=Validate-System pre-commit syntax gate active.
+
+ITEM_ID=TEMP_SKILLSMACHINE_STANDARDIZATION
+DISPOSITION=CLOSED
+EVIDENCE=C:\Users\aazcl\Downloads\Temp.SkillMachine is the active disposable staging root.
+
+============================================================================
+02.00_SUPERSEDED
+============================================================================
+ITEM_ID=BL-008_ACCUMULATED_REGISTER_STATUS_NORMALIZATION
+DISPOSITION=SUPERSEDED_BY_MB-SM-066A_AND_MB-SM-066B
+REPLACED_BY=SyS/PROJECT.BACKLOG.ACTIVE.txt;SyS/TECHNICAL.DEBT.ACTIVE.txt;SyS/PROJECT.ROADMAP.ACTIVE.txt;SyS/CLOSED.SUPERSEDED.REGISTER.txt
+
+ITEM_ID=BL-006_MANAGEMENT_VISIBLE_EVIDENCE_PACK
+DISPOSITION=SUPERSEDED_ID_ONLY
+REPLACED_BY=BL-PROD-002_MANAGEMENT_VISIBLE_DEMO
+
+ITEM_ID=BL-007_SESSION_CONTINUE_SKILL_GRC_CONTEXT_GATE
+DISPOSITION=SUPERSEDED_ID_ONLY
+REPLACED_BY=BL-PROD-006_SESSION_CONTINUE_CONTEXT_GATE_ACCEPTANCE;TD-004_SESSION_CONTINUE_CONTEXT_GATE
+
+============================================================================
+03.00_HISTORICAL_SOURCE_POLICY
+============================================================================
+POLICY=Do not delete or rewrite historical LAB, BATON, WHOAMI, session-close, backup or log evidence solely to normalize status.
+ACTIVE_SOURCE_OF_TRUTH=The four SyS active registers created by MB-SM-066B.
