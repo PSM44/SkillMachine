@@ -62,6 +62,92 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
+# MB-SM-067B-D1-R1_FAIL_CLOSED_GATE
+Write-Host "VALIDATION: automation reliability foundation"
+
+# A. Resolve exact required artifact paths relative to repository root
+$AutomationCommon  = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..\Common'))
+$AutomationModule  = Join-Path $AutomationCommon 'SkillsMachine.Automation.psm1'
+$AutomationTests   = Join-Path $AutomationCommon 'Tests\SkillsMachine.Automation.Tests.ps1'
+$AutomationRunner  = Join-Path $AutomationCommon 'Invoke-SkillsMachineAutomationTests.ps1'
+
+# B. Fail-closed artifact presence check — gate is never skipped
+$automGateFail = $false
+foreach ($automArtifact in @(
+    [PSCustomObject]@{ Path = $AutomationModule; Label = 'SyS/A_Tools/Common/SkillsMachine.Automation.psm1' },
+    [PSCustomObject]@{ Path = $AutomationTests;  Label = 'SyS/A_Tools/Common/Tests/SkillsMachine.Automation.Tests.ps1' },
+    [PSCustomObject]@{ Path = $AutomationRunner; Label = 'SyS/A_Tools/Common/Invoke-SkillsMachineAutomationTests.ps1' }
+)) {
+    if (-not (Test-Path -LiteralPath $automArtifact.Path -PathType Leaf)) {
+        Write-Host "ERROR: automation reliability foundation missing required artifact: $($automArtifact.Label)"
+        $automGateFail = $true
+    }
+}
+if ($automGateFail) {
+    Write-Host "ERROR: automation reliability foundation failed"
+    exit 1
+}
+
+# C. Parse module, tests, and runner before execution
+foreach ($automFile in @($AutomationModule, $AutomationTests, $AutomationRunner)) {
+    $automTokens = $null; $automErrors = $null
+    [System.Management.Automation.Language.Parser]::ParseFile($automFile, [ref]$automTokens, [ref]$automErrors) | Out-Null
+    if ($automErrors -and $automErrors.Count -gt 0) {
+        $automRel = $automFile.Replace($ValidationRepoRoot, '').TrimStart('\').TrimStart('/')
+        Write-Host "ERROR: automation reliability foundation parser failed: $automRel"
+        foreach ($automPe in $automErrors) {
+            Write-Host ("  LINE={0} MSG={1}" -f $automPe.Extent.StartLineNumber, $automPe.Message)
+        }
+        Write-Host "ERROR: automation reliability foundation failed"
+        exit 1
+    }
+}
+
+# D/E. Invoke runner; capture parseable summary via temp file to avoid Write-Host capture issues
+$automSummaryFile = [System.IO.Path]::GetTempFileName()
+$env:AUTOMATION_SUMMARY_FILE = $automSummaryFile
+& $PowerShellHost.Source -NoProfile -ExecutionPolicy Bypass -File $AutomationRunner
+$automRunnerExit = $LASTEXITCODE
+$env:AUTOMATION_SUMMARY_FILE = $null
+
+# F/G. Parse and validate summary fields
+$automSummaryText = ''
+if (Test-Path -LiteralPath $automSummaryFile -PathType Leaf) {
+    $automSummaryText = [System.IO.File]::ReadAllText($automSummaryFile, [System.Text.Encoding]::UTF8)
+    Remove-Item -LiteralPath $automSummaryFile -Force -ErrorAction SilentlyContinue
+}
+
+$automGateReason = ''
+if ($automRunnerExit -ne 0) {
+    $automGateReason = "runner exited $automRunnerExit"
+} else {
+    $automMTotal  = [regex]::Match($automSummaryText, '(?m)^TESTS_TOTAL=(\d+)')
+    $automMPassed = [regex]::Match($automSummaryText, '(?m)^TESTS_PASSED=(\d+)')
+    $automMFailed = [regex]::Match($automSummaryText, '(?m)^TESTS_FAILED=(\d+)')
+    if (-not $automMTotal.Success -or -not $automMPassed.Success -or -not $automMFailed.Success) {
+        $automGateReason = 'required summary fields missing (TESTS_TOTAL / TESTS_PASSED / TESTS_FAILED)'
+    } else {
+        $automGTotal  = [int]$automMTotal.Groups[1].Value
+        $automGPassed = [int]$automMPassed.Groups[1].Value
+        $automGFailed = [int]$automMFailed.Groups[1].Value
+        if ($automGTotal -le 0) {
+            $automGateReason = "TESTS_TOTAL=$automGTotal is not a positive integer"
+        } elseif ($automGFailed -ne 0) {
+            $automGateReason = "TESTS_FAILED=$automGFailed (expected 0)"
+        } elseif ($automGPassed -ne $automGTotal) {
+            $automGateReason = "TESTS_PASSED=$automGPassed != TESTS_TOTAL=$automGTotal"
+        }
+    }
+}
+
+# H/I. Report outcome
+if ($automGateReason -ne '') {
+    Write-Host "ERROR: automation reliability foundation failed ($automGateReason)"
+    exit 1
+}
+$automNTests = [int]$automMPassed.Groups[1].Value
+Write-Host "OK: automation reliability foundation passed ($automNTests tests)"
+
 Write-Host "OK: system pre-commit validation passed"
 exit 0
 
