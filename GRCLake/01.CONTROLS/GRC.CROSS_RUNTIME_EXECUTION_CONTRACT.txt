@@ -1,7 +1,7 @@
 # GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1
+VERSION: v1.1
 STATUS: ACTIVE
 LAYER: GRC
 CONTROL_TYPE: EXECUTION_GOVERNANCE
@@ -262,3 +262,51 @@ RELATED_CORE:
 FIN_SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
+==========
+MB-SM-067B-D2_RUNTIME_AND_AGENT_IDENTITY_EVIDENCE
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: CROSS_RUNTIME_EXECUTION_CONTRACT
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+
+10.00 RUNTIME AND AGENT IDENTITY DECLARATION
+Every execution report must declare BOTH:
+- RUNTIME: the actual interpreter/shell that executed (pwsh 7.x, Windows
+  PowerShell 5.1, python 3.x, bash/WSL2, node, etc.);
+- AGENT: the actual agent or human operator that drove execution (Claude Code,
+  Codex, ChatGPT-guided human paste, direct human, scheduled job).
+Identity is factual, not aspirational: report what actually ran.
+
+10.10 EXECUTABLE IDENTITY EVIDENCE
+Where feasible, reports should include the executable's identity evidence:
+absolute path, version string, and content hash (SHA256) of the script that
+ran. For repository scripts, the repo-relative path plus HEAD commit is
+acceptable evidence.
+
+10.20 TOOL OUTPUT VS PROJECT OUTPUT
+Reports must distinguish:
+- TOOL OUTPUT: diagnostics, logs, AI_TAIL, temp evidence produced by the
+  execution tooling;
+- PROJECT OUTPUT: canonical or generated artifacts of the project itself.
+Tool output must never be presented as project deliverable, and vice versa.
+
+10.30 REJECT SIMULATED OR MISLABELED EXECUTION IDENTITY
+A report that claims an agent, runtime, or machine executed work that it did
+not execute is non-compliant, regardless of whether the results are correct.
+Simulated runs must be labeled SIMULATED. Mislabeling execution identity is a
+hard failure of this GRC (see also GRC.PROJECT_CONTEXT_IDENTITY).
+
+10.40 SHELL/RUNTIME COMPATIBILITY VERIFICATION
+Before delivering an executable, verify the target shell/runtime is actually
+available and version-compatible in the operator environment (e.g. pwsh vs
+powershell, python launcher, WSL2 presence). Do not assume the authoring
+environment matches the execution environment.
+
+10.50 NO EXECUTION CLAIM WITHOUT EVIDENCE
+Never claim that another agent (Codex, Claude, remote job) executed work
+without direct evidence of that execution (its AI_TAIL, its log, its commit,
+its report). Absence of evidence means the claim must not be made.
+
+FIN_MB-SM-067B-D2_RUNTIME_AND_AGENT_IDENTITY_EVIDENCE
+==========

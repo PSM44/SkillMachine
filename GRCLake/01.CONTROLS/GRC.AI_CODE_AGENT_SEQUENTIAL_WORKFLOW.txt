@@ -4,11 +4,12 @@ GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
 
 ID_UNICO..........: GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.0001
 NOMBRE............: AiCodeAgentSequentialWorkflow
-VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
+UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
 SCOPE.............: Cross-project control for Codex and Claude Code task execution in VS Code
 APPLIES_TO........: SkillsMachine and any project where AI code agents execute long-running development tasks
 
@@ -240,4 +241,54 @@ This GRC succeeds when:
 
 ==========
 END
+==========
+
+==========
+MB-SM-067B-D2_FAILURE_ESCALATION_CHECKPOINTS_AND_IDENTITY
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.FAILURE_ESCALATION_BY_OBJECTIVE (candidate), GRC.LOOP_ENGINEERING_HUMAN_GATE (candidate)
+
+12.00 FAILURE COUNTING BY OBJECTIVE
+Failures are counted per objective (MB/task), not per command. The escalation
+ladder from 08.SKILL.PROBLEM_TROUBLE_INCIDENTS applies:
+first failure = diagnosis + one controlled correction; second = structural
+review; THIRD = hard stop with ESCALATION_REQUIRED=YES. No fourth retry
+without explicit human authorization.
+
+12.10 THIRD-FAILURE STOP
+After the third failure on the same objective, the agent must stop that
+objective entirely: no further edits, no new attempt variants, no loop
+engineering to circumvent the counter. Report state and wait for the human.
+
+12.20 CROSS-AGENT ESCALATION HUMAN GATE
+Escalating a failed objective to another agent (Codex, Claude Desktop, other
+runtime) is itself an action requiring explicit human authorization. An agent
+must never invoke or delegate to another autonomous agent on its own.
+
+12.30 CHECKPOINTS
+Long task sequences must define checkpoints (after preflight, after each
+mutation batch, before validation, before commit-ready gate). At each
+checkpoint the agent records objective status and worktree state, enabling
+precise rollback and diagnosis.
+
+12.40 HUMAN-OWNED COMMIT/PUSH (REAFFIRMED)
+Commit and push remain human-owned per section 03.00. Authorization is
+per-objective and does not carry across MBs.
+
+12.50 BLOCKER PARKING
+Parking a blocked objective to progress another front is allowed only when
+the fronts are independent (no shared files, state, or root cause), and the
+blocker plus resume condition are recorded.
+
+12.60 EXECUTION IDENTITY
+All reports must attribute execution to the ACTUAL agent and runtime that ran
+the work. Claiming Codex/Claude/other-agent execution when only a local shell
+ran, or vice versa, violates this GRC (see
+GRC.CROSS_RUNTIME_EXECUTION_CONTRACT and GRC.PROJECT_CONTEXT_IDENTITY).
+
+FIN_MB-SM-067B-D2_FAILURE_ESCALATION_CHECKPOINTS_AND_IDENTITY
 ==========

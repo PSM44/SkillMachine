@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
 NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
-VERSION...........: v1.4-DRAFT
+VERSION...........: v1.5-DRAFT
 FECHA.............: 2026-06-30
 HORA..............: HH:MM (actualizar al guardar)
 CIUDAD............: Maria Luisa, Chile
@@ -902,4 +902,44 @@ módulo; FULL/FULL.HUMAN/FULL.SKILLS ocasional), distinta de la generación loca
 
 ==========
 FIN_DEL_DOCUMENTO
+==========
+
+==========
+MB-SM-067B-D2_RADAR_SCAN_PROFILES_AND_FRESHNESS
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: RADAR
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.DEVEFACT_RADAR_PROFILE (candidate) resolved as PROJECT_LOCAL; global RADAR receives only this configurable-profile contract.
+
+RADAR_SCAN_PROFILES:
+RADAR must support configurable scan profiles (scope, exclusions, depth,
+hashing policy) instead of one hardcoded global scan. A profile declares:
+- PROFILE_NAME;
+- ROOT_PATH(S) covered;
+- EXCLUDED_PATHS;
+- HASH_POLICY;
+- OUTPUT_SET produced.
+
+FRESHNESS_AFTER_BATCH_CHAINS:
+After a chain of batch operations (multi-MB session, build chains, mass
+patches), RADAR outputs must be regenerated before they are used as closing
+evidence. RADAR generated before the chain is stale for closure purposes.
+
+EXPLICIT_GAPS_AND_EXCLUSIONS:
+Every RADAR output must declare its exclusions and known gaps explicitly.
+Consumers must not infer that absence from RADAR means absence from the
+filesystem when the path falls under a declared exclusion.
+
+NO_HARDCODED_GLOBAL_PATHS_FOR_LOCAL_PROFILES:
+Project-local scan profiles must not hardcode global/other-project paths.
+A profile belonging to one project references only that project's roots.
+
+LOCAL_PROFILES_REMAIN_LOCAL:
+Project-local RADAR profiles (e.g. a CloseReport- or DEVEFACT-specific
+profile) live in their project and are not promoted into global RADAR canon.
+Global RADAR carries only the profile CONTRACT, not per-project profiles.
+
+FIN_MB-SM-067B-D2_RADAR_SCAN_PROFILES_AND_FRESHNESS
 ==========

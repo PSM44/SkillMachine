@@ -5,8 +5,9 @@ GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
 GRC_ID: GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
 MARKER: SM-055J-SESSION-CLOSE-DIRTY-SCOPE-CONTROL
+VERSION: v1.1
 STATUS: ACTIVE_CANDIDATE_CORE
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-07-19
 
 CONTROL:
 Session close runners must distinguish expected close-artifact dirty state from unexpected dirty state.
@@ -30,3 +31,41 @@ AI_TAIL REQUIREMENTS:
 - PUSH_PERFORMED.
 - NEXT_ACTION.
 
+==========
+MB-SM-067B-D2_CLOSE_IDENTITY_AND_EXACT_SCOPE_RULES
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: SESSION_CLOSE_DIRTY_SCOPE_CONTROL
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+
+7. CLOSE_IDENTITY_CONSISTENCY:
+Session close artifacts must be identity-consistent: the project name, the
+repository root, the BATON being refreshed, the close report, and the commit
+(when one is authorized) must all reference the SAME project, root, branch,
+and task identity. A close that mixes identities (e.g. a CloseReport-named
+close operating on the SkillsMachine root) is invalid and must hard-stop
+(see GRC.PROJECT_CONTEXT_IDENTITY).
+
+8. EXACT_AUTHORIZED_DIRTY_PATHS:
+The declared close scope is a list of EXACT authorized dirty paths (or one
+declared close directory plus its files). Prefix or wildcard tolerance beyond
+the declared close directory is not allowed.
+
+9. PASS_WITH_REVIEW_CONDITIONS:
+PASS_WITH_REVIEW closure is valid only when BOTH hold:
+- an explicit blocker/review item is recorded; and
+- there is NO pending mutation outside the declared close scope.
+
+10. INDEPENDENT_COMMIT_AND_PUSH_STATUS:
+Close reporting must state commit status and push status INDEPENDENTLY
+(COMMIT_PERFORMED and PUSH_PERFORMED as separate fields). "Committed" never
+implies "pushed"; neither may be inferred from the other.
+
+11. UNKNOWN_DIRTY_SCOPE_HARD_STOP:
+If any dirty path cannot be classified against the declared close scope, the
+close hard-stops. Unknown dirty scope is never closed over, warned over, or
+deferred silently (see GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP).
+
+FIN_MB-SM-067B-D2_CLOSE_IDENTITY_AND_EXACT_SCOPE_RULES
+==========

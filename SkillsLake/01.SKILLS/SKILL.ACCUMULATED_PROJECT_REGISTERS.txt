@@ -5,8 +5,9 @@ SKILL.ACCUMULATED_PROJECT_REGISTERS
 SKILL_ID: SKILL.ACCUMULATED_PROJECT_REGISTERS
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
 MARKER: SM-055J-ACCUMULATED-PROJECT-REGISTERS
+VERSION: v1.1
 STATUS: ACTIVE_CANDIDATE_CORE
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-07-19
 
 PURPOSE:
 Maintain project-level accumulated registers so future IA instances can reconstruct decisions, unresolved questions, ideas, and Skill/GRC opportunities without relying on chat memory.
@@ -35,3 +36,45 @@ MINIMUM PRACTICE:
 - Include date/time, source event, status, decision, and next action.
 - Do not treat a register entry as canon until promoted through review.
 
+==========
+MB-SM-067B-D2_REGISTER_LIFECYCLE_AND_DISPOSITION_RULES
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: ACCUMULATED_PROJECT_REGISTERS
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+
+APPEND_ONLY_RULE:
+Accumulated registers are append-only. Existing entries are never rewritten or
+deleted; corrections and closures are recorded as NEW entries referencing the
+original entry ID.
+
+UNIQUE_ID_RULE:
+Every register entry must carry a unique, stable ID (CANDIDATE_ID, MB_ID, or
+equivalent). Two entries must never share an ID; a follow-up entry references
+the original ID instead of reusing it.
+
+LIFECYCLE_STATES_AND_EVIDENCE:
+Entries move through explicit lifecycle states, each transition recorded with
+date and evidence (what was decided, by whom, based on what):
+CANDIDATE -> CLASSIFIED -> APPROVED/REJECTED/DEFERRED -> IMPLEMENTED/CLOSED.
+
+DISPOSITION_VALUES:
+Final dispositions for Skill/GRC candidates are:
+- MERGED: content absorbed into one or more existing artifacts (record targets).
+- PROMOTED: became a new canonical artifact (record path/version).
+- REJECTED: will not be implemented (record reason).
+- DEFERRED: postponed with an explicit revisit condition.
+- PROJECT_LOCAL: valid only for a specific project; not global canon.
+
+CLOSE_WITHOUT_DELETE:
+Closing or superseding an entry never deletes its history. The closing entry
+states CLOSES=<original ID> or SUPERSEDES=<original ID> and the disposition.
+
+NO_CANON_MASQUERADE:
+An unresolved candidate must never be cited or applied as if it were canon.
+Until a candidate is dispositioned (MERGED/PROMOTED), its content is proposal
+only, regardless of how long it has been in the register.
+
+FIN_MB-SM-067B-D2_REGISTER_LIFECYCLE_AND_DISPOSITION_RULES
+==========

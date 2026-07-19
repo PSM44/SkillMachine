@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.AI.ORCH.LOGAUDIT.01.00
 NOMBRE_SUGERIDO...: 15.SKILL.LOGGING_AUDIT.txt
-VERSION...........: v1.0-DRAFT
+VERSION...........: v1.1-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (America/Santiago)
 CIUDAD............: Maria Luisa, Chile
@@ -193,3 +193,51 @@ NOTES.............: Patch aplicado; lint pendiente.
 
 2026-02-26, v1.0-DRAFT
 - Creación inicial: logging + audit para AI_ORCH.
+
+==========
+MB-SM-067B-D2_OPERATIONAL_SUMMARY_AND_STATE_ATTRIBUTION
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: LOGGING_AUDIT
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: SKILL.TOVS_SUMMARY_RUNNER_CONTRACT (candidate, partial)
+
+12.00_KEY_VALUE_SUMMARY_CONTRACT
+Operational runs must emit a machine-parseable KEY=VALUE summary (console
+and/or file), not only narrative logs. Minimum: OBJECTIVE/MB_ID, FINAL_STATUS,
+and the state fields below.
+
+12.10_FAILURE_FIELDS
+On failure, the summary must include:
+- LAST_STAGE=<stage reached before failure>
+- FAILURE_TYPE=<parser|validation|git|io|logic|environment|other>
+- FAILURE_MESSAGE=<minimum actionable error>
+- ROLLBACK_ATTEMPTED=<YES|NO> and ROLLBACK_STATUS=<CLEAN|INCOMPLETE|N/A>
+
+12.20_PROMOTION_TRACE
+When content is promoted or merged between artifacts (candidate to canon,
+source to generated, lab to core), the log must record the source path AND
+target path of each promotion, so the trace source->target is reconstructible.
+
+12.30_EXACT_ATTRIBUTION
+Every logged run must attribute:
+- the exact executable (path + name) that ran;
+- the exact objective (MB_ID/TASK_ID) it served.
+Logs must never attribute work to an agent, runtime, or executable that did
+not actually run.
+
+12.40_SEPARATE_STATE_AXES
+Execution, validation, commit, and push are FOUR independent states. A summary
+must report each explicitly (e.g. EXECUTION=PASS VALIDATION=PASS
+COMMIT_EXECUTED=NO PUSH_EXECUTED=NO). Never collapse them into a single OK.
+
+12.50_NO_MISLEADING_PASS
+A PASS printed at any stage must not survive a later failure in the same run:
+if a later mandatory stage fails, the final summary must report the failure,
+and any earlier PASS line must be superseded by the final FINAL_STATUS. A log
+whose last status line is PASS while a mandatory stage failed violates this
+skill (see anti-false-DONE in 08.SKILL.PROBLEM_TROUBLE_INCIDENTS).
+
+FIN_MB-SM-067B-D2_OPERATIONAL_SUMMARY_AND_STATE_ATTRIBUTION
+==========

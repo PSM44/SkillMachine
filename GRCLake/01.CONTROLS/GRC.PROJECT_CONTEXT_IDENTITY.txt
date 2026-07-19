@@ -1,0 +1,210 @@
+==========
+GRC.PROJECT_CONTEXT_IDENTITY
+==========
+
+ID_UNICO..........: GRC.PROJECT_CONTEXT_IDENTITY.0001
+NOMBRE............: ProjectContextIdentity
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE_CONTROL
+OWNER_HUMAN.......: PABLO
+CREATED_LOCAL.....: 2026-07-19
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+SCOPE.............: Cross-project control preventing operations on the wrong project, root, task, target artifacts, agent, or runtime
+APPLIES_TO........: SkillsMachine and any project where AI agents or human-guided scripts mutate repositories
+
+==========
+00.00 PURPOSE
+==========
+
+ProjectContextIdentity prevents the class of failure where work is performed
+correctly — but on the WRONG thing: the wrong project, the wrong repository
+root, the wrong task, targets outside the authorized scope, or attributed to
+an agent or runtime that did not actually execute.
+
+Every mutation, build, commit, push, close, or execution claim must first
+prove that the conversation's intent, the operative filesystem reality, and
+the declared task identity all agree.
+
+==========
+01.00 CORE RULE
+==========
+
+CONTEXT IDENTITY MUST MATCH BEFORE ACTION.
+
+An operation is valid only when the conversation project, the operative
+repository, and the declared task identity are the SAME identity, verified
+with evidence (not assumed).
+
+Mismatch = HARD STOP. Not a warning, not a note, not a deferred review item.
+
+==========
+02.00 MANDATORY IDENTITY FIELDS
+==========
+
+The identity gate evaluates these fields:
+
+- CONVERSATION_PROJECT.....: the project this conversation is about.
+- EXPECTED_PROJECT.........: the project the task authorization names.
+- OPERATIVE_PROJECT........: the project the filesystem/repo actually is.
+- EXPECTED_ROOT............: the authorized repository root path.
+- OPERATIVE_ROOT...........: git rev-parse --show-toplevel result.
+- EXPECTED_BRANCH..........: the authorized branch.
+- EXPECTED_HEAD............: the authorized HEAD commit.
+- TASK_ID or MB_ID.........: the specific authorized objective.
+- TARGET_ARTIFACTS.........: the exact files/paths authorized for mutation.
+- EXECUTABLE_IDENTITY......: path/version/hash of the executable that runs.
+- AGENT_RUNTIME_IDENTITY...: the actual agent and runtime executing.
+
+==========
+03.00 MANDATORY GATES
+==========
+
+The identity gate must pass:
+
+- BEFORE any mutation (create, edit, delete, rename);
+- BEFORE BUILD or RADAR when their outputs will affect decisions;
+- BEFORE commit;
+- BEFORE push;
+- BEFORE session close or acceptance of continuity artifacts;
+- BEFORE claiming that another project, agent, or runtime executed work.
+
+==========
+04.00 HARD STOPS
+==========
+
+The following are unconditional hard stops:
+
+- CONVERSATION_PROJECT, EXPECTED_PROJECT, and OPERATIVE_PROJECT disagree;
+- OPERATIVE_ROOT differs from EXPECTED_ROOT (project/root mismatch);
+- declared TASK_ID/MB_ID does not match the authorized task;
+- TARGET_ARTIFACTS outside the authorized scope would be touched;
+- git top-level is ambiguous (nested repo, submodule, resolution failure,
+  or disagreement with EXPECTED_ROOT);
+- AGENT_RUNTIME_IDENTITY cannot be verified for an execution claim;
+- a session-close or continuity artifact carries an identity inconsistent
+  with the repository evidence.
+
+==========
+05.00 ALLOWED RESULTS
+==========
+
+The identity gate returns exactly one of:
+
+- PASS_CONTEXT_IDENTITY
+- BLOCKED_CONTEXT_MISMATCH
+- BLOCKED_ROOT_MISMATCH
+- BLOCKED_TASK_MISMATCH
+- BLOCKED_TARGET_SCOPE_MISMATCH
+- BLOCKED_RUNTIME_IDENTITY_UNVERIFIED
+
+Any BLOCKED_* result stops the operation and requires human decision.
+
+==========
+06.00 BOUNDARY WITH RELATED CONTROLS
+==========
+
+This GRC is distinct from, and complementary to:
+
+GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP:
+- That control classifies UNEXPECTED DIRTY STATE inside a repository whose
+  identity is already known. This control verifies WHICH repository/project/
+  task you are operating on in the first place. Ambiguous git top-level is
+  escalated from that control to this one as a context failure.
+
+GRC.CROSS_RUNTIME_EXECUTION_CONTRACT:
+- That control governs HOW executables are delivered and run across runtimes
+  (AI_TAIL, temp paths, adapters). This control verifies WHO/WHAT identity is
+  claimed for execution and blocks mislabeled execution identity before the
+  claim is accepted.
+
+GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW:
+- That control governs task sequencing, failure escalation, and human-owned
+  commits DURING execution. This control gates whether execution may start,
+  commit, or close AT ALL, given the identity evidence.
+
+GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL:
+- That control verifies the DIRTY SCOPE of a close (which paths may be dirty).
+  This control verifies the IDENTITY of the close (which project/root/task
+  the close belongs to). A close must pass both.
+
+==========
+07.00 EXAMPLES
+==========
+
+07.10 WRONG-ROOT CONVERSATION (BLOCKED_ROOT_MISMATCH)
+A conversation about the CloseReport project issues a mutation while the
+terminal's operative root is C:\01. GitHub\HIA. CONVERSATION_PROJECT=
+CloseReport, OPERATIVE_ROOT=HIA repo. Result: BLOCKED_ROOT_MISMATCH.
+No mutation may run, even if the command itself is harmless.
+
+07.20 MISLABELED EXECUTION IDENTITY (BLOCKED_RUNTIME_IDENTITY_UNVERIFIED)
+A report states "Codex executed the migration" when the only evidence is a
+local PowerShell run driven by the human. AGENT_RUNTIME_IDENTITY for Codex
+cannot be verified. Result: BLOCKED_RUNTIME_IDENTITY_UNVERIFIED — the report
+must be corrected to name the actual runtime (PowerShell, human-driven).
+
+07.30 RIGHT PROJECT, WRONG TASK/TARGET (BLOCKED_TASK_MISMATCH /
+BLOCKED_TARGET_SCOPE_MISMATCH)
+The operative root and project are correct, but the session starts mutating
+files under an MB_ID that authorized different targets (e.g. authorization
+covers MB-SM-067B-D1 tooling paths, and the session edits SkillsLake skills).
+Result: BLOCKED_TASK_MISMATCH or BLOCKED_TARGET_SCOPE_MISMATCH, whichever is
+detected first. Work stops until the correct MB authorization exists.
+
+07.40 FULL PASS (PASS_CONTEXT_IDENTITY)
+Conversation, authorization, and filesystem all name SkillsMachine at
+C:\01. GitHub\Skills; branch and HEAD match the authorization; the MB_ID
+matches; every target artifact is inside the authorized allowlist; the
+executing runtime is declared and factual. Result: PASS_CONTEXT_IDENTITY —
+the operation may proceed.
+
+==========
+08.00 FAILURE CONDITIONS
+==========
+
+This GRC fails if an agent or operator:
+
+- mutates, builds, commits, pushes, or closes without running the identity gate;
+- proceeds after any BLOCKED_* result without human authorization;
+- attributes execution to an agent/runtime without verification evidence;
+- accepts a continuity artifact whose identity contradicts the repository;
+- treats an identity mismatch as a warning instead of a hard stop.
+
+==========
+09.00 SUCCESS CONDITIONS
+==========
+
+This GRC succeeds when:
+
+- every gated operation is preceded by a passed identity gate;
+- wrong-project/wrong-root operations are blocked before any mutation;
+- execution claims always match verifiable runtime/agent evidence;
+- close and continuity artifacts are identity-consistent with the repository;
+- humans are consulted on every BLOCKED_* result.
+
+==========
+10.00 TOOLING SUPPORT
+==========
+
+For SkillsMachine, the identity gate is mechanized by
+SyS/A_Tools/Common/SkillsMachine.Automation.psm1:
+- Get-RepoIdentity (root/branch/HEAD/origin evidence);
+- Assert-ProjectContext (throws PROJECT_CONTEXT_MISMATCH on disagreement);
+- Assert-WorktreeClean (exact-path authorized dirty scope).
+Other projects may implement equivalent checks; the contract is this GRC,
+not the specific tooling.
+
+==========
+11.00 CHANGELOG
+==========
+
+2026-07-19, v0.1-DRAFT_READY_FOR_TEST
+- Initial GRC created under MB-SM-067B-D2 to prevent operations on the wrong
+  project, root, task, targets, agent, or runtime; boundary declared against
+  UNKNOWN_WORKTREE_STATE_HARD_STOP, CROSS_RUNTIME_EXECUTION_CONTRACT,
+  AI_CODE_AGENT_SEQUENTIAL_WORKFLOW, and SESSION_CLOSE_DIRTY_SCOPE_CONTROL.
+
+==========
+END
+==========

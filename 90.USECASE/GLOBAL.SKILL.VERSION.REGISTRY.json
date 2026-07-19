@@ -37,11 +37,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
-      "version": "UNKNOWN"
+      "version": "v1.5-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-      "version": "UNKNOWN"
+      "version": "v1.5-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -57,7 +57,7 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/15.SKILL.LOGGING_AUDIT.txt",
-      "version": "v1.0-DRAFT"
+      "version": "v1.1-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/16.SKILL.CHECKPOINT_ROLLBACK.txt",
@@ -77,11 +77,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-      "version": "v1.0-DRAFT"
+      "version": "v1.1-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-      "version": "v1.0-CANON"
+      "version": "v1.3-CANON"
     },
     {
       "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
@@ -129,7 +129,7 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
-      "version": "v1.0-CANON"
+      "version": "v1.3"
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.REGISTRY.ALIGNMENT_AFTER_MIGRATION.txt",
@@ -174,14 +174,14 @@
     },
         {
       "file": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-      "version": "v1.0-CANON"
+      "version": "v1.1"
     },    {
       "file": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-      "version": "v1.0-CANON"
+      "version": "v1.1"
     },{
       "file": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-      "version": "v0.1-DRAFT",
-      "sha256": "A54409F7FE12E001A566B5FD2EE8BEC43312946E639471A13C71ED9FC1294576"
+      "version": "v0.2-DRAFT",
+      "sha256": "2B6970502EB61289E195B4CED8DE62DDF6F3C06BDF17908C7871E8951285877E"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
@@ -189,15 +189,30 @@
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
-      "version": "v0.1-DRAFT_READY_FOR_TEST"
+      "version": "v0.2-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
-      "version": "v0.1-DRAFT_READY_FOR_TEST"
+      "version": "v0.2-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
-      "version": "v0.1-DRAFT_READY_FOR_TEST"
+      "version": "v0.2-DRAFT_READY_FOR_TEST"
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.PROJECT_CONTEXT_IDENTITY.txt",
+      "version": "v0.1-DRAFT_READY_FOR_TEST",
+      "status": "DRAFT_READY_FOR_TEST",
+      "sha256": "7047561822593D1E4E984661306E7FA00D8DCC5025D8141B8DFB50358FE6E21E",
+      "description": "Prevents operations on the wrong project, root, task, target artifacts, agent, or runtime; identity gates before mutation, decision-affecting BUILD/RADAR, commit, push, and session close."
+    },
+    {
+      "file": "GRCLake/01.CONTROLS/GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL.txt",
+      "version": "v1.1"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.ACCUMULATED_PROJECT_REGISTERS.txt",
+      "version": "v1.1"
     },
     {
       "file": "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1",

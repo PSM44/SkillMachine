@@ -4,11 +4,12 @@ GRC.SCRIPT_EXECUTION_STAGING
 
 ID_UNICO..........: GRC.SCRIPT_EXECUTION_STAGING.0001
 NOMBRE............: ScriptExecutionStaging
-VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
+UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
 SCOPE.............: Cross-project control for staging long executable scripts before terminal execution
 APPLIES_TO........: SkillsMachine and any project where long scripts are safer from file than from terminal paste
 
@@ -131,4 +132,40 @@ GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 
 ==========
 END
+==========
+
+==========
+MB-SM-067B-D2_FLAT_STAGING_AND_UPLOAD_CONSOLIDATION
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: SCRIPT_EXECUTION_STAGING
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: SKILL.FlatTempUploadPackBuilder (candidate, partial; also merged into SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT scope)
+
+10.00 FLAT TEMP RULE
+Where project policy requires flat staging (SkillsMachine upload evidence,
+CloseReport temp packages), staged outputs live directly in the declared Temp
+folder without nested subfolders. Nested staging folders are forbidden where
+the governing policy declares flat staging.
+
+10.10 CLEAN ONLY OWNED STAGING
+A runner may clean ONLY the staging area it owns (its declared Temp scope).
+It must preserve:
+- the currently executing script when running from Temp;
+- user-provided input files placed in Temp for the run;
+- staging content owned by other flows unless explicitly instructed.
+
+10.20 UNIQUE PREFIXES
+Every staged output uses a unique objective/timestamp prefix
+(<MB_ID or OBJECTIVE>.<yyyyMMdd_HHmmss>.<name>) so parallel or successive
+runs never collide and evidence is traceable to its run.
+
+10.30 CONSOLIDATED UPLOAD PACKAGE
+The upload package for human/IA review must be consolidated into ONE
+AI-readable file (UPLOAD_*.txt) unless technically impossible (binary
+artifacts, size limits). Raw scattered logs are not an acceptable upload
+package; consolidate before delivery.
+
+FIN_MB-SM-067B-D2_FLAT_STAGING_AND_UPLOAD_CONSOLIDATION
 ==========

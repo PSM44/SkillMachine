@@ -4,11 +4,12 @@ GRC.DRAGONFLYFOCUS
 
 ID_UNICO..........: GRC.DRAGONFLYFOCUS.0001
 NOMBRE............: DragonflyFocus
-VERSION...........: v0.1-DRAFT
+VERSION...........: v0.2-DRAFT
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-23
+UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
 SCOPE.............: SkillsMachine project execution focus control
 APPLIES_TO........: 01.NEW_PROJECT | 03.SESSION_CONTINUE | 04.REPOSITORY_STRUCTURE_REPAIR
 
@@ -258,4 +259,47 @@ The decision must classify user side requests such as:
 
 If the worktree is dirty or readiness is WARN/FAIL, NEXT_ACTION must remain singular and focused on resolving that blocker.
 Do not proceed to new development while closure state is not saved and classified.
+==========
+
+==========
+MB-SM-067B-D2_FUNCTIONAL_DELIVERY_AND_MANAGEMENT_EVIDENCE
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: DRAGONFLYFOCUS
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.FALSE_DONE_CONTROL (candidate, partial); SKILL.MANAGEMENT_DEMO (candidate) REJECTED as Skill — management demo is a PRODUCT ARTIFACT governed here.
+
+10.00 GOVERNANCE PROGRESS IS NOT FUNCTIONAL DELIVERY
+Improving skills, GRCs, registries, validators, or repository structure is
+governance progress. It is NOT functional delivery. A session that produces
+only governance artifacts has not advanced the functional deliverable, and
+must not be reported as if it had.
+
+10.10 REJECT DEMO THEATER AND FALSE VERTICAL SLICES
+A demo that shows tooling running without a user-visible outcome, or a
+"vertical slice" that skips the layers a real user would touch, is demo
+theater. DragonflyFocus rejects it as evidence of progress.
+
+10.20 VISIBLE USABLE SLICE REQUIRED
+Functional delivery claims require a visible, usable slice: something a
+non-builder (operator or manager) can run, see, or use, producing a real
+outcome on real (or representative) data.
+
+10.30 MANAGEMENT EVIDENCE CONTRACT
+Management-facing evidence must state, in management terms:
+- PROBLEM: what hurt;
+- CHANGE: what was done;
+- BEFORE/AFTER: observable difference;
+- RISK: what risk was reduced or accepted;
+- METRIC: at least one measurable indicator;
+- DECISION: what decision this evidence enables.
+
+10.40 NO SEPARATE MANAGEMENT DEMO SKILL
+There is deliberately NO SKILL.MANAGEMENT_DEMO. Management demos are product
+artifacts produced under this GRC's evidence contract, not a reusable skill.
+Creating such a skill would institutionalize demo production as governance
+work, which contradicts 10.00.
+
+FIN_MB-SM-067B-D2_FUNCTIONAL_DELIVERY_AND_MANAGEMENT_EVIDENCE
 ==========

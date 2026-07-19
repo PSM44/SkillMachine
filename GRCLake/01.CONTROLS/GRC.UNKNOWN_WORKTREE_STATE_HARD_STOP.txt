@@ -4,11 +4,12 @@ GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
 
 ID_UNICO..........: GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.0001
 NOMBRE............: UnknownWorktreeStateHardStop
-VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+VERSION...........: v0.2-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
+UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
 SCOPE.............: Cross-project control for hard-stop handling of unexpected worktree state during AI-assisted execution
 APPLIES_TO........: SkillsMachine and any project where AI agents operate on Git worktrees
 
@@ -206,4 +207,47 @@ GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 
 ==========
 END
+==========
+
+==========
+MB-SM-067B-D2_ROOT_SUBTREE_AND_DIRTY_WHITELIST_RULES
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: UNKNOWN_WORKTREE_STATE_HARD_STOP
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.GIT_ROOT_SUBTREE_STATUS_CONTRACT (candidate)
+
+13.00 ROOT VS OPERATIVE SUBTREE
+Worktree evaluation must distinguish the Git repository ROOT (git rev-parse
+--show-toplevel) from the OPERATIVE SUBTREE the task is authorized to touch.
+Dirty state anywhere in the root is in scope for classification, even when
+the task only operates in a subtree; a clean subtree does not certify a clean
+repository.
+
+13.10 EXACT-PATH DIRTY WHITELIST
+Authorized dirty state must be expressed as an exact-path whitelist
+(repo-relative paths), not directory globs or prefixes, except where a whole
+new directory is the declared artifact. Any dirty path not on the whitelist
+is unknown state and triggers the hard stop.
+
+13.20 AUTHORIZED DIRTY BASELINE PRESERVATION
+When a task starts with a pre-authorized dirty baseline (e.g. carrying
+uncommitted work from a previous authorized MB), the agent should record the
+baseline (paths and, where feasible, content hashes) so post-task comparison
+can distinguish new mutations from the preserved baseline.
+
+13.30 AMBIGUOUS GIT TOP-LEVEL IS CONTEXT FAILURE
+If git rev-parse --show-toplevel fails, disagrees with the expected project
+root, or resolves to a different repository (nested repo, submodule, wrong
+folder), that is a PROJECT CONTEXT failure — hard stop under
+GRC.PROJECT_CONTEXT_IDENTITY — not merely a worktree-state question.
+
+13.40 IGNORED LOCAL TOOL CONFIG
+Git-ignored local tool configuration (e.g. .claude/settings.local.json) is
+LOCAL_CONFIG, not canonical mutation. Its presence does not dirty the
+worktree for governance purposes, but it must never be staged, committed, or
+treated as project source.
+
+FIN_MB-SM-067B-D2_ROOT_SUBTREE_AND_DIRTY_WHITELIST_RULES
 ==========

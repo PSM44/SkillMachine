@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.PROBLEM_TROUBLE_INCIDENT.01.00
 NOMBRE_SUGERIDO...: 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
-VERSION...........: v1.4-DRAFT
+VERSION...........: v1.5-DRAFT
 FECHA.............: 2026-02-26
 HORA..............: HH:MM (America/Santiago)
 CIUDAD............: Maria Luisa, Chile
@@ -593,6 +593,10 @@ NOTAS...............:
 08.00_CHANGELOG
 ==========
 
+2026-07-19, v1.5-DRAFT
+- Agregado: 06.50 Escalamiento por objetivo/minibattle (1a falla=correccion controlada, 2a=revision estructural, 3a=STOP+ESCALATION_REQUIRED).
+- Agregado: estados de resultado PASS / PASS_WITH_REVIEW / FAIL / BLOCKED.
+- Agregado: regla anti-false-DONE y completitud funcional basada en evidencia.
 2026-02-26, v1.4-DRAFT
 - Agregado: 04.60 PowerShell pitfalls operacionales (Count/Length, HashSet ctor, parser parentheses).
 - Refuerzo: tooling operacional (RADAR/ORCH) como AMBITO=TOOLING + subtipos.
@@ -603,3 +607,48 @@ NOTAS...............:
 - Refuerzo: costos como ámbito (COSTO) y campo COSTO_IMPACTO.
 2026-02-20, v1.2-CANON
 - Versión base del skill PROBLEM/TROUBLE/INCIDENTS.
+
+
+==========
+MB-SM-067B-D2_FAILURE_ESCALATION_BY_OBJECTIVE
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: PROBLEM_TROUBLE_INCIDENTS
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.FAILURE_ESCALATION_BY_OBJECTIVE (candidate), GRC.FALSE_DONE_CONTROL (candidate, partial)
+
+06.50_ESCALAMIENTO_POR_OBJETIVO
+
+FAILURE_COUNTING_RULE:
+Failures are counted per objective/minibattle, not per command or per session.
+Distinct objectives keep independent failure counters.
+
+ESCALATION_LADDER:
+- FIRST failure on an objective: diagnose root cause, then apply exactly ONE controlled correction.
+- SECOND failure on the same objective: stop patching; perform a structural review
+  (assumptions, schema, environment, method) before any further attempt.
+- THIRD failure on the same objective: HARD STOP. Report ESCALATION_REQUIRED=YES.
+- NO fourth retry is allowed without explicit human authorization.
+
+BLOCKER_PARKING_RULE:
+Parking a blocked objective to work another front is allowed ONLY when the other
+front is genuinely independent (no shared files, state, or root cause).
+Parking must be recorded with the blocker and the exact resume condition.
+
+RESULT_STATES:
+Every objective/minibattle must close with exactly one of:
+- PASS: objective met with validated evidence.
+- PASS_WITH_REVIEW: objective met but a recorded blocker or review item remains.
+- FAIL: objective not met; failure evidence recorded.
+- BLOCKED: cannot proceed; blocker and unblock condition recorded.
+
+ANTI_FALSE_DONE:
+- DONE requires functional evidence, not narrative claims.
+- A printed OK line, a generated file, or a completed script run is NOT completion
+  evidence by itself; the validated functional outcome is.
+- Declaring DONE while validation failed, outputs are missing, or the worktree
+  state is unknown is a FAIL of this skill (severity MEDIA minimum).
+
+FIN_MB-SM-067B-D2_FAILURE_ESCALATION_BY_OBJECTIVE
+==========

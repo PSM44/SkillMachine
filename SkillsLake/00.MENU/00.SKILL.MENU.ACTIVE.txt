@@ -527,3 +527,22 @@ STATUS............: ACTIVE
 CATEGORY..........: REVIEW
 PURPOSE...........: Define feedback critico, realista, no complaciente y accionable.
 
+==========
+11.00_PATCH_MB-SM-067B-D2_NEW_GRC_REGISTRATION
+==========
+
+FECHA.............: 2026-07-19
+MOTIVO............: Registrar en el catalogo activo el nuevo GRC de identidad de contexto de proyecto creado en MB-SM-067B-D2.
+POLITICA..........: Se preserva el orden existente; entrada agregada al final segun patron de auto-patch del menu.
+
+----------
+11.10
+----------
+
+SKILL_ID..........: GRC_PROJECT_CONTEXT_IDENTITY
+FILE..............: GRCLake\01.CONTROLS\GRC.PROJECT_CONTEXT_IDENTITY.txt
+VERSION...........: v0.1-DRAFT_READY_FOR_TEST
+STATUS............: DRAFT_READY_FOR_TEST
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Previene operar sobre proyecto, root, tarea, artefactos, agente o runtime equivocados; gates de identidad antes de mutacion, BUILD/RADAR decisorio, commit, push y cierre de sesion.
+

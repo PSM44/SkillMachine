@@ -1,7 +1,7 @@
 # SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1
+VERSION: v1.1
 STATUS: ACTIVE
 LAYER: SKILL
 OWNER_DOMAIN: SkillsMachine
@@ -294,3 +294,63 @@ RELATED_CORE:
 FIN_SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
+==========
+MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: HUMAN_CONTROLLED_SCRIPT_EXECUTION
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: SKILL.TOVS_SUMMARY_RUNNER_CONTRACT (candidate, partial)
+
+11.00 COMMON MODULE RULE
+For SkillsMachine repository automation, executables should import and use
+SyS/A_Tools/Common/SkillsMachine.Automation.psm1 helpers where applicable
+instead of re-implementing git invocation, JSON parsing, hashing, UTF-8
+writing, or worktree assertions inline.
+
+12.00 DISTINCT EXECUTION STAGES
+Every non-trivial executable must keep four distinct, visibly labeled stages:
+1. PREFLIGHT: context identity, expected branch/HEAD, clean-worktree or
+   authorized-dirty check, input existence.
+2. EXECUTION: the actual mutation or analysis work.
+3. PROBE: at least one representative functional verification of the output
+   (not just "the command exited 0").
+4. POST-VERIFICATION: final state check (git status, diff scope, output
+   hashes) plus TOVS/AI_TAIL emission.
+A stage failure must stop later stages and be reported as the failing stage.
+
+13.00 TOVS/AI_TAIL ATTRIBUTION FIELDS
+The TOVS/AI_TAIL block must attribute the run precisely, including at minimum:
+- EXECUTABLE (exact script path/name);
+- OBJECTIVE (MB_ID or TASK_ID);
+- LAST_STAGE (the stage reached);
+- FINAL_STATUS;
+- NEXT_ACTION (singular).
+Plus runtime/project identity: RUNTIME, PROJECT_ROOT, and, when verifiable,
+branch/HEAD. A report must never attribute execution to an agent or runtime
+that did not actually run (see GRC.CROSS_RUNTIME_EXECUTION_CONTRACT and
+GRC.PROJECT_CONTEXT_IDENTITY).
+
+14.00 GENERATED OUTPUT IS NOT VALIDATED DELIVERY
+Producing an output file is not delivery. Delivery requires the validation
+stage to pass against that output. Scripts must not report delivery-complete
+status based on file creation alone.
+
+15.00 FAIL-CLOSED MANDATORY VALIDATORS
+When a mandatory validator or gate artifact is missing, the run must FAIL,
+not warn-and-skip. Missing validator = broken contract. (Evidence:
+MB-SM-067B-D1-R1 converted the automation gate in Validate-System.ps1 from
+warn-and-skip to fail-closed.)
+
+16.00 FLAT TEMP UPLOAD PACKAGE
+Evidence for human upload must be consolidated into flat files directly under
+the project TEMP path (no nested folders), with unique objective/timestamp
+prefixes, following GRC.SCRIPT_EXECUTION_STAGING and COMPACT_UPLOAD_PACK rules.
+
+17.00 COMMIT/PUSH AUTHORIZATION BOUNDARY
+No commit and no push without explicit human authorization for the specific
+objective. Prior authorization for one MB does not carry over to the next.
+
+FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
+==========

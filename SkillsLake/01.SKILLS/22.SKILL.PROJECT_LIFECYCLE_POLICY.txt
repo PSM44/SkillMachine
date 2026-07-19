@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.2-CANON
+VERSION...........: v1.3-CANON
 FECHA.............: 2026-05-14
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -1061,4 +1061,41 @@ It must state the exact blocker and the minimum next action.
 GENERATED_OUTPUT_RULE:
 If the failing behavior is in a generated 90.USECASE package, do not patch the generated delivery output manually.
 Patch source Skills/GRC/registries/build inputs and then rebuild the package.
+==========
+
+==========
+MB-SM-067B-D2_CLOSE_REVIEW_AND_SESSION_IDENTITY_RULES
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: PROJECT_LIFECYCLE_POLICY
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+
+17.00_MANDATORY_SKILL_GRC_OPPORTUNITY_REVIEW_BEFORE_CLOSE
+Formal session close must include a review of the accumulated Skill/GRC
+opportunity register (SKILL_GRC opportunities, learning review candidates)
+before the close is declared complete. Unreviewed accumulated candidates must
+be surfaced, not silently carried over.
+
+17.10_CLOSE_RESULT_STATES
+- PASS_WITH_REVIEW is valid only when an explicit blocker or review item is
+  recorded with the close.
+- BLOCKED requires the explicit blocker and its unblock condition.
+- WARN-level closure is acceptable only when there is NO pending mutation in
+  the worktree and the blocker is recorded; a dirty worktree with pending
+  mutations cannot close as WARN.
+
+17.20_SESSION_IDENTITY_VALIDATION
+Before executing continue, close, mutation, commit, or push, the session must
+validate project/session identity: conversation project, operative repository
+root, expected branch/HEAD, and active task (MB_ID) must all agree
+(see GRC.PROJECT_CONTEXT_IDENTITY). A mismatch is a hard stop, not a warning.
+
+17.30_CONTINUITY_ARTIFACT_AGREEMENT
+Continuity artifacts (BATON, WHOAMI, close reports, backlog updates) must
+agree on project identity, repository root, and active task identity. A close
+or continuity record that names a different project, root, or task than the
+repository evidence is invalid and must be corrected before acceptance.
+
+FIN_MB-SM-067B-D2_CLOSE_REVIEW_AND_SESSION_IDENTITY_RULES
 ==========

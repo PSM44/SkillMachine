@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.OPERATIONAL.ARTIFACTS.POLICY.01.00
 NOMBRE_SUGERIDO...: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-VERSION...........: v1.0-DRAFT
+VERSION...........: v1.1-DRAFT
 FECHA.............: 2026-04-21
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -289,3 +289,56 @@ IA propone acción que viola SKILL
 - Creación del modelo de gobernanza de artefactos
 - Definición de precedencia y responsabilidades
 - Integración con flujo operativo
+
+==========
+MB-SM-067B-D2_ARTIFACT_CLASS_AND_AUTHORITY_RULES
+==========
+DATE..............: 2026-07-19
+STATUS............: ACTIVE_RULE
+LAYER.............: OPERATIONAL_ARTIFACTS_POLICY
+SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
+MERGES............: GRC.CANONICAL_DOCUMENT_AUTHORITY_MAP (candidate, partial; HUMAN README portion deferred)
+
+11.00_ARTIFACT_CLASS_TAXONOMY
+Every repository artifact belongs to exactly one class:
+- CANONICAL_SOURCE: authoritative, human/AI-edited content (SkillsLake, GRCLake,
+  registries, tools source).
+- GENERATED_OUTPUT: produced by BUILD or other generators (90.USECASE bundles,
+  manifests, copied menus). Never manually patched.
+- EVIDENCE: run logs, reports, upload packages, RADAR outputs. Historical record,
+  not a source of rules.
+- LOCAL_CONFIG: operator/workstation-local tool configuration. Never canon.
+An artifact whose class is ambiguous must be classified before it is mutated
+(see GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP).
+
+11.10_APPEND_ONLY_HISTORY_VS_ACTIVE_TRUTH
+Append-only history registers (backlogs, accumulated registers, changelogs)
+preserve the record; they are NOT the active source of truth. Stale OPEN/DONE
+values in historical entries do not override the current active registers.
+The active state lives in the designated active register for each concern
+(e.g. SyS\PROJECT.BACKLOG.ACTIVE.txt for product backlog).
+
+11.20_ONE_CANONICAL_AUTHORITY
+For each active state (versions, menu, backlog, roadmap, debt), exactly ONE
+artifact is the canonical authority. When two artifacts disagree, the declared
+authority wins and the other must be corrected or explicitly superseded, never
+silently ignored.
+
+11.30_PROMOTION_DISPOSITION_FIELDS
+When a candidate is dispositioned, the record must state:
+- DISPOSITION: MERGED | PROMOTED | REJECTED | DEFERRED | PROJECT_LOCAL
+- TARGET: the artifact(s) receiving merged/promoted content
+- SOURCE_MB: the minibattle performing the disposition
+
+11.40_GENERATED_USECASE_OUTPUTS
+Never manually patch generated 90.USECASE outputs. Patch canonical source and
+regenerate via BUILD. A manual edit to a generated output is drift, not a fix.
+
+11.50_MACHINE_MANIFESTS_AND_DISTRIBUTION
+Machine-facing manifests (JSON registries, schemas) may live outside the
+single-file upload distribution for humans/IA. Consolidated distribution
+completeness is measured against declared content, not against every machine
+manifest in the repository.
+
+FIN_MB-SM-067B-D2_ARTIFACT_CLASS_AND_AUTHORITY_RULES
+==========
