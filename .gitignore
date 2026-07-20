@@ -17,6 +17,9 @@ SyS/IADevelopHistory/
 *.pdf
 
 # Local tooling/config
+.agents/
+.claude/
+.codex/
 .continue/
 .vscode/
 .idea/
