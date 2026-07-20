@@ -1,0 +1,155 @@
+PROYECTO: New Project Bootstrap
+
+OBJETIVO:
+Crear el set mínimo correcto para iniciar un proyecto nuevo de cualquier índole.
+
+INPUT:
+- requerimiento del usuario
+- SKILL.MENU
+- skills adjuntos
+- policies de bootstrap, lifecycle, artifacts, WhoAmI
+- standards base de BATON, HUMAN y RADAR
+
+DEBES:
+1. evaluar si el set adjunto es suficiente
+2. pedir skills adicionales si faltan
+3. crear propuesta para:
+   - WhoAmI
+   - BATON
+   - HUMAN
+4. definir siguiente acción
+5. mantener consistencia con policies y standards
+
+OUTPUT:
+- evaluación de suficiencia del set
+- skills faltantes
+- propuesta de artefactos iniciales
+- siguiente acción recomendada
+
+
+
+
+
+==========
+MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
+==========
+
+REGLA:
+La carpeta del usecase es el paquete operativo de subida a la IA.
+
+CARPETA_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT
+
+REGLAS:
+- Subir el contenido completo de la carpeta del usecase correspondiente.
+- No usar SyS\Temp\TO_UPLOAD_TO_IA.
+- No pedir el repo completo por defecto.
+- Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
+- Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automáticamente.
+
+
+==========
+MB-GRC-027C_PROMPT_ENGINEERING_DISCOVERY_CHALLENGE
+==========
+
+REGLA:
+Cuando el nuevo proyecto requiera crear, auditar o perfeccionar prompts, la IA debe aplicar 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt.
+
+La IA debe:
+- ejecutar discovery antes de generar prompts finales;
+- desafiar alcance, inputs, outputs, restricciones y criterios de éxito;
+- declarar PROMPT_READY antes de generar un prompt final;
+- usar DRAFT_NOT_READY si falta información relevante;
+- mantener la capa pedagógica subordinada a la respuesta operacional.
+
+La IA no debe:
+- generar prompts finales sobre requerimientos incompletos;
+- crear canon automáticamente;
+- convertir una respuesta operacional simple en una clase.
+
+==========
+MB-GRC-031B_IT_PROJECT_DELIVERY_CONSTITUTION
+==========
+When creating a new IT project, apply GRCLake/AA.CONSTITUTION.
+
+The IA must force these decisions before proposing implementation:
+1. OUTPUT_TYPE: DEPLOY_DONE or DELIVERABLE_DONE.
+2. FIRST_OUTPUT_CONTRACT.
+3. MINIMUM_MOCKUP.
+4. MUST_HAVE.
+5. NO_SCOPE.
+6. MAX_HOURS / MAX_SESSIONS / MAX_COST_OR_COST_POLICY / MAX_EFFORT.
+7. PLAN_B_TRIGGER.
+8. PLAN_B_ACTION.
+9. TIMELOG format or path.
+
+The IA must prevent portfolio sprawl and stop-loss failure:
+- Do not open additional active projects without pausing/closing another.
+- Do not continue iteration by habit after Plan B trigger.
+- Do not perform platform/governance work before first output unless it directly unblocks DEPLOY_DONE or DELIVERABLE_DONE.
+
+==========
+MB-GRC-031M_CONSTITUTION_AI_BRIEF_SELF_CONTAINMENT
+==========
+
+When this usecase is used for an IT project, apply the AI operating brief:
+
+GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt
+
+Minimum required sequence before implementation:
+
+1. Define OUTPUT_TYPE: DEPLOY_DONE or DELIVERABLE_DONE.
+2. Define the first deploy or first deliverable.
+3. Define the minimum mockup.
+4. Define minimum functionality and characteristics.
+5. Define minimum work required to satisfy the first output.
+6. Define investment limits: time, cost, effort, complexity and Plan B.
+7. Execute only toward DEPLOY_DONE, DELIVERABLE_DONE or stop-loss.
+
+Do not expand platform, architecture, governance, automation, tooling or future features unless the work directly unblocks the first DEPLOY_DONE or DELIVERABLE_DONE.
+
+==========
+MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
+==========
+
+STATUS............: ACTIVE
+LAYER.............: USECASE_UPLOAD_PACKAGE_CONTROL
+IMPORTANT.........:
+This file is part of a 90.USECASE upload package. It is operational upload guidance for the IA.
+It is not primary canon. If doctrine changes are needed, patch HUMAN, 00.CATALOG, SkillsLake,
+GRCLake, registry/build sources, or an approved canonical source, then rebuild packages if applicable.
+
+USECASE_FIRST_RULE:
+Before proposing development, scripts, branches, commits, RADAR, Nightshift work, refactors,
+or architecture changes, the IA must first identify and state the applicable usecase.
+
+REQUIRED_INITIAL_RESPONSE:
+The IA must start by declaring:
+
+1. USECASE_DETECTED
+2. USER_GOAL
+3. CONFIRMED_CONTEXT
+4. MISSING_CONTEXT
+5. RECOMMENDED_UPLOADS
+6. FOCUS_BOUNDARY
+7. NEXT_ACTION
+
+CONTEXT_RULE:
+Do not request the full repository by default.
+If context is missing, request exact paths or exact Skills/GRC/HUMAN/CATALOG/BATON/RADAR files.
+
+ANTI_DRIFT_RULES:
+- Do not treat 90.USECASE as primary canon.
+- Do not create or modify canon automatically.
+- Do not jump to technical execution before usecase framing.
+- Do not use RADAR FULL by default.
+- Do not confuse a lab/pilot workload with the central purpose of PS.SkillsMachine.
+- Register Skill/GRC improvements as candidates unless the human explicitly approves a minibattle.
+
+DONE_WHEN:
+The IA can explain why the current request belongs to this usecase, what context is sufficient,
+what context is missing, and the next minimal reversible action.
+
+==========
+FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
+==========

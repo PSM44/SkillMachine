@@ -1,0 +1,207 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: RUNBOOK.SESSION_CLOSE.HARDENED.01.10
+NOMBRE_SUGERIDO...: RUNBOOK.SESSION_CLOSE.HARDENED.txt
+VERSION...........: v1.1-MB-SM-040D
+FECHA.............: 2026-06-30
+HORA..............: 15:XX
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: 90.USECASE\02.SESSION_CLOSE
+AUTOR_HUMANO......: PABLO
+TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, WHOAMI_STATE, LEARNING_REVIEW
+
+ALCANCE...........:
+Define el cierre endurecido de sesion para SkillsMachine.
+El cierre debe capturar evidencia objetiva de Git, validacion, RADAR, BATON, WHOAMI y learning review estructurado.
+
+NO_CUBRE..........:
+No reemplaza BATON.
+No reemplaza WHOAMI.
+No modifica politica GRC fuera de los artefactos del cierre.
+No reemplaza el juicio humano sobre commit o canonizacion.
+
+DEPENDENCIAS......:
+SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1
+SyS\A_Tools\Validation\Validate-System.ps1
+SyS\A_Tools\Radar\radar.manifest.json
+SyS\A_Tools\Radar\RADAR_LITE.ACTIVE.txt
+SyS\A_Tools\Radar\RADAR_INDEX.ACTIVE.txt
+SyS\A_Tools\Radar\RADAR_CORE.ACTIVE.txt
+SyS\A_Tools\Radar\RADAR_FULL.ACTIVE.txt
+SyS\A_Tools\Radar\RADAR_FULL.HUMAN.ACTIVE.txt
+SyS\A_Tools\Radar\RADAR_FULL.SKILLS.ACTIVE.txt
+SyS\00.0_BATON_SKILLMACHINE.txt
+SyS\01_WHOAMI_SKILLMACHINE.txt
+
+==========
+01.00_PROPOSITO
+==========
+
+Este runbook existe para evitar cierres de sesion incompletos.
+
+Problema que resuelve:
+- Cierres sin Git status.
+- Cierres sin HEAD/tag.
+- Cierres sin validacion.
+- Cierres sin evidencia RADAR.
+- Cierres sin chequeo BATON/WHOAMI.
+- Cierres sin learning review estructurado.
+- Dependencia excesiva de memoria humana.
+
+==========
+02.00_COMANDO_CANONICO
+==========
+
+Ejecutar desde:
+
+C:\01. GitHub\Skills
+
+Comando:
+
+powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+
+==========
+03.00_OUTPUTS
+==========
+
+El cierre endurecido genera:
+
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt
+SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
+
+==========
+04.00_CRITERIO_DE_CIERRE
+==========
+
+OK:
+- Git limpio.
+- Validate-System.ps1 OK.
+- RADAR manifest existe.
+- Existen los seis outputs ACTIVE de RADAR v1.4:
+  - RADAR_LITE.ACTIVE.txt
+  - RADAR_INDEX.ACTIVE.txt
+  - RADAR_CORE.ACTIVE.txt
+  - RADAR_FULL.ACTIVE.txt
+  - RADAR_FULL.HUMAN.ACTIVE.txt
+  - RADAR_FULL.SKILLS.ACTIVE.txt
+- BATON existe.
+- WHOAMI existe.
+
+WARN:
+- Validacion OK, pero Git tiene cambios pendientes.
+- Validacion OK, Git limpio, pero falta al menos un output ACTIVE de RADAR v1.4.
+- Continuidad fresca no confirmada contra HEAD.
+
+FAIL:
+- Validacion falla.
+- Falta RADAR manifest.
+- Falta evidencia minima de RADAR v1.4 si manifest y ACTIVE outputs requeridos no pueden verificarse.
+- Falta BATON.
+- Falta WHOAMI.
+
+==========
+05.00_REGLA_OPERATIVA
+==========
+
+Si el resultado es OK:
+- Se puede cerrar sesion.
+
+Si el resultado es WARN:
+- Revisar cambios Git antes de cerrar.
+- Revisar si los outputs ACTIVE faltantes deben regenerarse o si la advertencia se acepta explicitamente.
+
+Si el resultado es FAIL:
+- No cerrar como sesion limpia.
+
+==========
+06.00_FRESHNESS_POLICY
+==========
+
+El cierre endurecido debe evaluar frescura operacional contra HEAD.
+
+Regla:
+- BATON, WHOAMI y RADAR no solo deben existir.
+- Tambien deben ser iguales o posteriores a la fecha del ultimo commit HEAD.
+- Si existen pero son anteriores a HEAD, el cierre queda en WARN.
+
+Interpretacion:
+- WARN no significa falla tecnica.
+- WARN significa posible deuda de continuidad.
+- El humano decide si actualiza BATON/WHOAMI/RADAR o si acepta el cierre con advertencia.
+
+Campos esperados en el reporte:
+- HEAD_COMMIT_DATE
+- RADAR_FRESH_AGAINST_HEAD
+- BATON_FRESH_AGAINST_HEAD
+- WHOAMI_FRESH_AGAINST_HEAD
+
+==========
+07.00_FRESHNESS_SEMANTICS
+==========
+
+Correccion de criterio:
+
+BATON y WHOAMI:
+- La frescura se mide por el ultimo commit Git que toco cada archivo.
+- No se mide por LastWriteTime del filesystem.
+- Motivo: despues de un commit, la fecha HEAD sera posterior al LastWriteTime del archivo, generando falsos WARN.
+
+RADAR:
+- La frescura se mide por RADAR_GENERATED_AT porque los outputs RADAR son runtime/ignored.
+- Si RADAR queda anterior a HEAD, regenerar RADAR despues del commit o aceptar WARN informado.
+
+==========
+08.00_CONTINUITY_REFRESH_GATE
+==========
+
+Antes del commit final de cierre o minibattle que afecte continuidad:
+
+1. Actualizar SyS/00.0_BATON_SKILLMACHINE.txt.
+2. Actualizar SyS/01_WHOAMI_SKILLMACHINE.txt.
+3. Ejecutar Validate-System.
+4. Ejecutar RADAR si la continuidad o el contrato operativo lo requiere.
+5. Ejecutar Test-SessionCloseReadiness.
+6. Si readiness indica BATON viejo o WHOAMI viejo, actualizar ambos juntos y repetir.
+
+REGLA_DE_OUTPUTS_GENERADOS:
+Los outputs generados de 90.USECASE son reproducibles y pueden estar ignorados por Git.
+No forzar stage de outputs ignorados salvo decision humana explicita.
+
+==========
+09.00_STRUCTURED_LEARNING_REVIEW_GATE
+==========
+
+El cierre formal debe producir el siguiente bloque:
+
+SKILL_GRC_LEARNING_REVIEW:
+- NEW_GRC_CANDIDATES
+- GRC_IMPROVEMENT_CANDIDATES
+- SKILL_IMPROVEMENT_CANDIDATES
+- OPERATIONAL_RULES_TO_CANONIZE
+- DO_NOT_CANONIZE
+- CANDIDATES_REGISTER_UPDATED
+- NEXT_GRC_OR_SKILL_ACTION
+
+Regla:
+- Si una categoria no aplica, declarar NONE con motivo breve.
+- CANDIDATES_REGISTER_UPDATED debe declarar YES o NO.
+- NEXT_GRC_OR_SKILL_ACTION debe ser una sola accion recomendada.
+- No canonizar automaticamente; registrar o elevar al humano.
+
+==========
+10.00_CHANGELOG
+==========
+
+2026-06-30, v1.1-MB-SM-040D
+- Agrega gate de seis outputs ACTIVE de RADAR v1.4.
+- Agrega gate de learning review estructurado para Skill/GRC.
+
+2026-05-12, v1.0-MB-GRC-015
+- Creacion inicial del cierre endurecido de sesion.
+- Agrega captura objetiva de Git, validacion y artefactos de continuidad.
+
+==========
+FIN_DEL_DOCUMENTO
+==========

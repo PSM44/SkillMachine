@@ -64,7 +64,8 @@
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
-      ]
+      ],
+      "source_directory": "SyS/A_Tools/UseCaseSources/01.NewProject"
     },
     {
       "name": "02.SESSION_CLOSE",
@@ -112,7 +113,8 @@
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
-      ]
+      ],
+      "source_directory": "SyS/A_Tools/UseCaseSources/02.SessionClose"
     },
     {
       "name": "03.SESSION_CONTINUE",

@@ -836,9 +836,6 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $preserveFiles = @($PromptFiles)
-        if ($UseCaseName -eq "02.SESSION_CLOSE") {
-            $preserveFiles += @("RUNBOOK.SESSION_CLOSE.HARDENED.txt")
-        }
         # Preserve current delivery candidates so idempotent comparison can reuse existing files.
         $preserveFiles += @($MenuFiles | ForEach-Object { Split-Path -Leaf ([string]$_) })
         $preserveFiles += @($BundleDefinitions | ForEach-Object { [string]$_.output_file })

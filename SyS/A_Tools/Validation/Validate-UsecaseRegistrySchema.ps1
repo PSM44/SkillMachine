@@ -9,7 +9,10 @@ function Warn([string]$m){ Write-Host "WARN: $m" }
 
 Write-Host "VALIDATION: usecase registry schema"
 
-$regPath = Join-Path (Resolve-Path ".").Path "90.USECASE\USECASE.REGISTRY.json"
+$RepoRoot = [System.IO.Path]::GetFullPath(
+    (Join-Path $PSScriptRoot "..\..\..")
+)
+$regPath = Join-Path $RepoRoot "90.USECASE\USECASE.REGISTRY.json"
 if (-not (Test-Path -LiteralPath $regPath)) { Fail "Missing registry: $regPath" }
 
 try {
@@ -263,5 +266,93 @@ foreach ($opt in @("preserve_files","delivery_files_extra","copied_files")) {
 
 if ($failCount -gt 0) { exit 1 }
 Write-Host "OK: usecase registry schema validation passed"
+# BEGIN MB-SM-067B-D3R3 SOURCE DIRECTORY VALIDATION
+$d3RequiredSources = @(
+    [pscustomobject]@{
+        Name = "01.NEW_PROJECT"
+        SourceDirectory = "SyS/A_Tools/UseCaseSources/01.NewProject"
+        RequiredFiles = @(
+            "PROMPT.NEW_PROJECT.txt",
+            "README.UPLOAD_THIS_USECASE.txt",
+            "SKILL_SET.MANIFEST.txt"
+        )
+    },
+    [pscustomobject]@{
+        Name = "02.SESSION_CLOSE"
+        SourceDirectory = "SyS/A_Tools/UseCaseSources/02.SessionClose"
+        RequiredFiles = @(
+            "PROMPT.SESSION_CLOSE.txt",
+            "README.UPLOAD_THIS_USECASE.txt",
+            "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
+            "SKILL_SET.MANIFEST.txt"
+        )
+    }
+)
+
+$d3Registry = Get-Content -LiteralPath $regPath -Raw | ConvertFrom-Json
+$d3Usecases = @()
+
+if ($d3Registry.PSObject.Properties["usecases"]) {
+    $d3Usecases = @($d3Registry.usecases)
+}
+elseif ($d3Registry.PSObject.Properties["use_cases"]) {
+    $d3Usecases = @($d3Registry.use_cases)
+}
+else {
+    Write-Host "FAIL: D3R3 registry usecase collection not found"
+    exit 1
+}
+
+foreach ($d3Required in $d3RequiredSources) {
+    $d3Matches = @(
+        $d3Usecases | Where-Object {
+            (
+                $_.PSObject.Properties["name"] -and
+                [string]$_.name -eq $d3Required.Name
+            ) -or (
+                $_.PSObject.Properties["usecase"] -and
+                [string]$_.usecase -eq $d3Required.Name
+            ) -or (
+                $_.PSObject.Properties["id"] -and
+                [string]$_.id -eq $d3Required.Name
+            )
+        }
+    )
+
+    if ($d3Matches.Count -ne 1) {
+        Write-Host "FAIL: D3R3 $($d3Required.Name) must exist exactly once"
+        exit 1
+    }
+
+    $d3Usecase = $d3Matches[0]
+
+    if (
+        -not $d3Usecase.PSObject.Properties["source_directory"] -or
+        [string]$d3Usecase.source_directory -ne $d3Required.SourceDirectory
+    ) {
+        Write-Host "FAIL: D3R3 $($d3Required.Name) must declare source_directory=$($d3Required.SourceDirectory)"
+        exit 1
+    }
+
+    $d3SourcePath = Join-Path $RepoRoot (
+        $d3Required.SourceDirectory -replace '/', '\'
+    )
+
+    if (-not (Test-Path -LiteralPath $d3SourcePath -PathType Container)) {
+        Write-Host "FAIL: D3R3 canonical source directory missing: $($d3Required.SourceDirectory)"
+        exit 1
+    }
+
+    foreach ($d3File in $d3Required.RequiredFiles) {
+        $d3RequiredPath = Join-Path $d3SourcePath $d3File
+
+        if (-not (Test-Path -LiteralPath $d3RequiredPath -PathType Leaf)) {
+            Write-Host "FAIL: D3R3 canonical source file missing: $($d3Required.SourceDirectory)/$d3File"
+            exit 1
+        }
+    }
+}
+# END MB-SM-067B-D3R3 SOURCE DIRECTORY VALIDATION
+
 exit 0
 
