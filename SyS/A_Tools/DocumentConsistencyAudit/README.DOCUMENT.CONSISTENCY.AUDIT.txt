@@ -19,7 +19,7 @@ Core rules
 8. Full audit cadence is exact: sessions 5, 10, 15, ...
 9. Critical changes or explicit human request may force full mode without resetting cadence.
 10. Findings are proposals only. The runner never mutates HUMAN, GRC, BUILD, registry or code.
-11. The runner may recommend 05.SkillsMachineUpdate, but automatic execution is always false.
+11. The runner may recommend 05.SKILLSMACHINE_UPDATE, but automatic execution is always false.
 12. NoStateWrite must not create state, directories or other filesystem mutations.
 
 Normalized state failures
@@ -69,7 +69,7 @@ Workflow integration
 --------------------
 - `03.SESSION_CONTINUE`: run a focused audit before accepting continuity with `AcceptedSessionContinue=false`; rerun with `AcceptedSessionContinue=true` only after acceptance is confirmed.
 - `04.REPOSITORY_STRUCTURE_REPAIR`: run a full audit before proposing or applying repair; `HARD_CONFLICT` blocks mutation but not diagnosis.
-- `05.SkillsMachineUpdate`: may consume findings as read-only preflight and must block mutation when unresolved critical conflicts exist.
+- `05.SKILLSMACHINE_UPDATE`: may consume findings as read-only preflight and must block mutation when unresolved critical conflicts exist.
 Path-aware project authority
 ----------------------------
 - Role candidates must belong to the audited project root scope.

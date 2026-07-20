@@ -240,7 +240,7 @@ if ($actualUpdaterCoreFiles.Count -ne 5) {
 
 Write-Host "OK: updater core structure validated (5 files)"
 
-$supportPackageName = "05.SkillsMachineUpdate"
+$supportPackageName = "05.SKILLSMACHINE_UPDATE"
 $supportDir = Join-Path "90.USECASE" $supportPackageName
 $supportManifestPath = Join-Path $supportDir "SUPPORT_PACKAGE.MANIFEST.json"
 $expectedSupportFiles = @(

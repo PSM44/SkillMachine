@@ -739,7 +739,7 @@ Write-Host PASS
         "Full DocumentConsistencyAudit before repair proposal",
         "HARD_CONFLICT blocks destructive or mutating repair",
         "[REF_CRUZADA: <project>]",
-        "05.SkillsMachineUpdate is never auto-executed from this flow."
+        "05.SKILLSMACHINE_UPDATE is never auto-executed from this flow."
     ) -FailureMessage "REPOSITORY_REPAIR_README_CONTRACT_FAIL"
     Add-Result -Name "NO_AUTO_04" -Value "PASS"
     Add-Result -Name "FULL_AUDIT_REQUIRED" -Value "PASS"

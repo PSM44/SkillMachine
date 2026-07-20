@@ -852,7 +852,7 @@ function Invoke-DocumentConsistencyAuditCore {
             mandatory_human_status = [string](@($roles | Where-Object { $_.role -eq "HUMAN" })[0].status)
         }
         update_assessment = [ordered]@{
-            recommended_support_package = "05.SkillsMachineUpdate"
+            recommended_support_package = "05.SKILLSMACHINE_UPDATE"
             automatic_execution = $false
             blocked_by_hard_conflict = (@($sortedIssues | Where-Object { $_.severity -in @("HARD_CONFLICT", "BLOCKER") }).Count -gt 0)
         }

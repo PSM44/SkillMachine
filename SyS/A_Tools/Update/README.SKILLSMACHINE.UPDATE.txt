@@ -4,7 +4,7 @@ SKILLSMACHINE UPDATE CORE MVP
 STATUS:
 MVP core runner. Not yet integrated with:
 - 90.USECASE\BUILD.ps1
-- 90.USECASE\05.SkillsMachineUpdate
+- 90.USECASE\05.SKILLSMACHINE_UPDATE
 - Start-SkillsMachine.ps1
 - canonical validators
 

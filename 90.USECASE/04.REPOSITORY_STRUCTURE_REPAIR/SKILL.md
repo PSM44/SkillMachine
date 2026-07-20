@@ -10,7 +10,7 @@ snapshot -> target structure -> CIS migration plan -> apply -> validation.
 - Treat `HUMAN` as authority of intent, but still auditable against `WHOAMI`, `BATON`, registries, manifests, scripts and documentation.
 - Mark external references as `[REF_CRUZADA: <project>]`.
 - If the audit returns `HARD_CONFLICT`, diagnosis may continue but destructive or mutating repair must remain blocked pending human approval.
-- 04 may recommend `05.SkillsMachineUpdate`, but must not execute it automatically.
+- 04 may recommend `05.SKILLSMACHINE_UPDATE`, but must not execute it automatically.
 
 ## Delivery (policy compliant)
 - 00.BUNDLE.CORE.txt

@@ -186,7 +186,7 @@ foreach ($sp in @(SafeArray $registry "support_packages")) {
     Write-Host ("FAIL: support package {0} must have primary_usecase=false" -f $spName)
   }
 
-  if ($spName -eq "05.SkillsMachineUpdate") {
+  if ($spName -eq "05.SKILLSMACHINE_UPDATE") {
     if ((HasProp $sp "package_type") -and [string]$sp.package_type -ne "SUPPORT_PACKAGE") {
       $failCount++
       Write-Host ("FAIL: support package {0} must have package_type=SUPPORT_PACKAGE" -f $spName)
@@ -207,9 +207,9 @@ foreach ($sp in @(SafeArray $registry "support_packages")) {
       $failCount++
       Write-Host ("FAIL: support package {0} must declare source_directory=SyS/A_Tools/Update/SupportPackage" -f $spName)
     }
-    if (-not (HasProp $sp "target_directory") -or [string]$sp.target_directory -ne "90.USECASE/05.SkillsMachineUpdate") {
+    if (-not (HasProp $sp "target_directory") -or [string]$sp.target_directory -ne "90.USECASE/05.SKILLSMACHINE_UPDATE") {
       $failCount++
-      Write-Host ("FAIL: support package {0} must declare target_directory=90.USECASE/05.SkillsMachineUpdate" -f $spName)
+      Write-Host ("FAIL: support package {0} must declare target_directory=90.USECASE/05.SKILLSMACHINE_UPDATE" -f $spName)
     }
 
     $copiedFiles = @(SafeArray $sp "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)

@@ -23,7 +23,7 @@ USECASE — 04.REPOSITORY_STRUCTURE_REPAIR
    - Detect contradictions across HUMAN, WHOAMI, BATON, registries, manifests, scripts and docs.
    - References to other repositories/projects must be tagged as [REF_CRUZADA: <project>].
    - HARD_CONFLICT blocks destructive or mutating repair until human approval.
-   - 05.SkillsMachineUpdate is never auto-executed from this flow.
+   - 05.SKILLSMACHINE_UPDATE is never auto-executed from this flow.
 
 03) DONE
    - Validate-System PASS

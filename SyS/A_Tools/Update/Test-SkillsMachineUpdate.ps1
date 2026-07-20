@@ -708,7 +708,7 @@ try {
         "no ejecutar 04 ni 05"
     ) -FailureMessage "NO_CALL_FROM_03_CONTRACT_FAIL"
     Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\README.EXECUTION.txt") -Patterns @(
-        "05.SkillsMachineUpdate is never auto-executed from this flow."
+        "05.SKILLSMACHINE_UPDATE is never auto-executed from this flow."
     ) -FailureMessage "NO_CALL_FROM_04_CONTRACT_FAIL"
 
     $report = @"

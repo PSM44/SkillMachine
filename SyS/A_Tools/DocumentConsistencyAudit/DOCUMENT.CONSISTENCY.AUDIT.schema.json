@@ -131,7 +131,7 @@
         "blocked_by_hard_conflict"
       ],
       "properties": {
-        "recommended_support_package": { "const": "05.SkillsMachineUpdate" },
+        "recommended_support_package": { "const": "05.SKILLSMACHINE_UPDATE" },
         "automatic_execution": { "const": false },
         "blocked_by_hard_conflict": { "type": "boolean" }
       }

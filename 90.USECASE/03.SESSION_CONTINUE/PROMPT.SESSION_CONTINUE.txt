@@ -35,7 +35,7 @@ REGLAS:
   - volver a ejecutar la auditoría con AcceptedSessionContinue=true
   - conservar focused en cada continuación aceptada
   - permitir full cada quinta continuación aceptada o ante trigger crítico
-- La auditoría puede recomendar 04.REPOSITORY_STRUCTURE_REPAIR o 05.SkillsMachineUpdate, pero no ejecutarlos sola.
+- La auditoría puede recomendar 04.REPOSITORY_STRUCTURE_REPAIR o 05.SKILLSMACHINE_UPDATE, pero no ejecutarlos sola.
 - Distinguir entre:
   - estado confirmado
   - estado inferido

@@ -296,7 +296,7 @@
   ],
   "support_packages": [
     {
-      "name": "05.SkillsMachineUpdate",
+      "name": "05.SKILLSMACHINE_UPDATE",
       "package_type": "SUPPORT_PACKAGE",
       "lifecycle_status": "MVP",
       "build_enabled": true,
@@ -304,7 +304,7 @@
       "primary_usecase": false,
       "source_of_truth": "CORE_ONLY",
       "source_directory": "SyS/A_Tools/Update/SupportPackage",
-      "target_directory": "90.USECASE/05.SkillsMachineUpdate",
+      "target_directory": "90.USECASE/05.SKILLSMACHINE_UPDATE",
       "copied_files": [
         "README.UPLOAD_THIS_PACKAGE.txt",
         "PROMPT.SKILLSMACHINE_UPDATE.txt",

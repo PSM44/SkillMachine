@@ -40,7 +40,7 @@ Esto incluye, según corresponda:
 - El primer audit se ejecuta con AcceptedSessionContinue=false para no adelantar contador.
 - Solo después de aceptación humana se reejecuta con AcceptedSessionContinue=true para persistir cadence/state del proyecto.
 - Si el audit devuelve HARD_CONFLICT, SESSION_CONTINUE debe detener aceptación y emitir REVIEW_REQUIRED.
-- SESSION_CONTINUE no debe ejecutar automáticamente 04.REPOSITORY_STRUCTURE_REPAIR ni 05.SkillsMachineUpdate.
+- SESSION_CONTINUE no debe ejecutar automáticamente 04.REPOSITORY_STRUCTURE_REPAIR ni 05.SKILLSMACHINE_UPDATE.
 
 ==========
 03.00_PROMPT_DE_ARRANQUE_SUGERIDO

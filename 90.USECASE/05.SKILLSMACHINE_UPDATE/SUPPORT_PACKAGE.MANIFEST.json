@@ -1,10 +1,10 @@
 {
   "schema_version": "1.0",
-  "package_name": "05.SkillsMachineUpdate",
+  "package_name": "05.SKILLSMACHINE_UPDATE",
   "package_type": "SUPPORT_PACKAGE",
   "source_root": "C:\\01. GitHub\\Skills",
   "source_directory": "SyS/A_Tools/Update/SupportPackage",
-  "target_directory": "90.USECASE/05.SkillsMachineUpdate",
+  "target_directory": "90.USECASE/05.SKILLSMACHINE_UPDATE",
   "lifecycle_status": "MVP",
   "build_enabled": true,
   "generated_output_target": true,
@@ -23,7 +23,7 @@
   ],
   "delivery_file_count": 8,
   "upload_package_model": "SELF_CONTAINED_SUPPORT_PACKAGE_FOLDER",
-  "upload_package_root": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate",
+  "upload_package_root": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE",
   "upload_instruction_file": "README.UPLOAD_THIS_PACKAGE.txt",
   "upload_package_scope": "FULL_SUPPORT_PACKAGE_FOLDER",
   "folder_upload_required": true,
@@ -31,7 +31,7 @@
     {
       "bundle_name": "UPDATE_CONTEXT",
       "delivery_file": "00.BUNDLE.UPDATE_CONTEXT.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\00.BUNDLE.UPDATE_CONTEXT.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\00.BUNDLE.UPDATE_CONTEXT.txt",
       "delivery_size_bytes": 5855,
       "delivery_size_kb": 5.72,
       "delivery_sha256": "5DDF40F80374BE176508EA2C25802CCC07B151C5B14D73A256296ED6C4FAD24D",
@@ -53,7 +53,7 @@
     {
       "bundle_name": "UPDATE_METHOD",
       "delivery_file": "01.BUNDLE.UPDATE_METHOD.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\01.BUNDLE.UPDATE_METHOD.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\01.BUNDLE.UPDATE_METHOD.txt",
       "delivery_size_bytes": 66093,
       "delivery_size_kb": 64.54,
       "delivery_sha256": "0D21E2436F5F433289829DCA0EF9EAA192127F5C67EF6853EFBE0FFC56D17A39",
@@ -75,7 +75,7 @@
     {
       "bundle_name": "UPDATE_GOVERNANCE",
       "delivery_file": "02.BUNDLE.UPDATE_GOVERNANCE.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SkillsMachineUpdate\\02.BUNDLE.UPDATE_GOVERNANCE.txt",
+      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\02.BUNDLE.UPDATE_GOVERNANCE.txt",
       "delivery_size_bytes": 7278,
       "delivery_size_kb": 7.11,
       "delivery_sha256": "54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27",

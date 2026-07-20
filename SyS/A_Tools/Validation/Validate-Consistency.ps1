@@ -468,13 +468,13 @@ Write-Host "OK: updater core consistency validated"
 
 $supportPackage = @(
     $registrySupportPackages |
-    Where-Object { [string]$_.name -eq "05.SkillsMachineUpdate" }
+    Where-Object { [string]$_.name -eq "05.SKILLSMACHINE_UPDATE" }
 )
 if (@($supportPackage).Count -ne 1) {
-    throw "Support package 05.SkillsMachineUpdate must be declared exactly once"
+    throw "Support package 05.SKILLSMACHINE_UPDATE must be declared exactly once"
 }
 $supportPackage = $supportPackage[0]
-$supportTargetDir = Join-Path $usecaseRoot "05.SkillsMachineUpdate"
+$supportTargetDir = Join-Path $usecaseRoot "05.SKILLSMACHINE_UPDATE"
 $supportManifestPath = Join-Path $supportTargetDir "SUPPORT_PACKAGE.MANIFEST.json"
 $supportManifest = Read-Json $supportManifestPath
 $supportSourceDir = Join-Path $repoRoot "SyS\A_Tools\Update\SupportPackage"
@@ -498,7 +498,7 @@ if (($expectedSupportDelivery -join "|") -ne ($actualSupportDelivery -join "|"))
     throw "Support package manifest delivery_files mismatch"
 }
 
-if ([string]$supportManifest.package_name -ne "05.SkillsMachineUpdate") {
+if ([string]$supportManifest.package_name -ne "05.SKILLSMACHINE_UPDATE") {
     throw "Support package manifest package_name mismatch"
 }
 if ([string]$supportManifest.package_type -ne "SUPPORT_PACKAGE") {

@@ -1,4 +1,4 @@
-05.SkillsMachineUpdate support package.
+05.SKILLSMACHINE_UPDATE support package.
 
 This folder is generated from core under SyS\A_Tools\Update.
 The canonical updater implementation remains:
@@ -11,5 +11,5 @@ The canonical updater implementation remains:
 DocumentConsistencyAudit is a preflight consumer only.
 It may block unresolved critical document conflicts, but it does not auto-run this updater from 03 or 04.
 
-Upload and use the full 90.USECASE\05.SkillsMachineUpdate folder as one support package.
+Upload and use the full 90.USECASE\05.SKILLSMACHINE_UPDATE folder as one support package.
 Do not treat this generated package as canon. If doctrine changes are needed, patch core and rebuild.
