@@ -20,6 +20,7 @@ $SkillsRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot ".."))
 $UseCaseRoot = Join-Path $SkillsRoot "90.USECASE"
 $RegistryPath = Join-Path $UseCaseRoot "USECASE.REGISTRY.json"
 $VersionRegistryPath = Join-Path $UseCaseRoot "GLOBAL.SKILL.VERSION.REGISTRY.json"
+$UseCaseCompilerPath = Join-Path $SkillsRoot "SyS\A_Tools\UseCaseBuild\Compile-UseCaseSingleFile.ps1"
 
 # ==========================================================
 # 01.00 HELPERS
@@ -280,6 +281,82 @@ function Get-UseCaseCopiedFiles {
     return @(Safe-GetArray $UseCase "copied_files" | ForEach-Object { [string]$_ })
 }
 
+function Get-CompiledOutputContract {
+    param(
+        [Parameter(Mandatory = $true)]$Package,
+        [Parameter(Mandatory = $true)][string]$PackageName
+    )
+
+    $enabled = $false
+    if (Has-Property $Package "compiled_output_enabled") {
+        $enabled = [bool]$Package.compiled_output_enabled
+    }
+
+    $outputFile = ''
+    if (Has-Property $Package "compiled_output_file") {
+        $outputFile = [string]$Package.compiled_output_file
+    }
+
+    $formatVersion = ''
+    if (Has-Property $Package "compiled_format_version") {
+        $formatVersion = [string]$Package.compiled_format_version
+    }
+
+    $sourceOrder = @(Safe-GetArray $Package "compiled_source_order" | ForEach-Object { [string]$_ })
+
+    $uploadPackageModel = ''
+    if (Has-Property $Package "upload_package_model") {
+        $uploadPackageModel = [string]$Package.upload_package_model
+    }
+
+    if ($enabled) {
+        if ([string]::IsNullOrWhiteSpace($outputFile)) {
+            throw "Compiled output contract missing output file for '$PackageName'"
+        }
+        if ([string]::IsNullOrWhiteSpace($formatVersion)) {
+            throw "Compiled output contract missing format version for '$PackageName'"
+        }
+        if (@($sourceOrder).Count -eq 0) {
+            throw "Compiled output contract missing source order for '$PackageName'"
+        }
+    }
+
+    return [pscustomobject]@{
+        Enabled            = $enabled
+        OutputFile         = $outputFile
+        FormatVersion      = $formatVersion
+        SourceOrder        = @($sourceOrder)
+        UploadPackageModel = $uploadPackageModel
+    }
+}
+
+function Invoke-CompiledOutputBuild {
+    param(
+        [Parameter(Mandatory = $true)]$Package,
+        [Parameter(Mandatory = $true)][string]$PackageName,
+        [Parameter(Mandatory = $true)][string]$PackageType,
+        [Parameter(Mandatory = $true)][string]$PackageVersion,
+        [Parameter(Mandatory = $true)][string]$ProjectRoot,
+        [Parameter(Mandatory = $true)][string]$TargetDirectory
+    )
+
+    $contract = Get-CompiledOutputContract -Package $Package -PackageName $PackageName
+    if ($contract.Enabled -ne $true) {
+        return $null
+    }
+
+    return (New-UseCaseCompiledFile `
+        -PackageName $PackageName `
+        -PackageType $PackageType `
+        -PackageVersion $PackageVersion `
+        -ProjectRoot $ProjectRoot `
+        -TargetDirectory $TargetDirectory `
+        -OutputFileName $contract.OutputFile `
+        -SourceFiles @($contract.SourceOrder) `
+        -FormatVersion $contract.FormatVersion `
+        -WriteOutput)
+}
+
 function New-BundleFile {
     param(
         [Parameter(Mandatory = $true)][string]$BundlePath,
@@ -431,6 +508,23 @@ function Validate-ManifestIntegrity {
             }
         }
     }
+
+    if ($ManifestObject.PSObject.Properties["compiled_output_enabled"] -and [bool]$ManifestObject.compiled_output_enabled) {
+        $compiledOutputFile = [string]$ManifestObject.compiled_output_file
+        if ([string]::IsNullOrWhiteSpace($compiledOutputFile)) {
+            throw "Compiled output file missing in manifest: $ManifestPath"
+        }
+
+        $compiledOutputPath = Join-Path $TargetDir $compiledOutputFile
+        if (!(Test-Path -LiteralPath $compiledOutputPath -PathType Leaf)) {
+            throw "Compiled output missing in manifest validation: $compiledOutputFile"
+        }
+
+        $actualCompiledHash = Get-Sha256Safe -Path $compiledOutputPath
+        if ([string]$ManifestObject.compiled_output_sha256 -ne [string]$actualCompiledHash) {
+            throw "Compiled output hash mismatch for manifest: $compiledOutputFile"
+        }
+    }
 }
 
 function ConvertTo-ManifestCanonicalNode {
@@ -522,6 +616,7 @@ function Invoke-SupportPackagePreflight {
     $copiedFiles = @(Safe-GetArray $SupportPackage "copied_files")
     $declaredDeliveryFiles = @(Safe-GetArray $SupportPackage "delivery_files")
     $bundleDefinitions = @(Safe-GetArray $SupportPackage "bundle_definitions")
+    $compiledContract = Get-CompiledOutputContract -Package $SupportPackage -PackageName $name
 
     if ([string]::IsNullOrWhiteSpace($sourceDirectory)) {
         throw "Support package '$name' missing source_directory"
@@ -555,6 +650,7 @@ function Invoke-SupportPackagePreflight {
     $expectedDeliveryFiles = @(
         @($copiedFiles | ForEach-Object { [string]$_ }) +
         @($bundleDefinitions | ForEach-Object { [string]$_.output_file }) +
+        @($(if ($compiledContract.Enabled) { [string]$compiledContract.OutputFile } else { @() })) +
         @("SUPPORT_PACKAGE.MANIFEST.json")
     ) | Sort-Object -Unique
 
@@ -586,8 +682,25 @@ function Build-SupportPackageManifest {
         [Parameter(Mandatory = $true)][string]$SkillsRoot,
         [Parameter(Mandatory = $true)][string]$TargetDir,
         [Parameter(Mandatory = $true)]$DeliveryFiles,
-        [Parameter(Mandatory = $true)]$BundleManifest
+        [Parameter(Mandatory = $true)]$BundleManifest,
+        [AllowNull()]$CompiledOutputResult
     )
+
+    $compiledEnabled = ($null -ne $CompiledOutputResult)
+    $compiledOutputFile = ''
+    $compiledOutputSha256 = ''
+    $compiledSourceOrder = @()
+    $compiledSourceCount = 0
+    $compiledFormatVersion = ''
+    $primaryUploadFile = 'README.UPLOAD_THIS_PACKAGE.txt'
+    if ($compiledEnabled) {
+        $compiledOutputFile = [string]$CompiledOutputResult.OutputFileName
+        $compiledOutputSha256 = [string]$CompiledOutputResult.OutputSha256
+        $compiledSourceOrder = @($CompiledOutputResult.SourceFiles)
+        $compiledSourceCount = [int]$CompiledOutputResult.SourceCount
+        $compiledFormatVersion = [string]$CompiledOutputResult.FormatVersion
+        $primaryUploadFile = $compiledOutputFile
+    }
 
     return [ordered]@{
         schema_version = "1.0"
@@ -606,11 +719,19 @@ function Build-SupportPackageManifest {
         regeneration_contract = "Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills"
         delivery_files = @($DeliveryFiles)
         delivery_file_count = @($DeliveryFiles).Count
-        upload_package_model = "SELF_CONTAINED_SUPPORT_PACKAGE_FOLDER"
+        upload_package_model = [string]$SupportPackage.upload_package_model
         upload_package_root = $TargetDir
         upload_instruction_file = "README.UPLOAD_THIS_PACKAGE.txt"
-        upload_package_scope = "FULL_SUPPORT_PACKAGE_FOLDER"
-        folder_upload_required = $true
+        upload_package_scope = "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS"
+        folder_upload_required = $false
+        primary_upload_file = $primaryUploadFile
+        compiled_output_enabled = $compiledEnabled
+        compiled_output_file = $compiledOutputFile
+        compiled_output_sha256 = $compiledOutputSha256
+        compiled_source_order = @($compiledSourceOrder)
+        compiled_source_count = $compiledSourceCount
+        compiled_format_version = $compiledFormatVersion
+        compiled_content_policy = "FULL_CONTENT_NO_TRUNCATION"
         bundles = @($BundleManifest)
         validation = [ordered]@{
             status = "OK"
@@ -756,6 +877,14 @@ function Invoke-BuildPreflight {
 $registry = Read-JsonFileSafe -Path $RegistryPath
 $versionRegistry = Read-JsonFileSafe -Path $VersionRegistryPath
 
+if (!(Test-Path -LiteralPath $UseCaseCompilerPath -PathType Leaf)) {
+    throw "Compiled usecase compiler missing: $UseCaseCompilerPath"
+}
+. $UseCaseCompilerPath
+if (-not (Get-Command New-UseCaseCompiledFile -ErrorAction SilentlyContinue)) {
+    throw "Compiled usecase compiler did not expose New-UseCaseCompiledFile"
+}
+
 if (-not $registry.usecases) {
     throw "USECASE.REGISTRY.json no contiene 'usecases'"
 }
@@ -799,6 +928,7 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
     $PromptFiles = @(Normalize-ToArray $(if ($uc.PSObject.Properties['prompt_files']) { $uc.prompt_files } else { @() }))
     $MenuFiles = @(Normalize-ToArray $(if ($uc.PSObject.Properties['menu_files']) { $uc.menu_files } else { @() }))
     $BundleDefinitions = @(Normalize-ToArray $(if ($uc.PSObject.Properties['bundle_definitions']) { $uc.bundle_definitions } else { @() }))
+    $CompiledContract = Get-CompiledOutputContract -Package $uc -PackageName $UseCaseName
 
     if ($PromptFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$PromptFiles[0])) { $PromptFiles = @() }
     if ($MenuFiles.Count -eq 1 -and [string]::IsNullOrWhiteSpace([string]$MenuFiles[0])) { $MenuFiles = @() }
@@ -839,6 +969,7 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         # Preserve current delivery candidates so idempotent comparison can reuse existing files.
         $preserveFiles += @($MenuFiles | ForEach-Object { Split-Path -Leaf ([string]$_) })
         $preserveFiles += @($BundleDefinitions | ForEach-Object { [string]$_.output_file })
+        if ($CompiledContract.Enabled) { $preserveFiles += [string]$CompiledContract.OutputFile }
 
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
             # OPTION_B_MERGE_PRESERVE_FOR_CLEAR
@@ -975,6 +1106,17 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             $deliveryFiles += $p
         }
 
+        $compiledOutputResult = Invoke-CompiledOutputBuild `
+            -Package $uc `
+            -PackageName $UseCaseName `
+            -PackageType "USECASE" `
+            -PackageVersion $UseCaseVersion `
+            -ProjectRoot $SkillsRoot `
+            -TargetDirectory $TargetDir
+        if ($null -ne $compiledOutputResult) {
+            $deliveryFiles += [string]$compiledOutputResult.OutputFileName
+        }
+
         # OPTION_B_UC04_DELIVERY_EXTRA_BEFORE_FINALIZE
         # Ensure delivery_files_extra survive later rebuild/finalize of $deliveryFiles.
         if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) {
@@ -997,13 +1139,21 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             generated_at = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
             source_root = $SkillsRoot
             delivery_files = @($deliveryFiles)
-            upload_package_model = "SELF_CONTAINED_USECASE_FOLDER"
+            upload_package_model = [string]$uc.upload_package_model
             upload_package_root = $TargetDir
             upload_instruction_file = "README.UPLOAD_THIS_USECASE.txt"
-            upload_package_scope = "FULL_USECASE_FOLDER"
-            folder_upload_required = $true
+            upload_package_scope = "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS"
+            folder_upload_required = $false
+            primary_upload_file = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputFileName } else { "README.UPLOAD_THIS_USECASE.txt" })
+            compiled_output_enabled = ($null -ne $compiledOutputResult)
+            compiled_output_file = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputFileName } else { "" })
+            compiled_output_sha256 = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputSha256 } else { "" })
+            compiled_source_order = $(if ($null -ne $compiledOutputResult) { @($compiledOutputResult.SourceFiles) } else { @() })
+            compiled_source_count = $(if ($null -ne $compiledOutputResult) { [int]$compiledOutputResult.SourceCount } else { 0 })
+            compiled_format_version = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.FormatVersion } else { "" })
+            compiled_content_policy = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.ContentPolicy } else { "" })
             delivery_files_scope = "GENERATED_DELIVERY_FILES_ONLY"
-            delivery_files_note = "delivery_files lists generated/copied delivery artifacts; the operational IA upload package is the full usecase folder. Read README.UPLOAD_THIS_USECASE.txt first."
+            delivery_files_note = "delivery_files lists generated/copied delivery artifacts. The primary IA upload unit is the compiled single-file output while legacy package files continue to coexist."
             # MB-GRC-030E_UPLOAD_PACKAGE_MANIFEST_SEMANTICS
             bundles = @($bundleManifest)
             validation = [ordered]@{
@@ -1069,6 +1219,7 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
     $CopiedFiles = @(Safe-GetArray $sp "copied_files")
     $DeclaredDeliveryFiles = @(Safe-GetArray $sp "delivery_files")
     $BundleDefinitions = @(Safe-GetArray $sp "bundle_definitions")
+    $CompiledContract = Get-CompiledOutputContract -Package $sp -PackageName $SupportPackageName
 
     Write-Host ""
     Write-Host "=============================="
@@ -1079,6 +1230,7 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
         $preserveFiles = @(
             @($CopiedFiles | ForEach-Object { [string]$_ }) +
             @($BundleDefinitions | ForEach-Object { [string]$_.output_file }) +
+            @($(if ($CompiledContract.Enabled) { [string]$CompiledContract.OutputFile } else { @() })) +
             @("SUPPORT_PACKAGE.MANIFEST.json")
         ) | Sort-Object -Unique
 
@@ -1143,6 +1295,14 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
             Write-Host ("BUNDLE GENERATED: {0} ({1} KB)" -f $bundleOutput, $bundleSizeKb)
         }
 
+        $compiledOutputResult = Invoke-CompiledOutputBuild `
+            -Package $sp `
+            -PackageName $SupportPackageName `
+            -PackageType "SUPPORT_PACKAGE" `
+            -PackageVersion ([string]$sp.lifecycle_status) `
+            -ProjectRoot $SkillsRoot `
+            -TargetDirectory $TargetDir
+
         $deliveryFiles = @($DeclaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
         $validationMissing = @(Validate-SupportPackageOutput -TargetDir $TargetDir -DeliveryFiles $deliveryFiles)
         if (@($validationMissing).Count -gt 0) {
@@ -1155,8 +1315,10 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
             -SkillsRoot $SkillsRoot `
             -TargetDir $TargetDir `
             -DeliveryFiles $deliveryFiles `
-            -BundleManifest $bundleManifest
+            -BundleManifest $bundleManifest `
+            -CompiledOutputResult $compiledOutputResult
         $manifest = Write-ManifestIfChanged -ManifestPath $manifestPath -ManifestObject $manifest
+        Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -DeliveryFiles $deliveryFiles -TargetDir $TargetDir
 
         $results += [pscustomobject]@{
             usecase = $SupportPackageName

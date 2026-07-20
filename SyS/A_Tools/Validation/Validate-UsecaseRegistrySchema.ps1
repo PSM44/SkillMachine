@@ -49,8 +49,107 @@ function HasProp([object]$obj,[string]$prop){
   return ($null -ne $obj -and $null -ne $obj.PSObject.Properties[$prop])
 }
 
-$failCount = 0
+function Test-RelativeRegistryPath([string]$pathValue){
+  if ([string]::IsNullOrWhiteSpace($pathValue)) { return $false }
+  if ($pathValue -match '^[A-Za-z]:\\') { return $false }
+  if ($pathValue -match '^\.\.?[\\/]') { return $false }
+  if ($pathValue -match '[\\/]\.\.([\\/]|$)') { return $false }
+  if ($pathValue -match '^\.\.($|[\\/])') { return $false }
+  return $true
+}
+
+function Validate-CompiledContract {
+  param(
+    [Parameter(Mandatory=$true)]$Item,
+    [Parameter(Mandatory=$true)][string]$Name,
+    [Parameter(Mandatory=$true)][string[]]$AllowedSourcePaths,
+    [Parameter(Mandatory=$true)][hashtable]$GlobalCompiledNames
+  )
+
+  foreach ($req in @("compiled_output_enabled","compiled_output_file","compiled_format_version","compiled_source_order","upload_package_model")) {
+    if (-not (HasProp $Item $req)) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} missing compiled contract property: {1}" -f $Name,$req)
+    }
+  }
+
+  if (-not (HasProp $Item "compiled_output_enabled")) { return }
+  if ($Item.compiled_output_enabled -isnot [bool]) {
+    $script:failCount++
+    Write-Host ("FAIL: {0} compiled_output_enabled must be boolean" -f $Name)
+    return
+  }
+
+  if ([bool]$Item.compiled_output_enabled -ne $true) {
+    $script:failCount++
+    Write-Host ("FAIL: {0} compiled_output_enabled must be true for D5B contract" -f $Name)
+  }
+
+  if (-not (HasProp $Item "upload_package_model") -or [string]$Item.upload_package_model -ne "SINGLE_COMPILED_FILE") {
+    $script:failCount++
+    Write-Host ("FAIL: {0} upload_package_model must be SINGLE_COMPILED_FILE" -f $Name)
+  }
+
+  $compiledOutputFile = ''
+  if (HasProp $Item "compiled_output_file") {
+    $compiledOutputFile = [string]$Item.compiled_output_file
+    if ([string]::IsNullOrWhiteSpace($compiledOutputFile) -or -not $compiledOutputFile.EndsWith('.COMPILED.txt')) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} compiled_output_file must end with .COMPILED.txt" -f $Name)
+    }
+    if (-not (Test-RelativeRegistryPath $compiledOutputFile)) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} compiled_output_file must be target-relative and traversal-free: {1}" -f $Name,$compiledOutputFile)
+    }
+  }
+
+  if ((HasProp $Item "compiled_format_version") -and (([string]$Item.compiled_format_version) -ne 'v1')) {
+    $script:failCount++
+    Write-Host ("FAIL: {0} compiled_format_version must be v1" -f $Name)
+  }
+
+  $compiledSourceOrder = @(SafeArray $Item "compiled_source_order" | ForEach-Object { [string]$_ })
+  if ($compiledSourceOrder.Count -eq 0) {
+    $script:failCount++
+    Write-Host ("FAIL: {0} compiled_source_order must be a non-empty array" -f $Name)
+  }
+
+  $sourceDupes = @($compiledSourceOrder | Group-Object | Where-Object { $_.Count -gt 1 })
+  if ($sourceDupes.Count -gt 0) {
+    $script:failCount++
+    Write-Host ("FAIL: {0} compiled_source_order contains duplicates: {1}" -f $Name, (($sourceDupes | ForEach-Object { $_.Name }) -join ', '))
+  }
+
+  foreach ($sourcePath in @($compiledSourceOrder)) {
+    if (-not (Test-RelativeRegistryPath $sourcePath)) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} compiled_source_order contains invalid relative path: {1}" -f $Name,$sourcePath)
+      continue
+    }
+    if ($sourcePath -eq $compiledOutputFile) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} compiled_source_order must not include its own compiled output file" -f $Name)
+    }
+    if (@($AllowedSourcePaths | Where-Object { $_ -eq $sourcePath }).Count -eq 0) {
+      $script:failCount++
+      Write-Host ("FAIL: {0} compiled_source_order contains unsupported source path: {1}" -f $Name,$sourcePath)
+    }
+  }
+
+  if (-not [string]::IsNullOrWhiteSpace($compiledOutputFile)) {
+    $compiledKey = $compiledOutputFile.ToUpperInvariant()
+    if ($GlobalCompiledNames.ContainsKey($compiledKey)) {
+      $script:failCount++
+      Write-Host ("FAIL: compiled_output_file must be globally unique: {0} shared by {1} and {2}" -f $compiledOutputFile,$GlobalCompiledNames[$compiledKey],$Name)
+    } else {
+      $GlobalCompiledNames[$compiledKey] = $Name
+    }
+  }
+}
+
+$script:failCount = 0
 $warnCount = 0
+$compiledOutputNames = @{}
 
 # Support package contract.
 $supportNames = @{}
@@ -134,6 +233,7 @@ foreach ($sp in @(SafeArray $registry "support_packages")) {
       "PROMPT.SKILLSMACHINE_UPDATE.txt",
       "README.UPLOAD_THIS_PACKAGE.txt",
       "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+      "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
       "SUPPORT_PACKAGE.MANIFEST.json",
       "UPDATE.EXAMPLE.MANIFEST.json"
     )
@@ -147,6 +247,12 @@ foreach ($sp in @(SafeArray $registry "support_packages")) {
       Write-Host ("FAIL: support package {0} exceeds max delivery file count" -f $spName)
     }
   }
+
+  $supportAllowedCompiledSources = @(
+    @(SafeArray $sp "copied_files" | ForEach-Object { [string]$_ }) +
+    @(SafeArray $sp "bundle_definitions" | ForEach-Object { [string]$_.output_file })
+  ) | Sort-Object -Unique
+  Validate-CompiledContract -Item $sp -Name $spName -AllowedSourcePaths $supportAllowedCompiledSources -GlobalCompiledNames $compiledOutputNames
 }
 foreach ($uc in @(SafeArray $registry "usecases")) {
 
@@ -218,6 +324,50 @@ foreach ($opt in @("preserve_files","delivery_files_extra","copied_files")) {
     } else {
       if ($sourceDirectory -match '^[A-Za-z]:\\') { $failCount++; Write-Host ("FAIL: {0} source_directory contains absolute path: {1}" -f $name,$sourceDirectory) }
       if ($sourceDirectory -match '\.\.') { $failCount++; Write-Host ("FAIL: {0} source_directory contains traversal '..': {1}" -f $name,$sourceDirectory) }
+    }
+  }
+
+  $allowedCompiledSources = @(
+    @(SafeArray $uc "copied_files" | ForEach-Object { [string]$_ }) +
+    @(SafeArray $uc "prompt_files" | ForEach-Object { [string]$_ }) +
+    @(SafeArray $uc "menu_files" | ForEach-Object { Split-Path -Leaf ([string]$_) }) +
+    @(SafeArray $uc "bundle_definitions" | ForEach-Object { [string]$_.output_file }) +
+    @(SafeArray $uc "delivery_files_extra" | ForEach-Object { [string]$_ })
+  ) | Sort-Object -Unique
+  Validate-CompiledContract -Item $uc -Name $name -AllowedSourcePaths $allowedCompiledSources -GlobalCompiledNames $compiledOutputNames
+
+  if ($name -eq "01.NEW_PROJECT") {
+    if (-not (HasProp $uc "source_directory") -or [string]$uc.source_directory -ne "SyS/A_Tools/UseCaseSources/01.NewProject") {
+      $failCount++
+      Write-Host "FAIL: 01.NEW_PROJECT must declare source_directory=SyS/A_Tools/UseCaseSources/01.NewProject"
+    }
+    $copiedFiles = @(SafeArray $uc "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedCopied = @(
+      "PROMPT.NEW_PROJECT.txt",
+      "README.UPLOAD_THIS_USECASE.txt",
+      "SKILL_SET.MANIFEST.txt"
+    ) | Sort-Object -Unique
+    if (($copiedFiles -join "|") -ne ($expectedCopied -join "|")) {
+      $failCount++
+      Write-Host "FAIL: 01.NEW_PROJECT copied_files contract mismatch"
+    }
+  }
+
+  if ($name -eq "02.SESSION_CLOSE") {
+    if (-not (HasProp $uc "source_directory") -or [string]$uc.source_directory -ne "SyS/A_Tools/UseCaseSources/02.SessionClose") {
+      $failCount++
+      Write-Host "FAIL: 02.SESSION_CLOSE must declare source_directory=SyS/A_Tools/UseCaseSources/02.SessionClose"
+    }
+    $copiedFiles = @(SafeArray $uc "copied_files" | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+    $expectedCopied = @(
+      "PROMPT.SESSION_CLOSE.txt",
+      "README.UPLOAD_THIS_USECASE.txt",
+      "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
+      "SKILL_SET.MANIFEST.txt"
+    ) | Sort-Object -Unique
+    if (($copiedFiles -join "|") -ne ($expectedCopied -join "|")) {
+      $failCount++
+      Write-Host "FAIL: 02.SESSION_CLOSE copied_files contract mismatch"
     }
   }
 
@@ -355,4 +505,3 @@ foreach ($d3Required in $d3RequiredSources) {
 # END MB-SM-067B-D3R3 SOURCE DIRECTORY VALIDATION
 
 exit 0
-

@@ -9,6 +9,11 @@ Set-Location -LiteralPath $ValidationRepoRoot
 # Runs non-destructive SkillMachine pre-commit validations.
 
 $ErrorActionPreference = "Stop"
+$ValidationTempRoot = 'C:\Users\aazcl\Downloads\Temp.SkillMachine'
+
+if (-not (Test-Path -LiteralPath $ValidationTempRoot -PathType Container)) {
+    throw "Validation temp root not found: $ValidationTempRoot"
+}
 
 Write-Host "VALIDATION: naming"
 
@@ -103,8 +108,8 @@ foreach ($automFile in @($AutomationModule, $AutomationTests, $AutomationRunner)
     }
 }
 
-# D/E. Invoke runner; capture parseable summary via temp file to avoid Write-Host capture issues
-$automSummaryFile = [System.IO.Path]::GetTempFileName()
+# D/E. Invoke runner; capture parseable summary via repo-authorized temp root.
+$automSummaryFile = Join-Path $ValidationTempRoot ("AUTOMATION_SUMMARY_{0}.txt" -f ([System.Guid]::NewGuid().ToString('N')))
 $env:AUTOMATION_SUMMARY_FILE = $automSummaryFile
 & $PowerShellHost.Source -NoProfile -ExecutionPolicy Bypass -File $AutomationRunner
 $automRunnerExit = $LASTEXITCODE
@@ -147,6 +152,51 @@ if ($automGateReason -ne '') {
 }
 $automNTests = [int]$automMPassed.Groups[1].Value
 Write-Host "OK: automation reliability foundation passed ($automNTests tests)"
+
+Write-Host "VALIDATION: single-file usecase compiler"
+$CompilerScript = Join-Path $ValidationRepoRoot 'SyS\A_Tools\UseCaseBuild\Compile-UseCaseSingleFile.ps1'
+if (-not (Test-Path -LiteralPath $CompilerScript -PathType Leaf)) {
+    Write-Host "FAIL: compiled usecase compiler missing: $CompilerScript"
+    exit 1
+}
+
+$compilerTokens = $null
+$compilerErrors = $null
+[System.Management.Automation.Language.Parser]::ParseFile($CompilerScript, [ref]$compilerTokens, [ref]$compilerErrors) | Out-Null
+if ($compilerErrors -and $compilerErrors.Count -gt 0) {
+    Write-Host "FAIL: compiled usecase compiler parser validation failed"
+    foreach ($compilerError in $compilerErrors) {
+        Write-Host ("  LINE={0} MSG={1}" -f $compilerError.Extent.StartLineNumber, $compilerError.Message)
+    }
+    exit 1
+}
+
+$importOutput = . $CompilerScript
+if ($null -ne $importOutput -and @($importOutput).Count -gt 0) {
+    Write-Host "FAIL: compiled usecase compiler import produced unexpected side effects"
+    exit 1
+}
+
+if (-not (Get-Command Invoke-UseCaseCompiledFileSelfTests -ErrorAction SilentlyContinue)) {
+    Write-Host "FAIL: compiled usecase compiler did not expose Invoke-UseCaseCompiledFileSelfTests"
+    exit 1
+}
+
+$compilerTestSummary = Invoke-UseCaseCompiledFileSelfTests -ScratchRoot $ValidationTempRoot
+foreach ($compilerTest in @($compilerTestSummary.Results)) {
+    if ($compilerTest.Passed) {
+        Write-Host (" [+] {0} {1}" -f $compilerTest.Name, $compilerTest.Detail)
+    } else {
+        Write-Host (" [-] {0} {1}" -f $compilerTest.Name, $compilerTest.Detail)
+    }
+}
+Write-Host ("COMPILER_TESTS_TOTAL={0}" -f $compilerTestSummary.TestsTotal)
+Write-Host ("COMPILER_TESTS_PASSED={0}" -f $compilerTestSummary.TestsPassed)
+Write-Host ("COMPILER_TESTS_FAILED={0}" -f $compilerTestSummary.TestsFailed)
+if ([int]$compilerTestSummary.TestsFailed -ne 0) {
+    Write-Host "FAIL: single-file usecase compiler validation failed"
+    exit 1
+}
 
 Write-Host "OK: system pre-commit validation passed"
 exit 0

@@ -13,7 +13,7 @@
     "fail_on_missing_file": true,
     "fail_on_duplicate_file": true,
     "generate_bundles": true,
-    "max_delivery_files_per_usecase": 8,
+    "max_delivery_files_per_usecase": 9,
     "max_bundle_size_kb": 1024
   },
   "usecases": [
@@ -21,6 +21,11 @@
       "name": "01.NEW_PROJECT",
       "version": "v3.0-BUNDLES",
       "description": "Bootstrap de proyecto nuevo con continuidad humana e IA desde el día 0.",
+      "copied_files": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "SKILL_SET.MANIFEST.txt",
+        "PROMPT.NEW_PROJECT.txt"
+      ],
       "prompt_files": [
         "PROMPT.NEW_PROJECT.txt"
       ],
@@ -65,12 +70,31 @@
           ]
         }
       ],
+      "compiled_output_enabled": true,
+      "compiled_output_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
+      "compiled_format_version": "v1",
+      "compiled_source_order": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "PROMPT.NEW_PROJECT.txt",
+        "SKILL_SET.MANIFEST.txt",
+        "00.SKILL.MENU.ACTIVE.txt",
+        "00.BUNDLE.CORE.txt",
+        "01.BUNDLE.CONTINUITY.txt",
+        "02.BUNDLE.GOVERNANCE.txt"
+      ],
+      "upload_package_model": "SINGLE_COMPILED_FILE",
       "source_directory": "SyS/A_Tools/UseCaseSources/01.NewProject"
     },
     {
       "name": "02.SESSION_CLOSE",
       "version": "v3.0-BUNDLES",
       "description": "Cierre de sesión, continuidad humana operacional y actualización de artefactos.",
+      "copied_files": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
+        "SKILL_SET.MANIFEST.txt",
+        "PROMPT.SESSION_CLOSE.txt"
+      ],
       "prompt_files": [
         "PROMPT.SESSION_CLOSE.txt"
       ],
@@ -114,6 +138,20 @@
           ]
         }
       ],
+      "compiled_output_enabled": true,
+      "compiled_output_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
+      "compiled_format_version": "v1",
+      "compiled_source_order": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "PROMPT.SESSION_CLOSE.txt",
+        "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
+        "SKILL_SET.MANIFEST.txt",
+        "00.SKILL.MENU.ACTIVE.txt",
+        "00.BUNDLE.CORE.txt",
+        "01.BUNDLE.CONTINUITY.txt",
+        "02.BUNDLE.GOVERNANCE.txt"
+      ],
+      "upload_package_model": "SINGLE_COMPILED_FILE",
       "source_directory": "SyS/A_Tools/UseCaseSources/02.SessionClose"
     },
     {
@@ -167,7 +205,20 @@
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
-      ]
+      ],
+      "compiled_output_enabled": true,
+      "compiled_output_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
+      "compiled_format_version": "v1",
+      "compiled_source_order": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "PROMPT.SESSION_CONTINUE.txt",
+        "SKILL_SET.MANIFEST.txt",
+        "00.SKILL.MENU.ACTIVE.txt",
+        "00.BUNDLE.CORE.txt",
+        "01.BUNDLE.CONTINUITY.txt",
+        "02.BUNDLE.GOVERNANCE.txt"
+      ],
+      "upload_package_model": "SINGLE_COMPILED_FILE"
     },
     {
       "name": "04.REPOSITORY_STRUCTURE_REPAIR",
@@ -224,7 +275,23 @@
       "delivery_files_extra": [
         "USECASE.MANIFEST.json",
         "SKILL.md"
-      ]
+      ],
+      "compiled_output_enabled": true,
+      "compiled_output_file": "USECASE.04.REPOSITORY_STRUCTURE_REPAIR.COMPILED.txt",
+      "compiled_format_version": "v1",
+      "compiled_source_order": [
+        "README.UPLOAD_THIS_USECASE.txt",
+        "README.EXECUTION.txt",
+        "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
+        "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
+        "SKILL.md",
+        "SKILL_SET.MANIFEST.txt",
+        "EXAMPLES/EXAMPLE.REPO_REPAIR.txt",
+        "00.BUNDLE.CORE.txt",
+        "01.BUNDLE.CONTINUITY.txt",
+        "02.BUNDLE.GOVERNANCE.txt"
+      ],
+      "upload_package_model": "SINGLE_COMPILED_FILE"
     }
   ],
   "support_packages": [
@@ -251,6 +318,7 @@
         "PROMPT.SKILLSMACHINE_UPDATE.txt",
         "README.UPLOAD_THIS_PACKAGE.txt",
         "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+        "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
         "SUPPORT_PACKAGE.MANIFEST.json",
         "UPDATE.EXAMPLE.MANIFEST.json"
       ],
@@ -281,6 +349,19 @@
           ]
         }
       ],
+      "compiled_output_enabled": true,
+      "compiled_output_file": "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
+      "compiled_format_version": "v1",
+      "compiled_source_order": [
+        "README.UPLOAD_THIS_PACKAGE.txt",
+        "PROMPT.SKILLSMACHINE_UPDATE.txt",
+        "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+        "UPDATE.EXAMPLE.MANIFEST.json",
+        "00.BUNDLE.UPDATE_CONTEXT.txt",
+        "01.BUNDLE.UPDATE_METHOD.txt",
+        "02.BUNDLE.UPDATE_GOVERNANCE.txt"
+      ],
+      "upload_package_model": "SINGLE_COMPILED_FILE",
       "description": "Paquete de soporte generado desde core para actualizar una instalación SkillsMachine existente. No es un quinto use case primario."
     }
   ]
