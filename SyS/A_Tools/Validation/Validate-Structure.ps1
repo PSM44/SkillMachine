@@ -250,6 +250,7 @@ $expectedSupportFiles = @(
     "PROMPT.SKILLSMACHINE_UPDATE.txt",
     "README.UPLOAD_THIS_PACKAGE.txt",
     "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
+    "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
     "SUPPORT_PACKAGE.MANIFEST.json",
     "UPDATE.EXAMPLE.MANIFEST.json"
 ) | Sort-Object
@@ -275,8 +276,8 @@ if ($missingSupportFiles.Count -gt 0) {
 if ($unexpectedSupportFiles.Count -gt 0) {
     throw "Unexpected support package files: $($unexpectedSupportFiles -join ', ')"
 }
-if ($actualSupportFiles.Count -ne 8) {
-    throw "Support package file count must be exactly 8; actual=$($actualSupportFiles.Count)"
+if ($actualSupportFiles.Count -ne 9) {
+    throw "Support package file count must be exactly 9; actual=$($actualSupportFiles.Count)"
 }
 
 $supportSourceRoot = Join-Path $skillsMachineRootForUpdater "SyS\A_Tools\Update\SupportPackage"
@@ -303,7 +304,7 @@ if (($supportDeliveryFiles -join "|") -ne ($expectedSupportFiles -join "|")) {
     throw "Support package manifest delivery_files mismatch"
 }
 
-Write-Host "OK: support package structure validated (8 files)"
+Write-Host "OK: support package structure validated (9 files)"
 
 
 Write-Host "OK: structure validation passed"

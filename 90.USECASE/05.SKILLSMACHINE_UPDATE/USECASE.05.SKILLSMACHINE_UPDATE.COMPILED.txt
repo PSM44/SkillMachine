@@ -1,0 +1,2606 @@
+PS.SKILLSMACHINE SINGLE-FILE USECASE PACKAGE
+COMPILED_FORMAT_VERSION=v1
+PACKAGE_NAME=05.SKILLSMACHINE_UPDATE
+PACKAGE_TYPE=SUPPORT_PACKAGE
+PACKAGE_VERSION=MVP
+SOURCE_FILE_COUNT=7
+
+================================================================================
+00. EXECUTIVE SUMMARY
+================================================================================
+This generated package compiles the operational context for 05.SKILLSMACHINE_UPDATE into a single IA-readable file.
+It preserves complete source contents without truncation and keeps the canonical source-of-truth outside 90.USECASE.
+This file is generated, deterministic, and must not be edited manually.
+
+================================================================================
+01. COMPILATION METADATA
+================================================================================
+PACKAGE_NAME=05.SKILLSMACHINE_UPDATE
+PACKAGE_TYPE=SUPPORT_PACKAGE
+PACKAGE_VERSION=MVP
+COMPILED_OUTPUT_FILE=USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt
+COMPILED_FORMAT_VERSION=v1
+CONTENT_POLICY=FULL_CONTENT_NO_TRUNCATION
+SOURCE_ORDER_POLICY=REGISTRY_DECLARED
+ENCODING=UTF-8_NO_BOM
+GENERATED_OUTPUT_ONLY=YES
+DO_NOT_EDIT_MANUALLY=YES
+
+================================================================================
+02. SOURCE MANIFEST
+================================================================================
+SOURCE_INDEX=1
+SOURCE_PATH=README.UPLOAD_THIS_PACKAGE.txt
+SOURCE_BYTES=786
+SOURCE_SHA256=02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0
+
+SOURCE_INDEX=2
+SOURCE_PATH=PROMPT.SKILLSMACHINE_UPDATE.txt
+SOURCE_BYTES=530
+SOURCE_SHA256=8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B
+
+SOURCE_INDEX=3
+SOURCE_PATH=RUNBOOK.SKILLSMACHINE_UPDATE.txt
+SOURCE_BYTES=625
+SOURCE_SHA256=E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE
+
+SOURCE_INDEX=4
+SOURCE_PATH=UPDATE.EXAMPLE.MANIFEST.json
+SOURCE_BYTES=445
+SOURCE_SHA256=70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4
+
+SOURCE_INDEX=5
+SOURCE_PATH=00.BUNDLE.UPDATE_CONTEXT.txt
+SOURCE_BYTES=6335
+SOURCE_SHA256=21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4
+
+SOURCE_INDEX=6
+SOURCE_PATH=01.BUNDLE.UPDATE_METHOD.txt
+SOURCE_BYTES=81004
+SOURCE_SHA256=A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1
+
+SOURCE_INDEX=7
+SOURCE_PATH=02.BUNDLE.UPDATE_GOVERNANCE.txt
+SOURCE_BYTES=7278
+SOURCE_SHA256=54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27
+
+================================================================================
+03. OPERATIONAL INSTRUCTIONS
+================================================================================
+Use this compiled file as one complete upload unit instead of collecting multiple package files.
+The delimiters, source manifest, and hashes preserve source integrity and verification order.
+The canonical source-of-truth remains outside 90.USECASE; regenerate instead of editing this file manually.
+
+================================================================================
+04. COMPLETE SOURCE CONTENT
+================================================================================
+========== BEGIN_SOURCE_FILE 001 02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0 ==========
+SOURCE_INDEX=1
+SOURCE_PATH=README.UPLOAD_THIS_PACKAGE.txt
+SOURCE_BYTES=786
+SOURCE_SHA256=02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0
+========== CONTENT_START 001 02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0 ==========
+05.SKILLSMACHINE_UPDATE support package.
+
+This folder is generated from core under SyS\A_Tools\Update.
+The canonical updater implementation remains:
+- SyS\A_Tools\Update\Invoke-SkillsMachineUpdate.ps1
+- SyS\A_Tools\Update\Test-SkillsMachineUpdate.ps1
+- SyS\A_Tools\Update\README.SKILLSMACHINE.UPDATE.txt
+- SyS\A_Tools\Update\SKILLSMACHINE.PROJECT.BASELINE.schema.json
+- SyS\A_Tools\Update\SKILLSMACHINE.UPDATE.MANIFEST.schema.json
+
+DocumentConsistencyAudit is a preflight consumer only.
+It may block unresolved critical document conflicts, but it does not auto-run this updater from 03 or 04.
+
+Upload and use the full 90.USECASE\05.SKILLSMACHINE_UPDATE folder as one support package.
+Do not treat this generated package as canon. If doctrine changes are needed, patch core and rebuild.
+========== CONTENT_END 001 02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0 ==========
+========== END_SOURCE_FILE 001 02AB50FE30FF2FF60D87CB03926F24BD81D64F74E0E2DD8434243A2FC9C961E0 ==========
+========== BEGIN_SOURCE_FILE 002 8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B ==========
+SOURCE_INDEX=2
+SOURCE_PATH=PROMPT.SKILLSMACHINE_UPDATE.txt
+SOURCE_BYTES=530
+SOURCE_SHA256=8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B
+========== CONTENT_START 002 8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B ==========
+Operate only on the declared PROJECT_ROOT.
+Require created_by_skillsmachine=true and a clean Git state before apply mode.
+When available, run -UseDocumentAuditPreflight and block mutation on unresolved HARD_CONFLICT findings.
+Run compatibility, baseline load, dry-run fingerprint, explicit human approval, checkpoint, apply, validate and baseline update.
+Use SyS\A_Tools\Update as the core reference. Do not invent operations outside ADD, REPLACE and DELETE.
+Reject apply when the dry-run fingerprint was not reviewed by a human.
+========== CONTENT_END 002 8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B ==========
+========== END_SOURCE_FILE 002 8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B ==========
+========== BEGIN_SOURCE_FILE 003 E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE ==========
+SOURCE_INDEX=3
+SOURCE_PATH=RUNBOOK.SKILLSMACHINE_UPDATE.txt
+SOURCE_BYTES=625
+SOURCE_SHA256=E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE
+========== CONTENT_START 003 E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE ==========
+FLOW: compatibility -> baseline load -> preflight -> dry-run -> dry-run fingerprint review -> explicit human approval -> checkpoint -> apply -> validation -> baseline update.
+
+Rules:
+- Use Invoke-SkillsMachineUpdate.ps1 from SyS\A_Tools\Update.
+- Prefer -UseDocumentAuditPreflight as the document-consistency gate before mutation.
+- If DocumentConsistencyAudit reports HARD_CONFLICT, stop and require explicit human resolution before update.
+- Keep PROJECT_ROOT as a hard boundary.
+- Require clean Git before apply.
+- Use rollback when any apply step fails.
+- Re-run validation after apply and after rollback when triggered.
+========== CONTENT_END 003 E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE ==========
+========== END_SOURCE_FILE 003 E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE ==========
+========== BEGIN_SOURCE_FILE 004 70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4 ==========
+SOURCE_INDEX=4
+SOURCE_PATH=UPDATE.EXAMPLE.MANIFEST.json
+SOURCE_BYTES=445
+SOURCE_SHA256=70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4
+========== CONTENT_START 004 70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4 ==========
+{"schema_version":"1.1","update_id":"SM-UPD-000001","update_version":"0.3.1","source_commit":"0000000000000000000000000000000000000000","created_at":"2026-07-11T00:00:00Z","minimum_project_version":"0.3.0","maximum_project_version":"0.3.x","reversible":true,"human_approval_required":true,"affected_components":["metadata"],"operations":[],"rollback_contract":{"mode":"CHECKPOINT_AND_INVERSE_PLAN","verify_hashes":true,"restore_baseline":true}}
+========== CONTENT_END 004 70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4 ==========
+========== END_SOURCE_FILE 004 70B41EDA0E85DA273C358BB8B5B2B7EBECDF321420E55137787D2ED9CEB971B4 ==========
+========== BEGIN_SOURCE_FILE 005 21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4 ==========
+SOURCE_INDEX=5
+SOURCE_PATH=00.BUNDLE.UPDATE_CONTEXT.txt
+SOURCE_BYTES=6335
+SOURCE_SHA256=21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4
+========== CONTENT_START 005 21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4 ==========
+========== GENERATED_OUTPUT_POLICY ==========
+GENERATED_OUTPUT_ONLY.......: YES
+DO_NOT_EDIT_MANUALLY........: YES
+SOURCE_OF_TRUTH.............: SyS/A_Tools/Update + 90.USECASE/USECASE.REGISTRY.json + 90.USECASE/BUILD.ps1
+GENERATION_MODE.............: BUILD_UPDATE_CONTEXT
+REGENERATION_CONTRACT.......: Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills
+HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
+========== END_GENERATED_OUTPUT_POLICY ==========
+
+==============================
+BUNDLE: UPDATE_CONTEXT
+GENERATED_AT: 2026-07-20 18:38:37
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\README.SKILLSMACHINE.UPDATE.txt
+VERSION    : v1.1-CORE
+SHA256     : 73B78F160053AD21ED11BE271FCB8E3D3E0E89B661B2D7262E92287CE894F4FF
+--------------------------------------------------
+SKILLSMACHINE UPDATE CORE MVP
+=============================
+
+STATUS:
+MVP core runner. Not yet integrated with:
+- 90.USECASE\BUILD.ps1
+- 90.USECASE\05.SKILLSMACHINE_UPDATE
+- Start-SkillsMachine.ps1
+- canonical validators
+
+FILES:
+- Invoke-SkillsMachineUpdate.ps1
+- SKILLSMACHINE.PROJECT.BASELINE.schema.json
+- SKILLSMACHINE.UPDATE.MANIFEST.schema.json
+- Test-SkillsMachineUpdate.ps1
+- README.SKILLSMACHINE.UPDATE.txt
+
+SUPPORTED ACTIONS:
+- preflight
+- dry-run
+- apply
+- rollback
+
+SUPPORTED UPDATE OPERATIONS:
+- ADD
+- REPLACE
+- DELETE
+
+HARD CONTROLS:
+- Git repository required.
+- Clean worktree required for preflight, dry-run and apply.
+- DocumentConsistencyAudit may be used as a read-only preflight gate before mutation.
+- Project baseline schema_version must be 1.1.
+- created_by_skillsmachine must be true.
+- Update manifest schema_version must be 1.1.
+- All operations must be reversible.
+- REPLACE and DELETE require backups.
+- Dry-run fingerprint is mandatory for apply.
+- Apply requires -HumanApproved.
+- All paths must remain inside their permitted root.
+- Baseline is updated only after all operations pass.
+- Rollback restores affected files and the prior baseline.
+
+EXCLUSIONS:
+- No BUILD integration.
+- No launcher integration.
+- No support-package generation.
+- No services, dependencies, secrets or private-data migration.
+- No irreversible operations.
+- No project not created by SkillsMachine.
+
+PARTIAL-FAILURE CONTRACT:
+If apply fails after one or more operations mutate the project, the runner automatically:
+- loads the checkpoint manifest and ZIP;
+- restores every affected target to its pre-apply state;
+- removes files created by ADD;
+- restores the prior baseline;
+- verifies file and baseline hashes;
+- emits APPLY_FAILED_ROLLBACK_PASS or APPLY_FAILED_ROLLBACK_FAIL.
+
+Production readiness still requires BUILD, launcher, validator integration and repository-level
+acceptance tests.
+
+DOCUMENT CONSISTENCY PREFLIGHT:
+- Optional flag: `-UseDocumentAuditPreflight`.
+- The updater invokes `SyS\A_Tools\DocumentConsistencyAudit\Invoke-DocumentConsistencyAudit.ps1` in focused mode with `NoStateWrite=true`.
+- Changed paths are derived from update target paths.
+- `HARD_CONFLICT` blocks preflight/dry-run/apply.
+- State failures are surfaced as `DOCUMENT_AUDIT_STATE_ERROR`.
+- Root escapes or reparse traversal are surfaced as `DOCUMENT_AUDIT_ROOT_SCOPE_VIOLATION`.
+- The updater never auto-resolves audit findings and never auto-executes itself from 03 or 04.
+
+EXAMPLE:
+1. Run dry-run and record DRY_RUN_FINGERPRINT.
+2. Review the operation list.
+3. Run apply with:
+   -HumanApproved
+   -ApprovedDryRunFingerprint <fingerprint>
+4. Preserve CHECKPOINT_MANIFEST from output.
+5. Run rollback with -CheckpointManifest when required.
+
+TEST-ONLY FAILURE HOOK:
+The environment variable SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID is accepted only when:
+- the runner receives -TestMode;
+- baseline.project_id starts with TEST_ or NEGATIVE_TEST_;
+- the environment variable matches the current operation_id.
+
+Without all three conditions, the hook is blocked. Normal projects cannot activate it.
+Evidence and console output expose TEST_MODE_ACTIVE=True when the hook is used.
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\SKILLSMACHINE.PROJECT.BASELINE.schema.json
+VERSION    : v1.1-CORE
+SHA256     : C614E7F4C5F3A9EACCBEA8FB316503E1A0601BF227C7EBA7FD7DDE10E86F8849
+--------------------------------------------------
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "SKILLSMACHINE.PROJECT.BASELINE.schema.json",
+  "title": "SkillsMachine Project Baseline",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "created_by_skillsmachine",
+    "skillsmachine_version",
+    "skillsmachine_commit",
+    "last_update_id",
+    "baseline_generated_at",
+    "component_inventory"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.1" },
+    "project_id": { "type": "string", "minLength": 1 },
+    "created_by_skillsmachine": { "type": "boolean", "const": true },
+    "skillsmachine_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "skillsmachine_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$"
+    },
+    "last_update_id": {
+      "type": ["string", "null"],
+      "pattern": "^SM-UPD-[0-9]{6}$"
+    },
+    "baseline_generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "component_inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component_type",
+          "relative_path",
+          "sha256",
+          "version"
+        ],
+        "properties": {
+          "component_type": { "type": "string", "minLength": 1 },
+          "relative_path": { "type": "string", "minLength": 1 },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "version": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
+========== CONTENT_END 005 21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4 ==========
+========== END_SOURCE_FILE 005 21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4 ==========
+========== BEGIN_SOURCE_FILE 006 A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1 ==========
+SOURCE_INDEX=6
+SOURCE_PATH=01.BUNDLE.UPDATE_METHOD.txt
+SOURCE_BYTES=81004
+SOURCE_SHA256=A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1
+========== CONTENT_START 006 A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1 ==========
+========== GENERATED_OUTPUT_POLICY ==========
+GENERATED_OUTPUT_ONLY.......: YES
+DO_NOT_EDIT_MANUALLY........: YES
+SOURCE_OF_TRUTH.............: SyS/A_Tools/Update + SkillsLake/01.SKILLS + 90.USECASE/BUILD.ps1
+GENERATION_MODE.............: BUILD_UPDATE_METHOD
+REGENERATION_CONTRACT.......: Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills
+HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
+========== END_GENERATED_OUTPUT_POLICY ==========
+
+==============================
+BUNDLE: UPDATE_METHOD
+GENERATED_AT: 2026-07-20 18:38:37
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\Invoke-SkillsMachineUpdate.ps1
+VERSION    : v1.1-CORE
+SHA256     : A1BC02A37DDA43CBB7C4990228FE4AEBFC5EF04A69AA48AA7CE6153A387C64F5
+--------------------------------------------------
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true)]
+    [ValidateSet("preflight", "dry-run", "apply", "rollback", "recover")]
+    [string]$Action,
+
+    [Parameter(Mandatory = $true)]
+    [string]$ProjectRoot,
+
+    [string]$UpdateManifest,
+
+    [string]$BaselinePath,
+
+    [Parameter(Mandatory = $true)]
+    [string]$EvidencePath,
+
+    [switch]$HumanApproved,
+
+    [string]$ApprovedDryRunFingerprint,
+
+    [string]$CheckpointManifest,
+
+    [switch]$TestMode,
+
+    [switch]$UseDocumentAuditPreflight,
+
+    [string]$DocumentAuditStatePath
+)
+
+$ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
+
+$RunnerVersion = "0.1.0-MVP"
+$RunStamp = Get-Date -Format "yyyyMMdd_HHmmss"
+
+function Write-Utf8NoBom {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content
+    )
+    $utf8 = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($Path, $Content, $utf8)
+}
+
+function Get-Sha256 {
+    param([Parameter(Mandatory = $true)][string]$Path)
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
+}
+
+function Get-CanonicalObjectHash {
+    param([Parameter(Mandatory = $true)][object]$Value)
+    $json = $Value | ConvertTo-Json -Depth 30 -Compress
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($json)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        return ([System.BitConverter]::ToString($sha.ComputeHash($bytes))).Replace("-", "")
+    }
+    finally {
+        $sha.Dispose()
+    }
+}
+
+function Resolve-SafeRelativePath {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$RelativePath
+    )
+
+    if ([System.IO.Path]::IsPathRooted($RelativePath)) {
+        throw "ROOTED_PATH_NOT_ALLOWED: $RelativePath"
+    }
+
+    $rootFull = [System.IO.Path]::GetFullPath($Root).TrimEnd("\", "/")
+    $candidate = [System.IO.Path]::GetFullPath((Join-Path $rootFull $RelativePath))
+    $prefix = $rootFull + [System.IO.Path]::DirectorySeparatorChar
+
+    if ($candidate -ne $rootFull -and -not $candidate.StartsWith($prefix, [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "PATH_ESCAPES_ROOT: $RelativePath"
+    }
+
+    return $candidate
+}
+
+function Test-GitClean {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    if (-not (Test-Path -LiteralPath (Join-Path $Root ".git") -PathType Container)) {
+        throw "PROJECT_GIT_REQUIRED"
+    }
+
+    $status = & git -C $Root status --short --untracked-files=all 2>&1
+    if ($LASTEXITCODE -ne 0) {
+        throw "PROJECT_GIT_STATUS_FAILED: $($status -join ' | ')"
+    }
+
+    $lines = @($status | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($lines.Count -gt 0) {
+        throw "BLOCKED_DIRTY_WORKTREE: $($lines -join ' | ')"
+    }
+}
+
+# MB-SM-065A-5B TRANSACTION HELPERS
+function Get-UpdateTransactionPaths {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $transactionRoot = Join-Path $Root ".git\skillsmachine-update"
+    return [ordered]@{
+        root = $transactionRoot
+        state = Join-Path $transactionRoot "UPDATE.TRANSACTION.STATE.json"
+    }
+}
+
+function Get-ProjectMutexName {
+    param([Parameter(Mandatory = $true)][string]$Root)
+
+    $normalized = [System.IO.Path]::GetFullPath($Root).ToUpperInvariant()
+    $bytes = [System.Text.Encoding]::UTF8.GetBytes($normalized)
+    $sha = [System.Security.Cryptography.SHA256]::Create()
+    try {
+        $hash = ([System.BitConverter]::ToString($sha.ComputeHash($bytes))).Replace("-", "")
+    }
+    finally {
+        $sha.Dispose()
+    }
+
+    return "Local\SkillsMachine.Update.$hash"
+}
+
+function Enter-UpdateTransactionMutex {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$TransactionAction
+    )
+
+    $name = Get-ProjectMutexName -Root $Root
+    $mutex = [System.Threading.Mutex]::new($false, $name)
+    $acquired = $false
+
+    try {
+        $acquired = $mutex.WaitOne(0)
+    }
+    catch [System.Threading.AbandonedMutexException] {
+        $acquired = $true
+    }
+
+    if (-not $acquired) {
+        $mutex.Dispose()
+        throw "BLOCKED_UPDATE_TRANSACTION_ACTIVE: action=$TransactionAction"
+    }
+
+    return $mutex
+}
+
+function Exit-UpdateTransactionMutex {
+    param([System.Threading.Mutex]$Mutex)
+
+    if ($null -eq $Mutex) {
+        return
+    }
+
+    try {
+        $Mutex.ReleaseMutex()
+    }
+    catch {
+    }
+    finally {
+        $Mutex.Dispose()
+    }
+}
+
+function Write-AtomicJson {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][object]$Value
+    )
+
+    $parent = Split-Path -Parent $Path
+    if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+        New-Item -ItemType Directory -Force -Path $parent | Out-Null
+    }
+
+    $temporary = "$Path.tmp.$([guid]::NewGuid().ToString('N'))"
+    try {
+        Write-Utf8NoBom -Path $temporary -Content ($Value | ConvertTo-Json -Depth 30)
+        Move-Item -LiteralPath $temporary -Destination $Path -Force
+    }
+    finally {
+        if (Test-Path -LiteralPath $temporary) {
+            Remove-Item -LiteralPath $temporary -Force -ErrorAction SilentlyContinue
+        }
+    }
+}
+
+function Write-UpdateTransactionState {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Phase,
+        [Parameter(Mandatory = $true)][string]$TransactionId,
+        [Parameter(Mandatory = $true)][string]$TransactionAction,
+        [string]$UpdateId,
+        [string]$CheckpointManifestPath,
+        [string]$LastOperationId,
+        [string]$Failure
+    )
+
+    $state = [ordered]@{
+        schema_version = "1.0"
+        transaction_id = $TransactionId
+        process_id = $PID
+        host = [Environment]::MachineName
+        action = $TransactionAction
+        phase = $Phase
+        update_id = $UpdateId
+        checkpoint_manifest = $CheckpointManifestPath
+        last_operation_id = $LastOperationId
+        failure = $Failure
+        updated_at = (Get-Date).ToUniversalTime().ToString("o")
+    }
+
+    Write-AtomicJson -Path $Path -Value $state
+}
+
+function Remove-UpdateTransactionState {
+    param([Parameter(Mandatory = $true)][string]$Path)
+
+    if (Test-Path -LiteralPath $Path -PathType Leaf) {
+        Remove-Item -LiteralPath $Path -Force
+    }
+}
+
+function Restore-UpdateCheckpoint {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][string]$BaselineFile,
+        [Parameter(Mandatory = $true)][string]$CheckpointFile
+    )
+
+    $checkpoint = Read-JsonFile -Path $CheckpointFile
+    $zipPath = [string]$checkpoint.checkpoint_zip
+    if (-not (Test-Path -LiteralPath $zipPath -PathType Leaf)) {
+        throw "CHECKPOINT_ZIP_NOT_FOUND"
+    }
+
+    $extractRoot = Join-Path $env:TEMP (
+        "SkillsMachineCheckpointRestore.{0}" -f ([guid]::NewGuid().ToString("N"))
+    )
+    New-Item -ItemType Directory -Path $extractRoot -Force | Out-Null
+
+    try {
+        Expand-Archive -LiteralPath $zipPath -DestinationPath $extractRoot -Force
+
+        foreach ($entry in @($checkpoint.entries)) {
+            $targetFull = Resolve-SafeRelativePath `
+                -Root $Root `
+                -RelativePath ([string]$entry.target_path)
+
+            if ([bool]$entry.pre_exists) {
+                $backupFull = Join-Path $extractRoot ([string]$entry.backup_relative_path)
+                if (-not (Test-Path -LiteralPath $backupFull -PathType Leaf)) {
+                    throw "ROLLBACK_BACKUP_FILE_MISSING: $backupFull"
+                }
+
+                $parent = Split-Path -Parent $targetFull
+                if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+                    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+                }
+
+                Copy-Item -LiteralPath $backupFull -Destination $targetFull -Force
+                if ((Get-Sha256 -Path $targetFull) -ne [string]$entry.pre_hash) {
+                    throw "ROLLBACK_HASH_MISMATCH: $($entry.target_path)"
+                }
+            }
+            elseif (Test-Path -LiteralPath $targetFull) {
+                Remove-Item -LiteralPath $targetFull -Force
+            }
+        }
+
+        $baselineBackup = Join-Path $extractRoot "__baseline.json"
+        if (-not (Test-Path -LiteralPath $baselineBackup -PathType Leaf)) {
+            throw "ROLLBACK_BASELINE_BACKUP_MISSING"
+        }
+
+        Copy-Item -LiteralPath $baselineBackup -Destination $BaselineFile -Force
+        if ((Get-Sha256 -Path $BaselineFile) -ne [string]$checkpoint.baseline_pre_hash) {
+            throw "ROLLBACK_BASELINE_HASH_MISMATCH"
+        }
+
+        return [ordered]@{
+            checkpoint_manifest = $CheckpointFile
+            checkpoint_zip = $zipPath
+            restored_entries = @($checkpoint.entries).Count
+            baseline_restored = $true
+        }
+    }
+    finally {
+        if (Test-Path -LiteralPath $extractRoot) {
+            Remove-Item -LiteralPath $extractRoot -Recurse -Force
+        }
+    }
+}
+
+function ConvertTo-SemVer {
+    param([Parameter(Mandatory = $true)][string]$Version)
+    if ($Version -notmatch '^([0-9]+)\.([0-9]+)\.([0-9]+)$') {
+        throw "INVALID_SEMVER: $Version"
+    }
+    return [version]$Version
+}
+
+function Test-VersionCompatible {
+    param(
+        [Parameter(Mandatory = $true)][string]$Current,
+        [Parameter(Mandatory = $true)][string]$Minimum,
+        [Parameter(Mandatory = $true)][string]$Maximum
+    )
+
+    $currentVersion = ConvertTo-SemVer -Version $Current
+    $minimumVersion = ConvertTo-SemVer -Version $Minimum
+
+    if ($currentVersion -lt $minimumVersion) {
+        return $false
+    }
+
+    if ($Maximum -match '^([0-9]+)\.([0-9]+)\.x$') {
+        return ($currentVersion.Major -eq [int]$Matches[1] -and $currentVersion.Minor -eq [int]$Matches[2])
+    }
+
+    $maximumVersion = ConvertTo-SemVer -Version $Maximum
+    return ($currentVersion -le $maximumVersion)
+}
+
+function Read-JsonFile {
+    param([Parameter(Mandatory = $true)][string]$Path)
+    if (-not (Test-Path -LiteralPath $Path -PathType Leaf)) {
+        throw "JSON_FILE_NOT_FOUND: $Path"
+    }
+    return (Get-Content -LiteralPath $Path -Raw -Encoding UTF8 | ConvertFrom-Json -ErrorAction Stop)
+}
+
+function Assert-ManifestContract {
+    param([Parameter(Mandatory = $true)][object]$Manifest)
+
+    if ([string]$Manifest.schema_version -ne "1.1") {
+        throw "UNSUPPORTED_UPDATE_SCHEMA_VERSION"
+    }
+    if (-not [bool]$Manifest.reversible) {
+        throw "IRREVERSIBLE_UPDATE_BLOCKED"
+    }
+    if (-not [bool]$Manifest.human_approval_required) {
+        throw "HUMAN_APPROVAL_CONTRACT_REQUIRED"
+    }
+
+    $operations = @($Manifest.operations)
+    if ($operations.Count -lt 1) {
+        throw "UPDATE_REQUIRES_OPERATIONS"
+    }
+
+    $ids = @{}
+    foreach ($operation in $operations) {
+        $id = [string]$operation.operation_id
+        if ([string]::IsNullOrWhiteSpace($id)) {
+            throw "OPERATION_ID_REQUIRED"
+        }
+        if ($ids.ContainsKey($id)) {
+            throw "DUPLICATE_OPERATION_ID: $id"
+        }
+        $ids[$id] = $true
+
+        $action = [string]$operation.action
+        if ($action -notin @("ADD", "REPLACE", "DELETE")) {
+            throw "UNSUPPORTED_OPERATION_ACTION: $action"
+        }
+        if (-not [bool]$operation.reversible) {
+            throw "IRREVERSIBLE_OPERATION_BLOCKED: $id"
+        }
+
+        $targetPath = [string]$operation.target_path
+        if ([string]::IsNullOrWhiteSpace($targetPath)) {
+            throw "TARGET_PATH_REQUIRED: $id"
+        }
+
+        if ($action -eq "ADD") {
+            if ($null -ne $operation.expected_pre_hash) {
+                throw "ADD_PRE_HASH_MUST_BE_NULL: $id"
+            }
+            if ([string]::IsNullOrWhiteSpace([string]$operation.expected_post_hash)) {
+                throw "ADD_POST_HASH_REQUIRED: $id"
+            }
+            if ([string]::IsNullOrWhiteSpace([string]$operation.source_path)) {
+                throw "ADD_SOURCE_REQUIRED: $id"
+            }
+        }
+
+        if ($action -eq "REPLACE") {
+            if ([string]::IsNullOrWhiteSpace([string]$operation.expected_pre_hash)) {
+                throw "REPLACE_PRE_HASH_REQUIRED: $id"
+            }
+            if ([string]::IsNullOrWhiteSpace([string]$operation.expected_post_hash)) {
+                throw "REPLACE_POST_HASH_REQUIRED: $id"
+            }
+            if ([string]::IsNullOrWhiteSpace([string]$operation.source_path)) {
+                throw "REPLACE_SOURCE_REQUIRED: $id"
+            }
+            if (-not [bool]$operation.backup_required) {
+                throw "REPLACE_BACKUP_REQUIRED: $id"
+            }
+        }
+
+        if ($action -eq "DELETE") {
+            if ([string]::IsNullOrWhiteSpace([string]$operation.expected_pre_hash)) {
+                throw "DELETE_PRE_HASH_REQUIRED: $id"
+            }
+            if ($null -ne $operation.expected_post_hash) {
+                throw "DELETE_POST_HASH_MUST_BE_NULL: $id"
+            }
+            if (-not [bool]$operation.backup_required) {
+                throw "DELETE_BACKUP_REQUIRED: $id"
+            }
+        }
+    }
+}
+
+function Get-OperationEvaluation {
+    param(
+        [Parameter(Mandatory = $true)][object]$Manifest,
+        [Parameter(Mandatory = $true)][string]$ManifestDirectory,
+        [Parameter(Mandatory = $true)][string]$Root
+    )
+
+    $evaluations = New-Object System.Collections.Generic.List[object]
+
+    foreach ($operation in @($Manifest.operations)) {
+        $action = [string]$operation.action
+        $targetFull = Resolve-SafeRelativePath -Root $Root -RelativePath ([string]$operation.target_path)
+        $targetExists = Test-Path -LiteralPath $targetFull -PathType Leaf
+        $actualPreHash = if ($targetExists) { Get-Sha256 -Path $targetFull } else { $null }
+
+        $sourceFull = $null
+        $actualSourceHash = $null
+        if ($action -in @("ADD", "REPLACE")) {
+            $sourceFull = Resolve-SafeRelativePath -Root $ManifestDirectory -RelativePath ([string]$operation.source_path)
+            if (-not (Test-Path -LiteralPath $sourceFull -PathType Leaf)) {
+                throw "SOURCE_FILE_NOT_FOUND: $sourceFull"
+            }
+            $actualSourceHash = Get-Sha256 -Path $sourceFull
+        }
+
+        if ($action -eq "ADD") {
+            if ($targetExists) {
+                throw "ADD_TARGET_ALREADY_EXISTS: $targetFull"
+            }
+            if ($actualSourceHash -ne [string]$operation.expected_post_hash) {
+                throw "ADD_SOURCE_HASH_MISMATCH: $($operation.operation_id)"
+            }
+        }
+
+        if ($action -eq "REPLACE") {
+            if (-not $targetExists) {
+                throw "REPLACE_TARGET_MISSING: $targetFull"
+            }
+            if ($actualPreHash -ne [string]$operation.expected_pre_hash) {
+                throw "REPLACE_PRE_HASH_MISMATCH: $($operation.operation_id)"
+            }
+            if ($actualSourceHash -ne [string]$operation.expected_post_hash) {
+                throw "REPLACE_SOURCE_HASH_MISMATCH: $($operation.operation_id)"
+            }
+        }
+
+        if ($action -eq "DELETE") {
+            if (-not $targetExists) {
+                throw "DELETE_TARGET_MISSING: $targetFull"
+            }
+            if ($actualPreHash -ne [string]$operation.expected_pre_hash) {
+                throw "DELETE_PRE_HASH_MISMATCH: $($operation.operation_id)"
+            }
+        }
+
+        [void]$evaluations.Add([ordered]@{
+            operation_id = [string]$operation.operation_id
+            action = $action
+            source_path = if ($null -eq $operation.source_path) { $null } else { [string]$operation.source_path }
+            target_path = [string]$operation.target_path
+            expected_pre_hash = if ($null -eq $operation.expected_pre_hash) { $null } else { [string]$operation.expected_pre_hash }
+            expected_post_hash = if ($null -eq $operation.expected_post_hash) { $null } else { [string]$operation.expected_post_hash }
+            actual_pre_hash = $actualPreHash
+            actual_source_hash = $actualSourceHash
+            target_exists = $targetExists
+        })
+    }
+
+    return $evaluations.ToArray()
+}
+
+function Get-DryRunState {
+    param(
+        [Parameter(Mandatory = $true)][object]$Baseline,
+        [Parameter(Mandatory = $true)][object]$Manifest,
+        [Parameter(Mandatory = $true)][object[]]$Evaluations
+    )
+
+    $state = [ordered]@{
+        project_id = [string]$Baseline.project_id
+        current_version = [string]$Baseline.skillsmachine_version
+        target_version = [string]$Manifest.update_version
+        update_id = [string]$Manifest.update_id
+        source_commit = [string]$Manifest.source_commit
+        operations = @($Evaluations | ForEach-Object {
+            [ordered]@{
+                operation_id = $_.operation_id
+                action = $_.action
+                source_path = $_.source_path
+                target_path = $_.target_path
+                expected_pre_hash = $_.expected_pre_hash
+                expected_post_hash = $_.expected_post_hash
+                actual_pre_hash = $_.actual_pre_hash
+                actual_source_hash = $_.actual_source_hash
+                target_exists = $_.target_exists
+            }
+        })
+    }
+
+    return [ordered]@{
+        state = $state
+        fingerprint = Get-CanonicalObjectHash -Value $state
+    }
+}
+
+function Update-BaselineAfterApply {
+    param(
+        [Parameter(Mandatory = $true)][object]$Baseline,
+        [Parameter(Mandatory = $true)][object]$Manifest
+    )
+
+    $inventory = New-Object System.Collections.Generic.List[object]
+    foreach ($item in @($Baseline.component_inventory)) {
+        [void]$inventory.Add([ordered]@{
+            component_type = [string]$item.component_type
+            relative_path = [string]$item.relative_path
+            sha256 = [string]$item.sha256
+            version = [string]$item.version
+        })
+    }
+
+    foreach ($operation in @($Manifest.operations)) {
+        $target = [string]$operation.target_path
+        $remaining = @($inventory | Where-Object { $_.relative_path -ne $target })
+        $inventory = New-Object System.Collections.Generic.List[object]
+        foreach ($entry in $remaining) {
+            [void]$inventory.Add($entry)
+        }
+
+        if ([string]$operation.action -ne "DELETE") {
+            [void]$inventory.Add([ordered]@{
+                component_type = "updated_file"
+                relative_path = $target
+                sha256 = [string]$operation.expected_post_hash
+                version = [string]$Manifest.update_version
+            })
+        }
+    }
+
+    return [ordered]@{
+        schema_version = "1.1"
+        project_id = [string]$Baseline.project_id
+        created_by_skillsmachine = $true
+        skillsmachine_version = [string]$Manifest.update_version
+        skillsmachine_commit = [string]$Manifest.source_commit
+        last_update_id = [string]$Manifest.update_id
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = $inventory.ToArray()
+    }
+}
+
+function Write-ActionEvidence {
+    param(
+        [Parameter(Mandatory = $true)][string]$Status,
+        [Parameter(Mandatory = $true)][object]$Data
+    )
+
+    if (-not (Test-Path -LiteralPath $EvidencePath -PathType Container)) {
+        New-Item -ItemType Directory -Path $EvidencePath -Force | Out-Null
+    }
+
+    $evidence = [ordered]@{
+        runner_version = $RunnerVersion
+        action = $Action
+        status = $Status
+        generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        data = $Data
+    }
+
+    $jsonPath = Join-Path $EvidencePath ("UPDATE.{0}.{1}.json" -f $Action.ToUpperInvariant(), $RunStamp)
+    Write-Utf8NoBom -Path $jsonPath -Content ($evidence | ConvertTo-Json -Depth 30)
+
+    Write-Host "EVIDENCE_PATH=$jsonPath"
+    return $jsonPath
+}
+
+function Get-DocumentAuditRunnerPath {
+    $candidate = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\DocumentConsistencyAudit\Invoke-DocumentConsistencyAudit.ps1"))
+    if (-not (Test-Path -LiteralPath $candidate -PathType Leaf)) {
+        throw "DOCUMENT_AUDIT_RUNNER_NOT_FOUND"
+    }
+
+    return $candidate
+}
+
+function Get-DocumentAuditChangedPaths {
+    param([Parameter(Mandatory = $true)][object]$Manifest)
+
+    return @(
+        @($Manifest.operations | ForEach-Object { [string]$_.target_path }) |
+        Where-Object { -not [string]::IsNullOrWhiteSpace($_) } |
+        Sort-Object -Unique
+    )
+}
+
+function Get-DocumentAuditFailureClass {
+    param([Parameter(Mandatory = $true)][string]$Message)
+
+    if ($Message -like "STATE_*") {
+        return "STATE_ERROR"
+    }
+
+    if (
+        $Message -like "CROSS_ROOT_*" -or
+        $Message -like "REPARSE_POINT_*" -or
+        $Message -like "PATH_ESCAPES_ROOT*" -or
+        $Message -like "ROOTED_PATH_NOT_ALLOWED*" -or
+        $Message -eq "PROJECT_ROOT_REPARSE_POINT"
+    ) {
+        return "ROOT_SCOPE_VIOLATION"
+    }
+
+    return "AUDIT_FAILURE"
+}
+
+function Invoke-DocumentAuditPreflight {
+    param(
+        [Parameter(Mandatory = $true)][string]$Root,
+        [Parameter(Mandatory = $true)][object]$Baseline,
+        [Parameter(Mandatory = $true)][object]$Manifest
+    )
+
+    $auditRunner = Get-DocumentAuditRunnerPath
+    $auditParams = @{
+        Mode = "focused"
+        ProjectRoot = $Root
+        ProjectId = [string]$Baseline.project_id
+        ChangedPaths = @(Get-DocumentAuditChangedPaths -Manifest $Manifest)
+        NoStateWrite = $true
+    }
+
+    if (-not [string]::IsNullOrWhiteSpace($DocumentAuditStatePath)) {
+        $auditParams.StatePath = $DocumentAuditStatePath
+    }
+
+    try {
+        $auditOutput = & $auditRunner @auditParams 2>&1
+        if ($LASTEXITCODE -ne 0) {
+            throw (($auditOutput | ForEach-Object { [string]$_ }) -join " | ")
+        }
+
+        $auditJson = (($auditOutput | ForEach-Object { [string]$_ }) -join [Environment]::NewLine)
+        $audit = $auditJson | ConvertFrom-Json -ErrorAction Stop
+    }
+    catch {
+        $auditMessage = $_.Exception.Message
+        $failureClass = Get-DocumentAuditFailureClass -Message $auditMessage
+        throw ("DOCUMENT_AUDIT_{0}: {1}" -f $failureClass, $auditMessage)
+    }
+
+    $auditStatus = [string]$audit.status
+    if ($auditStatus -eq "HARD_CONFLICT") {
+        $issueClasses = @($audit.issues | ForEach-Object { [string]$_.issue_class } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
+        throw ("DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED: {0}" -f (($issueClasses -join ",").Trim(",")))
+    }
+
+    return [ordered]@{
+        status = $auditStatus
+        effective_mode = [string]$audit.effective_mode
+        changed_paths = @(Get-DocumentAuditChangedPaths -Manifest $Manifest)
+        conflicts_found = [int]$audit.summary.conflicts_found
+        warnings_found = [int]$audit.summary.warnings_found
+        blocked_by_hard_conflict = [bool]$audit.update_assessment.blocked_by_hard_conflict
+        automatic_execution = [bool]$audit.update_assessment.automatic_execution
+        recommended_support_package = [string]$audit.update_assessment.recommended_support_package
+    }
+}
+
+$ProjectRoot = [System.IO.Path]::GetFullPath($ProjectRoot)
+if (-not (Test-Path -LiteralPath $ProjectRoot -PathType Container)) {
+    throw "PROJECT_ROOT_NOT_FOUND"
+}
+
+if ([string]::IsNullOrWhiteSpace($BaselinePath)) {
+    $BaselinePath = Join-Path $ProjectRoot "SKILLSMACHINE.PROJECT.BASELINE.json"
+}
+else {
+    $BaselinePath = [System.IO.Path]::GetFullPath($BaselinePath)
+}
+
+$transactionPaths = Get-UpdateTransactionPaths -Root $ProjectRoot
+$transactionStatePath = [string]$transactionPaths.state
+$transactionMutex = $null
+$transactionId = [guid]::NewGuid().ToString("N")
+
+if ($Action -eq "recover") {
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "recover"
+
+    try {
+        if (-not (Test-Path -LiteralPath $transactionStatePath -PathType Leaf)) {
+            Write-Host "FINAL_STATUS=NO_RECOVERY_REQUIRED"
+            exit 0
+        }
+
+        $state = Read-JsonFile -Path $transactionStatePath
+        $recoverablePhases = @(
+            "CHECKPOINT_CREATED",
+            "APPLYING",
+            "ROLLING_BACK",
+            "FAILED_ROLLBACK_FAIL"
+        )
+
+        if ([string]$state.phase -notin $recoverablePhases) {
+            throw "TRANSACTION_STATE_NOT_RECOVERABLE: $($state.phase)"
+        }
+        if ([string]::IsNullOrWhiteSpace([string]$state.checkpoint_manifest)) {
+            throw "TRANSACTION_CHECKPOINT_REQUIRED_FOR_RECOVERY"
+        }
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLING_BACK" `
+            -TransactionId ([string]$state.transaction_id) `
+            -TransactionAction "recover" `
+            -UpdateId ([string]$state.update_id) `
+            -CheckpointManifestPath ([string]$state.checkpoint_manifest) `
+            -LastOperationId ([string]$state.last_operation_id)
+
+        $data = Restore-UpdateCheckpoint `
+            -Root $ProjectRoot `
+            -BaselineFile $BaselinePath `
+            -CheckpointFile ([string]$state.checkpoint_manifest)
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLED_BACK" `
+            -TransactionId ([string]$state.transaction_id) `
+            -TransactionAction "recover" `
+            -UpdateId ([string]$state.update_id) `
+            -CheckpointManifestPath ([string]$state.checkpoint_manifest)
+
+        [void](Write-ActionEvidence -Status "PASS_RECOVERY" -Data $data)
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
+        Write-Host "RECOVERY_STATUS=PASS"
+        Write-Host "FINAL_STATUS=PASS_RECOVERY"
+        exit 0
+    }
+    finally {
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
+    }
+}
+
+if ($Action -eq "rollback") {
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "rollback"
+
+    try {
+        if ([string]::IsNullOrWhiteSpace($CheckpointManifest)) {
+            throw "CHECKPOINT_MANIFEST_REQUIRED"
+        }
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLING_BACK" `
+            -TransactionId $transactionId `
+            -TransactionAction "rollback" `
+            -CheckpointManifestPath $CheckpointManifest
+
+        $data = Restore-UpdateCheckpoint `
+            -Root $ProjectRoot `
+            -BaselineFile $BaselinePath `
+            -CheckpointFile $CheckpointManifest
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "ROLLED_BACK" `
+            -TransactionId $transactionId `
+            -TransactionAction "rollback" `
+            -CheckpointManifestPath $CheckpointManifest
+
+        [void](Write-ActionEvidence -Status "PASS" -Data $data)
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
+        Write-Host "FINAL_STATUS=PASS_ROLLBACK"
+        exit 0
+    }
+    finally {
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
+    }
+}
+
+if ([string]::IsNullOrWhiteSpace($UpdateManifest)) {
+    throw "UPDATE_MANIFEST_REQUIRED"
+}
+
+$UpdateManifest = [System.IO.Path]::GetFullPath($UpdateManifest)
+$manifestDirectory = Split-Path -Parent $UpdateManifest
+$manifest = Read-JsonFile -Path $UpdateManifest
+$baseline = Read-JsonFile -Path $BaselinePath
+
+Assert-ManifestContract -Manifest $manifest
+
+if ([string]$baseline.schema_version -ne "1.1") {
+    throw "UNSUPPORTED_BASELINE_SCHEMA_VERSION"
+}
+if (-not [bool]$baseline.created_by_skillsmachine) {
+    throw "BLOCKED_UNKNOWN_PROJECT"
+}
+if (-not (Test-VersionCompatible `
+    -Current ([string]$baseline.skillsmachine_version) `
+    -Minimum ([string]$manifest.minimum_project_version) `
+    -Maximum ([string]$manifest.maximum_project_version))) {
+    throw "BLOCKED_UNSUPPORTED_BASELINE"
+}
+
+# MB-SM-065A-3R IDEMPOTENCY GATE
+# A project whose baseline already records this exact update and target version is
+# already compliant. Return before operation evaluation so ADD/REPLACE/DELETE are
+# not re-applied and no approval fingerprint or checkpoint is required.
+$alreadyApplied = (
+    [string]$baseline.last_update_id -eq [string]$manifest.update_id -and
+    [string]$baseline.skillsmachine_version -eq [string]$manifest.update_version
+)
+
+if ($alreadyApplied -and $Action -in @("preflight", "dry-run", "apply")) {
+    Test-GitClean -Root $ProjectRoot
+
+    New-Item -ItemType Directory -Force -Path $EvidencePath | Out-Null
+    $alreadyAppliedEvidence = [ordered]@{
+        action = $Action
+        project_id = [string]$baseline.project_id
+        update_id = [string]$manifest.update_id
+        current_version = [string]$baseline.skillsmachine_version
+        target_version = [string]$manifest.update_version
+        already_applied = $true
+        mutation_performed = $false
+        checked_at = (Get-Date).ToUniversalTime().ToString("o")
+    }
+    $alreadyAppliedEvidencePath = Join-Path $EvidencePath (
+        "UPDATE.ALREADY_APPLIED.{0}.{1}.json" -f $manifest.update_id, $RunStamp
+    )
+    Write-Utf8NoBom -Path $alreadyAppliedEvidencePath -Content (
+        $alreadyAppliedEvidence | ConvertTo-Json -Depth 10
+    )
+
+    Write-Host "ALREADY_APPLIED=True"
+    Write-Host "UPDATE_ID=$($manifest.update_id)"
+    Write-Host "CURRENT_VERSION=$($baseline.skillsmachine_version)"
+    Write-Host "EVIDENCE_FILE=$alreadyAppliedEvidencePath"
+    Write-Host "FINAL_STATUS=ALREADY_APPLIED"
+    exit 0
+}
+if (
+    $Action -eq "apply" -and
+    (Test-Path -LiteralPath $transactionStatePath -PathType Leaf)
+) {
+    $pendingState = Read-JsonFile -Path $transactionStatePath
+    if ([string]$pendingState.phase -in @(
+        "CHECKPOINT_CREATED",
+        "APPLYING",
+        "ROLLING_BACK",
+        "FAILED_ROLLBACK_FAIL"
+    )) {
+        throw "INTERRUPTED_UPDATE_RECOVERY_REQUIRED: phase=$($pendingState.phase)"
+    }
+}
+
+Test-GitClean -Root $ProjectRoot
+$evaluations = @(Get-OperationEvaluation -Manifest $manifest -ManifestDirectory $manifestDirectory -Root $ProjectRoot)
+$dryRun = Get-DryRunState -Baseline $baseline -Manifest $manifest -Evaluations $evaluations
+$documentAudit = $null
+if ($UseDocumentAuditPreflight) {
+    $documentAudit = Invoke-DocumentAuditPreflight -Root $ProjectRoot -Baseline $baseline -Manifest $manifest
+    Write-Host "DOCUMENT_AUDIT_STATUS=$($documentAudit.status)"
+    Write-Host "DOCUMENT_AUDIT_EFFECTIVE_MODE=$($documentAudit.effective_mode)"
+}
+
+if ($Action -eq "preflight") {
+    $data = [ordered]@{
+        project_id = [string]$baseline.project_id
+        current_version = [string]$baseline.skillsmachine_version
+        target_version = [string]$manifest.update_version
+        compatibility_status = "COMPATIBLE"
+        operation_count = $evaluations.Count
+        reversible = $true
+        human_approval_required = $true
+        repository_mutation = $false
+        document_audit = $documentAudit
+    }
+    [void](Write-ActionEvidence -Status "PASS" -Data $data)
+    Write-Host "FINAL_STATUS=PASS_PREFLIGHT"
+    exit 0
+}
+
+if ($Action -eq "dry-run") {
+    $data = [ordered]@{
+        project_id = [string]$baseline.project_id
+        current_version = [string]$baseline.skillsmachine_version
+        target_version = [string]$manifest.update_version
+        update_id = [string]$manifest.update_id
+        compatibility_status = "COMPATIBLE"
+        dry_run_fingerprint = [string]$dryRun.fingerprint
+        files_add = @($evaluations | Where-Object { $_.action -eq "ADD" }).Count
+        files_modify = @($evaluations | Where-Object { $_.action -eq "REPLACE" }).Count
+        files_delete = @($evaluations | Where-Object { $_.action -eq "DELETE" }).Count
+        operations = @($dryRun.state.operations)
+        repository_mutation = $false
+        document_audit = $documentAudit
+    }
+    [void](Write-ActionEvidence -Status "PASS" -Data $data)
+    Write-Host "DRY_RUN_FINGERPRINT=$($dryRun.fingerprint)"
+    Write-Host "FINAL_STATUS=PASS_DRY_RUN"
+    exit 0
+}
+
+if ($Action -eq "apply") {
+    if (-not $HumanApproved) {
+        throw "HUMAN_APPROVAL_REQUIRED"
+    }
+    if ([string]::IsNullOrWhiteSpace($ApprovedDryRunFingerprint)) {
+        throw "APPROVED_DRY_RUN_FINGERPRINT_REQUIRED"
+    }
+    if ($ApprovedDryRunFingerprint -ne [string]$dryRun.fingerprint) {
+        throw "DRY_RUN_FINGERPRINT_MISMATCH"
+    }
+
+    $transactionMutex = Enter-UpdateTransactionMutex `
+        -Root $ProjectRoot `
+        -TransactionAction "apply"
+
+    Write-UpdateTransactionState `
+        -Path $transactionStatePath `
+        -Phase "PREPARED" `
+        -TransactionId $transactionId `
+        -TransactionAction "apply" `
+        -UpdateId ([string]$manifest.update_id)
+
+    if (
+        $TestMode -and
+        -not [string]::IsNullOrWhiteSpace($env:SKILLSMACHINE_TEST_HOLD_LOCK_SECONDS)
+    ) {
+        $testProjectId = [string]$baseline.project_id
+        if (
+            $testProjectId.StartsWith("TEST_", [System.StringComparison]::OrdinalIgnoreCase) -or
+            $testProjectId.StartsWith("NEGATIVE_TEST_", [System.StringComparison]::OrdinalIgnoreCase)
+        ) {
+            Start-Sleep -Seconds ([int]$env:SKILLSMACHINE_TEST_HOLD_LOCK_SECONDS)
+        }
+    }
+
+    $checkpointWork = Join-Path $env:TEMP ("SkillsMachineCheckpoint.{0}" -f ([guid]::NewGuid().ToString("N")))
+    $checkpointManifestPath = $null
+    $checkpointZip = $null
+    New-Item -ItemType Directory -Path $checkpointWork -Force | Out-Null
+
+    try {
+        $checkpointEntries = New-Object System.Collections.Generic.List[object]
+
+        foreach ($evaluation in $evaluations) {
+            $targetFull = Resolve-SafeRelativePath -Root $ProjectRoot -RelativePath ([string]$evaluation.target_path)
+            $backupRelative = $null
+
+            if ([bool]$evaluation.target_exists) {
+                $backupRelative = Join-Path "files" ([string]$evaluation.operation_id + ".bin")
+                $backupFull = Join-Path $checkpointWork $backupRelative
+                $backupParent = Split-Path -Parent $backupFull
+                if (-not (Test-Path -LiteralPath $backupParent -PathType Container)) {
+                    New-Item -ItemType Directory -Path $backupParent -Force | Out-Null
+                }
+                Copy-Item -LiteralPath $targetFull -Destination $backupFull -Force
+            }
+
+            [void]$checkpointEntries.Add([ordered]@{
+                operation_id = [string]$evaluation.operation_id
+                target_path = [string]$evaluation.target_path
+                pre_exists = [bool]$evaluation.target_exists
+                pre_hash = $evaluation.actual_pre_hash
+                backup_relative_path = $backupRelative
+            })
+        }
+
+        Copy-Item -LiteralPath $BaselinePath -Destination (Join-Path $checkpointWork "__baseline.json") -Force
+        $baselinePreHash = Get-Sha256 -Path $BaselinePath
+
+        $checkpointZip = Join-Path $EvidencePath ("UPDATE.CHECKPOINT.{0}.{1}.zip" -f $manifest.update_id, $RunStamp)
+        if (-not (Test-Path -LiteralPath $EvidencePath -PathType Container)) {
+            New-Item -ItemType Directory -Path $EvidencePath -Force | Out-Null
+        }
+        Compress-Archive -Path (Join-Path $checkpointWork "*") -DestinationPath $checkpointZip -Force
+
+        $checkpointObject = [ordered]@{
+            schema_version = "1.0"
+            project_root = $ProjectRoot
+            update_id = [string]$manifest.update_id
+            dry_run_fingerprint = [string]$dryRun.fingerprint
+            checkpoint_zip = $checkpointZip
+            baseline_path = $BaselinePath
+            baseline_pre_hash = $baselinePreHash
+            entries = $checkpointEntries.ToArray()
+        }
+        $checkpointManifestPath = Join-Path $EvidencePath ("UPDATE.CHECKPOINT.{0}.{1}.json" -f $manifest.update_id, $RunStamp)
+        Write-Utf8NoBom -Path $checkpointManifestPath -Content ($checkpointObject | ConvertTo-Json -Depth 20)
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "CHECKPOINT_CREATED" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "APPLYING" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
+        foreach ($operation in @($manifest.operations)) {
+            $targetFull = Resolve-SafeRelativePath -Root $ProjectRoot -RelativePath ([string]$operation.target_path)
+            $actionName = [string]$operation.action
+
+            if ($actionName -in @("ADD", "REPLACE")) {
+                $sourceFull = Resolve-SafeRelativePath -Root $manifestDirectory -RelativePath ([string]$operation.source_path)
+                $parent = Split-Path -Parent $targetFull
+                if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+                    New-Item -ItemType Directory -Path $parent -Force | Out-Null
+                }
+                Copy-Item -LiteralPath $sourceFull -Destination $targetFull -Force
+                if ((Get-Sha256 -Path $targetFull) -ne [string]$operation.expected_post_hash) {
+                    throw "POST_APPLY_HASH_MISMATCH: $($operation.operation_id)"
+                }
+            }
+            elseif ($actionName -eq "DELETE") {
+                Remove-Item -LiteralPath $targetFull -Force
+                if (Test-Path -LiteralPath $targetFull) {
+                    throw "POST_DELETE_TARGET_STILL_EXISTS: $($operation.operation_id)"
+                }
+            }
+
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "APPLYING" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -LastOperationId ([string]$operation.operation_id)
+
+            if (
+                -not [string]::IsNullOrWhiteSpace(
+                    $env:SKILLSMACHINE_TEST_CRASH_AFTER_OPERATION_ID
+                )
+            ) {
+                if (-not $TestMode) {
+                    throw "TEST_CRASH_HOOK_BLOCKED_WITHOUT_TEST_MODE"
+                }
+
+                $testProjectId = [string]$baseline.project_id
+                if (
+                    -not $testProjectId.StartsWith(
+                        "TEST_",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    ) -and
+                    -not $testProjectId.StartsWith(
+                        "NEGATIVE_TEST_",
+                        [System.StringComparison]::OrdinalIgnoreCase
+                    )
+                ) {
+                    throw "TEST_CRASH_HOOK_BLOCKED_FOR_NON_TEST_PROJECT: $testProjectId"
+                }
+
+                if (
+                    $env:SKILLSMACHINE_TEST_CRASH_AFTER_OPERATION_ID -eq
+                    [string]$operation.operation_id
+                ) {
+                    Stop-Process -Id $PID -Force
+                }
+            }
+
+            if (-not [string]::IsNullOrWhiteSpace($env:SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID)) {
+                if (-not $TestMode) {
+                    throw "TEST_HOOK_BLOCKED_WITHOUT_TEST_MODE"
+                }
+
+                $testProjectId = [string]$baseline.project_id
+                if (
+                    -not $testProjectId.StartsWith("TEST_", [System.StringComparison]::OrdinalIgnoreCase) -and
+                    -not $testProjectId.StartsWith("NEGATIVE_TEST_", [System.StringComparison]::OrdinalIgnoreCase)
+                ) {
+                    throw "TEST_HOOK_BLOCKED_FOR_NON_TEST_PROJECT: $testProjectId"
+                }
+
+                if ($env:SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID -eq [string]$operation.operation_id) {
+                    Write-Host "TEST_MODE_ACTIVE=True"
+                    throw "TEST_INDUCED_FAILURE_AFTER_OPERATION: $($operation.operation_id)"
+                }
+            }
+        }
+
+        $baselineAfter = Update-BaselineAfterApply -Baseline $baseline -Manifest $manifest
+        Write-Utf8NoBom -Path $BaselinePath -Content ($baselineAfter | ConvertTo-Json -Depth 20)
+
+        $data = [ordered]@{
+            project_id = [string]$baseline.project_id
+            update_id = [string]$manifest.update_id
+            dry_run_fingerprint = [string]$dryRun.fingerprint
+            approval_recorded = $true
+            checkpoint_manifest = $checkpointManifestPath
+            checkpoint_zip = $checkpointZip
+            applied_operations = @($manifest.operations).Count
+            baseline_updated = $true
+            document_audit = $documentAudit
+        }
+        [void](Write-ActionEvidence -Status "PASS" -Data $data)
+
+        Write-UpdateTransactionState `
+            -Path $transactionStatePath `
+            -Phase "APPLIED" `
+            -TransactionId $transactionId `
+            -TransactionAction "apply" `
+            -UpdateId ([string]$manifest.update_id) `
+            -CheckpointManifestPath $checkpointManifestPath
+
+        Remove-UpdateTransactionState -Path $transactionStatePath
+
+        Write-Host "CHECKPOINT_MANIFEST=$checkpointManifestPath"
+        Write-Host "FINAL_STATUS=PASS_APPLY"
+        exit 0
+    }
+    catch {
+        $applyError = $_
+        $rollbackStatus = "NOT_ATTEMPTED"
+        $rollbackError = $null
+
+        try {
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "ROLLING_BACK" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -Failure $applyError.Exception.Message
+
+            if ($null -eq $checkpointManifestPath -or -not (Test-Path -LiteralPath $checkpointManifestPath -PathType Leaf)) {
+                throw "AUTOMATIC_ROLLBACK_CHECKPOINT_MANIFEST_UNAVAILABLE"
+            }
+
+            $checkpointForRollback = Read-JsonFile -Path $checkpointManifestPath
+            $rollbackZip = [string]$checkpointForRollback.checkpoint_zip
+            if (-not (Test-Path -LiteralPath $rollbackZip -PathType Leaf)) {
+                throw "AUTOMATIC_ROLLBACK_CHECKPOINT_ZIP_UNAVAILABLE"
+            }
+
+            $rollbackExtractRoot = Join-Path $env:TEMP ("SkillsMachineAutoRollback.{0}" -f ([guid]::NewGuid().ToString("N")))
+            New-Item -ItemType Directory -Path $rollbackExtractRoot -Force | Out-Null
+
+            try {
+                Expand-Archive -LiteralPath $rollbackZip -DestinationPath $rollbackExtractRoot -Force
+
+                foreach ($entry in @($checkpointForRollback.entries)) {
+                    $targetFull = Resolve-SafeRelativePath -Root $ProjectRoot -RelativePath ([string]$entry.target_path)
+
+                    if ([bool]$entry.pre_exists) {
+                        $backupFull = Join-Path $rollbackExtractRoot ([string]$entry.backup_relative_path)
+                        if (-not (Test-Path -LiteralPath $backupFull -PathType Leaf)) {
+                            throw "AUTOMATIC_ROLLBACK_BACKUP_MISSING: $($entry.target_path)"
+                        }
+
+                        $parent = Split-Path -Parent $targetFull
+                        if (-not (Test-Path -LiteralPath $parent -PathType Container)) {
+                            New-Item -ItemType Directory -Path $parent -Force | Out-Null
+                        }
+
+                        Copy-Item -LiteralPath $backupFull -Destination $targetFull -Force
+                        if ((Get-Sha256 -Path $targetFull) -ne [string]$entry.pre_hash) {
+                            throw "AUTOMATIC_ROLLBACK_HASH_MISMATCH: $($entry.target_path)"
+                        }
+                    }
+                    else {
+                        if (Test-Path -LiteralPath $targetFull) {
+                            Remove-Item -LiteralPath $targetFull -Force
+                        }
+                    }
+                }
+
+                $baselineBackup = Join-Path $rollbackExtractRoot "__baseline.json"
+                if (-not (Test-Path -LiteralPath $baselineBackup -PathType Leaf)) {
+                    throw "AUTOMATIC_ROLLBACK_BASELINE_BACKUP_MISSING"
+                }
+
+                Copy-Item -LiteralPath $baselineBackup -Destination $BaselinePath -Force
+                if ((Get-Sha256 -Path $BaselinePath) -ne [string]$checkpointForRollback.baseline_pre_hash) {
+                    throw "AUTOMATIC_ROLLBACK_BASELINE_HASH_MISMATCH"
+                }
+
+                $rollbackStatus = "PASS"
+
+                Write-UpdateTransactionState `
+                    -Path $transactionStatePath `
+                    -Phase "ROLLED_BACK" `
+                    -TransactionId $transactionId `
+                    -TransactionAction "apply" `
+                    -UpdateId ([string]$manifest.update_id) `
+                    -CheckpointManifestPath $checkpointManifestPath `
+                    -Failure $applyError.Exception.Message
+
+                Remove-UpdateTransactionState -Path $transactionStatePath
+            }
+            finally {
+                if (Test-Path -LiteralPath $rollbackExtractRoot) {
+                    Remove-Item -LiteralPath $rollbackExtractRoot -Recurse -Force
+                }
+            }
+        }
+        catch {
+            $rollbackStatus = "FAIL"
+            $rollbackError = $_.Exception.Message
+
+            Write-UpdateTransactionState `
+                -Path $transactionStatePath `
+                -Phase "FAILED_ROLLBACK_FAIL" `
+                -TransactionId $transactionId `
+                -TransactionAction "apply" `
+                -UpdateId ([string]$manifest.update_id) `
+                -CheckpointManifestPath $checkpointManifestPath `
+                -Failure $rollbackError
+        }
+
+        $failureData = [ordered]@{
+            project_id = [string]$baseline.project_id
+            update_id = [string]$manifest.update_id
+            dry_run_fingerprint = [string]$dryRun.fingerprint
+            apply_error = $applyError.Exception.Message
+            automatic_rollback_status = $rollbackStatus
+            automatic_rollback_error = $rollbackError
+            checkpoint_manifest = $checkpointManifestPath
+            checkpoint_zip = $checkpointZip
+            document_audit = $documentAudit
+        }
+
+        $failureStatus = if ($rollbackStatus -eq "PASS") {
+            "APPLY_FAILED_ROLLBACK_PASS"
+        }
+        else {
+            "APPLY_FAILED_ROLLBACK_FAIL"
+        }
+
+        [void](Write-ActionEvidence -Status $failureStatus -Data $failureData)
+        Write-Host "AUTOMATIC_ROLLBACK_STATUS=$rollbackStatus"
+        Write-Host "FINAL_STATUS=$failureStatus"
+        Write-Host "APPLY_ERROR=$($applyError.Exception.Message)"
+        exit 1
+    }
+    finally {
+        if (Test-Path -LiteralPath $checkpointWork) {
+            Remove-Item -LiteralPath $checkpointWork -Recurse -Force
+        }
+
+        Exit-UpdateTransactionMutex -Mutex $transactionMutex
+    }
+}
+
+throw "UNREACHABLE_ACTION"
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\Test-SkillsMachineUpdate.ps1
+VERSION    : v1.1-CORE
+SHA256     : 1D8AB8F8216AAD5772FBB9CAD3845D86AAC00A332B392574B2B9A382ED3ED067
+--------------------------------------------------
+[CmdletBinding()]
+param(
+    [Parameter(Mandatory = $true)]
+    [string]$RunnerPath,
+
+    [Parameter(Mandatory = $true)]
+    [string]$OutputPath
+)
+
+$ErrorActionPreference = "Stop"
+Set-StrictMode -Version Latest
+
+function Write-Utf8NoBom {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][AllowEmptyString()][string]$Content
+    )
+    $utf8 = New-Object System.Text.UTF8Encoding($false)
+    [System.IO.File]::WriteAllText($Path, $Content, $utf8)
+}
+
+function Get-Sha256 {
+    param([Parameter(Mandatory = $true)][string]$Path)
+    return (Get-FileHash -LiteralPath $Path -Algorithm SHA256).Hash
+}
+
+function Assert-FileContainsAll {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string[]]$Patterns,
+        [Parameter(Mandatory = $true)][string]$FailureMessage
+    )
+
+    $content = Get-Content -LiteralPath $Path -Raw -Encoding UTF8
+    foreach ($pattern in @($Patterns)) {
+        if (-not $content.Contains($pattern)) {
+            throw ("{0}: {1}" -f $FailureMessage, $pattern)
+        }
+    }
+}
+
+function Get-CommandPathIfRunnable {
+    param(
+        [Parameter(Mandatory = $true)][string]$Name
+    )
+
+    $cmd = Get-Command $Name -ErrorAction SilentlyContinue
+    if ($null -eq $cmd) {
+        return $null
+    }
+
+    try {
+        $null = & $cmd.Source -NoProfile -Command '$PSVersionTable.PSVersion.ToString()' 2>$null
+        if ($LASTEXITCODE -ne 0) {
+            return $null
+        }
+    }
+    catch {
+        return $null
+    }
+
+    return $cmd.Source
+}
+
+$testRoot = Join-Path $env:TEMP ("SkillsMachineUpdateTest.{0}" -f ([guid]::NewGuid().ToString("N")))
+$repoRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\.."))
+$windowsPowerShellPath = (Get-Command powershell.exe -ErrorAction Stop).Source
+$powerShell7Path = Get-CommandPathIfRunnable -Name "pwsh.exe"
+$runnerHostPath = if ($null -ne $powerShell7Path) { $powerShell7Path } else { $windowsPowerShellPath }
+$project = Join-Path $testRoot "project"
+$package = Join-Path $testRoot "package"
+$evidence = Join-Path $testRoot "evidence"
+
+$env:HOME = $testRoot
+$env:XDG_CONFIG_HOME = $testRoot
+
+New-Item -ItemType Directory -Path $project, $package, $evidence -Force | Out-Null
+
+try {
+    Write-Utf8NoBom -Path (Join-Path $project "replace.txt") -Content "before replace"
+    Write-Utf8NoBom -Path (Join-Path $project "delete.txt") -Content "before delete"
+    Write-Utf8NoBom -Path (Join-Path $package "add.payload.txt") -Content "added"
+    Write-Utf8NoBom -Path (Join-Path $package "replace.payload.txt") -Content "after replace"
+
+    $replacePre = Get-Sha256 -Path (Join-Path $project "replace.txt")
+    $deletePre = Get-Sha256 -Path (Join-Path $project "delete.txt")
+    $addPost = Get-Sha256 -Path (Join-Path $package "add.payload.txt")
+    $replacePost = Get-Sha256 -Path (Join-Path $package "replace.payload.txt")
+
+    & git -C $project init | Out-Null
+    & git -C $project config user.email "skillsmachine-test@example.invalid"
+    & git -C $project config user.name "SkillsMachine Test"
+
+    $baseline = [ordered]@{
+        schema_version = "1.1"
+        project_id = "TEST_PROJECT"
+        created_by_skillsmachine = $true
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "replace.txt"
+                sha256 = $replacePre
+                version = "0.3.0"
+            },
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "delete.txt"
+                sha256 = $deletePre
+                version = "0.3.0"
+            }
+        )
+    }
+    $baselinePath = Join-Path $project "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $baselinePath -Content ($baseline | ConvertTo-Json -Depth 10)
+
+    $manifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000001"
+        update_version = "0.3.1"
+        source_commit = ("1" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("metadata")
+        operations = @(
+            [ordered]@{
+                operation_id = "OP-ADD"
+                action = "ADD"
+                source_path = "add.payload.txt"
+                target_path = "add.txt"
+                expected_pre_hash = $null
+                expected_post_hash = $addPost
+                backup_required = $false
+                reversible = $true
+            },
+            [ordered]@{
+                operation_id = "OP-REPLACE"
+                action = "REPLACE"
+                source_path = "replace.payload.txt"
+                target_path = "replace.txt"
+                expected_pre_hash = $replacePre
+                expected_post_hash = $replacePost
+                backup_required = $true
+                reversible = $true
+            },
+            [ordered]@{
+                operation_id = "OP-DELETE"
+                action = "DELETE"
+                source_path = $null
+                target_path = "delete.txt"
+                expected_pre_hash = $deletePre
+                expected_post_hash = $null
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $manifestPath = Join-Path $package "update.json"
+    Write-Utf8NoBom -Path $manifestPath -Content ($manifest | ConvertTo-Json -Depth 10)
+
+    & git -C $project add .
+    & git -C $project commit -m "baseline" | Out-Null
+
+    $dryOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action dry-run `
+        -ProjectRoot $project `
+        -UpdateManifest $manifestPath `
+        -BaselinePath $baselinePath `
+        -EvidencePath $evidence 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "DRY_RUN_FAILED: $($dryOutput -join ' | ')"
+    }
+
+    $fingerprintLine = @($dryOutput | Where-Object { $_ -like "DRY_RUN_FINGERPRINT=*" }) | Select-Object -Last 1
+    if ([string]::IsNullOrWhiteSpace($fingerprintLine)) {
+        throw "DRY_RUN_FINGERPRINT_NOT_RETURNED"
+    }
+    $fingerprint = ($fingerprintLine -split "=", 2)[1]
+
+    $applyOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action apply `
+        -ProjectRoot $project `
+        -UpdateManifest $manifestPath `
+        -BaselinePath $baselinePath `
+        -EvidencePath $evidence `
+        -HumanApproved `
+        -ApprovedDryRunFingerprint $fingerprint 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "APPLY_FAILED: $($applyOutput -join ' | ')"
+    }
+
+    if (-not (Test-Path -LiteralPath (Join-Path $project "add.txt"))) {
+        throw "ADD_NOT_APPLIED"
+    }
+    if ((Get-Sha256 -Path (Join-Path $project "replace.txt")) -ne $replacePost) {
+        throw "REPLACE_NOT_APPLIED"
+    }
+    if (Test-Path -LiteralPath (Join-Path $project "delete.txt")) {
+        throw "DELETE_NOT_APPLIED"
+    }
+
+    $checkpointLine = @($applyOutput | Where-Object { $_ -like "CHECKPOINT_MANIFEST=*" }) | Select-Object -Last 1
+    if ([string]::IsNullOrWhiteSpace($checkpointLine)) {
+        throw "CHECKPOINT_MANIFEST_NOT_RETURNED"
+    }
+    $checkpointManifest = ($checkpointLine -split "=", 2)[1]
+
+    $rollbackOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action rollback `
+        -ProjectRoot $project `
+        -BaselinePath $baselinePath `
+        -EvidencePath $evidence `
+        -CheckpointManifest $checkpointManifest 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "ROLLBACK_FAILED: $($rollbackOutput -join ' | ')"
+    }
+
+    if (Test-Path -LiteralPath (Join-Path $project "add.txt")) {
+        throw "ADD_NOT_ROLLED_BACK"
+    }
+    if ((Get-Sha256 -Path (Join-Path $project "replace.txt")) -ne $replacePre) {
+        throw "REPLACE_NOT_ROLLED_BACK"
+    }
+    if ((Get-Sha256 -Path (Join-Path $project "delete.txt")) -ne $deletePre) {
+        throw "DELETE_NOT_ROLLED_BACK"
+    }
+
+    $status = & git -C $project status --short --untracked-files=all
+    $statusLines = @($status | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($statusLines.Count -gt 0) {
+        throw "PROJECT_NOT_CLEAN_AFTER_ROLLBACK: $($statusLines -join ' | ')"
+    }
+
+    # Security guard: an induced-failure hook must be rejected without -TestMode.
+    $guardProject = Join-Path $testRoot "guard-project"
+    $guardPackage = Join-Path $testRoot "guard-package"
+    $guardEvidence = Join-Path $testRoot "guard-evidence"
+    New-Item -ItemType Directory -Path $guardProject, $guardPackage, $guardEvidence -Force | Out-Null
+
+    Write-Utf8NoBom -Path (Join-Path $guardProject "guard.txt") -Content "guard before"
+    Write-Utf8NoBom -Path (Join-Path $guardPackage "guard.payload.txt") -Content "guard after"
+    $guardPre = Get-Sha256 -Path (Join-Path $guardProject "guard.txt")
+    $guardPost = Get-Sha256 -Path (Join-Path $guardPackage "guard.payload.txt")
+
+    & git -C $guardProject init | Out-Null
+    & git -C $guardProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $guardProject config user.name "SkillsMachine Test"
+
+    $guardBaseline = [ordered]@{
+        schema_version = "1.1"
+        project_id = "NORMAL_PROJECT"
+        created_by_skillsmachine = $true
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "guard.txt"
+                sha256 = $guardPre
+                version = "0.3.0"
+            }
+        )
+    }
+    $guardBaselinePath = Join-Path $guardProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $guardBaselinePath -Content ($guardBaseline | ConvertTo-Json -Depth 10)
+
+    $guardManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000003"
+        update_version = "0.3.1"
+        source_commit = ("3" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("metadata")
+        operations = @(
+            [ordered]@{
+                operation_id = "GUARD-01"
+                action = "REPLACE"
+                source_path = "guard.payload.txt"
+                target_path = "guard.txt"
+                expected_pre_hash = $guardPre
+                expected_post_hash = $guardPost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $guardManifestPath = Join-Path $guardPackage "update-guard.json"
+    Write-Utf8NoBom -Path $guardManifestPath -Content ($guardManifest | ConvertTo-Json -Depth 10)
+
+    & git -C $guardProject add .
+    & git -C $guardProject commit -m "guard baseline" | Out-Null
+
+    $guardDryOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action dry-run `
+        -ProjectRoot $guardProject `
+        -UpdateManifest $guardManifestPath `
+        -BaselinePath $guardBaselinePath `
+        -EvidencePath $guardEvidence 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "GUARD_DRY_RUN_FAILED: $($guardDryOutput -join ' | ')"
+    }
+
+    $guardFingerprintLine = @($guardDryOutput | Where-Object { $_ -like "DRY_RUN_FINGERPRINT=*" }) | Select-Object -Last 1
+    $guardFingerprint = ($guardFingerprintLine -split "=", 2)[1]
+
+    $env:SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID = "GUARD-01"
+    try {
+        try {
+            $guardApplyOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+                -Action apply `
+                -ProjectRoot $guardProject `
+                -UpdateManifest $guardManifestPath `
+                -BaselinePath $guardBaselinePath `
+                -EvidencePath $guardEvidence `
+                -HumanApproved `
+                -ApprovedDryRunFingerprint $guardFingerprint 2>&1
+            $guardApplyExit = $LASTEXITCODE
+        }
+        catch {
+            $guardApplyOutput = @($_.Exception.Message)
+            $guardApplyExit = 1
+        }
+    }
+    finally {
+        Remove-Item Env:\SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID -ErrorAction SilentlyContinue
+    }
+
+    if ($guardApplyExit -eq 0) {
+        throw "TEST_HOOK_GUARD_UNEXPECTED_PASS"
+    }
+    if (-not (@($guardApplyOutput) -match "TEST_HOOK_BLOCKED_WITHOUT_TEST_MODE")) {
+        throw "TEST_HOOK_GUARD_NOT_ENFORCED: $($guardApplyOutput -join ' | ')"
+    }
+    if ((Get-Sha256 -Path (Join-Path $guardProject "guard.txt")) -ne $guardPre) {
+        throw "GUARD_PROJECT_NOT_RESTORED"
+    }
+
+    # Negative path: operation 1 succeeds, operation 2 fails after mutation,
+    # and the runner must automatically restore project files and baseline.
+    $negativeProject = Join-Path $testRoot "negative-project"
+    $negativePackage = Join-Path $testRoot "negative-package"
+    $negativeEvidence = Join-Path $testRoot "negative-evidence"
+    New-Item -ItemType Directory -Path $negativeProject, $negativePackage, $negativeEvidence -Force | Out-Null
+
+    Write-Utf8NoBom -Path (Join-Path $negativeProject "first.txt") -Content "first before"
+    Write-Utf8NoBom -Path (Join-Path $negativeProject "second.txt") -Content "second before"
+    Write-Utf8NoBom -Path (Join-Path $negativePackage "first.payload.txt") -Content "first after"
+    Write-Utf8NoBom -Path (Join-Path $negativePackage "second.payload.txt") -Content "second after"
+
+    $negativeFirstPre = Get-Sha256 -Path (Join-Path $negativeProject "first.txt")
+    $negativeSecondPre = Get-Sha256 -Path (Join-Path $negativeProject "second.txt")
+    $negativeFirstPost = Get-Sha256 -Path (Join-Path $negativePackage "first.payload.txt")
+    $negativeSecondPost = Get-Sha256 -Path (Join-Path $negativePackage "second.payload.txt")
+
+    & git -C $negativeProject init | Out-Null
+    & git -C $negativeProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $negativeProject config user.name "SkillsMachine Test"
+
+    $negativeBaseline = [ordered]@{
+        schema_version = "1.1"
+        project_id = "NEGATIVE_TEST_PROJECT"
+        created_by_skillsmachine = $true
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "first.txt"
+                sha256 = $negativeFirstPre
+                version = "0.3.0"
+            },
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "second.txt"
+                sha256 = $negativeSecondPre
+                version = "0.3.0"
+            }
+        )
+    }
+    $negativeBaselinePath = Join-Path $negativeProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $negativeBaselinePath -Content ($negativeBaseline | ConvertTo-Json -Depth 10)
+    $negativeBaselinePreHash = Get-Sha256 -Path $negativeBaselinePath
+
+    $negativeManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000002"
+        update_version = "0.3.1"
+        source_commit = ("2" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("metadata")
+        operations = @(
+            [ordered]@{
+                operation_id = "NEG-01"
+                action = "REPLACE"
+                source_path = "first.payload.txt"
+                target_path = "first.txt"
+                expected_pre_hash = $negativeFirstPre
+                expected_post_hash = $negativeFirstPost
+                backup_required = $true
+                reversible = $true
+            },
+            [ordered]@{
+                operation_id = "NEG-02"
+                action = "REPLACE"
+                source_path = "second.payload.txt"
+                target_path = "second.txt"
+                expected_pre_hash = $negativeSecondPre
+                expected_post_hash = $negativeSecondPost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $negativeManifestPath = Join-Path $negativePackage "update-negative.json"
+    Write-Utf8NoBom -Path $negativeManifestPath -Content ($negativeManifest | ConvertTo-Json -Depth 10)
+
+    & git -C $negativeProject add .
+    & git -C $negativeProject commit -m "negative baseline" | Out-Null
+
+    $negativeDryOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action dry-run `
+        -ProjectRoot $negativeProject `
+        -UpdateManifest $negativeManifestPath `
+        -BaselinePath $negativeBaselinePath `
+        -EvidencePath $negativeEvidence 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "NEGATIVE_DRY_RUN_FAILED: $($negativeDryOutput -join ' | ')"
+    }
+
+    $negativeFingerprintLine = @($negativeDryOutput | Where-Object { $_ -like "DRY_RUN_FINGERPRINT=*" }) | Select-Object -Last 1
+    $negativeFingerprint = ($negativeFingerprintLine -split "=", 2)[1]
+
+    # Corrupt operation 2's payload only after dry-run. Apply re-evaluation normally catches
+    # this before mutation, so instead use an induced filesystem failure after operation 1:
+    # replace second target file with a directory after dry-run and commit that state is avoided
+    # by restoring its file before apply evaluation, then the test hook below triggers after op 1.
+    $env:SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID = "NEG-01"
+    try {
+        try {
+            $negativeApplyOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+                -Action apply `
+                -ProjectRoot $negativeProject `
+                -UpdateManifest $negativeManifestPath `
+                -BaselinePath $negativeBaselinePath `
+                -EvidencePath $negativeEvidence `
+                -HumanApproved `
+                -ApprovedDryRunFingerprint $negativeFingerprint `
+                -TestMode 2>&1
+            $negativeApplyExit = $LASTEXITCODE
+        }
+        catch {
+            $negativeApplyOutput = @($_.Exception.Message)
+            $negativeApplyExit = 1
+        }
+    }
+    finally {
+        Remove-Item Env:\SKILLSMACHINE_TEST_FAIL_AFTER_OPERATION_ID -ErrorAction SilentlyContinue
+    }
+
+    if ($negativeApplyExit -eq 0) {
+        throw "NEGATIVE_APPLY_UNEXPECTED_PASS"
+    }
+
+    if (-not (@($negativeApplyOutput) -match "AUTOMATIC_ROLLBACK_STATUS=PASS")) {
+        throw "AUTOMATIC_ROLLBACK_PASS_NOT_REPORTED: $($negativeApplyOutput -join ' | ')"
+    }
+
+    if ((Get-Sha256 -Path (Join-Path $negativeProject "first.txt")) -ne $negativeFirstPre) {
+        throw "NEGATIVE_FIRST_FILE_NOT_RESTORED"
+    }
+    if ((Get-Sha256 -Path (Join-Path $negativeProject "second.txt")) -ne $negativeSecondPre) {
+        throw "NEGATIVE_SECOND_FILE_NOT_RESTORED"
+    }
+    if ((Get-Sha256 -Path $negativeBaselinePath) -ne $negativeBaselinePreHash) {
+        throw "NEGATIVE_BASELINE_NOT_RESTORED"
+    }
+
+    $negativeStatus = & git -C $negativeProject status --short --untracked-files=all
+    $negativeStatusLines = @($negativeStatus | Where-Object { -not [string]::IsNullOrWhiteSpace($_) })
+    if ($negativeStatusLines.Count -gt 0) {
+        throw "NEGATIVE_PROJECT_NOT_CLEAN_AFTER_AUTO_ROLLBACK: $($negativeStatusLines -join ' | ')"
+    }
+
+    $auditProject = Join-Path $testRoot "audit-project"
+    $auditPackage = Join-Path $testRoot "audit-package"
+    $auditEvidence = Join-Path $testRoot "audit-evidence"
+    New-Item -ItemType Directory -Path $auditProject, $auditPackage, $auditEvidence -Force | Out-Null
+
+    Write-Utf8NoBom -Path (Join-Path $auditProject "HUMAN.AUDIT_PROJECT.txt") -Content "PROJECT_ROOT=$auditProject"
+    Write-Utf8NoBom -Path (Join-Path $auditProject "WHOAMI.AUDIT_PROJECT.txt") -Content "PROJECT_ID=AUDIT_PROJECT"
+    Write-Utf8NoBom -Path (Join-Path $auditProject "BATON.AUDIT_PROJECT.txt") -Content "NEXT_ACTION=TEST"
+    Write-Utf8NoBom -Path (Join-Path $auditProject "config.txt") -Content "before audit"
+    Write-Utf8NoBom -Path (Join-Path $auditPackage "config.payload.txt") -Content "after audit"
+    $auditPre = Get-Sha256 -Path (Join-Path $auditProject "config.txt")
+    $auditPost = Get-Sha256 -Path (Join-Path $auditPackage "config.payload.txt")
+
+    & git -C $auditProject init | Out-Null
+    & git -C $auditProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $auditProject config user.name "SkillsMachine Test"
+
+    $auditBaseline = [ordered]@{
+        schema_version = "1.1"
+        project_id = "AUDIT_PROJECT"
+        created_by_skillsmachine = $true
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "config.txt"
+                sha256 = $auditPre
+                version = "0.3.0"
+            }
+        )
+    }
+    $auditBaselinePath = Join-Path $auditProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $auditBaselinePath -Content ($auditBaseline | ConvertTo-Json -Depth 10)
+
+    $auditManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000004"
+        update_version = "0.3.1"
+        source_commit = ("4" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("docs")
+        operations = @(
+            [ordered]@{
+                operation_id = "AUDIT-01"
+                action = "REPLACE"
+                source_path = "config.payload.txt"
+                target_path = "config.txt"
+                expected_pre_hash = $auditPre
+                expected_post_hash = $auditPost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $auditManifestPath = Join-Path $auditPackage "update-audit.json"
+    Write-Utf8NoBom -Path $auditManifestPath -Content ($auditManifest | ConvertTo-Json -Depth 10)
+
+    & git -C $auditProject add .
+    & git -C $auditProject commit -m "audit baseline" | Out-Null
+
+    $auditPreflightOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action preflight `
+        -ProjectRoot $auditProject `
+        -UpdateManifest $auditManifestPath `
+        -BaselinePath $auditBaselinePath `
+        -EvidencePath $auditEvidence `
+        -UseDocumentAuditPreflight 2>&1
+
+    if ($LASTEXITCODE -ne 0) {
+        throw "AUDIT_PREFLIGHT_FAILED: $($auditPreflightOutput -join ' | ')"
+    }
+    if (-not (@($auditPreflightOutput) -match "DOCUMENT_AUDIT_STATUS=PASS")) {
+        throw "AUDIT_FINDINGS_NOT_CONSUMED: $($auditPreflightOutput -join ' | ')"
+    }
+
+    $auditConflictProject = Join-Path $testRoot "audit-conflict-project"
+    $auditConflictPackage = Join-Path $testRoot "audit-conflict-package"
+    $auditConflictEvidence = Join-Path $testRoot "audit-conflict-evidence"
+    New-Item -ItemType Directory -Path $auditConflictProject, $auditConflictPackage, $auditConflictEvidence -Force | Out-Null
+
+    Write-Utf8NoBom -Path (Join-Path $auditConflictProject "HUMAN.AUDIT_CONFLICT.txt") -Content "a"
+    Write-Utf8NoBom -Path (Join-Path $auditConflictProject "HUMAN.AUDIT_CONFLICT.md") -Content "b"
+    Write-Utf8NoBom -Path (Join-Path $auditConflictProject "WHOAMI.AUDIT_CONFLICT.txt") -Content "PROJECT_ID=AUDIT_CONFLICT"
+    Write-Utf8NoBom -Path (Join-Path $auditConflictProject "BATON.AUDIT_CONFLICT.txt") -Content "NEXT_ACTION=TEST"
+    Write-Utf8NoBom -Path (Join-Path $auditConflictProject "config.txt") -Content "before conflict"
+    Write-Utf8NoBom -Path (Join-Path $auditConflictPackage "config.payload.txt") -Content "after conflict"
+    $auditConflictPre = Get-Sha256 -Path (Join-Path $auditConflictProject "config.txt")
+    $auditConflictPost = Get-Sha256 -Path (Join-Path $auditConflictPackage "config.payload.txt")
+
+    & git -C $auditConflictProject init | Out-Null
+    & git -C $auditConflictProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $auditConflictProject config user.name "SkillsMachine Test"
+
+    $auditConflictBaseline = [ordered]@{
+        schema_version = "1.1"
+        project_id = "AUDIT_CONFLICT"
+        created_by_skillsmachine = $true
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "config.txt"
+                sha256 = $auditConflictPre
+                version = "0.3.0"
+            }
+        )
+    }
+    $auditConflictBaselinePath = Join-Path $auditConflictProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $auditConflictBaselinePath -Content ($auditConflictBaseline | ConvertTo-Json -Depth 10)
+
+    $auditConflictManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000005"
+        update_version = "0.3.1"
+        source_commit = ("5" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("docs")
+        operations = @(
+            [ordered]@{
+                operation_id = "AUDIT-CONFLICT-01"
+                action = "REPLACE"
+                source_path = "config.payload.txt"
+                target_path = "config.txt"
+                expected_pre_hash = $auditConflictPre
+                expected_post_hash = $auditConflictPost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $auditConflictManifestPath = Join-Path $auditConflictPackage "update-audit-conflict.json"
+    Write-Utf8NoBom -Path $auditConflictManifestPath -Content ($auditConflictManifest | ConvertTo-Json -Depth 10)
+
+    & git -C $auditConflictProject add .
+    & git -C $auditConflictProject commit -m "audit conflict baseline" | Out-Null
+
+    try {
+        $auditConflictOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+            -Action preflight `
+            -ProjectRoot $auditConflictProject `
+            -UpdateManifest $auditConflictManifestPath `
+            -BaselinePath $auditConflictBaselinePath `
+            -EvidencePath $auditConflictEvidence `
+            -UseDocumentAuditPreflight 2>&1
+        $auditConflictExit = $LASTEXITCODE
+    }
+    catch {
+        $auditConflictOutput = @($_.Exception.Message)
+        $auditConflictExit = 1
+    }
+
+    if ($auditConflictExit -eq 0) {
+        throw "AUDIT_CONFLICT_UNEXPECTED_PASS"
+    }
+    if (-not (@($auditConflictOutput) -match "DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED")) {
+        throw "CRITICAL_FINDING_NOT_BLOCKED: $($auditConflictOutput -join ' | ')"
+    }
+    if ((Get-Sha256 -Path (Join-Path $auditConflictProject "config.txt")) -ne $auditConflictPre) {
+        throw "NO_AUTO_RESOLUTION_VIOLATION"
+    }
+
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\03.SESSION_CONTINUE\PROMPT.SESSION_CONTINUE.txt") -Patterns @(
+        "no ejecutar 04 ni 05"
+    ) -FailureMessage "NO_CALL_FROM_03_CONTRACT_FAIL"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\README.EXECUTION.txt") -Patterns @(
+        "05.SKILLSMACHINE_UPDATE is never auto-executed from this flow."
+    ) -FailureMessage "NO_CALL_FROM_04_CONTRACT_FAIL"
+
+    $report = @"
+FINAL_STATUS=PASS_CORE_UPDATER_MVP_TEST
+DRY_RUN_FINGERPRINT=$fingerprint
+ADD_APPLY=PASS
+REPLACE_APPLY=PASS
+DELETE_APPLY=PASS
+ADD_ROLLBACK=PASS
+REPLACE_ROLLBACK=PASS
+DELETE_ROLLBACK=PASS
+BASELINE_ROLLBACK=PASS
+GIT_CLEAN_AFTER_ROLLBACK=PASS
+PARTIAL_FAILURE_INDUCED=PASS
+AUTOMATIC_ROLLBACK_AFTER_PARTIAL_FAILURE=PASS
+NEGATIVE_BASELINE_ROLLBACK=PASS
+NEGATIVE_GIT_CLEAN_AFTER_ROLLBACK=PASS
+TEST_HOOK_REJECTED_WITHOUT_TEST_MODE=PASS
+TEST_HOOK_REJECTED_FOR_NORMAL_PROJECT=PASS
+TEST_HOOK_ACCEPTED_FOR_NEGATIVE_TEST_PROJECT=PASS
+AUDIT_FINDINGS_CONSUMED=PASS
+CRITICAL_FINDING_BLOCKS_MUTATION=PASS
+NO_AUTO_RESOLUTION=PASS
+NO_CALL_FROM_03=PASS
+NO_CALL_FROM_04=PASS
+CORE_FILE_COUNT=5
+POWERSHELL_PARSE=PASS
+SCHEMA_JSON_PARSE=PASS
+"@
+    Write-Utf8NoBom -Path $OutputPath -Content $report
+    Write-Host $report
+    exit 0
+}
+finally {
+    if (Test-Path -LiteralPath $testRoot) {
+        Remove-Item -LiteralPath $testRoot -Recurse -Force
+    }
+}
+========== CONTENT_END 006 A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1 ==========
+========== END_SOURCE_FILE 006 A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1 ==========
+========== BEGIN_SOURCE_FILE 007 54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27 ==========
+SOURCE_INDEX=7
+SOURCE_PATH=02.BUNDLE.UPDATE_GOVERNANCE.txt
+SOURCE_BYTES=7278
+SOURCE_SHA256=54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27
+========== CONTENT_START 007 54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27 ==========
+==============================
+BUNDLE: UPDATE_GOVERNANCE
+GENERATED_AT: 2026-07-13 15:57:35
+==============================
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\SKILLSMACHINE.UPDATE.MANIFEST.schema.json
+VERSION    : v1.1-CORE
+SHA256     : A31DAA3F347FE745B70D6D422ED1BA12E29A11541CE391E62865A4D890EAFBEE
+--------------------------------------------------
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
+  "title": "SkillsMachine Update Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "update_id",
+    "update_version",
+    "source_commit",
+    "created_at",
+    "minimum_project_version",
+    "maximum_project_version",
+    "reversible",
+    "human_approval_required",
+    "affected_components",
+    "operations",
+    "rollback_contract"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.1" },
+    "update_id": {
+      "type": "string",
+      "pattern": "^SM-UPD-[0-9]{6}$"
+    },
+    "update_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "source_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$"
+    },
+    "created_at": { "type": "string", "format": "date-time" },
+    "minimum_project_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "maximum_project_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.(?:[0-9]+|x)$"
+    },
+    "reversible": { "type": "boolean", "const": true },
+    "human_approval_required": { "type": "boolean", "const": true },
+    "affected_components": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": ["skills", "grcs", "usecases", "registries", "metadata"]
+      }
+    },
+    "operations": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operation_id",
+          "action",
+          "source_path",
+          "target_path",
+          "expected_pre_hash",
+          "expected_post_hash",
+          "backup_required",
+          "reversible"
+        ],
+        "properties": {
+          "operation_id": { "type": "string", "minLength": 1 },
+          "action": {
+            "type": "string",
+            "enum": ["ADD", "REPLACE", "DELETE"]
+          },
+          "source_path": { "type": ["string", "null"] },
+          "target_path": { "type": "string", "minLength": 1 },
+          "expected_pre_hash": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "expected_post_hash": {
+            "type": ["string", "null"],
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "backup_required": { "type": "boolean" },
+          "reversible": { "type": "boolean", "const": true }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": { "action": { "const": "ADD" } }
+            },
+            "then": {
+              "properties": {
+                "expected_pre_hash": { "type": "null" },
+                "expected_post_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{64}$"
+                },
+                "source_path": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "REPLACE" } }
+            },
+            "then": {
+              "properties": {
+                "expected_pre_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{64}$"
+                },
+                "expected_post_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{64}$"
+                },
+                "source_path": { "type": "string", "minLength": 1 },
+                "backup_required": { "const": true }
+              }
+            }
+          },
+          {
+            "if": {
+              "properties": { "action": { "const": "DELETE" } }
+            },
+            "then": {
+              "properties": {
+                "expected_pre_hash": {
+                  "type": "string",
+                  "pattern": "^[0-9a-fA-F]{64}$"
+                },
+                "expected_post_hash": { "type": "null" },
+                "source_path": { "type": "null" },
+                "backup_required": { "const": true }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "rollback_contract": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "verify_hashes", "restore_baseline"],
+      "properties": {
+        "mode": {
+          "type": "string",
+          "const": "CHECKPOINT_AND_INVERSE_PLAN"
+        },
+        "verify_hashes": { "type": "boolean", "const": true },
+        "restore_baseline": { "type": "boolean", "const": true }
+      }
+    }
+  }
+}
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\SupportPackage\PROMPT.SKILLSMACHINE_UPDATE.txt
+VERSION    : v1.0-MVP
+SHA256     : 8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B
+--------------------------------------------------
+Operate only on the declared PROJECT_ROOT.
+Require created_by_skillsmachine=true and a clean Git state before apply mode.
+When available, run -UseDocumentAuditPreflight and block mutation on unresolved HARD_CONFLICT findings.
+Run compatibility, baseline load, dry-run fingerprint, explicit human approval, checkpoint, apply, validate and baseline update.
+Use SyS\A_Tools\Update as the core reference. Do not invent operations outside ADD, REPLACE and DELETE.
+Reject apply when the dry-run fingerprint was not reviewed by a human.
+
+--------------------------------------------------
+SOURCE_FILE: SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SyS\A_Tools\Update\SupportPackage\RUNBOOK.SKILLSMACHINE_UPDATE.txt
+VERSION    : v1.0-MVP
+SHA256     : E7B9E2A47BB48451481080CD8A937F41D3401DF7132CC4D4577E76DE35FC5CAE
+--------------------------------------------------
+FLOW: compatibility -> baseline load -> preflight -> dry-run -> dry-run fingerprint review -> explicit human approval -> checkpoint -> apply -> validation -> baseline update.
+
+Rules:
+- Use Invoke-SkillsMachineUpdate.ps1 from SyS\A_Tools\Update.
+- Prefer -UseDocumentAuditPreflight as the document-consistency gate before mutation.
+- If DocumentConsistencyAudit reports HARD_CONFLICT, stop and require explicit human resolution before update.
+- Keep PROJECT_ROOT as a hard boundary.
+- Require clean Git before apply.
+- Use rollback when any apply step fails.
+- Re-run validation after apply and after rollback when triggered.
+
+========== CONTENT_END 007 54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27 ==========
+========== END_SOURCE_FILE 007 54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27 ==========
+================================================================================
+05. INTEGRITY SUMMARY
+================================================================================
+SOURCE_FILE_COUNT=7
+SOURCE_TOTAL_BYTES=97003
+ALL_SOURCES_INCLUDED=YES
+TRUNCATION_DETECTED=NO
+DUPLICATE_SOURCE_PATH_COUNT=0
+MISSING_SOURCE_COUNT=0

@@ -1,22 +1,39 @@
 {
   "usecase": "03.SESSION_CONTINUE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-13 19:42:19",
+  "generated_at": "2026-07-20 18:38:36",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
     "00.SKILL.MENU.ACTIVE.txt",
     "01.BUNDLE.CONTINUITY.txt",
     "02.BUNDLE.GOVERNANCE.txt",
-    "PROMPT.SESSION_CONTINUE.txt"
+    "PROMPT.SESSION_CONTINUE.txt",
+    "USECASE.03.SESSION_CONTINUE.COMPILED.txt"
   ],
-  "upload_package_model": "SELF_CONTAINED_USECASE_FOLDER",
+  "upload_package_model": "SINGLE_COMPILED_FILE",
   "upload_package_root": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE",
   "upload_instruction_file": "README.UPLOAD_THIS_USECASE.txt",
-  "upload_package_scope": "FULL_USECASE_FOLDER",
-  "folder_upload_required": true,
+  "upload_package_scope": "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS",
+  "folder_upload_required": false,
+  "primary_upload_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
+  "compiled_output_enabled": true,
+  "compiled_output_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
+  "compiled_output_sha256": "BCE606B99BF6BD02DE54436B6539FB6CE85249CF6AB0192E005C88EA4544F455",
+  "compiled_source_order": [
+    "README.UPLOAD_THIS_USECASE.txt",
+    "PROMPT.SESSION_CONTINUE.txt",
+    "SKILL_SET.MANIFEST.txt",
+    "00.SKILL.MENU.ACTIVE.txt",
+    "00.BUNDLE.CORE.txt",
+    "01.BUNDLE.CONTINUITY.txt",
+    "02.BUNDLE.GOVERNANCE.txt"
+  ],
+  "compiled_source_count": 7,
+  "compiled_format_version": "v1",
+  "compiled_content_policy": "FULL_CONTENT_NO_TRUNCATION",
   "delivery_files_scope": "GENERATED_DELIVERY_FILES_ONLY",
-  "delivery_files_note": "delivery_files lists generated/copied delivery artifacts; the operational IA upload package is the full usecase folder. Read README.UPLOAD_THIS_USECASE.txt first.",
+  "delivery_files_note": "delivery_files lists generated/copied delivery artifacts. The primary IA upload unit is the compiled single-file output while legacy package files continue to coexist.",
   "bundles": [
     {
       "bundle_name": "CORE",
@@ -56,9 +73,9 @@
       "bundle_name": "CONTINUITY",
       "delivery_file": "01.BUNDLE.CONTINUITY.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 38949,
-      "delivery_size_kb": 38.04,
-      "delivery_sha256": "4A214B306E959296E784B888F06AC0C4AE74B06050055D72F164284EF6C8E7A4",
+      "delivery_size_bytes": 41787,
+      "delivery_size_kb": 40.81,
+      "delivery_sha256": "03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -81,8 +98,8 @@
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "6B92B94759D103A3617165913DB51EB0DD9524B30AF7374DC6FE636B1653C543"
+          "version": "v1.1",
+          "source_sha256": "946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA"
         }
       ]
     },
@@ -90,27 +107,27 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\03.SESSION_CONTINUE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 102130,
-      "delivery_size_kb": 99.74,
-      "delivery_sha256": "D442CCE593232E95C2C1CA48900C5A4C4023F9F07C084C387B76B88A38212C85",
+      "delivery_size_bytes": 115228,
+      "delivery_size_kb": 112.53,
+      "delivery_sha256": "1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "ACDB2411BCAD8095F6B8B189F6A2EAA9C5AC3B32BE9C33B125C88B2FCED69515"
+          "version": "v1.5-DRAFT",
+          "source_sha256": "C86EC9E17460B33A9758D59BA7A114F62C9D25DC3B1DB9CC9344368145E5A7D3"
         },
         {
           "name": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-          "version": "v1.0-DRAFT",
-          "source_sha256": "AF7DA1A28DDBA474C62C80AD20AE5EAAF198EEE60967ED292612C2B35D7506B2"
+          "version": "v1.1-DRAFT",
+          "source_sha256": "D6F77079F9893F89ABB519249E44206568BC7905306491A2FA0DB041BE0F0181"
         },
         {
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "12D1BC002A646A7772B3BBCA02D2C0928AE5A312B5ED587ED4F2133AD3E9449E"
+          "version": "v1.3-CANON",
+          "source_sha256": "8D01B1F89AE496901C9AA6B1E5105540ED9613246F27E26CA244620658E5B2E1"
         },
         {
           "name": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
@@ -121,8 +138,8 @@
         {
           "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
-          "version": "v0.1-DRAFT",
-          "source_sha256": "BC20D6D27B9366854B653850DB35C1DA4F13BEA14A0004AD07732FC81DFB5C47"
+          "version": "v0.2-DRAFT",
+          "source_sha256": "DECF90DDD98B8097E127103DCA37B1CB8C04556D74DDB6EF82FBE2AA52C3AAD2"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
@@ -133,22 +150,22 @@
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "6B92B94759D103A3617165913DB51EB0DD9524B30AF7374DC6FE636B1653C543"
+          "version": "v1.1",
+          "source_sha256": "946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "55037B6CAFC9BC86AC67C75AF361C07CB6D6D09517D28E87DAE3DAB354E725A7"
+          "version": "v1.1",
+          "source_sha256": "91107B332BF05164CD2E0B696ACB0B72DBD87604E336560220765525994ADCE6"
         }
       ]
     }
   ],
   "validation": {
     "missing_files": [],
-    "delivery_file_count": 5,
-    "max_delivery_files_allowed": 8,
+    "delivery_file_count": 6,
+    "max_delivery_files_allowed": 9,
     "status": "OK"
   },
   "source_of_truth": "90.USECASE/BUILD.ps1 + source registries/manifests",
