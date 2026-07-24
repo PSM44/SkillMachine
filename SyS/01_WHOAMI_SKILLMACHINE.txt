@@ -1695,3 +1695,53 @@ Resume MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN.
 COMMIT_PUSH_STATUS:
 Not performed in this update. Explicit authorization remains required.
 ========== END MB-SM-067A_SESSION_CLOSE_CONTINUITY_20260718 ==========
+
+==========
+MB-SM-071D_WHOAMI_SESSION_CLOSE_REFRESH_20260723
+==========
+UPDATED_AT...................: 2026-07-23 18:45 -04:00
+PROJECT......................: SkillsMachine
+ROOT.........................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_BASE....................: ea1757fb36314c527b55a6474c2f76d1b6fdfe8d
+STATUS.......................: ACTIVE_SESSION_CLOSE_REFRESH
+
+CURRENT_HUMAN_POSITION:
+- Pablo decided to keep SkillsMachine focused on its established mission.
+- SkillsMachine must not absorb the implementation of OpenCode or a generic coding-agent integration platform.
+- Reusable governance and learning discovered during the OpenCode exploration may remain as Skill/GRC candidates after deduplication.
+- DeveFactory is the primary proposed receiver for implementation.
+- Nightshift remains a laboratory for agent, model, permission, worktree, WSL2 and Docker experiments.
+
+CURRENT_PROJECT_STATE:
+- main is at ea1757f.
+- MB-SM-070A is closed locally with reporting corrections and two explicit technical debts.
+- MB-SM-071C is blocked after three failed implementation attempts.
+- No fourth local patch is authorized.
+- The next valid SM071C step is evidence capture and proven root-cause diagnosis.
+- Validate-System passes.
+- Session-close WARN is continuity freshness only, not a repository-health failure.
+
+OPERATING_RULES_REINFORCED:
+- HUMAN > GRC > Skills > Use Cases > Tools / artifacts / logs.
+- Generated 90.USECASE outputs are not edited manually.
+- Temp.SkillMachine is flat, disposable and reserved for consolidated upload-ready outputs.
+- Long scripts are delivered as downloadable executables outside Temp.SkillMachine.
+- AI_TAIL belongs to terminal/script output, not ordinary assistant prose.
+- Commit and push require separate explicit human authorization.
+- Three failures are counted by objective/minibattle and trigger STOP plus escalation.
+
+WHAT_REMAINS:
+- Commit BATON and WHOAMI together after human review.
+- Regenerate RADAR after the continuity commit.
+- Rerun hardened readiness.
+- Close the session only with readiness OK or an explicitly accepted WARN.
+- In a later session, deduplicate and disposition the accumulated OpenCode learning candidates.
+- Resume SM071C only through diagnosis, not another patch.
+
+NEXT_ACTION:
+Review the two-file continuity diff produced by this runner and authorize or reject the local continuity commit.
+
+==========
+END_MB-SM-071D_WHOAMI_SESSION_CLOSE_REFRESH_20260723
+==========

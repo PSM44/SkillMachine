@@ -2720,3 +2720,64 @@ Resume MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN.
 COMMIT_PUSH_STATUS:
 Not performed in this update. Explicit authorization remains required.
 ========== END MB-SM-067A_SESSION_CLOSE_CONTINUITY_20260718 ==========
+
+==========
+MB-SM-071D_SESSION_CLOSE_CONTINUITY_REFRESH_20260723
+==========
+UPDATED_AT...................: 2026-07-23 18:45 -04:00
+PROJECT......................: SkillsMachine
+PROJECT_ROOT.................: C:\01. GitHub\Skills
+BRANCH.......................: main
+HEAD_BASE....................: ea1757fb36314c527b55a6474c2f76d1b6fdfe8d
+STATUS.......................: SESSION_CLOSE_CONTINUITY_REFRESH_PENDING_COMMIT
+
+CURRENT_POSITION:
+- MB-SM-070A W4C minimum core Ring 0 is locally closed at ea1757f.
+- Validate-System passes, including 56/56 automation reliability tests and 15/15 single-file compiler tests.
+- The repository was clean before this continuity refresh.
+- Session-close readiness remains WARN only because RADAR, BATON and WHOAMI are older than HEAD.
+
+MB-SM-070A:
+- RESULT=PASS_WITH_REPORTING_CORRECTION.
+- COMMIT=ea1757fb36314c527b55a6474c2f76d1b6fdfe8d.
+- PUSH=NO.
+- OPEN_DEBT=SM070A-TD-001_UNAPPROVED_POWERSHELL_VERBS.
+- OPEN_DEBT=SM070A-TD-002_RING0_REPORTING_SCOPE_DEFECT.
+- RING1_AUTHORIZED=NO.
+
+MB-SM-071C:
+- TARGET=Reduce 90.USECASE to the approved minimum-safe 19-file publication surface.
+- STATUS=BLOCKED_AFTER_THREE_FAILED_IMPLEMENTATION_ATTEMPTS.
+- ROOT_CAUSE=NOT_PROVEN.
+- ROLLBACKS=PASS.
+- NEW_LOCAL_PATCH_AUTHORIZED=NO.
+- NEXT_VALID_MODE=EVIDENCE_CAPTURE_AND_ROOT_CAUSE_DIAGNOSIS_ONLY.
+
+MISSION_BOUNDARY:
+- SkillsMachine remains focused on HUMAN, GRC, Skills, Use Cases and governed reusable learning.
+- OpenCode and general coding-agent integration implementation were transferred outside SkillsMachine.
+- DeveFactory is the primary proposed implementation receiver.
+- Nightshift remains the experimentation laboratory.
+- SkillsMachine records reusable lessons and candidate improvements only.
+- No generic agent-integration platform is authorized inside SkillsMachine.
+
+LEARNING_REVIEW:
+- Candidate themes: Plan-before-Build; one-prompt-one-gate; disposable worktrees; evidence-before-PASS; simulation and placeholder detection; permission escalation hard stop; claimed/observed/verified evidence; model fitness; canonical checkout protection; repository content as untrusted input.
+- These items require deduplication against existing Skills and GRCs before promotion.
+- OpenCode-specific configuration, provider paths and rejected scripts must not become SkillsMachine canon.
+
+CURRENT_CLOSE_STATE:
+- VALIDATION=PASS.
+- WORKTREE_PRE_REFRESH=CLEAN.
+- RADAR_FRESH_AGAINST_HEAD=NO.
+- BATON_FRESH_AGAINST_HEAD=NO.
+- WHOAMI_FRESH_AGAINST_HEAD=NO.
+- COMMIT=NOT_YET_AUTHORIZED.
+- PUSH=NO.
+
+NEXT_ACTION:
+Review this BATON and WHOAMI refresh together, validate the exact two-file diff, then request explicit authorization for a local continuity commit. After that commit, regenerate RADAR and rerun Test-SessionCloseReadiness.
+
+==========
+END_MB-SM-071D_SESSION_CLOSE_CONTINUITY_REFRESH_20260723
+==========
