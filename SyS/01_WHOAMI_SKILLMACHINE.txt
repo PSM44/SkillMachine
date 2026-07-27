@@ -1745,3 +1745,32 @@ Review the two-file continuity diff produced by this runner and authorize or rej
 ==========
 END_MB-SM-071D_WHOAMI_SESSION_CLOSE_REFRESH_20260723
 ==========
+
+
+==========
+MB-SM-072A_WHOAMI_SESSION_CLOSE_REVIEW_20260727
+==========
+UPDATED_AT...................: 2026-07-27 10:33:46 -04:00
+PROJECT......................: SkillsMachine
+STATUS.......................: REVIEWED_READINESS_OK_AWAITING_HUMAN_DECISION
+
+CURRENT_PROJECT_STATE:
+- Session-close readiness es OK (sin WARN) por primera vez desde el
+  23-jul. Git limpio, validacion 100% pasando, continuidad fresca.
+- 2 commits locales sin push a origin/main.
+- El camino a entregable visible de gerencia (MB-SM-067A a 068A) sigue
+  sin avanzar mas alla del primer tramo - esto es la brecha mas
+  relevante del proyecto hoy, no un problema tecnico nuevo.
+
+WHAT_REMAINS:
+- Decidir push de los 2 commits locales.
+- Decidir foco: avanzar 067A-B (entregable visible) o continuar
+  diagnostico de 071C (bloqueado).
+- Ninguna accion tecnica nueva se ejecuto en esta revision.
+
+NEXT_ACTION:
+Esperar decision humana explicita antes de cualquier commit, push o
+nuevo minibattle.
+==========
+FIN_MB-SM-072A_WHOAMI_SESSION_CLOSE_REVIEW_20260727
+==========
