@@ -1,0 +1,80 @@
+DOMAIN.MODEL.V0.1
+SCHEMA_VERSION=0.1.1
+SOURCE=MB-SM-075B
+NOTE=Capability is the installed/published unit of a Skill or GRC; Skill/GRC remain entity names (no duplicate Capability entity).
+
+ENTITY=Skill
+ID_FIELD=id
+FIELDS=id,version,status,purpose,owner,sha256,provenance,deps[],lifecycle
+LIFECYCLE=CANDIDATE|ACTIVE|DEPRECATED|RETIRED
+PROVENANCE=required (origin, authoring event, or LAB fixture marker)
+
+ENTITY=GRC
+ID_FIELD=id
+FIELDS=id,version,status,enforcement_type,purpose,owner,sha256,provenance,lifecycle
+ENFORCEMENT=HARD|SOFT|ADVISORY
+LIFECYCLE=CANDIDATE|ACTIVE|DEPRECATED|RETIRED
+PROVENANCE=required
+
+ENTITY=Project
+ID_FIELD=project_id
+FIELDS=project_id,root,surface=00_SKILLSMACHINE,installed_capabilities[],head_or_version
+OWNERSHIP=local project authority; does not own transversal Skill/GRC canon
+
+ENTITY=Opportunity
+ID_FIELD=opportunity_id
+FIELDS=opportunity_id,source_project,source_event,target_capability,evidence_refs[],severity,status,disposition_state
+SEVERITY=P0|P1|P2
+LIFECYCLE=OPEN|SUBMITTED|RECEIPTED|DISPOSITIONED|CLOSED
+DIRECTION=Improvement Flow (Projects → SkillsMachine)
+
+ENTITY=Submission
+ID_FIELD=submission_id
+FIELDS=submission_id,freeze_id,source_project,item_ids[],content_sha256,created_at,schema_version,message_id,correlation_id
+UNIQUENESS=message_id unique; content_sha256 binds package
+
+ENTITY=Receipt
+ID_FIELD=receipt_id
+FIELDS=receipt_id,submission_id,accepted_ids[],form_rejects[],partial_acceptance,receipt_hash,received_at,correlation_id
+SEMANTICS=acknowledges submission form/receipt only; NOT a disposition
+IDEMPOTENCY=same submission_id+content_sha256 → same receipt_id/hash
+
+ENTITY=Disposition
+ID_FIELD=disposition_id
+VALUES=IMPROVE|MERGE|CREATE|REJECT|DEFER|PROJECT_LOCAL
+FIELDS=disposition_id,submission_id,opportunity_id,decision,targets[],rationale,decided_at
+SEPARATION=distinct from Receipt; may be delayed after receipt
+
+ENTITY=Provider
+ID_FIELD=provider_id
+FIELDS=provider_id,source_type,trust,freshness,ingestion_state
+TRUST=TRUSTED|REVIEW|UNKNOWN|BLOCKED
+RULE=external offerings are EXTERNAL_CANDIDATE only; never silent canon
+
+ENTITY=AuditFinding
+ID_FIELD=finding_id
+FIELDS=finding_id,scope,severity,entity_refs[],rule,evidence,remediation
+SEVERITY=CRITICAL|IMPORTANT|ADVISORY
+RULE=ADVISORY does not necessarily degrade Global Status
+
+ENTITY=UpdateReceipt
+ID_FIELD=message_id
+FIELDS=message_id,update_id,result,before_sha256,after_sha256,rollback_ref,validator_status,correlation_id
+DIRECTION=Project Sync (SkillsMachine → Projects)
+
+RELATIONS:
+Project USES Skill|GRC (as installed capability)
+Opportunity TARGETS Skill|GRC
+Provider OFFERS EXTERNAL_CANDIDATE
+AuditFinding REFERENCES Entity
+Skill|GRC MAY DEPEND_ON Skill|GRC
+Submission CONTAINS Opportunity
+Receipt ACKNOWLEDGES Submission
+Disposition DECIDES Opportunity
+UpdateReceipt CONFIRMS Project Sync apply
+
+OWNERSHIP_NON_CIRCULAR:
+HUMAN owns product meaning
+SkillsMachine owns transversal Skill/GRC publication + Improvement Flow reception + Audit + Project Sync packages
+Project owns local extensions and local surfaces
+Wings4.0 owns portfolio coordination (not SkillsMachine canon)

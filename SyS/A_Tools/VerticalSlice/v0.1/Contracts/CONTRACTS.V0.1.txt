@@ -1,0 +1,36 @@
+CONTRACTS.V0.1
+schema_version=0.1.1
+SOURCE=MB-SM-075B
+
+COMMON_MESSAGE_FIELDS=schema_version,message_type,message_id,correlation_id,source_project,destination,source_head_or_version,created_at,payload,attachment_manifest,content_sha256,status
+
+MESSAGE_ID_UNIQUENESS=YES — message_id must be unique per message instance
+CORRELATION_ID=links submission/receipt/disposition/update within one freeze/flow
+HASH_SEMANTICS=content_sha256 binds payload body; receipt_hash binds receipt body excluding the receipt_hash field itself
+
+SURFACE=00_SKILLSMACHINE
+FILES=
+IDENTITY.txt
+CATALOG_INDEX.txt
+CAPABILITIES.ACTIVE.txt
+OPPORTUNITIES.ACCUMULATED.ACTIVE.txt
+INBOX_LAST.txt
+OUTBOX_LAST.txt
+RECEIPTS.log.txt
+ARCHIVE_INDEX.txt
+
+IDENTITY_REQUIRED=project_id,root,surface_version,created_at
+CATALOG_INDEX=lightweight ids/type/version/summary/sha256/status only; no full bodies
+CAPABILITIES.ACTIVE=capability_id,kind(TRANSVERSAL|PROJECT_LOCAL|LOCAL_EXTENSION|PROMOTION_CANDIDATE),version,origin_sha256,status
+OPPORTUNITIES.ACCUMULATED.ACTIVE=append-only; unique opportunity_id; freeze_id when frozen
+OPPORTUNITY_SUBMISSION=deterministic package bound to freeze_id+content_sha256
+SUBMISSION_RECEIPT=idempotent for same submission_id+content_sha256
+DUPLICATE_SUBMISSION=same submission_id+content_sha256 → ignore second write; keep single receipt
+PARTIAL_ACCEPTANCE=accepted_ids may be subset; form_rejects lists rejected ids; partial_acceptance=YES|NO
+DISPOSITION_REPORT=separate from receipt; may be delayed; never substitute for receipt
+UPDATE_RECEIPT=update_id,result,before_after_hashes,rollback_ref,validator_status; confirms Project Sync apply
+
+IDEMPOTENCY=message_id unique; duplicate same content_sha256 ignored for receipt emission
+COMPATIBILITY=unknown fields REJECT in v0.1 strict mode
+NO_ROTATION_WITHOUT_VALID_RECEIPT=YES
+LAB_PUBLICATION_VS_PRODUCTION=LAB fixture publication is LAB_PUBLICATION; PRODUCTION_PUBLICATION=NOT_TESTED until real pilot evidence
