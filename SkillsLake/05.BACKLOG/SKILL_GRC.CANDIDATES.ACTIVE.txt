@@ -1775,3 +1775,70 @@ TARGET=SKILL.POWERSHELL.INTERACTIVE_SAFETY (22.x StrictMode/collection anti-patt
 
 NEXT_ACTION=MB-SM-067B-D3_CANONICAL_USECASE_SOURCE_MIGRATION
 ========== END MB-SM-067B-D2_CANDIDATE_DISPOSITION_MATRIX ==========
+
+==========
+MB-SM-073A_SESSION_CLOSE_20260731_SKILL_GRC_LEARNING_REVIEW
+==========
+RECORDED_AT=2026-07-31 18:38:56 -04:00
+SOURCE=PS.SkillsMachine session continuity and SMDI-002 scope correction
+
+CANDIDATE_ID=CAND-SM-SCOPE-COMPLETION-GATE-001
+IDEA=Add an objective-completion gate that prevents an adjacent workstream from blocking or replacing the user's original requested outcome.
+DOMAIN_AFFECTED=Session control; DragonflyFocus; project lifecycle
+ARTIFACT_RECTOR_AFFECTED=GRC.DRAGONFLYFOCUS; 22.SKILL.PROJECT_LIFECYCLE_POLICY; SESSION_CLOSE
+TYPE_OF_CHANGE=MERGE_WITH_EXISTING_PREFERRED
+PRIORITY=P0
+DECISION=CLASSIFY
+STATUS=CANDIDATE
+REASON=The session demonstrated severe scope drift after continuity was already complete.
+NEXT_STEP=Deduplicate against DragonflyFocus and project lifecycle controls before promotion.
+HUMAN_APPROVAL=PENDING
+
+CANDIDATE_ID=CAND-SM-POWERSHELL-COMPATIBILITY-GATE-001
+IDEA=Require every downloadable PowerShell runner to declare runtime compatibility, pass parser validation and use safe patterns for process arguments and scalar output.
+DOMAIN_AFFECTED=Human-controlled execution; PowerShell safety
+ARTIFACT_RECTOR_AFFECTED=SKILL.POWERSHELL.INTERACTIVE_SAFETY; SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION; TD-013
+TYPE_OF_CHANGE=IMPROVE_EXISTING
+PRIORITY=P0
+DECISION=CLASSIFY
+STATUS=CANDIDATE
+REASON=Two wrappers failed on ProcessStartInfo.ArgumentList and scalar-string indexing before reaching the real harness.
+NEXT_STEP=Merge into existing PowerShell and automation reliability controls; do not create a parallel standalone skill unless deduplication requires it.
+HUMAN_APPROVAL=PENDING
+
+CANDIDATE_ID=CAND-SM-TEST-LAYER-SEPARATION-001
+IDEA=Separate unit/core harness, integration fixture and management acceptance evidence contracts.
+DOMAIN_AFFECTED=Testing; release governance; evidence
+ARTIFACT_RECTOR_AFFECTED=Updater test harness; checkpoint/rollback skill; logging/audit skill
+TYPE_OF_CHANGE=IMPROVE_EXISTING
+PRIORITY=P1
+DECISION=CLASSIFY
+STATUS=CANDIDATE
+REASON=Core updater capability, harness coverage and retained SMDI evidence were treated as one contract.
+NEXT_STEP=Review candidate patch before deciding core-harness extension versus separate SMDI fixture.
+HUMAN_APPROVAL=PENDING
+
+DO_NOT_CANONIZE:
+- The current 153-line SMDI candidate patch.
+- SMDI storage/ingestion paths not approved by the human.
+- Project-specific temporary paths as universal doctrine.
+==========
+END_MB-SM-073A_SESSION_CLOSE_20260731_SKILL_GRC_LEARNING_REVIEW
+
+==========
+MB-SM-075A_CANDIDATE_NOTES
+==========
+CANDIDATE_ID=CAND-SM-DCA-ROLE-ROOTS-CONFIG-001
+IDEA=Configurable DocumentConsistencyAudit role-root profiles (DEC-CQ-002=B)
+STATUS=CANDIDATE
+PATH=SyS/A_Tools/DocumentConsistencyAudit/DCA_ROLE_ROOTS_CONFIGURABLE_DESIGN.V0.1.txt
+
+CANDIDATE_ID=CAND-SM-SMDI-ACCEPTANCE-FIXTURE-001
+IDEA=Separate SMDI acceptance fixture from core updater harness (DEC-CQ-003=B)
+STATUS=CANDIDATE
+PATH=SyS/A_Tools/Update/Fixtures/SMDI_Acceptance/README.SMDI_FIXTURE.txt
+
+CANDIDATE_ID=CAND-SM-TRANSCRIPT-CONSOLIDATION-EXEC-RECON-001
+STATUS=CANDIDATE
+PATH=SkillsLake/99.CANDIDATES/SKILL.TRANSCRIPT_CONSOLIDATION_EXECUTIVE_RECONSTRUCTION.CANDIDATE.md
+==========

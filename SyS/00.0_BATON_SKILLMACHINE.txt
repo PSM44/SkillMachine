@@ -2824,3 +2824,133 @@ diagnostico). No iniciar ninguno de los dos sin autorizacion explicita.
 ==========
 FIN_MB-SM-072A_SESSION_CLOSE_REVIEW_20260727
 ==========
+
+==========
+MB-SM-073A_SESSION_CLOSE_20260731
+==========
+RECORDED_AT=2026-07-31 18:38:56 -04:00
+PROJECT=PS.SkillsMachine
+PROJECT_ROOT=C:\01. GitHub\Skills
+BRANCH=main
+HEAD_BASE=df7e9d18293503ec03ed0bbee51d8fec86941f35
+STATUS=SESSION_CLOSE_WITH_KNOWN_DIRTY_WORKTREE_AND_UNCOMMITTED_CONTINUITY_UPDATE
+
+CURRENT_VERIFIED_STATE:
+- main is ahead of origin/main by 3 commits.
+- Two preexisting local modifications were preserved:
+  SyS/A_Tools/DocumentConsistencyAudit/Invoke-DocumentConsistencyAudit.ps1
+  SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1
+- The DocumentConsistencyAudit modification is preexisting and not dispositioned.
+- The Test-SkillsMachineUpdate modification is an unapproved SMDI-002 candidate patch.
+- No git add, commit or push is authorized in this close.
+- Session continuity in Cursor is complete.
+- SMDI-002 is separated from session continuity and frozen pending independent review.
+
+WHAT_WAS_DONE_IN_THIS_SESSION:
+- Closed the previous Cursor session read-only.
+- Created a consolidated continuation package and started a new Cursor session.
+- Verified repository identity, branch, HEAD, remote divergence, worktrees and dirty state.
+- Inspected the existing updater and avoided creating a duplicate engine.
+- Executed the canonical updater harness locally.
+- Confirmed PASS_CORE_UPDATER_MVP_TEST, dry-run fingerprint, ADD/REPLACE/DELETE, rollback, automatic rollback and critical document finding mutation block.
+- Performed structural review of missing direct evidence for ALREADY_APPLIED and Action=recover.
+- Cursor produced a 153-line candidate extension to Test-SkillsMachineUpdate.ps1; it remains unapproved and unvalidated after patch.
+- Corrected scope: SMDI-002 no longer blocks session continuity.
+
+CURRENT_TECHNICAL_DEBT:
+- TD-004 SessionContinue context gate acceptance.
+- TD-005 management-visible functionality.
+- TD-006 candidate-to-canon promotion.
+- TD-007 long-running heartbeat and execution budget.
+- TD-008 residual line-ending scope.
+- TD-009 evidence retention and repository weight.
+- TD-011 runtime schema and component semantics.
+- TD-012 trusted release provenance.
+- TD-013 one-shot automation reliability, reinforced by two wrapper defects in this session.
+- TD-015 scope drift and objective completion control.
+- TD-016 multi-scope dirty worktree disposition.
+- TD-017 test harness scope and evidence-contract separation.
+
+CURRENT_BACKLOG:
+- Resolve the two preexisting dirty files in separate reviewed scopes.
+- Resume BL-PROD-003 updater human runbook and operator UX.
+- Select a real project for controlled updater acceptance.
+- Execute preflight and dry-run, apply only with human approval, then validate and rollback or accept permanence.
+- Build BL-PROD-002 management-visible 5-10 minute demo only after real-project evidence.
+
+PATH_TO_VISIBLE_MANAGEMENT_DELIVERABLE:
+1. MB-SM-073B reconcile and disposition the two current dirty files.
+2. Resume MB-SM-067A updater human runbook and operator UX.
+3. MB-SM-067B select a real eligible project and define safety contract.
+4. MB-SM-067C execute real preflight and dry-run.
+5. MB-SM-067D controlled real apply with human approval.
+6. MB-SM-067E validate, rollback or accept permanence.
+7. MB-SM-068A produce a self-contained management demo and executive evidence pack.
+8. MB-SM-068B issue evidence-backed beta readiness decision.
+
+MANAGEMENT_DELIVERABLE_TARGET:
+A self-contained HTML control panel and 5-10 minute executable demonstration showing:
+problem, capability, controlled update, before/after, idempotency, recovery/rollback, risks,
+technical debt, next milestones and decisions required from management.
+
+NEXT_ACTION:
+MB-SM-073B_RECONCILE_CURRENT_DIRTY_WORKTREE, then return to MB-SM-067A.
+==========
+END_MB-SM-073A_SESSION_CLOSE_20260731
+
+==========
+MB-SM-075A_VERTICAL_SLICE_FUNCTIONAL_V0_1
+==========
+RECORDED_AT=2026-08-07
+STATUS=VERTICAL_SLICE_V0_1_IMPLEMENTED_UNCOMMITTED
+HEAD_BASE=df7e9d18293503ec03ed0bbee51d8fec86941f35
+NOTES=
+- DCA rigid dirty patch restored to HEAD; configurable design candidate recorded.
+- SMDI core harness extension removed; fixture design recorded under Update/Fixtures/SMDI_Acceptance.
+- Transcript skill relocated to 99.CANDIDATES.
+- HUMAN doctrine patched for Improvement Flow / Project Sync / Audit / Providers / free AI option.
+- Lab SM-LAB-004 vertical slice PASS with Home evidence.
+COMMIT=NO
+PUSH=NO
+NEXT_ACTION=Human review; optional commit grouping; MB-SM-075B harden contracts/DCA config/SMDI fixture.
+==========
+END_MB-SM-075A
+
+==========
+MB-SM-075B_VERTICAL_SLICE_STABILIZATION
+==========
+RECORDED_AT=2026-08-07
+STATUS=STABILIZED_UNCOMMITTED
+HEAD_BASE=df7e9d18293503ec03ed0bbee51d8fec86941f35
+NOTES=
+- Vertical slice runner decomposed minimally (Core/Common, Status, Audit).
+- Status vocabulary CURRENT|ATTENTION|CRITICAL|BLOCKED; deterministic precedence.
+- Advisory-only audit no longer forces ATTENTION; LAB_PUBLICATION terminology enforced.
+- LAB reset for repeatability; Test-VerticalSlice PASS including run×2.
+- Validate-System PASS; updater core PASS; DCA tests PASS.
+- No commit/push; no external project mutation; no paid AI.
+COMMIT=NO
+PUSH=NO
+NEXT_ACTION=Human review of commit groups; then optional first real pilot (CloseReport) only after authorization.
+==========
+END_MB-SM-075B
+
+==========
+MB-SM-075C_COMMIT_READY_RECONCILIATION
+==========
+RECORDED_AT=2026-08-07
+STATUS=COMMIT_MANIFESTS_READY_UNCOMMITTED
+HEAD_BASE=df7e9d18293503ec03ed0bbee51d8fec86941f35
+DIRTY_START=47
+DIRTY_FINAL=26
+DIRTY_REDUCTION=21
+NOTES=
+- Removed regenerable LAB evidence and home.data.json from dirty scope.
+- .gitignore excludes SM-LAB-004 runtime tree and Home/home.data.json.
+- HUMAN.README encoding verified UTF-8; no mojibake correction required.
+- VS/DCA/Validate-System/updater regressions PASS after cleanup.
+COMMIT=NO
+PUSH=NO
+NEXT_ACTION=Human authorize commit groups GROUP_01..08.
+==========
+END_MB-SM-075C

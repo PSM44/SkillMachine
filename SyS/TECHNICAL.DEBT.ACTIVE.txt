@@ -96,3 +96,58 @@ EVIDENCE=Project-scoped mutex, persistent transaction journal, recover action an
 TD_ID=CORE_LINE_ENDING_POLICY
 STATUS=CLOSED_FOR_CORE
 REMAINDER=TD-008_LINE_ENDING_RESIDUAL_SCOPE
+
+============================================================================
+03.00_SESSION_UPDATE_MB-SM-073A_SESSION_CLOSE_20260731
+============================================================================
+
+ENTRY_ID=TD-015_SCOPE_DRIFT_AND_OBJECTIVE_COMPLETION
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Adjacent work can overtake and delay completion of the original user objective.
+DETAIL=Session continuity was complete, but SMDI-002 design and testing continued for hours before scope correction.
+RISK=High operator cost, delayed delivery and governance work becoming self-perpetuating.
+NEXT_ACTION=Add an objective-completion gate before opening adjacent workstreams.
+
+ENTRY_ID=TD-016_MULTI_SCOPE_DIRTY_WORKTREE_DISPOSITION
+PRIORITY=P0
+STATUS=OPEN
+TITLE=Two unrelated uncommitted changes coexist in the canonical worktree.
+DETAIL=DocumentConsistencyAudit and Test-SkillsMachineUpdate have different origins, approvals and evidence states.
+RISK=Accidental mixed commit, invalid attribution and difficult rollback.
+NEXT_ACTION=MB-SM-073B_RECONCILE_CURRENT_DIRTY_WORKTREE
+
+ENTRY_ID=TD-017_TEST_HARNESS_SCOPE_AND_EVIDENCE_CONTRACT
+PRIORITY=P1
+STATUS=OPEN
+TITLE=Updater capability, harness coverage and retained acceptance evidence are not cleanly separated.
+DETAIL=The core harness passed, but the first Stage A contract expected evidence not emitted by the harness. A large candidate patch was then added to the general harness.
+RISK=Overgrown test harness, ambiguous acceptance and repeated reruns.
+NEXT_ACTION=Review whether SMDI-specific acceptance belongs in the core harness, a separate integration fixture or an adjusted evidence contract.
+
+TD-013_SESSION_UPDATE:
+- Two locally delivered wrappers failed before the harness due to PowerShell compatibility defects.
+- Required prevention: PowerShell 7 declaration, parser validation, PS 5.1 compatibility decision, scalar-output collection safety and reusable tested automation helpers.
+
+==========
+MB-SM-075A_DEBT
+==========
+TD-018_DCA_CONFIGURABLE_ROOTS=OPEN — design only; implement validated profiles.
+TD-019_SMDI_FIXTURE_IMPLEMENTATION=OPEN — design only; rework defective patch concepts.
+TD-020_VERTICAL_SLICE_HARDENING=OPEN — schemas JSON validators, more negative tests, real-project pilot.
+==========
+
+MB-SM-075B_DEBT_DISPOSITION
+==========
+TD-018_DCA_CONFIGURABLE_ROOTS=CAN_WAIT - design-only remains; not required for LAB vertical slice regression.
+TD-019_SMDI_FIXTURE_IMPLEMENTATION=CAN_WAIT - design-only remains; core harness stays clean.
+TD-020_VERTICAL_SLICE_HARDENING=NEXT_BEFORE_PILOT - LAB stabilization done in 075B; real-project pilot prerequisites still open.
+==========
+
+MB-SM-075C_DEBT_DISPOSITION
+==========
+TD-018_DCA_CONFIGURABLE_ROOTS=CAN_WAIT
+TD-019_SMDI_FIXTURE_IMPLEMENTATION=CAN_WAIT
+TD-020_VERTICAL_SLICE_HARDENING=NEXT (real-project pilot prereqs after commits)
+TRANSCRIPT_CANDIDATE_ENCODING=CAN_WAIT (candidate body has pre-existing encoding noise; not HUMAN)
+==========

@@ -100,3 +100,47 @@ PRIORITY=P2
 STATUS=DEFERRED
 TITLE=Evaluate whether the current project scaffold is too heavy.
 NEXT_ACTION=Reassess after real-project evidence.
+
+============================================================================
+05.00_SESSION_UPDATE_MB-SM-073A_SESSION_CLOSE_20260731
+============================================================================
+
+ENTRY_ID=BL-PROD-010_RECONCILE_CURRENT_DIRTY_WORKTREE
+PRIORITY=P0
+STATUS=IN_PROGRESS
+TITLE=Review and disposition the two current uncommitted modifications without mixing scopes.
+DETAIL=DocumentConsistencyAudit has a preexisting change; Test-SkillsMachineUpdate has an unapproved 153-line SMDI-002 candidate extension. Review, keep/rework/discard and validate each independently.
+DEPENDENCIES=NONE
+SUCCESS_GATE=Each file has an explicit disposition, focused validation and isolated commit decision.
+NEXT_ACTION=MB-SM-073B_RECONCILE_CURRENT_DIRTY_WORKTREE
+
+SESSION_UPDATE:
+- BL-PROD-003 remains IN_PROGRESS and resumes after BL-PROD-010.
+- BL-PROD-001 remains OPEN.
+- BL-PROD-002 remains OPEN.
+- BL-PROD-004 remains OPEN.
+- BL-PROD-005 remains BLOCKED.
+- SMDI-002 is a separate candidate workstream and does not replace the active product path.
+
+==========
+MB-SM-075A_BACKLOG
+==========
+ENTRY_ID=BL-PROD-011_VERTICAL_SLICE_V0_1
+STATUS=DONE_LOCAL_UNCOMMITTED
+TITLE=Functional vertical slice v0.1 Improvement Flow + Project Sync + Audit + Home
+NEXT=MB-SM-075B_HARDEN_AND_REAL_PROJECT_PILOT after human review/commit decision
+==========
+
+MB-SM-075B_BACKLOG
+==========
+ENTRY_ID=BL-PROD-011_VERTICAL_SLICE_V0_1
+STATUS=STABILIZED_LAB_UNCOMMITTED
+NEXT=Human commit-group review; then MB-SM-076A_CLOSEREPORT_PILOT_PREREQS only with explicit authorization.
+==========
+
+MB-SM-075C_BACKLOG
+==========
+ENTRY_ID=BL-PROD-011_VERTICAL_SLICE_V0_1
+STATUS=COMMIT_READY_MANIFESTS_PREPARED
+NEXT=Human authorize GROUP_01..08 commits; then MB-SM-076A_CLOSEREPORT_PILOT_PREREQS with explicit auth.
+==========

@@ -1774,3 +1774,59 @@ nuevo minibattle.
 ==========
 FIN_MB-SM-072A_WHOAMI_SESSION_CLOSE_REVIEW_20260727
 ==========
+
+==========
+MB-SM-073A_SESSION_CLOSE_20260731
+==========
+RECORDED_AT=2026-07-31 18:38:56 -04:00
+PROJECT=PS.SkillsMachine
+CURRENT_POSITION=Strong governed updater foundation; visible management delivery remains incomplete.
+CURRENT_HEAD=df7e9d18293503ec03ed0bbee51d8fec86941f35
+CURRENT_BRANCH=main
+
+WHAT_IS_TRUE_NOW:
+- Session continuity is complete.
+- Cursor is ready for a future primary objective.
+- The canonical updater harness passed its current core test contract.
+- Two local modifications remain intentionally uncommitted.
+- The SMDI-002 harness extension is a candidate patch, not approved canon.
+- The project must return from internal governance expansion to a real vertical product slice.
+
+PRIMARY_PRODUCT_OBJECTIVE:
+Demonstrate a controlled real-project update that a nontechnical manager can understand in 5-10 minutes.
+
+IMMEDIATE_NEXT_ACTION:
+First reconcile the current dirty worktree by reviewing and dispositioning each modified file separately.
+Then resume the human runbook/operator UX and real-project acceptance path.
+
+DO_NOT:
+- Do not treat session continuity as blocked.
+- Do not continue SMDI-002 automatically.
+- Do not stage or commit the two modified files together.
+- Do not claim beta or management readiness without visible real-project evidence.
+==========
+END_MB-SM-073A_SESSION_CLOSE_20260731
+
+==========
+MB-SM-075A_WHOAMI
+==========
+CURRENT_POSITION=Vertical slice functional v0.1 demonstrated locally (uncommitted).
+PRIMARY_PRODUCT_OBJECTIVE=Visible governed Improvement Flow + Project Sync + Audit loop.
+DO_NOT=Do not push; do not treat LAB fixture as production canon; do not reintroduce SMDI into core harness.
+==========
+
+==========
+MB-SM-075B_WHOAMI
+==========
+CURRENT_POSITION=Vertical slice v0.1 stabilized locally (uncommitted); ready for human commit-group review.
+PRIMARY_PRODUCT_OBJECTIVE=Governed Improvement Flow + Project Sync + Audit loop; pilot only after human authorization.
+DO_NOT=Do not push; do not treat LAB as production publication; do not reintroduce SMDI into core harness; do not start CloseReport pilot without explicit auth.
+==========
+
+==========
+MB-SM-075C_WHOAMI
+==========
+CURRENT_POSITION=Vertical slice stabilized and dirty scope reconciled for commit manifests (uncommitted).
+PRIMARY_PRODUCT_OBJECTIVE=Human-reviewed isolated commits, then CloseReport pilot prerequisites only with auth.
+DO_NOT=Do not commit/push without explicit human authorization; do not commit regenerable LAB/home.data.json; do not start real pilot yet.
+==========
