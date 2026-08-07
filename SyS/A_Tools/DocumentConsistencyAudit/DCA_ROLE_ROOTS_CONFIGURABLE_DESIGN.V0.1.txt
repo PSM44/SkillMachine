@@ -1,0 +1,20 @@
+DCA_ROLE_ROOTS_CONFIGURABLE_DESIGN.V0.1
+DECISION=DEC-CQ-002=B
+STATUS=DESIGN_CANDIDATE
+DO_NOT_APPLY_INCOMPLETE_HARDCODED_LIST=YES
+
+PROBLEM:
+Hardcoding a short allowlist (00.CANON/05.DOCS) is incomplete across real projects
+(e.g. CloseReport 000.HUMAN, Brainy 92_HUMAN) and risks false authority.
+
+DESIGN:
+1. External config file per SkillsMachine or per-audit profile:
+   ROLE_ROOTS.HUMAN=00.HUMAN,00_HUMAN,01_HUMAN,000.HUMAN,...
+   ROLE_ROOTS.WHOAMI=...
+   ROLE_ROOTS.BATON=...
+2. README-style names remain non-authority.
+3. Equal-precedence ambiguity remains HARD_CONFLICT.
+4. Focused validation fixtures required before enabling new roots.
+5. Default profile remains the HEAD-committed allowlist until config is validated.
+
+NEXT=MB-SM-075B or focused DCA config minibattle
