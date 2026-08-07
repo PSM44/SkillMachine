@@ -1,0 +1,8 @@
+SKILL_ID=SKILL.LAB.LONG_RUNNING_RUNNER_HEARTBEAT
+VERSION=1.0.0
+STATUS=ACTIVE
+KIND=TRANSVERSAL
+PURPOSE=Provide minimal heartbeat/progress contract for long-running runners (LAB fixture).
+OWNER=SkillsMachine.LAB
+REQUIRES_HEARTBEAT=NO
+PROVENANCE=SM-LAB-004 synthetic baseline

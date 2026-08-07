@@ -1,0 +1,5 @@
+candidate_id=EXT-CAND-LAB-001
+provider_id=PROVIDER.LAB.LOCAL_FIXTURE
+proposed_id=SKILL.LAB.EXTERNAL_EXAMPLE
+status=EXTERNAL_CANDIDATE
+auto_canon=NO

@@ -1,0 +1,5 @@
+provider_id=PROVIDER.LAB.LOCAL_FIXTURE
+source_type=LOCAL
+trust=REVIEW
+freshness=CURRENT
+ingestion_state=READY
