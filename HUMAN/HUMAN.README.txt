@@ -27,3 +27,11 @@ SALIDA_ESPERADA....:
 CHANGELOG..........:
 2026-04-30, v0.1-DRAFT
 - Creación inicial del HUMAN root.
+
+==========
+MB-SM-075A_NOTE
+==========
+Product doctrine for bidirectional SkillsMachine↔Projects, Improvement Flow, Project Sync,
+Audit and free/local AI option is recorded in HUMAN.OPERATING.MODEL.txt under MB-SM-075A.
+WHOAMI remains subordinate; stable identity belongs in HUMAN (see also Wings4 Q-003 / DEC-W4-047).
+==========

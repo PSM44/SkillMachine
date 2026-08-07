@@ -93,3 +93,70 @@ suficiencia de contexto y uploads adicionales requeridos, antes de ejecutar trab
 ==========
 FIN_MB-GRC-033B_USECASE_FIRST_FOCUS_GATE
 ==========
+
+==========
+MB-SM-075A_PRODUCT_DOCTRINE_VERTICAL_SLICE_V0_1
+==========
+
+DATE..............: 2026-08-07
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE_DECISIONS..: DEC-CQ-001=A; DEC-CQ-002=B; DEC-CQ-003=B; DEC-CQ-004=A; VERTICAL_SLICE_OPTION=C
+
+PURPOSE_CORE......:
+PS.SkillsMachine is the central mechanism for administration, governance, distribution
+and dynamic perfection of Skills and GRCs for Human–AI work across projects.
+
+PRODUCT_RELATIONSHIP:
+- Bidirectional SkillsMachine↔Projects communication is product doctrine.
+- Improvement Flow = Projects → SkillsMachine (opportunities, submission, receipt, disposition, improvement).
+- Project Sync = SkillsMachine → Projects (catalog, capability set, update, validation, receipt).
+- Forbidden term: "Learning Sync". Use Improvement Flow / Improvement Flow Status.
+
+OWNERSHIP_BOUNDARIES:
+- HUMAN: semantic authority and critical approvals.
+- SkillsMachine: transversal Skills/GRC canon publication, catalog, Improvement Flow reception,
+  Audit, Project Sync packages; does NOT direct project functional work; does NOT replace Wings4.0.
+- Project: local authority, local extensions, local HUMAN/BATON/WHOAMI; may request capabilities;
+  must not unilaterally rewrite transversal published Skills/GRC.
+- Wings4.0: portfolio governance; may prepare transfers; does not mutate SkillsMachine canon unilaterally;
+  SkillsMachine local surfaces remain separate from 00_WINGS4_COORD.
+- ORCHESTRATOR: sequencing and gated prompts within authorization.
+- EXECUTOR: technical execution within explicit authorization.
+
+PROJECT_SURFACE:
+- Recommended root surface name: 00_SKILLSMACHINE
+- Separate from Wings4.0 coordination surfaces and other transfer folders.
+
+HOME_INDICATORS_V1:
+GLOBAL STATUS; SKILLS SYNC; PROJECT SYNC; IMPROVEMENT FLOW STATUS; SKILLS PROVIDERS; AUDIT STATUS
+
+STATUS_VOCABULARY_V1:
+CURRENT | ATTENTION | CRITICAL | BLOCKED
+PRECEDENCE: BLOCKED > CRITICAL > ATTENTION > CURRENT
+ADVISORY audit findings alone must not force ATTENTION on Global Status.
+
+ACTIONS_V1:
+Browse Skills & GRCs; Improve Skills; Integrate New Skills from Experience; Improvement Flow;
+Sync Projects; Check Skills Providers; Audit SkillsMachine; Let's Talk About Our Skills;
+Iterate with AI; Settings
+
+AUDIT_FUNCTION:
+First-class transversal function detecting conflicts, omissions, duplicates, stale state,
+broken dependencies, forks and governance gaps.
+
+AI_ASSISTANCE:
+- Free/local AI assistance is an architectural option.
+- Paid AI provider dependency is PROHIBITED for core operations.
+- Core operations MUST work in NO-AI mode.
+
+RECEIPT_VS_DISPOSITION:
+- Submission receipt and disposition are different events.
+- Accumulator rotation requires a valid receipt; history is preserved (rotate, do not destroy).
+
+CATALOG_VS_PACKAGE:
+- Catalog index is lightweight; capability packages are minimal and selective.
+- Do not mass-distribute full catalog bodies to all projects by default.
+
+FIN_MB-SM-075A_PRODUCT_DOCTRINE_VERTICAL_SLICE_V0_1
+==========
