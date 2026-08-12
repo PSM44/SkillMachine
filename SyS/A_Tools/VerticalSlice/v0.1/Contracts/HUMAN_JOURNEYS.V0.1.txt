@@ -1,0 +1,104 @@
+HUMAN_JOURNEYS.V0.1
+SOURCE=MB-SM-076A2
+SCHEMA_VERSION=0.1.0
+MODEL=Opening SkillsMachine is activation. Minimize free-text. Prefer selection + derived state.
+
+J1_OPEN_DIRECT=
+ENTRY=open Home UI
+USER_INTENT=see current governed state
+SYSTEM_DERIVED_CONTEXT=load status indicators + attention + projects summary
+USER_DECISIONS=none required to view
+SYSTEM_ACTIONS=render GLOBAL STATUS + indicators + NEEDS_YOUR_ATTENTION + PROJECTS + actions
+HUMAN_AUTHORIZATION_POINTS=none for read
+RESULT=Home ready
+ERROR_OR_ATTENTION_STATE=UNAVAILABLE if evidence missing
+
+J2_BROWSE=
+ENTRY=Browse Skills & GRCs
+USER_INTENT=inspect catalog
+SYSTEM_DERIVED_CONTEXT=catalog index
+USER_DECISIONS=select skill/GRC
+SYSTEM_ACTIONS=show metadata; no free-text required
+HUMAN_AUTHORIZATION_POINTS=none for browse
+RESULT=skill/GRC detail
+ERROR_OR_ATTENTION_STATE=ATTENTION if stale catalog
+
+J3_SUBMIT_IMPROVEMENT_MANUAL=
+ENTRY=Improve Skills / Improvement Flow
+USER_INTENT=submit opportunity
+SYSTEM_DERIVED_CONTEXT=source project (selected), evidence refs, correlation_id
+USER_DECISIONS=confirm target skill/GRC + severity
+SYSTEM_ACTIONS=build submission package; emit receipt path
+HUMAN_AUTHORIZATION_POINTS=confirm submission
+RESULT=SUBMITTED/RECEIVED
+ERROR_OR_ATTENTION_STATE=SOURCE_NOT_ENROLLED or INVALID_FORM
+
+J4_INTEGRATE_EXPERIENCE=
+ENTRY=Integrate New Skills from Experience
+USER_INTENT=capture project experience as candidate
+SYSTEM_DERIVED_CONTEXT=project context if enrolled
+USER_DECISIONS=accept candidate classification
+SYSTEM_ACTIONS=create EXTERNAL_CANDIDATE or opportunity
+HUMAN_AUTHORIZATION_POINTS=accept candidate
+RESULT=candidate registered
+ERROR_OR_ATTENTION_STATE=insufficient evidence
+
+J5_REVIEW_IMPROVEMENT_FLOW=
+ENTRY=Improvement Flow
+USER_INTENT=review receipts/dispositions
+SYSTEM_DERIVED_CONTEXT=accumulator + receipts
+USER_DECISIONS=disposition when NEEDS_DECISION
+SYSTEM_ACTIONS=show IF status enum
+HUMAN_AUTHORIZATION_POINTS=disposition decisions
+RESULT=disposition recorded
+ERROR_OR_ATTENTION_STATE=CRITICAL if missing receipt
+
+J6_REVIEW_PROJECT_SYNC=
+ENTRY=Sync Projects
+USER_INTENT=review deliveries/updates
+SYSTEM_DERIVED_CONTEXT=desired vs observed
+USER_DECISIONS=approve delivery review request
+SYSTEM_ACTIONS=show PROJECT_SYNC_STATUS
+HUMAN_AUTHORIZATION_POINTS=apply remains project-local
+RESULT=review package prepared
+ERROR_OR_ATTENTION_STATE=DRIFTED/FAILED/UNKNOWN
+
+J7_NEEDS_YOUR_ATTENTION=
+ENTRY=Home aggregation
+USER_INTENT=resolve pending decisions/warnings
+SYSTEM_DERIVED_CONTEXT=derive from audit, providers, IF, PS, enrolment
+USER_DECISIONS=pick attention item
+SYSTEM_ACTIONS=route to governed action
+HUMAN_AUTHORIZATION_POINTS=per item
+RESULT=item cleared or deferred
+ERROR_OR_ATTENTION_STATE=empty list = none
+
+J8_CONVERSATIONAL_EXPLORATION=
+ENTRY=Let's Talk About Our Skills
+USER_INTENT=explore skill meaning
+SYSTEM_DERIVED_CONTEXT=selected skill + free/local AI optional
+USER_DECISIONS=topic selection
+SYSTEM_ACTIONS=NO_AI mode still works
+HUMAN_AUTHORIZATION_POINTS=none for talk
+RESULT=understanding aid
+ERROR_OR_ATTENTION_STATE=AI unavailable → degrade to browse
+
+J9_AI_ITERATION=
+ENTRY=Iterate with AI / AI adapter
+USER_INTENT=assisted propose improvement
+SYSTEM_DERIVED_CONTEXT=CALLER_* + correlation_id
+USER_DECISIONS=accept/reject proposal
+SYSTEM_ACTIONS=PROPOSE_SKILL_IMPROVEMENT only
+HUMAN_AUTHORIZATION_POINTS=any canon mutation
+RESULT=proposal packaged
+ERROR_OR_ATTENTION_STATE=reject silent escalation
+
+J10_REVIEW_PROJECTS=
+ENTRY=PROJECTS Home section / LIST_PROJECTS
+USER_INTENT=see enrolment and sync posture
+SYSTEM_DERIVED_CONTEXT=registry
+USER_DECISIONS=select project / start enrolment proposal
+SYSTEM_ACTIONS=show ENROLMENT_STATUS + IF/PS + ATTENTION
+HUMAN_AUTHORIZATION_POINTS=enrolment approval
+RESULT=project detail
+ERROR_OR_ATTENTION_STATE=NOT_ENROLLED/UNKNOWN explicit

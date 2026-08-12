@@ -103,6 +103,79 @@ Assert-True ($homeHtml -notmatch 'Start AI Session|Continue AI Session|Close AI 
 Assert-True ($homeHtml -match 'Improvement Flow|IMPROVEMENT FLOW') "Home references Improvement Flow"
 Assert-True ($homeHtml -match 'CRITICAL') "Home CSS knows CRITICAL"
 Assert-True ($homeHtml -notmatch 'Learning Sync Status') "Home HTML no Learning Sync Status"
+Assert-True ($homeHtml -match 'Needs Your Attention|needs_your_attention|nya') "Home has Needs Your Attention"
+Assert-True ($homeHtml -match 'Projects|projects') "Home has Projects section"
+Assert-True ($homeHtml -match 'Primary Actions|primary_actions') "Home has Primary Actions"
+
+# Enrolment / AI / real-project contracts (MB-SM-076A2)
+$contractFiles = @(
+    'PROJECT_ENROLMENT.V0.1.txt',
+    'AI_ACCESS.V0.1.txt',
+    'IMPROVEMENT_FLOW_REAL_PROJECT.V0.1.txt',
+    'PROJECT_SYNC.V0.1.txt',
+    'DESIRED_OBSERVED_STATE.V0.1.txt',
+    'AUTHORITY_MATRIX.V0.1.txt',
+    'HUMAN_JOURNEYS.V0.1.txt',
+    'CLOSEREPORT_PILOT_MAPPING.V0.1.txt'
+)
+foreach ($cf in $contractFiles) {
+    Assert-True (Test-Path (Join-Path $vsRoot ("Contracts\$cf"))) "Contract present: $cf"
+}
+$enrol = Get-Content (Join-Path $vsRoot 'Contracts\PROJECT_ENROLMENT.V0.1.txt') -Raw
+Assert-True ($enrol -match 'EXISTING_PROJECT_ENROLMENT') "Enrolment defines existing project flow"
+Assert-True ($enrol -match 'not autonomous mutation|≠ autonomous') "Enrolment not autonomous mutation"
+$aiAccess = Get-Content (Join-Path $vsRoot 'Contracts\AI_ACCESS.V0.1.txt') -Raw
+Assert-True ($aiAccess -match 'PROTOCOL_NEUTRAL') "AI access protocol-neutral"
+Assert-True ($aiAccess -match 'must not depend on MCP|MCP not core') "AI access not MCP-core"
+Assert-True ($aiAccess -notmatch 'Learning Sync') "AI contract has no Learning Sync"
+$psContract = Get-Content (Join-Path $vsRoot 'Contracts\PROJECT_SYNC.V0.1.txt') -Raw
+Assert-True ($psContract -match 'EXPLICITLY_ENROLLED_IN_SKILLSMACHINE') "Project Sync uses enrolment eligibility"
+$domain = Get-Content (Join-Path $vsRoot 'DOMAIN.MODEL.txt') -Raw
+Assert-True ($domain -match 'ENROLMENT_STATUS') "DOMAIN has enrolment"
+Assert-True ($domain -match 'ONE_SKILLSMACHINE_CORE') "DOMAIN has one core access model"
+
+$registryPath = Join-Path $vsRoot 'Fixtures\projects\PROJECT.REGISTRY.v0.1.json'
+Assert-True (Test-Path $registryPath) "Project registry fixture present"
+$reg = Get-Content $registryPath -Raw | ConvertFrom-Json
+Assert-True (@($reg.projects).Count -ge 2) "Registry has LAB + CloseReport rows"
+$cr = @($reg.projects | Where-Object { $_.PROJECT_ID -eq 'CloseReport' })[0]
+Assert-True ($null -ne $cr) "CloseReport registry row exists"
+Assert-True ($cr.ENROLMENT_STATUS -eq 'NOT_ENROLLED') "CloseReport NOT_ENROLLED"
+Assert-True ($cr.PROJECT_SYNC_STATUS -eq 'UNKNOWN') "CloseReport sync UNKNOWN (not fabricated CURRENT)"
+
+# Eligibility unit checks
+. (Join-Path $RepoRoot 'SyS\A_Tools\Update\Eligibility.ps1')
+$eligCreated = Test-SkillsMachineProjectEligibility -Baseline ([pscustomobject]@{
+    schema_version = '1.1'
+    created_by_skillsmachine = $true
+})
+Assert-True ([bool]$eligCreated.Eligible) "1.1 created_by eligible"
+$eligUnknown = Test-SkillsMachineProjectEligibility -Baseline ([pscustomobject]@{
+    schema_version = '1.1'
+    created_by_skillsmachine = $false
+})
+Assert-True (-not [bool]$eligUnknown.Eligible) "1.1 unknown blocked"
+Assert-True ([string]$eligUnknown.Reason -eq 'BLOCKED_UNKNOWN_PROJECT') "1.1 unknown reason"
+$eligEnrolled = Test-SkillsMachineProjectEligibility -Baseline ([pscustomobject]@{
+    schema_version = '1.2'
+    created_by_skillsmachine = $false
+    explicitly_enrolled_in_skillsmachine = $true
+    enrolment_status = 'ENROLLED'
+})
+Assert-True ([bool]$eligEnrolled.Eligible) "1.2 enrolled eligible"
+$eligPending = Test-SkillsMachineProjectEligibility -Baseline ([pscustomobject]@{
+    schema_version = '1.2'
+    created_by_skillsmachine = $false
+    explicitly_enrolled_in_skillsmachine = $false
+    enrolment_status = 'NOT_ENROLLED'
+})
+Assert-True (-not [bool]$eligPending.Eligible) "1.2 not enrolled blocked"
+Assert-True ([string]$eligPending.Reason -eq 'BLOCKED_PROJECT_NOT_ENROLLED') "1.2 not enrolled reason"
+
+# HUMAN 076A2 enrolment doctrine
+Assert-True ($human -match 'PROJECT_ENROLMENT|Enrolment = permission') "HUMAN has enrolment doctrine"
+Assert-True ($human -match 'NEEDS_YOUR_ATTENTION|Needs Your Attention') "HUMAN mentions Needs Your Attention"
+Assert-True ($human -match 'ONE_SKILLSMACHINE_CORE') "HUMAN one core model"
 
 # Run vertical slice (clean LAB)
 & $runner -RepoRoot $RepoRoot
@@ -143,6 +216,15 @@ Assert-True ($hd.actions -contains 'Integrate New Skills from Experience') "Inte
 Assert-True ($hd.actions -contains 'Audit SkillsMachine') "Audit SkillsMachine present"
 Assert-True ($hd.actions -contains 'Improvement Flow') "Improvement Flow action present"
 Assert-True (@($hd.actions | Where-Object { $_ -match 'Start AI Session|Continue AI Session|Close AI Session' }).Count -eq 0) "No AI Session actions"
+Assert-True ($null -ne $hd.needs_your_attention) "Home needs_your_attention present"
+Assert-True (@($hd.needs_your_attention).Count -ge 1) "Home attention has items"
+Assert-True ($null -ne $hd.projects) "Home projects present"
+Assert-True (@($hd.projects | Where-Object { $_.PROJECT_ID -eq 'CloseReport' -and $_.ENROLMENT_STATUS -eq 'NOT_ENROLLED' }).Count -eq 1) "Home shows CloseReport NOT_ENROLLED"
+Assert-True ($hd.primary_actions.Count -eq 5) "5 primary actions"
+Assert-True ($hd.secondary_actions.Count -eq 5) "5 secondary actions"
+Assert-True ($hd.access_model.core -eq 'ONE_SKILLSMACHINE_CORE') "Home access model core"
+Assert-True ($null -ne $hd.registry_source) "Home registry_source present"
+Assert-True ($hd.registry_source -in @('DURABLE_PROJECTOPS','FIXTURE_FALLBACK')) "Home registry_source known"
 
 # Negative: no Learning Sync Status misuse in home
 $homeRaw = Get-Content $homeDataPath -Raw

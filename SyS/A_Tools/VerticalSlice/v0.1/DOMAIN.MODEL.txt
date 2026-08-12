@@ -1,6 +1,6 @@
 DOMAIN.MODEL.V0.1
-SCHEMA_VERSION=0.1.1
-SOURCE=MB-SM-075B
+SCHEMA_VERSION=0.1.2
+SOURCE=MB-SM-075B;MB-SM-076A2
 NOTE=Capability is the installed/published unit of a Skill or GRC; Skill/GRC remain entity names (no duplicate Capability entity).
 
 ENTITY=Skill
@@ -18,8 +18,11 @@ PROVENANCE=required
 
 ENTITY=Project
 ID_FIELD=project_id
-FIELDS=project_id,root,surface=00_SKILLSMACHINE,installed_capabilities[],head_or_version
+FIELDS=project_id,root,surface=00_SKILLSMACHINE,installed_capabilities[],head_or_version,enrolment_status,project_class,created_by_skillsmachine,explicitly_enrolled_in_skillsmachine
 OWNERSHIP=local project authority; does not own transversal Skill/GRC canon
+ENROLMENT_STATUS=DISCOVERED|NOT_ENROLLED|ENROLMENT_PENDING|ENROLLED|SUSPENDED_OR_DISCONNECTED
+PROJECT_CLASS=NEW_PROJECT|EXISTING_UNINTEGRATED_PROJECT|ENROLLED_PROJECT
+ENROLMENT_SEMANTICS=package exchange permission only; not autonomous mutation authority
 
 ENTITY=Opportunity
 ID_FIELD=opportunity_id
@@ -41,7 +44,7 @@ IDEMPOTENCY=same submission_id+content_sha256 → same receipt_id/hash
 
 ENTITY=Disposition
 ID_FIELD=disposition_id
-VALUES=IMPROVE|MERGE|CREATE|REJECT|DEFER|PROJECT_LOCAL
+VALUES=IMPROVE|MERGE|CREATE|REJECT|DEFER|PROJECT_LOCAL|IMPROVE_EXISTING|CREATE_NEW|NO_ACTION|NEEDS_HUMAN_DECISION
 FIELDS=disposition_id,submission_id,opportunity_id,decision,targets[],rationale,decided_at
 SEPARATION=distinct from Receipt; may be delayed after receipt
 
@@ -62,6 +65,12 @@ ID_FIELD=message_id
 FIELDS=message_id,update_id,result,before_sha256,after_sha256,rollback_ref,validator_status,correlation_id
 DIRECTION=Project Sync (SkillsMachine → Projects)
 
+ACCESS_CHANNELS=
+DIRECT_UI
+AI_INTEGRATION (adapter-only; protocol-neutral; MCP not core dependency)
+ONE_SKILLSMACHINE_CORE
+ONE_GOVERNANCE_MODEL
+
 RELATIONS:
 Project USES Skill|GRC (as installed capability)
 Opportunity TARGETS Skill|GRC
@@ -72,6 +81,7 @@ Submission CONTAINS Opportunity
 Receipt ACKNOWLEDGES Submission
 Disposition DECIDES Opportunity
 UpdateReceipt CONFIRMS Project Sync apply
+Project MAY BE_ENROLLED_IN SkillsMachine (registry)
 
 OWNERSHIP_NON_CIRCULAR:
 HUMAN owns product meaning

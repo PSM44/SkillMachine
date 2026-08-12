@@ -490,22 +490,93 @@ $homeObj['generated_at'] = $result['finished_at']
 $homeObj['source_evidence'] = $outJson
 $homeObj['status'] = $statusObj
 $homeObj['vertical_slice'] = $vs
-$homeObj['actions'] = @(
+$primaryActions = @(
     'Browse Skills & GRCs',
     'Improve Skills',
     'Integrate New Skills from Experience',
     'Improvement Flow',
-    'Sync Projects',
+    'Sync Projects'
+)
+$secondaryActions = @(
     'Check Skills Providers',
     'Audit SkillsMachine',
     "Let's Talk About Our Skills",
     'Iterate with AI',
     'Settings'
 )
+$homeObj['primary_actions'] = $primaryActions
+$homeObj['secondary_actions'] = $secondaryActions
+$homeObj['actions'] = @($primaryActions + $secondaryActions)
 $homeObj['indicators'] = @('GLOBAL STATUS','SKILLS SYNC','PROJECT SYNC','IMPROVEMENT FLOW STATUS','SKILLS PROVIDERS','AUDIT STATUS')
 $homeObj['forbidden_terms_absent'] = @('Learning Sync')
 $homeObj['paid_ai_dependency'] = 'NO'
 $homeObj['production_publication'] = 'NOT_TESTED'
+
+# MB-SM-076A3: prefer durable ProjectOps registry; fixture remains fallback for isolated VS-only runs
+$projectsHome = New-Object System.Collections.Generic.List[object]
+$attentionItems = New-Object System.Collections.Generic.List[object]
+$registrySource = 'NONE'
+$durableOps = Join-Path $RepoRoot 'SyS\A_Tools\ProjectOps\v0.1'
+$durableRegistryPath = Join-Path $durableOps 'State\PROJECT.REGISTRY.json'
+$fixtureRegistryPath = Join-Path $PSScriptRoot 'Fixtures\projects\PROJECT.REGISTRY.v0.1.json'
+
+if (Test-Path -LiteralPath $durableRegistryPath) {
+    . (Join-Path $durableOps 'Core\Common.ps1')
+    . (Join-Path $durableOps 'Core\Registry.ps1')
+    $homeView = Get-ProjectHomeViewFromRegistry -OpsRoot $durableOps
+    foreach ($row in @($homeView.projects)) { [void]$projectsHome.Add($row) }
+    foreach ($attn in @($homeView.needs_your_attention)) { [void]$attentionItems.Add($attn) }
+    $registrySource = 'DURABLE_PROJECTOPS'
+}
+elseif (Test-Path -LiteralPath $fixtureRegistryPath) {
+    $registry = Get-Content -LiteralPath $fixtureRegistryPath -Raw -Encoding UTF8 | ConvertFrom-Json
+    foreach ($p in @($registry.projects)) {
+        $projRow = [pscustomobject]@{
+            PROJECT = [string]$p.PROJECT_ID
+            PROJECT_ID = [string]$p.PROJECT_ID
+            ENROLMENT_STATUS = [string]$p.ENROLMENT_STATUS
+            IMPROVEMENT_FLOW_STATUS = [string]$p.IMPROVEMENT_FLOW_STATUS
+            PROJECT_SYNC_STATUS = [string]$p.PROJECT_SYNC_STATUS
+            ATTENTION = [string]$p.ATTENTION
+            LAST_OBSERVED_STATE = [string]$p.LAST_OBSERVED_AT
+            PROJECT_CLASS = [string]$p.PROJECT_CLASS
+        }
+        [void]$projectsHome.Add($projRow)
+        if ([string]$p.ATTENTION -and [string]$p.ATTENTION -ne 'NONE') {
+            [void]$attentionItems.Add([pscustomobject]@{
+                id = ("ATTN-{0}" -f [string]$p.PROJECT_ID)
+                summary = ("{0}: {1}" -f [string]$p.PROJECT_ID, [string]$p.ATTENTION)
+                source = 'PROJECT_REGISTRY_FIXTURE'
+            })
+        }
+    }
+    $registrySource = 'FIXTURE_FALLBACK'
+}
+if ($providersStatus -ne 'CURRENT') {
+    [void]$attentionItems.Add([pscustomobject]@{
+        id = 'ATTN-PROVIDERS'
+        summary = 'EXTERNAL_CANDIDATE requires human review'
+        source = 'SKILLS_PROVIDERS'
+    })
+}
+$projectsRequiringAction = @(
+    $projectsHome | Where-Object {
+        ($_.ENROLMENT_STATUS -eq 'NOT_ENROLLED') -or
+        ($_.ENROLMENT_STATUS -eq 'ENROLMENT_PENDING') -or
+        ($_.ATTENTION -and $_.ATTENTION -ne 'NONE')
+    }
+).Count
+$statusObj['PROJECTS_REQUIRING_ACTION'] = $projectsRequiringAction
+$homeObj['status'] = $statusObj
+$homeObj['projects'] = @($projectsHome.ToArray())
+$homeObj['needs_your_attention'] = @($attentionItems.ToArray())
+$homeObj['registry_source'] = $registrySource
+$homeObj['access_model'] = [pscustomobject]@{
+    core = 'ONE_SKILLSMACHINE_CORE'
+    channels = @('DIRECT_UI', 'AI_INTEGRATION')
+    governance = 'ONE_GOVERNANCE_MODEL'
+    ai_protocol = 'PROTOCOL_NEUTRAL_ADAPTER'
+}
 Write-Utf8NoBom -Path (Join-Path $HomeDir 'home.data.json') -Content (($homeObj | ConvertTo-Json -Depth 10))
 
 Write-Host "VERTICAL_SLICE_STATUS=$($result['vertical_slice_status'])"

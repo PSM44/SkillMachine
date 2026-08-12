@@ -1,0 +1,20 @@
+AUTHORITY_MATRIX.V0.1
+SOURCE=MB-SM-076A2
+SCHEMA_VERSION=0.1.0
+
+ACTION|ACTOR|NOTES
+project_discovery|SkillsMachine_or_AI_READ_ONLY|no mutation
+project_enrolment|HUMAN_APPROVAL_REQUIRED|SkillsMachine prepares proposal
+opportunity_identification|Project_operators|project authority
+opportunity_submission|Project_or_authorized_adapter|requires enrolled or proposed enrolment path
+receipt|SkillsMachine|acknowledges form only
+disposition|SkillsMachine_+_HUMAN|consequential decisions need human
+skill_grc_canon_mutation|SkillsMachine_HUMAN|AI may propose only
+publication|SkillsMachine_HUMAN|PRODUCTION_PUBLICATION gated
+project_sync_delivery|SkillsMachine|delivery to surface; not silent apply
+target_project_mutation|TARGET_PROJECT_HUMAN_and_executor|SkillsMachine does not acquire project functional authority
+target_validation|TARGET_PROJECT|may share evidence with SkillsMachine
+result_acceptance|TARGET_PROJECT_HUMAN_for_project;_SkillsMachine_HUMAN_for_canon|joint acceptance must be explicit
+
+AI_ESCALATION=FORBIDDEN without human/project authority
+WINGS4=portfolio coordination only; not SkillsMachine canon mutation

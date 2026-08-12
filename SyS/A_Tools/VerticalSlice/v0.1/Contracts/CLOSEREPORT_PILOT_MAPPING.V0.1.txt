@@ -1,0 +1,43 @@
+CLOSEREPORT_PILOT_MAPPING.V0.1
+SOURCE=MB-SM-076A2
+MODE=DESIGN_MAPPING_ONLY
+CLOSEREPORT_MUTATION=PROHIBITED_IN_076A2
+
+CLASS=EXISTING_UNINTEGRATED_PROJECT
+ENROLMENT_STATUS=NOT_ENROLLED
+RECEIVING_BOUNDARY_00_SKILLSMACHINE=ABSENT
+
+FUTURE_PILOT_FLOW=
+1. CloseReport discovery (read-only)
+2. enrolment proposal (SkillsMachine)
+3. human authorizes enrolment
+4. baseline registered (schema 1.2 enrolled)
+5. OPP-CR-076A-01 submitted (Temp/upload retention)
+6. SkillsMachine receipt
+7. disposition IMPROVE_EXISTING
+8. improve existing Temp/artifact Skill/GRC
+9. Audit
+10. publication
+11. Project Sync package
+12. CloseReport-local executor applies under CR authority
+13. update receipt
+14. measurable result
+
+STEP_READINESS_AFTER_076A3=
+1 READY
+2 READY_ON_SM (proposal READY_FOR_REVIEW generated; human decision required)
+3 BLOCKED_BY_HUMAN (approval)
+4 BLOCKED_BY_HUMAN + CR surface still ABSENT (cross-project)
+5 PARTIAL (real-project IF intake implemented for enrolled projects; CR not enrolled)
+6 IMPLEMENTED (durable receipt for enrolled sources)
+7 IMPLEMENTED (disposition with no silent approve)
+8 PARTIAL (production publication PREPARED path; not delivered)
+9 PARTIAL (Project Sync preparation only; no external apply)
+10-14 unchanged blockers (cross-project / human thresholds)
+
+CLOSEREPORT_PROPOSAL_STATUS_AT_076A3=READY_FOR_REVIEW
+CLOSEREPORT_ENROLMENT_STATUS_AT_076A3=NOT_ENROLLED
+AUTO_ENROL=FORBIDDEN
+
+TOP_OPPORTUNITY=OPP-CR-076A-01
+PREFERRED_MATCH=IMPROVE_EXISTING SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT / upload pack skills

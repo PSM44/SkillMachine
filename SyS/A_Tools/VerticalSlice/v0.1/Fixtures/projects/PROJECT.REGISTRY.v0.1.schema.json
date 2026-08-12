@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "PROJECT.REGISTRY.v0.1.schema.json",
+  "title": "SkillsMachine Project Registry v0.1",
+  "type": "object",
+  "required": ["schema_version", "projects"],
+  "additionalProperties": true,
+  "properties": {
+    "schema_version": { "type": "string" },
+    "generated_at": { "type": "string" },
+    "source": { "type": "string" },
+    "note": { "type": "string" },
+    "projects": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "PROJECT_ID",
+          "PROJECT_ROOT_IDENTITY",
+          "ENROLMENT_STATUS",
+          "IMPROVEMENT_FLOW_STATUS",
+          "PROJECT_SYNC_STATUS"
+        ],
+        "properties": {
+          "PROJECT_ID": { "type": "string" },
+          "PROJECT_ROOT_IDENTITY": { "type": "string" },
+          "PROJECT_TYPE": { "type": "string" },
+          "PROJECT_CLASS": { "type": "string" },
+          "ENROLMENT_STATUS": {
+            "type": "string",
+            "enum": [
+              "DISCOVERED",
+              "NOT_ENROLLED",
+              "ENROLMENT_PENDING",
+              "ENROLLED",
+              "SUSPENDED_OR_DISCONNECTED"
+            ]
+          },
+          "ENROLMENT_METHOD": { "type": ["string", "null"] },
+          "ENROLLED_AT": { "type": ["string", "null"] },
+          "CAPABILITY_BASELINE": { "type": "string" },
+          "IMPROVEMENT_FLOW_ENABLED": { "type": "boolean" },
+          "PROJECT_SYNC_ENABLED": { "type": "boolean" },
+          "LAST_OBSERVED_AT": { "type": ["string", "null"] },
+          "LAST_SYNC_ID": { "type": ["string", "null"] },
+          "LAST_RECEIPT_ID": { "type": ["string", "null"] },
+          "AUTHORITY_MODEL": { "type": "string" },
+          "IMPROVEMENT_FLOW_STATUS": { "type": "string" },
+          "PROJECT_SYNC_STATUS": { "type": "string" },
+          "ATTENTION": { "type": "string" },
+          "CREATED_BY_SKILLSMACHINE": { "type": "boolean" },
+          "EXPLICITLY_ENROLLED_IN_SKILLSMACHINE": { "type": "boolean" },
+          "RECEIVING_BOUNDARY_00_SKILLSMACHINE": { "type": "string" }
+        }
+      }
+    }
+  }
+}

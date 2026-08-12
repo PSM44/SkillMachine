@@ -1,0 +1,58 @@
+PROJECT_SYNC_CONTRACT.V0.1
+SOURCE=MB-SM-076A2
+SCHEMA_VERSION=0.1.0
+DIRECTION=SkillsMachine → Projects
+MODEL=delivery contract (not uncontrolled file mirroring)
+
+REQUIRED_FIELDS=
+PACKAGE_ID
+TARGET_PROJECT
+CAPABILITY_ID
+FROM_VERSION
+TO_VERSION
+DEPENDENCIES
+COMPATIBILITY
+PREFLIGHT
+REVERSIBILITY
+HUMAN_APPROVAL
+DELIVERY_STATUS
+TARGET_APPLY_STATUS
+UPDATE_RECEIPT
+VALIDATION_RESULT
+
+ELIGIBILITY=
+TARGET must satisfy:
+CREATED_BY_SKILLSMACHINE
+OR
+EXPLICITLY_ENROLLED_IN_SKILLSMACHINE with ENROLMENT_STATUS=ENROLLED
+No project-specific exception paths (including CloseReport)
+
+AUTHORITY_SPLIT=
+SkillsMachine: publish package, deliver to governed surface, track desired state
+Target project: authorize and execute local apply; validate; emit update receipt
+
+PREFLIGHT_MINIMUM=
+identity gate; eligibility; clean worktree (updater); compatibility; reversible plan; human approval for apply
+
+DELIVERY_STATUS=
+PREPARED
+DELIVERED
+AWAITING_PROJECT_APPROVAL
+REJECTED
+SUPERSEDED
+
+TARGET_APPLY_STATUS=
+NOT_STARTED
+APPLYING
+APPLIED
+FAILED
+ROLLED_BACK
+
+DESIRED_VS_OBSERVED=
+CANONICAL_CAPABILITY_VERSION
+PROJECT_OBSERVED_CAPABILITY_VERSION
+PROJECT_SYNC_STATUS
+LAST_DELIVERY_ID
+LAST_UPDATE_RECEIPT_ID
+
+REVERSIBILITY=required for updater-managed paths; project-local executors must declare rollback or refuse apply

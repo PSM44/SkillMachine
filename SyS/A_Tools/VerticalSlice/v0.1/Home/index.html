@@ -18,14 +18,19 @@
     .card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:.9rem 1rem; }
     .card .k { font-size:.7rem; color:var(--muted); text-transform:uppercase; letter-spacing:.06em; }
     .card .v { font-size:1.1rem; font-weight:600; margin-top:.35rem; }
-    .CURRENT { color:var(--ok); } .ATTENTION { color:var(--attn); } .CRITICAL, .BLOCKED, .FAIL { color:var(--fail); }
+    .CURRENT { color:var(--ok); } .ATTENTION { color:var(--attn); } .CRITICAL, .BLOCKED, .FAIL, .UNKNOWN, .NOT_ENROLLED { color:var(--attn); }
     .actions { display:flex; flex-wrap:wrap; gap:.5rem; }
     button { background:#243044; color:var(--fg); border:1px solid var(--line); border-radius:8px; padding:.55rem .8rem; cursor:pointer; font-size:.8rem; }
+    button.secondary { opacity:.85; }
     button:hover { border-color:#4a5d78; }
     .lists { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:.75rem; }
+    table { width:100%; border-collapse:collapse; font-size:.8rem; margin-top:.5rem; }
+    th, td { text-align:left; padding:.4rem .35rem; border-bottom:1px solid var(--line); color:var(--muted); }
+    th { color:var(--fg); font-weight:600; }
     ul { margin:.4rem 0 0; padding-left:1.1rem; color:var(--muted); font-size:.85rem; }
     .err { color:var(--fail); }
     footer { color:var(--muted); font-size:.75rem; padding:0 1.5rem 1.5rem; }
+    .section-label { margin-bottom:.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.7rem; }
   </style>
 </head>
 <body>
@@ -44,9 +49,33 @@
       <div class="card"><div class="k">External Candidates</div><div id="ext" class="v">—</div></div>
       <div class="card"><div class="k">Projects Requiring Action</div><div id="pra" class="v">—</div></div>
     </section>
+    <section class="card">
+      <div class="k">Needs Your Attention</div>
+      <ul id="nya"></ul>
+    </section>
+    <section class="card">
+      <div class="k">Projects</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Project</th>
+            <th>Enrolment</th>
+            <th>Improvement Flow</th>
+            <th>Project Sync</th>
+            <th>Attention</th>
+            <th>Last Observed</th>
+          </tr>
+        </thead>
+        <tbody id="projects"></tbody>
+      </table>
+    </section>
     <section>
-      <div class="k" style="margin-bottom:.5rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;font-size:.7rem;">Actions</div>
-      <div class="actions" id="actions"></div>
+      <div class="section-label">Primary Actions</div>
+      <div class="actions" id="primary_actions"></div>
+    </section>
+    <section>
+      <div class="section-label">Secondary Actions</div>
+      <div class="actions" id="secondary_actions"></div>
     </section>
     <section class="card">
       <div class="k">Vertical Slice Evidence</div>
@@ -54,7 +83,7 @@
       <div id="loaderr" class="err"></div>
     </section>
   </main>
-  <footer>MB-SM-075B · Improvement Flow · Project Sync · Audit · Providers · NO paid AI dependency · Wings4 separated · PRODUCTION_PUBLICATION=NOT_TESTED</footer>
+  <footer>MB-SM-076A2 · Improvement Flow · Project Sync · Enrolment · Needs Your Attention · NO paid AI dependency · Wings4 separated · PRODUCTION_PUBLICATION=NOT_TESTED</footer>
   <script>
     async function load() {
       try {
@@ -81,7 +110,27 @@
         document.getElementById('opp').textContent = st.IMPROVEMENT_OPPORTUNITIES;
         document.getElementById('ext').textContent = st.EXTERNAL_CANDIDATES;
         document.getElementById('pra').textContent = st.PROJECTS_REQUIRING_ACTION;
-        const actions = data.actions || [];
+
+        const nya = data.needs_your_attention || [];
+        document.getElementById('nya').innerHTML = nya.length
+          ? nya.map(i => `<li>${i.id || ''}: ${i.summary || i}</li>`).join('')
+          : '<li>NONE</li>';
+
+        const projects = data.projects || [];
+        document.getElementById('projects').innerHTML = projects.map(p =>
+          `<tr>
+            <td>${p.PROJECT || p.PROJECT_ID || '—'}</td>
+            <td class="${p.ENROLMENT_STATUS || ''}">${p.ENROLMENT_STATUS || 'UNKNOWN'}</td>
+            <td>${p.IMPROVEMENT_FLOW_STATUS || 'UNKNOWN'}</td>
+            <td>${p.PROJECT_SYNC_STATUS || 'UNKNOWN'}</td>
+            <td>${p.ATTENTION || '—'}</td>
+            <td>${p.LAST_OBSERVED_STATE || p.LAST_OBSERVED_AT || 'UNKNOWN'}</td>
+          </tr>`
+        ).join('');
+
+        const primary = data.primary_actions || (data.actions || []).slice(0, 5);
+        const secondary = data.secondary_actions || (data.actions || []).slice(5);
+        const actions = (data.actions || []).length ? data.actions : primary.concat(secondary);
         if (actions.length !== 10) {
           document.getElementById('loaderr').textContent = 'Expected 10 actions, got ' + actions.length;
         }
@@ -90,7 +139,8 @@
         if (bad.length) {
           document.getElementById('loaderr').textContent = 'Forbidden action labels: ' + bad.join(', ');
         }
-        document.getElementById('actions').innerHTML = actions.map(a => `<button type="button">${a}</button>`).join('');
+        document.getElementById('primary_actions').innerHTML = primary.map(a => `<button type="button">${a}</button>`).join('');
+        document.getElementById('secondary_actions').innerHTML = secondary.map(a => `<button type="button" class="secondary">${a}</button>`).join('');
         const vs = data.vertical_slice || {};
         document.getElementById('vs').innerHTML = Object.keys(vs).map(k => `<li>${k}=${vs[k]}</li>`).join('');
       } catch (e) {
