@@ -1,5 +1,5 @@
 Operate only on the declared PROJECT_ROOT.
-Require created_by_skillsmachine=true and a clean Git state before apply mode.
+Require created_by_skillsmachine=true OR (schema 1.2 explicitly enrolled ENROLLED) and a clean Git state before apply mode.
 When available, run -UseDocumentAuditPreflight and block mutation on unresolved HARD_CONFLICT findings.
 Run compatibility, baseline load, dry-run fingerprint, explicit human approval, checkpoint, apply, validate and baseline update.
 Use SyS\A_Tools\Update as the core reference. Do not invent operations outside ADD, REPLACE and DELETE.

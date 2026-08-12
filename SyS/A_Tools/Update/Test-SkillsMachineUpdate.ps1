@@ -679,29 +679,225 @@ try {
     & git -C $auditConflictProject add .
     & git -C $auditConflictProject commit -m "audit conflict baseline" | Out-Null
 
+    $auditConflictLog = Join-Path $testRoot "audit-conflict-preflight.log"
+    $auditConflictExit = 0
     try {
-        $auditConflictOutput = & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
             -Action preflight `
             -ProjectRoot $auditConflictProject `
             -UpdateManifest $auditConflictManifestPath `
             -BaselinePath $auditConflictBaselinePath `
             -EvidencePath $auditConflictEvidence `
-            -UseDocumentAuditPreflight 2>&1
+            -UseDocumentAuditPreflight *> $auditConflictLog
         $auditConflictExit = $LASTEXITCODE
     }
     catch {
-        $auditConflictOutput = @($_.Exception.Message)
         $auditConflictExit = 1
+        Add-Content -LiteralPath $auditConflictLog -Value $_.Exception.Message -Encoding UTF8
+    }
+
+    $auditConflictText = ""
+    if (Test-Path -LiteralPath $auditConflictLog) {
+        $auditConflictText = Get-Content -LiteralPath $auditConflictLog -Raw -Encoding UTF8
     }
 
     if ($auditConflictExit -eq 0) {
         throw "AUDIT_CONFLICT_UNEXPECTED_PASS"
     }
-    if (-not (@($auditConflictOutput) -match "DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED")) {
-        throw "CRITICAL_FINDING_NOT_BLOCKED: $($auditConflictOutput -join ' | ')"
+    if ($auditConflictText -notmatch "DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED") {
+        throw "CRITICAL_FINDING_NOT_BLOCKED: $auditConflictText"
     }
     if ((Get-Sha256 -Path (Join-Path $auditConflictProject "config.txt")) -ne $auditConflictPre) {
         throw "NO_AUTO_RESOLUTION_VIOLATION"
+    }
+
+    # MB-SM-076A2 enrolment eligibility
+    . (Join-Path $PSScriptRoot "Eligibility.ps1")
+    $eligUnit = Test-SkillsMachineProjectEligibility -Baseline ([pscustomobject]@{
+            schema_version = "1.2"
+            created_by_skillsmachine = $false
+            explicitly_enrolled_in_skillsmachine = $true
+            enrolment_status = "ENROLLED"
+        })
+    if (-not [bool]$eligUnit.Eligible) {
+        throw "ENROLMENT_ELIGIBILITY_UNIT_FAIL"
+    }
+
+    $enrolledProject = Join-Path $testRoot "enrolled-project"
+    $enrolledPackage = Join-Path $testRoot "enrolled-package"
+    $enrolledEvidence = Join-Path $testRoot "enrolled-evidence"
+    New-Item -ItemType Directory -Path $enrolledProject, $enrolledPackage, $enrolledEvidence -Force | Out-Null
+    Write-Utf8NoBom -Path (Join-Path $enrolledProject "tracked.txt") -Content "enrolled-before"
+    Write-Utf8NoBom -Path (Join-Path $enrolledPackage "tracked.payload.txt") -Content "enrolled-after"
+    $enrolledPre = Get-Sha256 -Path (Join-Path $enrolledProject "tracked.txt")
+    $enrolledPost = Get-Sha256 -Path (Join-Path $enrolledPackage "tracked.payload.txt")
+    & git -C $enrolledProject init | Out-Null
+    & git -C $enrolledProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $enrolledProject config user.name "SkillsMachine Test"
+    $enrolledBaseline = [ordered]@{
+        schema_version = "1.2"
+        project_id = "TEST_ENROLLED_EXISTING"
+        created_by_skillsmachine = $false
+        explicitly_enrolled_in_skillsmachine = $true
+        enrolment_status = "ENROLLED"
+        enrolment_id = "ENR-TEST-001"
+        enrolled_at = (Get-Date).ToUniversalTime().ToString("o")
+        enrolment_method = "EXISTING_PROJECT"
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "tracked.txt"
+                sha256 = $enrolledPre
+                version = "0.3.0"
+            }
+        )
+    }
+    $enrolledBaselinePath = Join-Path $enrolledProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $enrolledBaselinePath -Content ($enrolledBaseline | ConvertTo-Json -Depth 10)
+    $enrolledManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000076"
+        update_version = "0.3.1"
+        source_commit = ("6" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("metadata")
+        operations = @(
+            [ordered]@{
+                operation_id = "ENR-01"
+                action = "REPLACE"
+                source_path = "tracked.payload.txt"
+                target_path = "tracked.txt"
+                expected_pre_hash = $enrolledPre
+                expected_post_hash = $enrolledPost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $enrolledManifestPath = Join-Path $enrolledPackage "update-enrolled.json"
+    Write-Utf8NoBom -Path $enrolledManifestPath -Content ($enrolledManifest | ConvertTo-Json -Depth 10)
+    & git -C $enrolledProject add .
+    & git -C $enrolledProject commit -m "enrolled baseline" | Out-Null
+
+    $enrolledLog = Join-Path $testRoot "enrolled-preflight.log"
+    & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+        -Action preflight `
+        -ProjectRoot $enrolledProject `
+        -UpdateManifest $enrolledManifestPath `
+        -BaselinePath $enrolledBaselinePath `
+        -EvidencePath $enrolledEvidence *> $enrolledLog
+    $enrolledExit = $LASTEXITCODE
+    $enrolledPreflightText = if (Test-Path -LiteralPath $enrolledLog) {
+        Get-Content -LiteralPath $enrolledLog -Raw -Encoding UTF8
+    } else { "" }
+    if ($enrolledExit -ne 0) {
+        throw "ENROLLED_PREFLIGHT_FAILED: $enrolledPreflightText"
+    }
+    if ($enrolledPreflightText -notmatch "ELIGIBILITY_MODE=EXPLICITLY_ENROLLED") {
+        throw "ENROLLED_ELIGIBILITY_MODE_MISSING: $enrolledPreflightText"
+    }
+
+    $notEnrolledProject = Join-Path $testRoot "not-enrolled-project"
+    $notEnrolledPackage = Join-Path $testRoot "not-enrolled-package"
+    $notEnrolledEvidence = Join-Path $testRoot "not-enrolled-evidence"
+    New-Item -ItemType Directory -Path $notEnrolledProject, $notEnrolledPackage, $notEnrolledEvidence -Force | Out-Null
+    Write-Utf8NoBom -Path (Join-Path $notEnrolledProject "tracked.txt") -Content "x"
+    Write-Utf8NoBom -Path (Join-Path $notEnrolledPackage "tracked.payload.txt") -Content "y"
+    $nePre = Get-Sha256 -Path (Join-Path $notEnrolledProject "tracked.txt")
+    $nePost = Get-Sha256 -Path (Join-Path $notEnrolledPackage "tracked.payload.txt")
+    & git -C $notEnrolledProject init | Out-Null
+    & git -C $notEnrolledProject config user.email "skillsmachine-test@example.invalid"
+    & git -C $notEnrolledProject config user.name "SkillsMachine Test"
+    $notEnrolledBaseline = [ordered]@{
+        schema_version = "1.2"
+        project_id = "TEST_NOT_ENROLLED"
+        created_by_skillsmachine = $false
+        explicitly_enrolled_in_skillsmachine = $false
+        enrolment_status = "NOT_ENROLLED"
+        skillsmachine_version = "0.3.0"
+        skillsmachine_commit = ("0" * 40)
+        last_update_id = $null
+        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
+        component_inventory = @(
+            [ordered]@{
+                component_type = "test_file"
+                relative_path = "tracked.txt"
+                sha256 = $nePre
+                version = "0.3.0"
+            }
+        )
+    }
+    $notEnrolledBaselinePath = Join-Path $notEnrolledProject "SKILLSMACHINE.PROJECT.BASELINE.json"
+    Write-Utf8NoBom -Path $notEnrolledBaselinePath -Content ($notEnrolledBaseline | ConvertTo-Json -Depth 10)
+    $notEnrolledManifest = [ordered]@{
+        schema_version = "1.1"
+        update_id = "SM-UPD-000077"
+        update_version = "0.3.1"
+        source_commit = ("7" * 40)
+        created_at = (Get-Date).ToUniversalTime().ToString("o")
+        minimum_project_version = "0.3.0"
+        maximum_project_version = "0.3.x"
+        reversible = $true
+        human_approval_required = $true
+        affected_components = @("metadata")
+        operations = @(
+            [ordered]@{
+                operation_id = "NE-01"
+                action = "REPLACE"
+                source_path = "tracked.payload.txt"
+                target_path = "tracked.txt"
+                expected_pre_hash = $nePre
+                expected_post_hash = $nePost
+                backup_required = $true
+                reversible = $true
+            }
+        )
+        rollback_contract = [ordered]@{
+            mode = "CHECKPOINT_AND_INVERSE_PLAN"
+            verify_hashes = $true
+            restore_baseline = $true
+        }
+    }
+    $notEnrolledManifestPath = Join-Path $notEnrolledPackage "update-not-enrolled.json"
+    Write-Utf8NoBom -Path $notEnrolledManifestPath -Content ($notEnrolledManifest | ConvertTo-Json -Depth 10)
+    & git -C $notEnrolledProject add .
+    & git -C $notEnrolledProject commit -m "not enrolled baseline" | Out-Null
+    $notEnrolledLog = Join-Path $testRoot "not-enrolled-preflight.log"
+    $notEnrolledExit = 0
+    try {
+        & $runnerHostPath -NoProfile -ExecutionPolicy Bypass -File $RunnerPath `
+            -Action preflight `
+            -ProjectRoot $notEnrolledProject `
+            -UpdateManifest $notEnrolledManifestPath `
+            -BaselinePath $notEnrolledBaselinePath `
+            -EvidencePath $notEnrolledEvidence *> $notEnrolledLog
+        $notEnrolledExit = $LASTEXITCODE
+    }
+    catch {
+        $notEnrolledExit = 1
+        Add-Content -LiteralPath $notEnrolledLog -Value $_.Exception.Message -Encoding UTF8
+    }
+    $notEnrolledText = if (Test-Path -LiteralPath $notEnrolledLog) {
+        Get-Content -LiteralPath $notEnrolledLog -Raw -Encoding UTF8
+    } else { "" }
+    if ($notEnrolledExit -eq 0) {
+        throw "NOT_ENROLLED_UNEXPECTED_PASS"
+    }
+    if ($notEnrolledText -notmatch "BLOCKED_PROJECT_NOT_ENROLLED") {
+        throw "NOT_ENROLLED_BLOCK_MISSING: $notEnrolledText"
     }
 
     Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\03.SESSION_CONTINUE\PROMPT.SESSION_CONTINUE.txt") -Patterns @(
@@ -710,6 +906,10 @@ try {
     Assert-FileContainsAll -Path (Join-Path $repoRoot "90.USECASE\04.REPOSITORY_STRUCTURE_REPAIR\README.EXECUTION.txt") -Patterns @(
         "05.SKILLSMACHINE_UPDATE is never auto-executed from this flow."
     ) -FailureMessage "NO_CALL_FROM_04_CONTRACT_FAIL"
+    Assert-FileContainsAll -Path (Join-Path $repoRoot "SyS\A_Tools\Update\README.SKILLSMACHINE.UPDATE.txt") -Patterns @(
+        "EXPLICITLY_ENROLLED_IN_SKILLSMACHINE",
+        "Eligibility.ps1"
+    ) -FailureMessage "UPDATER_README_ENROLMENT_CONTRACT_FAIL"
 
     $report = @"
 FINAL_STATUS=PASS_CORE_UPDATER_MVP_TEST
@@ -734,7 +934,10 @@ CRITICAL_FINDING_BLOCKS_MUTATION=PASS
 NO_AUTO_RESOLUTION=PASS
 NO_CALL_FROM_03=PASS
 NO_CALL_FROM_04=PASS
-CORE_FILE_COUNT=5
+ENROLMENT_ELIGIBILITY_UNIT=PASS
+ENROLLED_PROJECT_PREFLIGHT=PASS
+NOT_ENROLLED_PROJECT_BLOCKED=PASS
+CORE_FILE_COUNT=7
 POWERSHELL_PARSE=PASS
 SCHEMA_JSON_PARSE=PASS
 "@

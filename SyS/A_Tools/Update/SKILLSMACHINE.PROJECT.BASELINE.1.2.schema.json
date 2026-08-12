@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "SKILLSMACHINE.PROJECT.BASELINE.1.2.schema.json",
+  "title": "SkillsMachine Project Baseline 1.2",
+  "description": "Baseline supporting SkillsMachine-created projects OR explicitly enrolled existing projects. Enrolment grants package exchange eligibility, not autonomous mutation authority.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "project_id",
+    "created_by_skillsmachine",
+    "explicitly_enrolled_in_skillsmachine",
+    "enrolment_status",
+    "skillsmachine_version",
+    "skillsmachine_commit",
+    "last_update_id",
+    "baseline_generated_at",
+    "component_inventory"
+  ],
+  "properties": {
+    "schema_version": { "type": "string", "const": "1.2" },
+    "project_id": { "type": "string", "minLength": 1 },
+    "created_by_skillsmachine": { "type": "boolean" },
+    "explicitly_enrolled_in_skillsmachine": { "type": "boolean" },
+    "enrolment_status": {
+      "type": "string",
+      "enum": [
+        "DISCOVERED",
+        "NOT_ENROLLED",
+        "ENROLMENT_PENDING",
+        "ENROLLED",
+        "SUSPENDED_OR_DISCONNECTED"
+      ]
+    },
+    "enrolment_id": { "type": ["string", "null"], "minLength": 1 },
+    "enrolled_at": { "type": ["string", "null"], "format": "date-time" },
+    "enrolment_method": {
+      "type": ["string", "null"],
+      "enum": ["NEW_PROJECT", "EXISTING_PROJECT", null]
+    },
+    "skillsmachine_version": {
+      "type": "string",
+      "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+    },
+    "skillsmachine_commit": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{40}$"
+    },
+    "last_update_id": {
+      "type": ["string", "null"],
+      "pattern": "^SM-UPD-[0-9]{6}$"
+    },
+    "baseline_generated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "component_inventory": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "component_type",
+          "relative_path",
+          "sha256",
+          "version"
+        ],
+        "properties": {
+          "component_type": { "type": "string", "minLength": 1 },
+          "relative_path": { "type": "string", "minLength": 1 },
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$"
+          },
+          "version": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}

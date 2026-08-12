@@ -213,7 +213,7 @@ EXCLUSIONS:
 - No support-package generation.
 - No services, dependencies, secrets or private-data migration.
 - No irreversible operations.
-- No project not created by SkillsMachine.
+- No project that is neither SkillsMachine-created nor explicitly enrolled.
 
 PARTIAL-FAILURE CONTRACT:
 If apply fails after one or more operations mutate the project, the runner automatically:

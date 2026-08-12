@@ -33,6 +33,8 @@ Set-StrictMode -Version Latest
 $RunnerVersion = "0.1.0-MVP"
 $RunStamp = Get-Date -Format "yyyyMMdd_HHmmss"
 
+. (Join-Path $PSScriptRoot "Eligibility.ps1")
+
 function Write-Utf8NoBom {
     param(
         [Parameter(Mandatory = $true)][string]$Path,
@@ -559,16 +561,10 @@ function Update-BaselineAfterApply {
         }
     }
 
-    return [ordered]@{
-        schema_version = "1.1"
-        project_id = [string]$Baseline.project_id
-        created_by_skillsmachine = $true
-        skillsmachine_version = [string]$Manifest.update_version
-        skillsmachine_commit = [string]$Manifest.source_commit
-        last_update_id = [string]$Manifest.update_id
-        baseline_generated_at = (Get-Date).ToUniversalTime().ToString("o")
-        component_inventory = $inventory.ToArray()
-    }
+    return New-SkillsMachineBaselineAfterApply `
+        -Baseline $Baseline `
+        -Manifest $Manifest `
+        -Inventory $inventory.ToArray()
 }
 
 function Write-ActionEvidence {
@@ -673,7 +669,9 @@ function Invoke-DocumentAuditPreflight {
     $auditStatus = [string]$audit.status
     if ($auditStatus -eq "HARD_CONFLICT") {
         $issueClasses = @($audit.issues | ForEach-Object { [string]$_.issue_class } | Where-Object { -not [string]::IsNullOrWhiteSpace($_) } | Sort-Object -Unique)
-        throw ("DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED: {0}" -f (($issueClasses -join ",").Trim(",")))
+        $blockMessage = ("DOCUMENT_AUDIT_HARD_CONFLICT_BLOCKED: {0}" -f (($issueClasses -join ",").Trim(",")))
+        Write-Host $blockMessage
+        throw $blockMessage
     }
 
     return [ordered]@{
@@ -816,12 +814,9 @@ $baseline = Read-JsonFile -Path $BaselinePath
 
 Assert-ManifestContract -Manifest $manifest
 
-if ([string]$baseline.schema_version -ne "1.1") {
-    throw "UNSUPPORTED_BASELINE_SCHEMA_VERSION"
-}
-if (-not [bool]$baseline.created_by_skillsmachine) {
-    throw "BLOCKED_UNKNOWN_PROJECT"
-}
+$eligibility = Assert-SkillsMachineProjectEligibility -Baseline $baseline
+Write-Host ("ELIGIBILITY_MODE={0}" -f [string]$eligibility.Mode)
+Write-Host ("ELIGIBILITY_REASON={0}" -f [string]$eligibility.Reason)
 if (-not (Test-VersionCompatible `
     -Current ([string]$baseline.skillsmachine_version) `
     -Minimum ([string]$manifest.minimum_project_version) `

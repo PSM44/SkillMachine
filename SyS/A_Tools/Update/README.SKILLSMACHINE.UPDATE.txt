@@ -10,7 +10,9 @@ MVP core runner. Not yet integrated with:
 
 FILES:
 - Invoke-SkillsMachineUpdate.ps1
-- SKILLSMACHINE.PROJECT.BASELINE.schema.json
+- Eligibility.ps1
+- SKILLSMACHINE.PROJECT.BASELINE.schema.json (1.1 SM-created)
+- SKILLSMACHINE.PROJECT.BASELINE.1.2.schema.json (created-by OR enrolled)
 - SKILLSMACHINE.UPDATE.MANIFEST.schema.json
 - Test-SkillsMachineUpdate.ps1
 - README.SKILLSMACHINE.UPDATE.txt
@@ -30,8 +32,14 @@ HARD CONTROLS:
 - Git repository required.
 - Clean worktree required for preflight, dry-run and apply.
 - DocumentConsistencyAudit may be used as a read-only preflight gate before mutation.
-- Project baseline schema_version must be 1.1.
-- created_by_skillsmachine must be true.
+- Project baseline schema_version must be 1.1 or 1.2.
+- Eligibility (MB-SM-076A2): PROJECT_CREATED_BY_SKILLSMACHINE
+  OR PROJECT_EXPLICITLY_ENROLLED_IN_SKILLSMACHINE.
+  - schema 1.1: created_by_skillsmachine must be true.
+  - schema 1.2: created_by_skillsmachine=true OR
+    (explicitly_enrolled_in_skillsmachine=true AND enrolment_status=ENROLLED).
+- Enrolment grants governed package exchange eligibility only.
+  It does NOT grant autonomous permission for SkillsMachine to mutate the project.
 - Update manifest schema_version must be 1.1.
 - All operations must be reversible.
 - REPLACE and DELETE require backups.
@@ -47,7 +55,7 @@ EXCLUSIONS:
 - No support-package generation.
 - No services, dependencies, secrets or private-data migration.
 - No irreversible operations.
-- No project not created by SkillsMachine.
+- No project that is neither SkillsMachine-created nor explicitly enrolled.
 
 PARTIAL-FAILURE CONTRACT:
 If apply fails after one or more operations mutate the project, the runner automatically:

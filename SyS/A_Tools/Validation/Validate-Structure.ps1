@@ -201,8 +201,10 @@ if ($LASTEXITCODE -eq 0 -and $legacy) {
 $skillsMachineRootForUpdater = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot "..\..\.."))
 $updaterCoreRoot = Join-Path $skillsMachineRootForUpdater "SyS\A_Tools\Update"
 $expectedUpdaterCoreFiles = @(
+    "Eligibility.ps1",
     "Invoke-SkillsMachineUpdate.ps1",
     "README.SKILLSMACHINE.UPDATE.txt",
+    "SKILLSMACHINE.PROJECT.BASELINE.1.2.schema.json",
     "SKILLSMACHINE.PROJECT.BASELINE.schema.json",
     "SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
     "Test-SkillsMachineUpdate.ps1"
@@ -234,11 +236,11 @@ if ($missingUpdaterCoreFiles.Count -gt 0) {
 if ($unexpectedUpdaterCoreFiles.Count -gt 0) {
     throw "Unexpected updater core files: $($unexpectedUpdaterCoreFiles -join ', ')"
 }
-if ($actualUpdaterCoreFiles.Count -ne 5) {
-    throw "Updater core file count must be exactly 5; actual=$($actualUpdaterCoreFiles.Count)"
+if ($actualUpdaterCoreFiles.Count -ne 7) {
+    throw "Updater core file count must be exactly 7; actual=$($actualUpdaterCoreFiles.Count)"
 }
 
-Write-Host "OK: updater core structure validated (5 files)"
+Write-Host "OK: updater core structure validated (7 files)"
 
 $supportPackageName = "05.SKILLSMACHINE_UPDATE"
 $supportDir = Join-Path "90.USECASE" $supportPackageName
