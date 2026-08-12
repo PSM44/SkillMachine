@@ -35,3 +35,13 @@ Product doctrine for bidirectional SkillsMachine↔Projects, Improvement Flow, P
 Audit and free/local AI option is recorded in HUMAN.OPERATING.MODEL.txt under MB-SM-075A.
 WHOAMI remains subordinate; stable identity belongs in HUMAN (see also Wings4 Q-003 / DEC-W4-047).
 ==========
+
+==========
+MB-SM-076A6_NOTE
+==========
+WHOAMI_ACTIVE_CANON=NO.
+HUMAN is the sole top product canon. SyS/01_WHOAMI_SKILLMACHINE.txt is historical reference only.
+Cold-start continuity = BATON. Warm-start continuity = SESSION_CONTINUE. Neither replaces HUMAN.
+External AI exchange temp = C:\Users\aazcl\Downloads\T.AI.SkillMachine (flat).
+Details: HUMAN.OPERATING.MODEL.txt (MB-SM-076A6 block) and SyS/OPTION_D.INFORMATION_ARCHITECTURE.V0.1.txt.
+==========

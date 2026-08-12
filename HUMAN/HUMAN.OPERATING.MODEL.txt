@@ -157,8 +157,9 @@ OWNERSHIP_BOUNDARIES:
 - HUMAN: semantic authority and critical approvals.
 - SkillsMachine: transversal Skills/GRC canon publication, catalog, Improvement Flow reception,
   Audit, Project Sync packages; does NOT direct project functional work; does NOT replace Wings4.0.
-- Project: local authority, local extensions, local HUMAN/BATON/WHOAMI; may request capabilities;
-  must not unilaterally rewrite transversal published Skills/GRC.
+- Project: local authority, local extensions, local HUMAN and local continuity (BATON / warm-start);
+  project-local identity notes must not compete with SkillsMachine HUMAN canon;
+  may request capabilities; must not unilaterally rewrite transversal published Skills/GRC.
 - Wings4.0: portfolio governance; may prepare transfers; does not mutate SkillsMachine canon unilaterally;
   SkillsMachine local surfaces remain separate from 00_WINGS4_COORD.
 - ORCHESTRATOR: sequencing and gated prompts within authorization.
@@ -199,4 +200,70 @@ CATALOG_VS_PACKAGE:
 - Do not mass-distribute full catalog bodies to all projects by default.
 
 FIN_MB-SM-075A_PRODUCT_DOCTRINE_VERTICAL_SLICE_V0_1
+==========
+
+==========
+MB-SM-076A6_AUTHORITY_CONTINUITY_AND_BOUNDARIES
+==========
+
+DATE..............: 2026-08-12
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE............: MB-SM-076A6_OPTION_D_STABILIZE (Option D in place; no mass migration)
+
+WHAT_IT_IS........:
+PS.SkillsMachine is the central mechanism for administration, governance, distribution
+and dynamic perfection of Skills and GRCs for Human–AI work across projects.
+It is a governed product for people and projects, not a dump of prompts or a free-form repo tour.
+
+WHAT_IT_IS_NOT....:
+- Not a replacement for Wings4.0 portfolio governance.
+- Not an autonomous mutator of external projects.
+- Not a paid-AI-required core.
+- Not defined by WHOAMI, BATON, labs, or tool folders.
+
+WHO_USES_IT.......:
+Humans who govern Skills/GRC quality across projects; AI assistants only within human authority.
+
+HOW_USERS_ACCESS..:
+One SkillsMachine core; two access channels (direct UI / Home, and AI integration as adapter-only).
+Opening SkillsMachine is activation.
+
+CONTINUITY_ROLES..:
+- BATON = cold-start continuity (blank AI context). Operational state only. Not product meaning.
+- SESSION_CONTINUE = warm-start continuity (same AI Project/workspace already has broad context).
+  Not product meaning. Do not merge BATON and SESSION_CONTINUE.
+- WHOAMI_ACTIVE_CANON = NO. WHOAMI may remain as historical reference after selective absorption.
+  Stable product identity and boundaries live only in HUMAN.
+
+TEMP_FOR_AI_EXCHANGE:
+Disposable AI send/receive staging is:
+C:\Users\aazcl\Downloads\T.AI.SkillMachine
+Flat only; purge before write; upload-ready files only; no subfolders.
+That path is not the product, not canon storage, and not the same as internal runtime scratch.
+
+AI_ROLE...........:
+AI may assist under human authority. Core must work without AI.
+Provider-specific packs (Codex/Claude/OpenCode/etc.) adapt transport and prompts only.
+SkillsMachine AI rules that apply to every provider are provider-neutral ("AI core" conceptually).
+MCP/plugins/tools are transports, not the product architecture.
+
+PROJECT_RELATIONSHIPS:
+SkillsMachine relates to external projects through explicit enrolment and governed exchange:
+identity, enrolment, capability baseline, Improvement Flow, Project Sync, receipts, and authority.
+It does not mirror whole external projects. Generic relationship machinery must not be copied
+once per project. Wings4 integration is messenger-only under Wings4 authority.
+CloseReport and other projects remain separate projects; SkillsMachine holds only its side of the relationship.
+
+SOURCE_OF_TRUTH_POINTERS_(NON-TECHNICAL):
+- Product meaning: HUMAN
+- Cold-start continuity: BATON
+- Warm-start continuity: SESSION_CONTINUE
+- Durable project registry: SkillsMachine ProjectOps registry (lab fixtures are tests only)
+- Active product backlog: SkillsMachine project backlog register (not the SkillsLake capability backlog)
+
+RADAR_VS_AUDIT....:
+Radar observes. Audit evaluates. They must stay separate.
+
+FIN_MB-SM-076A6_AUTHORITY_CONTINUITY_AND_BOUNDARIES
 ==========
