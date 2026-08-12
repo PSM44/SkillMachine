@@ -17,6 +17,15 @@ BOUNDARY..........:
 - Si algo es mandatorio/enforceable -> GRCLake
 - Si es how-to/capability -> SkillsLake
 
+LIFECYCLE_ATTRIBUTES (not peer product domains):
+- 04.LEARNING = learning/evidence attribute of capabilities / Improvement Flow
+- 05.BACKLOG = capability/candidate lifecycle register (NOT the product backlog SoT)
+- 99.CANDIDATES = candidate lifecycle attribute
+Product backlog SoT remains SyS/PROJECT.BACKLOG.ACTIVE.txt.
+Physical path SkillsLake is preserved (no rename in Option D).
+
 CHANGELOG.........:
 2026-04-30, v0.1-DRAFT
 - Creación inicial.
+2026-08-12, MB-SM-076A6
+- Clarified LEARNING/BACKLOG/CANDIDATES as lifecycle attributes; path unchanged.

@@ -14,6 +14,7 @@ REGLA..............:
 - NO duplicar HUMAN (solo referenciarlo).
 - NO inventar estructura.
 - Operar con snapshot -> propuesta -> CIS -> implementación -> validación.
+- Este módulo es AI_PROVIDER (adapter). AI_CORE provider-neutral vive en HUMAN + contracts (AI_ACCESS / ProjectOps AiAccess); ver SyS/OPTION_D.INFORMATION_ARCHITECTURE.V0.1.txt.
 
 CANONICAL_LINKS....:
 - HUMAN: C:\01. GitHub\Skills\HUMAN
