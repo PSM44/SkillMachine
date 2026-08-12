@@ -98,6 +98,46 @@ FIN_MB-GRC-033B_USECASE_FIRST_FOCUS_GATE
 MB-SM-075A_PRODUCT_DOCTRINE_VERTICAL_SLICE_V0_1
 ==========
 
+DATE..............: 2026-08-10
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE_DECISIONS..: MB-SM-076A3_DURABLE_ENROLMENT_AND_REAL_PROJECT_FLOW
+
+PROJECTOPS........:
+Durable SkillsMachine-owned ProjectOps (SyS/A_Tools/ProjectOps/v0.1) holds project registry,
+enrolment proposals, Improvement Flow intake/receipts/accumulator/disposition, publication prep,
+and Project Sync preparation. Enrolment proposals never auto-approve or auto-enrol.
+CloseReport may have READY_FOR_REVIEW proposal while remaining NOT_ENROLLED.
+External project mutation from ProjectOps is forbidden.
+
+FIN_MB-SM-076A3_DURABLE_ENROLMENT_AND_REAL_PROJECT_FLOW
+==========
+
+DATE..............: 2026-08-10
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE_DECISIONS..: MB-SM-076A2_HUMAN_INTERACTION_PROJECT_ENROLMENT_AND_AI_ACCESS
+
+ACCESS_MODEL......:
+ONE_SKILLSMACHINE_CORE; TWO_ACCESS_CHANNELS (DIRECT_UI + AI_INTEGRATION); ONE_GOVERNANCE_MODEL.
+AI integration is adapter-only (MCP/plugin/tool are transports). Core must not depend on MCP.
+Opening SkillsMachine is activation; no extra technical activation unless runtime config missing.
+
+PROJECT_ENROLMENT.:
+Enrolment = permission to exchange governed SkillsMachine packages/information.
+Enrolment ≠ autonomous SkillsMachine mutation of the project.
+Lifecycle: DISCOVERED | NOT_ENROLLED | ENROLMENT_PENDING | ENROLLED | SUSPENDED_OR_DISCONNECTED.
+Classes: NEW_PROJECT | EXISTING_UNINTEGRATED_PROJECT | ENROLLED_PROJECT.
+Project Sync eligibility: created_by_skillsmachine OR explicitly enrolled (ENROLLED).
+
+HOME_AGGREGATION..:
+NEEDS_YOUR_ATTENTION surfaces pending decisions/warnings/update availability/governance items.
+It is not a new product function. PROJECTS summary shows enrolment + IF/PS + attention.
+Do not fabricate CURRENT for unobserved projects; use UNKNOWN/NOT_ENROLLED.
+
+FIN_MB-SM-076A2_HUMAN_INTERACTION_PROJECT_ENROLMENT_AND_AI_ACCESS
+==========
+
 DATE..............: 2026-08-07
 STATUS............: ACTIVE
 LAYER.............: HUMAN_OPERATING_MODEL
