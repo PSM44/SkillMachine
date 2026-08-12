@@ -1,0 +1,129 @@
+WHOAMI.CLASSIFICATION.MAP.076A6
+SOURCE=SyS/01_WHOAMI_SKILLMACHINE.txt
+MINIBATTLE=MB-SM-076A6_OPTION_D_STABILIZE
+METHOD=SECTION_BLOCK_INVENTORY_NOT_WHOLESALE_REWRITE
+WHOAMI_ACTIVE_CANON_TARGET=NO
+HISTORY_PRESERVED=YES
+
+================================================================================
+01 POLICY
+================================================================================
+Do not load this WHOAMI file wholesale into AI context.
+Do not treat WHOAMI as product meaning.
+Product meaning SoT = HUMAN.
+Cold-start continuity SoT = BATON.
+Warm-start continuity SoT = SESSION_CONTINUE usecase.
+
+================================================================================
+02 BLOCK INVENTORY
+================================================================================
+
+SECTION_ID=W-APPEND-042B..036B_TOP
+LINES≈1-231
+PURPOSE=Append-only latest continuity updates (2026-06)
+CONTENT_CLASS=HISTORICAL|CURRENT_RUNTIME(stale)
+CURRENT_AUTHORITY=competing soft-canon (pre-076A6)
+TARGET_DESTINATION=LEGACY_OR_HISTORY; current ops → BATON
+ACTION=PRESERVE_HISTORY
+RATIONALE=Runtime/priority snapshots superseded by later work and by BATON; keep for audit trail.
+
+SECTION_ID=W-APPEND-GRC-021_STATUS
+LINES≈234-249
+PURPOSE=Human operational status fragment
+CONTENT_CLASS=HISTORICAL
+TARGET_DESTINATION=LEGACY_OR_HISTORY
+ACTION=PRESERVE_HISTORY
+RATIONALE=Session-close era status; not product identity.
+
+SECTION_ID=W-00_METADATOS
+LINES≈252-282
+PURPOSE=Document identity and dependencies
+CONTENT_CLASS=DUPLICATE|STABLE_AUTHORITY(partial)
+TARGET_DESTINATION=REFERENCE_ONLY
+ACTION=SUPERSEDE
+RATIONALE=Self-declares it does not replace HUMAN/BATON; authority still competed in practice. Demotion banner supersedes active use.
+
+SECTION_ID=W-01_QUE_ES
+LINES≈285-306
+PURPOSE=What SkillsMachine is / hierarchy
+CONTENT_CLASS=PRODUCT_IDENTITY
+TARGET_DESTINATION=HUMAN
+ACTION=ABSORB
+RATIONALE=Stable product identity already largely present in HUMAN.OPERATING.MODEL PURPOSE_CORE/hierarchy; 076A6 reconciles and clarifies without redefining product.
+
+SECTION_ID=W-02_QUE_SE_HA_LOGRADO
+LINES≈309-358
+PURPOSE=Achievement inventory (May 2026)
+CONTENT_CLASS=HISTORICAL
+TARGET_DESTINATION=LEGACY_OR_HISTORY
+ACTION=PRESERVE_HISTORY
+RATIONALE=Useful archaeology; not current SoT.
+
+SECTION_ID=W-03_EN_QUE_ESTADO
+LINES≈361-399
+PURPOSE=Then-current Git/Cursor state
+CONTENT_CLASS=CURRENT_RUNTIME(stale)
+TARGET_DESTINATION=BATON (for live state); LEGACY_OR_HISTORY (this block)
+ACTION=PRESERVE_HISTORY
+RATIONALE=Stale as of 076A5 HEAD; live state belongs in BATON refresh.
+
+SECTION_ID=W-04_QUE_FALTA
+LINES≈402-426
+PURPOSE=Then-current gaps/priorities
+CONTENT_CLASS=CURRENT_PRIORITY(stale)
+TARGET_DESTINATION=BACKLOG (live); LEGACY_OR_HISTORY (this block)
+ACTION=PRESERVE_HISTORY
+RATIONALE=Priorities live in SyS/PROJECT.BACKLOG.ACTIVE.txt.
+
+SECTION_ID=W-05_SIGUIENTE_PASO
+LINES≈429-454
+PURPOSE=Then-next minibattle sequence
+CONTENT_CLASS=CURRENT_PRIORITY(stale)
+TARGET_DESTINATION=LEGACY_OR_HISTORY
+ACTION=PRESERVE_HISTORY
+RATIONALE=Superseded many times; do not absorb into HUMAN.
+
+SECTION_ID=W-06_NOTAS_OPERATIVAS
+LINES≈457-485
+PURPOSE=Operational Git/agent/RADAR rules
+CONTENT_CLASS=TECHNICAL_IMPLEMENTATION|STABLE_AUTHORITY(partial)
+TARGET_DESTINATION=AGENTS.md / technical layers; RADAR note → TECHNICAL_DOC
+ACTION=REFERENCE
+RATIONALE=Agent/Git rules belong in AGENTS and Skills/GRC; not HUMAN prose.
+
+SECTION_ID=W-07_CHANGELOG
+LINES≈488-508
+PURPOSE=WHOAMI file changelog
+CONTENT_CLASS=HISTORICAL
+TARGET_DESTINATION=LEGACY_OR_HISTORY
+ACTION=PRESERVE_HISTORY
+RATIONALE=File history only.
+
+SECTION_ID=W-APPEND-GRC-024B..LATER
+LINES≈571+
+PURPOSE=Later append updates including TEMP_SCRATCH Temp.SkillMachine policy
+CONTENT_CLASS=HISTORICAL|TECHNICAL_IMPLEMENTATION
+TARGET_DESTINATION=LEGACY_OR_HISTORY; TEMP policy → AGENTS + TEMP semantics doc
+ACTION=PRESERVE_HISTORY + SUPERSEDE (TEMP external path)
+RATIONALE=External AI-exchange temp superseded by T.AI.SkillMachine (076A6). Historical appends stay.
+
+SECTION_ID=W-FILE_AS_WHOLE
+PURPOSE=Active competing canon risk
+CONTENT_CLASS=DUPLICATE authority
+TARGET_DESTINATION=REFERENCE_ONLY archive
+ACTION=SUPERSEDE
+RATIONALE=Banner WHOAMI_ACTIVE_CANON=NO; load only targeted excerpts if archaeology required.
+
+================================================================================
+03 ABSORPTION EXECUTED IN 076A6
+================================================================================
+ABSORBED_TO_HUMAN=product identity reconciliation; continuity roles; WHOAMI demotion notice; external TEMP meaning; AI role (non-technical); project relationship model (non-technical); SoT pointers for registry/backlog
+MOVED_OPERATIONAL_TO_BATON=076A6 cold-start continuity append (HEAD, next action, TEMP canon)
+TEMP_POLICY_TO_AGENTS=T.AI.SkillMachine flat DETU
+NOT_COPIED_BLINDLY=achievement lists; stale priorities; Cursor Pro notes; full ~80KB body
+
+================================================================================
+04 HUMAN_DECISION_REQUIRED
+================================================================================
+HDR-076A6-01=APPROVED_MB-SM-076A6B (WHOAMI freshness removed from SESSION_CLOSE readiness)
+HDR-076A6-02=DEFERRED (WHOAMI archive split = Option C candidate; not done here)

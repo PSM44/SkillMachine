@@ -1,4 +1,22 @@
 ==========
+MB-SM-076A6_WHOAMI_AUTHORITY_DISPOSITION
+==========
+WHOAMI_ACTIVE_CANON.........: NO
+EFFECTIVE_DATE..............: 2026-08-12
+AUTHORITY...................: HUMAN is the sole top product canon.
+ROLE_OF_THIS_FILE...........: HISTORICAL_REFERENCE_AND_CONTINUITY_ARCHIVE
+DO_NOT......................: Load wholesale; treat as product meaning; compete with HUMAN.
+ABSORPTION_MAP..............: SyS/WHOAMI.CLASSIFICATION.MAP.076A6.txt
+INFORMATION_ARCHITECTURE....: SyS/OPTION_D.INFORMATION_ARCHITECTURE.V0.1.txt
+COLD_START_CONTINUITY.......: SyS/00.0_BATON_SKILLMACHINE.txt
+WARM_START_CONTINUITY.......: 90.USECASE/03.SESSION_CONTINUE
+HISTORY.....................: PRESERVED below without wholesale rewrite.
+TEMP_EXTERNAL_AI_EXCHANGE...: C:\Users\aazcl\Downloads\T.AI.SkillMachine (flat; supersedes Temp.SkillMachine for AI exchange)
+==========
+FIN_MB-SM-076A6_WHOAMI_AUTHORITY_DISPOSITION
+==========
+
+==========
 LATEST_WHOAMI_UPDATE_MB_SM_042B_POST_PR1_MERGE_20260630
 ==========
 

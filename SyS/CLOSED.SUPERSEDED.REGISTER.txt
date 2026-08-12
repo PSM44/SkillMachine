@@ -68,3 +68,8 @@ REPLACED_BY=BL-PROD-006_SESSION_CONTINUE_CONTEXT_GATE_ACCEPTANCE;TD-004_SESSION_
 ============================================================================
 POLICY=Do not delete or rewrite historical LAB, BATON, WHOAMI, session-close, backup or log evidence solely to normalize status.
 ACTIVE_SOURCE_OF_TRUTH=The four SyS active registers created by MB-SM-066B.
+
+ITEM_ID=TEMP_SKILLSMACHINE_EXTERNAL_AI_EXCHANGE_PATH
+DISPOSITION=SUPERSEDED_BY_MB-SM-076A6
+REPLACED_BY=C:\Users\aazcl\Downloads\T.AI.SkillMachine (flat AI exchange)
+NOTE=Validate-System internal scratch moved to %TEMP%\SkillsMachine.Validation; not AI exchange.

@@ -1,0 +1,151 @@
+OPTION_D.INFORMATION_ARCHITECTURE.V0.1
+MINIBATTLE=MB-SM-076A6_OPTION_D_STABILIZE
+MODE=IN_PLACE_STABILIZATION
+STRUCTURAL_MOVES=NO
+SKILLSLAKE_RENAMED=NO
+GRCLAKE_RENAMED=NO
+
+================================================================================
+01 AUTHORITY
+================================================================================
+PRODUCT_MEANING_SOT=HUMAN
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=HISTORICAL_REFERENCE_AND_ABSORPTION_MAP_ONLY
+IMPLEMENTATION_SUBORDINATE_TO_HUMAN=YES
+
+================================================================================
+02 CONTINUITY ROLES (DO NOT MERGE)
+================================================================================
+BATON=COLD_START_CONTINUITY
+  PATH=SyS/00.0_BATON_SKILLMACHINE.txt
+  USE=Restart work in a blank AI context with current operational state.
+  DOES_NOT=Define product meaning; replace HUMAN; replace SESSION_CONTINUE.
+
+SESSION_CONTINUE=WARM_START_CONTINUITY
+  PATH=90.USECASE/03.SESSION_CONTINUE (+ UseCaseSources)
+  USE=Continue inside the same AI Project/workspace that already retains broad context.
+  DOES_NOT=Define product meaning; replace HUMAN; replace BATON.
+
+================================================================================
+03 TEMP SEMANTICS
+================================================================================
+EXTERNAL_AI_EXCHANGE=
+  PATH=C:\Users\aazcl\Downloads\T.AI.SkillMachine
+  ROLE=AI send/receive staging only
+  FLAT=YES
+  SUBDIRECTORIES=FORBIDDEN
+  PURGE_BEFORE_WRITE=YES
+  UPLOAD_READY_ONLY=YES
+  LEGACY_NAME=C:\Users\aazcl\Downloads\Temp.SkillMachine (SUPERSEDED for AI exchange)
+
+INTERNAL_RUNTIME_SCRATCH_VALIDATION=
+  PATH=%TEMP%\SkillsMachine.Validation (Validate-System.ps1)
+  ROLE=RUNTIME_WORK / SCRATCH for validation summaries and compiler self-tests
+  NOT=external AI exchange
+
+INTERNAL_SyS_Temp=
+  PATH=SyS/Temp
+  ROLE=SCRATCH / STAGING for operational session-close upload packs and similar
+  RENAME=NOT_IN_076A6
+
+INTERNAL_90_USECASE_Temp=
+  PATH=90.USECASE/Temp
+  ROLE=USECASE_WORK / STAGING (often empty)
+  RENAME=NOT_IN_076A6
+
+================================================================================
+04 AI CORE VS PROVIDERS
+================================================================================
+AI_CORE=provider-neutral transversal behavior, authority, context rules, generic contracts/workflows
+  SEEDS=HUMAN AI doctrine; VerticalSlice Contracts/AI_ACCESS.V0.1.txt; ProjectOps Core/AiAccess.ps1; FREE_AI_ADAPTER contract
+AI_PROVIDERS=provider-specific adapters/runbooks only
+  PATH=95.AI_MODULES/{CODEX_DESKTOP,CLAUDE_CODE,OPENCODE}
+RULE=AI_CORE must not depend on one provider; MCP/plugin/tools are transports, not product architecture.
+MOVES=NONE in 076A6
+
+================================================================================
+05 PROJECT INTEGRATION MODEL
+================================================================================
+GENERIC_RELATIONSHIP_CONCEPTS=
+  PROJECT_ID
+  ENROLMENT
+  CAPABILITY_BASELINE
+  IMPROVEMENT_FLOW
+  PROJECT_SYNC
+  RECEIPTS
+  AUTHORITY
+
+ENGINE=SkillsMachine ProjectOps (generic); do not duplicate per project.
+INSTANCE_SURFACE=SkillsMachine-side relationship state only; not a project mirror.
+
+INSTANCES=
+  WINGS4=PRESENT via SyS/A_Tools/W4C (messenger-only; AUTHORITY=Wings4.0)
+  CLOSEREPORT=PRESENT_SM_SIDE via ProjectOps enrolment proposal/registry (NOT_ENROLLED until human decision)
+  BRAINY=NOT_INSTANTIATED
+  HIA=NOT_INSTANTIATED
+
+NO_COSMETIC_FOLDERS=YES
+
+================================================================================
+06 SOURCE OF TRUTH MATRIX
+================================================================================
+PRODUCT_MEANING=HUMAN
+COLD_START_CONTINUITY=BATON
+WARM_START_CONTINUITY=SESSION_CONTINUE
+PROJECT_REGISTRY_DURABLE=SyS/A_Tools/ProjectOps/v0.1/State/PROJECT.REGISTRY.json
+PROJECT_REGISTRY_FIXTURE=SyS/A_Tools/VerticalSlice/v0.1/Fixtures/projects/* (TEST_FIXTURE_ONLY)
+PRODUCT_BACKLOG=SyS/PROJECT.BACKLOG.ACTIVE.txt (AUTHORITATIVE_FOR=ACTIVE_PRODUCT_BACKLOG)
+SKILLSLAKE_BACKLOG=SkillsLake/05.BACKLOG (capability/candidate lifecycle register; NOT product backlog SoT)
+TECH_DEBT=SyS/TECHNICAL.DEBT.ACTIVE.txt (when present)
+ROADMAP=SyS/PROJECT.ROADMAP.ACTIVE.txt (when present)
+
+================================================================================
+07 RADAR VS AUDIT
+================================================================================
+RADAR=OBSERVATION (SyS/A_Tools/Radar); never auto-load RADAR_FULL
+AUDIT_EVALUATION=DocumentConsistencyAudit + Validation gates
+GRCLake/05.AUDIT=GRC audit artifacts (different layer; naming overlap only)
+RULE=RADAR may feed AUDIT; AUDIT must not become RADAR; do not merge.
+
+================================================================================
+08 AI_HISTORY
+================================================================================
+PATH=IA.History
+OWNER=Pablo
+CANON=NO
+PRODUCT_RUNTIME=NO
+GIT=IGNORED
+CONTEXT_LOADING=NEVER_AUTO_LOAD
+INSPECT=METADATA_ONLY
+
+================================================================================
+09 SKILLSLAKE / GRCLAKE
+================================================================================
+SkillsLake=KEEP physical path; how-to/capabilities; LEARNING/BACKLOG/CANDIDATES are lifecycle ATTRIBUTES not peer root domains
+GRCLake=KEEP physical path; enforceable GRC; 05.AUDIT is GRC-layer artifacts
+FUTURE_CAPABILITIES_RENAME=Option C/B hypothesis only; NOT authorized in Option D
+
+================================================================================
+10 CONTEXT-LOADING POLICY (HIGH COST)
+================================================================================
+HUMAN=ALWAYS_LOAD
+AGENTS.md=ALWAYS_LOAD for agents
+BATON=LOAD_ON_DEMAND (cold-start)
+SESSION_CONTINUE package=LOAD_ON_DEMAND (warm-start)
+WHOAMI full file=NEVER_AUTO_LOAD (use this map + HUMAN)
+ProjectOps state=PROJECT_SPECIFIC
+95.AI_MODULES=PROVIDER_SPECIFIC
+RADAR_FULL=NEVER_AUTO_LOAD
+IA.History=NEVER_AUTO_LOAD
+old/=NEVER_AUTO_LOAD
+
+================================================================================
+11 BOUNDARY STRENGTH TARGET AFTER 076A6
+================================================================================
+HUMAN_TO_IMPLEMENTATION=STRONG
+BATON_TO_HUMAN=STRONG (BATON not product meaning)
+SESSION_CONTINUE_TO_BATON=ACCEPTABLE (distinct roles documented)
+AI_CORE_TO_PROVIDER=ACCEPTABLE (conceptual split; physical Core folder deferred)
+CORE_TO_PROJECT_INTEGRATIONS=ACCEPTABLE (model defined; uneven instantiation)
+PROJECTOPS_TO_EXTERNAL_PROJECT=STRONG (non-mutation / enrolment≠apply)
+RADAR_TO_AUDIT=ACCEPTABLE (practice separate; naming overlap remains)
