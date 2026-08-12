@@ -10,15 +10,16 @@ HORA..............: 15:XX
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: 90.USECASE\02.SESSION_CLOSE
 AUTOR_HUMANO......: PABLO
-TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, WHOAMI_STATE, LEARNING_REVIEW
+TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, LEARNING_REVIEW
 
 ALCANCE...........:
 Define el cierre endurecido de sesion para SkillsMachine.
-El cierre debe capturar evidencia objetiva de Git, validacion, RADAR, BATON, WHOAMI y learning review estructurado.
+El cierre debe capturar evidencia objetiva de Git, validacion, RADAR, BATON y learning review estructurado.
+WHOAMI puede aparecer como evidencia historica/referencia, pero no es autoridad activa ni requisito de cierre (MB-SM-076A6B).
 
 NO_CUBRE..........:
 No reemplaza BATON.
-No reemplaza WHOAMI.
+No restaura WHOAMI como canon o continuidad activa.
 No modifica politica GRC fuera de los artefactos del cierre.
 No reemplaza el juicio humano sobre commit o canonizacion.
 
@@ -46,9 +47,10 @@ Problema que resuelve:
 - Cierres sin HEAD/tag.
 - Cierres sin validacion.
 - Cierres sin evidencia RADAR.
-- Cierres sin chequeo BATON/WHOAMI.
+- Cierres sin chequeo BATON.
 - Cierres sin learning review estructurado.
 - Dependencia excesiva de memoria humana.
+- (Historico) No exige frescura WHOAMI; WHOAMI es referencia solamente.
 
 ==========
 02.00_COMANDO_CANONICO
@@ -87,19 +89,18 @@ OK:
   - RADAR_FULL.HUMAN.ACTIVE.txt
   - RADAR_FULL.SKILLS.ACTIVE.txt
 - BATON existe.
-- WHOAMI existe.
+- WHOAMI no es requisito de OK/FAIL (historico/referencia).
 
 WARN:
 - Validacion OK, pero Git tiene cambios pendientes.
 - Validacion OK, Git limpio, pero falta al menos un output ACTIVE de RADAR v1.4.
-- Continuidad fresca no confirmada contra HEAD.
+- Continuidad BATON/RADAR fresca no confirmada contra HEAD.
 
 FAIL:
 - Validacion falla.
 - Falta RADAR manifest.
 - Falta evidencia minima de RADAR v1.4 si manifest y ACTIVE outputs requeridos no pueden verificarse.
 - Falta BATON.
-- Falta WHOAMI.
 
 ==========
 05.00_REGLA_OPERATIVA
@@ -122,20 +123,23 @@ Si el resultado es FAIL:
 El cierre endurecido debe evaluar frescura operacional contra HEAD.
 
 Regla:
-- BATON, WHOAMI y RADAR no solo deben existir.
+- BATON y RADAR no solo deben existir.
 - Tambien deben ser iguales o posteriores a la fecha del ultimo commit HEAD.
 - Si existen pero son anteriores a HEAD, el cierre queda en WARN.
+- WHOAMI_FRESHNESS_REQUIRED=NO. WHOAMI no bloquea cierre (MB-SM-076A6B).
 
 Interpretacion:
 - WARN no significa falla tecnica.
-- WARN significa posible deuda de continuidad.
-- El humano decide si actualiza BATON/WHOAMI/RADAR o si acepta el cierre con advertencia.
+- WARN significa posible deuda de continuidad BATON/RADAR.
+- El humano decide si actualiza BATON/RADAR o si acepta el cierre con advertencia.
 
 Campos esperados en el reporte:
 - HEAD_COMMIT_DATE
 - RADAR_FRESH_AGAINST_HEAD
 - BATON_FRESH_AGAINST_HEAD
-- WHOAMI_FRESH_AGAINST_HEAD
+- WHOAMI_FRESH_AGAINST_HEAD (informativo)
+- WHOAMI_FRESHNESS_REQUIRED=False
+- WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
 
 ==========
 07.00_FRESHNESS_SEMANTICS
@@ -143,10 +147,13 @@ Campos esperados en el reporte:
 
 Correccion de criterio:
 
-BATON y WHOAMI:
-- La frescura se mide por el ultimo commit Git que toco cada archivo.
+BATON:
+- La frescura se mide por el ultimo commit Git que toco el archivo.
 - No se mide por LastWriteTime del filesystem.
-- Motivo: despues de un commit, la fecha HEAD sera posterior al LastWriteTime del archivo, generando falsos WARN.
+
+WHOAMI:
+- Puede reportarse por ultimo commit Git como evidencia historica.
+- No es requisito de frescura ni de cierre.
 
 RADAR:
 - La frescura se mide por RADAR_GENERATED_AT porque los outputs RADAR son runtime/ignored.
@@ -159,11 +166,11 @@ RADAR:
 Antes del commit final de cierre o minibattle que afecte continuidad:
 
 1. Actualizar SyS/00.0_BATON_SKILLMACHINE.txt.
-2. Actualizar SyS/01_WHOAMI_SKILLMACHINE.txt.
-3. Ejecutar Validate-System.
-4. Ejecutar RADAR si la continuidad o el contrato operativo lo requiere.
-5. Ejecutar Test-SessionCloseReadiness.
-6. Si readiness indica BATON viejo o WHOAMI viejo, actualizar ambos juntos y repetir.
+2. Ejecutar Validate-System.
+3. Ejecutar RADAR si la continuidad o el contrato operativo lo requiere.
+4. Ejecutar Test-SessionCloseReadiness.
+5. Si readiness indica BATON viejo, actualizar BATON y repetir.
+6. No exigir refresh de WHOAMI para cerrar.
 
 REGLA_DE_OUTPUTS_GENERADOS:
 Los outputs generados de 90.USECASE son reproducibles y pueden estar ignorados por Git.

@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-07-20 18:38:35",
+  "generated_at": "2026-08-12 16:28:18",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
   "primary_upload_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
-  "compiled_output_sha256": "CFB24820D590755F0868169630A8F07F523FF2B3F9249C92358E527F288AFAB0",
+  "compiled_output_sha256": "89B4DAD00B472B279B1CF0B01982623EE035DBC87DC0BCF7AA862E228FA355CE",
   "compiled_source_order": [
     "README.UPLOAD_THIS_USECASE.txt",
     "PROMPT.SESSION_CLOSE.txt",
@@ -68,9 +68,9 @@
       "bundle_name": "CONTINUITY",
       "delivery_file": "01.BUNDLE.CONTINUITY.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 41787,
-      "delivery_size_kb": 40.81,
-      "delivery_sha256": "03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064",
+      "delivery_size_bytes": 42289,
+      "delivery_size_kb": 41.3,
+      "delivery_sha256": "2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -88,7 +88,7 @@
           "name": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
           "version": "v1.0-CANON",
-          "source_sha256": "0CF35357DEA40D6A1B5DA170F6AB5EF6B60559F039CB841385CFCB3F163324E2"
+          "source_sha256": "A199E76D2367AECB38D234686D3BE341AAA8AA4ACE89DF0D590F73FE680A72B8"
         },
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",

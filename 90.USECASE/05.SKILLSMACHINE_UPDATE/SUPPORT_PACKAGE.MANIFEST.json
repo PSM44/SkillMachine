@@ -31,7 +31,7 @@
   "primary_upload_file": "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
-  "compiled_output_sha256": "6078CCC353412981177542F90A025C133ADB65DA98A53899BAE82B3666A2013A",
+  "compiled_output_sha256": "E4917E93C0341E3B44E33192894F203BAFD8593EBC106C4D28877CD52370F5BE",
   "compiled_source_order": [
     "README.UPLOAD_THIS_PACKAGE.txt",
     "PROMPT.SKILLSMACHINE_UPDATE.txt",
@@ -49,15 +49,15 @@
       "bundle_name": "UPDATE_CONTEXT",
       "delivery_file": "00.BUNDLE.UPDATE_CONTEXT.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\00.BUNDLE.UPDATE_CONTEXT.txt",
-      "delivery_size_bytes": 6335,
-      "delivery_size_kb": 6.19,
-      "delivery_sha256": "21D4DBC2A1C2B604643D0DBEC5974364A29DBF2B068FF65BEA801104606962E4",
+      "delivery_size_bytes": 6893,
+      "delivery_size_kb": 6.73,
+      "delivery_sha256": "484D75C6F0854DB61EA6F2A6A6D637AF06ED016EC5C437C6AD943F5DD5740F2F",
       "source_files": [
         {
           "name": "SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\README.SKILLSMACHINE.UPDATE.txt",
           "version": "v1.1-CORE",
-          "source_sha256": "73B78F160053AD21ED11BE271FCB8E3D3E0E89B661B2D7262E92287CE894F4FF"
+          "source_sha256": "90437FD4DAA3DF0C428CA2366DEB74DDE59585DD2DE146A28B16BAA29A1577F3"
         },
         {
           "name": "SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json",
@@ -71,21 +71,21 @@
       "bundle_name": "UPDATE_METHOD",
       "delivery_file": "01.BUNDLE.UPDATE_METHOD.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\01.BUNDLE.UPDATE_METHOD.txt",
-      "delivery_size_bytes": 81004,
-      "delivery_size_kb": 79.11,
-      "delivery_sha256": "A73D4C1AFBC7CE9E131095FC4EBA2D621EE32E922145615E3D904CA9246A4AC1",
+      "delivery_size_bytes": 90254,
+      "delivery_size_kb": 88.14,
+      "delivery_sha256": "91F4A904338EC207F7FF8FBA91C8F09FF7389BB1B8EF7072285F6D547ED548AA",
       "source_files": [
         {
           "name": "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1",
           "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\Invoke-SkillsMachineUpdate.ps1",
           "version": "v1.1-CORE",
-          "source_sha256": "A1BC02A37DDA43CBB7C4990228FE4AEBFC5EF04A69AA48AA7CE6153A387C64F5"
+          "source_sha256": "F5EE81ADBD388C754E59C7D729C4006F04200A27BC11A79CAE005131EF2CE6EE"
         },
         {
           "name": "SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1",
           "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\Test-SkillsMachineUpdate.ps1",
           "version": "v1.1-CORE",
-          "source_sha256": "1D8AB8F8216AAD5772FBB9CAD3845D86AAC00A332B392574B2B9A382ED3ED067"
+          "source_sha256": "7805E4560F8ED1E8E6243B35F51BF1FEF36F3FC0BD40046DF5A5B4F763C34566"
         }
       ]
     },
@@ -93,9 +93,9 @@
       "bundle_name": "UPDATE_GOVERNANCE",
       "delivery_file": "02.BUNDLE.UPDATE_GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\05.SKILLSMACHINE_UPDATE\\02.BUNDLE.UPDATE_GOVERNANCE.txt",
-      "delivery_size_bytes": 7278,
-      "delivery_size_kb": 7.11,
-      "delivery_sha256": "54B16F660850BC6B572FDA69C650753EC8B2A8DB1689908DB1C96C6BFC823A27",
+      "delivery_size_bytes": 7780,
+      "delivery_size_kb": 7.6,
+      "delivery_sha256": "CB87EF1ECB26613B649A515227DD14500CBC32899B738007A4E0FE380EA041C8",
       "source_files": [
         {
           "name": "SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
@@ -107,7 +107,7 @@
           "name": "SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SyS\\A_Tools\\Update\\SupportPackage\\PROMPT.SKILLSMACHINE_UPDATE.txt",
           "version": "v1.0-MVP",
-          "source_sha256": "8E69A56AB1B97C89A98915110F8CE609771847FE329453B8991F1EE24055C71B"
+          "source_sha256": "4E434098640919F9E09FB72CD7F1C5E258ED43D172DF78C50D3B7779EB315272"
         },
         {
           "name": "SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt",

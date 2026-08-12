@@ -6,27 +6,27 @@ Cerrar sesion dejando continuidad humana e IA consistente para la proxima ocasio
 INPUT:
 - requerimiento del usuario
 - estado actual
-- BATON vigente
-- WhoAmI vigente
-- HUMAN si aplica
+- BATON vigente (cold-start continuity)
+- HUMAN (product canon)
 - RADAR before/after
 - SKILL.MENU
 - lifecycle y artifacts policy
+- WHOAMI solo como referencia historica opcional (no autoridad activa)
 
 DEBES:
 1. revisar el estado actual
 2. actualizar BATON
-3. actualizar WhoAmI si cambio el estado humano operacional
+3. NO tratar WHOAMI como canon ni como continuidad activa (MB-SM-076A6B)
 4. actualizar HUMAN solo si cambio el entendimiento profundo
 5. validar coherencia con RADAR
 6. identificar si algo aprendido amerita actualizar o crear skills
 
 OUTPUT:
 - BATON actualizado
-- WhoAmI actualizado si aplica
 - observacion sobre HUMAN
 - siguiente accion exacta
 - bloque estructurado SKILL_GRC_LEARNING_REVIEW
+- WHOAMI no es requisito de cierre
 
 
 ==========
@@ -50,7 +50,7 @@ El cierre debe reportar, como minimo:
 - Existencia y metadata basica de RADAR manifest.
 - Existencia de los seis outputs ACTIVE de RADAR v1.4.
 - Existencia y modified_at de BATON.
-- Existencia y modified_at de WHOAMI.
+- WHOAMI solo como evidencia historica/referencia (no bloquea cierre; MB-SM-076A6B).
 - Ruta del reporte TXT y JSON generado.
 
 Regla:
@@ -68,11 +68,15 @@ Ademas del cierre MB-GRC-015, revisar frescura de continuidad:
 - HEAD_COMMIT_DATE.
 - RADAR_FRESH_AGAINST_HEAD.
 - BATON_FRESH_AGAINST_HEAD.
-- WHOAMI_FRESH_AGAINST_HEAD.
+
+WHOAMI_FRESH_AGAINST_HEAD:
+- Informativo solamente.
+- WHOAMI_FRESHNESS_REQUIRED=NO (MB-SM-076A6B).
+- WHOAMI no bloquea cierre limpio.
 
 Regla:
-- Si cualquiera esta en False, reportar WARN.
-- No declarar cierre limpio sin informar la deuda de continuidad.
+- Si RADAR o BATON estan en False, reportar WARN.
+- No declarar cierre limpio sin informar la deuda de continuidad de BATON/RADAR.
 
 ==========
 
@@ -81,9 +85,23 @@ MB-GRC-016C_FRESHNESS_SEMANTICS
 ==========
 
 Para evaluar frescura:
-- BATON/WHOAMI usan ultimo commit Git del archivo.
+- BATON usa ultimo commit Git del archivo.
 - RADAR usa generated_at del manifest.
-- No usar LastWriteTime como criterio principal para BATON/WHOAMI.
+- No usar LastWriteTime como criterio principal para BATON.
+- WHOAMI puede reportarse por ultimo commit Git, pero no es requisito de frescura ni de cierre.
+
+==========
+
+==========
+MB-SM-076A6B_WHOAMI_READINESS_DISPOSITION
+==========
+
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
+COLD_START_CONTINUITY=BATON
+WARM_START_CONTINUITY=SESSION_CONTINUE
+PRODUCT_CANON=HUMAN
+ACTIVE_SESSION_CLOSE_WHOAMI_FRESHNESS_REQUIREMENT=0
 
 ==========
 

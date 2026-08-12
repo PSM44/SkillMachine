@@ -39,7 +39,7 @@ actualizar continuidad y dejar trazabilidad consistente.
 ==========
 
 - BATON es obligatorio
-- WHOAMI debe quedar actualizado
+- WHOAMI es historico/referencia solamente (no requisito de cierre; MB-SM-076A6B)
 - RADAR debe ejecutarse después del cierre
 - 29.SKILL.CRITICAL_FEEDBACK.txt
 - SESSION.LEARNING.REVIEW.ACTIVE.txt

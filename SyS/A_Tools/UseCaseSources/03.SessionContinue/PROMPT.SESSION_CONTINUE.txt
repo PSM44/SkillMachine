@@ -60,6 +60,19 @@ Este usecase no reemplaza SESSION_CLOSE.
 SESSION_CONTINUE abre/reanuda.
 SESSION_CLOSE consolida/cierra.
 
+==========
+MB-SM-076A6_CONTINUITY_ROLE
+==========
+ROLE=WARM_START_CONTINUITY
+ASSUMES=Same AI Project/workspace already retains broad project context.
+DOES_NOT_REPLACE=HUMAN product canon; BATON cold-start continuity.
+BATON=Use for blank-context cold start (SyS/00.0_BATON_SKILLMACHINE.txt).
+WHOAMI_ACTIVE_CANON=NO (historical reference only; do not load wholesale).
+PRODUCT_MEANING_SOT=HUMAN
+==========
+FIN_MB-SM-076A6_CONTINUITY_ROLE
+==========
+
 
 
 

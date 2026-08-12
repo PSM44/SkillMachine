@@ -15,14 +15,19 @@ OUTPUTS:
 
 CONTRACT:
   - OK only when Git is clean, Validate-System.ps1 exits 0, required continuity artifacts exist,
-    BATON/WHOAMI are version-fresh against HEAD, and RADAR runtime output is fresh against HEAD.
-  - WARN when validation passes but Git has pending changes or continuity freshness is stale.
-  - FAIL when validation fails or required artifacts are missing.
+    BATON is version-fresh against HEAD, and RADAR runtime output is fresh against HEAD.
+  - WHOAMI is historical/reference only (MB-SM-076A6B): reported for evidence, never blocks readiness.
+  - WARN when validation passes but Git has pending changes or BATON/RADAR continuity freshness is stale.
+  - FAIL when validation fails or required artifacts (RADAR manifest, BATON) are missing.
 
 CHANGELOG:
+  2026-08-12, MB-SM-076A6B
+  - Removes WHOAMI freshness and WHOAMI existence as readiness blockers.
+  - WHOAMI remains optional historical/reference evidence in the report.
+  - Cold-start continuity authority remains BATON; product canon remains HUMAN.
   2026-05-12, MB-GRC-016C
   - Fixes freshness semantics.
-  - BATON/WHOAMI freshness uses git last commit touching each file, not filesystem LastWriteTime.
+  - BATON freshness uses git last commit touching each file, not filesystem LastWriteTime.
   - RADAR freshness continues to use manifest generated_at because RADAR runtime outputs are ignored.
   2026-05-12, MB-GRC-016B
   - Robust full-file canonical version.
@@ -312,10 +317,8 @@ if (-not $batonExists) {
   [void]$issues.Add("BATON not found.")
 }
 
-if (-not $whoamiExists) {
-  $status = "FAIL"
-  [void]$issues.Add("WHOAMI not found.")
-}
+# MB-SM-076A6B: WHOAMI is historical/reference only — never FAIL/WARN readiness.
+# Existence and freshness are reported as informational evidence only.
 
 if ($gitDirty -and $status -eq "OK") {
   $status = "WARN"
@@ -331,11 +334,6 @@ if ($status -eq "OK") {
   if (-not $batonFreshAgainstHead) {
     $status = "WARN"
     [void]$issues.Add("BATON was not updated in HEAD.")
-  }
-
-  if (-not $whoamiFreshAgainstHead) {
-    $status = "WARN"
-    [void]$issues.Add("WHOAMI was not updated in HEAD.")
   }
 }
 
@@ -361,6 +359,8 @@ $artifactMeta = [pscustomobject]@{
   whoami_path = $WhoamiPath
   whoami_last_commit_date = if ($whoamiLastCommitDate) { $whoamiLastCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
   whoami_fresh_against_head = $whoamiFreshAgainstHead
+  whoami_freshness_required = $false
+  whoami_role = "HISTORICAL_REFERENCE_ONLY"
 }
 
 $result = [pscustomobject]@{
@@ -486,15 +486,17 @@ Add-Line $lines ("WHOAMI_EXISTS..............: {0}" -f $artifactMeta.whoami_exis
 Add-Line $lines ("WHOAMI_PATH................: {0}" -f $artifactMeta.whoami_path)
 Add-Line $lines ("WHOAMI_LAST_COMMIT_DATE....: {0}" -f $artifactMeta.whoami_last_commit_date)
 Add-Line $lines ("WHOAMI_FRESH_AGAINST_HEAD..: {0}" -f $artifactMeta.whoami_fresh_against_head)
+Add-Line $lines ("WHOAMI_FRESHNESS_REQUIRED..: {0}" -f $artifactMeta.whoami_freshness_required)
+Add-Line $lines ("WHOAMI_ROLE................: {0}" -f $artifactMeta.whoami_role)
 Add-Line $lines ""
 
 Add-Line $lines "=========="
 Add-Line $lines "05.00_NEXT_ACTION"
 Add-Line $lines "=========="
 if ($status -eq "OK") {
-  Add-Line $lines "NEXT_ACTION.........: Session can be closed. Repository is clean, validation passed, and continuity artifacts are fresh against HEAD."
+  Add-Line $lines "NEXT_ACTION.........: Session can be closed. Repository is clean, validation passed, and BATON/RADAR continuity are fresh against HEAD. WHOAMI is historical/reference only and does not block close."
 } elseif ($status -eq "WARN") {
-  Add-Line $lines "NEXT_ACTION.........: Review Git and continuity freshness warnings before closing session."
+  Add-Line $lines "NEXT_ACTION.........: Review Git and BATON/RADAR continuity freshness warnings before closing session. WHOAMI freshness does not block close."
 } else {
   Add-Line $lines "NEXT_ACTION.........: Do not close session as clean. Fix FAIL issues first."
 }

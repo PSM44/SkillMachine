@@ -36,18 +36,18 @@ SOURCE_SHA256=925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD
 
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CLOSE.txt
-SOURCE_BYTES=3816
-SOURCE_SHA256=3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A
+SOURCE_BYTES=4466
+SOURCE_SHA256=44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF
 
 SOURCE_INDEX=3
 SOURCE_PATH=RUNBOOK.SESSION_CLOSE.HARDENED.txt
-SOURCE_BYTES=6085
-SOURCE_SHA256=85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329
+SOURCE_BYTES=6460
+SOURCE_SHA256=D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A
 
 SOURCE_INDEX=4
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
-SOURCE_BYTES=972
-SOURCE_SHA256=1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483
+SOURCE_BYTES=1021
+SOURCE_SHA256=DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5
 
 SOURCE_INDEX=5
 SOURCE_PATH=00.SKILL.MENU.ACTIVE.txt
@@ -61,8 +61,8 @@ SOURCE_SHA256=5B0E286FFDD745A3AB9F57CE9FBEE8740CFB5ADC54A59AAA8A9E9405C40969CC
 
 SOURCE_INDEX=7
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=41787
-SOURCE_SHA256=03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064
+SOURCE_BYTES=42289
+SOURCE_SHA256=2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79
 
 SOURCE_INDEX=8
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
@@ -206,12 +206,12 @@ FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
 ==========
 ========== CONTENT_END 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
 ========== END_SOURCE_FILE 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
-========== BEGIN_SOURCE_FILE 002 3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A ==========
+========== BEGIN_SOURCE_FILE 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CLOSE.txt
-SOURCE_BYTES=3816
-SOURCE_SHA256=3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A
-========== CONTENT_START 002 3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A ==========
+SOURCE_BYTES=4466
+SOURCE_SHA256=44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF
+========== CONTENT_START 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
 PROYECTO: Session Close
 
 OBJETIVO:
@@ -220,27 +220,27 @@ Cerrar sesion dejando continuidad humana e IA consistente para la proxima ocasio
 INPUT:
 - requerimiento del usuario
 - estado actual
-- BATON vigente
-- WhoAmI vigente
-- HUMAN si aplica
+- BATON vigente (cold-start continuity)
+- HUMAN (product canon)
 - RADAR before/after
 - SKILL.MENU
 - lifecycle y artifacts policy
+- WHOAMI solo como referencia historica opcional (no autoridad activa)
 
 DEBES:
 1. revisar el estado actual
 2. actualizar BATON
-3. actualizar WhoAmI si cambio el estado humano operacional
+3. NO tratar WHOAMI como canon ni como continuidad activa (MB-SM-076A6B)
 4. actualizar HUMAN solo si cambio el entendimiento profundo
 5. validar coherencia con RADAR
 6. identificar si algo aprendido amerita actualizar o crear skills
 
 OUTPUT:
 - BATON actualizado
-- WhoAmI actualizado si aplica
 - observacion sobre HUMAN
 - siguiente accion exacta
 - bloque estructurado SKILL_GRC_LEARNING_REVIEW
+- WHOAMI no es requisito de cierre
 
 
 ==========
@@ -264,7 +264,7 @@ El cierre debe reportar, como minimo:
 - Existencia y metadata basica de RADAR manifest.
 - Existencia de los seis outputs ACTIVE de RADAR v1.4.
 - Existencia y modified_at de BATON.
-- Existencia y modified_at de WHOAMI.
+- WHOAMI solo como evidencia historica/referencia (no bloquea cierre; MB-SM-076A6B).
 - Ruta del reporte TXT y JSON generado.
 
 Regla:
@@ -282,11 +282,15 @@ Ademas del cierre MB-GRC-015, revisar frescura de continuidad:
 - HEAD_COMMIT_DATE.
 - RADAR_FRESH_AGAINST_HEAD.
 - BATON_FRESH_AGAINST_HEAD.
-- WHOAMI_FRESH_AGAINST_HEAD.
+
+WHOAMI_FRESH_AGAINST_HEAD:
+- Informativo solamente.
+- WHOAMI_FRESHNESS_REQUIRED=NO (MB-SM-076A6B).
+- WHOAMI no bloquea cierre limpio.
 
 Regla:
-- Si cualquiera esta en False, reportar WARN.
-- No declarar cierre limpio sin informar la deuda de continuidad.
+- Si RADAR o BATON estan en False, reportar WARN.
+- No declarar cierre limpio sin informar la deuda de continuidad de BATON/RADAR.
 
 ==========
 
@@ -295,9 +299,23 @@ MB-GRC-016C_FRESHNESS_SEMANTICS
 ==========
 
 Para evaluar frescura:
-- BATON/WHOAMI usan ultimo commit Git del archivo.
+- BATON usa ultimo commit Git del archivo.
 - RADAR usa generated_at del manifest.
-- No usar LastWriteTime como criterio principal para BATON/WHOAMI.
+- No usar LastWriteTime como criterio principal para BATON.
+- WHOAMI puede reportarse por ultimo commit Git, pero no es requisito de frescura ni de cierre.
+
+==========
+
+==========
+MB-SM-076A6B_WHOAMI_READINESS_DISPOSITION
+==========
+
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
+COLD_START_CONTINUITY=BATON
+WARM_START_CONTINUITY=SESSION_CONTINUE
+PRODUCT_CANON=HUMAN
+ACTIVE_SESSION_CLOSE_WHOAMI_FRESHNESS_REQUIREMENT=0
 
 ==========
 
@@ -351,14 +369,14 @@ REGLAS:
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automaticamente.
-========== CONTENT_END 002 3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A ==========
-========== END_SOURCE_FILE 002 3D383F04224714D1F4CB0F7166753DF41365B78F86ED2B4D14ACB9948117FD5A ==========
-========== BEGIN_SOURCE_FILE 003 85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329 ==========
+========== CONTENT_END 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
+========== END_SOURCE_FILE 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
+========== BEGIN_SOURCE_FILE 003 D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A ==========
 SOURCE_INDEX=3
 SOURCE_PATH=RUNBOOK.SESSION_CLOSE.HARDENED.txt
-SOURCE_BYTES=6085
-SOURCE_SHA256=85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329
-========== CONTENT_START 003 85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329 ==========
+SOURCE_BYTES=6460
+SOURCE_SHA256=D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A
+========== CONTENT_START 003 D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A ==========
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
@@ -371,15 +389,16 @@ HORA..............: 15:XX
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: 90.USECASE\02.SESSION_CLOSE
 AUTOR_HUMANO......: PABLO
-TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, WHOAMI_STATE, LEARNING_REVIEW
+TAGS_OPERATIVOS...: SESSION_CLOSE, GIT_EVIDENCE, RADAR_OUTPUT, BATON_STATE, LEARNING_REVIEW
 
 ALCANCE...........:
 Define el cierre endurecido de sesion para SkillsMachine.
-El cierre debe capturar evidencia objetiva de Git, validacion, RADAR, BATON, WHOAMI y learning review estructurado.
+El cierre debe capturar evidencia objetiva de Git, validacion, RADAR, BATON y learning review estructurado.
+WHOAMI puede aparecer como evidencia historica/referencia, pero no es autoridad activa ni requisito de cierre (MB-SM-076A6B).
 
 NO_CUBRE..........:
 No reemplaza BATON.
-No reemplaza WHOAMI.
+No restaura WHOAMI como canon o continuidad activa.
 No modifica politica GRC fuera de los artefactos del cierre.
 No reemplaza el juicio humano sobre commit o canonizacion.
 
@@ -407,9 +426,10 @@ Problema que resuelve:
 - Cierres sin HEAD/tag.
 - Cierres sin validacion.
 - Cierres sin evidencia RADAR.
-- Cierres sin chequeo BATON/WHOAMI.
+- Cierres sin chequeo BATON.
 - Cierres sin learning review estructurado.
 - Dependencia excesiva de memoria humana.
+- (Historico) No exige frescura WHOAMI; WHOAMI es referencia solamente.
 
 ==========
 02.00_COMANDO_CANONICO
@@ -448,19 +468,18 @@ OK:
   - RADAR_FULL.HUMAN.ACTIVE.txt
   - RADAR_FULL.SKILLS.ACTIVE.txt
 - BATON existe.
-- WHOAMI existe.
+- WHOAMI no es requisito de OK/FAIL (historico/referencia).
 
 WARN:
 - Validacion OK, pero Git tiene cambios pendientes.
 - Validacion OK, Git limpio, pero falta al menos un output ACTIVE de RADAR v1.4.
-- Continuidad fresca no confirmada contra HEAD.
+- Continuidad BATON/RADAR fresca no confirmada contra HEAD.
 
 FAIL:
 - Validacion falla.
 - Falta RADAR manifest.
 - Falta evidencia minima de RADAR v1.4 si manifest y ACTIVE outputs requeridos no pueden verificarse.
 - Falta BATON.
-- Falta WHOAMI.
 
 ==========
 05.00_REGLA_OPERATIVA
@@ -483,20 +502,23 @@ Si el resultado es FAIL:
 El cierre endurecido debe evaluar frescura operacional contra HEAD.
 
 Regla:
-- BATON, WHOAMI y RADAR no solo deben existir.
+- BATON y RADAR no solo deben existir.
 - Tambien deben ser iguales o posteriores a la fecha del ultimo commit HEAD.
 - Si existen pero son anteriores a HEAD, el cierre queda en WARN.
+- WHOAMI_FRESHNESS_REQUIRED=NO. WHOAMI no bloquea cierre (MB-SM-076A6B).
 
 Interpretacion:
 - WARN no significa falla tecnica.
-- WARN significa posible deuda de continuidad.
-- El humano decide si actualiza BATON/WHOAMI/RADAR o si acepta el cierre con advertencia.
+- WARN significa posible deuda de continuidad BATON/RADAR.
+- El humano decide si actualiza BATON/RADAR o si acepta el cierre con advertencia.
 
 Campos esperados en el reporte:
 - HEAD_COMMIT_DATE
 - RADAR_FRESH_AGAINST_HEAD
 - BATON_FRESH_AGAINST_HEAD
-- WHOAMI_FRESH_AGAINST_HEAD
+- WHOAMI_FRESH_AGAINST_HEAD (informativo)
+- WHOAMI_FRESHNESS_REQUIRED=False
+- WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
 
 ==========
 07.00_FRESHNESS_SEMANTICS
@@ -504,10 +526,13 @@ Campos esperados en el reporte:
 
 Correccion de criterio:
 
-BATON y WHOAMI:
-- La frescura se mide por el ultimo commit Git que toco cada archivo.
+BATON:
+- La frescura se mide por el ultimo commit Git que toco el archivo.
 - No se mide por LastWriteTime del filesystem.
-- Motivo: despues de un commit, la fecha HEAD sera posterior al LastWriteTime del archivo, generando falsos WARN.
+
+WHOAMI:
+- Puede reportarse por ultimo commit Git como evidencia historica.
+- No es requisito de frescura ni de cierre.
 
 RADAR:
 - La frescura se mide por RADAR_GENERATED_AT porque los outputs RADAR son runtime/ignored.
@@ -520,11 +545,11 @@ RADAR:
 Antes del commit final de cierre o minibattle que afecte continuidad:
 
 1. Actualizar SyS/00.0_BATON_SKILLMACHINE.txt.
-2. Actualizar SyS/01_WHOAMI_SKILLMACHINE.txt.
-3. Ejecutar Validate-System.
-4. Ejecutar RADAR si la continuidad o el contrato operativo lo requiere.
-5. Ejecutar Test-SessionCloseReadiness.
-6. Si readiness indica BATON viejo o WHOAMI viejo, actualizar ambos juntos y repetir.
+2. Ejecutar Validate-System.
+3. Ejecutar RADAR si la continuidad o el contrato operativo lo requiere.
+4. Ejecutar Test-SessionCloseReadiness.
+5. Si readiness indica BATON viejo, actualizar BATON y repetir.
+6. No exigir refresh de WHOAMI para cerrar.
 
 REGLA_DE_OUTPUTS_GENERADOS:
 Los outputs generados de 90.USECASE son reproducibles y pueden estar ignorados por Git.
@@ -566,14 +591,14 @@ Regla:
 ==========
 FIN_DEL_DOCUMENTO
 ==========
-========== CONTENT_END 003 85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329 ==========
-========== END_SOURCE_FILE 003 85B0F573405332D18EAC13AE2BC2A98A34CA80B6B2EC6E9FB9D05422436EC329 ==========
-========== BEGIN_SOURCE_FILE 004 1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483 ==========
+========== CONTENT_END 003 D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A ==========
+========== END_SOURCE_FILE 003 D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A ==========
+========== BEGIN_SOURCE_FILE 004 DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5 ==========
 SOURCE_INDEX=4
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
-SOURCE_BYTES=972
-SOURCE_SHA256=1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483
-========== CONTENT_START 004 1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483 ==========
+SOURCE_BYTES=1021
+SOURCE_SHA256=DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5
+========== CONTENT_START 004 DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5 ==========
 ==========
 00.00_METADATA
 ==========
@@ -615,12 +640,12 @@ actualizar continuidad y dejar trazabilidad consistente.
 ==========
 
 - BATON es obligatorio
-- WHOAMI debe quedar actualizado
+- WHOAMI es historico/referencia solamente (no requisito de cierre; MB-SM-076A6B)
 - RADAR debe ejecutarse después del cierre
 - 29.SKILL.CRITICAL_FEEDBACK.txt
 - SESSION.LEARNING.REVIEW.ACTIVE.txt
-========== CONTENT_END 004 1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483 ==========
-========== END_SOURCE_FILE 004 1AA3490CF0AB1A35F0045967E505140D06D5C3AEC47B85E0DD6300E43331E483 ==========
+========== CONTENT_END 004 DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5 ==========
+========== END_SOURCE_FILE 004 DF3450CF8DA3C4B82AFD35F51D66996282C94F49B188F14E89F925DE843CF1E5 ==========
 ========== BEGIN_SOURCE_FILE 005 2333D14E127C740B666F8B5E67836C6D9CE885149FEE370635AE2BC7CE8A9360 ==========
 SOURCE_INDEX=5
 SOURCE_PATH=00.SKILL.MENU.ACTIVE.txt
@@ -2742,12 +2767,12 @@ E4) Tandas desordenadas:
 - Base operacional del skill.
 ========== CONTENT_END 006 5B0E286FFDD745A3AB9F57CE9FBEE8740CFB5ADC54A59AAA8A9E9405C40969CC ==========
 ========== END_SOURCE_FILE 006 5B0E286FFDD745A3AB9F57CE9FBEE8740CFB5ADC54A59AAA8A9E9405C40969CC ==========
-========== BEGIN_SOURCE_FILE 007 03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064 ==========
+========== BEGIN_SOURCE_FILE 007 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
 SOURCE_INDEX=7
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=41787
-SOURCE_SHA256=03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064
-========== CONTENT_START 007 03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064 ==========
+SOURCE_BYTES=42289
+SOURCE_SHA256=2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79
+========== CONTENT_START 007 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -2759,7 +2784,7 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CONTINUITY
-GENERATED_AT: 2026-07-20 18:38:35
+GENERATED_AT: 2026-08-12 16:28:18
 ==============================
 
 --------------------------------------------------
@@ -3618,7 +3643,7 @@ No debe:
 SOURCE_FILE: SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\23.SKILL.WHOAMI_POLICY.txt
 VERSION    : v1.0-CANON
-SHA256     : 0CF35357DEA40D6A1B5DA170F6AB5EF6B60559F039CB841385CFCB3F163324E2
+SHA256     : A199E76D2367AECB38D234686D3BE341AAA8AA4ACE89DF0D590F73FE680A72B8
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -3626,16 +3651,32 @@ SHA256     : 0CF35357DEA40D6A1B5DA170F6AB5EF6B60559F039CB841385CFCB3F163324E2
 
 ID_UNICO..........: SKILL.WHOAMI.POLICY.01.00
 NOMBRE_SUGERIDO...: 23.SKILL.WHOAMI_POLICY.txt
-VERSION...........: v1.0-CANON
+VERSION...........: v1.1-MB-SM-076A6B
 FECHA.............: 2026-04-21
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
 
+==========
+MB-SM-076A6B_DISPOSITION
+==========
+For PS.SkillsMachine:
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
+PRODUCT_CANON=HUMAN
+COLD_START_CONTINUITY=BATON
+WARM_START_CONTINUITY=SESSION_CONTINUE
+Do not treat WHOAMI freshness as a session-close gate.
+Historical sections below remain for reference / project-local patterns.
+==========
+FIN_MB-SM-076A6B_DISPOSITION
+==========
+
 ALCANCE...........:
 Define qué es WhoAmI como artefacto operativo humano y cómo debe crearse,
-mantenerse y usarse para continuidad humana operacional.
+mantenerse y usarse. En SkillsMachine, WHOAMI ya no es autoridad activa de producto
+ni de continuidad (ver disposition 076A6B).
 
 NO_CUBRE..........:
 No reemplaza HUMAN.
@@ -3650,7 +3691,7 @@ DEPENDENCIAS......:
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 
-TAGS_OPERATIVOS...: RUNTIME_CRITICAL, CONTINUITY, HUMAN_ONBOARDING
+TAGS_OPERATIVOS...: HISTORICAL_REFERENCE, HUMAN_ONBOARDING, CONTINUITY_LEGACY
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -4151,8 +4192,8 @@ objective. Prior authorization for one MB does not carry over to the next.
 
 FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 ==========
-========== CONTENT_END 007 03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064 ==========
-========== END_SOURCE_FILE 007 03FF268289BBB6582F9BB5CC76BE86C2472AB53B69AAC8D57452E183EE235064 ==========
+========== CONTENT_END 007 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
+========== END_SOURCE_FILE 007 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
 ========== BEGIN_SOURCE_FILE 008 D75DE327CAC8AE12F228F01EA3B04F086C49DFCC421CECCB72AB39EFB0C5D918 ==========
 SOURCE_INDEX=8
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
@@ -8605,7 +8646,7 @@ FIN_MB-SM-067B-D2_RUNTIME_AND_AGENT_IDENTITY_EVIDENCE
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=8
-SOURCE_TOTAL_BYTES=245562
+SOURCE_TOTAL_BYTES=247138
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0

@@ -56,7 +56,8 @@ MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_SKILLSET_PATCH
 ==========
 
 RULE:
-SESSION_CONTINUE requires project BATON/WHOAMI/equivalent with PROJECT_ROOT and TEMP_PATH before project-specific synchronization.
+SESSION_CONTINUE requires project BATON (or project-local continuity equivalent) with PROJECT_ROOT and TEMP_PATH before project-specific synchronization.
+Do not require SkillsMachine WHOAMI as active continuity authority (WHOAMI_ACTIVE_CANON=NO; MB-SM-076A6B).
 
 CONTEXT_PACK_OUTPUT:
 Generate up to 10 IA-readable files in TEMP_PATH; fewer files are allowed when sufficient.
