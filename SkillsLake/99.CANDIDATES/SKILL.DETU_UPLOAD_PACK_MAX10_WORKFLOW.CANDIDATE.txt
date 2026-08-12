@@ -59,20 +59,18 @@ The final Temp content must be upload-ready:
 If more than 10 files would be needed, consolidate/merge first.
 If Temp was not cleaned before use, that is an operational non-compliance and must be corrected in the next iteration.
 
-## DETU single upload subfolder rule
+## DETU flat AI-exchange temp rule
 
-Marker: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE
+Marker: MB-SM-057E-R1_TEMP_FLAT_AI_EXCHANGE_RULE
+Supersedes: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE for SkillsMachine AI exchange
 
-For DETU workflows in this project:
+For DETU / AI-exchange workflows in this project:
 
-- Use Temp root exactly as C:\Users\aazcl\Downloads\Temp.SkillMachine.
+- Use Temp root exactly as C:\Users\aazcl\Downloads\T.AI.SkillMachine.
 - Before using Temp, delete its existing contents.
-- After the runner finishes, Temp root must contain exactly one upload subfolder.
-- That upload subfolder must contain every file the assistant wants uploaded.
-- Do not leave loose files directly under Temp.
-- Do not leave multiple package folders under Temp.
-- Do not leave nested subfolders inside the upload subfolder unless explicitly authorized.
-- The upload subfolder must contain 1 to 10 files.
+- Temp root must remain completely flat — subdirectories are forbidden.
+- Place 1 to 10 upload-ready files directly under Temp root (prefer one consolidated file).
+- Do not leave nested subfolders.
 - If more evidence is needed, consolidate/merge before finishing.
-- The human uploads the contents of that one subfolder, not arbitrary files from Temp.
+- The human uploads those files from Temp root.
 This rule is part of the DETU upload-pack workflow Skill candidate.

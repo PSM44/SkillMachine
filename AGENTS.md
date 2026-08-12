@@ -93,15 +93,25 @@ If an interactive PowerShell prompt enters >>, stop with Ctrl+C instead of conti
 ```
 ## 5. Temp and local evidence
 ```
-Use:
+External AI exchange temp (canonical):
 ```
 ```text
-C:\Users\aazcl\Downloads\Temp.SkillMachine
+C:\Users\aazcl\Downloads\T.AI.SkillMachine
 ```
 ```
-Do not clean Temp if it contains evidence required by current or prior steps.
+Rules for that path:
 ```
-Prefer timestamped subdirectories for runner outputs.
+- FLAT only — subdirectories are forbidden.
+- Purge contents before writing a new upload package.
+- Leave only upload-ready files (prefer one consolidated TXT when possible).
+- Minimum file count and total size.
+- Do not store canon there.
+```
+```
+Internal runtime scratch (validators, local work) is different and must not be treated as AI exchange.
+Validate-System uses %TEMP%\SkillsMachine.Validation as internal scratch.
+SyS\Temp and 90.USECASE\Temp are internal scratch/staging — classify before any rename.
+```
 ```
 Under GPT.Upload.Lock, do not require upload of generated files. Request a compact TOVS or targeted Get-Content / Select-String evidence block.
 ```
@@ -145,7 +155,7 @@ The SM-LAB-003 matrix establishes these mandatory controls:
 5. No git add -A.
 6. Quote paths with spaces.
 7. Validate/RADAR/Readiness evidence.
-8. BATON/WHOAMI continuity before clean session close.
+8. BATON cold-start continuity before clean session close; WHOAMI is not active product canon.
 9. Candidate before canon.
 10. AGENTS.md must derive from guardrail matrix.
 11. Do not clean Temp if it contains required evidence.
@@ -198,24 +208,25 @@ The human should not have to repeat this rule.
 ```
 Marker: MB-SM-057D-R3_TEMP_CLEAN_UPLOAD_ONLY_RULE
 ```
-Before generating or adding files under the project Temp path, the runner must delete the existing contents of that Temp path.
+Before generating or adding files under the external AI exchange temp, the runner must delete the existing contents of that Temp path.
 ```
-For SkillsMachine the current Temp path is:
+For SkillsMachine the current external AI exchange temp is:
 ```
 ```text
-C:\Users\aazcl\Downloads\Temp.SkillMachine
+C:\Users\aazcl\Downloads\T.AI.SkillMachine
 ```
 ```
-After the runner finishes, Temp must contain only the files the assistant wants the human to upload.
+After the runner finishes, that Temp must contain only the files the assistant wants the human to upload.
 ```
 Operational consequences:
 ```
+- Flat root only — no subfolders.
 - Do not leave non-upload evidence, stray stdout/stderr, old package folders, previous manifests, or intermediate files in Temp.
 - If the runner needs many raw outputs, merge them into consolidated upload files.
-- The manifest must list all and only the files to upload.
-- The upload pack must contain between 1 and 10 files.
+- Prefer a single consolidated upload-ready TXT when feasible; never exceed 10 files.
 - If Temp was not cleaned before use, acknowledge it as an operational non-compliance and correct it in the next iteration.
 - Do not ask the human to choose which Temp files to upload; leave only the intended files there.
+- Legacy path C:\Users\aazcl\Downloads\Temp.SkillMachine is superseded for AI exchange (may still exist only as unrelated local scratch — do not use it for DETU uploads).
 ```
 ## SM-LAB-003 guardrail candidates
 ```
@@ -243,22 +254,20 @@ These candidates govern:
 ```
 Candidate files must not be promoted to canon without explicit human authorization.
 ```
-## DETU single upload subfolder rule
+## DETU flat AI-exchange temp rule
 ```
-Marker: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE
+Marker: MB-SM-057E-R1_TEMP_FLAT_AI_EXCHANGE_RULE
+Supersedes: MB-SM-057E-R1_TEMP_SINGLE_UPLOAD_SUBFOLDER_RULE for SkillsMachine AI exchange
 ```
-For DETU workflows in this project:
+For DETU / AI-exchange workflows in this project:
 ```
-- Use Temp root exactly as C:\Users\aazcl\Downloads\Temp.SkillMachine.
+- Use Temp root exactly as C:\Users\aazcl\Downloads\T.AI.SkillMachine.
 - Before using Temp, delete its existing contents.
-- After the runner finishes, Temp root must contain exactly one upload subfolder.
-- That upload subfolder must contain every file the assistant wants uploaded.
-- Do not leave loose files directly under Temp.
-- Do not leave multiple package folders under Temp.
-- Do not leave nested subfolders inside the upload subfolder unless explicitly authorized.
-- The upload subfolder must contain 1 to 10 files.
+- Temp root must remain completely flat — subdirectories are forbidden.
+- Place 1 to 10 upload-ready files directly under Temp root (prefer one consolidated file).
+- Do not leave nested subfolders.
 - If more evidence is needed, consolidate/merge before finishing.
-- The human uploads the contents of that one subfolder, not arbitrary files from Temp.
+- The human uploads those files from Temp root.
 ```
 ## PowerShell parser safety for generated runners
 
@@ -277,7 +286,7 @@ Required controls before delivering long PowerShell runners:
 - Run a parser check when feasible before delivery.
 - Deliver long scripts as `.ps1` files, not pasted console blocks.
 - If a runner cleans Temp, it must refuse to run from Temp.
-- Preserve DETU one-subfolder packaging under `C:\Users\aazcl\Downloads\Temp.SkillMachine`.
+- Preserve DETU flat packaging under `C:\Users\aazcl\Downloads\T.AI.SkillMachine`.
 
 Any non-allowed variable-colon match is a blocker before handing the runner to the human.
 

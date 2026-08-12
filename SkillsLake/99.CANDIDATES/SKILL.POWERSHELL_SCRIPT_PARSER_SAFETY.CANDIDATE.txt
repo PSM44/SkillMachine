@@ -31,7 +31,7 @@ MANDATORY CONTROLS:
 7. Do not ask the human to paste long scripts into an interactive terminal. Provide a .ps1 file.
 8. If the runner cleans Temp, the runner must refuse to execute from Temp.
 9. Preserve DETU packaging:
-   - Temp root: C:\Users\aazcl\Downloads\Temp.SkillMachine
+   - Temp root: C:\Users\aazcl\Downloads\T.AI.SkillMachine
    - Clean Temp before use.
    - Leave exactly one upload subfolder.
    - Maximum 10 upload files.
