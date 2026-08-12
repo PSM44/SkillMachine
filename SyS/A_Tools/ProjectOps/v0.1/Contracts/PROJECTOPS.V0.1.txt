@@ -1,0 +1,5 @@
+PROJECTOPS.V0.1
+SOURCE=MB-SM-076A3
+PURPOSE=Durable SkillsMachine-owned project registry, enrolment proposals, real-project Improvement Flow, publication prep, Project Sync preparation, AI access runtime.
+EXTERNAL_PROJECT_MUTATION=FORBIDDEN_FROM_THIS_MODULE
+ENROLMENT_AUTO_APPROVE=FORBIDDEN

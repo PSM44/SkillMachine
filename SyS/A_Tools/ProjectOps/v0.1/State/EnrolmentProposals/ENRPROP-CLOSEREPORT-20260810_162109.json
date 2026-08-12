@@ -1,0 +1,51 @@
+{
+    "schema_version":  "0.2.0",
+    "source":  "MB-SM-076A3",
+    "PROPOSAL_ID":  "ENRPROP-CLOSEREPORT-20260810_162109",
+    "PROJECT_ID":  "CloseReport",
+    "PROJECT_CLASS":  "EXISTING_UNINTEGRATED_PROJECT",
+    "ENROLMENT_METHOD":  "EXISTING_PROJECT",
+    "PROPOSAL_STATUS":  "READY_FOR_REVIEW",
+    "HUMAN_APPROVAL":  "REQUIRED_NOT_GRANTED",
+    "HUMAN_DECISION_REQUIRED":  true,
+    "AUTO_ENROL":  false,
+    "created_at":  "2026-08-10T20:21:09.8400942Z",
+    "updated_at":  "2026-08-10T20:21:09.8433331Z",
+    "PROJECT_ROOT_IDENTITY":  "C:\\01. GitHub\\CloseReport",
+    "OBSERVED_HEAD":  "aba2e3441a1041a1e7e1f63df5190e53a4e0c48f",
+    "CURRENT_INTEGRATION_STATUS":  "NOT_ENROLLED",
+    "DISCOVERY":  {
+                      "human_authority_doc":  "000.HUMAN/HUMAN.CloseReport.txt",
+                      "fork_or_gap_summary":  "No 00_SKILLSMACHINE surface; project-local 07.SKILLS present; not enrolled in SkillsMachine",
+                      "non_mutation":  true,
+                      "observed_branch":  "main",
+                      "read_only_discovery":  true,
+                      "receiving_boundary_present":  false,
+                      "dirty_worktree_count":  1487,
+                      "local_skills_surface":  "07.SKILLS"
+                  },
+    "LOCAL_VS_CANONICAL":  {
+                               "receiving_boundary_00_SKILLSMACHINE":  false,
+                               "local_skills_surface":  "07.SKILLS",
+                               "fork_or_gap_summary":  "No 00_SKILLSMACHINE surface; project-local 07.SKILLS present; not enrolled in SkillsMachine"
+                           },
+    "PROPOSED_CAPABILITIES":  [
+                                  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+                                  "SKILL.COMPACT_UPLOAD_PACK_EXECUTION"
+                              ],
+    "IMPROVEMENT_FLOW_ENABLED_PROPOSED":  true,
+    "PROJECT_SYNC_ENABLED_PROPOSED":  true,
+    "RECEIVING_BOUNDARY_REQUIREMENT":  "Create project-local 00_SKILLSMACHINE under target project authority (NOT performed by this proposal)",
+    "DIRTY_WORKTREE_CONSTRAINT":  "1487",
+    "REQUIRED_TARGET_PROJECT_AUTHORIZATION":  "Target project human must authorize enrolment acceptance and any local surface creation/apply",
+    "NON_MUTATION_STATEMENT":  "This proposal is SkillsMachine-side only. No target-project files were created, edited, staged, committed, or pushed.",
+    "AUTHORITY_MODEL":  "PROJECT_LOCAL_MUTATION_REQUIRED",
+    "FLOW":  [
+                 "DISCOVERY",
+                 "INVENTORY",
+                 "LOCAL_CANONICAL_COMPARISON",
+                 "FORK_GAP_DETECTION",
+                 "PROPOSAL",
+                 "HUMAN_DECISION_REQUIRED"
+             ]
+}

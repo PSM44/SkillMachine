@@ -1,0 +1,11 @@
+{
+    "schema_version":  "0.2.0",
+    "ACCUMULATOR_ID":  "ACC-ACTIVE-001",
+    "status":  "ACTIVE",
+    "created_at":  "2026-08-10T20:21:08.4638109Z",
+    "updated_at":  "2026-08-10T20:21:08.4638109Z",
+    "last_receipt_id":  null,
+    "opportunities":  [
+
+                      ]
+}

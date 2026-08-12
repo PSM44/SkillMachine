@@ -1,0 +1,17 @@
+{
+  "MEASURE_ID": "MEAS-OPP-CR-076A-01-TEMP-UPLOAD-RETENTION",
+  "OPPORTUNITY_ID": "OPP-CR-076A-01",
+  "source": "MB-SM-076A3",
+  "BASELINE_EVIDENCE": [
+    "CloseReport/01.PROJECT_MANAGEMENT/SKILL_GRC.LEARNING.csv :: CR-SGRC-0234C-001 / CR-SGRC-0234C-003",
+    "CloseReport/01.PROJECT_MANAGEMENT/TECHNICAL.DEBT.csv :: TD-CR0234C-001 MITIGATED / TD-CR0234C-002 RESOLVED",
+    "Historical marker: CR0234_STATUS=FAILED_BEFORE_DDL_DUE_TO_BASELINE_LIFECYCLE"
+  ],
+  "METRIC": "Count of dependent minibattle starts blocked because continuity referenced disposable upload/staging Temp as authoritative baseline store",
+  "OBSERVATION_WINDOW": "HUMAN_DECISION_REQUIRED",
+  "TARGET_DIRECTION": "DECREASE",
+  "SUCCESS_THRESHOLD": "HUMAN_DECISION_REQUIRED",
+  "RESULT_SOURCE": "Pilot run evidence under SkillsMachine Temp + CloseReport session/baton markers after governed Skill improvement and optional Project Sync (if authorized)",
+  "VALIDATION_OWNER": "HUMAN (SkillsMachine + CloseReport authorities as applicable)",
+  "NOTE": "No invented numeric baseline. Threshold requires explicit human choice before 076B success claim."
+}
