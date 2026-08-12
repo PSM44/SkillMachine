@@ -9,10 +9,11 @@ Set-Location -LiteralPath $ValidationRepoRoot
 # Runs non-destructive SkillMachine pre-commit validations.
 
 $ErrorActionPreference = "Stop"
-$ValidationTempRoot = 'C:\Users\aazcl\Downloads\Temp.SkillMachine'
-
+# MB-SM-076A6: INTERNAL_RUNTIME_SCRATCH for validation only.
+# Not the external AI-exchange temp (C:\Users\aazcl\Downloads\T.AI.SkillMachine).
+$ValidationTempRoot = Join-Path $env:TEMP 'SkillsMachine.Validation'
 if (-not (Test-Path -LiteralPath $ValidationTempRoot -PathType Container)) {
-    throw "Validation temp root not found: $ValidationTempRoot"
+    New-Item -ItemType Directory -Path $ValidationTempRoot -Force | Out-Null
 }
 
 Write-Host "VALIDATION: naming"
