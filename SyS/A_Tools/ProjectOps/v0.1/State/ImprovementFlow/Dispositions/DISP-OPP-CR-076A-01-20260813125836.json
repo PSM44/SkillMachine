@@ -1,0 +1,14 @@
+{
+    "schema_version":  "0.2.0",
+    "DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813125836",
+    "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "SUBMISSION_ID":  "SUB-B068B2775B468E356505E631",
+    "RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+    "DECISION":  "NEEDS_HUMAN_DECISION",
+    "RECOMMENDED_BY":  "SYSTEM",
+    "HUMAN_CONFIRMED":  false,
+    "SILENT_APPROVAL":  false,
+    "rationale":  "Preferred match SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT. Consequential improve requires explicit human confirmation. MB-SM-076A7 stops at this gate.",
+    "decided_at":  "2026-08-13T16:58:36.2593569Z",
+    "NOTE":  "Disposition is separate from receipt; capability mutation remains separately governed"
+}

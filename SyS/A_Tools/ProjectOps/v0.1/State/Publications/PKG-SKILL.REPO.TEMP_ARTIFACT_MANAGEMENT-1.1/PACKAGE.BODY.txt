@@ -1,0 +1,330 @@
+==========
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT
+==========
+
+ID_UNICO..........: SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT
+NOMBRE............: Repository Temporary Artifact Management
+TIPO..............: Skill operativo
+DOMINIO...........: Repository hygiene / Temporary files / Backups / AI artifacts
+ESTADO............: ACTIVE
+VERSION...........: 1.1
+FECHA.............: 2026-08-13
+ORIGEN............: Cleanup after OpenCode trial and SkillsLake migration; improved from OPP-CR-076A-01
+
+----------
+1. PURPOSE
+----------
+
+This skill defines how to identify, classify, archive, delete, or canonicalize temporary artifacts created during repository operations.
+
+The objective is to keep the repository root clean, avoid accidental commits, and preserve useful evidence outside the canonical source tree.
+
+----------
+2. CORE PRINCIPLE
+----------
+
+The repository is for canonical project assets.
+
+Temporary diagnostics, AI session files, migration scratch notes, backup folders, and one-off reports must not remain in the repository unless explicitly promoted to canonical artifacts.
+
+----------
+3. COMMON TEMPORARY ARTIFACTS
+----------
+
+Examples observed:
+
+00_CONTEXT/
+session-ses_2152.md
+99_TEMP_BACKUP_OPENCODE_20260502/
+_GIT_RECONCILIATION/
+README.LEARNING.MOVED.txt
+
+Other possible artifacts:
+
+*.tmp
+*.bak
+*.log
+scratch files
+AI transcript dumps
+collector reports
+migration notes
+tool cache folders
+generated inventories
+manual backup folders
+
+----------
+4. CLASSIFICATION TYPES
+----------
+
+Each temporary artifact must be classified as:
+
+1. Delete immediately
+2. Archive outside repo
+3. Move to official backup vault
+4. Convert into canonical documentation
+5. Add to .gitignore
+6. Keep and commit intentionally
+
+Default decision:
+Archive outside repo, then remove from repo.
+
+----------
+5. EXTERNAL ARCHIVE LOCATIONS
+----------
+
+Preferred locations:
+
+C:\Users\aazcl\Desktop\<PROJECT>_<TASK>_ARCHIVE_<YYYYMMDD>
+
+or:
+
+C:\00. Wings\99.Backups\<PROJECT>\<TASK>_<YYYYMMDD_HHMMSS>
+
+Do not place temporary backup folders under repo root unless the repo intentionally tracks them.
+
+----------
+6. ROOT CLEANLINESS RULE
+----------
+
+The root should contain only canonical top-level assets.
+
+Temporary notes in root are usually wrong.
+
+Example:
+
+README.LEARNING.MOVED.txt
+
+This may be useful during migration, but once the migration is committed, tagged, and pushed, the Git history becomes the canonical evidence. The temporary README should be archived outside the repo or integrated into proper documentation.
+
+----------
+7. AI TOOL ARTIFACTS
+----------
+
+AI tools may create:
+
+1. session files
+2. cache files
+3. temporary context files
+4. generated reports
+5. local scratch documents
+6. tool-specific metadata
+
+Before commit, search for AI artifacts and remove or archive them.
+
+Examples:
+
+session-ses_*.md
+00_CONTEXT/
+opencode artifacts
+cursor scratch outputs
+agent logs
+
+----------
+8. DIAGNOSTIC REPORTS
+----------
+
+Diagnostic reports are useful but usually not canonical.
+
+Examples:
+
+ROOT.ORIENTATION.INPUT.<date>.txt
+SKILLSLAKE.RECONCILIATION.<date>.txt
+tool test reports
+
+Decision rule:
+
+If report is needed for short-term troubleshooting:
+- archive outside repo
+
+If report defines a process or standard:
+- convert into a skill or doc
+
+If report is obsolete:
+- delete
+
+----------
+9. BACKUP HANDLING
+----------
+
+Before destructive changes, backups are good.
+
+After successful commit, review backups:
+
+1. Are they inside repo?
+2. Are they needed?
+3. Should they be archived externally?
+4. Should they be deleted?
+5. Should they be documented?
+
+Backups inside repo should be treated as suspicious until proven canonical.
+
+----------
+10. GIT STATUS CONTROL
+----------
+
+Before cleanup:
+
+git status --short
+
+After cleanup:
+
+git status --short
+
+A cleanup is successful when temporary untracked files disappear from Git status.
+
+----------
+11. CLEANUP WORKFLOW
+----------
+
+Step 1:
+Inventory temporary artifacts.
+
+Step 2:
+Classify each artifact.
+
+Step 3:
+Back up externally if evidence may be useful.
+
+Step 4:
+Remove from repo.
+
+Step 5:
+Run git status.
+
+Step 6:
+Commit only if cleanup itself changes tracked files or .gitignore.
+
+Step 7:
+If only untracked files were removed, no commit is needed.
+
+----------
+12. ARCHIVE COMMAND PATTERN
+----------
+
+Recommended PowerShell pattern:
+
+$Source = "C:\path\inside\repo\artifact.txt"
+$ArchiveDir = "C:\Users\aazcl\Desktop\PROJECT_TASK_ARCHIVE_YYYYMMDD"
+$ArchivePath = Join-Path $ArchiveDir "artifact.txt"
+
+New-Item -ItemType Directory -Force -Path $ArchiveDir | Out-Null
+
+if (Test-Path $Source) {
+  Copy-Item $Source $ArchivePath -Force
+  Remove-Item $Source -Force
+}
+
+if (-not (Test-Path $Source)) {
+  Write-Host "Removed from repo:"
+  Write-Host $Source
+}
+
+----------
+13. .GITIGNORE RULE
+----------
+
+If a temporary artifact type keeps recurring, consider `.gitignore`.
+
+Examples:
+
+session-ses_*.md
+00_CONTEXT/
+*_TEMP_BACKUP_*/
+_GIT_RECONCILIATION/
+
+But do not use `.gitignore` to hide important unresolved structural problems.
+
+Ignoring is for known noise, not for unresolved risk.
+
+----------
+14. CANONICALIZATION RULE
+----------
+
+A temporary artifact may become canonical only if it is rewritten into a durable form.
+
+Example:
+
+Temporary:
+README.LEARNING.MOVED.txt
+
+Canonical alternatives:
+- entry in CHANGELOG
+- migration section in README.SKILLSLAKE.txt
+- skill documenting migration policy
+- registry update
+- release note
+
+Do not commit raw scratch notes as canonical docs.
+
+----------
+15. ANTI-PATTERNS
+----------
+
+1. Leaving temporary files in root.
+2. Committing AI session dumps.
+3. Keeping migration notes after commit/tag/push.
+4. Backing up inside repo and forgetting to remove.
+5. Using .gitignore to hide messy work.
+6. Treating generated diagnostic reports as permanent truth.
+7. Letting AI tools write uncontrolled artifacts.
+
+----------
+16. ACCEPTANCE CRITERIA
+----------
+
+Temporary artifact management is complete when:
+
+1. All untracked artifacts are classified.
+2. Non-canonical artifacts are removed from repo.
+3. Useful evidence is archived outside repo.
+4. Root is clean.
+5. `git status --short` is empty or only intentionally pending files remain.
+6. No temporary backup folders remain inside the repository.
+7. The final repo state is ready for AI agent use or commit.
+
+----------
+17. LESSON LEARNED
+----------
+
+Temporary files are useful during battle and dangerous after battle.
+
+A clean repository is not cosmetic. It is a control system that prevents accidental commits, AI confusion, and future forensic work.
+
+----------
+18. TEMP CLASSES AND AUTHORITY (OPP-CR-076A-01)
+----------
+
+SOURCE_OPPORTUNITY: OPP-CR-076A-01
+SOURCE_MEASUREMENT: MEAS.OPP-CR-076A-01
+FAILURE_MODE: Continuity referenced disposable upload/staging Temp as an authoritative baseline store.
+
+Temp is not one thing. Classify a path before treating it as durable:
+
+1. REPO_INTERNAL_TEMP
+   Untracked or scratch files inside the repository. Default: archive outside the repo, then remove.
+
+2. EXTERNAL_AI_EXCHANGE_TEMP
+   Disposable send/receive staging for AI upload/download.
+   Current SkillsMachine path: C:\Users\aazcl\Downloads\T.AI.SkillMachine
+   Flat; purge before write; upload-ready only; no subfolders.
+   Legacy name Temp.SkillMachine is superseded for AI exchange.
+   NEVER an authoritative baseline, BATON, session-state, or continuity store.
+   NEVER the source of truth that a later minibattle must start from.
+
+3. INTERNAL_RUNTIME_SCRATCH
+   Validator/tool scratch (example: %TEMP%\SkillsMachine.Validation, SyS\Temp, 90.USECASE\Temp).
+   Not AI-exchange Temp. Not canon. Not continuity.
+
+Durable continuity and baseline live in repository canon and governed durable state
+(HUMAN, BATON, ProjectOps registry / Improvement Flow state), not in disposable Temp.
+
+Related but distinct:
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION = how to pack disposable Temp for upload.
+- This skill = how to classify temp artifacts and their authority.
+
+ANTI-PATTERN:
+Using upload/staging Temp contents as the baseline that a dependent minibattle must start from.
+
+CHANGELOG:
+2026-08-13, v1.1
+- OPP-CR-076A-01 / MB-SM-076A8: add temp-class authority so disposable AI-exchange Temp cannot be treated as continuity/baseline.

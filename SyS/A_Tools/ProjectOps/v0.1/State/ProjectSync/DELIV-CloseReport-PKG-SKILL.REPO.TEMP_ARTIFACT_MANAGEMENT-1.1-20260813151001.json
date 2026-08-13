@@ -1,0 +1,22 @@
+{
+    "schema_version":  "0.2.0",
+    "DELIVERY_ID":  "DELIV-CloseReport-PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1-20260813151001",
+    "TARGET_PROJECT":  "CloseReport",
+    "PACKAGE_ID":  "PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1",
+    "CAPABILITY_ID":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+    "FROM_VERSION":  "UNKNOWN",
+    "TO_VERSION":  "1.1",
+    "DELIVERY_STATUS":  "PREPARED",
+    "TARGET_APPLY_STATUS":  "NOT_STARTED",
+    "HUMAN_APPROVAL":  "REQUIRED",
+    "CLEAN_WORKTREE_REQUIRED":  true,
+    "TARGET_AUTHORITY":  "TARGET_PROJECT_CONTROLS_APPLY",
+    "MUTATION_PERFORMED":  false,
+    "created_at":  "2026-08-13T19:10:01.2957591Z",
+    "NOTE":  "Delivery preparation only. SkillsMachine must not apply into target project from this record.",
+    "SOURCE_OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "SOURCE_DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813151000",
+    "SOURCE_RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+    "RECEIVING_PROJECT_AUTHORITY":  "CloseReport human must authorize local apply, 00_SKILLSMACHINE creation, and clean worktree. SkillsMachine must not apply.",
+    "PROJECT_SYNC_APPLIED":  "NO"
+}

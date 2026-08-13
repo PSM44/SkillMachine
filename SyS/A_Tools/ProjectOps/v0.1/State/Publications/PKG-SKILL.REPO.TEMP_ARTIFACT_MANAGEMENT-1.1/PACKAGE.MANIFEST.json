@@ -1,0 +1,23 @@
+{
+    "schema_version":  "0.2.0",
+    "PACKAGE_ID":  "PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1",
+    "CAPABILITY_ID":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+    "VERSION":  "1.1",
+    "SOURCE_DISPOSITION":  "DISP-OPP-CR-076A-01-20260813151000",
+    "SOURCE_OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "SOURCE_RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+    "CHANGE_RATIONALE":  "OPP-CR-076A-01 REAL_GAP. Skill source v1.1 is CANON_SOURCE_WORKTREE_UPDATED (GIT_COMMITTED=NO). Publication PREPARED_NOT_DELIVERED. Project Sync PREPARED, TARGET_APPLY_STATUS=NOT_STARTED. Version registry v1.1-CANON. Compact-upload GRC names T.AI.SkillMachine. BUILD idempotent SECOND_BUILD_HASH_DRIFT=0. Validate-System PASS.",
+    "DEPENDENCIES":  [
+
+                     ],
+    "COMPATIBILITY":  "baseline_schema\u003e=1.1",
+    "TARGET_ELIGIBILITY":  "CREATED_BY_OR_ENROLLED",
+    "AUDIT_RESULT":  "FOCUSED_GATES_PASS_VALIDATE_SYSTEM_PASS",
+    "PUBLICATION_STATUS":  "PREPARED",
+    "content_sha256":  "CEF57DF97ADC59C747D17EC5D91D8F04F158E7478D0407F216F97E99BFED16AD",
+    "REVERSIBILITY_INFO":  "Package is reversible only via SkillsMachine updater checkpoint/rollback when applied under HumanApproved + clean worktree; target apply remains target-project controlled.",
+    "created_at":  "2026-08-13T21:21:22.7286638Z",
+    "LAB_PUBLICATION":  false,
+    "PRODUCTION_PUBLICATION":  "PREPARED_NOT_DELIVERED",
+    "NOTE":  "Minimum production publication path. No external project mutation performed."
+}

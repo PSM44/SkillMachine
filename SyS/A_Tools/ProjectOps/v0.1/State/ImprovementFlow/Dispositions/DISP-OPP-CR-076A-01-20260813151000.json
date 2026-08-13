@@ -1,0 +1,16 @@
+{
+    "schema_version":  "0.2.0",
+    "DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813151000",
+    "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "SUBMISSION_ID":  "SUB-B068B2775B468E356505E631",
+    "RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+    "DECISION":  "IMPROVE_EXISTING",
+    "TARGET_SKILL_GRC":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+    "SUPERSEDES_DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813125836",
+    "RECOMMENDED_BY":  "HUMAN",
+    "HUMAN_CONFIRMED":  true,
+    "SILENT_APPROVAL":  false,
+    "rationale":  "Human confirmed IMPROVE_EXISTING for OPP-CR-076A-01 targeting SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT. MB-SM-076A8. Evidence: disposable upload/staging Temp used as authoritative continuity/baseline. HUMAN_CONFIRMED=TRUE. Authorization=MB-SM-076A8 section 02.01.",
+    "decided_at":  "2026-08-13T19:10:00.9725886Z",
+    "NOTE":  "Disposition is separate from receipt; capability mutation remains separately governed. Prior disposition files are retained."
+}

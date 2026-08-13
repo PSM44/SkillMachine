@@ -1,0 +1,29 @@
+{
+    "schema_version":  "0.2.0",
+    "message_type":  "OPPORTUNITY_SUBMISSION",
+    "SUBMISSION_ID":  "SUB-B068B2775B468E356505E631",
+    "SOURCE_PROJECT":  "CloseReport",
+    "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "CORRELATION_ID":  "CORR-FB794B07078B4BC5",
+    "EVIDENCE_REFS":  [
+                          "SyS/A_Tools/ProjectOps/v0.1/Measurement/MEAS.OPP-CR-076A-01.json",
+                          "SyS/A_Tools/VerticalSlice/v0.1/Contracts/CLOSEREPORT_PILOT_MAPPING.V0.1.txt",
+                          "ENRPROP-CLOSEREPORT-20260810_162109"
+                      ],
+    "TARGET_SKILL_GRC":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+    "content_sha256":  "9DC6588062176D0310CF2C5E33D6459FE3513906D7F3195C482FE43501EAFCDF",
+    "STATUS":  "SUBMITTED",
+    "created_at":  "2026-08-13T16:58:36.1824199Z",
+    "payload":  {
+                    "source_project":  "CloseReport",
+                    "opportunity_id":  "OPP-CR-076A-01",
+                    "evidence_refs":  [
+                                          "SyS/A_Tools/ProjectOps/v0.1/Measurement/MEAS.OPP-CR-076A-01.json",
+                                          "SyS/A_Tools/VerticalSlice/v0.1/Contracts/CLOSEREPORT_PILOT_MAPPING.V0.1.txt",
+                                          "ENRPROP-CLOSEREPORT-20260810_162109"
+                                      ],
+                    "target_skill_grc":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+                    "correlation_id":  "CORR-FB794B07078B4BC5",
+                    "payload_text":  "CloseReport opportunity OPP-CR-076A-01: Temp/upload retention. Avoid treating disposable staging as authoritative continuity/baseline. Measurement threshold remains HUMAN_DECISION_REQUIRED. No numeric baseline invented."
+                }
+}

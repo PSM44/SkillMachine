@@ -1,0 +1,21 @@
+{
+    "schema_version":  "0.2.0",
+    "message_type":  "SUBMISSION_RECEIPT",
+    "RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+    "SUBMISSION_ID":  "SUB-B068B2775B468E356505E631",
+    "SOURCE_PROJECT":  "CloseReport",
+    "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "CORRELATION_ID":  "CORR-FB794B07078B4BC5",
+    "accepted_ids":  [
+                         "OPP-CR-076A-01"
+                     ],
+    "form_rejects":  [
+
+                     ],
+    "partial_acceptance":  "NO",
+    "content_sha256":  "9DC6588062176D0310CF2C5E33D6459FE3513906D7F3195C482FE43501EAFCDF",
+    "received_at":  "2026-08-13T16:58:36.1936110Z",
+    "STATUS":  "RECEIVED",
+    "NOTE":  "Receipt acknowledges form only; NOT a disposition",
+    "receipt_hash":  "17E2A073775DCFDEB370AA2F2973EB2B8635D37D6907EDA8260D555E9B16E61F"
+}

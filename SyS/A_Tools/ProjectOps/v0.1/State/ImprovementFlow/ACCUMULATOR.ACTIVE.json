@@ -3,9 +3,26 @@
     "ACCUMULATOR_ID":  "ACC-ACTIVE-001",
     "status":  "ACTIVE",
     "created_at":  "2026-08-10T20:21:08.4638109Z",
-    "updated_at":  "2026-08-10T20:21:08.4638109Z",
-    "last_receipt_id":  null,
+    "updated_at":  "2026-08-13T19:10:01.0189800Z",
+    "last_receipt_id":  "RCPT-SUB-B068B2775B468E356505E631",
     "opportunities":  [
-
+                          {
+                              "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+                              "SOURCE_PROJECT":  "CloseReport",
+                              "SUBMISSION_ID":  "SUB-B068B2775B468E356505E631",
+                              "RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
+                              "CORRELATION_ID":  "CORR-FB794B07078B4BC5",
+                              "content_sha256":  "9DC6588062176D0310CF2C5E33D6459FE3513906D7F3195C482FE43501EAFCDF",
+                              "EVIDENCE_REFS":  [
+                                                    "SyS/A_Tools/ProjectOps/v0.1/Measurement/MEAS.OPP-CR-076A-01.json",
+                                                    "SyS/A_Tools/VerticalSlice/v0.1/Contracts/CLOSEREPORT_PILOT_MAPPING.V0.1.txt",
+                                                    "ENRPROP-CLOSEREPORT-20260810_162109"
+                                                ],
+                              "added_at":  "2026-08-13T16:58:36.2302640Z",
+                              "DISPOSITION":  "IMPROVE_EXISTING",
+                              "STATUS":  "UNDER_REVIEW",
+                              "LATEST_DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813151000",
+                              "TARGET_SKILL_GRC":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT"
+                          }
                       ]
 }
