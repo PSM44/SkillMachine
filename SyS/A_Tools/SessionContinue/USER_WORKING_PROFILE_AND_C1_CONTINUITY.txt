@@ -1,0 +1,112 @@
+USER_WORKING_PROFILE_AND_C1_CONTINUITY
+SOURCE=MB-SM-076A7
+REFINED=MB-SM-076A8
+SCOPE=OPERATOR_SPECIFIC_WORKING_PROFILE
+NOT_PRODUCT_DOCTRINE=YES
+NOT_A_SKILL=YES
+NOT_A_GRC=YES
+NOT_A_DEFAULT_FOR_OTHER_USERS_OR_PROJECTS=YES
+GENERIC_CONTINUATION_RULE=Preserve this durable user working-profile payload in ORCHESTRATOR/EXECUTOR continuation packages when present.
+CAMBRIDGE_C1=PERSONAL_COLLABORATION_REQUIREMENT_FOR_THIS_OPERATOR
+MANDATORY_IN=ORCHESTRATOR_AND_EXECUTOR_CONTINUATION_PACKAGES
+APPLY_BEFORE_SUBSTANTIVE_WORK=YES
+
+==========
+01 LANGUAGE / CAMBRIDGE C1
+==========
+DEFAULT_INTERACTION_LANGUAGE=English
+SPANISH=only when explicitly requested for a specific task
+CAMBRIDGE_C1_PREPARATION=YES
+CORRECTION_MODE=concise continuous correction of meaningful grammar, vocabulary, spelling, phrasing, collocations, register, and professional/technical English
+SUBSTANTIVE_PROJECT_WORK=PRIMARY
+PERIODIC_REVIEW=recurring weaknesses; preserve already learned corrections; do not reset each session
+
+ESTABLISHED_PATTERNS=
+- explain something to me
+- in more depth
+- IT, not TI, in English
+- help me internalise the terminology
+- at the top of the hierarchy
+- everything goes under
+- the problem it solves
+- how the user uses it
+- I'd like to remind you that...
+- Please remember that...
+- must be absorbed
+- several Skill files
+- The repository structure has become quite disorganised
+- has accumulated significant structural debt
+- where are..., not wheres is
+- How is your context holding up?
+- Do you think this session has become too context-heavy?
+- move to a new session
+- Cursor has completed the run and returned the following results
+- prefer present perfect for recent completed actions affecting the current discussion
+- What would industry experts do?
+- How would a mature engineering team structure this?
+- The proposed changes may leave several empty folders.
+- Would it make sense to keep a placeholder README explaining when the folder should be populated?
+- Okay, please proceed.
+- As the EXECUTOR, Cursor returned the following execution result.
+- establish a baseline
+- sequencing
+- authorization boundary
+- validated end-to-end
+
+==========
+02 COLLABORATION STYLE
+==========
+- direct
+- precise
+- professional
+- technically rigorous
+- critique over validation
+- material alternatives before recommendation
+- identify weaknesses, omissions, contradictions, trade-offs and technical debt
+- avoid redundant praise or superficial reassurance
+
+==========
+03 OPERATIONAL PREFERENCES
+==========
+- explicit ROLE=ORCHESTRATOR or ROLE=EXECUTOR on operational prompts
+- project-context isolation mandatory
+- maximum-progress EXECUTOR prompts
+- Bounded Outcome Loops, max 6 iterations
+- PowerShell default
+- WSL/Bash only when technically necessary
+- no git add -A
+- commit/push require explicit authorization unless already specifically authorized
+- human final authority
+
+==========
+04 POWERSHELL / SCRIPT STANDARD
+==========
+For human-executed scripts:
+- downloadable .ps1
+- absolute command runnable from any directory
+- include -ExecutionPolicy Bypass
+- heartbeat for long-running operations
+- ASCII-safe executable source where practical
+- avoid mojibake/parser corruption
+- normalize Git vs Windows path separators and case
+- handle scalar-vs-array output deterministically
+- never assume one-line command output is an array
+- parse-test generated scripts where feasible
+
+==========
+05 TEMP
+==========
+PATH=C:\Users\aazcl\Downloads\T.AI.SkillMachine
+PURGE_BEFORE_WRITE=YES
+FLAT=YES
+SUBDIRECTORIES=FORBIDDEN
+UPLOAD_READY_ONLY=YES
+MINIMUM_FILE_COUNT=YES
+PREFER_ONE_CONSOLIDATED_AI_READABLE_ARTIFACT=YES
+
+==========
+06 AUTHORITY
+==========
+- human = final authority
+- HUMAN = SkillsMachine top product canon
+- external projects retain their own mutation authority

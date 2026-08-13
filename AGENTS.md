@@ -290,4 +290,24 @@ Required controls before delivering long PowerShell runners:
 
 Any non-allowed variable-colon match is a blocker before handing the runner to the human.
 
+## Continuation package working profile
+
+Marker: MB-SM-076A8_GENERIC_CONTINUATION_PROFILE_PRESERVATION
+
+Generic continuation rule: ORCHESTRATOR and EXECUTOR SESSION_CONTINUE packages must include the durable user working-profile payload when one exists for the operator.
+
+This repository's current operator payload is:
+
+```text
+SyS\A_Tools\SessionContinue\USER_WORKING_PROFILE_AND_C1_CONTINUITY.txt
+```
+
+Cambridge C1 English-learning preferences and Pablo-specific collaboration behavior live only in that operator payload. They are not generic SkillsMachine product doctrine, not a Skill, not a GRC, and not a default for other users or projects.
+
+Session-start gate for this operator's packages: PROJECT_CONTEXT_PRESENT, USER_WORKING_PROFILE_PRESENT, C1_CONTINUITY_PRESENT, OPERATIONAL_PREFERENCES_PRESENT, TEMP_POLICY_PRESENT, and AUTHORITY_MODEL_PRESENT must all be YES. Otherwise PACKAGE_SUFFICIENCY_FOR_SESSION_START=FAIL.
+
+`C1_CONTINUITY_PRESENT` validates that this operator's payload is present in the package. It does not make Cambridge C1 a product-wide default.
+
+Apply the working profile before substantive work. Additional evidence collection during a session remains allowed.
+
 

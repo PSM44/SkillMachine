@@ -68,3 +68,14 @@ Codex/Claude prompts and execution remain blocked until explicit human authoriza
 ==========
 FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_SKILLSET_PATCH
 ==========
+
+==========
+MB-SM-076A7_WORKING_PROFILE_SKILLSET_PATCH
+==========
+SESSION_CONTINUE packages for ORCHESTRATOR and EXECUTOR must include the durable operator working-profile payload.
+Generic rule: preserve user working-profile context. Cambridge C1 is operator payload, not product doctrine.
+Session-start gate: all of PROJECT_CONTEXT / USER_WORKING_PROFILE / C1_CONTINUITY /
+OPERATIONAL_PREFERENCES / TEMP_POLICY / AUTHORITY_MODEL must be YES or PACKAGE_SUFFICIENCY_FOR_SESSION_START=FAIL.
+==========
+FIN_MB-SM-076A7_WORKING_PROFILE_SKILLSET_PATCH
+==========

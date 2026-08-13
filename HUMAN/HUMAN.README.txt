@@ -45,3 +45,17 @@ Cold-start continuity = BATON. Warm-start continuity = SESSION_CONTINUE. Neither
 External AI exchange temp = C:\Users\aazcl\Downloads\T.AI.SkillMachine (flat).
 Details: HUMAN.OPERATING.MODEL.txt (MB-SM-076A6 block) and SyS/OPTION_D.INFORMATION_ARCHITECTURE.V0.1.txt.
 ==========
+
+==========
+MB-SM-076A7_NOTE
+==========
+CloseReport enrolment proposal ENRPROP-CLOSEREPORT-20260810_162109 was explicitly approved for SkillsMachine-side relationship only.
+CloseReport mutation remains forbidden until CloseReport-local authorization.
+==========
+
+==========
+MB-SM-076A8_NOTE
+==========
+Warm-start continuation packages must preserve the durable user working-profile payload when one exists for the operator.
+User-specific Cambridge C1 / language / collaboration preferences are operator payload, not product doctrine.
+==========

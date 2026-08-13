@@ -267,3 +267,31 @@ Radar observes. Audit evaluates. They must stay separate.
 
 FIN_MB-SM-076A6_AUTHORITY_CONTINUITY_AND_BOUNDARIES
 ==========
+
+==========
+MB-SM-076A7_CLOSEREPORT_ENROLMENT_AND_CONTINUATION_PROFILE
+==========
+
+DATE..............: 2026-08-13
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE............: MB-SM-076A7; refined MB-SM-076A8
+
+CLOSEREPORT_ENROLMENT:
+Human explicitly approved ENRPROP-CLOSEREPORT-20260810_162109.
+SkillsMachine-side enrolment is authorized. CloseReport remains a separate project.
+SkillsMachine must not mutate C:\01. GitHub\CloseReport, must not create 00_SKILLSMACHINE there,
+and must not apply Project Sync into CloseReport without CloseReport-local authorization.
+Enrolment = permission to exchange governed packages. Enrolment != autonomous mutation.
+
+CONTINUATION_PROFILE:
+Warm-start continuation packages must preserve durable user working-profile context
+when that payload exists for the operator.
+User-specific language, Cambridge C1, and personal collaboration preferences are
+operator payload, not SkillsMachine product doctrine, not a Skill, not a GRC,
+and not a default for other users or projects.
+This repository stores the current operator payload at:
+SyS/A_Tools/SessionContinue/USER_WORKING_PROFILE_AND_C1_CONTINUITY.txt
+==========
+FIN_MB-SM-076A7_CLOSEREPORT_ENROLMENT_AND_CONTINUATION_PROFILE
+==========

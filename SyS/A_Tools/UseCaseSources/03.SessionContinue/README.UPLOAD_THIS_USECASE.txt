@@ -137,3 +137,18 @@ The assistant must then provide an immediate safe script to consolidate relevant
 ==========
 FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
 ==========
+
+==========
+MB-SM-076A7_SESSION_START_GATE_README
+==========
+ORCHESTRATOR and EXECUTOR continuation packages MUST include the durable operator working-profile payload.
+Generic rule: preserve user working-profile context. Cambridge C1 preferences are operator payload, not product doctrine.
+Canonical payload: SyS/A_Tools/SessionContinue/USER_WORKING_PROFILE_AND_C1_CONTINUITY.txt
+Apply that payload before substantive work.
+If any of PROJECT_CONTEXT_PRESENT, USER_WORKING_PROFILE_PRESENT, C1_CONTINUITY_PRESENT,
+OPERATIONAL_PREFERENCES_PRESENT, TEMP_POLICY_PRESENT, AUTHORITY_MODEL_PRESENT is NO:
+PACKAGE_SUFFICIENCY_FOR_SESSION_START=FAIL
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO when the package is sufficient.
+==========
+FIN_MB-SM-076A7_SESSION_START_GATE_README
+==========

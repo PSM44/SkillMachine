@@ -267,3 +267,38 @@ Generated/copied usecase outputs must be regenerated from their source/build mec
 ==========
 FIN_MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT
 ==========
+
+==========
+MB-SM-076A7_USER_WORKING_PROFILE_AND_C1_CONTINUITY
+==========
+GENERIC_CONTINUATION_RULE=Preserve the durable user working-profile payload in ORCHESTRATOR and EXECUTOR continuation packages when one exists for the operator.
+MANDATORY_CONTINUATION_SECTION=USER_WORKING_PROFILE_AND_C1_CONTINUITY
+CANONICAL_SOURCE=SyS/A_Tools/SessionContinue/USER_WORKING_PROFILE_AND_C1_CONTINUITY.txt
+APPLIES_TO=ORCHESTRATOR and EXECUTOR continuation packages
+PAYLOAD_CLASS=OPERATOR_SPECIFIC_WORKING_PROFILE
+NOT_PRODUCT_DOCTRINE=YES
+DO_NOT_INLINE_OPERATOR_C1_PREFERENCES_HERE=YES
+
+START HERE:
+Apply the operator working-profile payload before substantive work begins.
+Do not wait for an extra human prompt if this package is complete.
+Do not treat Cambridge C1 / language / personal collaboration preferences as generic SkillsMachine doctrine.
+
+SESSION_START_GATE_FIELDS=
+PROJECT_CONTEXT_PRESENT=<YES|NO>
+USER_WORKING_PROFILE_PRESENT=<YES|NO>
+C1_CONTINUITY_PRESENT=<YES|NO>
+OPERATIONAL_PREFERENCES_PRESENT=<YES|NO>
+TEMP_POLICY_PRESENT=<YES|NO>
+AUTHORITY_MODEL_PRESENT=<YES|NO>
+
+RULE:
+If any field is NO: PACKAGE_SUFFICIENCY_FOR_SESSION_START=FAIL
+Only all YES may produce: PACKAGE_SUFFICIENCY_FOR_SESSION_START=PASS
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO when the package is sufficient
+ADDITIONAL_EVIDENCE_COLLECTION_DURING_SESSION=ALLOWED_WHEN_NEEDED
+C1_CONTINUITY_PRESENT validates that this operator payload is present; it is not a product-wide default.
+Embed the canonical payload file contents in the continuation package. Do not copy operator-specific C1 rules into HUMAN, Skills, GRC, or this usecase contract.
+==========
+FIN_MB-SM-076A7_USER_WORKING_PROFILE_AND_C1_CONTINUITY
+==========
