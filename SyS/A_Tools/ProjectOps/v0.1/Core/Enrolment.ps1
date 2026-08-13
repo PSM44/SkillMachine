@@ -199,3 +199,142 @@ function New-NewProjectEnrolmentProposal {
     $path = Save-EnrolmentProposal -Proposal $proposal -OpsRoot $OpsRoot
     return [pscustomobject]@{ proposal = $proposal; proposal_path = $path; auto_enrolled = $false }
 }
+
+function Set-EnrolmentObjectProperty {
+    param(
+        [Parameter(Mandatory = $true)]$Object,
+        [Parameter(Mandatory = $true)][string]$Name,
+        $Value
+    )
+    if ($Object.PSObject.Properties.Name -contains $Name) {
+        $Object.$Name = $Value
+    }
+    else {
+        $Object | Add-Member -NotePropertyName $Name -NotePropertyValue $Value
+    }
+}
+
+function Approve-EnrolmentProposal {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProposalId,
+        [Parameter(Mandatory = $true)][ValidateSet('APPROVE', 'REJECT')][string]$HumanDecision,
+        [Parameter(Mandatory = $true)][string]$AuthorizationSource,
+        [string]$ApprovedBy = 'HUMAN',
+        [switch]$ApplySkillsMachineEnrolment,
+        [string]$OpsRoot = (Get-ProjectOpsRoot)
+    )
+
+    $proposal = Get-EnrolmentProposal -ProposalId $ProposalId -OpsRoot $OpsRoot
+    if ($null -eq $proposal) {
+        throw ("ENROLMENT_PROPOSAL_NOT_FOUND: {0}" -f $ProposalId)
+    }
+
+    $currentStatus = [string]$proposal.PROPOSAL_STATUS
+    if ($currentStatus -notin @('READY_FOR_REVIEW', 'APPROVED')) {
+        throw ("ENROLMENT_PROPOSAL_NOT_APPROVABLE: {0}" -f $currentStatus)
+    }
+
+    if ($HumanDecision -eq 'REJECT') {
+        Set-EnrolmentObjectProperty $proposal 'PROPOSAL_STATUS' 'REJECTED'
+        Set-EnrolmentObjectProperty $proposal 'HUMAN_APPROVAL' 'EXPLICIT'
+        Set-EnrolmentObjectProperty $proposal 'HUMAN_DECISION' 'REJECT'
+        Set-EnrolmentObjectProperty $proposal 'HUMAN_APPROVER' $ApprovedBy
+        Set-EnrolmentObjectProperty $proposal 'AUTHORIZATION_SOURCE' $AuthorizationSource
+        Set-EnrolmentObjectProperty $proposal 'HUMAN_DECISION_REQUIRED' $false
+        Set-EnrolmentObjectProperty $proposal 'updated_at' (Get-ProjectOpsUtcNow)
+        $path = Save-EnrolmentProposal -Proposal $proposal -OpsRoot $OpsRoot
+        $entry = Get-ProjectRegistryEntry -ProjectId ([string]$proposal.PROJECT_ID) -OpsRoot $OpsRoot
+        if ($null -ne $entry) {
+            Set-EnrolmentObjectProperty $entry 'PROPOSAL_STATUS' 'REJECTED'
+            Set-EnrolmentObjectProperty $entry 'ATTENTION' 'ENROLMENT_REJECTED'
+            [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
+        }
+        return [pscustomobject]@{
+            ok = $true
+            proposal = $proposal
+            proposal_path = $path
+            enrolled = $false
+            EXTERNAL_PROJECT_MUTATION = 'NO'
+        }
+    }
+
+    Set-EnrolmentObjectProperty $proposal 'HUMAN_APPROVAL' 'EXPLICIT'
+    Set-EnrolmentObjectProperty $proposal 'HUMAN_DECISION' 'APPROVE'
+    Set-EnrolmentObjectProperty $proposal 'HUMAN_APPROVER' $ApprovedBy
+    Set-EnrolmentObjectProperty $proposal 'AUTHORIZATION_SOURCE' $AuthorizationSource
+    Set-EnrolmentObjectProperty $proposal 'HUMAN_DECISION_REQUIRED' $false
+    Set-EnrolmentObjectProperty $proposal 'updated_at' (Get-ProjectOpsUtcNow)
+    Set-EnrolmentObjectProperty $proposal 'PROPOSAL_STATUS' 'APPROVED'
+    Set-EnrolmentObjectProperty $proposal 'EXTERNAL_PROJECT_MUTATION' 'NO'
+
+    $path = Save-EnrolmentProposal -Proposal $proposal -OpsRoot $OpsRoot
+    $enrolled = $false
+    $entry = Get-ProjectRegistryEntry -ProjectId ([string]$proposal.PROJECT_ID) -OpsRoot $OpsRoot
+
+    if ($ApplySkillsMachineEnrolment) {
+        if ($null -eq $entry) {
+            throw ("ENROLMENT_REGISTRY_ENTRY_MISSING: {0}" -f [string]$proposal.PROJECT_ID)
+        }
+        $caps = @()
+        if ($proposal.PSObject.Properties.Name -contains 'PROPOSED_CAPABILITIES') {
+            $caps = @($proposal.PROPOSED_CAPABILITIES)
+        }
+        $baseline = if ($caps.Count -gt 0) { ($caps -join '; ') } else { [string]$entry.CAPABILITY_BASELINE }
+        $ifEnabled = $false
+        if ($proposal.PSObject.Properties.Name -contains 'IMPROVEMENT_FLOW_ENABLED_PROPOSED') {
+            $ifEnabled = [bool]$proposal.IMPROVEMENT_FLOW_ENABLED_PROPOSED
+        }
+        $psEnabled = $false
+        if ($proposal.PSObject.Properties.Name -contains 'PROJECT_SYNC_ENABLED_PROPOSED') {
+            $psEnabled = [bool]$proposal.PROJECT_SYNC_ENABLED_PROPOSED
+        }
+
+        Set-EnrolmentObjectProperty $entry 'ENROLMENT_STATUS' 'ENROLLED'
+        Set-EnrolmentObjectProperty $entry 'ENROLMENT_METHOD' ([string]$proposal.ENROLMENT_METHOD)
+        Set-EnrolmentObjectProperty $entry 'ENROLLED_AT' (Get-ProjectOpsUtcNow)
+        Set-EnrolmentObjectProperty $entry 'EXPLICITLY_ENROLLED_IN_SKILLSMACHINE' $true
+        Set-EnrolmentObjectProperty $entry 'IMPROVEMENT_FLOW_ENABLED' $ifEnabled
+        Set-EnrolmentObjectProperty $entry 'PROJECT_SYNC_ENABLED' $psEnabled
+        Set-EnrolmentObjectProperty $entry 'PROJECT_CLASS' 'ENROLLED_PROJECT'
+        Set-EnrolmentObjectProperty $entry 'CAPABILITY_BASELINE' $baseline
+        Set-EnrolmentObjectProperty $entry 'PROPOSAL_STATUS' 'APPLIED'
+        Set-EnrolmentObjectProperty $entry 'LATEST_PROPOSAL_ID' ([string]$proposal.PROPOSAL_ID)
+        Set-EnrolmentObjectProperty $entry 'LAST_OBSERVED_AT' (Get-ProjectOpsUtcNow)
+        Set-EnrolmentObjectProperty $entry 'PROJECT_SYNC_STATUS' 'UNKNOWN'
+        $surface = 'ABSENT'
+        if ($entry.PSObject.Properties.Name -contains 'RECEIVING_BOUNDARY_00_SKILLSMACHINE') {
+            $surface = [string]$entry.RECEIVING_BOUNDARY_00_SKILLSMACHINE
+        }
+        if ($surface -eq 'ABSENT') {
+            Set-EnrolmentObjectProperty $entry 'ATTENTION' 'RECEIVING_BOUNDARY_ABSENT'
+        }
+        else {
+            Set-EnrolmentObjectProperty $entry 'ATTENTION' 'NONE'
+        }
+        [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
+
+        Set-EnrolmentObjectProperty $proposal 'PROPOSAL_STATUS' 'APPLIED'
+        Set-EnrolmentObjectProperty $proposal 'CURRENT_INTEGRATION_STATUS' 'ENROLLED'
+        $flow = @()
+        if ($proposal.PSObject.Properties.Name -contains 'FLOW') { $flow = @($proposal.FLOW) }
+        if ($flow -notcontains 'HUMAN_APPROVED') { $flow += 'HUMAN_APPROVED' }
+        if ($flow -notcontains 'SM_SIDE_ENROLLED') { $flow += 'SM_SIDE_ENROLLED' }
+        Set-EnrolmentObjectProperty $proposal 'FLOW' $flow
+        $path = Save-EnrolmentProposal -Proposal $proposal -OpsRoot $OpsRoot
+        $enrolled = $true
+    }
+    elseif ($null -ne $entry) {
+        Set-EnrolmentObjectProperty $entry 'PROPOSAL_STATUS' 'APPROVED'
+        Set-EnrolmentObjectProperty $entry 'ATTENTION' 'ENROLMENT_APPROVED_NOT_APPLIED'
+        [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
+    }
+
+    return [pscustomobject]@{
+        ok = $true
+        proposal = $proposal
+        proposal_path = $path
+        enrolled = $enrolled
+        enrolment_status = $(if ($enrolled) { 'ENROLLED' } else { 'NOT_ENROLLED' })
+        EXTERNAL_PROJECT_MUTATION = 'NO'
+    }
+}

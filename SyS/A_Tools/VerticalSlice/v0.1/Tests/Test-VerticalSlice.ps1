@@ -219,7 +219,7 @@ Assert-True (@($hd.actions | Where-Object { $_ -match 'Start AI Session|Continue
 Assert-True ($null -ne $hd.needs_your_attention) "Home needs_your_attention present"
 Assert-True (@($hd.needs_your_attention).Count -ge 1) "Home attention has items"
 Assert-True ($null -ne $hd.projects) "Home projects present"
-Assert-True (@($hd.projects | Where-Object { $_.PROJECT_ID -eq 'CloseReport' -and $_.ENROLMENT_STATUS -eq 'NOT_ENROLLED' }).Count -eq 1) "Home shows CloseReport NOT_ENROLLED"
+Assert-True (@($hd.projects | Where-Object { $_.PROJECT_ID -eq 'CloseReport' -and $_.ENROLMENT_STATUS -eq 'ENROLLED' }).Count -eq 1) "Home shows CloseReport ENROLLED after SM-side approval"
 Assert-True ($hd.primary_actions.Count -eq 5) "5 primary actions"
 Assert-True ($hd.secondary_actions.Count -eq 5) "5 secondary actions"
 Assert-True ($hd.access_model.core -eq 'ONE_SKILLSMACHINE_CORE') "Home access model core"

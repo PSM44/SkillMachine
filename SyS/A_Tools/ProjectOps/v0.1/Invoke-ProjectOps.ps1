@@ -19,7 +19,8 @@ param(
         'PrepareProjectSync',
         'AiAccess',
         'ShowHomeView',
-        'SelfTest'
+        'SelfTest',
+        'ApproveEnrolment'
     )]
     [string]$Action,
 
@@ -53,6 +54,17 @@ function Set-NoteProp {
     else {
         $Object | Add-Member -NotePropertyName $Name -NotePropertyValue $Value
     }
+}
+
+function Test-NoteProp {
+    param($Object, [string]$Name)
+    return ($null -ne $Object -and ($Object.PSObject.Properties.Name -contains $Name))
+}
+
+function Get-NoteProp {
+    param($Object, [string]$Name, $Default = $null)
+    if (Test-NoteProp -Object $Object -Name $Name) { return $Object.$Name }
+    return $Default
 }
 
 function Initialize-DefaultRegistry {
@@ -174,8 +186,10 @@ switch ($Action) {
             -OpsRoot $OpsRoot
         Write-Host ("OK={0}" -f $r.ok)
         Write-Host ("STATUS={0}" -f $r.STATUS)
-        if ($r.FAILURE_STATE) { Write-Host ("FAILURE_STATE={0}" -f $r.FAILURE_STATE) }
-        if ($r.receipt) { Write-Host ("RECEIPT_ID={0}" -f $r.receipt.RECEIPT_ID) }
+        $failState = Get-NoteProp -Object $r -Name 'FAILURE_STATE'
+        if (-not [string]::IsNullOrWhiteSpace([string]$failState)) { Write-Host ("FAILURE_STATE={0}" -f $failState) }
+        $receipt = Get-NoteProp -Object $r -Name 'receipt'
+        if ($null -ne $receipt) { Write-Host ("RECEIPT_ID={0}" -f [string]$receipt.RECEIPT_ID) }
         Write-Host 'ACTION=SubmitImprovement STATUS=PASS'
     }
     'RotateAccumulator' {
@@ -185,15 +199,33 @@ switch ($Action) {
         Write-Host 'ACTION=RotateAccumulator STATUS=PASS'
     }
     'CreateDisposition' {
+        $humanConfirmed = $false
+        if ($Args.ContainsKey('HumanConfirmed')) {
+            $rawHc = $Args['HumanConfirmed']
+            if ($rawHc -is [bool]) { $humanConfirmed = [bool]$rawHc }
+            elseif ([string]$rawHc -in @('1', 'true', 'TRUE', 'True', 'YES')) { $humanConfirmed = $true }
+        }
+        $targetSkill = ''
+        if ($Args.ContainsKey('TargetSkillGrc')) { $targetSkill = [string]$Args['TargetSkillGrc'] }
+        $supersedes = ''
+        if ($Args.ContainsKey('SupersedesDispositionId')) { $supersedes = [string]$Args['SupersedesDispositionId'] }
+        $recommendedBy = 'SYSTEM'
+        if ($Args.ContainsKey('RecommendedBy')) { $recommendedBy = [string]$Args['RecommendedBy'] }
         $d = New-ImprovementFlowDisposition `
             -OpportunityId ([string]$Args['OpportunityId']) `
             -SubmissionId ([string]$Args['SubmissionId']) `
             -Decision ([string]$Args['Decision']) `
             -Rationale ([string]$Args['Rationale']) `
-            -HumanConfirmed:([bool]$Args['HumanConfirmed']) `
+            -RecommendedBy $recommendedBy `
+            -TargetSkillGrc $targetSkill `
+            -SupersedesDispositionId $supersedes `
+            -HumanConfirmed:$humanConfirmed `
             -OpsRoot $OpsRoot
         Write-Host ("DISPOSITION_ID={0}" -f $d.DISPOSITION_ID)
         Write-Host ("DECISION={0}" -f $d.DECISION)
+        Write-Host ("HUMAN_CONFIRMED={0}" -f [bool]$d.HUMAN_CONFIRMED)
+        Write-Host ("TARGET_SKILL_GRC={0}" -f [string]$d.TARGET_SKILL_GRC)
+        Write-Host ("SUPERSEDES_DISPOSITION_ID={0}" -f [string]$d.SUPERSEDES_DISPOSITION_ID)
         Write-Host 'ACTION=CreateDisposition STATUS=PASS'
     }
     'PreparePublication' {
@@ -202,6 +234,9 @@ switch ($Action) {
             -Version ([string]$Args['Version']) `
             -SourceDispositionId ([string]$Args['SourceDispositionId']) `
             -PackageBody ([string]$Args['PackageBody']) `
+            -SourceOpportunityId $(if ($Args.ContainsKey('SourceOpportunityId')) { [string]$Args['SourceOpportunityId'] } else { '' }) `
+            -ChangeRationale $(if ($Args.ContainsKey('ChangeRationale')) { [string]$Args['ChangeRationale'] } else { '' }) `
+            -ReceiptId $(if ($Args.ContainsKey('ReceiptId')) { [string]$Args['ReceiptId'] } else { '' }) `
             -OpsRoot $OpsRoot
         Write-Host ("PACKAGE_ID={0}" -f $p.manifest.PACKAGE_ID)
         Write-Host ("PUBLICATION_STATUS={0}" -f $p.PUBLICATION_STATUS)
@@ -211,11 +246,16 @@ switch ($Action) {
         $p = New-ProjectSyncDeliveryPreparation `
             -TargetProject ([string]$Args['TargetProject']) `
             -PackageId ([string]$Args['PackageId']) `
+            -SourceOpportunityId $(if ($Args.ContainsKey('SourceOpportunityId')) { [string]$Args['SourceOpportunityId'] } else { '' }) `
+            -SourceDispositionId $(if ($Args.ContainsKey('SourceDispositionId')) { [string]$Args['SourceDispositionId'] } else { '' }) `
+            -ReceiptId $(if ($Args.ContainsKey('ReceiptId')) { [string]$Args['ReceiptId'] } else { '' }) `
             -OpsRoot $OpsRoot
         Write-Host ("OK={0}" -f $p.ok)
-        if ($p.delivery) { Write-Host ("DELIVERY_ID={0}" -f $p.delivery.DELIVERY_ID) }
-        if ($p.Reason) { Write-Host ("REASON={0}" -f $p.Reason) }
-        Write-Host ("MUTATION_PERFORMED={0}" -f $p.MUTATION_PERFORMED)
+        $delivery = Get-NoteProp -Object $p -Name 'delivery'
+        if ($null -ne $delivery) { Write-Host ("DELIVERY_ID={0}" -f [string]$delivery.DELIVERY_ID) }
+        $reason = Get-NoteProp -Object $p -Name 'Reason'
+        if (-not [string]::IsNullOrWhiteSpace([string]$reason)) { Write-Host ("REASON={0}" -f $reason) }
+        Write-Host ("MUTATION_PERFORMED={0}" -f (Get-NoteProp -Object $p -Name 'MUTATION_PERFORMED' -Default $false))
         Write-Host 'ACTION=PrepareProjectSync STATUS=PASS'
     }
     'AiAccess' {
@@ -238,6 +278,26 @@ switch ($Action) {
         Write-Host ("ATTENTION={0}" -f $h.needs_your_attention.Count)
         Write-Host ("REGISTRY={0}" -f $h.registry_path)
         Write-Host 'ACTION=ShowHomeView STATUS=PASS'
+    }
+    'ApproveEnrolment' {
+        $apply = $false
+        if ($Args.ContainsKey('ApplySkillsMachineEnrolment')) {
+            $apply = [bool]$Args['ApplySkillsMachineEnrolment']
+        }
+        $r = Approve-EnrolmentProposal `
+            -ProposalId ([string]$Args['ProposalId']) `
+            -HumanDecision ([string]$Args['HumanDecision']) `
+            -AuthorizationSource ([string]$Args['AuthorizationSource']) `
+            -ApprovedBy $(if ($Args.ContainsKey('ApprovedBy')) { [string]$Args['ApprovedBy'] } else { 'HUMAN' }) `
+            -ApplySkillsMachineEnrolment:$apply `
+            -OpsRoot $OpsRoot
+        Write-Host ("PROPOSAL_ID={0}" -f [string]$Args['ProposalId'])
+        Write-Host ("PROPOSAL_STATUS={0}" -f [string]$r.proposal.PROPOSAL_STATUS)
+        Write-Host ("HUMAN_APPROVAL={0}" -f [string]$r.proposal.HUMAN_APPROVAL)
+        Write-Host ("ENROLLED={0}" -f [bool]$r.enrolled)
+        Write-Host ("ENROLMENT_STATUS={0}" -f [string]$r.enrolment_status)
+        Write-Host 'EXTERNAL_PROJECT_MUTATION=NO'
+        Write-Host 'ACTION=ApproveEnrolment STATUS=PASS'
     }
     'SelfTest' {
         Write-Host 'Use Tests\Test-ProjectOps.ps1'

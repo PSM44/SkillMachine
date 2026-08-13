@@ -7,9 +7,9 @@ NOMBRE............: Repository Temporary Artifact Management
 TIPO..............: Skill operativo
 DOMINIO...........: Repository hygiene / Temporary files / Backups / AI artifacts
 ESTADO............: ACTIVE
-VERSION...........: 1.0
-FECHA.............: 2026-05-02
-ORIGEN............: Cleanup after OpenCode trial and SkillsLake migration
+VERSION...........: 1.1
+FECHA.............: 2026-08-13
+ORIGEN............: Cleanup after OpenCode trial and SkillsLake migration; improved from OPP-CR-076A-01
 
 ----------
 1. PURPOSE
@@ -289,3 +289,42 @@ Temporary artifact management is complete when:
 Temporary files are useful during battle and dangerous after battle.
 
 A clean repository is not cosmetic. It is a control system that prevents accidental commits, AI confusion, and future forensic work.
+
+----------
+18. TEMP CLASSES AND AUTHORITY (OPP-CR-076A-01)
+----------
+
+SOURCE_OPPORTUNITY: OPP-CR-076A-01
+SOURCE_MEASUREMENT: MEAS.OPP-CR-076A-01
+FAILURE_MODE: Continuity referenced disposable upload/staging Temp as an authoritative baseline store.
+
+Temp is not one thing. Classify a path before treating it as durable:
+
+1. REPO_INTERNAL_TEMP
+   Untracked or scratch files inside the repository. Default: archive outside the repo, then remove.
+
+2. EXTERNAL_AI_EXCHANGE_TEMP
+   Disposable send/receive staging for AI upload/download.
+   Current SkillsMachine path: C:\Users\aazcl\Downloads\T.AI.SkillMachine
+   Flat; purge before write; upload-ready only; no subfolders.
+   Legacy name Temp.SkillMachine is superseded for AI exchange.
+   NEVER an authoritative baseline, BATON, session-state, or continuity store.
+   NEVER the source of truth that a later minibattle must start from.
+
+3. INTERNAL_RUNTIME_SCRATCH
+   Validator/tool scratch (example: %TEMP%\SkillsMachine.Validation, SyS\Temp, 90.USECASE\Temp).
+   Not AI-exchange Temp. Not canon. Not continuity.
+
+Durable continuity and baseline live in repository canon and governed durable state
+(HUMAN, BATON, ProjectOps registry / Improvement Flow state), not in disposable Temp.
+
+Related but distinct:
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION = how to pack disposable Temp for upload.
+- This skill = how to classify temp artifacts and their authority.
+
+ANTI-PATTERN:
+Using upload/staging Temp contents as the baseline that a dependent minibattle must start from.
+
+CHANGELOG:
+2026-08-13, v1.1
+- OPP-CR-076A-01 / MB-SM-076A8: add temp-class authority so disposable AI-exchange Temp cannot be treated as continuity/baseline.

@@ -290,6 +290,8 @@ function New-ImprovementFlowDisposition {
         [string]$Decision,
         [string]$Rationale = '',
         [string]$RecommendedBy = 'SYSTEM',
+        [string]$TargetSkillGrc = '',
+        [string]$SupersedesDispositionId = '',
         [switch]$HumanConfirmed,
         [string]$OpsRoot = (Get-ProjectOpsRoot)
     )
@@ -307,7 +309,27 @@ function New-ImprovementFlowDisposition {
         throw 'DISPOSITION_REQUIRES_RECEIPT'
     }
 
-    $dispId = ('DISP-{0}-{1}' -f $OpportunityId, (Get-Date -Format 'yyyyMMddHHmmss'))
+    $accLookup = Read-ActiveAccumulator -OpsRoot $OpsRoot
+    if ([string]::IsNullOrWhiteSpace($TargetSkillGrc)) {
+        $matchOpp = @($accLookup.opportunities | Where-Object { [string]$_.OPPORTUNITY_ID -eq $OpportunityId } | Select-Object -First 1)
+        if ($matchOpp.Count -gt 0) {
+            $candidate = $matchOpp[0]
+            if ($candidate.PSObject.Properties.Name -contains 'TARGET_SKILL_GRC') {
+                $TargetSkillGrc = [string]$candidate.TARGET_SKILL_GRC
+            }
+        }
+    }
+
+    $stamp = Get-Date -Format 'yyyyMMddHHmmss'
+    $dispId = ('DISP-{0}-{1}' -f $OpportunityId, $stamp)
+    $dispDir = Get-IfDispositionsDir -OpsRoot $OpsRoot
+    $path = Join-Path $dispDir ("{0}.json" -f $dispId)
+    $suffix = 0
+    while (Test-Path -LiteralPath $path) {
+        $suffix++
+        $dispId = ('DISP-{0}-{1}-{2:D2}' -f $OpportunityId, $stamp, $suffix)
+        $path = Join-Path $dispDir ("{0}.json" -f $dispId)
+    }
     $disp = [pscustomobject]@{
         schema_version = '0.2.0'
         DISPOSITION_ID = $dispId
@@ -315,14 +337,15 @@ function New-ImprovementFlowDisposition {
         SUBMISSION_ID = $SubmissionId
         RECEIPT_ID = [string]$receipt.RECEIPT_ID
         DECISION = $Decision
+        TARGET_SKILL_GRC = $TargetSkillGrc
+        SUPERSEDES_DISPOSITION_ID = $(if ([string]::IsNullOrWhiteSpace($SupersedesDispositionId)) { $null } else { $SupersedesDispositionId })
         RECOMMENDED_BY = $RecommendedBy
         HUMAN_CONFIRMED = [bool]$HumanConfirmed
         SILENT_APPROVAL = $false
         rationale = $Rationale
         decided_at = (Get-ProjectOpsUtcNow)
-        NOTE = 'Disposition is separate from receipt; capability mutation remains separately governed'
+        NOTE = 'Disposition is separate from receipt; capability mutation remains separately governed. Prior disposition files are retained.'
     }
-    $path = Join-Path (Get-IfDispositionsDir -OpsRoot $OpsRoot) ("{0}.json" -f $dispId)
     Write-ProjectOpsUtf8NoBom -Path $path -Content (ConvertTo-ProjectOpsJson -Object $disp)
 
     $acc = Read-ActiveAccumulator -OpsRoot $OpsRoot
@@ -331,6 +354,10 @@ function New-ImprovementFlowDisposition {
         if ([string]$o.OPPORTUNITY_ID -eq $OpportunityId) {
             $o | Add-Member -NotePropertyName DISPOSITION -NotePropertyValue $Decision -Force
             $o | Add-Member -NotePropertyName STATUS -NotePropertyValue $(if ($Decision -eq 'NEEDS_HUMAN_DECISION') { 'NEEDS_DECISION' } else { 'UNDER_REVIEW' }) -Force
+            $o | Add-Member -NotePropertyName LATEST_DISPOSITION_ID -NotePropertyValue $dispId -Force
+            if (-not [string]::IsNullOrWhiteSpace($TargetSkillGrc)) {
+                $o | Add-Member -NotePropertyName TARGET_SKILL_GRC -NotePropertyValue $TargetSkillGrc -Force
+            }
         }
         $updated += $o
     }

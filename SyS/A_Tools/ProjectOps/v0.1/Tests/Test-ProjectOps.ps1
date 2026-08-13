@@ -181,14 +181,28 @@ try {
         -Decision 'IMPROVE_EXISTING' `
         -OpsRoot $testOps
     Assert-True ($dispSilent.DECISION -eq 'NEEDS_HUMAN_DECISION') 'Silent improve becomes NEEDS_HUMAN_DECISION'
+    Assert-True ([bool]$dispSilent.HUMAN_CONFIRMED -eq $false) 'Silent path is not human-confirmed'
     $dispOk = New-ImprovementFlowDisposition `
         -OpportunityId 'OPP-TEST-002' `
         -SubmissionId ([string]$sub3.submission.SUBMISSION_ID) `
         -Decision 'IMPROVE_EXISTING' `
         -HumanConfirmed `
+        -RecommendedBy 'HUMAN' `
+        -TargetSkillGrc 'SKILL.LAB.LONG_RUNNING_RUNNER_HEARTBEAT' `
+        -SupersedesDispositionId ([string]$dispSilent.DISPOSITION_ID) `
         -Rationale 'human ok' `
         -OpsRoot $testOps
     Assert-True ($dispOk.DECISION -eq 'IMPROVE_EXISTING') 'Human confirmed improve allowed'
+    Assert-True ([bool]$dispOk.HUMAN_CONFIRMED) 'Confirmed flag true'
+    Assert-True ([string]$dispOk.TARGET_SKILL_GRC -eq 'SKILL.LAB.LONG_RUNNING_RUNNER_HEARTBEAT') 'Target skill recorded'
+    Assert-True ([string]$dispOk.SUPERSEDES_DISPOSITION_ID -eq [string]$dispSilent.DISPOSITION_ID) 'Confirmed disposition supersedes prior decision'
+    Assert-True ([string]$dispOk.DISPOSITION_ID -ne [string]$dispSilent.DISPOSITION_ID) 'New disposition id does not overwrite prior'
+    $priorPath = Join-Path (Get-IfDispositionsDir -OpsRoot $testOps) ("{0}.json" -f [string]$dispSilent.DISPOSITION_ID)
+    $newPath = Join-Path (Get-IfDispositionsDir -OpsRoot $testOps) ("{0}.json" -f [string]$dispOk.DISPOSITION_ID)
+    Assert-True (Test-Path -LiteralPath $priorPath) 'Prior NEEDS_HUMAN_DECISION file retained'
+    Assert-True (Test-Path -LiteralPath $newPath) 'Confirmed disposition file written'
+    $priorReload = Read-ProjectOpsJson -Path $priorPath
+    Assert-True ([string]$priorReload.DECISION -eq 'NEEDS_HUMAN_DECISION') 'Prior decision remains auditable'
 
     $pub = New-ProductionPublicationPackage `
         -CapabilityId 'SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT' `
@@ -205,6 +219,26 @@ try {
     Assert-True ([bool]$syncLab.ok) 'Project Sync prep ok for enrolled LAB'
     Assert-True (-not [bool]$syncLab.MUTATION_PERFORMED) 'Project Sync prep no mutation'
 
+    $runnerFailThrew = $false
+    try {
+        & $runner -Action PrepareProjectSync -OpsRoot $testOps -Args @{
+            TargetProject = 'CloseReport'
+            PackageId = [string]$pub.manifest.PACKAGE_ID
+        } | Out-Null
+    }
+    catch { $runnerFailThrew = $true }
+    Assert-True (-not $runnerFailThrew) 'Runner PrepareProjectSync failure shape does not throw under StrictMode'
+
+    $runnerOkThrew = $false
+    try {
+        & $runner -Action PrepareProjectSync -OpsRoot $testOps -Args @{
+            TargetProject = 'SM-LAB-004'
+            PackageId = [string]$pub.manifest.PACKAGE_ID
+        } | Out-Null
+    }
+    catch { $runnerOkThrew = $true }
+    Assert-True (-not $runnerOkThrew) 'Runner PrepareProjectSync success shape does not throw under StrictMode'
+
     $homeView = Get-ProjectHomeViewFromRegistry -OpsRoot $testOps
     Assert-True (@($homeView.projects | Where-Object { $_.PROJECT_ID -eq 'CloseReport' -and $_.PROJECT_SYNC_STATUS -eq 'UNKNOWN' }).Count -eq 1) 'Home CR sync UNKNOWN'
     Assert-True (@($homeView.needs_your_attention).Count -ge 1) 'Home attention from registry'
@@ -219,10 +253,64 @@ try {
     $meas = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\ProjectOps\v0.1\Measurement\MEAS.OPP-CR-076A-01.json') -Raw | ConvertFrom-Json
     Assert-True ($meas.SUCCESS_THRESHOLD -eq 'HUMAN_DECISION_REQUIRED') 'Measurement threshold human'
     Assert-True ($meas.OPPORTUNITY_ID -eq 'OPP-CR-076A-01') 'Measurement opportunity id'
+    $tempSkill = Get-Content (Join-Path $RepoRoot 'SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt') -Raw
+    Assert-True ($tempSkill -match 'OPP-CR-076A-01') 'Temp skill traces OPP-CR-076A-01'
+    Assert-True ($tempSkill -match 'EXTERNAL_AI_EXCHANGE_TEMP') 'Temp skill classifies AI-exchange temp'
+    Assert-True ($tempSkill -match 'NEVER an authoritative baseline') 'Temp skill forbids Temp as baseline'
+    Assert-True ($tempSkill -match 'T\.AI\.SkillMachine') 'Temp skill uses current AI-exchange path'
+    Assert-True ($tempSkill -match 'Temp\.SkillMachine is superseded') 'Temp skill records superseded name'
+    $verReg = Get-Content (Join-Path $RepoRoot '90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json') -Raw | ConvertFrom-Json
+    $tempReg = @($verReg.skills | Where-Object { [string]$_.file -match 'SKILL\.REPO\.TEMP_ARTIFACT_MANAGEMENT' } | Select-Object -First 1)
+    Assert-True ($tempReg.Count -eq 1) 'Version registry has temp skill entry'
+    Assert-True ([string]$tempReg[0].version -match 'v?1\.1') 'Active version registry is 1.1'
+    $grcCompact = Get-Content (Join-Path $RepoRoot 'GRCLake\01.CONTROLS\GRC.COMPACT_UPLOAD_PACK_ONLY.txt') -Raw
+    Assert-True ($grcCompact -match 'T\.AI\.SkillMachine') 'Active compact-upload GRC names current AI-exchange Temp'
+    Assert-True ($grcCompact -match 'superseded for AI exchange') 'Active compact-upload GRC records legacy name as superseded'
+    $mapTxt = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\VerticalSlice\v0.1\Contracts\CLOSEREPORT_PILOT_MAPPING.V0.1.txt') -Raw
+    Assert-True ($mapTxt -match 'SKILL_SOURCE_STATUS=CANON_SOURCE_WORKTREE_UPDATED') 'Mapping does not claim Git-published canon'
+    Assert-True ($mapTxt -match 'GIT_COMMITTED=NO') 'Mapping records commit has not happened'
+    Assert-True ($mapTxt -match 'PUBLICATION_STATUS=PREPARED_NOT_DELIVERED') 'Mapping publication is prepared not delivered'
+    Assert-True ($mapTxt -match 'PROJECT_SYNC_APPLIED=NO') 'Mapping Project Sync not applied'
+    Assert-True ($mapTxt -match 'TARGET_APPLY_STATUS=NOT_STARTED') 'Mapping target apply not started'
 
     $aiContract = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\VerticalSlice\v0.1\Contracts\AI_ACCESS.V0.1.txt') -Raw
     Assert-True ($aiContract -match 'GET_ENROLMENT_PROPOSAL') 'AI contract has GET_ENROLMENT_PROPOSAL'
     Assert-True ($aiContract -notmatch 'Learning Sync') 'AI contract no Learning Sync'
+
+    $approvedOnly = Approve-EnrolmentProposal `
+        -ProposalId ([string]$prop.proposal.PROPOSAL_ID) `
+        -HumanDecision 'APPROVE' `
+        -AuthorizationSource 'TEST-076A7' `
+        -OpsRoot $testOps
+    Assert-True ([string]$approvedOnly.proposal.HUMAN_APPROVAL -eq 'EXPLICIT') 'Approval records EXPLICIT'
+    Assert-True ([string]$approvedOnly.proposal.PROPOSAL_STATUS -eq 'APPROVED') 'Approved without apply stays APPROVED'
+    Assert-True (-not [bool]$approvedOnly.enrolled) 'Approve without apply does not enrol'
+    $crApproved = Get-ProjectRegistryEntry -ProjectId 'CloseReport' -OpsRoot $testOps
+    Assert-True ($crApproved.ENROLMENT_STATUS -eq 'NOT_ENROLLED') 'CR still NOT_ENROLLED until apply'
+
+    $applied = Approve-EnrolmentProposal `
+        -ProposalId ([string]$prop.proposal.PROPOSAL_ID) `
+        -HumanDecision 'APPROVE' `
+        -AuthorizationSource 'TEST-076A7' `
+        -ApplySkillsMachineEnrolment `
+        -OpsRoot $testOps
+    Assert-True ([bool]$applied.enrolled) 'Apply enrols SM-side'
+    Assert-True ([string]$applied.enrolment_status -eq 'ENROLLED') 'Enrolment status ENROLLED'
+    Assert-True ([string]$applied.EXTERNAL_PROJECT_MUTATION -eq 'NO') 'Enrolment does not mutate external projects'
+    $crEnrolled = Get-ProjectRegistryEntry -ProjectId 'CloseReport' -OpsRoot $testOps
+    Assert-True ($crEnrolled.ENROLMENT_STATUS -eq 'ENROLLED') 'Registry ENROLLED'
+    Assert-True ([bool]$crEnrolled.EXPLICITLY_ENROLLED_IN_SKILLSMACHINE) 'Explicitly enrolled flag'
+    Assert-True ([bool]$crEnrolled.IMPROVEMENT_FLOW_ENABLED) 'IF enabled after apply'
+    Assert-True ([string]$crEnrolled.RECEIVING_BOUNDARY_00_SKILLSMACHINE -eq 'ABSENT') 'Receiving boundary remains ABSENT'
+
+    $ifAfterEnrol = New-ImprovementFlowSubmissionPackage `
+        -SourceProject 'CloseReport' `
+        -OpportunityId 'OPP-CR-TEST-ENROLLED' `
+        -EvidenceRefs @('meas.json') `
+        -TargetSkillGrc 'SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT' `
+        -PayloadText 'temp retention' `
+        -OpsRoot $testOps
+    Assert-True ([bool]$ifAfterEnrol.ok) 'IF accepts CloseReport after SM-side enrol'
 }
 finally {
     if (Test-Path -LiteralPath $testOps) {

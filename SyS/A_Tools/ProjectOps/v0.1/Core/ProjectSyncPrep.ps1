@@ -54,6 +54,9 @@ function New-ProjectSyncDeliveryPreparation {
     param(
         [Parameter(Mandatory = $true)][string]$TargetProject,
         [Parameter(Mandatory = $true)][string]$PackageId,
+        [string]$SourceOpportunityId = '',
+        [string]$SourceDispositionId = '',
+        [string]$ReceiptId = '',
         [string]$OpsRoot = (Get-ProjectOpsRoot)
     )
 
@@ -74,12 +77,24 @@ function New-ProjectSyncDeliveryPreparation {
 
     $deliveryId = ('DELIV-{0}-{1}-{2}' -f $TargetProject, $PackageId, (Get-Date -Format 'yyyyMMddHHmmss'))
     $pkg = Get-ProductionPublication -PackageId $PackageId -OpsRoot $OpsRoot
+    if ([string]::IsNullOrWhiteSpace($SourceOpportunityId) -and ($pkg.PSObject.Properties.Name -contains 'SOURCE_OPPORTUNITY_ID')) {
+        $SourceOpportunityId = [string]$pkg.SOURCE_OPPORTUNITY_ID
+    }
+    if ([string]::IsNullOrWhiteSpace($SourceDispositionId) -and ($pkg.PSObject.Properties.Name -contains 'SOURCE_DISPOSITION')) {
+        $SourceDispositionId = [string]$pkg.SOURCE_DISPOSITION
+    }
+    if ([string]::IsNullOrWhiteSpace($ReceiptId) -and ($pkg.PSObject.Properties.Name -contains 'SOURCE_RECEIPT_ID')) {
+        $ReceiptId = [string]$pkg.SOURCE_RECEIPT_ID
+    }
     $record = [pscustomobject]@{
         schema_version = '0.2.0'
         DELIVERY_ID = $deliveryId
         TARGET_PROJECT = $TargetProject
         PACKAGE_ID = $PackageId
         CAPABILITY_ID = [string]$pkg.CAPABILITY_ID
+        SOURCE_OPPORTUNITY_ID = $SourceOpportunityId
+        SOURCE_DISPOSITION_ID = $SourceDispositionId
+        SOURCE_RECEIPT_ID = $ReceiptId
         FROM_VERSION = 'UNKNOWN'
         TO_VERSION = [string]$pkg.VERSION
         DELIVERY_STATUS = 'PREPARED'

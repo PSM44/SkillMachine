@@ -17,6 +17,9 @@ function New-ProductionPublicationPackage {
         [string]$TargetEligibility = 'CREATED_BY_OR_ENROLLED',
         [string]$AuditResult = 'PENDING_HUMAN_REVIEW',
         [string]$PackageBody = '',
+        [string]$SourceOpportunityId = '',
+        [string]$ChangeRationale = '',
+        [string]$ReceiptId = '',
         [string]$OpsRoot = (Get-ProjectOpsRoot)
     )
 
@@ -32,6 +35,9 @@ function New-ProductionPublicationPackage {
         CAPABILITY_ID = $CapabilityId
         VERSION = $Version
         SOURCE_DISPOSITION = $SourceDispositionId
+        SOURCE_OPPORTUNITY_ID = $SourceOpportunityId
+        SOURCE_RECEIPT_ID = $ReceiptId
+        CHANGE_RATIONALE = $ChangeRationale
         DEPENDENCIES = @($Dependencies)
         COMPATIBILITY = $Compatibility
         TARGET_ELIGIBILITY = $TargetEligibility
