@@ -1,11 +1,17 @@
 #Requires -Version 5.1
 [CmdletBinding()]
 param(
-    [string]$RepoRoot = (Resolve-Path (Join-Path $PSScriptRoot '..\..\..')).Path
+    [string]$RepoRoot = ''
 )
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = 'Stop'
+if ([string]::IsNullOrWhiteSpace($RepoRoot)) {
+    $here = $PSCommandPath
+    if ([string]::IsNullOrWhiteSpace($here)) { $here = $MyInvocation.MyCommand.Path }
+    if ([string]::IsNullOrWhiteSpace($here)) { throw 'Cannot resolve test script path' }
+    $RepoRoot = (Resolve-Path (Join-Path (Split-Path -Parent $here) '..\..\..')).Path
+}
 $failed = 0
 function Assert-True($cond, $msg) {
     if (-not $cond) { Write-Host "FAIL: $msg"; $script:failed++ } else { Write-Host "PASS: $msg" }
@@ -44,6 +50,10 @@ Assert-True ($profileText -match 'ROLE=ORCHESTRATOR') 'Profile has ORCHESTRATOR 
 Assert-True ($profileText -match 'ROLE=EXECUTOR') 'Profile has EXECUTOR role'
 Assert-True ($profileText -match 'T\.AI\.SkillMachine') 'Profile has temp policy'
 Assert-True ($profileText -match 'human = final authority') 'Profile has authority model'
+Assert-True ($profileText -match 'FIRST_LINE_MUST_BE_UNIQUE_ID_CODE') 'Profile requires unique prompt ID'
+Assert-True ($profileText -match 'USE_MAXIMUM_PRACTICAL_NON_INTERFERING_LOOPS') 'Profile requires max safe loops'
+Assert-True ($profileText -match 'MAX_ITERATIONS_PER_LOOP=6') 'Profile has max iterations per loop'
+Assert-True ($profileText -match 'WBS-like numbered structure') 'Profile has WBS-like reporting preference'
 
 foreach ($p in @($sourcePrompt, $generatedPrompt)) {
     Assert-True (Test-Path -LiteralPath $p) ("Prompt exists: " + $p)
@@ -84,6 +94,54 @@ $negExec = $neg.Replace('ROLE=ORCHESTRATOR', 'ROLE=EXECUTOR')
 $negExecGate = Get-SessionContinuePackageSufficiency -Text $negExec
 Assert-True ($negExecGate.PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'FAIL') 'EXECUTOR package omitting profile fails gate'
 
+$negProfileOnly = @"
+USER_WORKING_PROFILE_AND_C1_CONTINUITY
+PROJECT_CONTEXT_PRESENT=YES
+USER_WORKING_PROFILE_PRESENT=NO
+C1_CONTINUITY_PRESENT=YES
+OPERATIONAL_PREFERENCES_PRESENT=YES
+TEMP_POLICY_PRESENT=YES
+AUTHORITY_MODEL_PRESENT=YES
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO
+"@
+Assert-True ((Get-SessionContinuePackageSufficiency -Text $negProfileOnly).PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'FAIL') 'Omit user profile fails gate'
+
+$negC1Only = @"
+USER_WORKING_PROFILE_AND_C1_CONTINUITY
+PROJECT_CONTEXT_PRESENT=YES
+USER_WORKING_PROFILE_PRESENT=YES
+C1_CONTINUITY_PRESENT=NO
+OPERATIONAL_PREFERENCES_PRESENT=YES
+TEMP_POLICY_PRESENT=YES
+AUTHORITY_MODEL_PRESENT=YES
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO
+"@
+Assert-True ((Get-SessionContinuePackageSufficiency -Text $negC1Only).PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'FAIL') 'Omit C1 continuity fails gate'
+
+$negAuthOnly = @"
+USER_WORKING_PROFILE_AND_C1_CONTINUITY
+PROJECT_CONTEXT_PRESENT=YES
+USER_WORKING_PROFILE_PRESENT=YES
+C1_CONTINUITY_PRESENT=YES
+OPERATIONAL_PREFERENCES_PRESENT=YES
+TEMP_POLICY_PRESENT=YES
+AUTHORITY_MODEL_PRESENT=NO
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO
+"@
+Assert-True ((Get-SessionContinuePackageSufficiency -Text $negAuthOnly).PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'FAIL') 'Omit authority model fails gate'
+
+$negProjectOnly = @"
+USER_WORKING_PROFILE_AND_C1_CONTINUITY
+PROJECT_CONTEXT_PRESENT=NO
+USER_WORKING_PROFILE_PRESENT=YES
+C1_CONTINUITY_PRESENT=YES
+OPERATIONAL_PREFERENCES_PRESENT=YES
+TEMP_POLICY_PRESENT=YES
+AUTHORITY_MODEL_PRESENT=YES
+ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO
+"@
+Assert-True ((Get-SessionContinuePackageSufficiency -Text $negProjectOnly).PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'FAIL') 'Omit project context fails gate'
+
 $testTemp = Join-Path $env:TEMP ('SessionContinuePkg.{0}' -f ([guid]::NewGuid().ToString('N')))
 New-Item -ItemType Directory -Path $testTemp -Force | Out-Null
 try {
@@ -98,6 +156,18 @@ try {
         Assert-True ($gate.PACKAGE_SUFFICIENCY_FOR_SESSION_START -eq 'PASS') ("Built " + $role + " package passes session-start gate")
         Assert-True ($built -match ('ROLE={0}' -f $role)) ("Built package role " + $role)
         Assert-True ($built.Contains('explain something to me')) ("Built package preserves C1 patterns " + $role)
+        Assert-True ($built -match '(?m)^STAGE_14=') ("Built package has STAGE_14 " + $role)
+        Assert-True ($built -match 'NEXT_REAL_CLOSEREPORT_CONTINUITY_DEPENDENT_EVENT') ("Built package has Stage-14 gate " + $role)
+        Assert-True ($built -match 'Do not immediately run another ProjectOps mutation') ("Built package has first-action contract " + $role)
+        Assert-True ($built -match '(?m)^DEFER=') ("Built package classifies DEFER dirt " + $role)
+        Assert-True ($built -match 'HISTORICAL_SNAPSHOT_NOT_CURRENT_AUTHORITY=YES') ("Built package distinguishes historical snapshots " + $role)
+        Assert-True ($built -match 'BATON=COLD_START_CONTINUITY_IN_BLANK_AI_CONTEXT') ("Built package preserves BATON role " + $role)
+        Assert-True ($built -match '(?m)^AI_HISTORY_INCLUDED=NO\s*$') ("Built package excludes AI_History " + $role)
+        Assert-True ($built -match 'Apply USER_WORKING_PROFILE_AND_C1_CONTINUITY before substantive work') ("Built package START HERE applies profile " + $role)
+        Assert-True ($built -notmatch '(?m)^yS/') ("Built package does not truncate git status paths " + $role)
+        Assert-True ($built -match '(?m)^CURRENT_ACTIVE_MUTATION=NONE\s*$') ("Built package has no active mutation " + $role)
+        Assert-True ($built -match '(?m)^UNRESOLVED_COMMIT_GATE=') ("Built package reports commit gate " + $role)
+        Assert-True ($built -match '(?m)^NEXT_GENUINE_GATE=NEXT_REAL_CLOSEREPORT_CONTINUITY_DEPENDENT_EVENT\s*$') ("Built package has genuine Stage-14 gate " + $role)
     }
     $dirs = @(Get-ChildItem -LiteralPath $testTemp -Force -Directory)
     Assert-True ($dirs.Count -eq 0) 'Collector temp remains flat'

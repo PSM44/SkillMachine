@@ -1,6 +1,7 @@
 USER_WORKING_PROFILE_AND_C1_CONTINUITY
 SOURCE=MB-SM-076A7
 REFINED=MB-SM-076A8
+PROFILE_DELTA=MB-SM-076A15
 SCOPE=OPERATOR_SPECIFIC_WORKING_PROFILE
 NOT_PRODUCT_DOCTRINE=YES
 NOT_A_SKILL=YES
@@ -69,9 +70,14 @@ ESTABLISHED_PATTERNS=
 03 OPERATIONAL PREFERENCES
 ==========
 - explicit ROLE=ORCHESTRATOR or ROLE=EXECUTOR on operational prompts
+- FIRST_LINE_MUST_BE_UNIQUE_ID_CODE=YES for prompts prepared for this operator
 - project-context isolation mandatory
 - maximum-progress EXECUTOR prompts
+- MAXIMIZE_USEFUL_PROGRESS_PER_PROMPT=YES
 - Bounded Outcome Loops, max 6 iterations
+- MAX_ITERATIONS_PER_LOOP=6
+- USE_MAXIMUM_PRACTICAL_NON_INTERFERING_LOOPS=YES
+- WBS-like numbered structure for operational reports where appropriate
 - PowerShell default
 - WSL/Bash only when technically necessary
 - no git add -A
@@ -91,6 +97,10 @@ For human-executed scripts:
 - normalize Git vs Windows path separators and case
 - handle scalar-vs-array output deterministically
 - never assume one-line command output is an array
+- never index [0] on unproven wrapper output
+- handle $PSScriptRoot loss in nested PowerShell
+- handle optional properties safely under StrictMode
+- explicit UTF-8 output
 - parse-test generated scripts where feasible
 
 ==========
