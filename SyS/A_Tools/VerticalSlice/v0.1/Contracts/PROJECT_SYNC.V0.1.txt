@@ -56,3 +56,14 @@ LAST_DELIVERY_ID
 LAST_UPDATE_RECEIPT_ID
 
 REVERSIBILITY=required for updater-managed paths; project-local executors must declare rollback or refuse apply
+
+UPDATE_RECEIPT_CONSUMPTION=
+SkillsMachine records a target-emitted update receipt via Register-ProjectSyncTargetReturnReceipt / Action=ConsumeTargetReturnReceipt.
+This does not mutate the target project.
+DELIVERY_STATUS PREPARED becomes DELIVERED when a valid target apply receipt is acknowledged.
+TARGET_APPLY_STATUS uses contract values (NOT_STARTED|APPLYING|APPLIED|FAILED|ROLLED_BACK).
+Richer target-side evidence may be stored in TARGET_APPLY_EVIDENCE without replacing the contract enum.
+PROJECT_SYNC_APPLIED on a delivery record means SkillsMachine applied into the target; it remains NO for this module.
+ORIGINAL_DELIVERY_STATUS and ORIGINAL_TARGET_APPLY_STATUS preserve the prepared snapshot.
+Idempotent replay of the same UPDATE_RECEIPT_ID + TARGET_HEAD is allowed.
+Wrong delivery, wrong project, mismatched HEAD, or a second distinct receipt is rejected.

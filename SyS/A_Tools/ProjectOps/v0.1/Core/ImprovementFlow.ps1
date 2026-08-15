@@ -367,3 +367,83 @@ function New-ImprovementFlowDisposition {
 
     return $disp
 }
+
+function Get-OpportunityMeasurementPath {
+    param(
+        [Parameter(Mandatory = $true)][string]$OpportunityId,
+        [string]$OpsRoot = (Get-ProjectOpsRoot)
+    )
+    return (Join-Path $OpsRoot (Join-Path 'Measurement' ("MEAS.{0}.json" -f $OpportunityId)))
+}
+
+function Set-OpportunityMeasurementObservation {
+    param(
+        [Parameter(Mandatory = $true)][string]$OpportunityId,
+        [string]$ImmediateResult = '',
+        [string]$OperationalResult = '',
+        [string]$OverallResult = '',
+        [string]$ImmediateEvidence = '',
+        [string]$OperationalQualifyingEvent = '',
+        [string]$ForbiddenAuthoritativeBaseline = '',
+        [string]$DurableSources = '',
+        [string]$Note = '',
+        [string]$OpsRoot = (Get-ProjectOpsRoot)
+    )
+
+    $path = Get-OpportunityMeasurementPath -OpportunityId $OpportunityId -OpsRoot $OpsRoot
+    if (-not (Test-Path -LiteralPath $path)) {
+        return [pscustomobject]@{
+            ok = $false
+            Reason = 'MEASUREMENT_CONTRACT_NOT_FOUND'
+            OPPORTUNITY_ID = $OpportunityId
+        }
+    }
+    $meas = Read-ProjectOpsJson -Path $path
+    $now = Get-ProjectOpsUtcNow
+    if (-not [string]::IsNullOrWhiteSpace($ImmediateResult)) {
+        if ($meas.PSObject.Properties.Name -contains 'IMMEDIATE_RESULT') { $meas.IMMEDIATE_RESULT = $ImmediateResult }
+        else { $meas | Add-Member -NotePropertyName IMMEDIATE_RESULT -NotePropertyValue $ImmediateResult }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($OperationalResult)) {
+        if ($meas.PSObject.Properties.Name -contains 'OPERATIONAL_RESULT') { $meas.OPERATIONAL_RESULT = $OperationalResult }
+        else { $meas | Add-Member -NotePropertyName OPERATIONAL_RESULT -NotePropertyValue $OperationalResult }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($OverallResult)) {
+        if ($meas.PSObject.Properties.Name -contains 'OVERALL_RESULT') { $meas.OVERALL_RESULT = $OverallResult }
+        else { $meas | Add-Member -NotePropertyName OVERALL_RESULT -NotePropertyValue $OverallResult }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($ImmediateEvidence)) {
+        if ($meas.PSObject.Properties.Name -contains 'IMMEDIATE_EVIDENCE') { $meas.IMMEDIATE_EVIDENCE = $ImmediateEvidence }
+        else { $meas | Add-Member -NotePropertyName IMMEDIATE_EVIDENCE -NotePropertyValue $ImmediateEvidence }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($OperationalQualifyingEvent)) {
+        if ($meas.PSObject.Properties.Name -contains 'OPERATIONAL_QUALIFYING_EVENT') { $meas.OPERATIONAL_QUALIFYING_EVENT = $OperationalQualifyingEvent }
+        else { $meas | Add-Member -NotePropertyName OPERATIONAL_QUALIFYING_EVENT -NotePropertyValue $OperationalQualifyingEvent }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($ForbiddenAuthoritativeBaseline)) {
+        if ($meas.PSObject.Properties.Name -contains 'FORBIDDEN_AUTHORITATIVE_BASELINE') { $meas.FORBIDDEN_AUTHORITATIVE_BASELINE = $ForbiddenAuthoritativeBaseline }
+        else { $meas | Add-Member -NotePropertyName FORBIDDEN_AUTHORITATIVE_BASELINE -NotePropertyValue $ForbiddenAuthoritativeBaseline }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($DurableSources)) {
+        if ($meas.PSObject.Properties.Name -contains 'DURABLE_SOURCES') { $meas.DURABLE_SOURCES = $DurableSources }
+        else { $meas | Add-Member -NotePropertyName DURABLE_SOURCES -NotePropertyValue $DurableSources }
+    }
+    if (-not [string]::IsNullOrWhiteSpace($Note)) {
+        if ($meas.PSObject.Properties.Name -contains 'OBSERVATION_NOTE') { $meas.OBSERVATION_NOTE = $Note }
+        else { $meas | Add-Member -NotePropertyName OBSERVATION_NOTE -NotePropertyValue $Note }
+    }
+    if ($meas.PSObject.Properties.Name -contains 'OBSERVED_AT') { $meas.OBSERVED_AT = $now }
+    else { $meas | Add-Member -NotePropertyName OBSERVED_AT -NotePropertyValue $now }
+    if ($meas.PSObject.Properties.Name -contains 'STAGE_14') { $meas.STAGE_14 = 'PARTIAL' }
+    else { $meas | Add-Member -NotePropertyName STAGE_14 -NotePropertyValue 'PARTIAL' }
+    Write-ProjectOpsUtf8NoBom -Path $path -Content (ConvertTo-ProjectOpsJson -Object $meas)
+    return [pscustomobject]@{
+        ok = $true
+        OPPORTUNITY_ID = $OpportunityId
+        IMMEDIATE_RESULT = $(if ($meas.PSObject.Properties.Name -contains 'IMMEDIATE_RESULT') { [string]$meas.IMMEDIATE_RESULT } else { '' })
+        OPERATIONAL_RESULT = $(if ($meas.PSObject.Properties.Name -contains 'OPERATIONAL_RESULT') { [string]$meas.OPERATIONAL_RESULT } else { '' })
+        OVERALL_RESULT = $(if ($meas.PSObject.Properties.Name -contains 'OVERALL_RESULT') { [string]$meas.OVERALL_RESULT } else { '' })
+        STAGE_14 = 'PARTIAL'
+        path = $path
+    }
+}

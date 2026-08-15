@@ -17,6 +17,7 @@ param(
         'CreateDisposition',
         'PreparePublication',
         'PrepareProjectSync',
+        'ConsumeTargetReturnReceipt',
         'AiAccess',
         'ShowHomeView',
         'SelfTest',
@@ -257,6 +258,30 @@ switch ($Action) {
         if (-not [string]::IsNullOrWhiteSpace([string]$reason)) { Write-Host ("REASON={0}" -f $reason) }
         Write-Host ("MUTATION_PERFORMED={0}" -f (Get-NoteProp -Object $p -Name 'MUTATION_PERFORMED' -Default $false))
         Write-Host 'ACTION=PrepareProjectSync STATUS=PASS'
+    }
+    'ConsumeTargetReturnReceipt' {
+        $p = Register-ProjectSyncTargetReturnReceipt `
+            -DeliveryId ([string]$Args['DeliveryId']) `
+            -TargetProject ([string]$Args['TargetProject']) `
+            -LocalReceiptId ([string]$Args['LocalReceiptId']) `
+            -TargetHead ([string]$Args['TargetHead']) `
+            -TargetOriginMain $(if ($Args.ContainsKey('TargetOriginMain')) { [string]$Args['TargetOriginMain'] } else { '' }) `
+            -TargetSkillVersion $(if ($Args.ContainsKey('TargetSkillVersion')) { [string]$Args['TargetSkillVersion'] } else { '' }) `
+            -TargetValidation $(if ($Args.ContainsKey('TargetValidation')) { [string]$Args['TargetValidation'] } else { '' }) `
+            -TargetPushStatus $(if ($Args.ContainsKey('TargetPushStatus')) { [string]$Args['TargetPushStatus'] } else { '' }) `
+            -TargetApplyEvidence $(if ($Args.ContainsKey('TargetApplyEvidence')) { [string]$Args['TargetApplyEvidence'] } else { '' }) `
+            -ReceivingBoundaryStatus $(if ($Args.ContainsKey('ReceivingBoundaryStatus')) { [string]$Args['ReceivingBoundaryStatus'] } else { '' }) `
+            -OpsRoot $OpsRoot
+        Write-Host ("OK={0}" -f $p.ok)
+        $reason = Get-NoteProp -Object $p -Name 'Reason'
+        if (-not [string]::IsNullOrWhiteSpace([string]$reason)) { Write-Host ("REASON={0}" -f $reason) }
+        Write-Host ("DELIVERY_STATUS={0}" -f [string](Get-NoteProp -Object $p -Name 'DELIVERY_STATUS' -Default ''))
+        Write-Host ("TARGET_APPLY_STATUS={0}" -f [string](Get-NoteProp -Object $p -Name 'TARGET_APPLY_STATUS' -Default ''))
+        Write-Host ("UPDATE_RECEIPT_ID={0}" -f [string](Get-NoteProp -Object $p -Name 'UPDATE_RECEIPT_ID' -Default ''))
+        Write-Host ("RETURN_RECEIPT_RECORDED={0}" -f (Get-NoteProp -Object $p -Name 'RETURN_RECEIPT_RECORDED' -Default $false))
+        Write-Host ("IDEMPOTENT_REPLAY={0}" -f (Get-NoteProp -Object $p -Name 'IDEMPOTENT_REPLAY' -Default $false))
+        Write-Host ("MUTATION_PERFORMED={0}" -f (Get-NoteProp -Object $p -Name 'MUTATION_PERFORMED' -Default $false))
+        Write-Host 'ACTION=ConsumeTargetReturnReceipt STATUS=PASS'
     }
     'AiAccess' {
         $skillsRoot = Join-Path $RepoRoot 'SkillsLake\01.SKILLS'

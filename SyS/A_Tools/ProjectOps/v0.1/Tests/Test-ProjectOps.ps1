@@ -253,6 +253,9 @@ try {
     $meas = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\ProjectOps\v0.1\Measurement\MEAS.OPP-CR-076A-01.json') -Raw | ConvertFrom-Json
     Assert-True ($meas.SUCCESS_THRESHOLD -eq 'HUMAN_DECISION_REQUIRED') 'Measurement threshold human'
     Assert-True ($meas.OPPORTUNITY_ID -eq 'OPP-CR-076A-01') 'Measurement opportunity id'
+    Assert-True ([string]$meas.IMMEDIATE_RESULT -eq 'PASS') 'Measurement immediate PASS'
+    Assert-True ([string]$meas.OPERATIONAL_RESULT -eq 'NOT_YET_OBSERVED') 'Measurement operational not yet observed'
+    Assert-True ([string]$meas.OVERALL_RESULT -eq 'PARTIAL') 'Measurement overall PARTIAL'
     $tempSkill = Get-Content (Join-Path $RepoRoot 'SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt') -Raw
     Assert-True ($tempSkill -match 'OPP-CR-076A-01') 'Temp skill traces OPP-CR-076A-01'
     Assert-True ($tempSkill -match 'EXTERNAL_AI_EXCHANGE_TEMP') 'Temp skill classifies AI-exchange temp'
@@ -267,11 +270,14 @@ try {
     Assert-True ($grcCompact -match 'T\.AI\.SkillMachine') 'Active compact-upload GRC names current AI-exchange Temp'
     Assert-True ($grcCompact -match 'superseded for AI exchange') 'Active compact-upload GRC records legacy name as superseded'
     $mapTxt = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\VerticalSlice\v0.1\Contracts\CLOSEREPORT_PILOT_MAPPING.V0.1.txt') -Raw
-    Assert-True ($mapTxt -match 'SKILL_SOURCE_STATUS=CANON_SOURCE_WORKTREE_UPDATED') 'Mapping does not claim Git-published canon'
-    Assert-True ($mapTxt -match 'GIT_COMMITTED=NO') 'Mapping records commit has not happened'
-    Assert-True ($mapTxt -match 'PUBLICATION_STATUS=PREPARED_NOT_DELIVERED') 'Mapping publication is prepared not delivered'
-    Assert-True ($mapTxt -match 'PROJECT_SYNC_APPLIED=NO') 'Mapping Project Sync not applied'
-    Assert-True ($mapTxt -match 'TARGET_APPLY_STATUS=NOT_STARTED') 'Mapping target apply not started'
+    Assert-True ($mapTxt -match 'MB-SM-076A7_CURRENT') 'Mapping retains 076A7 historical snapshot'
+    Assert-True ($mapTxt -match 'GIT_COMMITTED=NO') 'Historical mapping snapshot still records pre-commit state'
+    Assert-True ($mapTxt -match 'PUBLICATION_STATUS=PREPARED_NOT_DELIVERED') 'Historical mapping snapshot still records prepared publication'
+    Assert-True ($mapTxt -match 'MB-SM-076A12_CURRENT') 'Mapping has 076A12 current lifecycle section'
+    Assert-True ($mapTxt -match 'STAGE_13=PASS') 'Current mapping Stage 13 is PASS'
+    Assert-True ($mapTxt -match 'STAGE_14=PARTIAL') 'Current mapping Stage 14 remains PARTIAL'
+    Assert-True ($mapTxt -match 'TARGET_APPLY_STATUS=APPLIED') 'Current mapping target apply is APPLIED'
+    Assert-True ($mapTxt -match 'PROJECT_SYNC_APPLIED=NO') 'Mapping still records SkillsMachine did not apply into target'
 
     $aiContract = Get-Content (Join-Path $RepoRoot 'SyS\A_Tools\VerticalSlice\v0.1\Contracts\AI_ACCESS.V0.1.txt') -Raw
     Assert-True ($aiContract -match 'GET_ENROLMENT_PROPOSAL') 'AI contract has GET_ENROLMENT_PROPOSAL'
@@ -311,6 +317,103 @@ try {
         -PayloadText 'temp retention' `
         -OpsRoot $testOps
     Assert-True ([bool]$ifAfterEnrol.ok) 'IF accepts CloseReport after SM-side enrol'
+
+    $syncCrEnrolled = New-ProjectSyncDeliveryPreparation -TargetProject 'CloseReport' -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
+    Assert-True ([bool]$syncCrEnrolled.ok) 'Project Sync prep ok for enrolled CR'
+    $delivId = [string]$syncCrEnrolled.delivery.DELIVERY_ID
+    $headA = '5e298bcd132cf8d87832bb66bbc6875bf0b68c02'
+    $headB = 'aba2e3441a1041a1e7e1f63df5190e53a4e0c48f'
+    $receiptA = 'RECEIPT-DELIV-TEST-VALID-001'
+
+    $rrMissing = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId -TargetProject 'CloseReport' -LocalReceiptId $receiptA -TargetHead 'not-a-hash' -OpsRoot $testOps
+    Assert-True (-not [bool]$rrMissing.ok) 'Missing/invalid target HEAD is rejected'
+    Assert-True ([string]$rrMissing.Reason -eq 'MISSING_APPLY_EVIDENCE') 'Invalid HEAD reason MISSING_APPLY_EVIDENCE'
+
+    $rrWrongDeliv = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId 'DELIV-DOES-NOT-EXIST' -TargetProject 'CloseReport' -LocalReceiptId $receiptA -TargetHead $headA -OpsRoot $testOps
+    Assert-True (-not [bool]$rrWrongDeliv.ok) 'Wrong delivery ID is rejected'
+    Assert-True ([string]$rrWrongDeliv.Reason -eq 'DELIVERY_NOT_FOUND') 'Wrong delivery reason DELIVERY_NOT_FOUND'
+
+    $rrWrongProj = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId -TargetProject 'SM-LAB-004' -LocalReceiptId $receiptA -TargetHead $headA -OpsRoot $testOps
+    Assert-True (-not [bool]$rrWrongProj.ok) 'Wrong project is rejected'
+    Assert-True ([string]$rrWrongProj.Reason -eq 'TARGET_PROJECT_MISMATCH') 'Wrong project reason TARGET_PROJECT_MISMATCH'
+
+    $prepReload = Read-ProjectOpsJson -Path $syncCrEnrolled.delivery_path
+    Assert-True ([string]$prepReload.DELIVERY_STATUS -eq 'PREPARED') 'PREPARED remains until valid consume'
+    Assert-True ([string]$prepReload.TARGET_APPLY_STATUS -eq 'NOT_STARTED') 'NOT_STARTED remains until valid consume'
+
+    $rrOk = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId `
+        -TargetProject 'CloseReport' `
+        -LocalReceiptId $receiptA `
+        -TargetHead $headA `
+        -TargetOriginMain $headA `
+        -TargetSkillVersion '1.1' `
+        -TargetValidation 'PASS' `
+        -TargetPushStatus 'PASS' `
+        -TargetApplyEvidence 'APPLIED_LOCAL_COMMITTED_AND_PUSHED' `
+        -ReceivingBoundaryStatus 'COMMITTED_MINIMAL_AND_PUSHED' `
+        -OpsRoot $testOps
+    Assert-True ([bool]$rrOk.ok) 'Valid target receipt is consumed'
+    Assert-True ([string]$rrOk.TARGET_APPLY_STATUS -eq 'APPLIED') 'Contract TARGET_APPLY_STATUS is APPLIED'
+    Assert-True ([string]$rrOk.DELIVERY_STATUS -eq 'DELIVERED') 'DELIVERY_STATUS becomes DELIVERED'
+    Assert-True ([bool]$rrOk.RETURN_RECEIPT_RECORDED) 'Return receipt recorded'
+    Assert-True (-not [bool]$rrOk.MUTATION_PERFORMED) 'Consume does not mutate target'
+    $after = Read-ProjectOpsJson -Path $syncCrEnrolled.delivery_path
+    Assert-True ([string]$after.ORIGINAL_DELIVERY_STATUS -eq 'PREPARED') 'Prepared delivery status preserved'
+    Assert-True ([string]$after.ORIGINAL_TARGET_APPLY_STATUS -eq 'NOT_STARTED') 'Prepared apply status preserved'
+    Assert-True ([string]$after.PROJECT_SYNC_APPLIED -eq 'NO') 'PROJECT_SYNC_APPLIED remains NO (SM did not apply)'
+    Assert-True ([string]$after.UPDATE_RECEIPT_ID -eq $receiptA) 'UPDATE_RECEIPT_ID stored'
+    Assert-True ([string]$after.TARGET_HEAD -eq $headA) 'TARGET_HEAD stored'
+    Assert-True ([string]$after.TARGET_APPLY_EVIDENCE -eq 'APPLIED_LOCAL_COMMITTED_AND_PUSHED') 'Target-side apply evidence preserved'
+    $rrFile = Join-Path (Get-ProjectSyncReturnReceiptDir -OpsRoot $testOps) ("{0}.json" -f $receiptA)
+    Assert-True (Test-Path -LiteralPath $rrFile) 'Durable return receipt file written'
+    $crAfterRr = Get-ProjectRegistryEntry -ProjectId 'CloseReport' -OpsRoot $testOps
+    Assert-True ([string]$crAfterRr.PROJECT_SYNC_STATUS -eq 'CURRENT') 'Registry Project Sync becomes CURRENT'
+    Assert-True ([string]$crAfterRr.LAST_UPDATE_RECEIPT_ID -eq $receiptA) 'Registry LAST_UPDATE_RECEIPT_ID set'
+    Assert-True ([string]$crAfterRr.RECEIVING_BOUNDARY_00_SKILLSMACHINE -eq 'PRESENT') 'Registry receiving boundary PRESENT'
+    Assert-True ([string]$crAfterRr.OBSERVED_HEAD -eq $headA) 'Registry observed HEAD updated'
+
+    $rrReplay = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId -TargetProject 'CloseReport' -LocalReceiptId $receiptA -TargetHead $headA -OpsRoot $testOps
+    Assert-True ([bool]$rrReplay.ok) 'Duplicate identical receipt is idempotent'
+    Assert-True ([bool]$rrReplay.IDEMPOTENT_REPLAY) 'Replay flagged IDEMPOTENT_REPLAY'
+
+    $rrDupHead = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId -TargetProject 'CloseReport' -LocalReceiptId $receiptA -TargetHead $headB -OpsRoot $testOps
+    Assert-True (-not [bool]$rrDupHead.ok) 'Same receipt different HEAD is rejected'
+    Assert-True ([string]$rrDupHead.Reason -eq 'TARGET_HEAD_MISMATCH') 'Different HEAD reason TARGET_HEAD_MISMATCH'
+
+    $rrDupId = Register-ProjectSyncTargetReturnReceipt `
+        -DeliveryId $delivId -TargetProject 'CloseReport' -LocalReceiptId 'RECEIPT-OTHER' -TargetHead $headA -OpsRoot $testOps
+    Assert-True (-not [bool]$rrDupId.ok) 'Second receipt for same delivery is rejected'
+    Assert-True ([string]$rrDupId.Reason -eq 'DUPLICATE_RECEIPT_CONFLICT') 'Different receipt reason DUPLICATE_RECEIPT_CONFLICT'
+
+    $runnerRrThrew = $false
+    try {
+        & $runner -Action ConsumeTargetReturnReceipt -OpsRoot $testOps -Args @{
+            DeliveryId = $delivId
+            TargetProject = 'CloseReport'
+            LocalReceiptId = $receiptA
+            TargetHead = $headA
+        } | Out-Null
+    }
+    catch { $runnerRrThrew = $true }
+    Assert-True (-not $runnerRrThrew) 'Runner ConsumeTargetReturnReceipt idempotent shape does not throw under StrictMode'
+
+    $runnerRrFailThrew = $false
+    try {
+        & $runner -Action ConsumeTargetReturnReceipt -OpsRoot $testOps -Args @{
+            DeliveryId = 'DELIV-DOES-NOT-EXIST'
+            TargetProject = 'CloseReport'
+            LocalReceiptId = $receiptA
+            TargetHead = $headA
+        } | Out-Null
+    }
+    catch { $runnerRrFailThrew = $true }
+    Assert-True (-not $runnerRrFailThrew) 'Runner ConsumeTargetReturnReceipt failure shape does not throw under StrictMode'
 }
 finally {
     if (Test-Path -LiteralPath $testOps) {
