@@ -1,17 +1,27 @@
 {
-  "MEASURE_ID": "MEAS-OPP-CR-076A-01-TEMP-UPLOAD-RETENTION",
-  "OPPORTUNITY_ID": "OPP-CR-076A-01",
-  "source": "MB-SM-076A3",
-  "BASELINE_EVIDENCE": [
-    "CloseReport/01.PROJECT_MANAGEMENT/SKILL_GRC.LEARNING.csv :: CR-SGRC-0234C-001 / CR-SGRC-0234C-003",
-    "CloseReport/01.PROJECT_MANAGEMENT/TECHNICAL.DEBT.csv :: TD-CR0234C-001 MITIGATED / TD-CR0234C-002 RESOLVED",
-    "Historical marker: CR0234_STATUS=FAILED_BEFORE_DDL_DUE_TO_BASELINE_LIFECYCLE"
-  ],
-  "METRIC": "Count of dependent minibattle starts blocked because continuity referenced disposable upload/staging Temp as authoritative baseline store",
-  "OBSERVATION_WINDOW": "HUMAN_DECISION_REQUIRED",
-  "TARGET_DIRECTION": "DECREASE",
-  "SUCCESS_THRESHOLD": "HUMAN_DECISION_REQUIRED",
-  "RESULT_SOURCE": "Pilot run evidence under SkillsMachine Temp + CloseReport session/baton markers after governed Skill improvement and optional Project Sync (if authorized)",
-  "VALIDATION_OWNER": "HUMAN (SkillsMachine + CloseReport authorities as applicable)",
-  "NOTE": "No invented numeric baseline. Threshold requires explicit human choice before 076B success claim."
+    "MEASURE_ID":  "MEAS-OPP-CR-076A-01-TEMP-UPLOAD-RETENTION",
+    "OPPORTUNITY_ID":  "OPP-CR-076A-01",
+    "source":  "MB-SM-076A3",
+    "BASELINE_EVIDENCE":  [
+                              "CloseReport/01.PROJECT_MANAGEMENT/SKILL_GRC.LEARNING.csv :: CR-SGRC-0234C-001 / CR-SGRC-0234C-003",
+                              "CloseReport/01.PROJECT_MANAGEMENT/TECHNICAL.DEBT.csv :: TD-CR0234C-001 MITIGATED / TD-CR0234C-002 RESOLVED",
+                              "Historical marker: CR0234_STATUS=FAILED_BEFORE_DDL_DUE_TO_BASELINE_LIFECYCLE"
+                          ],
+    "METRIC":  "Count of dependent minibattle starts blocked because continuity referenced disposable upload/staging Temp as authoritative baseline store",
+    "OBSERVATION_WINDOW":  "HUMAN_DECISION_REQUIRED",
+    "TARGET_DIRECTION":  "DECREASE",
+    "SUCCESS_THRESHOLD":  "HUMAN_DECISION_REQUIRED",
+    "RESULT_SOURCE":  "Pilot run evidence under SkillsMachine Temp + CloseReport session/baton markers after governed Skill improvement and optional Project Sync (if authorized)",
+    "VALIDATION_OWNER":  "HUMAN (SkillsMachine + CloseReport authorities as applicable)",
+    "NOTE":  "No invented numeric baseline. Threshold requires explicit human choice before 076B success claim.",
+    "IMMEDIATE_RESULT":  "PASS",
+    "OPERATIONAL_RESULT":  "NOT_YET_OBSERVED",
+    "OVERALL_RESULT":  "PARTIAL",
+    "IMMEDIATE_EVIDENCE":  "Skill v1.1 applied locally; CloseReport uses GlobalTemp.CierreMes as disposable exchange Temp; local receiving boundary exists; durable receipt exists; target commit pushed; isolated dirty scope preserved.",
+    "OPERATIONAL_QUALIFYING_EVENT":  "Next real CloseReport continuity-dependent minibattle or session activation after target push 5e298bcd132cf8d87832bb66bbc6875bf0b68c02. CR0239I2 Excel human runtime does not qualify merely because it runs.",
+    "FORBIDDEN_AUTHORITATIVE_BASELINE":  "C:\\Users\\aazcl\\Downloads\\GlobalTemp.CierreMes",
+    "DURABLE_SOURCES":  "000.HUMAN;001.BATON;02.DATABASE/BASELINES;01.PROJECT_MANAGEMENT;07.SKILLS",
+    "OBSERVATION_NOTE":  "Immediate PASS is not operational PASS. OVERALL remains PARTIAL until a real session derives continuity from durable sources and uses GlobalTemp only as disposable exchange staging.",
+    "OBSERVED_AT":  "2026-08-15T04:03:04.8440945Z",
+    "STAGE_14":  "PARTIAL"
 }

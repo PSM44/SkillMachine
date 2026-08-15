@@ -2,7 +2,7 @@
     "schema_version":  "0.2.0",
     "source":  "MB-SM-076A3",
     "generated_at":  "2026-08-10T20:21:08.3719525Z",
-    "updated_at":  "2026-08-13T19:10:01.3168547Z",
+    "updated_at":  "2026-08-15T04:03:04.7818619Z",
     "note":  "Durable SkillsMachine-owned project registry. Enrolment != autonomous mutation authority.",
     "projects":  [
                      {
@@ -41,19 +41,20 @@
                          "CAPABILITY_BASELINE":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT; SKILL.COMPACT_UPLOAD_PACK_EXECUTION",
                          "IMPROVEMENT_FLOW_ENABLED":  true,
                          "PROJECT_SYNC_ENABLED":  true,
-                         "LAST_OBSERVED_AT":  "2026-08-13T19:10:01.3032698Z",
+                         "LAST_OBSERVED_AT":  "2026-08-15T04:03:04.6764661Z",
                          "LAST_SYNC_ID":  "DELIV-CloseReport-PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1-20260813151001",
                          "LAST_RECEIPT_ID":  "RCPT-SUB-B068B2775B468E356505E631",
                          "AUTHORITY_MODEL":  "PROJECT_LOCAL_MUTATION_REQUIRED",
                          "IMPROVEMENT_FLOW_STATUS":  "RECEIVED",
-                         "PROJECT_SYNC_STATUS":  "DELIVERY_PENDING",
-                         "ATTENTION":  "RECEIVING_BOUNDARY_ABSENT",
+                         "PROJECT_SYNC_STATUS":  "CURRENT",
+                         "ATTENTION":  "NONE",
                          "CREATED_BY_SKILLSMACHINE":  false,
                          "EXPLICITLY_ENROLLED_IN_SKILLSMACHINE":  true,
-                         "RECEIVING_BOUNDARY_00_SKILLSMACHINE":  "ABSENT",
+                         "RECEIVING_BOUNDARY_00_SKILLSMACHINE":  "PRESENT",
                          "PROPOSAL_STATUS":  "APPLIED",
                          "LATEST_PROPOSAL_ID":  "ENRPROP-CLOSEREPORT-20260810_162109",
-                         "OBSERVED_HEAD":  "aba2e3441a1041a1e7e1f63df5190e53a4e0c48f"
+                         "OBSERVED_HEAD":  "5e298bcd132cf8d87832bb66bbc6875bf0b68c02",
+                         "LAST_UPDATE_RECEIPT_ID":  "RECEIPT-DELIV-CloseReport-PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1-20260814130221"
                      }
                  ]
 }
