@@ -11,6 +11,9 @@ CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: SkillsLake\05.BACKLOG
 AUTOR_HUMANO......: Pablo
 ESTADO............: ACTIVE
+LAYER.............: SKILL_GRC_CANDIDATE_LEDGER
+NOT_PRODUCT_BACKLOG=YES
+PRODUCT_BACKLOG_SOT=SyS/PROJECT.BACKLOG.ACTIVE.txt
 
 ALCANCE...........:
 Backlog único de candidatos para crear, mejorar, fusionar o rechazar Skills y GRC

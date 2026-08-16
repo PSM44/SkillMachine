@@ -11,6 +11,8 @@ CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: 00.CATALOG
 AUTOR_HUMANO......: Pablo
 ESTADO............: ACTIVE_DRAFT
+CLASSIFICATION....: CURRENT_INDEX
+DATED_CATALOG_REVIEWS=HISTORICAL snapshots (filename date); not live HEAD
 
 ALCANCE...........:
 Catálogo global de dominios funcionales amplios para SkillsMachine.

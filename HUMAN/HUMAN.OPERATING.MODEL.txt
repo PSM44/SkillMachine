@@ -107,7 +107,10 @@ PROJECTOPS........:
 Durable SkillsMachine-owned ProjectOps (SyS/A_Tools/ProjectOps/v0.1) holds project registry,
 enrolment proposals, Improvement Flow intake/receipts/accumulator/disposition, publication prep,
 and Project Sync preparation. Enrolment proposals never auto-approve or auto-enrol.
-CloseReport may have READY_FOR_REVIEW proposal while remaining NOT_ENROLLED.
+INSTANCE_STATUS=HISTORICAL_SUPERSEDED
+SUPERSEDED_BY=MB-SM-076A7_CLOSEREPORT_ENROLMENT_AND_CONTINUATION_PROFILE
+CURRENT_INSTANCE_SOT=SyS/A_Tools/ProjectOps/v0.1/State/PROJECT.REGISTRY.json
+HISTORICAL_AS_OF=MB-SM-076A3: CloseReport may have READY_FOR_REVIEW proposal while remaining NOT_ENROLLED.
 External project mutation from ProjectOps is forbidden.
 
 FIN_MB-SM-076A3_DURABLE_ENROLMENT_AND_REAL_PROJECT_FLOW
@@ -278,6 +281,9 @@ LAYER.............: HUMAN_OPERATING_MODEL
 SOURCE............: MB-SM-076A7; refined MB-SM-076A8
 
 CLOSEREPORT_ENROLMENT:
+CURRENT_CLOSEREPORT_ENROLMENT=ENROLLED
+CURRENT_INSTANCE_SOT=SyS/A_Tools/ProjectOps/v0.1/State/PROJECT.REGISTRY.json
+NESTED_076A3_INSTANCE_TEXT=HISTORICAL
 Human explicitly approved ENRPROP-CLOSEREPORT-20260810_162109.
 SkillsMachine-side enrolment is authorized. CloseReport remains a separate project.
 SkillsMachine must not mutate C:\01. GitHub\CloseReport, must not create 00_SKILLSMACHINE there,

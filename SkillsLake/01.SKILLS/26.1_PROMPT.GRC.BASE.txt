@@ -10,6 +10,11 @@ HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
 AUTOR_HUMANO......: PABLO
 
+LAYER.............: SKILL_HOWTO
+NOT_GRCLAKE_CONTROL=YES
+ENFORCEMENT_SOT...: GRCLake/01.CONTROLS
+NAME_CONTAINS_GRC=HISTORICAL_FILENAME_NOT_LAYER
+
 ALCANCE...........:
 Prompt base para forzar cumplimiento del sistema GRC (Guardrails Control)
 en cualquier IA.

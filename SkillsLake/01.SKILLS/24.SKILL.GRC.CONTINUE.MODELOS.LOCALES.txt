@@ -11,6 +11,11 @@ CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
 
+LAYER.............: SKILL_HOWTO
+NOT_GRCLAKE_CONTROL=YES
+ENFORCEMENT_SOT...: GRCLake/01.CONTROLS
+NAME_CONTAINS_GRC=HISTORICAL_FILENAME_NOT_LAYER
+
 ALCANCE...........:
 Define cómo retomar continuidad operativa en modelos locales
 (Ollama, OpenCode, Claude local, etc.) bajo enforcement estricto de GRC.

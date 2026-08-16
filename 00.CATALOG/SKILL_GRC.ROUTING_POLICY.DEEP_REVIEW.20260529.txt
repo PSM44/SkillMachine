@@ -9,7 +9,11 @@ FECHA.............: 2026-05-29
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: 00.CATALOG
 AUTOR_HUMANO......: PABLO
-ESTADO............: ACTIVE
+ESTADO............: HISTORICAL
+CLASSIFICATION....: DATED_REVIEW_SNAPSHOT
+CURRENT_CATALOG_INDEX=00.CATALOG/ARTIFACT.REGISTRY.ACTIVE.txt
+CURRENT_DOMAIN_INDEX=00.CATALOG/DOMAIN.REGISTRY.ACTIVE.txt
+CURRENT_ROUTING_CANON=05.SKILL.ROUTING_POLICY.txt and 27.SKILL.MODEL_ROUTING_POLICY.txt remain canon; this file is not a live merge decision.
 
 ALCANCE...........:
 Revisión documental profunda de posible duplicidad entre:
