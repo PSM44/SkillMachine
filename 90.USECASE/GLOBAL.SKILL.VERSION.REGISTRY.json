@@ -13,11 +13,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt",
-      "version": "v1.1-DRAFT"
+      "version": "v1.2-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/03.SKILL.SANDBOX_BOUNDARY.txt",
-      "version": "v1.1-DRAFT"
+      "version": "v1.2-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/04.SKILL.COST_CONTROL.txt",
@@ -137,7 +137,7 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
-      "version": "v1.1-CANON"
+      "version": "v1.2-CANON"
     },
     {
       "file": "SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt",
@@ -193,7 +193,7 @@
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
-      "version": "v0.2-DRAFT_READY_FOR_TEST"
+      "version": "v0.3-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",

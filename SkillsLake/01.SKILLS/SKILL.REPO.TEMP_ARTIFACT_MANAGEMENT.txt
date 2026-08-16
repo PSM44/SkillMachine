@@ -7,8 +7,8 @@ NOMBRE............: Repository Temporary Artifact Management
 TIPO..............: Skill operativo
 DOMINIO...........: Repository hygiene / Temporary files / Backups / AI artifacts
 ESTADO............: ACTIVE
-VERSION...........: 1.1
-FECHA.............: 2026-08-13
+VERSION...........: 1.2
+FECHA.............: 2026-08-16
 ORIGEN............: Cleanup after OpenCode trial and SkillsLake migration; improved from OPP-CR-076A-01
 
 ----------
@@ -300,10 +300,15 @@ FAILURE_MODE: Continuity referenced disposable upload/staging Temp as an authori
 
 Temp is not one thing. Classify a path before treating it as durable:
 
-1. REPO_INTERNAL_TEMP
+1. DURABLE_CANONICAL_STORAGE
+   Repository canon and governed durable state (HUMAN, BATON, ProjectOps registry /
+   Improvement Flow state). This is not Temp. Listed here only as the authority class
+   against which the Temp classes below must not be confused.
+
+2. REPO_INTERNAL_TEMP
    Untracked or scratch files inside the repository. Default: archive outside the repo, then remove.
 
-2. EXTERNAL_AI_EXCHANGE_TEMP
+3. EXTERNAL_AI_EXCHANGE_TEMP
    Disposable send/receive staging for AI upload/download.
    Current SkillsMachine path: C:\Users\aazcl\Downloads\T.AI.SkillMachine
    Flat; purge before write; upload-ready only; no subfolders.
@@ -311,20 +316,37 @@ Temp is not one thing. Classify a path before treating it as durable:
    NEVER an authoritative baseline, BATON, session-state, or continuity store.
    NEVER the source of truth that a later minibattle must start from.
 
-3. INTERNAL_RUNTIME_SCRATCH
+4. INTERNAL_RUNTIME_SCRATCH
    Validator/tool scratch (example: %TEMP%\SkillsMachine.Validation, SyS\Temp, 90.USECASE\Temp).
    Not AI-exchange Temp. Not canon. Not continuity.
 
-Durable continuity and baseline live in repository canon and governed durable state
-(HUMAN, BATON, ProjectOps registry / Improvement Flow state), not in disposable Temp.
+5. EXECUTION_SANDBOX_TEMP
+   Temporary, task/run-bounded execution perimeter for isolated work (including proposal sandboxes).
+   May contain subdirectories when execution isolation requires them.
+   May contain branch/run state.
+   Is not an authoritative baseline.
+   Must not silently become durable project state.
+   Differs from flat AI-exchange Temp: subdirectories may be required; it is not an upload pack.
+   Lifecycle and cleanup policy must be explicit for the specific project or tool.
+   Do not hard-code a product-specific sandbox path as generic doctrine; each project/tool
+   declares its own instance path in its execution contract.
+   Not AI-exchange Temp. Not canon. Not continuity.
+
+Durable continuity and baseline live in DURABLE_CANONICAL_STORAGE, not in disposable Temp.
 
 Related but distinct:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION = how to pack disposable Temp for upload.
+- 03.SKILL.SANDBOX_BOUNDARY = authorised execution root and task read/write sets.
 - This skill = how to classify temp artifacts and their authority.
 
 ANTI-PATTERN:
 Using upload/staging Temp contents as the baseline that a dependent minibattle must start from.
+Treating EXECUTION_SANDBOX_TEMP as either AI-exchange Temp or as canonical project state.
 
 CHANGELOG:
+2026-08-16, v1.2
+- MB-SM-GRAPH-003: add EXECUTION_SANDBOX_TEMP as a distinct class from AI-exchange Temp and durable canon.
+- Distinguish DURABLE_CANONICAL_STORAGE / AI_EXCHANGE_TEMP / EXECUTION_SANDBOX_TEMP.
+- Do not promote a tool-specific sandbox filesystem path into generic doctrine.
 2026-08-13, v1.1
 - OPP-CR-076A-01 / MB-SM-076A8: add temp-class authority so disposable AI-exchange Temp cannot be treated as continuity/baseline.

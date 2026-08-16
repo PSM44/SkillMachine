@@ -259,13 +259,16 @@ try {
     $tempSkill = Get-Content (Join-Path $RepoRoot 'SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt') -Raw
     Assert-True ($tempSkill -match 'OPP-CR-076A-01') 'Temp skill traces OPP-CR-076A-01'
     Assert-True ($tempSkill -match 'EXTERNAL_AI_EXCHANGE_TEMP') 'Temp skill classifies AI-exchange temp'
+    Assert-True ($tempSkill -match 'EXECUTION_SANDBOX_TEMP') 'Temp skill classifies execution sandbox temp'
+    Assert-True ($tempSkill -match 'DURABLE_CANONICAL_STORAGE') 'Temp skill distinguishes durable canonical storage'
     Assert-True ($tempSkill -match 'NEVER an authoritative baseline') 'Temp skill forbids Temp as baseline'
     Assert-True ($tempSkill -match 'T\.AI\.SkillMachine') 'Temp skill uses current AI-exchange path'
     Assert-True ($tempSkill -match 'Temp\.SkillMachine is superseded') 'Temp skill records superseded name'
+    Assert-True ($tempSkill -notmatch 'T\.AI\.SkillsMachineGrafos') 'Temp skill does not hard-code Graph sandbox path'
     $verReg = Get-Content (Join-Path $RepoRoot '90.USECASE\GLOBAL.SKILL.VERSION.REGISTRY.json') -Raw | ConvertFrom-Json
     $tempReg = @($verReg.skills | Where-Object { [string]$_.file -match 'SKILL\.REPO\.TEMP_ARTIFACT_MANAGEMENT' } | Select-Object -First 1)
     Assert-True ($tempReg.Count -eq 1) 'Version registry has temp skill entry'
-    Assert-True ([string]$tempReg[0].version -match 'v?1\.1') 'Active version registry is 1.1'
+    Assert-True ([string]$tempReg[0].version -match 'v?1\.2') 'Active version registry is 1.2'
     $grcCompact = Get-Content (Join-Path $RepoRoot 'GRCLake\01.CONTROLS\GRC.COMPACT_UPLOAD_PACK_ONLY.txt') -Raw
     Assert-True ($grcCompact -match 'T\.AI\.SkillMachine') 'Active compact-upload GRC names current AI-exchange Temp'
     Assert-True ($grcCompact -match 'superseded for AI exchange') 'Active compact-upload GRC records legacy name as superseded'

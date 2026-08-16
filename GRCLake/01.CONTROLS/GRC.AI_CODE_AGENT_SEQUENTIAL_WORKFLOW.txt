@@ -4,12 +4,12 @@ GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
 
 ID_UNICO..........: GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.0001
 NOMBRE............: AiCodeAgentSequentialWorkflow
-VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+VERSION...........: v0.3-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
-UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
+UPDATED_LOCAL.....: 2026-08-16 (MB-SM-GRAPH-003)
 SCOPE.............: Cross-project control for Codex and Claude Code task execution in VS Code
 APPLIES_TO........: SkillsMachine and any project where AI code agents execute long-running development tasks
 
@@ -39,17 +39,33 @@ IA develops -> IA commits automatically
 02.00 SEQUENTIAL TASK EXECUTION
 ==========
 
-Agents must execute tasks sequentially.
+Sequentiality remains the safe default for shared and canonical state mutation.
 
-A compliant agent must:
+Layered concurrency rule:
 
-- start one task at a time;
+NON_CANONICAL_ISOLATED_PROPOSAL_CONCURRENCY=CONDITIONALLY_ALLOWED
+SHARED_STATE_MUTATION_CONCURRENCY=RESTRICTED
+CANONICAL_MUTATION=SINGLE_OWNER_OR_EXPLICITLY_SEQUENCED
+
+For shared-state or canonical mutation, a compliant agent must:
+
+- start one mutating task at a time;
 - restate task ID and objective before work;
 - identify expected files to inspect or modify;
-- avoid parallel task execution;
 - avoid mixing changes from different tasks;
 - avoid opportunistic edits outside task scope;
 - finish, validate, and classify the current task before starting the next one.
+
+Independent non-canonical proposal work may run in bounded parallel branches only if:
+
+- isolation is proven;
+- declared write/resource boundaries do not interfere;
+- no branch owns canonical apply authority;
+- branch results converge through controlled integration or selection.
+
+Parallel execution must not be recommended merely for speed.
+Shared-state interference returns execution to sequencing and single ownership.
+This GRC does not create a separate Parallelism control; the layer split lives here.
 
 Valid per-task result classifications:
 
@@ -207,7 +223,10 @@ GRCLake\01.CONTROLS\GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt
 
 This GRC fails if an AI code agent:
 
-- works tasks in parallel without instruction;
+- mutates shared or canonical state in parallel without an explicit sequenced/single-owner model;
+- runs parallel proposal work without proven isolation or with overlapping write/resource boundaries;
+- lets a proposal branch own or silently exercise canonical apply authority;
+- recommends parallelism merely for speed;
 - mixes unrelated tasks;
 - modifies files outside task scope;
 - hides validation failures;
@@ -223,7 +242,8 @@ This GRC fails if an AI code agent:
 
 This GRC succeeds when:
 
-- Codex or Claude Code completes tasks sequentially;
+- shared and canonical mutation remain sequential or single-owner;
+- any isolated proposal concurrency meets the conditions in 02.00;
 - each task has an explicit result;
 - the worktree state is known;
 - validation is run and reported;
@@ -235,6 +255,11 @@ This GRC succeeds when:
 ==========
 11.00 CHANGELOG
 ==========
+
+2026-08-16, v0.3-DRAFT_READY_FOR_TEST
+- MB-SM-GRAPH-003: sequential remains the safe default for shared/canonical mutation.
+- Isolated non-canonical proposal concurrency is conditionally allowed; canonical mutation stays single-owner or explicitly sequenced.
+- No separate Parallelism GRC.
 
 2026-06-30, v0.1-DRAFT_READY_FOR_TEST
 - Initial GRC draft created to capture sequential Codex / Claude Code workflow with human-owned commits.

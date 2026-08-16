@@ -4,8 +4,8 @@
 
 ID_UNICO..........: SKILL.AI.ORCH.EXEC_POLICY.01.10
 NOMBRE_SUGERIDO...: 02.SKILL.AGENT_EXECUTION_POLICY.txt
-VERSION...........: v1.1-DRAFT
-FECHA.............: 2026-02-26
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-08-16
 HORA..............: HH:MM (America/Santiago)
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
@@ -13,10 +13,12 @@ AUTOR_HUMANO......: ADMIN (PABLO)
 AUTOR_IA..........: GPT-5.2 Thinking
 ALCANCE...........:
 Política operativa para agentes ejecutores: crear/editar/eliminar archivos y carpetas
-SOLO dentro del sandbox del proyecto, con rollback obligatorio, validación y evidencia.
+dentro del AUTHORISED_EXECUTION_ROOT (PROJECT_ROOT por defecto), con rollback
+obligatorio, validación, evidencia, y separación entre proposal worker y mutador canónico.
 NO_CUBRE..........:
 - No define routing ni costos (ver skills respectivos).
 - No define estructura del repo (solo reglas de ejecución).
+- No embebe algoritmos de colisión física de líneas ni nombres de un motor concreto.
 DEPENDENCIAS......:
 03.SKILL.SANDBOX_BOUNDARY.txt
 04.SKILL.COST_CONTROL.txt
@@ -32,8 +34,8 @@ DEPENDENCIAS......:
 00.10 Índice general WBS
 00.20 Contexto
 
-01.00 Roles del agente (Planner vs Executor)
-02.00 Permisos y límites (FS)
+01.00 Roles del agente (Planner vs Executor vs Proposal worker)
+02.00 Permisos y límites (FS, ocupación concurrente)
 03.00 Operaciones permitidas (Create/Edit/Delete/Rename/Move)
 04.00 Operaciones prohibidas
 05.00 Contrato de rollback (Git + snapshot)
@@ -63,38 +65,58 @@ Objetivo:
 - No escribe FS (solo lectura), salvo outputs temporales del orquestador.
 
 01.20_EXECUTOR
+- Mutador canónico autorizado para trabajo in-project.
 - Aplica cambios en FS, pero solo con:
-  - sandbox validado,
+  - sandbox / AUTHORISED_EXECUTION_ROOT validado,
   - rollback listo,
   - budget autorizado,
-  - instrucciones concretas.
+  - instrucciones concretas,
+  - plan aprobado por el humano en MVP.
+
+01.30_PROPOSAL_WORKER
+- Produce cambios candidatos dentro de su sandbox / AUTHORISED_EXECUTION_ROOT autorizado.
+- No es el mutador canónico de ese mismo producto de trabajo.
+- No puede auto-promover candidatos a estado canónico del proyecto.
+- Distinto del Planner (solo lectura) y del Executor (FS canónico tras aprobación).
+
+01.40_PROPIEDAD_DE_MUTACION_CANONICA
+- La mutación canónica permanece single-owner salvo un modelo de autoridad más fuerte y explícito.
+- Un proposal worker nunca es, por sí mismo, el applier canónico.
 
 Regla:
-- En MVP: el humano aprueba el plan antes del executor.
+- En MVP: el humano aprueba el plan antes del executor / apply canónico.
 
 ==========
 02.00_PERMISOS_Y_LIMITES_(FS)
 ==========
 
 02.10_SCOPE_DURO
-- El executor solo puede operar en PROJECT_ROOT (definido por SANDBOX_BOUNDARY).
-- Cualquier path fuera => FAIL inmediato + TROUBLE.
+- El executor in-project opera en PROJECT_ROOT como AUTHORISED_EXECUTION_ROOT default (definido por SANDBOX_BOUNDARY).
+- Un proposal worker opera solo en el root de ejecución que su contrato declara y autoriza.
+- Cualquier path fuera del root autorizado => FAIL inmediato + TROUBLE.
 
 02.20_ALLOWLIST_Y_DENYLIST
-- Allowlist: PROJECT_ROOT y subpaths autorizados.
+- Allowlist: AUTHORISED_EXECUTION_ROOT y subpaths autorizados, más task-level write-set si el modelo de ejecución lo declara.
 - Denylist: secretos, llaves, .env, y “zona de sistema” del proyecto si aplica.
+- Denylist gana incluso si el path figura en un write-set de tarea.
 
 Nota:
 - .git:
   - lectura permitida,
   - escritura solo vía Git CLI controlado por orquestador (no edits directos a objetos).
 
+02.30_OCUPACION_CONCURRENTE_Y_CONFLICTO_DE_ESCRITURA
+- La ejecución concurrente exige ocupación de recursos declarada y no interferente.
+- Objetivos de mutación superpuestos no pueden ser owned de forma concurrente por mutadores/proposers distintos cuando eso puede producir conflicto físico.
+- Los algoritmos concretos de colisión por span de líneas son específicos de tooling y NO forman doctrina genérica de este Skill.
+- Ante interferencia de estado compartido: volver a secuenciación / single-owner.
+
 ==========
 03.00_OPERACIONES_PERMITIDAS
 ==========
 
 03.10_CREATE
-- Crear archivos y carpetas dentro del root.
+- Crear archivos y carpetas dentro del AUTHORISED_EXECUTION_ROOT.
 - Debe respetar:
   - WBS/ID si aplica,
   - FILE_CONTENT si es “archivo serio”.
@@ -129,8 +151,11 @@ Nota:
 - Prohibido instalar software, modificar PATH, registry, servicios.
 
 04.40_SECRET_EXFILTRATION
-- Prohibido copiar llaves/secretos fuera del root.
+- Prohibido copiar llaves/secretos fuera del AUTHORISED_EXECUTION_ROOT.
 - Prohibido imprimir secretos en logs.
+
+04.50_AUTO_PROMOCION_A_CANON
+- Prohibido que un proposal worker convierta su output de sandbox en estado canónico del proyecto de forma silenciosa.
 
 ==========
 05.00_CONTRATO_DE_ROLLBACK
@@ -202,7 +227,9 @@ En OK/FAIL, registrar:
 - Preflight:
   - costo estimado dentro budget,
   - rollback listo,
-  - paths dentro sandbox.
+  - paths dentro del AUTHORISED_EXECUTION_ROOT,
+  - read-set / write-set de tarea respetados si el modelo de ejecución los declara,
+  - ocupación de recursos no interferente si hay trabajo concurrente.
 
 08.20_POST_VALIDATION
 - Si proyecto tiene tests/lint:
@@ -241,9 +268,12 @@ En OK/FAIL, registrar:
 11.00_CHECKLIST_RAPIDO
 ==========
 
-[ ] Scope = PROJECT_ROOT
+[ ] Scope = AUTHORISED_EXECUTION_ROOT (default PROJECT_ROOT)
+[ ] Rol explícito: Planner / Proposal worker / Executor (mutador canónico)
+[ ] Proposal worker no auto-promueve a canon
+[ ] Ocupación concurrente no interferente; writes superpuestos no concurrentes
 [ ] Budget aprobado
-[ ] Rollback listo (git commit/snapshot)
+[ ] Rollback listo (git commit/snapshot) para mutación canónica
 [ ] Cambios como patch por defecto
 [ ] Delete = quarantine por defecto
 [ ] Scripts allowlisted (sin OS arbitrary)
@@ -253,6 +283,10 @@ En OK/FAIL, registrar:
 12.00_CHANGELOG
 ==========
 
+2026-08-16, v1.2-DRAFT
+- MB-SM-GRAPH-003: distingue Proposal worker de Executor (mutador canónico).
+- Absorción: ocupación concurrente de recursos y conflicto de write-targets; algoritmos de línea quedan en tooling.
+- Mutación canónica permanece single-owner salvo autoridad más fuerte y explícita.
 2026-02-26, v1.1-DRAFT
 - Refuerzo: ejecución frecuente segura = rollback + quarantine + no OS arbitrary.
 - Refuerzo: Test-* verbos aprobados (evitar Validate-*).

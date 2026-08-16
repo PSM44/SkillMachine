@@ -4,8 +4,8 @@
 
 ID_UNICO..........: SKILL.AI.ORCH.SANDBOX.01.10
 NOMBRE_SUGERIDO...: 03.SKILL.SANDBOX_BOUNDARY.txt
-VERSION...........: v1.1-DRAFT
-FECHA.............: 2026-02-26
+VERSION...........: v1.2-DRAFT
+FECHA.............: 2026-08-16
 HORA..............: HH:MM (America/Santiago)
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
@@ -14,16 +14,19 @@ AUTOR_IA..........: GPT-5.2 Thinking
 ALCANCE...........:
 Definir un sandbox “a toda prueba” a nivel de orquestador:
 - allowlist/denylist de paths,
-- bloqueo de operaciones fuera de PROJECT_ROOT,
+- perímetro de mutación = AUTHORISED_EXECUTION_ROOT declarado (PROJECT_ROOT es el default, no el techo universal del filesystem),
+- conjuntos de lectura/escritura a nivel de tarea cuando el modelo de ejecución los declara,
 - política de soft-delete,
 - límites de ejecución de scripts.
 NO_CUBRE..........:
 - No define costos/routing.
 - No define permisos del OS/ACL (opcional; se recomienda pero no es requisito).
+- No define algoritmos de colisión de líneas ni vocabulario de un motor de ejecución concreto.
 DEPENDENCIAS......:
 02.SKILL.AGENT_EXECUTION_POLICY.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
 06.SKILL.WBS.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
 
 ==========
 00.10_INDICE_GENERAL_WBS
@@ -33,9 +36,9 @@ DEPENDENCIAS......:
 00.10 Índice general WBS
 00.20 Contexto
 
-01.00 Definiciones (PROJECT_ROOT, ALLOWLIST, DENYLIST)
-02.00 Contrato duro de boundary (deny outside)
-03.00 Allowlist (lectura/escritura)
+01.00 Definiciones (PROJECT_ROOT, AUTHORISED_EXECUTION_ROOT, ALLOWLIST, DENYLIST, task read/write sets)
+02.00 Contrato duro de boundary (deny outside authorised root)
+03.00 Allowlist (lectura/escritura + conjuntos de tarea)
 04.00 Denylist (secrets/zonas prohibidas)
 05.00 Política de scripts (allowlisted runner)
 06.00 Política de deletes (quarantine)
@@ -49,8 +52,16 @@ DEPENDENCIAS......:
 ==========
 
 Objetivo:
-- La IA debe poder “hacer de todo” dentro del proyecto,
-  pero debe quedar imposibilitada de salir de ese perímetro.
+- La IA debe poder operar de forma útil dentro de un perímetro declarado y autorizado.
+- PROJECT_ROOT sigue siendo el root de ejecución normal/default para trabajo in-project.
+- Un root de ejecución externo solo es permitido cuando el contrato de ejecución lo declara y autoriza de forma explícita.
+- El output de sandbox/propuesta nunca se convierte silenciosamente en estado canónico del proyecto.
+
+Invariante refinado:
+ALL_MUTATION_MUST_REMAIN_WITHIN_DECLARED_AUTHORISED_EXECUTION_ROOT
+
+Interpretación retirada (demasiado amplia):
+ALL_FILESYSTEM_ACTIVITY_MUST_REMAIN_UNDER_PROJECT_ROOT
 
 ==========
 01.00_DEFINICIONES
@@ -58,13 +69,35 @@ Objetivo:
 
 01.10_PROJECT_ROOT
 - Carpeta raíz canónica de un proyecto.
-- Todas las operaciones del executor deben resolverse a paths bajo este root.
+- Es el AUTHORISED_EXECUTION_ROOT normal/default para ejecución in-project.
+- No es, por sí solo, el techo universal del filesystem.
+
+01.15_AUTHORISED_EXECUTION_ROOT
+- Perímetro de ejecución declarado para la tarea o contrato vigente.
+- Default = PROJECT_ROOT.
+- Un root externo es permitido SOLO si está explícitamente declarado y autorizado por el contrato de ejecución.
+- Roots externos:
+  - fail-closed (si no hay declaración/autorización explícita => DENY);
+  - no-autoritativos salvo designación separada por autoridad superior;
+  - no convierten su output en estado canónico del proyecto de forma silenciosa.
+- Toda mutación debe resolverse bajo este root declarado.
 
 01.20_ALLOWLIST
-- Lista de subpaths permitidos para escritura (y opcionalmente lectura).
+- Lista de subpaths permitidos para escritura (y opcionalmente lectura) dentro del AUTHORISED_EXECUTION_ROOT.
+
+01.25_TASK_READ_SET
+- Conjunto de lectura declarado a nivel de tarea, cuando el modelo de ejecución lo suministra.
+- Más estricto que “todo el root menos denylist”.
+- Las lecturas fuera del conjunto declarado FALLAN aunque el path esté dentro del root autorizado.
+
+01.26_TASK_WRITE_SET
+- Conjunto de escritura declarado a nivel de tarea, cuando el modelo de ejecución lo suministra.
+- Las escrituras fuera del conjunto declarado FALLAN aunque el path esté dentro del root autorizado.
+- Denylist y controles de secretos siguen ganando aunque un path figure en el write-set.
 
 01.30_DENYLIST
-- Subpaths o patrones prohibidos incluso dentro del root (ej: secrets).
+- Subpaths o patrones prohibidos incluso dentro del root autorizado (ej: secrets).
+- No se debilita por allowlist, task write-set, ni root externo.
 
 ==========
 02.00_CONTRATO_DURO_DE_BOUNDARY
@@ -73,10 +106,25 @@ Objetivo:
 02.10_REGLA_CENTRAL
 - Toda operación FS debe pasar por una función:
   ResolveAndVerifyPath(path)
-- Si ResolveAndVerifyPath detecta que el path resuelto NO está bajo PROJECT_ROOT:
+- El path resuelto debe quedar bajo el AUTHORISED_EXECUTION_ROOT declarado.
+- Si ResolveAndVerifyPath detecta que el path resuelto NO está bajo ese root:
   - FAIL inmediato,
   - no se realiza ninguna acción,
   - se registra TROUBLE.
+- Si no hay AUTHORISED_EXECUTION_ROOT explícito, el default es PROJECT_ROOT.
+
+02.15_ROOT_EXTERNO
+- Un root externo no se infiere, no se ensancha implícitamente y no se “descubre” por conveniencia.
+- Debe estar declarado y autorizado en el contrato de ejecución.
+- Fail-closed: ausencia de declaración = DENY.
+- No-autoritativo: el trabajo allí no es baseline canónico del proyecto salvo designación separada por autoridad superior.
+- El output de sandbox/propuesta no se materializa en el árbol canónico del proyecto sin un apply autorizado posterior.
+
+02.18_ESCALAMIENTO_CROSS_BOUNDARY
+- Si una tarea requiere leer o mutar fuera del root autorizado, del read-set o del write-set declarados:
+  - STOP,
+  - escalar,
+  - no ampliar el perímetro de forma implícita.
 
 02.20_NORMALIZACION
 - Resolver:
@@ -89,19 +137,22 @@ Objetivo:
 03.00_ALLOWLIST
 ==========
 
-03.10_DEFAULT
-- Escritura permitida en:
-  - \01_HUMAN\
-  - \02_CODE\
-  - \03_ARTIFACTS\
-  - \AI_ORCH\ (si está dentro del proyecto)
-- Lectura permitida en todo el root EXCEPTO denylist.
+03.10_DEFAULT_IN_PROJECT
+- Cuando AUTHORISED_EXECUTION_ROOT = PROJECT_ROOT:
+  - la allowlist de escritura es el conjunto de subpaths que el proyecto declara como escribibles;
+  - si el proyecto no declara una allowlist más estricta, la escritura puede ocurrir bajo PROJECT_ROOT excepto denylist;
+  - la lectura está permitida bajo el root autorizado EXCEPTO denylist, y se restringe además por el task-level read-set cuando el modelo de ejecución lo suministra.
+- No tratar nombres de carpeta históricos (\01_HUMAN\, \02_CODE\, \03_ARTIFACTS\, \AI_ORCH\) como layout universal.
 
-03.20_MODO_RESTRICTIVO_(OPCIONAL)
-- Escritura solo en:
-  - \02_CODE\
-  - \03_ARTIFACTS\
-- HUMAN/SKILLS solo se escriben con aprobación explícita (modo governance).
+03.20_CONJUNTOS_DE_TAREA
+- Si el modelo de ejecución declara un task-level read-set, no leer fuera de él.
+- Si el modelo de ejecución declara un task-level write-set, no escribir fuera de él.
+- La ausencia de un conjunto de tarea no autoriza salir del AUTHORISED_EXECUTION_ROOT.
+- Denylist/secretos siguen aplicándose encima de cualquier conjunto declarado.
+
+03.30_MODO_RESTRICTIVO_(OPCIONAL)
+- Escritura de canon (HUMAN / Skills / GRC / contratos de autoridad) solo con aprobación explícita (modo governance).
+- El resto de escrituras in-project sigue la allowlist del proyecto y el write-set de la tarea.
 
 ==========
 04.00_DENYLIST
@@ -118,8 +169,11 @@ Bloquear lectura/escritura:
 - **\credentials\**
 
 04.20_ZONAS_SENSIBLES_DEL_PROYECTO
-- \03_ARTIFACTS\SNAPSHOTS\  (escritura solo por el orquestador)
+- snapshots de artefactos operativos (escritura solo por el orquestador)
 - \.git\objects\            (no tocar directo)
+
+04.30_DENYLIST_GANA
+- Un path en denylist permanece prohibido aunque figure en allowlist, task write-set o root externo autorizado.
 
 ==========
 05.00_POLITICA_DE_SCRIPTS_(RUNNER_ALLOWLIST)
@@ -127,8 +181,7 @@ Bloquear lectura/escritura:
 
 05.10_REGLA
 - Executor no ejecuta comandos OS arbitrarios.
-- Solo ejecuta scripts allowlisted desde:
-  \AI_ORCH\02_TOOLS\ o \03_ARTIFACTS\RUNNERS\
+- Solo ejecuta scripts allowlisted desde runners controlados del proyecto (herramientas y artefactos de runner declarados).
 
 05.20_ALLOWLIST_EJEMPLO
 - RADAR.ps1 (si aplica)
@@ -136,14 +189,15 @@ Bloquear lectura/escritura:
 
 05.30_PARAMETROS_CONTROLADOS
 - Los parámetros de scripts son validados:
-  - paths deben estar dentro del PROJECT_ROOT,
+  - paths deben estar dentro del AUTHORISED_EXECUTION_ROOT,
   - no se aceptan strings que permitan “escape” (ej: ; & |).
 
 ==========
 06.00_POLITICA_DE_DELETES_(QUARANTINE)
 ==========
 
-- Todo delete => move a QUARANTINE dentro del root (ver EXEC_POLICY).
+- Todo delete => move a QUARANTINE dentro del AUTHORISED_EXECUTION_ROOT (ver EXEC_POLICY).
+- La cuarentena de un sandbox externo permanece en ese root; no se mueve al árbol canónico del proyecto de forma silenciosa.
 - Mantener meta:
   - timestamp,
   - motivo,
@@ -155,8 +209,9 @@ Bloquear lectura/escritura:
 ==========
 
 Registrar por cada acción:
-- actor (executor)
+- actor (executor / proposal worker)
 - operation (create/edit/move/quarantine)
+- authorised_execution_root
 - path_before / path_after
 - hash_before / hash_after (si aplica)
 - resultado OK/FAIL
@@ -168,22 +223,33 @@ Registrar por cada acción:
 - Boundary violation => TROUBLE severidad MEDIA mínimo.
 - Attempt secret access => TROUBLE severidad ALTA (riesgo).
 - Script runner intento no allowlisted => FAIL + TROUBLE.
+- Intento de ampliar el perímetro de forma implícita => FAIL + escalar.
 
 ==========
 09.00_CHECKLIST_RAPIDO
 ==========
 
 [ ] ResolveAndVerifyPath para toda operación
+[ ] AUTHORISED_EXECUTION_ROOT declarado (default = PROJECT_ROOT)
+[ ] Root externo solo si está explícitamente declarado y autorizado
 [ ] Normalización anti-bypass activa
 [ ] Allowlist definida
-[ ] Denylist secrets activa
+[ ] Task-level read-set / write-set respetados cuando el modelo de ejecución los declara
+[ ] Denylist secrets activa (gana sobre write-set)
 [ ] Runner allowlist activa
-[ ] Delete = quarantine por defecto
+[ ] Delete = quarantine por defecto, dentro del root autorizado
+[ ] Output de sandbox/propuesta no se vuelve canónico de forma silenciosa
 
 ==========
 10.00_CHANGELOG
 ==========
 
+2026-08-16, v1.2-DRAFT
+- MB-SM-GRAPH-003: invariante refinado a AUTHORISED_EXECUTION_ROOT declarado; PROJECT_ROOT permanece como default/normal.
+- Absorción: task-level read-set y write-set cuando el modelo de ejecución los declara.
+- Roots externos: fail-closed, no-autoritativos, sin promoción silenciosa a canon.
+- Escalamiento cross-boundary en lugar de ensanchar el perímetro de forma implícita.
+- Limpieza de ejemplos de layout histórico (\01_HUMAN\ / \02_CODE\ / \03_ARTIFACTS\) como si fueran universales.
 2026-02-26, v1.1-DRAFT
 - Refuerzo: contrato duro “deny outside root” + normalización anti-bypass.
 - Denylist de secretos/patrones.
