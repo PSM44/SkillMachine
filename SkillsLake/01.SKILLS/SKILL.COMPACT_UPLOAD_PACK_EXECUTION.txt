@@ -4,25 +4,51 @@ SKILL.COMPACT_UPLOAD_PACK_EXECUTION
 
 SKILL_ID: SKILL.COMPACT_UPLOAD_PACK_EXECUTION
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D
 MARKER: SM-055J-COMPACT-UPLOAD-PACK-EXECUTION
 STATUS: ACTIVE_CANDIDATE_CORE
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-16
+ABSORBS: DETU upload-pack how-to; GPT.Upload.Lock as MODE how-to (no standalone Skill)
 
 PURPOSE:
-Define how long-running operational scripts must produce IA-readable upload evidence without flooding the user with raw logs.
+Define how operational scripts produce IA-readable evidence without flooding
+the human with raw logs, and how to switch between normal compact-upload
+output and GPT.Upload.Lock paste continuation.
 
-METHOD:
-1. Treat the declared Temp path as disposable scratch.
-2. Clean Temp at the start of every runner.
-3. If the currently executing .ps1 is stored inside Temp, preserve that .ps1 during cleanup.
-4. Capture stdout/stderr from tools into memory or transient variables.
-5. Consolidate relevant evidence into a small number of flat UPLOAD_*.txt files.
-6. Persist AI_TAIL.<timestamp>.txt.
-7. At the end, delete or avoid creating raw log files.
-8. Leave only:
-   - the executed .ps1 when stored in Temp;
-   - AI_TAIL.<timestamp>.txt;
-   - maximum 10 UPLOAD_*.txt files.
+Enforceable control: GRC.COMPACT_UPLOAD_PACK_ONLY.
+This Skill is how-to only. It does not change human or canonical authority.
+
+OUTPUT MODES:
+- NORMAL_OUTPUT_MODE = default when file uploads are available.
+  Download/execute locally, then leave a compact pack in the declared
+  external AI-exchange Temp for upload (method name: DETU).
+- GPT_UPLOAD_LOCK_MODE = temporary fallback. MODE_NAME=GPT.Upload.Lock.
+  Not a separate Skill.
+
+METHOD (NORMAL_OUTPUT_MODE):
+1. Treat the declared Temp path as disposable scratch, never as durable
+   baseline and never as product canon.
+2. Clean Temp at the start of every runner (purge before write).
+3. Capture stdout/stderr from tools into memory or transient variables.
+4. Consolidate required evidence. Use the minimum necessary artifact count.
+   Prefer one consolidated AI-readable artifact when feasible.
+   Add further files only when technically justified.
+5. Keep FILES_COUNT between 1 and 10. Ten is an upper bound, not a target.
+   Do not require the filename prefix UPLOAD_*.txt.
+   Files must be self-explanatory for the IA.
+6. Include a package inventory that lists only the files to upload.
+   Put the inventory inside the single consolidated artifact unless a
+   separate manifest file is technically justified.
+7. Do not ask the human to upload files outside that inventory.
+8. If evidence cannot be consolidated to 10 files or fewer, fail with
+   BLOCKER=UPLOAD_PACK_OVER_LIMIT. Do not ask for more uploads.
+9. Persist and print AI_TAIL. Disclose DB_MODIFIED, CANON_MODIFIED,
+   COMMIT_PUSH_PERFORMED and BUILD_EXECUTED.
+10. At the end, Temp must contain only upload-ready files from the
+    inventory. No raw logs, stale packages, empty evidence files, nested
+    subfolders, or disposable intermediates.
+11. An executing .ps1 may remain in that Temp only if it is listed in the
+    inventory. Otherwise do not leave the runner there.
 
 APPLIES_TO:
 - Session continue runners.
@@ -32,13 +58,34 @@ APPLIES_TO:
 - Any SkillsMachine package intended for IA upload.
 
 OUTPUT STANDARD:
-- UPLOAD files must be flat, readable, and self-contained.
-- Tool stdout/stderr must be consolidated inside UPLOAD files.
-- Do not ask the user to upload many logs.
-- Prefer 4 to 6 upload files unless a stronger reason exists.
+- Keep the pack flat under the declared AI-exchange Temp root.
+- Consolidate tool stdout/stderr inside the upload-ready artifact(s).
+- Do not ask the human to upload many logs.
+- Do not treat upload-ready Temp as durable baseline.
+
+GPT_UPLOAD_LOCK_MODE HOW-TO:
+Activate when the human cannot upload, the upload limit is exhausted,
+attachments are unreliable, or the human explicitly activates the mode.
+Deactivate when uploads are available again unless the human extends
+GPT.Upload.Lock.
+While the mode is active:
+- Do not request uploads, the full repository, or complete files by default.
+- Every runner prints a pasteable TOVS_SUMMARY_START / TOVS_SUMMARY_END
+  block of 9000 characters or less.
+- Required fields: AI_TAIL_SCHEMA, MB_ID, FINAL_STATUS, BLOCKER,
+  PROJECT_ROOT, TEMP_PATH, TOVS_ONLY_MODE, MAX_PASTE_CHARS, DB_MODIFIED,
+  CANON_MODIFIED, COMMIT_PUSH_PERFORMED, BUILD_EXECUTED, WARNINGS,
+  KEY_FINDINGS, DECISIONS_NEEDED, NEXT_ACTION.
+- Generated files may remain local. If evidence is missing, ask for one
+  specific pasteable block of 9000 characters or less.
+- Skill/GRC opportunities remain candidates.
+- Do not delete required durable evidence. Do not treat this mode as a
+  change of canonical authority.
 
 DONE WHEN:
-- Temp output count stays within the upload cap.
-- The user can upload the full evidence set without exceeding file limits.
+- NORMAL_OUTPUT_MODE: the human can continue from the inventory-listed
+  pack alone, FILES_COUNT is 1..10, and one file was used unless more
+  were technically justified.
+- GPT_UPLOAD_LOCK_MODE: the human can continue from the TOVS block alone
+  without an upload.
 - AI_TAIL includes TEMP_OUTPUT_POLICY=COMPACT_UPLOAD_PACK_ONLY.
-

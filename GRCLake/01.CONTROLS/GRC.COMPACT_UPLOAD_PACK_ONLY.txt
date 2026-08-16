@@ -4,32 +4,85 @@ GRC.COMPACT_UPLOAD_PACK_ONLY
 
 GRC_ID: GRC.COMPACT_UPLOAD_PACK_ONLY
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D
 MARKER: SM-055J-GRC-COMPACT-UPLOAD-PACK-ONLY
 STATUS: ACTIVE_CANDIDATE_CORE
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-16
+ABSORBS: DETU upload-pack candidate; GPT.Upload.Lock as MODE only (no standalone Skill or GRC)
 
 CONTROL:
 When a runner uses the current external AI-exchange Temp
 (C:\Users\aazcl\Downloads\T.AI.SkillMachine; legacy name Temp.SkillMachine is superseded for AI exchange)
 or equivalent Temp upload staging, it MUST leave a compact upload pack only.
 
+Upload-ready Temp is disposable evidence staging. It is NEVER durable baseline
+and NEVER product canon. Compact packaging does not change human or canonical
+authority and does not authorize deletion of required durable evidence.
+
+OUTPUT MODES:
+- NORMAL_OUTPUT_MODE = default when file uploads are available. Produce a
+  compact upload pack and ask the human to upload only that pack
+  (SkillsMachine method name: DETU).
+- GPT_UPLOAD_LOCK_MODE = temporary fallback when uploads are unavailable,
+  exhausted, unreliable, or explicitly activated by the human.
+  MODE_NAME=GPT.Upload.Lock
+  This is a mode of this GRC, not a new control surface.
+
 MANDATORY RULES:
 1. TEMP_OUTPUT_POLICY must be stated as COMPACT_UPLOAD_PACK_ONLY in AI_TAIL.
-2. Temp must be cleaned at script start.
-3. Raw logs must not remain in Temp at the end.
-4. The upload evidence set must not exceed 10 UPLOAD_*.txt files.
-5. AI_TAIL must be persisted and printed.
-6. Tool stdout/stderr must be consolidated into UPLOAD files.
-7. The executing .ps1 may remain when it is stored in Temp.
-8. No generated-output manual patching may be hidden inside upload staging.
+2. Temp must be cleaned at script start (purge before write).
+3. Raw logs, stale packages, empty evidence files, and disposable
+   intermediates must not remain in Temp at the end.
+4. Bounded output discipline:
+   - FILES_COUNT is an upper bound of 10, not a target.
+   - Use the minimum necessary artifact count.
+   - Prefer one consolidated AI-readable artifact when feasible.
+   - Multiple files only when technically justified.
+   - Upload-ready names may be any self-explanatory files.
+   - Do not require the prefix UPLOAD_*.txt.
+5. Emit a package inventory listing only the files that must be uploaded.
+   The inventory may live inside the single consolidated artifact.
+   Do not ask the human to upload files outside that inventory.
+6. If consolidation cannot keep FILES_COUNT <= 10, FAIL with
+   BLOCKER=UPLOAD_PACK_OVER_LIMIT.
+7. AI_TAIL must be persisted and printed.
+8. Tool stdout/stderr must be consolidated into the upload-ready artifact(s).
+9. An executing .ps1 may remain in AI-exchange Temp only if it is listed in
+   the upload inventory. Otherwise do not leave the runner in that Temp.
+10. No generated-output manual patching may be hidden inside upload staging.
+11. AI-exchange Temp root must remain flat; subdirectories are forbidden.
+12. Runners must disclose DB_MODIFIED, CANON_MODIFIED, COMMIT_PUSH_PERFORMED
+    and BUILD_EXECUTED.
+
+GPT_UPLOAD_LOCK_MODE:
+ACTIVATE when uploads are unavailable, exhausted, unreliable, or the human
+explicitly activates the mode.
+DEACTIVATE when uploads are restored unless the human explicitly extends
+GPT.Upload.Lock.
+TOVS_ONLY_MODE=ON
+MAX_PASTE_CHARS=9000
+Runners must emit TOVS_SUMMARY_START / TOVS_SUMMARY_END with:
+AI_TAIL_SCHEMA, MB_ID, FINAL_STATUS, BLOCKER, PROJECT_ROOT, TEMP_PATH,
+TOVS_ONLY_MODE, MAX_PASTE_CHARS, DB_MODIFIED, CANON_MODIFIED,
+COMMIT_PUSH_PERFORMED, BUILD_EXECUTED, WARNINGS, KEY_FINDINGS,
+DECISIONS_NEEDED, NEXT_ACTION.
+Do not request uploads, the full repository, or complete files by default.
+Generated files may remain local; missing evidence is one pasteable block
+of 9000 characters or less.
+Skill/GRC opportunities detected in this mode remain candidates.
+This mode does not change canonical authority and does not authorize
+deletion of required durable evidence.
 
 BLOCKERS:
-- More than 10 UPLOAD_*.txt files.
+- More than 10 upload-ready files requested or left for upload.
 - Raw POSTPUSH/PREPUSH/RADAR/READINESS/VALIDATE logs left loose in Temp.
+- Empty evidence files in the upload pack.
 - Missing AI_TAIL.
 - Missing TEMP_CLEANED_AT_START=YES.
 - Missing or false TEMP_OUTPUT_POLICY.
+- GPT_UPLOAD_LOCK_MODE without a TOVS block.
+- Asking for files outside the inventory.
 
 EXCEPTION:
-A runner may leave an explicitly declared exception file only if the AI_TAIL declares why it is needed.
-
+A runner may leave an explicitly declared exception file only if the AI_TAIL
+declares why it is needed and the file is listed in the inventory.
