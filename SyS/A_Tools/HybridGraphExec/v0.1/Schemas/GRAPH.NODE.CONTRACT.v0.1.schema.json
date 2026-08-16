@@ -1,0 +1,180 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "GRAPH.NODE.CONTRACT.v0.1.schema.json",
+  "title": "SkillsMachine Hybrid Graph Node/Run Contract v0.1",
+  "description": "Deterministic node/branch and run contracts for Hybrid Deterministic Graph Execution v0.1. Semantic judgement is out of scope.",
+  "$defs": {
+    "relPath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?![.]{2}(/|$))(?!/).+"
+    },
+    "lineSpan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "start", "end"],
+      "properties": {
+        "path": { "$ref": "#/$defs/relPath" },
+        "start": { "type": "integer", "minimum": 1 },
+        "end": { "type": "integer", "minimum": 1 }
+      }
+    },
+    "baseline": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["class"],
+      "properties": {
+        "class": {
+          "type": "string",
+          "enum": ["CANONICAL_HEAD", "SNAPSHOT_OVERLAY", "SANDBOX_FIXTURE"]
+        },
+        "head": { "type": ["string", "null"] },
+        "canonical_head": { "type": ["string", "null"] },
+        "overlay_id": { "type": ["string", "null"] },
+        "overlay_digest": { "type": ["string", "null"] },
+        "treat_as_canonical_head": { "type": "boolean", "default": false }
+      }
+    },
+    "node": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "node_id",
+        "branch_id",
+        "baseline",
+        "parent_node_ids",
+        "read_set",
+        "write_set",
+        "protected_paths",
+        "resource_locks",
+        "sandbox_path",
+        "iteration",
+        "max_iterations",
+        "local_bounded_loop_max_iterations",
+        "status",
+        "retry_class",
+        "canonical_apply_eligible",
+        "actor_role",
+        "actor_id",
+        "apply_requested",
+        "observed_reads",
+        "observed_writes",
+        "observed_line_spans"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "0.1" },
+        "node_id": { "type": "string", "minLength": 1 },
+        "branch_id": { "type": "string", "minLength": 1 },
+        "baseline": { "$ref": "#/$defs/baseline" },
+        "parent_node_ids": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "read_set": { "type": "array", "items": { "$ref": "#/$defs/relPath" } },
+        "write_set": { "type": "array", "items": { "$ref": "#/$defs/relPath" } },
+        "protected_paths": { "type": "array", "items": { "$ref": "#/$defs/relPath" } },
+        "resource_locks": { "type": "array", "items": { "type": "string", "minLength": 1 } },
+        "sandbox_path": { "type": "string", "minLength": 1 },
+        "iteration": { "type": "integer", "minimum": 1 },
+        "max_iterations": { "type": "integer", "minimum": 1, "maximum": 10 },
+        "local_bounded_loop_max_iterations": { "type": "integer", "const": 6 },
+        "status": {
+          "type": "string",
+          "enum": [
+            "PENDING",
+            "READY",
+            "RUNNING",
+            "VALID",
+            "REJECTED",
+            "RETRY",
+            "ESCALATED",
+            "CRASHED",
+            "INTEGRATED",
+            "APPLY_CANDIDATE",
+            "APPLY_BLOCKED"
+          ]
+        },
+        "retry_class": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "TRANSIENT",
+            "BOUNDARY",
+            "CONFLICT",
+            "AUTHORITY",
+            "BASELINE",
+            "ITERATION",
+            "PARALLEL",
+            "ISOLATION"
+          ]
+        },
+        "proposal_status": { "type": ["string", "null"] },
+        "evidence_refs": { "type": "array", "items": { "type": "string" } },
+        "canonical_apply_eligible": { "type": "boolean" },
+        "actor_role": {
+          "type": "string",
+          "enum": ["PROPOSER", "CANONICAL_APPLIER", "ORCHESTRATOR"]
+        },
+        "actor_id": { "type": "string", "minLength": 1 },
+        "apply_requested": { "type": "boolean" },
+        "observed_reads": { "type": "array", "items": { "type": "string" } },
+        "observed_writes": { "type": "array", "items": { "type": "string" } },
+        "observed_locks": { "type": "array", "items": { "type": "string" } },
+        "observed_line_spans": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/lineSpan" }
+        },
+        "fixture_ops": { "type": "array" }
+      }
+    },
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "schema_version",
+        "run_id",
+        "architecture",
+        "graph_max_iterations",
+        "max_parallel_branches",
+        "target_valid_proposals",
+        "max_valid_proposals",
+        "sandbox_root",
+        "recorded_head",
+        "baseline",
+        "canonical_applier_id",
+        "human_authority",
+        "worker_is_proposer",
+        "canonical_mutation_forbidden",
+        "nodes"
+      ],
+      "properties": {
+        "schema_version": { "type": "string", "const": "0.1" },
+        "run_id": { "type": "string", "minLength": 1 },
+        "architecture": {
+          "type": "string",
+          "const": "OPTION_B_HYBRID_DETERMINISTIC_GRAPH_PLUS_AI_WORKERS"
+        },
+        "graph_max_iterations": { "type": "integer", "const": 10 },
+        "max_parallel_branches": { "type": "integer", "minimum": 1 },
+        "target_valid_proposals": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "max_valid_proposals": { "type": "integer", "minimum": 1, "maximum": 3 },
+        "sandbox_root": { "type": "string", "minLength": 1 },
+        "recorded_head": { "type": ["string", "null"] },
+        "baseline": { "$ref": "#/$defs/baseline" },
+        "canonical_applier_id": { "type": ["string", "null"] },
+        "human_authority": { "type": "boolean" },
+        "worker_is_proposer": { "type": "boolean", "const": true },
+        "canonical_mutation_forbidden": { "type": "boolean", "const": true },
+        "nodes": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/node" }
+        }
+      }
+    }
+  },
+  "oneOf": [
+    { "$ref": "#/$defs/node" },
+    { "$ref": "#/$defs/run" }
+  ]
+}
