@@ -59,3 +59,13 @@ MB-SM-076A8_NOTE
 Warm-start continuation packages must preserve the durable user working-profile payload when one exists for the operator.
 User-specific Cambridge C1 / language / collaboration preferences are operator payload, not product doctrine.
 ==========
+
+==========
+MB-SM-077D_NOTE
+==========
+HUMAN is the authoritative home for human/operator context.
+WHOAMI_STANDALONE_ACTIVE_CANON=NO. NEW_PROJECTS_MUST_NOT_REQUIRE_WHOAMI=YES.
+Useful WhoAmI content is absorbed into HUMAN.OPERATING.MODEL.txt (MB-SM-077D block).
+23.SKILL.WHOAMI_POLICY.txt is historical reference only. Do not create a competing identity file.
+Operator-specific working-profile payload remains operator-specific, not a generic default.
+==========

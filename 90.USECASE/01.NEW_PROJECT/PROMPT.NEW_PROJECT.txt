@@ -7,16 +7,17 @@ INPUT:
 - requerimiento del usuario
 - SKILL.MENU
 - skills adjuntos
-- policies de bootstrap, lifecycle, artifacts, WhoAmI
+- policies de bootstrap, lifecycle, artifacts
 - standards base de BATON, HUMAN y RADAR
+- WhoAmI is not required and must not be created as standalone active canon
 
 DEBES:
 1. evaluar si el set adjunto es suficiente
 2. pedir skills adicionales si faltan
 3. crear propuesta para:
-   - WhoAmI
+   - HUMAN (home for human/operator context; product meaning)
    - BATON
-   - HUMAN
+   - RADAR
 4. definir siguiente acción
 5. mantener consistencia con policies y standards
 

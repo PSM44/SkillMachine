@@ -301,3 +301,60 @@ SyS/A_Tools/SessionContinue/USER_WORKING_PROFILE_AND_C1_CONTINUITY.txt
 ==========
 FIN_MB-SM-076A7_CLOSEREPORT_ENROLMENT_AND_CONTINUATION_PROFILE
 ==========
+
+==========
+MB-SM-077D_HUMAN_HOME_FOR_HUMAN_CONTEXT
+==========
+
+DATE..............: 2026-08-16
+STATUS............: ACTIVE
+LAYER.............: HUMAN_OPERATING_MODEL
+SOURCE............: MB-SM-077D Slice C WhoAmI absorption
+TRANSVERSAL.......: YES (present and future projects)
+
+HUMAN_IS_HOME_FOR_HUMAN_CONTEXT=YES
+WHOAMI_STANDALONE_ACTIVE_CANON=NO
+WHOAMI_OPERABILITY_DEPENDENCY=NO
+NEW_PROJECTS_MUST_NOT_REQUIRE_WHOAMI=YES
+CONTINUATION_MUST_PRESERVE_RELEVANT_HUMAN_PROFILE=YES
+OPERATOR_SPECIFIC_PAYLOAD_IS_NOT_GENERIC_DEFAULT=YES
+AUTHORITATIVE_HOME=HUMAN
+CONTENT_MIGRATION_STATUS=ABSORBED
+
+WHAT_BELONGS_IN_HUMAN:
+HUMAN is the home for human/operator context and product meaning, including:
+- human authority and role;
+- product identity, purpose, and boundaries;
+- durable collaboration and operating constraints that are product doctrine;
+- enough short human-readable context that a blank human or AI can understand
+  what the project is, why it exists, and how to operate without a separate
+  WhoAmI file.
+
+WHAT_DOES_NOT_BELONG_IN_A_STANDALONE_WHOAMI:
+Do not create, require, or revive a standalone WhoAmI artifact as active canon,
+bootstrap dependency, continuity authority, or canonical user profile.
+Session operational state for AI remains BATON (cold-start) or SESSION_CONTINUE
+(warm-start). Those are not product meaning and do not replace HUMAN.
+
+NEW_AND_FUTURE_PROJECTS:
+Required operable set is HUMAN + BATON + RADAR as defined by current bootstrap
+policy. A standalone WhoAmI file is not required and must not be proposed as a
+mandatory initial artifact.
+
+OPERATOR_PAYLOAD_SEPARATION:
+When an operator has a durable working-profile payload (language, personal
+collaboration preferences, operator-specific constraints), continuation packages
+must preserve that payload if it exists for that operator.
+That payload is not SkillsMachine product doctrine, not a Skill, not a GRC,
+and not a default for other users or projects.
+Do not copy one operator's personal requirements into HUMAN as universal defaults.
+
+ABSORBED_FROM_WHOAMI_POLICY:
+The still-useful job formerly described by 23.SKILL.WHOAMI_POLICY — a short,
+understandable human snapshot of purpose and operating context — is absorbed
+here. Historical WhoAmI files and that Skill remain reference-only.
+Stale project-state dumps, WhoAmI freshness gates, and WhoAmI file-update
+mechanics are not promoted into HUMAN.
+==========
+FIN_MB-SM-077D_HUMAN_HOME_FOR_HUMAN_CONTEXT
+==========

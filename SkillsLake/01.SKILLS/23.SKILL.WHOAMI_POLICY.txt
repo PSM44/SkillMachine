@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.WHOAMI.POLICY.01.00
 NOMBRE_SUGERIDO...: 23.SKILL.WHOAMI_POLICY.txt
-VERSION...........: v1.1-MB-SM-076A6B
+VERSION...........: v1.2-MB-SM-077D
 FECHA.............: 2026-04-21
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -26,10 +26,28 @@ Historical sections below remain for reference / project-local patterns.
 FIN_MB-SM-076A6B_DISPOSITION
 ==========
 
+==========
+MB-SM-077D_WHOAMI_ABSORPTION
+==========
+ACTIVE_CANON=NO
+AUTHORITATIVE_HOME=HUMAN
+CONTENT_MIGRATION_STATUS=ABSORBED
+NEW_PROJECT_CREATION=NOT_REQUIRED
+HISTORICAL_REFERENCE_ONLY=YES
+WHOAMI_REQUIRED_FOR_OPERABILITY=NO
+Useful human-context content formerly described by this Skill now belongs in HUMAN.
+Do not create a standalone WhoAmI file as active canon for present or future projects.
+Do not use this Skill as bootstrap, continuity, or profile authority.
+Operator-specific working-profile payload is not this Skill and is not a generic default.
+==========
+FIN_MB-SM-077D_WHOAMI_ABSORPTION
+==========
+
 ALCANCE...........:
 Define qué es WhoAmI como artefacto operativo humano y cómo debe crearse,
 mantenerse y usarse. En SkillsMachine, WHOAMI ya no es autoridad activa de producto
-ni de continuidad (ver disposition 076A6B).
+ni de continuidad (ver disposition 076A6B). Contenido útil absorbido en HUMAN
+(MB-SM-077D). Este Skill no autoriza crear WhoAmI en proyectos nuevos.
 
 NO_CUBRE..........:
 No reemplaza HUMAN.
@@ -178,6 +196,11 @@ WhoAmI no reemplaza HUMAN.
 ==========
 09.00_CHANGELOG
 ==========
+
+2026-08-16, v1.2-MB-SM-077D
+- Absorption: useful human-context content now lives in HUMAN.
+- ACTIVE_CANON=NO; AUTHORITATIVE_HOME=HUMAN; NEW_PROJECT_CREATION=NOT_REQUIRED.
+- Historical sections below remain non-operative.
 
 2026-04-21, v1.0-CANON
 - Creación del skill canónico de WhoAmI

@@ -4,7 +4,7 @@
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.3-CANON
+VERSION...........: v1.4-CANON
 FECHA.............: 2026-05-14
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -32,7 +32,7 @@ DEPENDENCIAS......:
 09.SKILL.RADAR.txt
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
-23.SKILL.WHOAMI_POLICY.txt
+23.SKILL.WHOAMI_POLICY.txt (histórico/absorbido en HUMAN; no dependencia operativa)
 Skill de Git aplicable, si existe en el proyecto activo.
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL, SESSION_CLOSE, CONTINUITY
@@ -131,14 +131,14 @@ INPUTS RECOMENDADOS:
 
 - BATON principal del proyecto activo, si existe;
 - HUMAN vigente, si aplica;
-- WhoAmI vigente, si aplica;
 - RADAR_INDEX o RADAR equivalente, si aplica;
 - backlog operativo del proyecto activo, si existe.
+- WhoAmI no es insumo requerido. Si existe un archivo histórico, no es autoridad.
 
 ACCIONES:
 
 - leer BATON si existe;
-- leer WhoAmI si existe y aporta continuidad humana;
+- no exigir WhoAmI; un archivo histórico, si existe, no se usa como autoridad;
 - entender estado actual;
 - identificar NEXT_ACTION;
 - validar coherencia con HUMAN si el proyecto tiene capa HUMAN;
@@ -373,10 +373,10 @@ Artefactos típicos:
 - BATON principal del proyecto activo;
 - backlog operativo del proyecto activo;
 - deuda técnica;
-- HUMAN, solo si aplica;
-- WhoAmI, solo si cambia contexto humano operacional;
+- HUMAN, solo si cambia significado de producto, autoridad o contexto humano/operador;
 - RADAR, si aplica;
 - readiness o equivalente de cierre, si existe.
+- WhoAmI no es artefacto de actualización. No refrescarlo por defecto. Histórico si existe.
 
 ----------
 07.20_NO_ACTUALIZACION_PERMANENTE
@@ -890,6 +890,11 @@ Si no existe evidencia suficiente para clasificar un dato, debe declararse como 
 16.00_CHANGELOG
 ==========
 
+2026-08-17, v1.4-CANON
+- MB-SM-077D Slice C2: WhoAmI deja de ser requisito de refresh de continuidad.
+- Continuity refresh = BATON (+ HUMAN si cambia contexto/autoridad) (+ RADAR si aplica).
+- MB-GRC-026F1: WHOAMI_REFRESH_REQUIRED=NO; AUTHORITATIVE_HOME=HUMAN.
+
 2026-05-17, v1.2-CANON
 - Agrega regla de acumulación y perfeccionamiento de artefactos al cierre formal.
 - Define que backlog acumula, deuda técnica acumula, HUMAN se perfecciona, BATON se refresca, RADAR se regenera y Git registra.
@@ -921,28 +926,37 @@ MB-GRC-026F1_CONTINUITY_REFRESH_RULE
 ==========
 
 FECHA.............: 2026-06-04 10:35:38
-ESTADO............: ACTIVE_RULE
+REFINED...........: 2026-08-17 MB-SM-077D Slice C2
+ESTADO............: SUPERSEDED_FOR_WHOAMI ; ACTIVE_FOR_BATON_HUMAN
+
+WHOAMI_REFRESH_REQUIRED=NO
+WHOAMI_ACTIVE_CANON=NO
+AUTHORITATIVE_HOME=HUMAN
 
 REGLA:
-Cuando una minibattle, cierre de sesión o cambio operacional afecte continuidad,
-BATON y WHOAMI deben actualizarse juntos antes del commit final.
+Cuando una minibattle, cierre de sesión o cambio operacional afecte continuidad:
+- actualizar BATON como snapshot de continuidad en frío;
+- actualizar HUMAN solo si cambia significado de producto, autoridad o contexto humano/operador;
+- regenerar RADAR si hace falta evidencia de estructura;
+- no exigir, crear ni refrescar un archivo WhoAmI autónomo;
+- no tratar frescura de WhoAmI como gate de cierre o commit.
 
 NO_RECOMENDADO:
-- Commit BATON-only.
-- Commit WHOAMI-only.
-- Refrescar uno y luego corregir el otro en commit separado.
+- Commit que deja BATON obsoleto cuando la continuidad sí cambió.
+- Recrear WhoAmI como par de frescura de BATON.
+- Usar WhoAmI como sustituto de HUMAN o BATON.
 
-MOTIVO:
-Readiness compara frescura contra HEAD. Si BATON y WHOAMI se actualizan por separado,
-se produce ping-pong de frescura: uno queda fresco y el otro queda viejo.
+MOTIVO (histórico):
+Readiness comparaba frescura BATON/WHOAMI contra HEAD y producía ping-pong.
+Ese acoplamiento ya no aplica: WHOAMI no es canon activo ni requisito de
+frescura (MB-SM-076A6B / MB-SM-077D). HUMAN es el hogar de contexto humano.
 
 CONTRATO:
-- Actualizar BATON + WHOAMI en el mismo bloque operativo.
-- Stagear ambos explícitamente.
-- Commit/push.
-- Regenerar RADAR.
-- Ejecutar readiness final.
-- Cerrar solo con READINESS_STATUS OK y Git clean.
+- Set de refresh de continuidad = BATON (+ HUMAN si aplica) (+ RADAR si aplica).
+- WhoAmI no forma parte de ese set.
+- Stagear solo artefactos que realmente cambiaron.
+- Commit/push siguen siendo human-owned.
+- Readiness: WHOAMI_FRESHNESS_REQUIRED=NO.
 
 FIN_MB-GRC-026F1_CONTINUITY_REFRESH_RULE
 ==========
@@ -1092,10 +1106,13 @@ root, expected branch/HEAD, and active task (MB_ID) must all agree
 (see GRC.PROJECT_CONTEXT_IDENTITY). A mismatch is a hard stop, not a warning.
 
 17.30_CONTINUITY_ARTIFACT_AGREEMENT
-Continuity artifacts (BATON, WHOAMI, close reports, backlog updates) must
-agree on project identity, repository root, and active task identity. A close
-or continuity record that names a different project, root, or task than the
-repository evidence is invalid and must be corrected before acceptance.
+Continuity artifacts (BATON, close reports, backlog updates; HUMAN when product
+or human-context meaning changed) must agree on project identity, repository
+root, and active task identity. A close or continuity record that names a
+different project, root, or task than the repository evidence is invalid and
+must be corrected before acceptance.
+A historical WhoAmI file, if present, is not a required continuity artifact and
+is not authority. Do not refresh WhoAmI to satisfy this rule.
 
 FIN_MB-SM-067B-D2_CLOSE_REVIEW_AND_SESSION_IDENTITY_RULES
 ==========
