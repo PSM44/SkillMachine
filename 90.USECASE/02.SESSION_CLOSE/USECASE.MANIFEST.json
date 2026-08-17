@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-08-16 13:09:57",
+  "generated_at": "2026-08-17 14:02:21",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
   "primary_upload_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
-  "compiled_output_sha256": "899E396FE9A9E61366983FFA21FDDAD7B56448804D68C7CA4B67B636A2FE7AED",
+  "compiled_output_sha256": "980FA933F4B29E221B2C46E99F10E2061130E441682C2117A2B40F757224FDFA",
   "compiled_source_order": [
     "README.UPLOAD_THIS_USECASE.txt",
     "PROMPT.SESSION_CLOSE.txt",
@@ -68,9 +68,9 @@
       "bundle_name": "CONTINUITY",
       "delivery_file": "01.BUNDLE.CONTINUITY.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 42289,
-      "delivery_size_kb": 41.3,
-      "delivery_sha256": "2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79",
+      "delivery_size_bytes": 43489,
+      "delivery_size_kb": 42.47,
+      "delivery_sha256": "5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
@@ -87,14 +87,14 @@
         {
           "name": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
-          "version": "v1.0-CANON",
-          "source_sha256": "A199E76D2367AECB38D234686D3BE341AAA8AA4ACE89DF0D590F73FE680A72B8"
+          "version": "v1.2-MB-SM-077D",
+          "source_sha256": "67E5DA0C3BA13C547846080F8D8D99A3779ADF2EC1F106E9F128ECDA01175CE3"
         },
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.1",
-          "source_sha256": "946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA"
+          "version": "v1.2",
+          "source_sha256": "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
         }
       ]
     },
@@ -102,9 +102,9 @@
       "bundle_name": "GOVERNANCE",
       "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
       "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 135958,
-      "delivery_size_kb": 132.77,
-      "delivery_sha256": "B625944F670E754ADE7B9B88ECDEE3C98BE6EF03DFFFEF50EAF15DBC5D049FE7",
+      "delivery_size_bytes": 143426,
+      "delivery_size_kb": 140.06,
+      "delivery_sha256": "CD29A26FC4534BF76CB2E3F63B7D47E5DE2F412A80389BCF7E028839650A3293",
       "source_files": [
         {
           "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
@@ -121,8 +121,8 @@
         {
           "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "version": "v1.3-CANON",
-          "source_sha256": "8D01B1F89AE496901C9AA6B1E5105540ED9613246F27E26CA244620658E5B2E1"
+          "version": "v1.4-CANON",
+          "source_sha256": "17C2ACA2D7C2B9DD48505813ED4498711B78AAFBCB2EA0CFFA4B91B2C6EDF79B"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
@@ -133,38 +133,38 @@
         {
           "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-          "version": "v0.1-DRAFT",
-          "source_sha256": "6A985591E1CCA4A87511CA05B12B074CD201F58BED9DB7D4FBBD11075436010F"
+          "version": "v0.3-DRAFT_READY_FOR_TEST",
+          "source_sha256": "51043DF111871291DA804CF5E07843FBE292BC91DB9435E9D4EC2AD7600C828E"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.SCRIPT_EXECUTION_STAGING.txt",
-          "version": "v0.2-DRAFT_READY_FOR_TEST",
-          "source_sha256": "5E10F7C1938770D67253D0E604F9E0ACD4F1D11F854B33EC5F2770664EB1C1BF"
+          "version": "v0.3-DRAFT_READY_FOR_TEST",
+          "source_sha256": "92502C949303F1EDE48B9E218EE27EDB2706B6CF27783517B70E9E86792B25A2"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
-          "version": "v0.3-DRAFT_READY_FOR_TEST",
-          "source_sha256": "66923155152C1975925F0A29C4039BF35924585D86279F5D998C6E65DD5BACE6"
+          "version": "v0.4-DRAFT_READY_FOR_TEST",
+          "source_sha256": "A7F5AB4021E4F6363033EAD383BF5666B1E53CF97FB81D2694D906C42A6EA4D4"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
-          "version": "v0.2-DRAFT_READY_FOR_TEST",
-          "source_sha256": "C693EE63EECFB66418BE903C1998E5F41843929697D8C29844BE03A20CF5CDD7"
+          "version": "v0.3-DRAFT_READY_FOR_TEST",
+          "source_sha256": "D50ED0EE39B19D6500AAED33C81BDE144B062A66267991B5DBF1D0A9A91227D7"
         },
         {
           "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
           "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.1",
-          "source_sha256": "946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA"
+          "version": "v1.2",
+          "source_sha256": "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
         },
         {
           "name": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
           "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-          "version": "v1.1",
-          "source_sha256": "91107B332BF05164CD2E0B696ACB0B72DBD87604E336560220765525994ADCE6"
+          "version": "v1.3",
+          "source_sha256": "2BFE9CC45F33A91BFA93E6CFAE1C569F13C454F79901112611D36FA6C031EAE8"
         }
       ]
     }

@@ -56,13 +56,13 @@ SOURCE_SHA256=71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8
 
 SOURCE_INDEX=6
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=42289
-SOURCE_SHA256=2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79
+SOURCE_BYTES=43489
+SOURCE_SHA256=5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0
 
 SOURCE_INDEX=7
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=115228
-SOURCE_SHA256=1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94
+SOURCE_BYTES=119099
+SOURCE_SHA256=CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416
 
 ================================================================================
 03. OPERATIONAL INSTRUCTIONS
@@ -3065,12 +3065,12 @@ FIN_DEL_DOCUMENTO
 ==========
 ========== CONTENT_END 005 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
 ========== END_SOURCE_FILE 005 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
-========== BEGIN_SOURCE_FILE 006 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
+========== BEGIN_SOURCE_FILE 006 5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0 ==========
 SOURCE_INDEX=6
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=42289
-SOURCE_SHA256=2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79
-========== CONTENT_START 006 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
+SOURCE_BYTES=43489
+SOURCE_SHA256=5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0
+========== CONTENT_START 006 5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -3082,7 +3082,7 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CONTINUITY
-GENERATED_AT: 2026-08-12 16:28:18
+GENERATED_AT: 2026-08-17 14:02:21
 ==============================
 
 --------------------------------------------------
@@ -3940,8 +3940,8 @@ No debe:
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\23.SKILL.WHOAMI_POLICY.txt
-VERSION    : v1.0-CANON
-SHA256     : A199E76D2367AECB38D234686D3BE341AAA8AA4ACE89DF0D590F73FE680A72B8
+VERSION    : v1.2-MB-SM-077D
+SHA256     : 67E5DA0C3BA13C547846080F8D8D99A3779ADF2EC1F106E9F128ECDA01175CE3
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -3949,7 +3949,7 @@ SHA256     : A199E76D2367AECB38D234686D3BE341AAA8AA4ACE89DF0D590F73FE680A72B8
 
 ID_UNICO..........: SKILL.WHOAMI.POLICY.01.00
 NOMBRE_SUGERIDO...: 23.SKILL.WHOAMI_POLICY.txt
-VERSION...........: v1.1-MB-SM-076A6B
+VERSION...........: v1.2-MB-SM-077D
 FECHA.............: 2026-04-21
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -3971,10 +3971,28 @@ Historical sections below remain for reference / project-local patterns.
 FIN_MB-SM-076A6B_DISPOSITION
 ==========
 
+==========
+MB-SM-077D_WHOAMI_ABSORPTION
+==========
+ACTIVE_CANON=NO
+AUTHORITATIVE_HOME=HUMAN
+CONTENT_MIGRATION_STATUS=ABSORBED
+NEW_PROJECT_CREATION=NOT_REQUIRED
+HISTORICAL_REFERENCE_ONLY=YES
+WHOAMI_REQUIRED_FOR_OPERABILITY=NO
+Useful human-context content formerly described by this Skill now belongs in HUMAN.
+Do not create a standalone WhoAmI file as active canon for present or future projects.
+Do not use this Skill as bootstrap, continuity, or profile authority.
+Operator-specific working-profile payload is not this Skill and is not a generic default.
+==========
+FIN_MB-SM-077D_WHOAMI_ABSORPTION
+==========
+
 ALCANCE...........:
 Define qué es WhoAmI como artefacto operativo humano y cómo debe crearse,
 mantenerse y usarse. En SkillsMachine, WHOAMI ya no es autoridad activa de producto
-ni de continuidad (ver disposition 076A6B).
+ni de continuidad (ver disposition 076A6B). Contenido útil absorbido en HUMAN
+(MB-SM-077D). Este Skill no autoriza crear WhoAmI en proyectos nuevos.
 
 NO_CUBRE..........:
 No reemplaza HUMAN.
@@ -4124,6 +4142,11 @@ WhoAmI no reemplaza HUMAN.
 09.00_CHANGELOG
 ==========
 
+2026-08-16, v1.2-MB-SM-077D
+- Absorption: useful human-context content now lives in HUMAN.
+- ACTIVE_CANON=NO; AUTHORITATIVE_HOME=HUMAN; NEW_PROJECT_CREATION=NOT_REQUIRED.
+- Historical sections below remain non-operative.
+
 2026-04-21, v1.0-CANON
 - Creación del skill canónico de WhoAmI
 
@@ -4131,13 +4154,13 @@ WhoAmI no reemplaza HUMAN.
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
-VERSION    : v1.1
-SHA256     : 946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA
+VERSION    : v1.2
+SHA256     : 87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9
 --------------------------------------------------
 # SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.1
+VERSION: v1.2
 STATUS: ACTIVE
 LAYER: SKILL
 OWNER_DOMAIN: SkillsMachine
@@ -4409,17 +4432,22 @@ FIN_MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This Skill adds only human-controlled local
+execution method constraints (human runs the artifact; AI interprets
+evidence). Human execution authority is unchanged.
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION
@@ -4490,14 +4518,14 @@ objective. Prior authorization for one MB does not carry over to the next.
 
 FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 ==========
-========== CONTENT_END 006 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
-========== END_SOURCE_FILE 006 2273E6B589703893721F67E61634DE6CB62592F3D38A91203E0BD05EFC9F3E79 ==========
-========== BEGIN_SOURCE_FILE 007 1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94 ==========
+========== CONTENT_END 006 5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0 ==========
+========== END_SOURCE_FILE 006 5BC0A22A67D02AE5C371AAC176C3F9590AC19AD9338A5A8181AC49E4F27441D0 ==========
+========== BEGIN_SOURCE_FILE 007 CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416 ==========
 SOURCE_INDEX=7
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=115228
-SOURCE_SHA256=1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94
-========== CONTENT_START 007 1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94 ==========
+SOURCE_BYTES=119099
+SOURCE_SHA256=CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416
+========== CONTENT_START 007 CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -4509,7 +4537,7 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: GOVERNANCE
-GENERATED_AT: 2026-07-20 18:38:36
+GENERATED_AT: 2026-08-17 14:02:21
 ==============================
 
 --------------------------------------------------
@@ -5818,8 +5846,8 @@ FIN_MB-SM-067B-D2_ARTIFACT_CLASS_AND_AUTHORITY_RULES
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION    : v1.3-CANON
-SHA256     : 8D01B1F89AE496901C9AA6B1E5105540ED9613246F27E26CA244620658E5B2E1
+VERSION    : v1.4-CANON
+SHA256     : 17C2ACA2D7C2B9DD48505813ED4498711B78AAFBCB2EA0CFFA4B91B2C6EDF79B
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -5827,7 +5855,7 @@ SHA256     : 8D01B1F89AE496901C9AA6B1E5105540ED9613246F27E26CA244620658E5B2E1
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.3-CANON
+VERSION...........: v1.4-CANON
 FECHA.............: 2026-05-14
 HORA..............: HH:MM
 CIUDAD............: Santiago, Chile
@@ -5855,7 +5883,7 @@ DEPENDENCIAS......:
 09.SKILL.RADAR.txt
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
-23.SKILL.WHOAMI_POLICY.txt
+23.SKILL.WHOAMI_POLICY.txt (histórico/absorbido en HUMAN; no dependencia operativa)
 Skill de Git aplicable, si existe en el proyecto activo.
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL, SESSION_CLOSE, CONTINUITY
@@ -5954,14 +5982,14 @@ INPUTS RECOMENDADOS:
 
 - BATON principal del proyecto activo, si existe;
 - HUMAN vigente, si aplica;
-- WhoAmI vigente, si aplica;
 - RADAR_INDEX o RADAR equivalente, si aplica;
 - backlog operativo del proyecto activo, si existe.
+- WhoAmI no es insumo requerido. Si existe un archivo histórico, no es autoridad.
 
 ACCIONES:
 
 - leer BATON si existe;
-- leer WhoAmI si existe y aporta continuidad humana;
+- no exigir WhoAmI; un archivo histórico, si existe, no se usa como autoridad;
 - entender estado actual;
 - identificar NEXT_ACTION;
 - validar coherencia con HUMAN si el proyecto tiene capa HUMAN;
@@ -6196,10 +6224,10 @@ Artefactos típicos:
 - BATON principal del proyecto activo;
 - backlog operativo del proyecto activo;
 - deuda técnica;
-- HUMAN, solo si aplica;
-- WhoAmI, solo si cambia contexto humano operacional;
+- HUMAN, solo si cambia significado de producto, autoridad o contexto humano/operador;
 - RADAR, si aplica;
 - readiness o equivalente de cierre, si existe.
+- WhoAmI no es artefacto de actualización. No refrescarlo por defecto. Histórico si existe.
 
 ----------
 07.20_NO_ACTUALIZACION_PERMANENTE
@@ -6713,6 +6741,11 @@ Si no existe evidencia suficiente para clasificar un dato, debe declararse como 
 16.00_CHANGELOG
 ==========
 
+2026-08-17, v1.4-CANON
+- MB-SM-077D Slice C2: WhoAmI deja de ser requisito de refresh de continuidad.
+- Continuity refresh = BATON (+ HUMAN si cambia contexto/autoridad) (+ RADAR si aplica).
+- MB-GRC-026F1: WHOAMI_REFRESH_REQUIRED=NO; AUTHORITATIVE_HOME=HUMAN.
+
 2026-05-17, v1.2-CANON
 - Agrega regla de acumulación y perfeccionamiento de artefactos al cierre formal.
 - Define que backlog acumula, deuda técnica acumula, HUMAN se perfecciona, BATON se refresca, RADAR se regenera y Git registra.
@@ -6744,28 +6777,37 @@ MB-GRC-026F1_CONTINUITY_REFRESH_RULE
 ==========
 
 FECHA.............: 2026-06-04 10:35:38
-ESTADO............: ACTIVE_RULE
+REFINED...........: 2026-08-17 MB-SM-077D Slice C2
+ESTADO............: SUPERSEDED_FOR_WHOAMI ; ACTIVE_FOR_BATON_HUMAN
+
+WHOAMI_REFRESH_REQUIRED=NO
+WHOAMI_ACTIVE_CANON=NO
+AUTHORITATIVE_HOME=HUMAN
 
 REGLA:
-Cuando una minibattle, cierre de sesión o cambio operacional afecte continuidad,
-BATON y WHOAMI deben actualizarse juntos antes del commit final.
+Cuando una minibattle, cierre de sesión o cambio operacional afecte continuidad:
+- actualizar BATON como snapshot de continuidad en frío;
+- actualizar HUMAN solo si cambia significado de producto, autoridad o contexto humano/operador;
+- regenerar RADAR si hace falta evidencia de estructura;
+- no exigir, crear ni refrescar un archivo WhoAmI autónomo;
+- no tratar frescura de WhoAmI como gate de cierre o commit.
 
 NO_RECOMENDADO:
-- Commit BATON-only.
-- Commit WHOAMI-only.
-- Refrescar uno y luego corregir el otro en commit separado.
+- Commit que deja BATON obsoleto cuando la continuidad sí cambió.
+- Recrear WhoAmI como par de frescura de BATON.
+- Usar WhoAmI como sustituto de HUMAN o BATON.
 
-MOTIVO:
-Readiness compara frescura contra HEAD. Si BATON y WHOAMI se actualizan por separado,
-se produce ping-pong de frescura: uno queda fresco y el otro queda viejo.
+MOTIVO (histórico):
+Readiness comparaba frescura BATON/WHOAMI contra HEAD y producía ping-pong.
+Ese acoplamiento ya no aplica: WHOAMI no es canon activo ni requisito de
+frescura (MB-SM-076A6B / MB-SM-077D). HUMAN es el hogar de contexto humano.
 
 CONTRATO:
-- Actualizar BATON + WHOAMI en el mismo bloque operativo.
-- Stagear ambos explícitamente.
-- Commit/push.
-- Regenerar RADAR.
-- Ejecutar readiness final.
-- Cerrar solo con READINESS_STATUS OK y Git clean.
+- Set de refresh de continuidad = BATON (+ HUMAN si aplica) (+ RADAR si aplica).
+- WhoAmI no forma parte de ese set.
+- Stagear solo artefactos que realmente cambiaron.
+- Commit/push siguen siendo human-owned.
+- Readiness: WHOAMI_FRESHNESS_REQUIRED=NO.
 
 FIN_MB-GRC-026F1_CONTINUITY_REFRESH_RULE
 ==========
@@ -6915,10 +6957,13 @@ root, expected branch/HEAD, and active task (MB_ID) must all agree
 (see GRC.PROJECT_CONTEXT_IDENTITY). A mismatch is a hard stop, not a warning.
 
 17.30_CONTINUITY_ARTIFACT_AGREEMENT
-Continuity artifacts (BATON, WHOAMI, close reports, backlog updates) must
-agree on project identity, repository root, and active task identity. A close
-or continuity record that names a different project, root, or task than the
-repository evidence is invalid and must be corrected before acceptance.
+Continuity artifacts (BATON, close reports, backlog updates; HUMAN when product
+or human-context meaning changed) must agree on project identity, repository
+root, and active task identity. A close or continuity record that names a
+different project, root, or task than the repository evidence is invalid and
+must be corrected before acceptance.
+A historical WhoAmI file, if present, is not a required continuity artifact and
+is not authority. Do not refresh WhoAmI to satisfy this rule.
 
 FIN_MB-SM-067B-D2_CLOSE_REVIEW_AND_SESSION_IDENTITY_RULES
 ==========
@@ -7407,8 +7452,8 @@ FIN_MB-SM-067B-D2_FUNCTIONAL_DELIVERY_AND_MANAGEMENT_EVIDENCE
 --------------------------------------------------
 SOURCE_FILE: GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 SOURCE_PATH: C:\01. GitHub\Skills\GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
-VERSION    : v0.1-DRAFT
-SHA256     : 6A985591E1CCA4A87511CA05B12B074CD201F58BED9DB7D4FBBD11075436010F
+VERSION    : v0.3-DRAFT_READY_FOR_TEST
+SHA256     : 51043DF111871291DA804CF5E07843FBE292BC91DB9435E9D4EC2AD7600C828E
 --------------------------------------------------
 ==========
 GRC.USECASE_TEMP_UPLOAD_STAGING
@@ -7416,7 +7461,7 @@ GRC.USECASE_TEMP_UPLOAD_STAGING
 
 ID_UNICO..........: GRC.USECASE_TEMP_UPLOAD_STAGING.0001
 NOMBRE............: UsecaseTempUploadStaging
-VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+VERSION...........: v0.3-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
@@ -7538,6 +7583,11 @@ This GRC succeeds when:
 2026-06-30, v0.1-DRAFT
 - Initial GRC created to govern upload staging for additional Skills/GRCs through SyS\Temp.
 
+2026-08-17, v0.3-DRAFT_READY_FOR_TEST
+- MB-SM-077D Slice E: align upload packaging with GRC.COMPACT_UPLOAD_PACK_ONLY
+  and SKILL.COMPACT_UPLOAD_PACK_EXECUTION; keep SyS\Temp staging and
+  bundle+manifest as domain-specific justified delta.
+
 ==========
 END
 ==========
@@ -7620,15 +7670,25 @@ Any package intended for upload to IA/chat must be flat and IA-readable.
 Required:
 - No folders as final handoff.
 - Prefer text-first files.
-- Consolidate all relevant files the assistant considers necessary into a maximum of 10 files, perfectly understandable for the IA.
-- Include manifest with file names, sizes, purpose, source scope and next action.
+- Follow GRC.COMPACT_UPLOAD_PACK_ONLY and SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+  for packaging: use the minimum necessary artifact count; prefer one
+  consolidated AI-readable artifact when feasible; FILES_COUNT <= 10 is a
+  guardrail, not a target; do not require UPLOAD_*.txt naming; additional
+  files only when technically justified.
+- This GRC's domain-specific staging output remains a compiled TXT bundle
+  plus a JSON manifest when hashes/traceability require a separate file
+  (see 03.00). That two-file pair is a justified delta, not a global default.
+- Include inventory/manifest with file names, sizes, purpose, source scope and next action.
 - Split oversized files deterministically.
 - Do not include raw sensitive binaries unless explicitly requested.
 
 RULE_02_LOCAL_EVIDENCE_VS_IA_UPLOAD:
 Distinguish:
 - LOCAL_EVIDENCE_DIR: complete local evidence, may contain many files/folders.
-- IA_UPLOAD_PACK: compressed, flat, maximum 5-10 uploadable files.
+  This is not the IA upload pack and is not AI-exchange Temp.
+- IA_UPLOAD_PACK: the compact upload-ready set (flat, minimum necessary,
+  prefer one when feasible, maximum 10 as guardrail). Not an unbounded tree
+  and not a compressed/ZIP default.
 
 The assistant must not ask the human to upload a folder when the UI does not support folder upload.
 
@@ -7665,17 +7725,23 @@ FIN_MB-SM-054B_P0_UPLOAD_TEMP_GENERATED_OUTPUT_HARDENING
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This GRC adds only usecase Skills/GRC upload
+staging constraints (SyS\Temp as this GRC's staging path, compiled TXT bundle,
+traceability manifest). It does not redefine AI-exchange Temp, internal
+runtime scratch, or execution-sandbox Temp.
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION
@@ -7690,13 +7756,13 @@ FIN_SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
-VERSION    : v1.1
-SHA256     : 946486D04BBA4DD1AC4E5AAA0F3E3B94997A3FC9B7632EF653734E9C153EA3BA
+VERSION    : v1.2
+SHA256     : 87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9
 --------------------------------------------------
 # SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.1
+VERSION: v1.2
 STATUS: ACTIVE
 LAYER: SKILL
 OWNER_DOMAIN: SkillsMachine
@@ -7968,17 +8034,22 @@ FIN_MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This Skill adds only human-controlled local
+execution method constraints (human runs the artifact; AI interprets
+evidence). Human execution authority is unchanged.
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION
@@ -8053,13 +8124,13 @@ FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 --------------------------------------------------
 SOURCE_FILE: GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
 SOURCE_PATH: C:\01. GitHub\Skills\GRCLake\01.CONTROLS\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
-VERSION    : v1.1
-SHA256     : 91107B332BF05164CD2E0B696ACB0B72DBD87604E336560220765525994ADCE6
+VERSION    : v1.3
+SHA256     : 2BFE9CC45F33A91BFA93E6CFAE1C569F13C454F79901112611D36FA6C031EAE8
 --------------------------------------------------
 # GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.1
+VERSION: v1.3
 STATUS: ACTIVE
 LAYER: GRC
 CONTROL_TYPE: EXECUTION_GOVERNANCE
@@ -8299,17 +8370,22 @@ FIN_MB-SM-054B_P0_AITAIL_STRICT_AND_CHILD_PROCESS_FAIL_RULE
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This GRC adds only cross-runtime execution
+contract constraints (runtime adapters, AI_TAIL, generated-output flow,
+identity evidence, path quoting).
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION
@@ -8368,13 +8444,38 @@ its report). Absence of evidence means the claim must not be made.
 
 FIN_MB-SM-067B-D2_RUNTIME_AND_AGENT_IDENTITY_EVIDENCE
 ==========
-========== CONTENT_END 007 1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94 ==========
-========== END_SOURCE_FILE 007 1A1C6AB8A11A35ED571108B94D7904B569113338F3B5C4A0A5CEAC44FAFE4C94 ==========
+
+==========
+MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
+==========
+DATE..............: 2026-08-17
+STATUS............: ACTIVE_RULE
+LAYER.............: CROSS_RUNTIME_EXECUTION_CONTRACT
+SOURCE_MB.........: MB-SM-077D Slice D
+
+11.00 PATH QUOTING
+Human- or AI-generated shell commands must quote paths that contain spaces or
+other characters that can change parsing. This includes the SkillsMachine root
+C:\01. GitHub\Skills.
+
+11.10 POWERSHELL LITERAL-PATH PREFERENCE
+For PowerShell, prefer literal-path semantics where the call is a file or
+directory path: -LiteralPath, and -File with a quoted script path. Do not
+split a path on spaces when invoking -File.
+
+11.20 BOUNDARY
+This rule is path-parsing safety only. It does not redefine DETU, compact
+upload, Temp policy, or general shell style.
+==========
+FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
+==========
+========== CONTENT_END 007 CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416 ==========
+========== END_SOURCE_FILE 007 CEC1139F2B55C1B86020710BA37C34B12C02BE425F9CBCA14349E48DDF083416 ==========
 ================================================================================
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=7
-SOURCE_TOTAL_BYTES=242023
+SOURCE_TOTAL_BYTES=247094
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0
