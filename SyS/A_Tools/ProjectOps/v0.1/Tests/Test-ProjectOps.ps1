@@ -212,12 +212,25 @@ try {
         -OpsRoot $testOps
     Assert-True ($pub.PUBLICATION_STATUS -eq 'PREPARED') 'Publication PREPARED'
     Assert-True ($pub.manifest.PRODUCTION_PUBLICATION -eq 'PREPARED_NOT_DELIVERED') 'Not delivered externally'
+    $lcPath = Get-PublicationLifecyclePath -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
+    Assert-True (Test-Path -LiteralPath $lcPath) 'T01 publication creates lifecycle sidecar'
+    $lc0 = Get-PublicationLifecycle -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
+    Assert-True ([string]$lc0.LIFECYCLE_STATUS -eq 'PREPARED') 'T02 initial sidecar status PREPARED'
+    Assert-True ([string]$lc0.PACKAGE_ID -eq [string]$pub.manifest.PACKAGE_ID) 'Sidecar package identity matches'
+    Assert-True ([bool]$lc0.HISTORICAL_MANIFEST_UNCHANGED) 'Sidecar records historical manifest unchanged'
+    Assert-True (Test-HistoricalPublicationManifestUnchanged -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps) 'T03 PACKAGE.MANIFEST historical status unchanged after publication'
 
     $syncCr = New-ProjectSyncDeliveryPreparation -TargetProject 'CloseReport' -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
     Assert-True (-not [bool]$syncCr.ok) 'Project Sync blocked for not enrolled CR'
     $syncLab = New-ProjectSyncDeliveryPreparation -TargetProject 'SM-LAB-004' -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
     Assert-True ([bool]$syncLab.ok) 'Project Sync prep ok for enrolled LAB'
     Assert-True (-not [bool]$syncLab.MUTATION_PERFORMED) 'Project Sync prep no mutation'
+    Assert-True ([string]$syncLab.LIFECYCLE_STATUS -eq 'DELIVERY_PREPARED') 'T04 ProjectSyncPrep transition DELIVERY_PREPARED'
+    $lc1 = Get-PublicationLifecycle -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
+    Assert-True ([string]$lc1.LIFECYCLE_STATUS -eq 'DELIVERY_PREPARED') 'Sidecar after ProjectSync is DELIVERY_PREPARED'
+    Assert-True (Test-HistoricalPublicationManifestUnchanged -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps) 'T03 manifest unchanged after ProjectSyncPrep'
+    $labAfterSync = Get-ProjectRegistryEntry -ProjectId 'SM-LAB-004' -OpsRoot $testOps
+    Assert-True ([string]$labAfterSync.LAST_PUBLICATION_LIFECYCLE -eq 'DELIVERY_PREPARED') 'T13 registry optional LAST_PUBLICATION_LIFECYCLE set on prep'
 
     $runnerFailThrew = $false
     try {
@@ -347,6 +360,20 @@ try {
     Assert-True ([string]$prepReload.DELIVERY_STATUS -eq 'PREPARED') 'PREPARED remains until valid consume'
     Assert-True ([string]$prepReload.TARGET_APPLY_STATUS -eq 'NOT_STARTED') 'NOT_STARTED remains until valid consume'
 
+    $ifEarly = Advance-ImprovementFlowOpportunityOnReturnReceipt `
+        -PackageId ([string]$pub.manifest.PACKAGE_ID) `
+        -OpportunityId 'OPP-TEST-002' `
+        -OpsRoot $testOps
+    Assert-True (-not [bool]$ifEarly.ok) 'T09 missing receipt does not over-advance IF reconcile'
+    Assert-True ([string]$ifEarly.Reason -eq 'MISSING_RECEIPT') 'T09 reason MISSING_RECEIPT'
+
+    $ifMissingOpp = Advance-ImprovementFlowOpportunityOnReturnReceipt `
+        -PackageId ([string]$pub.manifest.PACKAGE_ID) `
+        -OpportunityId 'OPP-DOES-NOT-EXIST' `
+        -OpsRoot $testOps
+    Assert-True (-not [bool]$ifMissingOpp.ok) 'T10 missing accumulator evidence does not over-advance'
+    Assert-True ([string]$ifMissingOpp.Reason -eq 'MISSING_ACCUMULATOR_EVIDENCE' -or [string]$ifMissingOpp.Reason -eq 'MISSING_RECEIPT') 'T10 refuses without accumulator or receipt'
+
     $rrOk = Register-ProjectSyncTargetReturnReceipt `
         -DeliveryId $delivId `
         -TargetProject 'CloseReport' `
@@ -378,6 +405,67 @@ try {
     Assert-True ([string]$crAfterRr.LAST_UPDATE_RECEIPT_ID -eq $receiptA) 'Registry LAST_UPDATE_RECEIPT_ID set'
     Assert-True ([string]$crAfterRr.RECEIVING_BOUNDARY_00_SKILLSMACHINE -eq 'PRESENT') 'Registry receiving boundary PRESENT'
     Assert-True ([string]$crAfterRr.OBSERVED_HEAD -eq $headA) 'Registry observed HEAD updated'
+    Assert-True ([string]$rrOk.LIFECYCLE_STATUS -eq 'RETURN_RECEIPT_CONSUMED') 'T05 receipt-consumption transition RETURN_RECEIPT_CONSUMED'
+    $lc2 = Get-PublicationLifecycle -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps
+    Assert-True ([string]$lc2.LIFECYCLE_STATUS -eq 'RETURN_RECEIPT_CONSUMED') 'Sidecar after receipt is RETURN_RECEIPT_CONSUMED'
+    Assert-True (Test-HistoricalPublicationManifestUnchanged -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps) 'T03 manifest unchanged after receipt consume'
+    Assert-True ([string]$crAfterRr.LAST_PUBLICATION_LIFECYCLE -eq 'RETURN_RECEIPT_CONSUMED') 'T13 registry LAST_PUBLICATION_LIFECYCLE after receipt'
+
+    $ifMissingOppAfter = Advance-ImprovementFlowOpportunityOnReturnReceipt `
+        -PackageId ([string]$pub.manifest.PACKAGE_ID) `
+        -OpportunityId 'OPP-DOES-NOT-EXIST' `
+        -OpsRoot $testOps
+    Assert-True (-not [bool]$ifMissingOppAfter.ok) 'T10 missing accumulator evidence refuses after receipt'
+    Assert-True ([string]$ifMissingOppAfter.Reason -eq 'MISSING_ACCUMULATOR_EVIDENCE') 'T10 reason MISSING_ACCUMULATOR_EVIDENCE'
+
+    $ifOk = Advance-ImprovementFlowOpportunityOnReturnReceipt `
+        -PackageId ([string]$pub.manifest.PACKAGE_ID) `
+        -OpportunityId 'OPP-TEST-002' `
+        -OpsRoot $testOps
+    Assert-True ([bool]$ifOk.ok) 'T06 applied/receipt/accumulator transition ok'
+    Assert-True ([string]$ifOk.ACCUMULATOR_STATUS -eq 'DELIVERED_APPLIED_RECEIPTED') 'T06 accumulator DELIVERED_APPLIED_RECEIPTED'
+    Assert-True ([string]$ifOk.LIFECYCLE_STATUS -eq 'RETURN_RECEIPT_CONSUMED') 'T07 sidecar remains RETURN_RECEIPT_CONSUMED'
+    Assert-True ([string]$ifOk.RECONCILIATION_STATUS -eq 'DELIVERED_APPLIED_RECEIPTED') 'T07 fully reconciled lifecycle status supported'
+    $accAfter = Read-ActiveAccumulator -OpsRoot $testOps
+    $opp002 = @($accAfter.opportunities | Where-Object { [string]$_.OPPORTUNITY_ID -eq 'OPP-TEST-002' } | Select-Object -First 1)
+    Assert-True ([string]$opp002[0].STATUS -eq 'DELIVERED_APPLIED_RECEIPTED') 'Accumulator opportunity advanced without rewriting dispositions'
+    $priorReloadAfterIf = Read-ProjectOpsJson -Path $priorPath
+    Assert-True ([string]$priorReloadAfterIf.DECISION -eq 'NEEDS_HUMAN_DECISION') 'IF reconcile does not rewrite prior disposition JSON'
+    Assert-True (Test-HistoricalPublicationManifestUnchanged -PackageId ([string]$pub.manifest.PACKAGE_ID) -OpsRoot $testOps) 'Manifest unchanged after IF reconcile'
+
+    $ifReplay = Advance-ImprovementFlowOpportunityOnReturnReceipt `
+        -PackageId ([string]$pub.manifest.PACKAGE_ID) `
+        -OpportunityId 'OPP-TEST-002' `
+        -OpsRoot $testOps
+    Assert-True ([bool]$ifReplay.ok) 'T08 IF reconcile rerun ok'
+    Assert-True ([bool]$ifReplay.MUTATION_PERFORMED -eq $false) 'T08 IF reconcile rerun is idempotent'
+
+    $lcCorruptPkg = New-ProductionPublicationPackage `
+        -CapabilityId 'SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT' `
+        -Version '9.9.8' `
+        -SourceDispositionId ([string]$dispOk.DISPOSITION_ID) `
+        -PackageBody 'identity-fail' `
+        -OpsRoot $testOps
+    $corrupt = Get-PublicationLifecycle -PackageId ([string]$lcCorruptPkg.manifest.PACKAGE_ID) -OpsRoot $testOps
+    $corrupt.PACKAGE_ID = 'PKG-OTHER-IDENTITY'
+    [void](Write-PublicationLifecycle -Lifecycle $corrupt -PackageId ([string]$lcCorruptPkg.manifest.PACKAGE_ID) -OpsRoot $testOps)
+    $idFail = Set-PublicationLifecycleStatus `
+        -PackageId ([string]$lcCorruptPkg.manifest.PACKAGE_ID) `
+        -NewStatus 'DELIVERY_PREPARED' `
+        -SourceEvent 'PROJECT_SYNC_PREPARED' `
+        -OpsRoot $testOps
+    Assert-True (-not [bool]$idFail.ok) 'T11 mismatched package identity refuses transition'
+    Assert-True ([string]$idFail.Reason -eq 'PACKAGE_IDENTITY_MISMATCH') 'T11 reason PACKAGE_IDENTITY_MISMATCH'
+
+    $runnerPubOut = & $runner -Action PreparePublication -OpsRoot $testOps -Args @{
+        CapabilityId = 'SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT'
+        Version = '9.9.9'
+        SourceDispositionId = [string]$dispOk.DISPOSITION_ID
+        PackageBody = 'runner-lifecycle'
+    } *>&1 | Out-String
+    Assert-True ($runnerPubOut -match 'LIFECYCLE_STATUS=PREPARED') 'T12 Invoke-ProjectOps emits LIFECYCLE_STATUS'
+    $runnerLc = Get-PublicationLifecycle -PackageId 'PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-9.9.9' -OpsRoot $testOps
+    Assert-True ($null -ne $runnerLc -and [string]$runnerLc.LIFECYCLE_STATUS -eq 'PREPARED') 'T12 runner publication sidecar PREPARED'
 
     $rrReplay = Register-ProjectSyncTargetReturnReceipt `
         -DeliveryId $delivId -TargetProject 'CloseReport' -LocalReceiptId $receiptA -TargetHead $headA -OpsRoot $testOps

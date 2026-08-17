@@ -241,6 +241,7 @@ switch ($Action) {
             -OpsRoot $OpsRoot
         Write-Host ("PACKAGE_ID={0}" -f $p.manifest.PACKAGE_ID)
         Write-Host ("PUBLICATION_STATUS={0}" -f $p.PUBLICATION_STATUS)
+        Write-Host ("LIFECYCLE_STATUS={0}" -f [string](Get-NoteProp -Object $p -Name 'LIFECYCLE_STATUS' -Default ''))
         Write-Host 'ACTION=PreparePublication STATUS=PASS'
     }
     'PrepareProjectSync' {
@@ -257,6 +258,7 @@ switch ($Action) {
         $reason = Get-NoteProp -Object $p -Name 'Reason'
         if (-not [string]::IsNullOrWhiteSpace([string]$reason)) { Write-Host ("REASON={0}" -f $reason) }
         Write-Host ("MUTATION_PERFORMED={0}" -f (Get-NoteProp -Object $p -Name 'MUTATION_PERFORMED' -Default $false))
+        Write-Host ("LIFECYCLE_STATUS={0}" -f [string](Get-NoteProp -Object $p -Name 'LIFECYCLE_STATUS' -Default ''))
         Write-Host 'ACTION=PrepareProjectSync STATUS=PASS'
     }
     'ConsumeTargetReturnReceipt' {
@@ -281,6 +283,7 @@ switch ($Action) {
         Write-Host ("RETURN_RECEIPT_RECORDED={0}" -f (Get-NoteProp -Object $p -Name 'RETURN_RECEIPT_RECORDED' -Default $false))
         Write-Host ("IDEMPOTENT_REPLAY={0}" -f (Get-NoteProp -Object $p -Name 'IDEMPOTENT_REPLAY' -Default $false))
         Write-Host ("MUTATION_PERFORMED={0}" -f (Get-NoteProp -Object $p -Name 'MUTATION_PERFORMED' -Default $false))
+        Write-Host ("LIFECYCLE_STATUS={0}" -f [string](Get-NoteProp -Object $p -Name 'LIFECYCLE_STATUS' -Default ''))
         Write-Host 'ACTION=ConsumeTargetReturnReceipt STATUS=PASS'
     }
     'AiAccess' {

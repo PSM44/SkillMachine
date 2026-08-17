@@ -447,3 +447,88 @@ function Set-OpportunityMeasurementObservation {
         path = $path
     }
 }
+
+function Advance-ImprovementFlowOpportunityOnReturnReceipt {
+    param(
+        [Parameter(Mandatory = $true)][string]$PackageId,
+        [Parameter(Mandatory = $true)][string]$OpportunityId,
+        [string]$OpsRoot = (Get-ProjectOpsRoot)
+    )
+
+    $fail = {
+        param([string]$Reason)
+        return [pscustomobject]@{
+            ok = $false
+            Reason = $Reason
+            PACKAGE_ID = $PackageId
+            OPPORTUNITY_ID = $OpportunityId
+            LIFECYCLE_STATUS = $null
+            ACCUMULATOR_STATUS = $null
+            RECONCILIATION_STATUS = $null
+            MUTATION_PERFORMED = $false
+        }
+    }
+
+    if ([string]::IsNullOrWhiteSpace($PackageId)) { return & $fail 'PACKAGE_ID_REQUIRED' }
+    if ([string]::IsNullOrWhiteSpace($OpportunityId)) { return & $fail 'OPPORTUNITY_ID_REQUIRED' }
+
+    $lifecycle = Get-PublicationLifecycle -PackageId $PackageId -OpsRoot $OpsRoot
+    if ($null -eq $lifecycle) { return & $fail 'LIFECYCLE_PACKAGE_MISSING' }
+    if ([string]$lifecycle.PACKAGE_ID -ne $PackageId) { return & $fail 'PACKAGE_IDENTITY_MISMATCH' }
+    if ([string]$lifecycle.LIFECYCLE_STATUS -ne 'RETURN_RECEIPT_CONSUMED') {
+        return & $fail 'MISSING_RECEIPT'
+    }
+
+    $acc = Read-ActiveAccumulator -OpsRoot $OpsRoot
+    $match = @($acc.opportunities | Where-Object { [string]$_.OPPORTUNITY_ID -eq $OpportunityId })
+    if ($match.Count -eq 0) { return & $fail 'MISSING_ACCUMULATOR_EVIDENCE' }
+    $opp = $match[0]
+    $currentStatus = [string]$opp.STATUS
+
+    if ($currentStatus -eq 'DELIVERED_APPLIED_RECEIPTED') {
+        return [pscustomobject]@{
+            ok = $true
+            Reason = 'IDEMPOTENT_REPLAY'
+            PACKAGE_ID = $PackageId
+            OPPORTUNITY_ID = $OpportunityId
+            LIFECYCLE_STATUS = 'RETURN_RECEIPT_CONSUMED'
+            ACCUMULATOR_STATUS = $currentStatus
+            RECONCILIATION_STATUS = 'DELIVERED_APPLIED_RECEIPTED'
+            MUTATION_PERFORMED = $false
+        }
+    }
+
+    $updated = @()
+    foreach ($o in @($acc.opportunities)) {
+        if ([string]$o.OPPORTUNITY_ID -eq $OpportunityId) {
+            $o | Add-Member -NotePropertyName STATUS -NotePropertyValue 'DELIVERED_APPLIED_RECEIPTED' -Force
+        }
+        $updated += $o
+    }
+    $acc.opportunities = $updated
+    $acc.updated_at = Get-ProjectOpsUtcNow
+    Write-ProjectOpsUtf8NoBom -Path (Get-IfAccumulatorPath -OpsRoot $OpsRoot) -Content (ConvertTo-ProjectOpsJson -Object $acc)
+
+    if ($lifecycle.PSObject.Properties.Name -contains 'RECONCILIATION_STATUS') {
+        $lifecycle.RECONCILIATION_STATUS = 'DELIVERED_APPLIED_RECEIPTED'
+    }
+    else {
+        $lifecycle | Add-Member -NotePropertyName RECONCILIATION_STATUS -NotePropertyValue 'DELIVERED_APPLIED_RECEIPTED'
+    }
+    $lifecycle.SOURCE_EVENT = 'IF_RECONCILED'
+    $lifecycle.UPDATED_AT = Get-ProjectOpsUtcNow
+    $lifecycle.HISTORICAL_MANIFEST_UNCHANGED = $true
+    $lifecycle.LIFECYCLE_STATUS = 'RETURN_RECEIPT_CONSUMED'
+    [void](Write-PublicationLifecycle -Lifecycle $lifecycle -PackageId $PackageId -OpsRoot $OpsRoot)
+
+    return [pscustomobject]@{
+        ok = $true
+        Reason = 'DELIVERED_APPLIED_RECEIPTED'
+        PACKAGE_ID = $PackageId
+        OPPORTUNITY_ID = $OpportunityId
+        LIFECYCLE_STATUS = 'RETURN_RECEIPT_CONSUMED'
+        ACCUMULATOR_STATUS = 'DELIVERED_APPLIED_RECEIPTED'
+        RECONCILIATION_STATUS = 'DELIVERED_APPLIED_RECEIPTED'
+        MUTATION_PERFORMED = $true
+    }
+}

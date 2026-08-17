@@ -1,8 +1,54 @@
 PROJECTOPS.V0.1
 SOURCE=MB-SM-076A3
-UPDATED=MB-SM-076A12
-PURPOSE=Durable SkillsMachine-owned project registry, enrolment proposals, real-project Improvement Flow, publication prep, Project Sync preparation, target return-receipt consumption, AI access runtime.
+UPDATED=MB-SM-077E
+PURPOSE=Durable SkillsMachine-owned project registry, enrolment proposals, real-project Improvement Flow, publication prep, Project Sync preparation, target return-receipt consumption, current publication lifecycle sidecar, AI access runtime.
 EXTERNAL_PROJECT_MUTATION=FORBIDDEN_FROM_THIS_MODULE
 ENROLMENT_AUTO_APPROVE=FORBIDDEN
 CONSUME_TARGET_RETURN_RECEIPT=GENERIC
 CLOSE_REPORT_HARDCODE_FORBIDDEN=YES
+
+==========
+MB-SM-077E_PUBLICATION_LIFECYCLE_SIDECAR
+==========
+HISTORICAL_PUBLICATION_EVIDENCE=PACKAGE.MANIFEST.json
+HISTORICAL_PUBLICATION_STATUS=PREPARED
+HISTORICAL_PRODUCTION_PUBLICATION=PREPARED_NOT_DELIVERED
+HISTORICAL_REWRITE=FORBIDDEN
+CURRENT_LIFECYCLE_SURFACE=Publications/<PACKAGE_ID>/PACKAGE.LIFECYCLE.CURRENT.json
+SIDECAR_OWNER=ProjectOps publication/sync/IF helpers
+SIDECAR_AUTHORITY=CURRENT_STATE_ONLY
+SIDECAR_NOT_AUTHORITATIVE_FOR=historical publication facts (created_at, CHANGE_RATIONALE, content_sha256, PUBLICATION_STATUS snapshot)
+
+LIFECYCLE_STATUS_VALUES=
+  PREPARED
+  DELIVERY_PREPARED
+  TARGET_APPLIED
+  RETURN_RECEIPT_CONSUMED
+
+TRANSITIONS=
+  Publication prepare -> PREPARED
+  ProjectSync prepare -> DELIVERY_PREPARED
+  Return-receipt consume -> RETURN_RECEIPT_CONSUMED (TARGET_APPLIED implied)
+  Improvement Flow accumulator reconcile -> RECONCILIATION_STATUS=DELIVERED_APPLIED_RECEIPTED without changing LIFECYCLE_STATUS beyond RETURN_RECEIPT_CONSUMED
+  Same-status rerun -> IDEMPOTENT_REPLAY
+  Missing sidecar -> FAIL LIFECYCLE_PACKAGE_MISSING
+  Package identity mismatch -> FAIL PACKAGE_IDENTITY_MISMATCH
+  Missing receipt -> IF reconcile refuses (MISSING_RECEIPT)
+  Missing accumulator opportunity -> IF reconcile refuses (MISSING_ACCUMULATOR_EVIDENCE)
+
+LIVE_STATE_MUTATION_BOUNDARY=
+  CG1 implements capability and isolated tests only.
+  Live PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1 sidecar/accumulator/registry CURRENT values require explicit CG2 authorization.
+  Do not rewrite live PACKAGE.MANIFEST.json.
+
+STAGE_14=
+  Non-interference. Do not manufacture operational measurement PASS.
+  MEAS operational remains NOT_YET_OBSERVED until a real CloseReport continuity event.
+
+REGISTRY=
+  LAST_PUBLICATION_LIFECYCLE is optional on project entries.
+  Older registry objects without the field remain valid.
+  Do not require the field for schema 0.2.0.
+==========
+FIN_MB-SM-077E_PUBLICATION_LIFECYCLE_SIDECAR
+==========

@@ -77,6 +77,35 @@ function New-ProjectSyncDeliveryPreparation {
 
     $deliveryId = ('DELIV-{0}-{1}-{2}' -f $TargetProject, $PackageId, (Get-Date -Format 'yyyyMMddHHmmss'))
     $pkg = Get-ProductionPublication -PackageId $PackageId -OpsRoot $OpsRoot
+    $preLifecycle = Get-PublicationLifecycle -PackageId $PackageId -OpsRoot $OpsRoot
+    if ($null -eq $preLifecycle) {
+        return [pscustomobject]@{
+            ok = $false
+            DELIVERY_STATUS = 'REJECTED'
+            Reason = 'LIFECYCLE_PACKAGE_MISSING'
+            TARGET_APPLY_STATUS = 'NOT_STARTED'
+            MUTATION_PERFORMED = $false
+        }
+    }
+    if ([string]$preLifecycle.PACKAGE_ID -ne $PackageId) {
+        return [pscustomobject]@{
+            ok = $false
+            DELIVERY_STATUS = 'REJECTED'
+            Reason = 'PACKAGE_IDENTITY_MISMATCH'
+            TARGET_APPLY_STATUS = 'NOT_STARTED'
+            MUTATION_PERFORMED = $false
+        }
+    }
+    if (-not (Test-PublicationLifecycleTransitionAllowed -FromStatus ([string]$preLifecycle.LIFECYCLE_STATUS) -ToStatus 'DELIVERY_PREPARED') -and [string]$preLifecycle.LIFECYCLE_STATUS -ne 'DELIVERY_PREPARED') {
+        return [pscustomobject]@{
+            ok = $false
+            DELIVERY_STATUS = 'REJECTED'
+            Reason = 'INVALID_LIFECYCLE_TRANSITION'
+            TARGET_APPLY_STATUS = 'NOT_STARTED'
+            MUTATION_PERFORMED = $false
+            LIFECYCLE_STATUS = [string]$preLifecycle.LIFECYCLE_STATUS
+        }
+    }
     if ([string]::IsNullOrWhiteSpace($SourceOpportunityId) -and ($pkg.PSObject.Properties.Name -contains 'SOURCE_OPPORTUNITY_ID')) {
         $SourceOpportunityId = [string]$pkg.SOURCE_OPPORTUNITY_ID
     }
@@ -109,12 +138,25 @@ function New-ProjectSyncDeliveryPreparation {
     $path = Join-Path (Get-ProjectSyncPrepDir -OpsRoot $OpsRoot) ("{0}.json" -f $deliveryId)
     Write-ProjectOpsUtf8NoBom -Path $path -Content (ConvertTo-ProjectOpsJson -Object $record)
 
+    $lifecycleResult = Set-PublicationLifecycleStatus -PackageId $PackageId -NewStatus 'DELIVERY_PREPARED' -SourceEvent 'PROJECT_SYNC_PREPARED' -OpsRoot $OpsRoot
+    if (-not [bool]$lifecycleResult.ok) {
+        return [pscustomobject]@{
+            ok = $false
+            DELIVERY_STATUS = 'REJECTED'
+            Reason = [string]$lifecycleResult.Reason
+            TARGET_APPLY_STATUS = 'NOT_STARTED'
+            MUTATION_PERFORMED = $false
+            LIFECYCLE_STATUS = $(if ($null -ne $lifecycleResult.LIFECYCLE_STATUS) { [string]$lifecycleResult.LIFECYCLE_STATUS } else { $null })
+        }
+    }
+
     $entry = Get-ProjectRegistryEntry -ProjectId $TargetProject -OpsRoot $OpsRoot
     if ($null -ne $entry) {
         $entry.PROJECT_SYNC_STATUS = 'DELIVERY_PENDING'
         $entry.LAST_SYNC_ID = $deliveryId
         $entry.LAST_OBSERVED_AT = Get-ProjectOpsUtcNow
         [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
+        [void](Set-ProjectRegistryLastPublicationLifecycle -ProjectId $TargetProject -LifecycleStatus 'DELIVERY_PREPARED' -OpsRoot $OpsRoot)
     }
 
     return [pscustomobject]@{
@@ -122,6 +164,7 @@ function New-ProjectSyncDeliveryPreparation {
         delivery = $record
         delivery_path = $path
         MUTATION_PERFORMED = $false
+        LIFECYCLE_STATUS = [string]$lifecycleResult.LIFECYCLE_STATUS
     }
 }
 
@@ -213,6 +256,10 @@ function Register-ProjectSyncTargetReturnReceipt {
     $pkg = Get-ProductionPublication -PackageId $pkgId -OpsRoot $OpsRoot
     if ($null -eq $pkg) { return & $fail 'PACKAGE_NOT_FOUND' }
 
+    $preLifecycle = Get-PublicationLifecycle -PackageId $pkgId -OpsRoot $OpsRoot
+    if ($null -eq $preLifecycle) { return & $fail 'LIFECYCLE_PACKAGE_MISSING' }
+    if ([string]$preLifecycle.PACKAGE_ID -ne $pkgId) { return & $fail 'PACKAGE_IDENTITY_MISMATCH' }
+
     $entry = Get-ProjectRegistryEntry -ProjectId $TargetProject -OpsRoot $OpsRoot
     if ($null -eq $entry) { return & $fail 'UNKNOWN_TARGET_PROJECT' }
     $check = Test-ProjectSyncDeliveryEligibility -TargetProject $TargetProject -PackageId $pkgId -OpsRoot $OpsRoot
@@ -228,6 +275,9 @@ function Register-ProjectSyncTargetReturnReceipt {
 
     if ($alreadyRecorded -or ($currentApply -eq 'APPLIED' -and -not [string]::IsNullOrWhiteSpace($existingReceipt))) {
         if ($existingReceipt -eq $LocalReceiptId -and $existingHead -eq $TargetHead) {
+            $replayLifecycle = Get-PublicationLifecycle -PackageId $pkgId -OpsRoot $OpsRoot
+            $replayStatus = ''
+            if ($null -ne $replayLifecycle) { $replayStatus = [string]$replayLifecycle.LIFECYCLE_STATUS }
             return [pscustomobject]@{
                 ok = $true
                 Reason = 'IDEMPOTENT_REPLAY'
@@ -239,6 +289,7 @@ function Register-ProjectSyncTargetReturnReceipt {
                 RETURN_RECEIPT_RECORDED = $true
                 IDEMPOTENT_REPLAY = $true
                 MUTATION_PERFORMED = $false
+                LIFECYCLE_STATUS = $replayStatus
             }
         }
         if ($existingReceipt -ne $LocalReceiptId -and -not [string]::IsNullOrWhiteSpace($existingReceipt)) {
@@ -325,6 +376,21 @@ function Register-ProjectSyncTargetReturnReceipt {
     }
     [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
 
+    $lifecycleResult = Set-PublicationLifecycleStatus -PackageId $pkgId -NewStatus 'RETURN_RECEIPT_CONSUMED' -SourceEvent 'RETURN_RECEIPT_CONSUMED' -OpsRoot $OpsRoot
+    if (-not [bool]$lifecycleResult.ok) {
+        return [pscustomobject]@{
+            ok = $false
+            Reason = [string]$lifecycleResult.Reason
+            DELIVERY_ID = $DeliveryId
+            TARGET_APPLY_STATUS = 'APPLIED'
+            RETURN_RECEIPT_RECORDED = $true
+            IDEMPOTENT_REPLAY = $false
+            MUTATION_PERFORMED = $false
+            LIFECYCLE_STATUS = $(if ($null -ne $lifecycleResult.LIFECYCLE_STATUS) { [string]$lifecycleResult.LIFECYCLE_STATUS } else { $null })
+        }
+    }
+    [void](Set-ProjectRegistryLastPublicationLifecycle -ProjectId $TargetProject -LifecycleStatus 'RETURN_RECEIPT_CONSUMED' -OpsRoot $OpsRoot)
+
     return [pscustomobject]@{
         ok = $true
         Reason = 'RETURN_RECEIPT_RECORDED'
@@ -337,5 +403,6 @@ function Register-ProjectSyncTargetReturnReceipt {
         RETURN_RECEIPT_RECORDED = $true
         IDEMPOTENT_REPLAY = $false
         MUTATION_PERFORMED = $false
+        LIFECYCLE_STATUS = [string]$lifecycleResult.LIFECYCLE_STATUS
     }
 }

@@ -38,6 +38,12 @@ function Test-ProjectRegistryObject {
         if ([string]$p.PROJECT_SYNC_STATUS -eq 'CURRENT' -and [string]$p.ENROLMENT_STATUS -eq 'NOT_ENROLLED') {
             throw ("PROJECT_REGISTRY_FAKE_CURRENT: {0}" -f [string]$p.PROJECT_ID)
         }
+        if ($p.PSObject.Properties.Name -contains 'LAST_PUBLICATION_LIFECYCLE' -and -not [string]::IsNullOrWhiteSpace([string]$p.LAST_PUBLICATION_LIFECYCLE)) {
+            $allowedLifecycle = @('PREPARED', 'DELIVERY_PREPARED', 'TARGET_APPLIED', 'RETURN_RECEIPT_CONSUMED')
+            if ($allowedLifecycle -notcontains [string]$p.LAST_PUBLICATION_LIFECYCLE) {
+                throw ("PROJECT_REGISTRY_INVALID_LAST_PUBLICATION_LIFECYCLE: {0}" -f [string]$p.PROJECT_ID)
+            }
+        }
     }
     return $true
 }
@@ -121,6 +127,7 @@ function Get-ProjectHomeViewFromRegistry {
             LAST_OBSERVED_STATE = [string]$p.LAST_OBSERVED_AT
             PROJECT_CLASS = [string]$p.PROJECT_CLASS
             PROPOSAL_STATUS = $(if ($p.PSObject.Properties.Name -contains 'PROPOSAL_STATUS') { [string]$p.PROPOSAL_STATUS } else { $null })
+            LAST_PUBLICATION_LIFECYCLE = $(if ($p.PSObject.Properties.Name -contains 'LAST_PUBLICATION_LIFECYCLE') { [string]$p.LAST_PUBLICATION_LIFECYCLE } else { $null })
         }
         [void]$projects.Add($row)
         if ([string]$p.ATTENTION -and [string]$p.ATTENTION -ne 'NONE') {
@@ -143,5 +150,58 @@ function Get-ProjectHomeViewFromRegistry {
         needs_your_attention = @($attention.ToArray())
         registry_path = (Get-ProjectRegistryPath -OpsRoot $OpsRoot)
         schema_version = [string]$reg.schema_version
+    }
+}
+
+function Set-ProjectRegistryLastPublicationLifecycle {
+    param(
+        [Parameter(Mandatory = $true)][string]$ProjectId,
+        [Parameter(Mandatory = $true)][string]$LifecycleStatus,
+        [string]$OpsRoot = (Get-ProjectOpsRoot)
+    )
+
+    $allowed = @('PREPARED', 'DELIVERY_PREPARED', 'TARGET_APPLIED', 'RETURN_RECEIPT_CONSUMED')
+    if ($allowed -notcontains $LifecycleStatus) {
+        return [pscustomobject]@{
+            ok = $false
+            Reason = 'INVALID_LIFECYCLE_STATUS'
+            MUTATION_PERFORMED = $false
+        }
+    }
+
+    $entry = Get-ProjectRegistryEntry -ProjectId $ProjectId -OpsRoot $OpsRoot
+    if ($null -eq $entry) {
+        return [pscustomobject]@{
+            ok = $false
+            Reason = 'UNKNOWN_TARGET_PROJECT'
+            MUTATION_PERFORMED = $false
+        }
+    }
+
+    $current = ''
+    if ($entry.PSObject.Properties.Name -contains 'LAST_PUBLICATION_LIFECYCLE') {
+        $current = [string]$entry.LAST_PUBLICATION_LIFECYCLE
+    }
+    if ($current -eq $LifecycleStatus) {
+        return [pscustomobject]@{
+            ok = $true
+            Reason = 'IDEMPOTENT_REPLAY'
+            LAST_PUBLICATION_LIFECYCLE = $current
+            MUTATION_PERFORMED = $false
+        }
+    }
+
+    if ($entry.PSObject.Properties.Name -contains 'LAST_PUBLICATION_LIFECYCLE') {
+        $entry.LAST_PUBLICATION_LIFECYCLE = $LifecycleStatus
+    }
+    else {
+        $entry | Add-Member -NotePropertyName LAST_PUBLICATION_LIFECYCLE -NotePropertyValue $LifecycleStatus
+    }
+    [void](Upsert-ProjectRegistryEntry -Entry $entry -OpsRoot $OpsRoot)
+    return [pscustomobject]@{
+        ok = $true
+        Reason = 'LAST_PUBLICATION_LIFECYCLE_SET'
+        LAST_PUBLICATION_LIFECYCLE = $LifecycleStatus
+        MUTATION_PERFORMED = $true
     }
 }
