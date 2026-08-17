@@ -23,7 +23,6 @@ actualizar continuidad y dejar trazabilidad consistente.
 12.SKILL.DRAG_AND_DROP.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-23.SKILL.WHOAMI_POLICY.txt
 
 ========== 
 02.00_USAGE
@@ -39,7 +38,8 @@ actualizar continuidad y dejar trazabilidad consistente.
 ==========
 
 - BATON es obligatorio
-- WHOAMI es historico/referencia solamente (no requisito de cierre; MB-SM-076A6B)
+- HUMAN is the authoritative home for human/operator context
+- 23.SKILL.WHOAMI_POLICY.txt is historical/absorbed (WHOAMI_ACTIVE_CANON=NO); not a REQUIRED_FILES entry and not a close gate (MB-SM-076A6B; CAND-SM-077D-WHOAMI-CONSUMER-LIST-001)
 - RADAR debe ejecutarse después del cierre
 - 29.SKILL.CRITICAL_FEEDBACK.txt
 - SESSION.LEARNING.REVIEW.ACTIVE.txt

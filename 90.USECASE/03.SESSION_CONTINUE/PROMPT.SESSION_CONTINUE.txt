@@ -221,9 +221,10 @@ RULE:
 03.SESSION_CONTINUE is a transversal usecase package. It is not sufficient by itself to start project-specific work.
 
 MINIMUM_PROJECT_CONTEXT:
-After uploading 03.SESSION_CONTINUE, the human must also provide a project BATON, WHOAMI, or equivalent file that contains at least:
+After uploading 03.SESSION_CONTINUE, the human must also provide a project BATON (or project continuity equivalent) that contains at least:
 - PROJECT_ROOT
 - TEMP_PATH
+Do not require standalone WHOAMI. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home for human/operator context (CAND-SM-077D-WHOAMI-CONSUMER-LIST-001).
 
 If PROJECT_ROOT is present but TEMP_PATH is missing, the assistant must not invent it. It must state TEMP_PATH_NOT_FOUND and suggest creating a Temp folder for the project.
 

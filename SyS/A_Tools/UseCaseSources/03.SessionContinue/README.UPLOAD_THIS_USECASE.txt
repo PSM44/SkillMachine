@@ -128,7 +128,8 @@ MB-SM-043C_SESSION_CONTINUE_STARTUP_CONTRACT_README_PATCH
 ==========
 
 03.SESSION_CONTINUE is transversal.
-After uploading this usecase package, the human must also provide the project BATON, WHOAMI, or equivalent continuity file containing PROJECT_ROOT and TEMP_PATH.
+After uploading this usecase package, the human must also provide the project BATON (or project continuity equivalent) containing PROJECT_ROOT and TEMP_PATH.
+Do not require standalone WHOAMI. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home (CAND-SM-077D-WHOAMI-CONSUMER-LIST-001).
 
 If TEMP_PATH is missing, the assistant must stop and ask for it or suggest creating a project Temp folder.
 
