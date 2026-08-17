@@ -4,12 +4,12 @@ GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
 
 ID_UNICO..........: GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.0001
 NOMBRE............: AiCodeAgentSequentialWorkflow
-VERSION...........: v0.3-DRAFT_READY_FOR_TEST
+VERSION...........: v0.4-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
-UPDATED_LOCAL.....: 2026-08-16 (MB-SM-GRAPH-003)
+UPDATED_LOCAL.....: 2026-08-17 (MB-SM-077D)
 SCOPE.............: Cross-project control for Codex and Claude Code task execution in VS Code
 APPLIES_TO........: SkillsMachine and any project where AI code agents execute long-running development tasks
 
@@ -256,6 +256,11 @@ This GRC succeeds when:
 11.00 CHANGELOG
 ==========
 
+2026-08-17, v0.4-DRAFT_READY_FOR_TEST
+- MB-SM-077D Slice D: exact human authority for canon promotion, destructive
+  operations, and BUILD/generated mutation; candidate-before-canon.
+- Graph-003 isolated-proposal concurrency and single-owner canonical mutation unchanged.
+
 2026-08-16, v0.3-DRAFT_READY_FOR_TEST
 - MB-SM-GRAPH-003: sequential remains the safe default for shared/canonical mutation.
 - Isolated non-canonical proposal concurrency is conditionally allowed; canonical mutation stays single-owner or explicitly sequenced.
@@ -316,4 +321,40 @@ ran, or vice versa, violates this GRC (see
 GRC.CROSS_RUNTIME_EXECUTION_CONTRACT and GRC.PROJECT_CONTEXT_IDENTITY).
 
 FIN_MB-SM-067B-D2_FAILURE_ESCALATION_CHECKPOINTS_AND_IDENTITY
+==========
+
+==========
+MB-SM-077D_EXACT_AUTHORITY_AND_CANDIDATE_BEFORE_CANON
+==========
+DATE..............: 2026-08-17
+STATUS............: ACTIVE_RULE
+LAYER.............: AI_CODE_AGENT_SEQUENTIAL_WORKFLOW
+SOURCE_MB.........: MB-SM-077D Slice D
+PRESERVES.........: MB-SM-GRAPH-003 section 02.00 concurrency layer split
+
+12.70 EXACT HUMAN AUTHORITY FOR SENSITIVE MUTATION
+Commit and push remain human-owned per 03.00 and 12.40.
+
+In addition, the following require exact human authorization for the current
+objective; authorization does not carry across minibattles:
+
+- CANON_PROMOTION: moving a candidate into SkillsLake/01.SKILLS or
+  GRCLake/01.CONTROLS, or treating a candidate as live product canon;
+- DESTRUCTIVE_OPERATIONS: irreversible git or filesystem actions
+  (force-push, hard reset, deleting durable canon or evidence required
+  for the current task);
+- BUILD_OR_GENERATED_MUTATION: running BUILD.ps1 or otherwise regenerating
+  90.USECASE / generated outputs.
+
+12.80 CANDIDATE BEFORE CANON
+New Skill or GRC opportunities remain candidates (99.CANDIDATES) until the
+human explicitly authorizes promotion. Do not create a canonical Skill or GRC
+file from a candidate without that authorization. Do not treat AGENTS.md as
+a substitute for this GRC gate.
+
+This section does not change 02.00: isolated non-canonical proposal concurrency
+remains conditionally allowed; canonical mutation remains single-owner or
+explicitly sequenced.
+==========
+FIN_MB-SM-077D_EXACT_AUTHORITY_AND_CANDIDATE_BEFORE_CANON
 ==========

@@ -4,12 +4,12 @@ GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP
 
 ID_UNICO..........: GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.0001
 NOMBRE............: UnknownWorktreeStateHardStop
-VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+VERSION...........: v0.3-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
-UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
+UPDATED_LOCAL.....: 2026-08-17 (MB-SM-077D)
 SCOPE.............: Cross-project control for hard-stop handling of unexpected worktree state during AI-assisted execution
 APPLIES_TO........: SkillsMachine and any project where AI agents operate on Git worktrees
 
@@ -202,6 +202,9 @@ GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 12.00 CHANGELOG
 ==========
 
+2026-08-17, v0.3-DRAFT_READY_FOR_TEST
+- MB-SM-077D Slice D: require complete dirty-state visibility including untracked paths before and after repo-affecting actions.
+
 2026-06-30, v0.1-DRAFT_READY_FOR_TEST
 - Initial GRC draft created to enforce hard-stop behavior for unknown worktree state and local-only ignore handling.
 
@@ -250,4 +253,29 @@ worktree for governance purposes, but it must never be staged, committed, or
 treated as project source.
 
 FIN_MB-SM-067B-D2_ROOT_SUBTREE_AND_DIRTY_WHITELIST_RULES
+==========
+
+==========
+MB-SM-077D_COMPLETE_DIRTY_STATE_VISIBILITY
+==========
+DATE..............: 2026-08-17
+STATUS............: ACTIVE_RULE
+LAYER.............: UNKNOWN_WORKTREE_STATE_HARD_STOP
+SOURCE_MB.........: MB-SM-077D Slice D
+
+14.00 COMPLETE DIRTY-STATE VISIBILITY
+Before and after any repo-affecting action, the agent must obtain a dirty-state
+view that includes untracked paths, not only modified tracked files.
+
+A compliant example:
+
+  git status --short --untracked-files=all
+
+An equivalent mechanism is acceptable only if it exposes the same relevant
+untracked set. git status that omits untracked files is not sufficient.
+
+Hard stop on unexpected dirty scope remains 01.00 / 13.10. This section does
+not replace classification; it requires that classification see the full set.
+==========
+FIN_MB-SM-077D_COMPLETE_DIRTY_STATE_VISIBILITY
 ==========

@@ -1,7 +1,7 @@
 # GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.1
+VERSION: v1.2
 STATUS: ACTIVE
 LAYER: GRC
 CONTROL_TYPE: EXECUTION_GOVERNANCE
@@ -309,4 +309,29 @@ without direct evidence of that execution (its AI_TAIL, its log, its commit,
 its report). Absence of evidence means the claim must not be made.
 
 FIN_MB-SM-067B-D2_RUNTIME_AND_AGENT_IDENTITY_EVIDENCE
+==========
+
+==========
+MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
+==========
+DATE..............: 2026-08-17
+STATUS............: ACTIVE_RULE
+LAYER.............: CROSS_RUNTIME_EXECUTION_CONTRACT
+SOURCE_MB.........: MB-SM-077D Slice D
+
+11.00 PATH QUOTING
+Human- or AI-generated shell commands must quote paths that contain spaces or
+other characters that can change parsing. This includes the SkillsMachine root
+C:\01. GitHub\Skills.
+
+11.10 POWERSHELL LITERAL-PATH PREFERENCE
+For PowerShell, prefer literal-path semantics where the call is a file or
+directory path: -LiteralPath, and -File with a quoted script path. Do not
+split a path on spaces when invoking -File.
+
+11.20 BOUNDARY
+This rule is path-parsing safety only. It does not redefine DETU, compact
+upload, Temp policy, or general shell style.
+==========
+FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 ==========

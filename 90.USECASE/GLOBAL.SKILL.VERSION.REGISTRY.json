@@ -177,7 +177,7 @@
       "version": "v1.1"
     },    {
       "file": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-      "version": "v1.1"
+      "version": "v1.2"
     },{
       "file": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
       "version": "v0.2-DRAFT",
@@ -193,11 +193,11 @@
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
-      "version": "v0.3-DRAFT_READY_FOR_TEST"
+      "version": "v0.4-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
-      "version": "v0.2-DRAFT_READY_FOR_TEST"
+      "version": "v0.3-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.PROJECT_CONTEXT_IDENTITY.txt",
