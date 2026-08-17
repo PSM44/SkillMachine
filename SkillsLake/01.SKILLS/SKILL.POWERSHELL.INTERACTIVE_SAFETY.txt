@@ -8,9 +8,9 @@ NOMBRE............: PowerShell Interactive Safety
 TIPO..............: Skill operativo
 DOMINIO...........: PowerShell / Windows / CLI execution
 ESTADO............: ACTIVE
-VERSION...........: 1.3
-FECHA.............: 2026-07-19
-ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session; updated after MB-EXAM-005R2 PowerShell wrapper recovery; repaired by MB-SKILL-PS-INTERACTIVE-002; hardened by MB-SM-067B-D2 with StrictMode/array/parser anti-patterns
+VERSION...........: 1.4
+FECHA.............: 2026-08-16
+ORIGEN............: Lessons learned from MB-GRC-014A / SkillsLake migration session; updated after MB-EXAM-005R2 PowerShell wrapper recovery; repaired by MB-SKILL-PS-INTERACTIVE-002; hardened by MB-SM-067B-D2 with StrictMode/array/parser anti-patterns; MB-SM-077D absorbed generated-runner variable-colon parser safety
 
 ----------
 1. PURPOSE
@@ -845,4 +845,69 @@ Test-ObjectProperty, New-AiTail) over ad-hoc copied helper code. The module runs
 under StrictMode with a Pester regression suite that encodes these anti-patterns.
 
 FIN_MB-SM-067B-D2_POWERSHELL_STRICTMODE_AND_COLLECTION_ANTIPATTERNS
+==========
+
+==========
+23. GENERATED_RUNNER_PARSER_SAFETY
+==========
+SOURCE_MB.........: MB-SM-077D
+ABSORBS...........: SKILL.POWERSHELL_SCRIPT_PARSER_SAFETY.CANDIDATE (variable-colon delta only)
+SCOPE.............: PowerShell only. Do not apply this colon rule to cmd, bash, Python, or other languages.
+SUPPLEMENTS.......: section 20 parse gate; section 22.6 Parser::ParseFile plus functional probe; encoding/ASCII-safe source preference in the activation wrapper. This section does not replace those controls.
+
+23.1 FAILURE CLASS
+PowerShell may treat a variable immediately followed by a colon as a scoped or
+drive-qualified variable, not as the variable plus literal punctuation.
+
+This applies inside expandable strings and here-strings. It does not make every
+colon in a PowerShell string unsafe.
+
+UNSAFE CLASS (do not deliver):
+  "$name: value"
+  "$path:$line"
+
+SAFE DELIMITERS (use when a colon must follow a variable):
+  "${name}: value"
+  "$($path):$line"
+
+Valid scoped / drive variables that MAY keep the colon:
+  $env:  $script:  $global:  $local:  $private:
+
+23.2 PREVENTIVE STATIC SCAN
+Before delivering any long generated .ps1, scan the file. Do not wait for a
+runtime ParserError.
+
+Regex:
+  \$[A-Za-z_][A-Za-z0-9_]*:
+
+Exclude only:
+  $env:  $script:  $global:  $local:  $private:
+
+Any remaining match is a blocker:
+  POWERSHELL_RISKY_VARIABLE_COLON_PATTERN
+
+Rewrite unsafe matches with braces or a subexpression, then rescan.
+
+Ordinary colons with no immediately preceding unscoped variable are allowed
+(drive paths, hashtable entries, ratios, labels, comments).
+
+23.3 PARSE TEST
+When feasible, also run:
+  [System.Management.Automation.Language.Parser]::ParseFile(path, tokens-ref, errors-ref)
+Zero parser errors is necessary and still not sufficient (see 22.6).
+
+23.4 DELIVERY
+Deliver long PowerShell as a .ps1 file, not as a long interactive paste.
+Prefer ASCII-safe executable source where practical; keep existing encoding
+normalization. If a runner deletes the contents of its own Temp directory, it
+must refuse to execute from that Temp. Nested PowerShell can lose $PSScriptRoot;
+use $PSCommandPath or an explicit path instead of assuming the nested root.
+
+23.5 NOT IN THIS SKILL
+Do not copy DETU upload-pack rules, Temp path names, or compact-upload file
+caps here. Those live in SKILL.COMPACT_UPLOAD_PACK_EXECUTION and
+GRC.COMPACT_UPLOAD_PACK_ONLY.
+
+==========
+FIN_MB-SM-077D_GENERATED_RUNNER_PARSER_SAFETY
 ==========

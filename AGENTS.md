@@ -273,10 +273,11 @@ For DETU / AI-exchange workflows in this project:
 
 Marker: MB-SM-057J_POWERSHELL_PARSER_SAFETY_SKILL_REFERENCE
 
-PowerShell `.ps1` runners must follow the candidate Skill:
+PowerShell `.ps1` runners must follow SKILL.POWERSHELL.INTERACTIVE_SAFETY section 23
+(MB-SM-077D absorbed the former parser-safety candidate; do not promote a second Skill):
 
 ```text
-SkillsLake\99.CANDIDATES\SKILL.POWERSHELL_SCRIPT_PARSER_SAFETY.CANDIDATE.txt
+SkillsLake\01.SKILLS\SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt
 ```
 Required controls before delivering long PowerShell runners:
 

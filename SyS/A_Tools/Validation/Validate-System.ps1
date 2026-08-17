@@ -68,6 +68,18 @@ if ($LASTEXITCODE -ne 0) {
     exit $LASTEXITCODE
 }
 
+# MB-SM-077D Slice B: INTERACTIVE_SAFETY variable-colon fixtures (not a repo-wide .ps1 scan)
+Write-Host "VALIDATION: PowerShell variable-colon fixtures"
+$VariableColonValidator = Join-Path $PSScriptRoot "Test-PowerShellVariableColon.ps1"
+if (-not (Test-Path -LiteralPath $VariableColonValidator -PathType Leaf)) {
+    Write-Host "FAIL: missing PowerShell variable-colon fixture test: $VariableColonValidator"
+    exit 1
+}
+& $PowerShellHost.Source -NoProfile -ExecutionPolicy Bypass -File $VariableColonValidator
+if ($LASTEXITCODE -ne 0) {
+    exit $LASTEXITCODE
+}
+
 # MB-SM-067B-D1-R1_FAIL_CLOSED_GATE
 Write-Host "VALIDATION: automation reliability foundation"
 
