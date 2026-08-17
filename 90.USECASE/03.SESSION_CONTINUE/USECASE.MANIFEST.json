@@ -1,7 +1,7 @@
 {
   "usecase": "03.SESSION_CONTINUE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-08-17 14:02:21",
+  "generated_at": "2026-08-17 16:24:17",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
   "primary_upload_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
-  "compiled_output_sha256": "E0547A152E43BFC13669EE4B9C02A6B40F6D51C6AC1538A1651A6C5C7042D023",
+  "compiled_output_sha256": "F5191D77705D4D81AC39016972C6171B463EFF7057A72D8EF3D5E6E5AC31D47D",
   "compiled_source_order": [
     "README.UPLOAD_THIS_USECASE.txt",
     "PROMPT.SESSION_CONTINUE.txt",
