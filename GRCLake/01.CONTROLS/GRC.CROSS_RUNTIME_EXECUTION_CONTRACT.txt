@@ -1,7 +1,7 @@
 # GRC.CROSS_RUNTIME_EXECUTION_CONTRACT
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.2
+VERSION: v1.3
 STATUS: ACTIVE
 LAYER: GRC
 CONTROL_TYPE: EXECUTION_GOVERNANCE
@@ -241,17 +241,22 @@ FIN_MB-SM-054B_P0_AITAIL_STRICT_AND_CHILD_PROCESS_FAIL_RULE
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This GRC adds only cross-runtime execution
+contract constraints (runtime adapters, AI_TAIL, generated-output flow,
+identity evidence, path quoting).
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION

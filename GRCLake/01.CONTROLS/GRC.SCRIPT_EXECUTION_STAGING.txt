@@ -4,12 +4,12 @@ GRC.SCRIPT_EXECUTION_STAGING
 
 ID_UNICO..........: GRC.SCRIPT_EXECUTION_STAGING.0001
 NOMBRE............: ScriptExecutionStaging
-VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+VERSION...........: v0.3-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
 CREATED_LOCAL.....: 2026-06-30
-UPDATED_LOCAL.....: 2026-07-19 (MB-SM-067B-D2)
+UPDATED_LOCAL.....: 2026-08-17 (MB-SM-077D Slice E)
 SCOPE.............: Cross-project control for staging long executable scripts before terminal execution
 APPLIES_TO........: SkillsMachine and any project where long scripts are safer from file than from terminal paste
 
@@ -130,6 +130,10 @@ GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 2026-06-30, v0.1-DRAFT_READY_FOR_TEST
 - Initial transversal GRC draft created for staging long scripts before execution.
 
+2026-08-17, v0.3-DRAFT_READY_FOR_TEST
+- MB-SM-077D Slice E: replace 10.30 UPLOAD_*.txt / one-file-or-impossible
+  assumption with the authoritative compact pair; preserve staging workflow.
+
 ==========
 END
 ==========
@@ -162,10 +166,20 @@ Every staged output uses a unique objective/timestamp prefix
 runs never collide and evidence is traceable to its run.
 
 10.30 CONSOLIDATED UPLOAD PACKAGE
-The upload package for human/IA review must be consolidated into ONE
-AI-readable file (UPLOAD_*.txt) unless technically impossible (binary
-artifacts, size limits). Raw scattered logs are not an acceptable upload
-package; consolidate before delivery.
+When staged outputs are prepared for human/IA review, compact/upload packaging
+follows GRC.COMPACT_UPLOAD_PACK_ONLY and SKILL.COMPACT_UPLOAD_PACK_EXECUTION.
+
+Use the minimum necessary artifact count. Prefer one consolidated AI-readable
+artifact when feasible. FILES_COUNT <= 10 is an upper bound, not a target.
+Do not require the filename prefix UPLOAD_*.txt. Additional files only when
+technically justified (for example binary artifacts or size limits).
+
+Raw scattered logs are not an acceptable upload package; consolidate before
+delivery.
+
+Preserving the currently executing script (10.10) is execution-sandbox safety.
+Whether that script remains in an upload pack is inventory/need-based per the
+compact pair, not automatic. This GRC's staging path is not AI-exchange Temp.
 
 FIN_MB-SM-067B-D2_FLAT_STAGING_AND_UPLOAD_CONSOLIDATION
 ==========

@@ -174,10 +174,10 @@
     },
         {
       "file": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-      "version": "v1.1"
+      "version": "v1.2"
     },    {
       "file": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-      "version": "v1.2"
+      "version": "v1.3"
     },{
       "file": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
       "version": "v0.2-DRAFT",
@@ -185,11 +185,11 @@
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-      "version": "v0.1-DRAFT"
+      "version": "v0.3-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
-      "version": "v0.2-DRAFT_READY_FOR_TEST"
+      "version": "v0.3-DRAFT_READY_FOR_TEST"
     },
     {
       "file": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",

@@ -1,7 +1,7 @@
 # SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
 
 MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.1
+VERSION: v1.2
 STATUS: ACTIVE
 LAYER: SKILL
 OWNER_DOMAIN: SkillsMachine
@@ -273,17 +273,22 @@ FIN_MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This Skill adds only human-controlled local
+execution method constraints (human runs the artifact; AI interprets
+evidence). Human execution authority is unchanged.
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION

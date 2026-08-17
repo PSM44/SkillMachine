@@ -4,7 +4,7 @@ GRC.USECASE_TEMP_UPLOAD_STAGING
 
 ID_UNICO..........: GRC.USECASE_TEMP_UPLOAD_STAGING.0001
 NOMBRE............: UsecaseTempUploadStaging
-VERSION...........: v0.2-DRAFT_READY_FOR_TEST
+VERSION...........: v0.3-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE_CONTROL
 OWNER_HUMAN.......: PABLO
@@ -126,6 +126,11 @@ This GRC succeeds when:
 2026-06-30, v0.1-DRAFT
 - Initial GRC created to govern upload staging for additional Skills/GRCs through SyS\Temp.
 
+2026-08-17, v0.3-DRAFT_READY_FOR_TEST
+- MB-SM-077D Slice E: align upload packaging with GRC.COMPACT_UPLOAD_PACK_ONLY
+  and SKILL.COMPACT_UPLOAD_PACK_EXECUTION; keep SyS\Temp staging and
+  bundle+manifest as domain-specific justified delta.
+
 ==========
 END
 ==========
@@ -208,15 +213,25 @@ Any package intended for upload to IA/chat must be flat and IA-readable.
 Required:
 - No folders as final handoff.
 - Prefer text-first files.
-- Consolidate all relevant files the assistant considers necessary into a maximum of 10 files, perfectly understandable for the IA.
-- Include manifest with file names, sizes, purpose, source scope and next action.
+- Follow GRC.COMPACT_UPLOAD_PACK_ONLY and SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+  for packaging: use the minimum necessary artifact count; prefer one
+  consolidated AI-readable artifact when feasible; FILES_COUNT <= 10 is a
+  guardrail, not a target; do not require UPLOAD_*.txt naming; additional
+  files only when technically justified.
+- This GRC's domain-specific staging output remains a compiled TXT bundle
+  plus a JSON manifest when hashes/traceability require a separate file
+  (see 03.00). That two-file pair is a justified delta, not a global default.
+- Include inventory/manifest with file names, sizes, purpose, source scope and next action.
 - Split oversized files deterministically.
 - Do not include raw sensitive binaries unless explicitly requested.
 
 RULE_02_LOCAL_EVIDENCE_VS_IA_UPLOAD:
 Distinguish:
 - LOCAL_EVIDENCE_DIR: complete local evidence, may contain many files/folders.
-- IA_UPLOAD_PACK: compressed, flat, maximum 5-10 uploadable files.
+  This is not the IA upload pack and is not AI-exchange Temp.
+- IA_UPLOAD_PACK: the compact upload-ready set (flat, minimum necessary,
+  prefer one when feasible, maximum 10 as guardrail). Not an unbounded tree
+  and not a compressed/ZIP default.
 
 The assistant must not ask the human to upload a folder when the UI does not support folder upload.
 
@@ -253,17 +268,23 @@ FIN_MB-SM-054B_P0_UPLOAD_TEMP_GENERATED_OUTPUT_HARDENING
 SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
 ==========
 
-UPDATED_AT: 2026-07-05 01:04:17 -04:00
+UPDATED_AT: 2026-08-17
 SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
+REFINED_MB: MB-SM-077D Slice E
 
 SUPPORTING_RULE:
-Operational runners that create upload evidence must follow COMPACT_UPLOAD_PACK_ONLY:
-- clean Temp at start;
-- preserve current .ps1 if executing from Temp;
-- consolidate tool output into UPLOAD_*.txt;
-- leave no raw logs;
-- keep upload count <=10;
-- persist and print AI_TAIL.
+Compact/upload packaging is governed by the authoritative pair:
+- GRC.COMPACT_UPLOAD_PACK_ONLY
+- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
+
+Do not restate that pair here. This GRC adds only usecase Skills/GRC upload
+staging constraints (SyS\Temp as this GRC's staging path, compiled TXT bundle,
+traceability manifest). It does not redefine AI-exchange Temp, internal
+runtime scratch, or execution-sandbox Temp.
+
+Upload-ready Temp is disposable evidence staging, never durable baseline and
+never product canon. Compact packaging does not change human or canonical
+authority.
 
 RELATED_CORE:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION
