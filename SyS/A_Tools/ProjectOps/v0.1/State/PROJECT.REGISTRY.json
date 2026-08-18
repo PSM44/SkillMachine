@@ -2,7 +2,7 @@
     "schema_version":  "0.2.0",
     "source":  "MB-SM-076A3",
     "generated_at":  "2026-08-10T20:21:08.3719525Z",
-    "updated_at":  "2026-08-15T04:03:04.7818619Z",
+    "updated_at":  "2026-08-17T21:13:48.3011618Z",
     "note":  "Durable SkillsMachine-owned project registry. Enrolment != autonomous mutation authority.",
     "projects":  [
                      {
@@ -54,7 +54,8 @@
                          "PROPOSAL_STATUS":  "APPLIED",
                          "LATEST_PROPOSAL_ID":  "ENRPROP-CLOSEREPORT-20260810_162109",
                          "OBSERVED_HEAD":  "5e298bcd132cf8d87832bb66bbc6875bf0b68c02",
-                         "LAST_UPDATE_RECEIPT_ID":  "RECEIPT-DELIV-CloseReport-PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1-20260814130221"
+                         "LAST_UPDATE_RECEIPT_ID":  "RECEIPT-DELIV-CloseReport-PKG-SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT-1.1-20260814130221",
+                         "LAST_PUBLICATION_LIFECYCLE":  "RETURN_RECEIPT_CONSUMED"
                      }
                  ]
 }

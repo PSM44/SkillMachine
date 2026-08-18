@@ -3,7 +3,7 @@
     "ACCUMULATOR_ID":  "ACC-ACTIVE-001",
     "status":  "ACTIVE",
     "created_at":  "2026-08-10T20:21:08.4638109Z",
-    "updated_at":  "2026-08-13T19:10:01.0189800Z",
+    "updated_at":  "2026-08-17T21:13:48.2438241Z",
     "last_receipt_id":  "RCPT-SUB-B068B2775B468E356505E631",
     "opportunities":  [
                           {
@@ -20,9 +20,9 @@
                                                 ],
                               "added_at":  "2026-08-13T16:58:36.2302640Z",
                               "DISPOSITION":  "IMPROVE_EXISTING",
-                              "STATUS":  "UNDER_REVIEW",
                               "LATEST_DISPOSITION_ID":  "DISP-OPP-CR-076A-01-20260813151000",
-                              "TARGET_SKILL_GRC":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT"
+                              "TARGET_SKILL_GRC":  "SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT",
+                              "STATUS":  "DELIVERED_APPLIED_RECEIPTED"
                           }
                       ]
 }
