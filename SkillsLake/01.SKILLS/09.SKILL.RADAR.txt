@@ -4,8 +4,8 @@
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
 NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
-VERSION...........: v1.6-DRAFT
-FECHA_HORA........: 2026-08-19T15:30:00-04:00
+VERSION...........: v1.6-CANON
+FECHA_HORA........: 2026-08-19T16:20:00-04:00
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -1079,6 +1079,12 @@ SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (y no rutas hardcodeadas)?
 ==========
 16.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.6-CANON
+SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
+- Promoted after RADAR.ps1 v0.7.0 runtime conformance tests FAIL=0 SKIPPED=0.
+- Contract and runtime aligned: binary detection, FILE_ID, reparse policy,
+  secrets/DO_NOT_UPLOAD, first-run six outputs, daily upload selection.
 
 2026-08-19, v1.6-DRAFT runtime conformance
 SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001

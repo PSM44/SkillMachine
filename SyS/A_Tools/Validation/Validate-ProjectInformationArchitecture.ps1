@@ -24,7 +24,9 @@ $owner = [System.IO.File]::ReadAllText($OwnerFile)
 $boot = [System.IO.File]::ReadAllText($BootstrapFile)
 $radar = [System.IO.File]::ReadAllText($RadarFile)
 
-if ($owner -notmatch 'STATUS\s*\.+:\s*DRAFT') { Fail 'owner skill STATUS is not DRAFT' }
+if ($owner -notmatch 'VERSION\s*\.+:\s*v0\.1-CANON') { Fail 'owner skill VERSION is not v0.1-CANON' }
+if ($owner -match '(?m)^STATUS\s*\.+:\s*DRAFT') { Fail 'owner skill STATUS is still DRAFT' }
+if ($owner -notmatch '(?m)^STATUS\s*\.+:\s*CANON') { Fail 'owner skill STATUS is not CANON' }
 if ($owner -notmatch 'SINGLE_OWNER=YES') { Fail 'owner skill missing SINGLE_OWNER=YES' }
 if ($owner -notmatch 'DIRECTORY_ARCHITECTURE' -or $owner -notmatch 'ARTIFACT_ARCHITECTURE') {
     Fail 'owner skill missing DIRECTORY_ARCHITECTURE or ARTIFACT_ARCHITECTURE'
@@ -61,7 +63,9 @@ if ($boot -match 'OWNER_CONTRACT\s*\.+:\s*DIRECTORY_ARCHITECTURE') {
 if ($boot -notmatch 'SKILL\.PROJECT_INFORMATION_ARCHITECTURE\.txt') {
     Fail 'Skill 20 does not consume PIA owner'
 }
-if ($boot -match 'SINGLE_OWNER=YES') { Fail 'Skill 20 still declares SINGLE_OWNER=YES' }
+if ($boot -notmatch 'VERSION\s*\.+:\s*v1\.3-CANON') { Fail 'Skill 20 VERSION is not v1.3-CANON' }
+if ($boot -match '(?m)^STATUS\s*\.+:\s*DRAFT') { Fail 'Skill 20 STATUS is still DRAFT' }
+if ($radar -notmatch 'VERSION\s*\.+:\s*v1\.6-CANON') { Fail 'RADAR VERSION is not v1.6-CANON' }
 
 # One owner file; no extra architecture skills by folder.
 $extraOwners = @(Get-ChildItem -LiteralPath $SkillsDir -File | Where-Object {

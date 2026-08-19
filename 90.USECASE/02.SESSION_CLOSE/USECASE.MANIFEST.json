@@ -1,7 +1,7 @@
 {
     "usecase":  "02.SESSION_CLOSE",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-08-19 15:40:54",
+    "generated_at":  "2026-08-19 16:28:35",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
     "primary_upload_file":  "USECASE.02.SESSION_CLOSE.COMPILED.txt",
     "compiled_output_enabled":  true,
     "compiled_output_file":  "USECASE.02.SESSION_CLOSE.COMPILED.txt",
-    "compiled_output_sha256":  "174BB88FDC5FCFE4BA10542D071C8E91A3F7F03C1D2E0A1B8F5F72B30B05F8BB",
+    "compiled_output_sha256":  "066D090B8389DA5412E2B02598749B595F0F5DC1E4B223E1FBFBB8B288745F40",
     "compiled_source_order":  [
                                   "README.UPLOAD_THIS_USECASE.txt",
                                   "PROMPT.SESSION_CLOSE.txt",
@@ -102,15 +102,15 @@
                         "bundle_name":  "GOVERNANCE",
                         "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\02.SESSION_CLOSE\\02.BUNDLE.GOVERNANCE.txt",
-                        "delivery_size_bytes":  155810,
-                        "delivery_size_kb":  152.16,
-                        "delivery_sha256":  "0C67BBB58488D150771D958A2F389692686093F9D5C6CC2EE88DB88A1F842AC7",
+                        "delivery_size_bytes":  156770,
+                        "delivery_size_kb":  153.1,
+                        "delivery_sha256":  "54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-                                                 "version":  "v1.6-DRAFT",
-                                                 "source_sha256":  "D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D"
+                                                 "version":  "v1.6-CANON",
+                                                 "source_sha256":  "7F29C75DA759F6E05AB6FDCD93CBD7E24C8CDD97B52B377D4EFFB97BF363875E"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",

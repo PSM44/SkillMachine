@@ -1,7 +1,7 @@
 {
     "usecase":  "04.REPOSITORY_STRUCTURE_REPAIR",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-08-19 15:40:54",
+    "generated_at":  "2026-08-19 16:28:35",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
     "primary_upload_file":  "USECASE.04.REPOSITORY_STRUCTURE_REPAIR.COMPILED.txt",
     "compiled_output_enabled":  true,
     "compiled_output_file":  "USECASE.04.REPOSITORY_STRUCTURE_REPAIR.COMPILED.txt",
-    "compiled_output_sha256":  "14C599973E8600FC0D6679E6A32EE6898F30A8317980F38C01A1130C97FB6164",
+    "compiled_output_sha256":  "CC2C3090CD5E6801B136A8EFB1F2CDA75243EDA3D743EF095FE730F6D04BA229",
     "compiled_source_order":  [
                                   "README.UPLOAD_THIS_USECASE.txt",
                                   "README.EXECUTION.txt",
@@ -110,21 +110,21 @@
                         "bundle_name":  "GOVERNANCE",
                         "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\04.REPOSITORY_STRUCTURE_REPAIR\\02.BUNDLE.GOVERNANCE.txt",
-                        "delivery_size_bytes":  172754,
-                        "delivery_size_kb":  168.71,
-                        "delivery_sha256":  "5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809",
+                        "delivery_size_bytes":  173952,
+                        "delivery_size_kb":  169.88,
+                        "delivery_sha256":  "96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-                                                 "version":  "v1.6-DRAFT",
-                                                 "source_sha256":  "D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D"
+                                                 "version":  "v1.6-CANON",
+                                                 "source_sha256":  "7F29C75DA759F6E05AB6FDCD93CBD7E24C8CDD97B52B377D4EFFB97BF363875E"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
-                                                 "version":  "v0.1-DRAFT",
-                                                 "source_sha256":  "29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D"
+                                                 "version":  "v0.1-CANON",
+                                                 "source_sha256":  "EAFD902A6314952C04D06F3D222D5AAA082B7915E91B848D3F0051DFB06D7CB5"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",

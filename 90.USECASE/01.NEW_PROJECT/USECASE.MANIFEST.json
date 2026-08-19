@@ -1,7 +1,7 @@
 {
     "usecase":  "01.NEW_PROJECT",
     "usecase_version":  "v3.0-BUNDLES",
-    "generated_at":  "2026-08-19 15:40:53",
+    "generated_at":  "2026-08-19 16:28:34",
     "source_root":  "C:\\01. GitHub\\Skills",
     "delivery_files":  [
                            "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
     "primary_upload_file":  "USECASE.01.NEW_PROJECT.COMPILED.txt",
     "compiled_output_enabled":  true,
     "compiled_output_file":  "USECASE.01.NEW_PROJECT.COMPILED.txt",
-    "compiled_output_sha256":  "B30049903EF201CD2DF6F5B56D971386F5D4C3CB26DCB5C6B5D98B34F3DB22D4",
+    "compiled_output_sha256":  "6D30CC0CE9BBF1DCA7E05C10249EBF4BB4C00C18815CFCCCE6F2A05A544743D9",
     "compiled_source_order":  [
                                   "README.UPLOAD_THIS_USECASE.txt",
                                   "PROMPT.NEW_PROJECT.txt",
@@ -107,27 +107,27 @@
                         "bundle_name":  "GOVERNANCE",
                         "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
                         "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
-                        "delivery_size_bytes":  182508,
-                        "delivery_size_kb":  178.23,
-                        "delivery_sha256":  "35BD6987AEFBBDF3871733E8413962E2B3000166E6FF3694E1010F5AE7FC1A1B",
+                        "delivery_size_bytes":  183909,
+                        "delivery_size_kb":  179.6,
+                        "delivery_sha256":  "88AD25F192F302EFC7CD099DC1A8EE98F8B24265A73C98AF0C4B028086BB3DB5",
                         "source_files":  [
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-                                                 "version":  "v1.6-DRAFT",
-                                                 "source_sha256":  "D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D"
+                                                 "version":  "v1.6-CANON",
+                                                 "source_sha256":  "7F29C75DA759F6E05AB6FDCD93CBD7E24C8CDD97B52B377D4EFFB97BF363875E"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-                                                 "version":  "v1.3-DRAFT",
-                                                 "source_sha256":  "E11AA0C9B7CE6664F3FB05EEB1DCB9A992D0824FC6AA75F0CE0DE8E245EE29AB"
+                                                 "version":  "v1.3-CANON",
+                                                 "source_sha256":  "25974EDA73A88B18DE3805D0313BC244535D6FDDCBB76191EF12007C8ABB1DAF"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
                                                  "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
-                                                 "version":  "v0.1-DRAFT",
-                                                 "source_sha256":  "29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D"
+                                                 "version":  "v0.1-CANON",
+                                                 "source_sha256":  "EAFD902A6314952C04D06F3D222D5AAA082B7915E91B848D3F0051DFB06D7CB5"
                                              },
                                              {
                                                  "name":  "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",

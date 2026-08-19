@@ -76,8 +76,8 @@ SOURCE_SHA256=920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880
 
 SOURCE_INDEX=10
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=172754
-SOURCE_SHA256=5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809
+SOURCE_BYTES=173952
+SOURCE_SHA256=96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06
 
 ================================================================================
 03. OPERATIONAL INSTRUCTIONS
@@ -4029,12 +4029,12 @@ FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 ==========
 ========== CONTENT_END 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
 ========== END_SOURCE_FILE 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
-========== BEGIN_SOURCE_FILE 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
+========== BEGIN_SOURCE_FILE 010 96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06 ==========
 SOURCE_INDEX=10
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=172754
-SOURCE_SHA256=5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809
-========== CONTENT_START 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
+SOURCE_BYTES=173952
+SOURCE_SHA256=96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06
+========== CONTENT_START 010 96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -4046,14 +4046,14 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: GOVERNANCE
-GENERATED_AT: 2026-08-19 15:40:54
+GENERATED_AT: 2026-08-19 16:28:35
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/09.SKILL.RADAR.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\09.SKILL.RADAR.txt
-VERSION    : v1.6-DRAFT
-SHA256     : D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D
+VERSION    : v1.6-CANON
+SHA256     : 7F29C75DA759F6E05AB6FDCD93CBD7E24C8CDD97B52B377D4EFFB97BF363875E
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -4061,8 +4061,8 @@ SHA256     : D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
 NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
-VERSION...........: v1.6-DRAFT
-FECHA_HORA........: 2026-08-19T15:30:00-04:00
+VERSION...........: v1.6-CANON
+FECHA_HORA........: 2026-08-19T16:20:00-04:00
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -4446,28 +4446,30 @@ de UPLOAD_SELECTION.
 
 Decisión humana: mantener seis outputs locales en la primera ejecución válida.
 Costo local: INDEX+CORE+FULL+FULL.HUMAN+FULL.SKILLS en repos grandes es caro.
-Optimización permitida DESPUÉS de INITIAL_BASELINE: DAILY; CORE/FULL on-demand;
-DEPTH_POLICY; HASH omitido sobre umbral; no seguir reparse.
-Incremental scan / caching: no forman parte del contrato duro del script actual
-(RADAR.ps1 v0.6.x enumera el árbol en cada corrida). No inventar APIs.
-Límites: CORE_MAX_FILE_SIZE; SEGMENT_MAX_BYTES; warning de tamaño en LITE/MANIFEST.
-Falta de espacio: STATUS=FAIL; no publicar línea base parcial.
+Optimización permitida DESPUÉS de INITIAL_BASELINE: DAILY upload selection (LITE/INDEX);
+CORE/FULL on-demand para upload, no para dejar de generarlos; DEPTH_POLICY; HASH omitido
+sobre umbral; no seguir reparse.
+Incremental scan / caching: no forman parte del contrato duro. Cada corrida enumera el árbol.
+Límites: CORE_MAX_FILE_SIZE; SEGMENT_MAX_BYTES; MaxFileCountWarning; SizeWarningBytes.
+Falta de espacio: STATUS=FAIL; publicación atómica; no se publican ACTIVE parciales.
 
 ++++++++++
 02.75_IMPLEMENTATION_ALIGNMENT_RADAR_PS1
 ++++++++++
 
 Script canónico: SyS\A_Tools\Radar\RADAR.ps1 (nombre RADAR.ps1).
+Runtime helper: SyS\A_Tools\Radar\Radar.Runtime.ps1 (dot-sourced; no es un segundo entrypoint).
+RADAR_SCRIPT_VERSION=v0.7.0
+RADAR_OUTPUT_SCHEMA=v1.5
 Genera los seis outputs descriptivos + manifest en cada corrida local
 (compatible con INITIAL_BASELINE / LEGACY_SIX_OUTPUTS).
-No implementa aún SCAN_PROFILE/OUTPUT_SET switching.
-Enumeración: Get-ChildItem -Recurse -File, luego exclusiones de ruta
-(DO_NOT_UPLOAD, 00_ACCESS, ImproveOp operator evidence).
-No sigue 00_ACCESS por exclusión de ruta.
-Contrato 06.20/06.25 es normativo. Residuales de RADAR.ps1 v0.6.3 (no inventar API):
-- detección binaria aún principalmente por extensión/lista CORE, no el orden 06.20 completo;
-- FILE_ID/VOLUME_ID hardlink-once no implementado en el enumerator;
-- reparse/junction/symlink no se clasifican con Win32; se evitan por path exclusion.
+UPLOAD_SELECTION por defecto LITE,INDEX no impide la generación local (NO_SUBIR != NO_GENERAR).
+Enumeración: walk BFS sin Get-ChildItem -Recurse; no sigue reparse/junction/symlink.
+FILE_ID+VOLUME_ID vía GetFileInformationByHandle; hardlink content counted once.
+Detección binaria 06.20 implementada en Get-RadarContentClassFromBytes.
+Secretos y DO_NOT_UPLOAD fail-closed; FULL.SKILLS no inlinea incertidumbre.
+00_ACCESS se lista y no se recorre.
+CYCLES=STOP_AND_REPORT. BROKEN_LINKS=REPORT_WITHOUT_FOLLOW.
 
 ++++++++++
 02.80_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
@@ -4691,10 +4693,10 @@ CYCLES=STOP_AND_REPORT
 
 Symlinks, junctions, mount points y otros reparse points se listan en INDEX y
 no se siguen por defecto. Targets fuera del root nunca se siguen.
-Hardlink target normativo: FILE_ID + VOLUME_ID, contenido una sola vez.
-Implementación vigente RADAR.ps1 v0.6.3: ver 02.75 (residual documentado; no se
-inventa Win32 API en este DRAFT). Consumidores no deben asumir FILE_ID hasta
-que el script lo emita.
+Hardlink: VOLUME_ID + FILE_ID; el contenido se incorpora una sola vez.
+RADAR.ps1 v0.7.0 implementa 06.20 y 06.25 (GetFileInformationByHandle; BFS sin follow).
+Si FILE_ID no está disponible, el fallback es conservador (PATH key, warning
+FILE_ID_UNAVAILABLE, sin afirmar deduplicación perfecta).
 
 00_ACCESS (ROLE_ID from SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt) is a non-canonical
 navigation surface. RADAR MUST NOT follow shortcut, symlink or junction targets
@@ -5135,6 +5137,19 @@ SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (y no rutas hardcodeadas)?
 16.00_HISTORIAL_DE_CAMBIOS
 ==========
 
+2026-08-19, v1.6-CANON
+SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
+- Promoted after RADAR.ps1 v0.7.0 runtime conformance tests FAIL=0 SKIPPED=0.
+- Contract and runtime aligned: binary detection, FILE_ID, reparse policy,
+  secrets/DO_NOT_UPLOAD, first-run six outputs, daily upload selection.
+
+2026-08-19, v1.6-DRAFT runtime conformance
+SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
+- RADAR.ps1 v0.7.0 / schema v1.5 implements binary detection, FILE_ID hardlink
+  dedupe, reparse/junction/symlink unfollow, secrets/DO_NOT_UPLOAD fail-closed,
+  first-run six outputs, daily upload selection, atomic publish, size warnings.
+- Removed live residual language from 02.75/06.25.
+
 2026-08-19, v1.6-DRAFT adoption audit
 SOURCE_TASK: 20260819.152636.SM-PIA-RADAR-DRAFT-ADOPTION-FORWARD-VALIDATION-COMMIT-001
 - Combined-unit adoption: generate vs upload separated (NO_SUBIR != NO_GENERAR).
@@ -5199,8 +5214,8 @@ FIN_DEL_DOCUMENTO
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
-VERSION    : v0.1-DRAFT
-SHA256     : 29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D
+VERSION    : v0.1-CANON
+SHA256     : EAFD902A6314952C04D06F3D222D5AAA082B7915E91B848D3F0051DFB06D7CB5
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -5208,16 +5223,16 @@ SHA256     : 29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D
 
 ID_UNICO..........: SKILL.PROJECT_INFORMATION_ARCHITECTURE.01.00
 NOMBRE_SUGERIDO...: SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
-VERSION...........: v0.1-DRAFT
+VERSION...........: v0.1-CANON
 FECHA.............: 2026-08-19
-HORA..............: 15:10
+HORA..............: 16:20
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
-SOURCE_TASK.......: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+SOURCE_TASK.......: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
 OWNER_CONTRACT....: DIRECTORY_ARCHITECTURE + ARTIFACT_ARCHITECTURE
 DOMAIN............: PROJECT_INFORMATION_ARCHITECTURE
-STATUS............: DRAFT (HUMAN promotion to CANON pending)
+STATUS............: CANON
 PHYSICAL_NUMBER...: NONE (filename has no invented sequential prefix)
 
 ==========
@@ -5947,6 +5962,11 @@ This Skill does not:
 ==========
 25.00_CHANGELOG
 ==========
+
+2026-08-19, v0.1-CANON
+SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
+- HUMAN authorized promotion DRAFT → CANON. Numeric version preserved (v0.1).
+- Exclusive owner of DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE unchanged.
 
 2026-08-19, v0.1-DRAFT
 SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
@@ -9337,13 +9357,13 @@ upload, Temp policy, or general shell style.
 ==========
 FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 ==========
-========== CONTENT_END 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
-========== END_SOURCE_FILE 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
+========== CONTENT_END 010 96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06 ==========
+========== END_SOURCE_FILE 010 96A7983A5002DB31B520A55355DAE93B32B0060B1AC7D5D81C930CFA301BBE06 ==========
 ================================================================================
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=10
-SOURCE_TOTAL_BYTES=284943
+SOURCE_TOTAL_BYTES=286141
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0
