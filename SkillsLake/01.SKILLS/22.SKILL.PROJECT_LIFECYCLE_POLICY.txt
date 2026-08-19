@@ -37,7 +37,7 @@ SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 09.SKILL.RADAR.txt
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
-23.SKILL.WHOAMI_POLICY.txt (histórico/absorbido en HUMAN; no dependencia operativa)
+WHOAMI_ACTIVE_CANON=NO (HUMAN is home; standalone WhoAmI is not a lifecycle dependency)
 Skill de Git aplicable, si existe en el proyecto activo.
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, LIFECYCLE, SESSION_CONTROL, SESSION_CLOSE, CONTINUITY

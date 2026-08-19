@@ -130,7 +130,7 @@ Objetivo: <qué se quiere lograr>"
 Orden obligatorio:
 
 1. BATON (estado actual)
-2. HUMAN (contexto humano/operador). Do not load 23.SKILL.WHOAMI_POLICY.txt by default. WHOAMI_ACTIVE_CANON=NO.
+2. HUMAN (contexto humano/operador). Do not load a standalone WhoAmI file. WHOAMI_ACTIVE_CANON=NO.
 3. RADAR_INDEX
 4. SKILL.GRC.CORE
 5. PROMPT.GRC.BASE

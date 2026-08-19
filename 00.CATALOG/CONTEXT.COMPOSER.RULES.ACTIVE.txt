@@ -275,7 +275,7 @@ ROUTING_ORDER......:
 3. 00.CATALOG routing/composer rules
 4. GRCLake policies and controls
 5. SkillsLake skills
-6. SyS tools, BATON, WHOAMI, RADAR, logs, and execution artifacts
+6. SyS tools, BATON, RADAR, logs, and execution artifacts
 
 OUTPUT_PACKAGE_RULE:
 90.USECASE is an upload/output package layer. It is not primary canon.
@@ -283,7 +283,7 @@ If a usecase package needs improvement, patch the canonical source or registry a
 
 DELTA_CONTEXT_RULE:
 Do not ask for the full repository by default.
-If context is insufficient, request exact paths from HUMAN, SkillsLake, GRCLake, 00.CATALOG, SyS, BATON, WHOAMI, RADAR, or project files.
+If context is insufficient, request exact paths from HUMAN, SkillsLake, GRCLake, 00.CATALOG, SyS, BATON, RADAR, or project files.
 
 ANTI_DRIFT_RULES:
 - Do not jump to Nightshift, RADAR, scripts, branches, commits, or patches before confirming usecase fit.

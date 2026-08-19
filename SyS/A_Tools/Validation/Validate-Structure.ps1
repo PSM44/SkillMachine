@@ -156,8 +156,7 @@ $useCaseSourceContracts = @(
             "README.EXECUTION.txt",
             "README.UPLOAD_THIS_USECASE.txt",
             "SKILL.md",
-            "SKILL_SET.MANIFEST.txt",
-            "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt"
+            "SKILL_SET.MANIFEST.txt"
         )
     }
 )

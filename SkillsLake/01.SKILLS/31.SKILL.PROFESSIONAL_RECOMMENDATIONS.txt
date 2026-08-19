@@ -28,7 +28,6 @@ DEPENDENCIAS......:
 11.SKILL.HUMAN_README.txt
 HUMAN (authoritative human/operator context; WHOAMI_ACTIVE_CANON=NO)
 HUMAN_README_CAREER_BACKGROUND (del proyecto correspondiente)
-23.SKILL.WHOAMI_POLICY.txt is historical reference only; not a required consumer.
 
 ==========
 00.10_INDICE_GENERAL_WBS

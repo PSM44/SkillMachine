@@ -43,7 +43,7 @@ SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 - Este paquete NO se interpreta parcialmente
 - Si falta un archivo, la IA debe pedirlo
 - No se permite reemplazar por versiones similares
-- 23.SKILL.WHOAMI_POLICY.txt is historical/absorbed (WHOAMI_ACTIVE_CANON=NO). HUMAN is the authoritative home. Do not require standalone WhoAmI for bootstrap or operability (CAND-SM-077D-WHOAMI-CONSUMER-LIST-001).
+- WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. Do not require standalone WhoAmI for bootstrap or operability.
 
 GOVERNANCE:
 - 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt

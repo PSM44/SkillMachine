@@ -352,9 +352,29 @@ Do not copy one operator's personal requirements into HUMAN as universal default
 ABSORBED_FROM_WHOAMI_POLICY:
 The still-useful job formerly described by 23.SKILL.WHOAMI_POLICY — a short,
 understandable human snapshot of purpose and operating context — is absorbed
-here. Historical WhoAmI files and that Skill remain reference-only.
-Stale project-state dumps, WhoAmI freshness gates, and WhoAmI file-update
-mechanics are not promoted into HUMAN.
+here. That Skill is not active product and must not be loaded, required, or
+recreated. Stale project-state dumps, WhoAmI freshness gates, and WhoAmI
+file-update mechanics are not promoted into HUMAN.
+
+SHORT_HUMAN_CONTEXT_CHECKLIST:
+When a human or AI needs a compact current-context snapshot for reliable work,
+the minimum fields are:
+
+- PURPOSE / PURPOSE_POINTER
+- CURRENT_STATE / STATE_POINTER
+- CURRENT_DELIVERABLES
+- OPEN_ITEMS
+- NEXT_ACTION
+- CURRENT_AS_OF / DATE
+
+HUMAN owns the durable meaning of those fields (what they are, why they matter,
+and that a standalone WhoAmI file is not required to supply them).
+Live operational values belong in BATON (cold-start) or SESSION_CONTINUE
+(warm-start), preferably by pointer (STATE_POINTER), not by copying a second
+live project dump into HUMAN.
+Do not turn HUMAN into a second BATON.
+Do not hard-code one operator's personal working-profile as a generic default
+for other users or projects.
 ==========
 FIN_MB-SM-077D_HUMAN_HOME_FOR_HUMAN_CONTEXT
 ==========

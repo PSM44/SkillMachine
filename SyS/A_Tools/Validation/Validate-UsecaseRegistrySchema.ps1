@@ -400,7 +400,6 @@ foreach ($opt in @("preserve_files","delivery_files_extra","copied_files")) {
       "README.UPLOAD_THIS_USECASE.txt",
       "SKILL.md",
       "SKILL_SET.MANIFEST.txt",
-      "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
       "EXAMPLES/EXAMPLE.REPO_REPAIR.txt"
     ) | Sort-Object -Unique
     if (($copiedFiles -join "|") -ne ($expectedCopied -join "|")) {

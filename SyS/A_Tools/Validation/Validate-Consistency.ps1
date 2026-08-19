@@ -299,7 +299,6 @@ $expectedUseCaseSourceContracts = @(
             "README.UPLOAD_THIS_USECASE.txt",
             "SKILL.md",
             "SKILL_SET.MANIFEST.txt",
-            "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
             "EXAMPLES/EXAMPLE.REPO_REPAIR.txt"
         )
     }

@@ -231,7 +231,7 @@ If PROJECT_ROOT is present but TEMP_PATH is missing, the assistant must not inve
 If both PROJECT_ROOT and TEMP_PATH are present, the assistant must immediately provide a safe launcher/child-script that:
 - clears TEMP_PATH before generating new upload context;
 - consolidates all relevant project files into up to 10 IA-readable files, generating fewer when sufficient;
-- may include BATON, WHOAMI, HUMAN files referenced by BATON, RADAR_LITE/RADAR_INDEX, backlog, registries, manifests, Skills, GRC, git evidence, and other relevant project files;
+- may include BATON, HUMAN files referenced by BATON, RADAR_LITE/RADAR_INDEX, backlog, registries, manifests, Skills, GRC, git evidence, and other relevant project files;
 - must not run build by default;
 - must not run RADAR_FULL by default;
 - may regenerate RADAR_LITE/RADAR_INDEX only if absent or stale and if this is safe/read-only for canon;

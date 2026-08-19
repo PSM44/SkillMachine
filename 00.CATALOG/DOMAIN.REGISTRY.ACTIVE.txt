@@ -32,7 +32,6 @@ GRCLake
 SkillsLake
 RADAR
 BATON
-WHOAMI
 
 ==========
 00.10_INDICE_GENERAL_WBS

@@ -17,6 +17,13 @@ REGLAS_DURAS.......:
 - No refactor funcional (solo estructura).
 - No cambios sin CIS + rollback.
 
+MODO...............:
+PLAN_ONLY por defecto; APPLY solo con CIS.
+
+OUTPUT.............:
+Bundles + manifest + skill + docs base (HUMAN).
+Do not create or require a standalone WhoAmI package identity file.
+
 DONE...............:
 - Validate-System PASS
 - Validate-Release PASS

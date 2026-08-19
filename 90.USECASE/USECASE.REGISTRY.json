@@ -225,7 +225,6 @@
         "README.UPLOAD_THIS_USECASE.txt",
         "SKILL.md",
         "SKILL_SET.MANIFEST.txt",
-        "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
         "EXAMPLES/EXAMPLE.REPO_REPAIR.txt"
       ],
       "prompt_files": [],
@@ -277,7 +276,6 @@
         "README.UPLOAD_THIS_USECASE.txt",
         "README.EXECUTION.txt",
         "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
-        "WHOAMI.REPOSITORY_STRUCTURE_REPAIR.txt",
         "SKILL.md",
         "SKILL_SET.MANIFEST.txt",
         "EXAMPLES/EXAMPLE.REPO_REPAIR.txt",

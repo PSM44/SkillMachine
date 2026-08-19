@@ -25,7 +25,7 @@ POLICIES_OPERATIVAS_(COPIA_USECASE):
 - TEMPLATE.GRC.MVP.txt
 
 HISTORICAL_REFERENCE:
-- 23.SKILL.WHOAMI_POLICY.txt is historical/absorbed (WHOAMI_ACTIVE_CANON=NO). HUMAN is the authoritative home. Not a SKILLS_MINIMOS / operability requirement (CAND-SM-077D-WHOAMI-CONSUMER-LIST-001).
+- WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. Standalone WhoAmI is not a SKILLS_MINIMOS / operability requirement.
 
 GOVERNANCE:
 - 30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt

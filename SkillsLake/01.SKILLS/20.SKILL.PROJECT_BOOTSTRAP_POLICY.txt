@@ -28,7 +28,7 @@ RADAR=MANDATORY_STRUCTURE_INDEX
 Do not recreate WhoAmI as a competing product-canon or continuity surface.
 Do not treat WhoAmI as an implicit fallback when HUMAN or BATON exist.
 Useful human-context content belongs in HUMAN (HUMAN.OPERATING.MODEL MB-SM-077D).
-23.SKILL.WHOAMI_POLICY.txt is historical reference only after absorption; not a bootstrap dependency.
+A standalone WhoAmI Skill is not a bootstrap dependency and must not be loaded.
 ==========
 FIN_MB-SM-077D_BOOTSTRAP_WHOAMI_DISPOSITION
 ==========
@@ -163,7 +163,7 @@ de HUMAN o BATON.
 - No es fuente de continuidad en frío
 - Si existe, es referencia histórica u onboarding humano opcional
 - El contenido útil de contexto humano vive en HUMAN, no en un archivo WhoAmI
-- 23.SKILL.WHOAMI_POLICY.txt es histórico/absorbido; no es dependencia de bootstrap
+- Un archivo WhoAmI autónomo es histórico/absorbido; no es dependencia de bootstrap
 - No usar WhoAmI como fallback implícito de HUMAN o BATON
 
 04.30_BATON
