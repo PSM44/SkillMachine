@@ -389,28 +389,30 @@ de UPLOAD_SELECTION.
 
 Decisión humana: mantener seis outputs locales en la primera ejecución válida.
 Costo local: INDEX+CORE+FULL+FULL.HUMAN+FULL.SKILLS en repos grandes es caro.
-Optimización permitida DESPUÉS de INITIAL_BASELINE: DAILY; CORE/FULL on-demand;
-DEPTH_POLICY; HASH omitido sobre umbral; no seguir reparse.
-Incremental scan / caching: no forman parte del contrato duro del script actual
-(RADAR.ps1 v0.6.x enumera el árbol en cada corrida). No inventar APIs.
-Límites: CORE_MAX_FILE_SIZE; SEGMENT_MAX_BYTES; warning de tamaño en LITE/MANIFEST.
-Falta de espacio: STATUS=FAIL; no publicar línea base parcial.
+Optimización permitida DESPUÉS de INITIAL_BASELINE: DAILY upload selection (LITE/INDEX);
+CORE/FULL on-demand para upload, no para dejar de generarlos; DEPTH_POLICY; HASH omitido
+sobre umbral; no seguir reparse.
+Incremental scan / caching: no forman parte del contrato duro. Cada corrida enumera el árbol.
+Límites: CORE_MAX_FILE_SIZE; SEGMENT_MAX_BYTES; MaxFileCountWarning; SizeWarningBytes.
+Falta de espacio: STATUS=FAIL; publicación atómica; no se publican ACTIVE parciales.
 
 ++++++++++
 02.75_IMPLEMENTATION_ALIGNMENT_RADAR_PS1
 ++++++++++
 
 Script canónico: SyS\A_Tools\Radar\RADAR.ps1 (nombre RADAR.ps1).
+Runtime helper: SyS\A_Tools\Radar\Radar.Runtime.ps1 (dot-sourced; no es un segundo entrypoint).
+RADAR_SCRIPT_VERSION=v0.7.0
+RADAR_OUTPUT_SCHEMA=v1.5
 Genera los seis outputs descriptivos + manifest en cada corrida local
 (compatible con INITIAL_BASELINE / LEGACY_SIX_OUTPUTS).
-No implementa aún SCAN_PROFILE/OUTPUT_SET switching.
-Enumeración: Get-ChildItem -Recurse -File, luego exclusiones de ruta
-(DO_NOT_UPLOAD, 00_ACCESS, ImproveOp operator evidence).
-No sigue 00_ACCESS por exclusión de ruta.
-Contrato 06.20/06.25 es normativo. Residuales de RADAR.ps1 v0.6.3 (no inventar API):
-- detección binaria aún principalmente por extensión/lista CORE, no el orden 06.20 completo;
-- FILE_ID/VOLUME_ID hardlink-once no implementado en el enumerator;
-- reparse/junction/symlink no se clasifican con Win32; se evitan por path exclusion.
+UPLOAD_SELECTION por defecto LITE,INDEX no impide la generación local (NO_SUBIR != NO_GENERAR).
+Enumeración: walk BFS sin Get-ChildItem -Recurse; no sigue reparse/junction/symlink.
+FILE_ID+VOLUME_ID vía GetFileInformationByHandle; hardlink content counted once.
+Detección binaria 06.20 implementada en Get-RadarContentClassFromBytes.
+Secretos y DO_NOT_UPLOAD fail-closed; FULL.SKILLS no inlinea incertidumbre.
+00_ACCESS se lista y no se recorre.
+CYCLES=STOP_AND_REPORT. BROKEN_LINKS=REPORT_WITHOUT_FOLLOW.
 
 ++++++++++
 02.80_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
@@ -634,10 +636,10 @@ CYCLES=STOP_AND_REPORT
 
 Symlinks, junctions, mount points y otros reparse points se listan en INDEX y
 no se siguen por defecto. Targets fuera del root nunca se siguen.
-Hardlink target normativo: FILE_ID + VOLUME_ID, contenido una sola vez.
-Implementación vigente RADAR.ps1 v0.6.3: ver 02.75 (residual documentado; no se
-inventa Win32 API en este DRAFT). Consumidores no deben asumir FILE_ID hasta
-que el script lo emita.
+Hardlink: VOLUME_ID + FILE_ID; el contenido se incorpora una sola vez.
+RADAR.ps1 v0.7.0 implementa 06.20 y 06.25 (GetFileInformationByHandle; BFS sin follow).
+Si FILE_ID no está disponible, el fallback es conservador (PATH key, warning
+FILE_ID_UNAVAILABLE, sin afirmar deduplicación perfecta).
 
 00_ACCESS (ROLE_ID from SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt) is a non-canonical
 navigation surface. RADAR MUST NOT follow shortcut, symlink or junction targets
@@ -1077,6 +1079,13 @@ SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (y no rutas hardcodeadas)?
 ==========
 16.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.6-DRAFT runtime conformance
+SOURCE_TASK: 20260819.160924.SM-PIA-BOOTSTRAP-RADAR-FINAL-CONFORMANCE-CANON-PROMOTION-001
+- RADAR.ps1 v0.7.0 / schema v1.5 implements binary detection, FILE_ID hardlink
+  dedupe, reparse/junction/symlink unfollow, secrets/DO_NOT_UPLOAD fail-closed,
+  first-run six outputs, daily upload selection, atomic publish, size warnings.
+- Removed live residual language from 02.75/06.25.
 
 2026-08-19, v1.6-DRAFT adoption audit
 SOURCE_TASK: 20260819.152636.SM-PIA-RADAR-DRAFT-ADOPTION-FORWARD-VALIDATION-COMMIT-001
