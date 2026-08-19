@@ -82,6 +82,20 @@ TAGS_OPERATIVOS...: HISTORICAL_REFERENCE, HUMAN_ONBOARDING, CONTINUITY_LEGACY
 09.00 Changelog
 
 ==========
+00.20_HISTORICAL_BODY_NOT_CURRENT_MANDATE
+==========
+Sections 01.00 through 08.00 below are HISTORICAL_REFERENCE_ONLY.
+They describe the former WhoAmI artifact pattern.
+They are not current product mandates.
+Do not create, require, refresh, or treat WhoAmI as active canon.
+Authoritative human/operator context: HUMAN.
+Authoritative cold-start continuity: BATON.
+WHOAMI_REQUIRED_CONSUMER_COUNT=0 for SkillsMachine.
+==========
+FIN_00.20_HISTORICAL_BODY_NOT_CURRENT_MANDATE
+==========
+
+==========
 01.00_OBJETIVO
 ==========
 
@@ -196,6 +210,10 @@ WhoAmI no reemplaza HUMAN.
 ==========
 09.00_CHANGELOG
 ==========
+
+2026-08-19, v1.2-MB-SM-077D
+SOURCE_TASK: 20260819.172000.SM-SKILLSLAKE-USECASE-REVIEW-REFINE-REDUNDANCY-001
+- Added 00.20 banner: body sections 01-08 are historical reference only, not current mandates.
 
 2026-08-16, v1.2-MB-SM-077D
 - Absorption: useful human-context content now lives in HUMAN.

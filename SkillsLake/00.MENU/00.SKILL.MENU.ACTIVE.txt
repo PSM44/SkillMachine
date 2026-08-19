@@ -93,7 +93,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 - 09.SKILL.RADAR.txt
 - 10.SKILL.BATON.txt
 - 11.SKILL.HUMAN_README.txt
-- 23.SKILL.WHOAMI_POLICY.txt
+
+Do not treat 23.SKILL.WHOAMI_POLICY.txt as default-critical.
+WHOAMI_ACTIVE_CANON=NO. Human/operator context lives in HUMAN, not WhoAmI.
 
 ==========
 04.00_CATALOGO_ACTIVO
@@ -215,9 +217,9 @@ PURPOSE...........: Define inicio, ejecución y cierre de sesión.
 
 SKILL_ID..........: SKILL_WHOAMI_POLICY
 FILE..............: 23.SKILL.WHOAMI_POLICY.txt
-STATUS............: ACTIVE
+STATUS............: HISTORICAL_ABSORBED
 CATEGORY..........: CONTINUITY
-PURPOSE...........: Define continuidad humana operacional resumida.
+PURPOSE...........: Historical reference only. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. Not a required consumer. Do not load wholesale.
 
 ----------
 05.30
@@ -591,4 +593,23 @@ PURPOSE...........: Exclusive how-to owner of DIRECTORY_ARCHITECTURE and ARTIFAC
 FECHA.............: 2026-08-19
 SOURCE_TASK.......: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
 MOTIVO............: PURPOSE de 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt actualizado a owner de bootstrap plus DIRECTORY_ARCHITECTURE y ARTIFACT_ARCHITECTURE. Sin Skill nuevo. VERSION del menu permanece v1.0-CANON.
+
+==========
+15.00_PATCH_20260819_WHOAMI_CATALOG_ABSORPTION
+==========
+
+FECHA.............: 2026-08-19
+SOURCE_TASK.......: 20260819.172000.SM-SKILLSLAKE-USECASE-REVIEW-REFINE-REDUNDANCY-001
+MOTIVO............: Catalog 05.20 no longer presents WhoAmI as active continuity. Section 03.00 default-critical list no longer includes 23.SKILL.WHOAMI_POLICY.txt. Live STATUS=HISTORICAL_ABSORBED. VERSION del menu permanece v1.0-CANON.
+
+----------
+15.10
+----------
+
+SKILL_ID..........: SKILL_WHOAMI_POLICY
+FILE..............: 23.SKILL.WHOAMI_POLICY.txt
+VERSION...........: v1.2-MB-SM-077D
+STATUS............: HISTORICAL_ABSORBED
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Historical reference only. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. WHOAMI_REQUIRED_CONSUMER_COUNT=0.
 

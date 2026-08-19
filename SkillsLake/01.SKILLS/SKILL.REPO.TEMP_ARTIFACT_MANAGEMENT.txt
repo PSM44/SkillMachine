@@ -301,9 +301,11 @@ FAILURE_MODE: Continuity referenced disposable upload/staging Temp as an authori
 Temp is not one thing. Classify a path before treating it as durable:
 
 1. DURABLE_CANONICAL_STORAGE
-   Repository canon and governed durable state (HUMAN, BATON, ProjectOps registry /
-   Improvement Flow state). This is not Temp. Listed here only as the authority class
-   against which the Temp classes below must not be confused.
+   Repository canon and governed durable state (HUMAN, BATON, ProjectOps registry,
+   Improvement Flow state, and Project Sync state). This is not Temp.
+   Improvement Flow and Project Sync are distinct sidecars; neither is Temp.
+   Listed here only as the authority class against which the Temp classes below
+   must not be confused.
 
 2. REPO_INTERNAL_TEMP
    Untracked or scratch files inside the repository. Default: archive outside the repo, then remove.
@@ -346,6 +348,9 @@ Using upload/staging Temp contents as the baseline that a dependent minibattle m
 Treating EXECUTION_SANDBOX_TEMP as either AI-exchange Temp or as canonical project state.
 
 CHANGELOG:
+2026-08-19, v1.4
+SOURCE_TASK: 20260819.172000.SM-SKILLSLAKE-USECASE-REVIEW-REFINE-REDUNDANCY-001
+- Durable class names Improvement Flow and Project Sync as distinct non-Temp sidecars.
 2026-08-19, v1.4
 SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
 - Directory-role placement owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.

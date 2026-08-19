@@ -53,11 +53,11 @@ The AI must not invent a TEMP path.
 
 The TEMP path must come from project canon:
 - BATON
-- WHOAMI
 - HUMAN
 - README
 - active usecase instructions
 - explicit user instruction
+Do not treat a historical WhoAmI file as a TEMP path source of truth. WHOAMI_ACTIVE_CANON=NO.
 
 If TEMP path is missing and execution requires it, ask or declare a safe project-local TEMP path before script delivery.
 
