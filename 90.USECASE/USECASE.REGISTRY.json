@@ -49,7 +49,6 @@
           "source_files": [
             "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
             "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
             "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
           ]
         },
@@ -66,7 +65,6 @@
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
             "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
             "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
@@ -118,7 +116,6 @@
           "source_files": [
             "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
             "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
             "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
           ]
         },
@@ -134,7 +131,6 @@
             "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
             "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
             "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
@@ -188,7 +184,6 @@
           "source_files": [
             "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
             "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
             "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
           ]
         },
@@ -202,7 +197,6 @@
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
             "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
             "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
@@ -252,7 +246,6 @@
           "source_files": [
             "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
             "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
             "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
           ]
         },
@@ -268,7 +261,6 @@
             "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
             "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
             "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
             "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
           ]
         }
