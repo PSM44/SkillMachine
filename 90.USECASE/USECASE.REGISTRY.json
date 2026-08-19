@@ -59,6 +59,7 @@
           "source_files": [
             "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
             "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+            "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
             "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
             "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
             "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
@@ -260,6 +261,7 @@
           "output_file": "02.BUNDLE.GOVERNANCE.txt",
           "source_files": [
             "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+            "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
             "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
             "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
             "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",

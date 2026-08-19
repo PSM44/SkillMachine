@@ -187,7 +187,7 @@ SKILL_ID..........: SKILL_PROJECT_BOOTSTRAP_POLICY
 FILE..............: 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 STATUS............: ACTIVE
 CATEGORY..........: LIFECYCLE
-PURPOSE...........: Define creación inicial de artefactos base.
+PURPOSE...........: Owner of project birth/bootstrap triad (HUMAN, BATON, RADAR_INDEX). Consumes SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
 
 ----------
 05.00
@@ -545,4 +545,31 @@ VERSION...........: v0.1-DRAFT_READY_FOR_TEST
 STATUS............: DRAFT_READY_FOR_TEST
 CATEGORY..........: GOVERNANCE
 PURPOSE...........: Previene operar sobre proyecto, root, tarea, artefactos, agente o runtime equivocados; gates de identidad antes de mutacion, BUILD/RADAR decisorio, commit, push y cierre de sesion.
+
+==========
+13.00_PATCH_20260819_PIA_OWNER
+==========
+
+FECHA.............: 2026-08-19
+SOURCE_TASK.......: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+MOTIVO............: Alta de SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt como unico how-to owner. PURPOSE de Skill 20 reducido a bootstrap. VERSION del menu permanece v1.0-CANON.
+
+----------
+13.10
+----------
+
+SKILL_ID..........: SKILL_PROJECT_INFORMATION_ARCHITECTURE
+FILE..............: SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+VERSION...........: v0.1-DRAFT
+STATUS............: DRAFT
+CATEGORY..........: GOVERNANCE
+PURPOSE...........: Exclusive how-to owner of DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE.
+
+==========
+12.00_PATCH_20260819_OWNER_POINTER
+==========
+
+FECHA.............: 2026-08-19
+SOURCE_TASK.......: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+MOTIVO............: PURPOSE de 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt actualizado a owner de bootstrap plus DIRECTORY_ARCHITECTURE y ARTIFACT_ARCHITECTURE. Sin Skill nuevo. VERSION del menu permanece v1.0-CANON.
 

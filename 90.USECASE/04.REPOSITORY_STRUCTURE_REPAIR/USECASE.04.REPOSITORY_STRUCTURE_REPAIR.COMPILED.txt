@@ -56,8 +56,8 @@ SOURCE_SHA256=28549C3F897DA6528794785A93F686F28C396120C3260CA012632644D26B26CA
 
 SOURCE_INDEX=6
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
-SOURCE_BYTES=1142
-SOURCE_SHA256=7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1
+SOURCE_BYTES=1187
+SOURCE_SHA256=02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2
 
 SOURCE_INDEX=7
 SOURCE_PATH=EXAMPLES\EXAMPLE.REPO_REPAIR.txt
@@ -66,18 +66,18 @@ SOURCE_SHA256=F84509D6D722C1C4CA7FE846307549BE58B1855A967B00DB41315CB6C1398367
 
 SOURCE_INDEX=8
 SOURCE_PATH=00.BUNDLE.CORE.txt
-SOURCE_BYTES=48519
-SOURCE_SHA256=71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8
+SOURCE_BYTES=49897
+SOURCE_SHA256=DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663
 
 SOURCE_INDEX=9
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=43489
-SOURCE_SHA256=9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE
+SOURCE_BYTES=44331
+SOURCE_SHA256=920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880
 
 SOURCE_INDEX=10
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=129427
-SOURCE_SHA256=99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3
+SOURCE_BYTES=172754
+SOURCE_SHA256=5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809
 
 ================================================================================
 03. OPERATIONAL INSTRUCTIONS
@@ -600,12 +600,12 @@ FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
 ==========
 ========== CONTENT_END 005 28549C3F897DA6528794785A93F686F28C396120C3260CA012632644D26B26CA ==========
 ========== END_SOURCE_FILE 005 28549C3F897DA6528794785A93F686F28C396120C3260CA012632644D26B26CA ==========
-========== BEGIN_SOURCE_FILE 006 7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1 ==========
+========== BEGIN_SOURCE_FILE 006 02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2 ==========
 SOURCE_INDEX=6
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
-SOURCE_BYTES=1142
-SOURCE_SHA256=7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1
-========== CONTENT_START 006 7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1 ==========
+SOURCE_BYTES=1187
+SOURCE_SHA256=02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2
+========== CONTENT_START 006 02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2 ==========
 ==========
 00.00_METADATA
 ==========
@@ -625,6 +625,7 @@ SKILLS_MINIMOS....:
 - 10.SKILL.BATON.txt
 - 11.SKILL.HUMAN_README.txt
 - 26.SKILL.GRC.CORE.txt
+- SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 
 POLICIES_OPERATIVAS_(COPIA_USECASE):
 - POLICY.REPOSITORY.ARCHITECTURE.txt
@@ -639,8 +640,8 @@ GOVERNANCE:
 
 - 31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt
   - Uso: aplicar cuando el usecase cree o modifique archivos .md, Mermaid, fences Markdown o scripts largos mediante SyS/Temp/TempScript.sh. Regla dura: no entregar scripts IA con triple backtick literal; generar fences finales mediante código de carácter.
-========== CONTENT_END 006 7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1 ==========
-========== END_SOURCE_FILE 006 7FEC0A62EFD2E3042737F7DDA4C3A054FC5CCD6773C06ED9EEB9A432675548E1 ==========
+========== CONTENT_END 006 02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2 ==========
+========== END_SOURCE_FILE 006 02766E0422C07218EB33A1C20A4E227CF637F3A7F10AC2BFAA1153AEDBA1B3A2 ==========
 ========== BEGIN_SOURCE_FILE 007 F84509D6D722C1C4CA7FE846307549BE58B1855A967B00DB41315CB6C1398367 ==========
 SOURCE_INDEX=7
 SOURCE_PATH=EXAMPLES\EXAMPLE.REPO_REPAIR.txt
@@ -660,12 +661,12 @@ EXAMPLE — REPOSITORY STRUCTURE REPAIR
 (Placeholder)
 ========== CONTENT_END 007 F84509D6D722C1C4CA7FE846307549BE58B1855A967B00DB41315CB6C1398367 ==========
 ========== END_SOURCE_FILE 007 F84509D6D722C1C4CA7FE846307549BE58B1855A967B00DB41315CB6C1398367 ==========
-========== BEGIN_SOURCE_FILE 008 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
+========== BEGIN_SOURCE_FILE 008 DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663 ==========
 SOURCE_INDEX=8
 SOURCE_PATH=00.BUNDLE.CORE.txt
-SOURCE_BYTES=48519
-SOURCE_SHA256=71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8
-========== CONTENT_START 008 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
+SOURCE_BYTES=49897
+SOURCE_SHA256=DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663
+========== CONTENT_START 008 DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -677,14 +678,14 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CORE
-GENERATED_AT: 2026-07-13 16:02:32
+GENERATED_AT: 2026-08-19 15:13:41
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/06.SKILL.WBS.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\06.SKILL.WBS.txt
-VERSION    : v1.2-DRAFT
-SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
+VERSION    : v1.4-DRAFT
+SHA256     : 7CD87AF849F7EBE63DC449BF6B4F5DF459C96A338F793A7C6A9036693BFABA07
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -692,9 +693,9 @@ SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
 
 ID_UNICO..........: SKILL.WBS_ID.01.01
 NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
-VERSION...........: v1.2-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.4-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
@@ -713,6 +714,11 @@ Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
 
 Este SKILL es transversal: ningún frame debe redefinir por su cuenta el formato de WBS e IDs.
 
+NO_CUBRE_LAYOUT....:
+No define DIRECTORY_ARCHITECTURE ni placement de artefactos.
+Layout, materialization, profiles and RADAR_ROOT are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill keeps ID_FS/ID_DB/WBS naming.
+
 Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
 
 MEJORA_CLAVE_v1.2:
@@ -725,6 +731,7 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.SKILL.FILE_CONTENT.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (layout owner; this Skill does not own tree)
 09.SKILL.RADAR.txt (recomendado)
 10.SKILL.BATON.txt (recomendado)
 
@@ -1264,6 +1271,15 @@ EXCEPCION_ID_FS...: SI (justificada)
 12.00_HISTORIAL_DE_CAMBIOS
 ==========
 
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Layout/directory architecture owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.3-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Layout/directory architecture deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.4).
+- This Skill retains ID_FS / ID_DB / WBS naming only.
+
 2026-02-26, v1.2-DRAFT
 - Agregado: catálogo FRM recomendado.
 - Agregado: validación operativa (regex + checks) para agentes y tooling.
@@ -1274,8 +1290,8 @@ EXCEPCION_ID_FS...: SI (justificada)
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\07.SKILL.FILE_CONTENT.txt
-VERSION    : v1.3-DRAFT
-SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
+VERSION    : v1.5-DRAFT
+SHA256     : 051A7875EC3F712A8E284FEA851195F414763F79DFCB2965BBE087A20EA9CB61
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -1283,9 +1299,9 @@ SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
 
 ID_UNICO..........: SKILL.FILE_CONTENT.01.01
 NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.5-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -1311,7 +1327,9 @@ Forma de entrega IA->humano (bloques reemplazables, copy/paste).
 
 NO_CUBRE..........:
 
-No define arquitectura de carpetas ni naming del filesystem (eso vive en WBS/ID y en taxonomía del proyecto).
+No define arquitectura de carpetas ni naming del filesystem.
+DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE placement are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. Naming/ID_FS remains 06.SKILL.WBS.txt.
 
 No define estándares de estilo de código línea-a-línea (eso vive en CODE standards).
 
@@ -1322,6 +1340,7 @@ No define modelos IA ni routing/costos (eso vive en skills de orquestación si e
 DEPENDENCIAS......:
 
 06.SKILL.WBS.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 (Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
 
 NOTA_IMPORTANTE...:
@@ -1912,6 +1931,15 @@ Informes/outputs serios
 ==========
 08.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Path/layout owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Path/layout deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.5).
+- Inner-file content contract unchanged.
 
 2026-02-26, v1.3-DRAFT
 - Agregado: 02.15 TAGS_OPERATIVOS para runtime-critical.
@@ -2530,14 +2558,14 @@ A9. Esconder errores de formato como si fueran cambios de contenido.
 ==========
 FIN_DEL_DOCUMENTO
 ==========
-========== CONTENT_END 008 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
-========== END_SOURCE_FILE 008 71101777265B10F3B845A863BB31AF64D5E9383AF2F41FE6F9B1C0050AE7C0A8 ==========
-========== BEGIN_SOURCE_FILE 009 9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE ==========
+========== CONTENT_END 008 DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663 ==========
+========== END_SOURCE_FILE 008 DE591EDBD58FF57CEC25E603DD5615A499971E1EB73578E79DC869721C720663 ==========
+========== BEGIN_SOURCE_FILE 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
 SOURCE_INDEX=9
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=43489
-SOURCE_SHA256=9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE
-========== CONTENT_START 009 9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE ==========
+SOURCE_BYTES=44331
+SOURCE_SHA256=920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880
+========== CONTENT_START 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -2549,14 +2577,14 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CONTINUITY
-GENERATED_AT: 2026-08-17 14:02:22
+GENERATED_AT: 2026-08-19 15:13:41
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/10.SKILL.BATON.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\10.SKILL.BATON.txt
-VERSION    : UNKNOWN
-SHA256     : B0F126A3AA84746BC15F7EAB8B99F039022328271126ABCC5E950A65705F805D
+VERSION    : v1.5-DRAFT
+SHA256     : 186D00F9098AA616E63643BC55FEEC2C888318F0396CF55B57727225E48397D1
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -2564,11 +2592,14 @@ SHA256     : B0F126A3AA84746BC15F7EAB8B99F039022328271126ABCC5E950A65705F805D
 
 ID_UNICO..........: SKILL.BATON.01.00
 NOMBRE_SUGERIDO...: 10.SKILL.BATON.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.5-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
-UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\BATON)
+UBICACION_SISTEMA.: Canonical directory ROLE_ID=BATON_HOME / 91_BATON is owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. Physical aliases (BATON.STATE.txt,
+00.0_BATON_<Proyecto>.txt, folder BATON\, SyS\00.0_BATON_SKILLMACHINE.txt)
+map to that role. This Skill owns BATON content and lifecycle only.
 AUTOR_HUMANO......: ADMIN
 
 ALCANCE...........:
@@ -2600,6 +2631,8 @@ DEPENDENCIAS......:
 11.SKILL.HUMAN_README.txt
 09.SKILL.RADAR.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (canonical BATON directory role)
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (bootstrap triad; not layout owner)
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)
@@ -3011,6 +3044,15 @@ Si no, la actualización es incompleta.
 ==========
 08.00_CHANGELOG
 ==========
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Canonical directory role owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Canonical directory role deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.5).
+- BATON content/lifecycle unchanged.
 
 2026-02-26, v1.3-DRAFT
 - Complemento: sección de límites operativos para agentes ejecutores (sandbox boundary).
@@ -3985,14 +4027,14 @@ objective. Prior authorization for one MB does not carry over to the next.
 
 FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 ==========
-========== CONTENT_END 009 9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE ==========
-========== END_SOURCE_FILE 009 9F07A79EF0921941652165D0032DC551F1928EBC44051C0C34E8EF128EC4BCDE ==========
-========== BEGIN_SOURCE_FILE 010 99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3 ==========
+========== CONTENT_END 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
+========== END_SOURCE_FILE 009 920C8CD6E9E6D81E6224108B64EC099EEF2679AA6D82355F9D85FD83B08DF880 ==========
+========== BEGIN_SOURCE_FILE 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
 SOURCE_INDEX=10
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=129427
-SOURCE_SHA256=99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3
-========== CONTENT_START 010 99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3 ==========
+SOURCE_BYTES=172754
+SOURCE_SHA256=5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809
+========== CONTENT_START 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -4004,14 +4046,14 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: GOVERNANCE
-GENERATED_AT: 2026-08-17 14:02:22
+GENERATED_AT: 2026-08-19 15:40:54
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/09.SKILL.RADAR.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\09.SKILL.RADAR.txt
-VERSION    : v1.5-DRAFT
-SHA256     : C86EC9E17460B33A9758D59BA7A114F62C9D25DC3B1DB9CC9344368145E5A7D3
+VERSION    : v1.6-DRAFT
+SHA256     : D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -4019,9 +4061,8 @@ SHA256     : C86EC9E17460B33A9758D59BA7A114F62C9D25DC3B1DB9CC9344368145E5A7D3
 
 ID_UNICO..........: SKILL.RADAR.INDEX_CORE_FULL.01.00
 NOMBRE_SUGERIDO...: 09.SKILL.RADAR.txt
-VERSION...........: v1.5-DRAFT
-FECHA.............: 2026-06-30
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.6-DRAFT
+FECHA_HORA........: 2026-08-19T15:30:00-04:00
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -4048,18 +4089,20 @@ No interpreta negocio (no KPIs, no conclusiones).
 
 No hace OCR de PDFs ni intenta "leer" binarios.
 
-No define rutas físicas obligatorias propias: para HUMAN/SKILLS consume rutas
-resueltas por la skill de arquitectura de archivos/carpetas del ecosistema
-(ver DEPENDENCIAS). Para el resto del proyecto, cada proyecto decide dónde
-guarda outputs e históricos.
+No define las rutas fuente de HUMAN/SKILLS: las consume desde
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (owner of DIRECTORY_ARCHITECTURE and
+ARTIFACT_ARCHITECTURE). Sí define la estructura interna obligatoria de
+sus propios outputs bajo RADAR_ROOT (ver 04.35).
 
 DEPENDENCIAS......:
 
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
-[PENDIENTE: ID/nombre de la SKILL de arquitectura de archivos/carpetas del ecosistema
-— define las rutas canónicas de HUMAN y SKILLS que RADAR consume sin reinterpretar]
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+(OWNER: resolves RADAR_ROOT, HUMAN path, SKILLS path; RADAR consumes without redefining)
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
+(bootstrap triad consumer; not architecture owner)
 
 NOTA_IMPORTANTE...:
 
@@ -4072,8 +4115,8 @@ del FS es un concepto distinto, ver 01.50/08.40).
 
 Otros sistemas pueden consumir outputs RADAR, pero eso no es parte del contrato.
 
-RADAR no define ni asume rutas de HUMAN/SKILLS; las consume desde la skill de
-arquitectura del ecosistema referenciada en DEPENDENCIAS.
+RADAR no define ni asume rutas de HUMAN/SKILLS; las consume desde
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt referenciada en DEPENDENCIAS.
 
 MEJORA_CLAVE_v1.4:
 
@@ -4089,6 +4132,18 @@ MEJORA_CLAVE_v1.4:
   Nota sobre consumidores pasa a 02.60).
 - Aclara alcance de la política cost-aware (02.55): aplica a qué se sube a IA cloud,
   no a qué se genera en el FS local.
+
+MEJORA_CLAVE_v1.6:
+
+- Reemplaza la generación universal de seis outputs por perfiles y OUTPUT_SET.
+- Mantiene una línea base integral obligatoria en la primera ejecución válida.
+- Agrega RADAR_MANIFEST como interfaz estructurada y evidencia de cada corrida.
+- Define rutas físicas para activos, históricos, segmentos y logs bajo RADAR_ROOT.
+- Define bloques formales, delimitadores, escaping y longitud de contenido.
+- Cierra detección de binarios, encodings y objetos especiales de Windows.
+- Agrega política obligatoria de secretos y exclusión de 00.SOURCE_DO_NOT_UPLOAD.
+- Agrega publicación atómica, freshness, estados ampliados y retención histórica.
+- Integra el contrato de perfiles/freshness de MB-SM-067B-D2 dentro del canon.
 
 MEJORA_CLAVE_v1.3:
 
@@ -4109,13 +4164,16 @@ MEJORA_CLAVE_v1.3:
 01.15 RADAR_LITE
 01.50 HUMAN y SKILLS como carpetas canónicas (NUEVO)
 02.00 Modos de RADAR (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)
-02.40 Modo Local FS vs Modo AI Upload
-02.50 Política recomendada de uso (anti-cost)
-02.55 Alcance de la política cost-aware (NUEVO)
-02.60 Nota sobre consumidores (no parte del contrato)
+02.50 Modo Local FS vs Modo AI Upload
+02.60 Política recomendada de uso (anti-cost)
+02.70 Perfiles, primera ejecución y política de generación
+02.75 Alineación RADAR.ps1
+02.80 Nota sobre consumidores (no parte del contrato)
 
 03.00 Principios de diseño
 04.00 Contrato duro (independencia, outputs, naming)
+04.35 Rutas físicas de outputs RADAR
+04.40 RADAR_MANIFEST y RUN_ID
 
 05.00 Estándar RADAR_LITE
 06.00 Estándar RADAR_INDEX
@@ -4128,6 +4186,7 @@ MEJORA_CLAVE_v1.3:
 10.00 Exclusiones e inclusiones (FS + tipos)
 11.00 Determinismo, ordenamiento, encoding
 12.00 Evidencia, estado final y exit code (para scripts)
+12.40 Publicación atómica y freshness
 13.00 Ejemplos prácticos
 14.00 Antipatrones
 15.00 Checklist rápido
@@ -4249,8 +4308,8 @@ FULL no agrega semántica de negocio; sigue siendo descriptivo.
 ----------
 
 HUMAN y SKILLS son carpetas canónicas del ecosistema cuya ubicación física
-(ruta) NO es definida por RADAR. La ruta de ambas es resuelta vía la skill de
-arquitectura de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+(ruta) NO es definida por RADAR. La ruta de ambas es resuelta vía
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (ver DEPENDENCIAS).
 
 RADAR solo:
 
@@ -4299,18 +4358,18 @@ y cualquier metadata descriptiva adicional permitida por el proyecto.
 
 Produce RADAR_FULL.HUMAN: compilación completa, determinista, optimizada para
 lectura por IA, del contenido de la carpeta canónica HUMAN (ruta resuelta vía
-skill de arquitectura). Mismo tratamiento de formato que CORE.
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt). Mismo tratamiento de formato que CORE.
 
 ++++++++++
 02.42_MODO_FULL_SKILLS_(NUEVO)
 ++++++++++
 
 Produce RADAR_FULL.SKILLS: compilación completa, determinista, optimizada para
-lectura por IA, del contenido de la carpeta SKILLS (ruta resuelta vía skill de
-arquitectura), separada del resto del proyecto. Mismo tratamiento que FULL.HUMAN.
+lectura por IA, del contenido de la carpeta SKILLS (ruta resuelta vía
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt), separada del resto del proyecto. Mismo tratamiento que FULL.HUMAN.
 
 ++++++++++
-02.40_MODO_LOCAL_FS_VS_MODO_AI_UPLOAD
+02.50_MODO_LOCAL_FS_VS_MODO_AI_UPLOAD
 ++++++++++
 
 MODO_LOCAL_FS (máquina local / FS completo):
@@ -4334,12 +4393,14 @@ Se suben segmentos (chunks) al chat para consumo por IA.
 El activo completo puede no subirse (pero existe localmente).
 
 ++++++++++
-02.50_POLITICA_RECOMENDADA_DE_USO_(ANTI-COST_INCIDENT)
+02.60_POLITICA_RECOMENDADA_DE_USO_(ANTI-COST_INCIDENT)
 ++++++++++
 
 Regla operativa recomendada:
 
-- Default diario: RADAR_LITE o RADAR_INDEX.
+- Primera ejecución válida: generar localmente CORE, FULL, FULL.HUMAN y FULL.SKILLS
+  además de LITE, INDEX y MANIFEST (ver 02.70). NO_SUBIR no equivale a NO_GENERAR.
+- Default diario de generación DESPUÉS de la línea base: perfil DAILY (LITE + INDEX + MANIFEST).
 - CORE: solo cuando vas a analizar/editar un módulo específico.
 - FULL / FULL.HUMAN / FULL.SKILLS: ocasional (auditoría, "foto completa", o
   análisis canónico puntual), no por costumbre.
@@ -4347,22 +4408,69 @@ Regla operativa recomendada:
 Si usas IA cloud:
 - Evitar subir FULL/FULL.HUMAN/FULL.SKILLS completos al chat salvo necesidad real.
 - Preferir subir segmentos CORE del módulo objetivo.
+- UPLOAD_SELECTION es independiente de OUTPUT_SET.
 
 ++++++++++
-02.55_ALCANCE_DE_LA_POLITICA_COST_AWARE_(NUEVO)
+02.70_PERFILES_PRIMERA_EJECUCION_Y_POLITICA_DE_GENERACION
 ++++++++++
 
-Aclaración dura para evitar ambigüedad con el contrato de 04.30:
+Cada ejecución declara SCAN_PROFILE y OUTPUT_SET. Todo SCAN_PROFILE define
+PROFILE_NAME, ROOT_PATHS, EXCLUDED_PATHS, DEPTH_POLICY, HASH_POLICY, ERROR_POLICY
+y OUTPUT_SET. Los perfiles locales solo pueden referenciar roots de su proyecto;
+permanecen locales y no se promueven como configuración global. Perfiles mínimos:
 
-- La política anti-costo (02.50) aplica a QUÉ SE SUBE a IA cloud (chat/upload).
-- NO aplica a qué se GENERA en el FS local: los 6 outputs (LITE/INDEX/CORE/FULL/
-  FULL.HUMAN/FULL.SKILLS) se generan siempre en cada ejecución, según el
-  contrato duro de 04.30.
-- Generar localmente es proceso (CPU/disco); subir a IA cloud es costo (tokens).
-  RADAR distingue ambos explícitamente.
+- INITIAL_BASELINE: LITE, INDEX, CORE, FULL, FULL.HUMAN, FULL.SKILLS, MANIFEST.
+- DAILY: LITE, INDEX, MANIFEST.
+- MODULE_ANALYSIS: LITE, INDEX, CORE acotado, MANIFEST.
+- CLOSURE: LITE, INDEX, outputs exigidos por el gate, MANIFEST.
+- FULL_AUDIT: los seis outputs descriptivos y MANIFEST.
+- HUMAN_AUDIT: LITE, INDEX, FULL.HUMAN, MANIFEST.
+- SKILLS_AUDIT: LITE, INDEX, FULL.SKILLS, MANIFEST.
+- LEGACY_SIX_OUTPUTS: compatibilidad temporal con consumidores anteriores.
+
+CORE, FULL, FULL.HUMAN y FULL.SKILLS se generan obligatoriamente durante la
+primera ejecución válida de RADAR para establecer la línea base integral del
+proyecto. En ejecuciones posteriores se generan solo cuando los exige el perfil,
+los solicita explícitamente el operador o los requiere un gate de auditoría,
+cierre o continuidad.
+
+La ausencia de archivos ACTIVE no constituye por sí sola primera ejecución.
+INITIAL_BASELINE aplica cuando no existe ningún RADAR_MANIFEST válido y
+compatible para el PROJECT_ID. Si la línea base integral no puede completarse,
+STATUS=FAIL y BASELINE_CREATED=NO; no se publica una línea base parcial.
+
+La política de generación local es independiente de UPLOAD_SELECTION. Ningún
+output se sube a IA cloud automáticamente.
+NO_SUBIR != NO_GENERAR. Un output puede existir en el FS local y quedar fuera
+de UPLOAD_SELECTION.
+
+Decisión humana: mantener seis outputs locales en la primera ejecución válida.
+Costo local: INDEX+CORE+FULL+FULL.HUMAN+FULL.SKILLS en repos grandes es caro.
+Optimización permitida DESPUÉS de INITIAL_BASELINE: DAILY; CORE/FULL on-demand;
+DEPTH_POLICY; HASH omitido sobre umbral; no seguir reparse.
+Incremental scan / caching: no forman parte del contrato duro del script actual
+(RADAR.ps1 v0.6.x enumera el árbol en cada corrida). No inventar APIs.
+Límites: CORE_MAX_FILE_SIZE; SEGMENT_MAX_BYTES; warning de tamaño en LITE/MANIFEST.
+Falta de espacio: STATUS=FAIL; no publicar línea base parcial.
 
 ++++++++++
-02.60_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
+02.75_IMPLEMENTATION_ALIGNMENT_RADAR_PS1
+++++++++++
+
+Script canónico: SyS\A_Tools\Radar\RADAR.ps1 (nombre RADAR.ps1).
+Genera los seis outputs descriptivos + manifest en cada corrida local
+(compatible con INITIAL_BASELINE / LEGACY_SIX_OUTPUTS).
+No implementa aún SCAN_PROFILE/OUTPUT_SET switching.
+Enumeración: Get-ChildItem -Recurse -File, luego exclusiones de ruta
+(DO_NOT_UPLOAD, 00_ACCESS, ImproveOp operator evidence).
+No sigue 00_ACCESS por exclusión de ruta.
+Contrato 06.20/06.25 es normativo. Residuales de RADAR.ps1 v0.6.3 (no inventar API):
+- detección binaria aún principalmente por extensión/lista CORE, no el orden 06.20 completo;
+- FILE_ID/VOLUME_ID hardlink-once no implementado en el enumerator;
+- reparse/junction/symlink no se clasifican con Win32; se evitan por path exclusion.
+
+++++++++++
+02.80_NOTA_SOBRE_CONSUMIDORES_(NO_PARTE_DEL_CONTRATO)
 ++++++++++
 
 RADAR puede ser consumido por sistemas externos (ej: orquestadores IA)
@@ -4407,9 +4515,9 @@ Solo escribe outputs y mueve históricos RADAR.
 
 03.50_PRINCIPIO_5_COST_AWARE
 
-RADAR no optimiza por costo de generación local, pero el estándar recomienda
-LITE/INDEX como default de SUBIDA a IA cloud para evitar consumo innecesario
-de tokens/costo (ver 02.55).
+RADAR controla el costo de generación local mediante perfiles y recomienda
+DAILY/LITE/INDEX como selección normal de contexto para evitar procesamiento y
+consumo innecesarios (ver 02.60/02.70).
 
 ==========
 04.00_CONTRATO_DURO
@@ -4441,27 +4549,45 @@ Aunque el estándar general recomienda ID_FS, este contrato permite excepción c
 cuando el humano fija el nombre operativo. La excepción debe documentarse en metadatos.
 
 ++++++++++
-04.30_SEIS_OUTPUTS_SIEMPRE_(ACTUALIZADO_v1.4)
+04.30_OUTPUTS_SEGUN_PERFIL_Y_LINEA_BASE_INTEGRAL
 ++++++++++
 
 Contrato duro:
 
-RADAR siempre produce 6 outputs por ejecución (activos):
+Toda ejecución válida produce RADAR_LITE, RADAR_INDEX y RADAR_MANIFEST.
+Los demás outputs se rigen por OUTPUT_SET y 02.70. INITIAL_BASELINE produce
+obligatoriamente los seis outputs descriptivos más MANIFEST. Todos los outputs
+de una corrida comparten RUN_ID y no se mezclan con outputs de otra corrida.
 
-RADAR_LITE
+----------
+04.35_RUTAS_FISICAS_DE_OUTPUTS_RADAR
+----------
 
-RADAR_INDEX
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt resuelve RADAR_ROOT. RADAR escribe:
 
-RADAR_CORE
+- Activos directamente en <RADAR_ROOT>\; no existe carpeta ACTIVE.
+- Históricos en <RADAR_ROOT>\HISTORY\.
+- Segmentos en <RADAR_ROOT>\SEGMENTS\.
+- Logs en <RADAR_ROOT>\LOGS\.
+- Manifest activo en <RADAR_ROOT>\RADAR_MANIFEST.ACTIVE.json.
 
-RADAR_FULL
+RADAR_ROOT se excluye siempre del escaneo fuente para impedir autorreferencia.
+Las rutas fuente HUMAN y SKILLS siguen siendo resueltas externamente.
 
-RADAR_FULL.HUMAN
+----------
+04.40_RADAR_MANIFEST_Y_RUN_ID
+----------
 
-RADAR_FULL.SKILLS
+RADAR_MANIFEST.ACTIVE.json es la interfaz máquina-a-máquina. Debe incluir:
 
-Nota de alcance (ver 02.55): "siempre produce" se refiere a generación en el
-FS local. La política de qué se sube a IA cloud es independiente (02.50).
+- SCHEMA_VERSION, CONTRACT_VERSION, PROJECT_ID y RUN_ID.
+- GENERATED_AT con zona horaria y SCAN_PROFILE.
+- ROOT_PATHS, EXCLUDED_PATHS, KNOWN_GAPS y HASH_POLICY.
+- OUTPUTS_REQUESTED, OUTPUTS_GENERATED, rutas, tamaños y SHA256 de outputs.
+- PREVIOUS_RUN_ID, RUN_TYPE, BASELINE_CREATED, FRESHNESS y STATUS.
+- SAFE_FOR_LOCAL y SAFE_FOR_UPLOAD por output.
+
+RUN_ID usa AAAAMMDD-HHMMSS y es común a todo el conjunto de la corrida.
 
 ==========
 05.00_ESTANDAR_RADAR_LITE
@@ -4532,23 +4658,55 @@ Para evitar ambigüedad y mantener determinismo entre proyectos:
 - El umbral es configurable por proyecto, pero debe quedar documentado en los
   metadatos de la ejecución (mismo patrón que la excepción de 04.20).
 
-06.20_BINARIOS_E_ILEGIBLES
+06.20_DETECCION_DE_BINARIOS_TEXTO_Y_ENCODING
 
-Se listan en INDEX con metadata y hash.
+La clasificación no depende solo de la extensión ni de “parece binario”.
+Orden obligatorio:
 
-No se intenta leer contenido.
+1. Clasificar reparse points / shortcuts antes de abrir.
+2. BOM: UTF-8/UTF-16 LE/BE reconocidos como texto candidato.
+3. Aplicar lista binaria dura y firmas conocidas (magic bytes / MIME si el host lo expone).
+4. Si la muestra contiene byte NUL, clasificar BINARY.
+5. Intentar UTF-8 estricto y luego encodings permitidos por el perfil.
+6. Aplicar umbral documentado de caracteres de control.
+7. Extensión textual + contenido binario => BINARY (no incorporar inline).
+8. Extensión binaria + contenido textual inequívoco => TEXT_WITH_BINARY_EXTENSION;
+   no incorporar inline en CORE/FULL salvo lista blanca explícita.
+9. Si no hay resultado inequívoco: UNREADABLE_OR_BINARY y no incorporar contenido.
+10. RESULT: TEXT | BINARY | UNREADABLE_OR_BINARY | EXCLUDED. Fallo de lectura = UNREADABLE.
+
+INDEX registra DETECTION_METHOD, DETECTED_ENCODING, CONFIDENCE y CONTENT_STATUS.
+Los binarios se listan con metadata y hash, pero no se intenta leer su contenido
+ni se incorporan inline en bundles de texto.
 
 ----------
-06.25_SYMLINKS_Y_REFERENCIAS_CIRCULARES_(NUEVO)
+06.25_LINKS_REPARSE_POINTS_Y_HARDLINKS
 ----------
 
-Symlinks se listan SOLO en INDEX (nunca se siguen para CORE/FULL/FULL.HUMAN/
-FULL.SKILLS, evitando loops).
+FOLLOW_REPARSE_TARGETS_DEFAULT=NO
+FOLLOW_00_ACCESS_TARGETS=NO
+HARDLINK_CONTENT_COUNT=ONCE_PER_FILE_ID
+BROKEN_LINKS=REPORT_WITHOUT_FOLLOW
+CYCLES=STOP_AND_REPORT
+
+Symlinks, junctions, mount points y otros reparse points se listan en INDEX y
+no se siguen por defecto. Targets fuera del root nunca se siguen.
+Hardlink target normativo: FILE_ID + VOLUME_ID, contenido una sola vez.
+Implementación vigente RADAR.ps1 v0.6.3: ver 02.75 (residual documentado; no se
+inventa Win32 API en este DRAFT). Consumidores no deben asumir FILE_ID hasta
+que el script lo emita.
+
+00_ACCESS (ROLE_ID from SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt) is a non-canonical
+navigation surface. RADAR MUST NOT follow shortcut, symlink or junction targets
+that originate under 00_ACCESS. List them in INDEX only.
 
 Campos adicionales para TIPO_LOGICO = symlink:
 
 - TARGET_RUTA: ruta a la que apunta el symlink.
-- TARGET_ESTADO: uno de "válido" / "roto" / "circular".
+- LINK_TYPE, REPARSE_TAG, TARGET_RUTA, TARGET_ESTADO y TARGET_SCOPE.
+- FILE_ID, VOLUME_ID y DUPLICATE_OF cuando aplique.
+- TARGET_ESTADO: VALID / BROKEN / CIRCULAR / INACCESSIBLE.
+- TARGET_SCOPE: INSIDE_ROOT / OUTSIDE_ROOT.
 
 06.30_XLSX
 
@@ -4569,13 +4727,34 @@ leer celdas / KPIs / fórmulas (eso es negocio y va fuera de RADAR)
 CORE incluye solo extensiones legibles (texto/código/config), típicamente:
 .txt, .ps1, .py, .json, .yml/.yaml, .xml, .csv, .js, .ts, .md (si existiera)
 
-07.20_ENCODING_Y_ERRORES
+07.20_ENCODING_ERRORES_Y_ESQUEMA_DE_BLOQUES
 
-Si un archivo no puede leerse (permiso/encoding/bloqueo):
+Cada archivo incorporado usa bloques formales:
+
+=== RADAR_FILE_BEGIN ===
+PATH_JSON=<string JSON>
+SIZE_BYTES=<entero>
+SHA256=<hex>
+ENCODING=<valor>
+CONTENT_STATUS=<valor>
+CONTENT_LENGTH_BYTES=<entero>
+--- RADAR_CONTENT_BEGIN:<SHA256> ---
+<contenido>
+--- RADAR_CONTENT_END:<SHA256> ---
+=== RADAR_FILE_END ===
+
+Metadata textual se serializa como string JSON para resolver comillas,
+backslashes y caracteres de control. El delimitador incorpora SHA256 y la
+longitud en bytes permite validar el bloque sin heurísticas.
+
+Si un archivo no puede leerse por permiso, encoding o bloqueo:
 
 CORE debe registrar error dentro del bloque del archivo (sin detener todo el proceso si el proyecto lo permite)
 
 pero el script debe reflejar estado final (OK real vs FAIL)
+
+STRICT: un archivo requerido ilegible produce FAIL.
+TOLERANT: continúa y produce PASS_WITH_GAPS. Nunca produce PASS.
 
 07.30_CONTROL_DE_TAMANO_(RECOMENDADO)
 
@@ -4619,8 +4798,8 @@ contenido de la carpeta canónica HUMAN.
 
 08.42_RUTA
 
-La ruta de HUMAN NO la define RADAR; se resuelve vía la skill de arquitectura
-de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+La ruta de HUMAN NO la define RADAR; se resuelve vía
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (ver DEPENDENCIAS).
 
 08.43_TRATAMIENTO
 
@@ -4644,8 +4823,8 @@ contenido de la carpeta SKILLS del ecosistema, separada del resto del proyecto.
 
 08.52_RUTA
 
-La ruta de SKILLS NO la define RADAR; se resuelve vía la skill de arquitectura
-de archivos/carpetas del ecosistema (ver DEPENDENCIAS).
+La ruta de SKILLS NO la define RADAR; se resuelve vía
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (ver DEPENDENCIAS).
 
 08.53_TRATAMIENTO
 
@@ -4747,6 +4926,31 @@ El proyecto puede ampliar/reducir; RADAR debe documentar su lista de exclusión.
 
 No existe. RADAR no interpreta negocio.
 
+----------
+10.30_POLITICA_DE_SECRETOS_Y_DO_NOT_UPLOAD
+----------
+
+Antes de incorporar texto a CORE, FULL, FULL.HUMAN o FULL.SKILLS, RADAR aplica
+exclusión y detección de secretos. Se excluyen por defecto .env, claves privadas,
+certificados con clave, archivos de credenciales y patrones configurados de
+tokens, passwords, connection strings y API keys.
+
+Un secreto detectado nunca se copia al output ni al log. Se reemplaza por
+[REDACTED:<TYPE>:<FINGERPRINT>] o, si no puede garantizarse una redacción segura,
+el archivo completo queda SKIPPED_SECRET_RISK. El manifest declara SAFE_FOR_LOCAL
+y SAFE_FOR_UPLOAD. Un output no es seguro para upload por mera presunción.
+
+La ruta 00.SOURCE_DO_NOT_UPLOAD y todo su contenido:
+
+- puede aparecer en INDEX solo con metadata mínima;
+- nunca se incorpora a CORE, FULL, FULL.HUMAN ni FULL.SKILLS;
+- nunca se incorpora a segmentos o derivados de consumo IA;
+- se registra como CONTENT_STATUS=EXCLUDED_DO_NOT_UPLOAD y EXCLUSION_POLICY=HARD.
+
+FULL.SKILLS es fail-closed: si hay incertidumbre material (secreto, clasificación,
+DO_NOT_UPLOAD, encoding ilegible), el archivo no se incorpora y SAFE_FOR_UPLOAD=NO
+para ese output. No imprimir secretos detectados en logs, reportes ni fixtures.
+
 ==========
 11.00_DETERMINISMO_ORDENAMIENTO_ENCODING
 ==========
@@ -4767,17 +4971,26 @@ Outputs RADAR en UTF-8 (idealmente sin BOM) para tooling.
 
 No mezclar encodings dentro del output si se puede evitar.
 
+11.30_DETERMINISMO_LOGICO
+
+Los timestamps impiden identidad byte-a-byte entre corridas. RADAR distingue:
+
+- CONTENT_DETERMINISTIC: mismo FS y perfil producen el mismo contenido lógico.
+- BYTE_DETERMINISTIC: solo YES si se excluyen campos volátiles del cálculo.
+
+El manifest documenta ambos valores y el algoritmo de normalización utilizado.
+
 ==========
 12.00_EVIDENCIA_ESTADO_FINAL_EXIT_CODE
 ==========
 
-12.10_DONE_BINARIO
+12.10_ESTADOS_Y_DONE
 
-DONE cuando:
+Estados permitidos: PASS, PASS_WITH_GAPS, FAIL, BLOCKED_CONFIGURATION y STALE.
 
-Existen los 6 activos requeridos (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)
-
-Y el script termina sin excepción no controlada.
+DONE exige todos los outputs solicitados por OUTPUT_SET, mismo RUN_ID, hashes
+válidos, manifest consistente, ausencia de escritura parcial y terminación sin
+excepción no controlada. La mera existencia de archivos ACTIVE no prueba DONE.
 
 12.20_EXIT_CODE
 
@@ -4789,6 +5002,8 @@ Ante excepción no controlada: exit 1.
 
 Solo OK si todo terminó correcto.
 
+PASS_WITH_GAPS debe imprimirse como tal; nunca se presenta como OK/PASS.
+
 12.30_LOGS_(RECOMENDADO)
 
 Registrar:
@@ -4798,6 +5013,28 @@ Registrar:
 - outputs generados (paths, incluyendo FULL.HUMAN y FULL.SKILLS)
 - estado final OK/FAIL
 
+----------
+12.40_PUBLICACION_ATOMICA_Y_FRESHNESS
+----------
+
+RADAR genera primero en staging temporal, valida el conjunto, mueve los ACTIVE
+anteriores a HISTORY, publica el nuevo conjunto y publica MANIFEST al final.
+Si falla antes de publicar MANIFEST, el conjunto anterior sigue siendo el último
+ACTIVE válido y la corrida fallida no crea baseline.
+
+Después de operaciones masivas, builds o cadenas de mutaciones, RADAR debe
+regenerarse antes de utilizarse como evidencia de cierre. Un RADAR anterior a
+la última mutación relevante tiene FRESHNESS=STALE.
+
+Cada output declara exclusiones y gaps conocidos. Ausencia dentro de una ruta
+excluida nunca demuestra ausencia en el filesystem.
+
+12.50_RETENCION_DE_HISTORICOS
+
+La política de retención es configurable y se registra en MANIFEST. Debe fijar
+cantidad máxima, antigüedad máxima y protección de baselines/cierres. RADAR no
+elimina históricos protegidos ni aplica una purga implícita.
+
 ==========
 13.00_EJEMPLOS_PRACTICOS
 ==========
@@ -4806,7 +5043,8 @@ Registrar:
 
 Ejecutar RADAR.ps1
 
-Obtener los 6 outputs en carpeta de RADAR del proyecto
+Obtener LITE, INDEX, MANIFEST y el OUTPUT_SET del perfil. En INITIAL_BASELINE,
+obtener los seis outputs descriptivos más MANIFEST.
 
 Subir al chat solo segmentos .seg.* si se requiere AI_UPLOAD
 
@@ -4840,14 +5078,14 @@ Imprimir "OK" con errores = destruye confianza operacional.
 
 14.40_ANTIPATRON_FULL_DIARIO
 
-Generar FULL/FULL.HUMAN/FULL.SKILLS por hábito de SUBIDA a IA cloud (costo/tiempo
-de tokens), cuando bastaba LITE/INDEX o CORE puntual. No confundir con la
-generación local, que siempre ocurre (ver 02.55).
+Generar o subir FULL/FULL.HUMAN/FULL.SKILLS por hábito cuando bastaba DAILY o
+CORE puntual. INITIAL_BASELINE y los perfiles que los exigen son excepciones
+deliberadas, no una autorización de upload.
 
 14.50_ANTIPATRON_RADAR_DEFINIENDO_RUTAS_(NUEVO)
 
 Que RADAR asuma o hardcodee la ruta de HUMAN/SKILLS en vez de resolverla vía
-la skill de arquitectura del ecosistema = acoplamiento indebido y duplicación
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt = acoplamiento indebido y duplicación
 de responsabilidad.
 
 ==========
@@ -4856,7 +5094,9 @@ de responsabilidad.
 
 ¿RADAR es independiente y no menciona frames?
 
-¿Produce SIEMPRE los 6 outputs (LITE/INDEX/CORE/FULL/FULL.HUMAN/FULL.SKILLS)?
+¿Produce LITE, INDEX, MANIFEST y el OUTPUT_SET exigido por el perfil?
+
+¿INITIAL_BASELINE produjo los seis outputs descriptivos más MANIFEST?
 
 ¿INDEX incluye hash según la regla por defecto (06.15)?
 
@@ -4864,14 +5104,14 @@ de responsabilidad.
 
 ¿FULL incluye tree-size?
 
-¿FULL.HUMAN y FULL.SKILLS usan rutas resueltas por la skill de arquitectura
-(y no rutas hardcodeadas)?
+¿FULL.HUMAN y FULL.SKILLS usan rutas resueltas por
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (y no rutas hardcodeadas)?
 
 ¿LITE incluye HUMAN_CAMBIOS_DETECTADOS de forma descriptiva, no evaluativa?
 
 ¿Si ACTIVE >8MB, existen .seg.001..N (incluyendo FULL.HUMAN/FULL.SKILLS)?
 
-¿Symlinks aparecen solo en INDEX, con TARGET_RUTA y TARGET_ESTADO?
+¿Symlinks, junctions, mount points, reparse points y hardlinks siguen 06.25?
 
 ¿Históricos usan naming con timestamp compartido entre los 6 outputs?
 
@@ -4879,14 +5119,51 @@ de responsabilidad.
 
 ¿No hay "OK falso" si ocurrió error?
 
-¿Se respetó la política de uso de SUBIDA a IA (LITE/INDEX default; CORE por
-módulo; FULL/FULL.HUMAN/FULL.SKILLS ocasional), distinta de la generación local?
+¿UPLOAD_SELECTION está separado de OUTPUT_SET y ningún upload es automático?
+
+¿Se aplicó la política de secretos antes de consolidar contenido?
+
+¿00.SOURCE_DO_NOT_UPLOAD quedó fuera de todo contenido y segmento para IA?
+
+¿Todos los outputs comparten RUN_ID y coinciden con MANIFEST?
+
+¿La publicación fue atómica y FRESHNESS no está STALE?
 
 ¿Primera ejecución de LITE indica "version_0" sin intentar calcular diffs?
 
 ==========
 16.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.6-DRAFT adoption audit
+SOURCE_TASK: 20260819.152636.SM-PIA-RADAR-DRAFT-ADOPTION-FORWARD-VALIDATION-COMMIT-001
+- Combined-unit adoption: generate vs upload separated (NO_SUBIR != NO_GENERAR).
+- Binary detection order, Windows link constants, FULL.SKILLS fail-closed upload.
+- RADAR.ps1 exclusion alignment documented; six local outputs remain human decision.
+
+2026-08-19, v1.6-DRAFT owner transfer
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Architecture owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+- 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt remains bootstrap consumer only.
+
+2026-08-19, v1.6-DRAFT pointer patch
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Dependencia pendiente de arquitectura resuelta a 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt.
+- RADAR no sigue shortcut/symlink/junction targets desde 00_ACCESS.
+
+2026-08-17, v1.6-DRAFT
+- Integrado contrato de perfiles configurables y freshness de MB-SM-067B-D2.
+- Reemplazada generación universal por OUTPUT_SET según perfil.
+- Agregada línea base integral obligatoria en primera ejecución válida.
+- Agregados MANIFEST, RUN_ID, rutas físicas, esquema formal y publicación atómica.
+- Agregadas detección binaria, política Windows, secretos y DO_NOT_UPLOAD.
+- Agregados estados ampliados, determinismo lógico y retención histórica.
+
+2026-07-19, v1.5-DRAFT
+- Agregado contrato configurable RADAR_SCAN_PROFILES.
+- Agregada regeneración obligatoria después de cadenas de mutaciones.
+- Agregada declaración explícita de gaps y exclusiones.
+- Establecido que perfiles locales permanecen en sus proyectos.
 
 2026-06-30, v1.4-DRAFT
 - Agregados outputs FULL.HUMAN y FULL.SKILLS (contrato duro pasa de 3 a 6 outputs).
@@ -4919,51 +5196,771 @@ módulo; FULL/FULL.HUMAN/FULL.SKILLS ocasional), distinta de la generación loca
 FIN_DEL_DOCUMENTO
 ==========
 
+--------------------------------------------------
+SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+VERSION    : v0.1-DRAFT
+SHA256     : 29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D
+--------------------------------------------------
 ==========
-MB-SM-067B-D2_RADAR_SCAN_PROFILES_AND_FRESHNESS
+00.00_METADATOS_DEL_DOCUMENTO
 ==========
-DATE..............: 2026-07-19
-STATUS............: ACTIVE_RULE
-LAYER.............: RADAR
-SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
-MERGES............: GRC.DEVEFACT_RADAR_PROFILE (candidate) resolved as PROJECT_LOCAL; global RADAR receives only this configurable-profile contract.
 
-RADAR_SCAN_PROFILES:
-RADAR must support configurable scan profiles (scope, exclusions, depth,
-hashing policy) instead of one hardcoded global scan. A profile declares:
-- PROFILE_NAME;
-- ROOT_PATH(S) covered;
-- EXCLUDED_PATHS;
-- HASH_POLICY;
-- OUTPUT_SET produced.
+ID_UNICO..........: SKILL.PROJECT_INFORMATION_ARCHITECTURE.01.00
+NOMBRE_SUGERIDO...: SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+SOURCE_TASK.......: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+OWNER_CONTRACT....: DIRECTORY_ARCHITECTURE + ARTIFACT_ARCHITECTURE
+DOMAIN............: PROJECT_INFORMATION_ARCHITECTURE
+STATUS............: DRAFT (HUMAN promotion to CANON pending)
+PHYSICAL_NUMBER...: NONE (filename has no invented sequential prefix)
 
-FRESHNESS_AFTER_BATCH_CHAINS:
-After a chain of batch operations (multi-MB session, build chains, mass
-patches), RADAR outputs must be regenerated before they are used as closing
-evidence. RADAR generated before the chain is stale for closure purposes.
-
-EXPLICIT_GAPS_AND_EXCLUSIONS:
-Every RADAR output must declare its exclusions and known gaps explicitly.
-Consumers must not infer that absence from RADAR means absence from the
-filesystem when the path falls under a declared exclusion.
-
-NO_HARDCODED_GLOBAL_PATHS_FOR_LOCAL_PROFILES:
-Project-local scan profiles must not hardcode global/other-project paths.
-A profile belonging to one project references only that project's roots.
-
-LOCAL_PROFILES_REMAIN_LOCAL:
-Project-local RADAR profiles (e.g. a CloseReport- or DEVEFACT-specific
-profile) live in their project and are not promoted into global RADAR canon.
-Global RADAR carries only the profile CONTRACT, not per-project profiles.
-
-FIN_MB-SM-067B-D2_RADAR_SCAN_PROFILES_AND_FRESHNESS
 ==========
+00.05_ACTIVATION
+==========
+
+QUE_RESUELVE......:
+How-to owner of evolutionary project information architecture: logical maximum
+tree, physical minimum, folder/file roles, profiles, materialization, growth,
+contraction, access layer, operational I/O, modules, and architectural validation.
+
+CUANDO_SE_ACTIVA..:
+- Creating or repairing a project structure
+- Deciding whether a directory/role may materialize
+- Resolving RADAR_ROOT, HUMAN path, SKILLS path, ACCESS, SYS.INPUT/OUTPUT
+- Composing project profiles
+- Promoting, retiring, or mapping aliases of directory/artifact roles
+
+QUE_NO_RESUELVE...:
+Bootstrap execution order (20.SKILL.PROJECT_BOOTSTRAP_POLICY).
+WBS/ID_FS construction (06.SKILL.WBS).
+Inner file format (07.SKILL.FILE_CONTENT).
+RADAR output schema and scan procedure (09.SKILL.RADAR).
+BATON inner content (10.SKILL.BATON).
+Session open/execute/close (22.SKILL.PROJECT_LIFECYCLE_POLICY).
+Artifact class/precedence engine (21.SKILL.OPERATIONAL_ARTIFACTS_POLICY).
+TEMP class authority (SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT).
+Manifest field semantics (SKILL.MANIFEST.PATH_SEMANTICS).
+SkillsMachine-local lakes enforcement (POLICY.REPOSITORY.ARCHITECTURE).
+HUMAN meaning (HUMAN documents). Does not replace HUMAN with CONSTITUTION.
+
+CONSUMIDORES......:
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
+09.SKILL.RADAR.txt
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+10.SKILL.BATON.txt
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+SKILL.MANIFEST.PATH_SEMANTICS.txt
+POLICY.REPOSITORY.ARCHITECTURE.txt (SkillsMachine-specific GRC; consumes transversal doctrine)
+
+LIMITES_DE_AUTORIDAD:
+How-to only. Not GRC enforcement. Not HUMAN. Not a Skill-per-folder catalog.
+Do not silently move project content. Do not auto-materialize the logical maximum.
+
+==========
+MB-SM-077D_WHOAMI_DISPOSITION
+==========
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=OPTIONAL_HISTORICAL_REFERENCE_ONLY
+WHOAMI_REQUIRED_FOR_OPERABILITY=NO
+Useful human-context content belongs in HUMAN_AUTHORITY artifacts.
+Do not recreate WhoAmI as competing product-canon or continuity surface.
+==========
+FIN_MB-SM-077D_WHOAMI_DISPOSITION
+==========
+
+ALCANCE...........:
+Single how-to owner of DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE for
+projects in this ecosystem.
+
+NO_CUBRE..........:
+See QUE_NO_RESUELVE. No new GRC. No project migration. No empty-tree materialization.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt (physical-name constraints only; this Skill does not own ID_FS)
+11.SKILL.HUMAN_README.txt (HUMAN document contract exists)
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt is a CONSUMER, not a dependency of this Skill.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.05 Activation
+00.10 Índice
+01.00 Authority
+02.00 Two coordinated contracts
+03.00 Four types of order
+04.00 Role identity
+05.00 Logical maximum versus physical minimum
+06.00 Materialization lifecycle
+07.00 Project profiles
+08.00 DIRECTORY_ARCHITECTURE
+09.00 HUMAN authority model
+10.00 Governance separation
+11.00 Human access layer and Windows links
+12.00 SYS.INPUT and SYS.OUTPUT
+13.00 Skills, tools, modules
+14.00 Ideas, backlogs, roadmap
+15.00 Sessions and agents
+16.00 Quality, tests, security, evidence
+17.00 ARTIFACT_ARCHITECTURE
+18.00 Three-artifact rule
+19.00 Promotion and collapse
+20.00 Source, generated, temp, legacy
+21.00 Physical paths and portability
+22.00 Validation contract
+23.00 Forward-test profiles (declarative)
+24.00 Exclusions
+25.00 Changelog
+
+==========
+01.00_AUTHORITY
+==========
+
+AUTHORITY_ORDER (do not mix with folder numbers or ACCESS shortcuts):
+
+1) HUMAN / ROLE_ID=HUMAN_AUTHORITY
+2) GRC (enforceable controls, when present)
+3) THIS SKILL (how-to owner of DIRECTORY_ARCHITECTURE + ARTIFACT_ARCHITECTURE)
+4) Specialized Skills (bootstrap, WBS, FILE_CONTENT, RADAR, BATON, TEMP, lifecycle, path semantics)
+5) ENGINE / TOOLS
+6) OUTPUTS
+7) TEMP
+
+Compatible with live canon: HUMAN > GRC > SKILLS > ENGINE > TOOLS > OUTPUTS > TEMP.
+
+SINGLE_OWNER=YES
+This file is the only how-to owner of complete evolutionary project information architecture.
+
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt owns birth/bootstrap procedure only and MUST consume this Skill.
+
+POLICY.REPOSITORY.ARCHITECTURE remains SkillsMachine-repository GRC (APLICA_A=C:\01. GitHub\Skills).
+It must not silently redefine transversal project layout.
+
+Other Skills must reference this owner, keep only specialized procedure, and must not
+repeat the complete directory tree or silently redefine paths.
+
+==========
+02.00_TWO_COORDINATED_CONTRACTS
+==========
+
+DIRECTORY_ARCHITECTURE
+- roles, hierarchy, parents, children, materialization, profiles, triggers, retirement
+
+ARTIFACT_ARCHITECTURE
+- canonical files, producers/consumers, SOT, editable vs generated, upload, retention
+
+They remain separate contracts under this one owner.
+Do not create a Skill per folder, role, artifact, or tree name.
+
+==========
+03.00_FOUR_TYPES_OF_ORDER
+==========
+
+Do not assume one numeric prefix solves all four:
+
+FUNCTIONAL_ORDER       parent/child purpose in the logical tree (HIERARCHICAL)
+LIFECYCLE_ORDER        bootstrap then later materialization (TEMPORAL_CREATION)
+AUTHORITY_ORDER        HUMAN > GRC > this Skill > specialized Skills > tools > outputs > temp
+HUMAN_ACCESS_ORDER     00_ACCESS / display prefixes / launchers (not identity)
+
+DISPLAY_ORDER (numeric prefixes) is a visual aid for HUMAN_ACCESS_ORDER only.
+It does not define semantic identity or authority.
+ROLE_ID is identity. PHYSICAL_NAME is an alias.
+
+==========
+04.00_ROLE_IDENTITY
+==========
+
+Each relevant element distinguishes:
+
+ROLE_ID
+PHYSICAL_NAME
+DISPLAY_NAME
+PURPOSE
+AUTHORITY
+OWNER
+MATERIALIZATION_TRIGGER
+ALLOWED_CONTENT
+FORBIDDEN_CONTENT
+RETENTION_OR_DISPOSITION
+PROFILE_APPLICABILITY
+
+Physical names are not semantic identity.
+Observed aliases (HUMAN, 00.HUMAN, 000.HUMAN, 01.HUMAN, human) map to
+ROLE_ID=HUMAN_AUTHORITY unless the project mapping says otherwise.
+
+A project SHOULD publish ROLE_ID → physical relative path (in BATON or a project
+architecture note) when aliases diverge. If absent, prefer the recommended
+PHYSICAL_NAME only when materializing a new folder.
+
+==========
+05.00_LOGICAL_MAXIMUM_VERSUS_PHYSICAL_MINIMUM
+==========
+
+LOGICAL_MAXIMUM              complete known role catalog in this Skill
+PHYSICAL_MINIMUM             only materialized folders/files justified now
+MATERIALIZED_STRUCTURE       what exists on disk with governed purpose
+PLANNED_GROWTH               selected by profile, not yet on disk
+ARCHIVED_OR_RETIRED_STRUCTURE RETIRED/LEGACY/ARCHIVE per 20.00
+
+The complete architecture MUST be known without physically creating the complete tree.
+Empty cosmetic folders are prohibited by default.
+
+==========
+06.00_MATERIALIZATION_LIFECYCLE
+==========
+
+KNOWN
+PLANNED
+MATERIALIZATION_READY
+MATERIALIZED
+RETIRED
+PROHIBITED
+
+KNOWN = documented here.
+PLANNED = selected for a project profile but not yet on disk.
+MATERIALIZATION_READY = trigger fired; promotion plan exists; not yet moved/created.
+MATERIALIZED = exists on disk with governed purpose.
+RETIRED = closed; content migrated or archived per policy.
+PROHIBITED = must not be created (example: standalone active WhoAmI as canon).
+
+A planned directory does not require a physical empty directory.
+Who can change state: HUMAN (or approved GRC process). Specialized Skills propose; they do not silently mutate.
+
+==========
+07.00_PROJECT_PROFILES
+==========
+
+Profiles are composable. Not mutually exclusive unless a conflict is explicit.
+
+Every project in this ecosystem includes AI integration.
+Not every project is an executable SYSTEM_PRODUCT.
+
+BASE_AI_PROJECT
+  Always present conceptually. Activates bootstrap artifacts HUMAN+BATON+RADAR_INDEX
+  and knowledge of baseline roles. Does not create all baseline folders.
+
+GIT_REPOSITORY
+  Versioning surfaces (.git, ignore, optional license). Not a substitute for HUMAN.
+
+RESEARCH
+  Source/working/analysis evidence; tests = reproducibility/peer review.
+
+LEARNING
+  Curriculum/progress; tests = assessments/progress validation.
+
+KNOWLEDGE_MEMORY
+  Memory/registers with provenance; tests = retrieval/integrity.
+
+SOFTWARE
+  src/tests/build as justified; tests = unit/integration/system/regression.
+
+AUTOMATION
+  Durable scripts/runbooks as justified under 60_TOOLS; not a dump of TEMP.
+
+DOCUMENT_TRANSACTION
+  Domain packets as project-local extensions. Not transversal defaults.
+
+SYSTEM_PRODUCT
+  Activates SYS.INPUT and SYS.OUTPUT. Other profiles MUST NOT auto-activate them.
+
+INTEGRATION
+  Activates 81_PRODUCT_MODULES when an external product boundary is real.
+
+PRODUCTION_OPERATIONS
+  Runbooks, incidents, observability as justified.
+
+CORPORATE
+  Adds charter/acceptance/governance packets under HUMAN_AUTHORITY / 02_GOVERNANCE
+  when those artifacts exist. Does not auto-create empty governance folders.
+
+REGULATED
+  Evidence, classification, retention, and security boundaries become HARD exceptions.
+
+MATERIAL_EVIDENCE
+  52_EVIDENCE required for material operations, validations, decisions, or deliveries.
+
+ACADEMIC
+  Citation/reproducibility packets.
+
+SKILLS_ECOSYSTEM
+  This SkillsMachine repo. Consumes POLICY.REPOSITORY.ARCHITECTURE for local lakes.
+
+DATA / AI_ML remain valid composable specializations of SOFTWARE/RESEARCH/SYSTEM_PRODUCT.
+
+==========
+08.00_DIRECTORY_ARCHITECTURE
+==========
+
+08.10_BASELINE_ROLES (known; materialize only when justified)
+
+ROLE_ID              DISPLAY  PHYSICAL_RECOMMENDED     PURPOSE
+ACCESS_LAYER         00       00_ACCESS                Non-canonical human navigation
+HUMAN_AUTHORITY      01       01_HUMAN                 Human/product meaning home
+GOVERNANCE           02       02_GOVERNANCE            GRC/policies/controls if present
+PROJECT_IDENTITY     03       03_PROJECT               ABOUT.PROJECT / PROJECT packet
+BACKLOGS             04       04_BACKLOGS              Master and specialized backlogs
+IDEAS                13       13_IDEAS                 Ideas; DEV.PATH; NON.RELATED
+QUALITY              50       50_QUALITY               Minimum quality / security-quality
+EVIDENCE             52       52_EVIDENCE              Evidence of execution and quality
+AI_COLLAB            62       62_AI                    AI collaboration surfaces (not Skill copies)
+PROJECT_SKILLS       63       63_SKILLS                Project-available skills
+SESSIONS             90       90_SESSIONS              Session packs; ORCHESTRATOR/EXECUTOR
+BATON_HOME           91       91_BATON                 Cold-start continuity home
+RADAR_HOME           92       92_RADAR                 RADAR_ROOT
+
+Compatibility aliases: 00_ACCESS, 01_HUMAN, 63_SKILLS, 90_SESSIONS remain valid
+PHYSICAL_NAME / ROLE_ID strings. HUMAN_AUTHORITY is the semantic identity of 01_HUMAN.
+
+08.20_CONDITIONAL_ROLES
+
+TESTS                51       51_TESTS                 Profile-dependent tests
+TOOLS                60       60_TOOLS                 Durable tools (left TEMP)
+PRODUCT_MODULES      81       81_PRODUCT_MODULES       SKILLSMACHINE, WINGS, HIA, BRAINY, others
+LEGACY               97       97_LEGACY                Retired governed structure
+AI_HISTORY           98       98_AI_HISTORY            AI.History class; NEVER_AUTO_LOAD
+DEV_INPUTS           20       20_INPUTS                Development/project inputs
+DELIVERABLES         40       40_DELIVERABLES          Approved delivery results
+SYS_INPUT                     SYS.INPUT                SYSTEM_PRODUCT operational input
+SYS_OUTPUT                    SYS.OUTPUT               SYSTEM_PRODUCT operational output
+
+08.30_ORCHESTRATOR_AND_EXECUTOR
+
+Belong under SESSIONS (90_SESSIONS).
+They are not independent root domains.
+
+08.40_SKILLSMACHINE_REPO_EXCEPTION
+
+For profile SKILLS_ECOSYSTEM, physical lakes HUMAN\, GRCLake\, SkillsLake\,
+90.USECASE\, SyS\ remain as required by POLICY.REPOSITORY.ARCHITECTURE.
+That is project-local-to-SkillsMachine, not the default tree for other projects.
+
+==========
+09.00_HUMAN_AUTHORITY_MODEL
+==========
+
+ROLE_ID=HUMAN_AUTHORITY
+PHYSICAL_NAME recommended = 01_HUMAN
+Do not automatically rename HUMAN to CONSTITUTION.
+
+Conceptual artifacts (do not create empty files indiscriminately):
+
+HUMAN.PROJECT
+  Context, intention, and human particularities of this project.
+
+PROJECT.CHARTER
+  Purpose, scope, objectives, limits, and value.
+
+CONSTITUTION
+  Non-negotiable principles/rules approved by HUMAN.
+  Subordinate component of HUMAN_AUTHORITY. Not a replacement of HUMAN.
+  Changes only by human decision or HUMAN-approved governance process.
+
+USER.WORKING_PROFILE
+  Personal collaboration preferences. Not generic product canon.
+
+ACCEPTANCE.AUTHORITY
+  Authority to accept, reject, promote, or change canon.
+
+SkillsMachine GRCLake\AA.CONSTITUTION\ is a repo-local constitution pack for
+IT-delivery operating briefs. It does not replace project HUMAN_AUTHORITY and
+must not be copied as the generic project HUMAN folder.
+
+==========
+10.00_GOVERNANCE_SEPARATION
+==========
+
+Distinguish:
+
+HUMAN_AUTHORITY     meaning, limits, acceptance
+PROJECT.CHARTER     scope/value statement (HUMAN artifact)
+CONSTITUTION        HUMAN-approved non-negotiables (HUMAN artifact)
+GOVERNANCE          project control home (02_GOVERNANCE) when materialized
+GRC                 enforceable policy/control/evidence (when the project has GRC)
+Skills              how-to capabilities
+Agent instructions  session/runtime prompts (not canon)
+Defaults/heuristics advisory only
+
+CONSTITUTION does not insert a new rank above HUMAN.
+If approved, it operates as a HUMAN artifact (or as GRC only when a project
+explicitly promotes a control). Do not create two sources of truth.
+
+==========
+11.00_HUMAN_ACCESS_LAYER_AND_WINDOWS_LINKS
+==========
+
+ACCESS_LAYER / 00_ACCESS is a non-canonical navigation surface.
+
+MAY contain: instructions; shortcuts; symlinks; junctions; views; indexes;
+launchers; explicitly disposable copies only when no better alternative exists.
+
+MUST NOT contain: editable copies that compete with SOT; secrets;
+system-required state; uncontrolled duplicates.
+
+Prefer navigation or shortcuts over copies.
+
+Link handling (default for RADAR and other scanners):
+
+DETECT type before opening: symlink, junction, mount point, other reparse, hardlink, shortcut (.lnk).
+FOLLOW reparse targets from 00_ACCESS: NO.
+FOLLOW reparse targets elsewhere: NO by default (list in INDEX with TARGET_RUTA / TARGET_ESTADO).
+HARDLINK: same file identity; count once; do not treat as a second tree.
+CYCLES: detect by visited-id (file-id / reparse key); stop; record.
+DOUBLE COUNT: skip target content already indexed via canonical path.
+BROKEN LINKS: list; do not repair silently; TARGET_ESTADO=BROKEN.
+RADAR must not re-ingest shortcut/symlink/junction targets originating under 00_ACCESS.
+
+==========
+12.00_SYS_INPUT_AND_SYS_OUTPUT
+==========
+
+Only SYSTEM_PRODUCT (or an explicit equivalent executable-system profile) activates
+these operational boundaries.
+
+20_INPUTS / DEV_INPUTS = development and project inputs
+SYS.INPUT              = operational material submitted for system processing
+SYS.OUTPUT             = traceable result produced by the system
+40_DELIVERABLES        = approved result prepared for delivery
+52_EVIDENCE            = evidence proving execution and quality
+
+They are not the same as working files, generic generated outputs, or approved deliverables.
+
+Every operational run MUST use a stable JOB_ID and preserve input-to-output lineage.
+
+Conceptual proof (ParserMakerMachine; do not materialize here):
+- SYS.INPUT: PDF or other document for a job
+- SYS.OUTPUT candidates: images, tables, text, metadata, styles, candidate Skills
+- Distinguish intermediate / final / derived / rejected / evidence
+- Lineage: JOB_ID binds input → transform → outputs
+- Project antecedents stay in 20_INPUTS; approved client packets in 40_DELIVERABLES
+
+Other profiles do not automatically activate SYS.INPUT/SYS.OUTPUT.
+
+==========
+13.00_SKILLS_TOOLS_MODULES
+==========
+
+Reusable Skill              PROJECT_SKILLS / 63_SKILLS
+Executable tool             TOOLS / 60_TOOLS
+Internal module             decomposition inside THIS project
+Product module              PRODUCT_MODULES / 81_PRODUCT_MODULES
+Adapter/integration         inbound/outbound boundary inside a product module
+External product            lives outside; module must not contain an uncontrolled copy
+Other-repo reference        mapping/receipt, not a clone
+
+63_SKILLS is separate from 81_PRODUCT_MODULES\SKILLSMACHINE.
+
+Project Skills surfaces (when 63 materializes):
+LOCAL, IMPORTED, PROJECT_SPECIFIC, OVERRIDES, DEPENDENCIES, PROFILES,
+TESTS, EVIDENCE, RECEIPTS, HISTORY, CANDIDATES
+
+Imported Skills require provenance, version and hash.
+
+A product module may contain only:
+contracts; configuration; inbound/outbound boundaries; packages; receipts;
+mappings; local integration state; evidence; history.
+
+Known product names (examples, not a Skill-per-product):
+SKILLSMACHINE, WINGS, HIA, BRAINY — only when an integration boundary is real.
+
+==========
+14.00_IDEAS_BACKLOGS_ROADMAP
+==========
+
+13_IDEAS may contain ABOUT.PROJECT, PROJECT notes, DEV.PATH, NON.RELATED.
+Ideas do not automatically become backlog.
+DEV.PATH is not ROADMAP.
+Master backlog (04_BACKLOGS) remains authoritative for active work.
+Specialized backlogs must declare they are NOT the product master backlog.
+Roadmap, if present, is a planning view, not DEV.PATH and not the master backlog.
+
+Promotion (reconciled; do not invent a second canon if a project already names these):
+
+IDEA -> EVALUATED_IDEA -> BACKLOG_ITEM -> ROADMAP_COMMITMENT -> EXECUTION
+
+Equivalences: ABOUT.PROJECT may feed CHARTER; DEV.PATH is exploratory sequence,
+not commitment.
+
+NON.RELATED is not a permanent dump. It requires retention, review, or disposition
+(move to IDEAS, BACKLOG, LEGACY, or delete under HUMAN/GRC rules).
+
+==========
+15.00_SESSIONS_AND_AGENTS
+==========
+
+SESSION         warm pack under 90_SESSIONS; lifecycle owned by 22.SKILL.PROJECT_LIFECYCLE_POLICY
+ORCHESTRATOR    session role under 90_SESSIONS; not a root domain
+EXECUTOR        session role under 90_SESSIONS; not a root domain
+AI_HISTORY      98_AI_HISTORY; CANON=NO; NEVER_AUTO_LOAD; not current authority
+
+Continuity in cold start = BATON (Skill 10), not SESSION and not AI_HISTORY.
+Dynamic state = session pack; handoff = BATON + session close procedure (Skill 22).
+Execution evidence = 52_EVIDENCE and/or session receipts — not AI_HISTORY as SOT.
+
+No new SESSION Skill. Gap, if any, is documented here: Skill 22 remains operational owner.
+
+==========
+16.00_QUALITY_TESTS_SECURITY_EVIDENCE
+==========
+
+Do not treat these as synonyms.
+
+QUALITY (50)  = bootstrap minimum quality, including security baseline when operation is material.
+              Do not create an empty QUALITY folder without need.
+TESTS (51)    = profile-dependent. Not created by default for every project.
+SECURITY      = baseline at bootstrap (access, secrets, classification, privacy, personal data,
+              credentials, AI upload, DO_NOT_UPLOAD, incidents, redaction/exclusion,
+              secrets in apparently textual CORE/FULL content).
+              May live under 50_QUALITY until a security boundary exception justifies a directory.
+EVIDENCE (52) = required for material operations, validations, decisions, or deliveries that need traceability.
+
+Tests adapt to project nature:
+software: unit/integration/system/regression
+parser: fixtures/extraction/reconstruction/regression
+research: reproducibility/peer review
+learning: assessments/progress validation
+knowledge: provenance/retrieval/integrity
+documents: completeness/classification/traceability
+AI: evaluations/adversarial cases/human review/safety
+automation: run fixtures/idempotence/rollback
+
+Do not embed real secrets in fixtures, examples, bundles, or outputs.
+
+==========
+17.00_ARTIFACT_ARCHITECTURE
+==========
+
+17.10_BOOTSTRAP_MANDATORY (physical minimum files; consumed by Skill 20)
+
+HUMAN document (HUMAN_AUTHORITY) — SOT HUMAN — editable by human — upload YES
+BATON snapshot (BATON_HOME) — derived — human-validated edit — upload YES
+RADAR_INDEX (RADAR_HOME) — generated by RADAR — not manual — upload INDEX/LITE as needed
+
+These are artifacts, not an obligation to create all baseline folders.
+
+17.20_CONDITIONAL_LATER
+
+RADAR_LITE/CORE/FULL/MANIFEST — generated — RADAR Skill owns format
+First valid RADAR run also generates CORE, FULL, FULL.HUMAN, FULL.SKILLS per 09.SKILL.RADAR
+FULL.SKILLS MUST NOT ingest DO_NOT_UPLOAD content
+Skill/GRC files — only when 63_SKILLS materializes
+Manifests — BUILD or packager; generated JSON not hand-edited as SOT
+00.SOURCE_DO_NOT_UPLOAD — NEVER upload
+Compact upload pack — TEMP class EXTERNAL_AI_EXCHANGE — FLAT — <=10 files
+
+17.30_WHOAMI
+
+PROHIBITED as active canon, bootstrap dependency, or BATON substitute.
+OPTIONAL historical file only.
+
+17.40_HUMAN_ARTIFACTS (conceptual; three-artifact / hard-boundary still apply)
+
+HUMAN.PROJECT, PROJECT.CHARTER, CONSTITUTION, USER.WORKING_PROFILE, ACCEPTANCE.AUTHORITY
+
+17.50_CLASSES (class engine remains Skill 21)
+
+CANONICAL_SOURCE
+GENERATED_OUTPUT
+EVIDENCE
+LOCAL_CONFIG
+
+This Skill owns placement of those classes into directory roles.
+
+==========
+18.00_THREE_ARTIFACT_DIRECTORY_RULE
+==========
+
+Default:
+Do not automatically materialize a functional directory without a reasonable
+expectation of at least three related, durable, relevant direct artifacts.
+
+What COUNTS as an artifact:
+- current relevant durable files that belong to the role
+- approved near-term artifacts (named, accepted, not hypothetical)
+
+What does NOT count:
+.gitkeep; cosmetic README; empty placeholders; shortcuts; temporary files;
+caches; locks; copied previews; segments; hidden system files unless they are
+the governed content; files created only to justify the directory.
+
+Generated files COUNT only if they are durable role outputs (not caches).
+Manifests COUNT when they are the role's real contract (not a stub).
+Links/shortcuts do NOT count.
+Placeholders do NOT count.
+
+HARD exceptions (directory allowed with fewer than three):
+authority boundary; security boundary; permissions boundary; operational interface;
+external platform requirement; source/generated separation; independent lifecycle;
+independent ownership; exact integration contract; mandatory bootstrap role.
+
+DIRECTORY_CREATION_ALLOWED =
+    HARD_BOUNDARY_REQUIRED
+    OR RELEVANT_DURABLE_ARTIFACT_COUNT >= 3
+    OR APPROVED_NEAR_TERM_ARTIFACT_COUNT >= 3
+    OR PARENT_CONGESTION_REQUIRES_GROUPING
+
+PARENT_CONGESTION_THRESHOLD=12 (default, configurable per project)
+Verified as the live default from the approved architecture decision; not a universal law.
+Projects MAY set another integer in BATON/project mapping; scanners MUST read the project value
+when present, else 12.
+
+Fewer than three files do not automatically create subfolders.
+Never automatically collapse a directory because its count later falls below three.
+Contraction/retirement uses an explicit promotion/retirement plan (19.00).
+
+==========
+19.00_PROMOTION_AND_COLLAPSE
+==========
+
+When a category reaches the creation threshold, produce a controlled promotion plan:
+
+files to move; references; manifests; imports; scripts; shortcuts;
+Git impact; rollback; validation; RADAR refresh.
+
+Do not silently move existing project content.
+Collapse is never automatic. Retirement uses RETIRED lifecycle + plan.
+Preserve references to retired identities as aliases where consumers still resolve them.
+
+==========
+20.00_SOURCE_GENERATED_TEMP_LEGACY
+==========
+
+States (do not merge):
+ACTIVE, HISTORICAL, ARCHIVED, LEGACY, DEPRECATED, RETIRED, TEMPORARY, GENERATED, CANDIDATE
+
+SOURCE ≠ GENERATED.
+LEGACY is not automatic trash or deletion. Do not duplicate ACTIVE content inside LEGACY.
+
+TEMP classes remain those of SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT:
+DURABLE_CANONICAL_STORAGE
+REPO_INTERNAL_TEMP
+EXTERNAL_AI_EXCHANGE_TEMP (FLAT; no subfolders)
+INTERNAL_RUNTIME_SCRATCH
+EXECUTION_SANDBOX_TEMP (may nest)
+
+History distinctions:
+LEGACY (97) = retired governed structure
+ARCHIVE = packed retention
+LOCAL_HISTORY = git / project history
+AI_HISTORY (98) = IA.History/AI.History; CANON=NO; NEVER_AUTO_LOAD
+
+This Skill places those classes; TEMP Skill classifies Temp authority.
+
+==========
+21.00_PHYSICAL_PATHS_AND_PORTABILITY
+==========
+
+Define paths by rules and variables, not by one machine's Windows path as universal law.
+
+LOGICAL_ROOT     project identity root
+PHYSICAL_ROOT    actual filesystem root (may differ: clone, worktree, sandbox)
+REPO_RELATIVE    path from PHYSICAL_ROOT
+EXTERNAL_PATH    outside the repo; declare, do not silently ingest
+USER_PATH        human home/OneDrive/profile; not canon
+TEMP_PATH        TEMP class locations
+GENERATED_PATH   BUILD/RADAR/tool output
+ACCESS_PATH      00_ACCESS entries (non-canonical)
+HISTORICAL_PATH  retired/alias paths kept for resolution
+
+Portability:
+Windows is first-class here; it is not the only possible project OS.
+Separators: store repo-relative paths with a documented convention; do not mix
+unquoted raw "C:\..." as the generic standard for all projects.
+Case: Windows case-insensitive default; do not rely on case as identity.
+Forbidden characters: follow 06.SKILL.WBS / Windows rules for PHYSICAL_NAME.
+Long paths: avoid deep cosmetic nesting; respect MAX_PATH risk.
+OneDrive / network / reparse: detect; do not follow ACCESS reparse; record TARGET_ESTADO.
+Hardlinks: identity by file-id; count once.
+
+SkillsMachine repo physical root C:\01. GitHub\Skills is an instance, not a universal project root.
+
+==========
+22.00_VALIDATION_CONTRACT
+==========
+
+Architecture gate (this DRAFT; not a new GRC):
+- one owner: this Skill
+- Skill 20 is bootstrap consumer, not complete architecture owner
+- no Skill-per-folder
+- HUMAN not replaced by CONSTITUTION
+- WhoAmI not active canon
+- CONSTITUTION subordinated to HUMAN_AUTHORITY
+- logical maximum not auto-materialized
+- three-artifact rule defined
+- 00_ACCESS is not SOT
+- scanners do not follow reparse targets by default
+- SYS.INPUT/SYS.OUTPUT are profile-dependent
+- QUALITY, TESTS, SECURITY, EVIDENCE are distinct
+- no complete canon duplicated in consumers
+- live pointers resolve to this file (not Skill 20 as architecture owner)
+- historical "PENDIENTE" changelog lines are not current state
+
+Official repo gate remains Validate-System.ps1 plus
+Validate-ProjectInformationArchitecture.ps1
+
+==========
+23.00_FORWARD_TEST_PROFILES_DECLARATIVE
+==========
+
+Declarative only. Do not materialize these trees in external roots.
+
+SCENARIO                 PROFILES                                      MIN_PHYSICAL                         NOT_AUTO                     SYS_IO
+RESEARCH_SMALL           BASE_AI_PROJECT+RESEARCH                      HUMAN,BATON,RADAR_INDEX              empty RESEARCH taxonomy      NO
+LEARNING                 BASE_AI_PROJECT+LEARNING                      HUMAN,BATON,RADAR_INDEX              empty curriculum tree        NO
+KNOWLEDGE_MEMORY         BASE_AI_PROJECT+KNOWLEDGE_MEMORY              HUMAN,BATON,RADAR_INDEX              empty memory lakes           NO
+SOFTWARE_APP             BASE_AI_PROJECT+SOFTWARE+GIT_REPOSITORY       HUMAN,BATON,RADAR_INDEX (+src if 3+) empty 51_TESTS                NO
+PARSERMAKERMACHINE       BASE_AI_PROJECT+SYSTEM_PRODUCT+SOFTWARE       HUMAN,BATON,RADAR_INDEX+SYS.I/O when product runs  JOB_ID lineage YES
+CORPORATE_AI             BASE_AI_PROJECT+CORPORATE                     HUMAN,BATON,RADAR_INDEX              empty 02_GOVERNANCE          NO
+REGULATED                BASE_AI_PROJECT+REGULATED+MATERIAL_EVIDENCE   HUMAN,BATON,RADAR_INDEX; EVIDENCE/SECURITY as HARD  empty max tree YES_IF_SYSTEM_PRODUCT
+MULTI_PRODUCT            BASE_AI_PROJECT+INTEGRATION                   HUMAN,BATON,RADAR_INDEX              empty 81 until real boundary NO
+LARGE_REPO               BASE_AI_PROJECT+GIT_REPOSITORY(+SOFTWARE)     existing tree mapped; no rewrite     no ACCESS SOT copies         depends
+MIN_THEN_GROW            BASE_AI_PROJECT then add profiles             triad only at birth                  planned roles stay metadata  later if SYSTEM_PRODUCT
+
+Authority always HUMAN_AUTHORITY. WhoAmI never required. 00_ACCESS optional, never SOT.
+
+==========
+24.00_EXCLUSIONS
+==========
+
+This Skill does not:
+- replace HUMAN authority
+- rename HUMAN to CONSTITUTION
+- enforce SkillsMachine lakes on generic projects
+- auto-materialize baseline folders
+- auto-collapse folders
+- define WBS/ID_FS, file inner format, RADAR schema, BATON content, session-close protocol
+- create a Skill per folder/product
+- create a GRC
+- migrate other repositories
+- restore WhoAmI as canon
+
+==========
+25.00_CHANGELOG
+==========
+
+2026-08-19, v0.1-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Created as exclusive how-to owner of PROJECT_INFORMATION_ARCHITECTURE.
+- Extracted evolutionary DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE from
+  20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt v1.2-DRAFT and expanded required contracts.
+- Filename unnumbered (no invented sequential prefix). Status DRAFT.
+- HUMAN_AUTHORITY / CONSTITUTION subordination / WhoAmI disposition recorded.
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-VERSION    : v1.1-DRAFT
-SHA256     : D6F77079F9893F89ABB519249E44206568BC7905306491A2FA0DB041BE0F0181
+VERSION    : v1.3-DRAFT
+SHA256     : E1D7EC0A61FDB674DD4F24F7BAB518151C2D4CBB6B20F025A05EFD9C96979440
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -4971,9 +5968,9 @@ SHA256     : D6F77079F9893F89ABB519249E44206568BC7905306491A2FA0DB041BE0F0181
 
 ID_UNICO..........: SKILL.OPERATIONAL.ARTIFACTS.POLICY.01.00
 NOMBRE_SUGERIDO...: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-VERSION...........: v1.1-DRAFT
-FECHA.............: 2026-04-21
-HORA..............: HH:MM
+VERSION...........: v1.3-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
@@ -4985,7 +5982,9 @@ Establece precedencia, responsabilidades, sincronización y reglas de uso.
 
 NO_CUBRE..........:
 No define contenido interno de cada artefacto (ver skills específicos).
-No define arquitectura técnica del sistema.
+No define DIRECTORY_ARCHITECTURE ni placement de archivos en el árbol.
+Placement is owned by SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+This Skill retains artifact class, precedence HUMAN>SKILLS>BATON>RADAR, and sync rules.
 No define lógica de negocio de proyectos.
 
 DEPENDENCIAS......:
@@ -4995,6 +5994,8 @@ DEPENDENCIAS......:
 09.SKILL.RADAR.txt
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
 
@@ -5252,6 +6253,15 @@ IA propone acción que viola SKILL
 10.00_CHANGELOG
 ==========
 
+2026-08-19, v1.3-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Placement owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.2-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Placement deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.3).
+- Class/precedence contract unchanged.
+
 2026-04-21, v1.0-DRAFT
 - Creación del modelo de gobernanza de artefactos
 - Definición de precedencia y responsabilidades
@@ -5313,8 +6323,8 @@ FIN_MB-SM-067B-D2_ARTIFACT_CLASS_AND_AUTHORITY_RULES
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION    : v1.4-CANON
-SHA256     : 17C2ACA2D7C2B9DD48505813ED4498711B78AAFBCB2EA0CFFA4B91B2C6EDF79B
+VERSION    : v1.6-DRAFT
+SHA256     : 1E138AB85ACF92CA54F92518CEF1E5A1DED6B49F624B7C55AB3D221190F247EA
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -5322,9 +6332,9 @@ SHA256     : 17C2ACA2D7C2B9DD48505813ED4498711B78AAFBCB2EA0CFFA4B91B2C6EDF79B
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.4-CANON
-FECHA.............: 2026-05-14
-HORA..............: HH:MM
+VERSION...........: v1.6-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
@@ -5341,9 +6351,14 @@ No define lógica específica de proyectos.
 No redefine comandos Git; toda operación Git debe derivarse al Skill de Git aplicable.
 No obliga a actualizar BATON, backlogs, deuda técnica ni HUMAN durante toda la sesión.
 No es exclusivo de SkillsMachine; aplica como patrón general a cualquier proyecto que use ciclo de vida operativo.
+No define DIRECTORY_ARCHITECTURE. Directory layout, materialization and RADAR_ROOT
+are owned by SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill retains session
+open/execute/close procedure.
 
 DEPENDENCIAS......:
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
@@ -6207,6 +7222,15 @@ Si no existe evidencia suficiente para clasificar un dato, debe declararse como 
 ==========
 16.00_CHANGELOG
 ==========
+
+2026-08-19, v1.6-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Directory layout owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Directory layout deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.6).
+- Session lifecycle procedure unchanged. Status DRAFT until HUMAN promotion of the owner set.
 
 2026-08-17, v1.4-CANON
 - MB-SM-077D Slice C2: WhoAmI deja de ser requisito de refresh de continuidad.
@@ -8313,13 +9337,13 @@ upload, Temp policy, or general shell style.
 ==========
 FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 ==========
-========== CONTENT_END 010 99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3 ==========
-========== END_SOURCE_FILE 010 99298B542D1BAAFC27FB67F179259A0E545B78FBD6CF5270BA241F190778A7D3 ==========
+========== CONTENT_END 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
+========== END_SOURCE_FILE 010 5121FB793D15ACC73A18A8C21337EB6C5BBA47175AB9CC3263C046FEA45B8809 ==========
 ================================================================================
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=10
-SOURCE_TOTAL_BYTES=239351
+SOURCE_TOTAL_BYTES=284943
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0

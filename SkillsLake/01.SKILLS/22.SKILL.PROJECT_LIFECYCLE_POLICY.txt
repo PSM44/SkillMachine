@@ -4,9 +4,9 @@
 
 ID_UNICO..........: SKILL.PROJECT.LIFECYCLE.POLICY.01.00
 NOMBRE_SUGERIDO...: 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-VERSION...........: v1.4-CANON
-FECHA.............: 2026-05-14
-HORA..............: HH:MM
+VERSION...........: v1.6-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
@@ -23,9 +23,14 @@ No define lógica específica de proyectos.
 No redefine comandos Git; toda operación Git debe derivarse al Skill de Git aplicable.
 No obliga a actualizar BATON, backlogs, deuda técnica ni HUMAN durante toda la sesión.
 No es exclusivo de SkillsMachine; aplica como patrón general a cualquier proyecto que use ciclo de vida operativo.
+No define DIRECTORY_ARCHITECTURE. Directory layout, materialization and RADAR_ROOT
+are owned by SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill retains session
+open/execute/close procedure.
 
 DEPENDENCIAS......:
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 06.SKILL.WBS.txt
 07.SKILL.FILE_CONTENT.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
@@ -889,6 +894,15 @@ Si no existe evidencia suficiente para clasificar un dato, debe declararse como 
 ==========
 16.00_CHANGELOG
 ==========
+
+2026-08-19, v1.6-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Directory layout owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Directory layout deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.6).
+- Session lifecycle procedure unchanged. Status DRAFT until HUMAN promotion of the owner set.
 
 2026-08-17, v1.4-CANON
 - MB-SM-077D Slice C2: WhoAmI deja de ser requisito de refresh de continuidad.

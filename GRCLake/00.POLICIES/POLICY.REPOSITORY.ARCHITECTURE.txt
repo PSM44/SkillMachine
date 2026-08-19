@@ -21,7 +21,7 @@ RACIONAL_SEVERIDAD.: Si se viola, el repo deriva en drift, pérdida de trazabili
 
 VERSION...........: v0.1-DRAFT
 FECHA_CREACION....: 2026-04-30
-FECHA_MODIFICACION: 2026-04-30
+FECHA_MODIFICACION: 2026-08-19
 ESTADO............: DRAFT
 
 TRACE_TO_HUMAN....:
@@ -92,6 +92,9 @@ FUERA DE SCOPE (no cubre):
 - contenido profundo de cada skill/policy/control (salvo estructura y ubicación)
 - diseño funcional de herramientas externas
 - refactor masivo automático de todo el repo sin CIS
+- evolutionary project information architecture for generic projects
+  (owned by SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt).
+  This GRC remains SkillsMachine-repository-specific (APLICA_A=C:\01. GitHub\Skills).
 
 
 ==========
@@ -404,6 +407,16 @@ LOG recomendado:
 ==========
 13.00_CHANGELOG
 ==========
+
+2026-08-19, v0.1-DRAFT pointer
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Transversal evolutionary directory/artifact architecture owned by
+  SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This GRC stays SkillsMachine-specific.
+
+2026-08-19, v0.1-DRAFT pointer
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Transversal evolutionary directory/artifact architecture owned by
+  20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded same day by PIA Skill). This GRC stays SkillsMachine-specific.
 
 2026-04-30, v0.1-DRAFT
 - Creación inicial de policy base de arquitectura del repositorio.

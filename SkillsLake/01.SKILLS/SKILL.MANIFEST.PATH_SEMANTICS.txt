@@ -7,8 +7,8 @@ NOMBRE............: Manifest Path Semantics
 TIPO..............: Skill operativo
 DOMINIO...........: JSON manifests / Registry contracts / Path migration
 ESTADO............: ACTIVE
-VERSION...........: 1.0
-FECHA.............: 2026-05-02
+VERSION...........: 1.2
+FECHA.............: 2026-08-19
 ORIGEN............: SkillsLake migration / manifest repair during MB-GRC-014A
 
 ----------
@@ -18,6 +18,9 @@ ORIGEN............: SkillsLake migration / manifest repair during MB-GRC-014A
 This skill defines how to reason about paths inside manifests and registries.
 
 The objective is to avoid corrupting structured files through blind text replacement and to preserve the semantic contract of each manifest field.
+
+DIRECTORY_ARCHITECTURE / project folder topology is owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill does not define the tree.
 
 ----------
 2. CORE PRINCIPLE
@@ -420,3 +423,19 @@ Durante MB-GRC-028A/B/C se confirmó que:
 - el menú global puede contener el skill aunque el usecase no lo aplique.
 
 Esta regla queda activa para cambios futuros de build/usecase.
+
+----------
+MB-SM-20260819_DIRECTORY_TOPOLOGY_OWNER
+----------
+Project folder topology / DIRECTORY_ARCHITECTURE is owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+This Skill retains manifest field semantics only.
+
+2026-08-19, v1.2
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Topology owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.1
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Topology deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.2).
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001

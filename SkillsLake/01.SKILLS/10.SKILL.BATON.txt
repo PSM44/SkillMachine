@@ -4,11 +4,14 @@
 
 ID_UNICO..........: SKILL.BATON.01.00
 NOMBRE_SUGERIDO...: 10.SKILL.BATON.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.5-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
-UBICACION_SISTEMA.: Carpeta estándar de SKILLS (ej.: \Skills\BATON)
+UBICACION_SISTEMA.: Canonical directory ROLE_ID=BATON_HOME / 91_BATON is owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. Physical aliases (BATON.STATE.txt,
+00.0_BATON_<Proyecto>.txt, folder BATON\, SyS\00.0_BATON_SKILLMACHINE.txt)
+map to that role. This Skill owns BATON content and lifecycle only.
 AUTOR_HUMANO......: ADMIN
 
 ALCANCE...........:
@@ -40,6 +43,8 @@ DEPENDENCIAS......:
 11.SKILL.HUMAN_README.txt
 09.SKILL.RADAR.txt
 08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (canonical BATON directory role)
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (bootstrap triad; not layout owner)
 
 (DEPENDENCIAS_RECOMENDADAS si existe orquestación IA ejecutora)
 - SKILL.AI.ORCH.EXEC_POLICY (si tu ecosistema lo incorpora)
@@ -451,6 +456,15 @@ Si no, la actualización es incompleta.
 ==========
 08.00_CHANGELOG
 ==========
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Canonical directory role owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Canonical directory role deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.5).
+- BATON content/lifecycle unchanged.
 
 2026-02-26, v1.3-DRAFT
 - Complemento: sección de límites operativos para agentes ejecutores (sandbox boundary).

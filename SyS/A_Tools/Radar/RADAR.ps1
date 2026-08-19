@@ -14,7 +14,7 @@ $ErrorActionPreference = 'Stop'
 # 00.00 METADATA
 # ==============================
 
-$RADAR_SCRIPT_VERSION = "v0.6.2"
+$RADAR_SCRIPT_VERSION = "v0.6.3"
 $RADAR_OUTPUT_SCHEMA = "v1.4"
 
 # INDEX = inventario amplio
@@ -203,6 +203,11 @@ function Test-IsExcluded {
             return $true
         }
     }
+
+    if ($Candidate -match '(?i)[\\/]00\.SOURCE_DO_NOT_UPLOAD([\\/]|$)') { return $true }
+    if ($Candidate -match '(?i)[\\/]00_ACCESS([\\/]|$)') { return $true }
+    if ($Candidate -match '(?i)[\\/]ImproveOp([\\/]|$)') { return $true }
+    if ($Candidate -match '(?i)DO_NOT_UPLOAD') { return $true }
 
     return $false
 }

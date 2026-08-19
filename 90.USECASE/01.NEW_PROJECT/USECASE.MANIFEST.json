@@ -1,187 +1,195 @@
 {
-  "usecase": "01.NEW_PROJECT",
-  "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-08-17 16:24:17",
-  "source_root": "C:\\01. GitHub\\Skills",
-  "delivery_files": [
-    "00.BUNDLE.CORE.txt",
-    "00.SKILL.MENU.ACTIVE.txt",
-    "01.BUNDLE.CONTINUITY.txt",
-    "02.BUNDLE.GOVERNANCE.txt",
-    "PROMPT.NEW_PROJECT.txt",
-    "USECASE.01.NEW_PROJECT.COMPILED.txt"
-  ],
-  "upload_package_model": "SINGLE_COMPILED_FILE",
-  "upload_package_root": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT",
-  "upload_instruction_file": "README.UPLOAD_THIS_USECASE.txt",
-  "upload_package_scope": "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS",
-  "folder_upload_required": false,
-  "primary_upload_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
-  "compiled_output_enabled": true,
-  "compiled_output_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
-  "compiled_output_sha256": "5B8EC08AB1BC542E4E0268055FDD664A6EF2F6CC60D0ECF1044A544AD9CA6619",
-  "compiled_source_order": [
-    "README.UPLOAD_THIS_USECASE.txt",
-    "PROMPT.NEW_PROJECT.txt",
-    "SKILL_SET.MANIFEST.txt",
-    "00.SKILL.MENU.ACTIVE.txt",
-    "00.BUNDLE.CORE.txt",
-    "01.BUNDLE.CONTINUITY.txt",
-    "02.BUNDLE.GOVERNANCE.txt"
-  ],
-  "compiled_source_count": 7,
-  "compiled_format_version": "v1",
-  "compiled_content_policy": "FULL_CONTENT_NO_TRUNCATION",
-  "delivery_files_scope": "GENERATED_DELIVERY_FILES_ONLY",
-  "delivery_files_note": "delivery_files lists generated/copied delivery artifacts. The primary IA upload unit is the compiled single-file output while legacy package files continue to coexist.",
-  "bundles": [
-    {
-      "bundle_name": "CORE",
-      "delivery_file": "00.BUNDLE.CORE.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
-      "delivery_size_bytes": 48519,
-      "delivery_size_kb": 47.38,
-      "delivery_sha256": "1AEB8FB8E301939CEFD7B32EE538F67121B3E14766F108D121F5509164C44D85",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\06.SKILL.WBS.txt",
-          "version": "v1.2-DRAFT",
-          "source_sha256": "84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\07.SKILL.FILE_CONTENT.txt",
-          "version": "v1.3-DRAFT",
-          "source_sha256": "44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\12.SKILL.DRAG_AND_DROP.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
-          "version": "v0.2-DRAFT_READY_FOR_TEST",
-          "source_sha256": "C46DDA5341D53B3F15A8ED8509C3D93F243539D98C9D47B8225F96552B13CCDC"
-        }
-      ]
-    },
-    {
-      "bundle_name": "CONTINUITY",
-      "delivery_file": "01.BUNDLE.CONTINUITY.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
-      "delivery_size_bytes": 43489,
-      "delivery_size_kb": 42.47,
-      "delivery_sha256": "04180AEC317CE719077B8CC52D5C74268F400903627AC0644BA9BFC985AB725B",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\10.SKILL.BATON.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "B0F126A3AA84746BC15F7EAB8B99F039022328271126ABCC5E950A65705F805D"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\11.SKILL.HUMAN_README.txt",
-          "version": "UNKNOWN",
-          "source_sha256": "40BB16C77F1DAA9574A7D9958A18A53FC6482B5F2525693F572E28A5006E679C"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
-          "version": "v1.2-MB-SM-077D",
-          "source_sha256": "67E5DA0C3BA13C547846080F8D8D99A3779ADF2EC1F106E9F128ECDA01175CE3"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.2",
-          "source_sha256": "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
-        }
-      ]
-    },
-    {
-      "bundle_name": "GOVERNANCE",
-      "delivery_file": "02.BUNDLE.GOVERNANCE.txt",
-      "delivery_path": "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
-      "delivery_size_bytes": 135251,
-      "delivery_size_kb": 132.08,
-      "delivery_sha256": "27D8AC944E43BC3C8C297847E2C95A04A83E70BD6806CB63DE2FF3990CAE5727",
-      "source_files": [
-        {
-          "name": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
-          "version": "v1.5-DRAFT",
-          "source_sha256": "C86EC9E17460B33A9758D59BA7A114F62C9D25DC3B1DB9CC9344368145E5A7D3"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-          "version": "v1.1-CANON",
-          "source_sha256": "79D83EB92FB57DBACB3DBDF309D975043E06BD00CF1559B3AC475AEA629D8F3C"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-          "version": "v1.1-DRAFT",
-          "source_sha256": "D6F77079F9893F89ABB519249E44206568BC7905306491A2FA0DB041BE0F0181"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-          "version": "v1.4-CANON",
-          "source_sha256": "17C2ACA2D7C2B9DD48505813ED4498711B78AAFBCB2EA0CFFA4B91B2C6EDF79B"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
-          "version": "v0.1-DRAFT_READY_FOR_TEST",
-          "source_sha256": "1CCA51C2D05CD484037CF2CA3F3995443E7E951070C2987D492E8573A2F96FD8"
-        },
-        {
-          "name": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\AA.CONSTITUTION\\05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-          "version": "01.00",
-          "source_sha256": "11EB71797C9E8E8D1DF3964E6C151DFBA8833242E8948A7F311E053FFEA314AB"
-        },
-        {
-          "name": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
-          "version": "v0.2-DRAFT",
-          "source_sha256": "DECF90DDD98B8097E127103DCA37B1CB8C04556D74DDB6EF82FBE2AA52C3AAD2"
-        },
-        {
-          "name": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-          "version": "v0.3-DRAFT_READY_FOR_TEST",
-          "source_sha256": "51043DF111871291DA804CF5E07843FBE292BC91DB9435E9D4EC2AD7600C828E"
-        },
-        {
-          "name": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
-          "version": "v1.2",
-          "source_sha256": "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
-        },
-        {
-          "name": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-          "source_path": "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
-          "version": "v1.3",
-          "source_sha256": "2BFE9CC45F33A91BFA93E6CFAE1C569F13C454F79901112611D36FA6C031EAE8"
-        }
-      ]
-    }
-  ],
-  "validation": {
-    "missing_files": [],
-    "delivery_file_count": 6,
-    "max_delivery_files_allowed": 9,
-    "status": "OK"
-  },
-  "source_of_truth": "90.USECASE/BUILD.ps1 + source registries/manifests",
-  "regeneration_contract": "Re-run 90.USECASE/BUILD.ps1 from C:\\01. GitHub\\Skills",
-  "generated_output_only": true,
-  "do_not_edit_manually": true
+    "usecase":  "01.NEW_PROJECT",
+    "usecase_version":  "v3.0-BUNDLES",
+    "generated_at":  "2026-08-19 15:40:53",
+    "source_root":  "C:\\01. GitHub\\Skills",
+    "delivery_files":  [
+                           "00.BUNDLE.CORE.txt",
+                           "00.SKILL.MENU.ACTIVE.txt",
+                           "01.BUNDLE.CONTINUITY.txt",
+                           "02.BUNDLE.GOVERNANCE.txt",
+                           "PROMPT.NEW_PROJECT.txt",
+                           "USECASE.01.NEW_PROJECT.COMPILED.txt"
+                       ],
+    "upload_package_model":  "SINGLE_COMPILED_FILE",
+    "upload_package_root":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT",
+    "upload_instruction_file":  "README.UPLOAD_THIS_USECASE.txt",
+    "upload_package_scope":  "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS",
+    "folder_upload_required":  false,
+    "primary_upload_file":  "USECASE.01.NEW_PROJECT.COMPILED.txt",
+    "compiled_output_enabled":  true,
+    "compiled_output_file":  "USECASE.01.NEW_PROJECT.COMPILED.txt",
+    "compiled_output_sha256":  "B30049903EF201CD2DF6F5B56D971386F5D4C3CB26DCB5C6B5D98B34F3DB22D4",
+    "compiled_source_order":  [
+                                  "README.UPLOAD_THIS_USECASE.txt",
+                                  "PROMPT.NEW_PROJECT.txt",
+                                  "SKILL_SET.MANIFEST.txt",
+                                  "00.SKILL.MENU.ACTIVE.txt",
+                                  "00.BUNDLE.CORE.txt",
+                                  "01.BUNDLE.CONTINUITY.txt",
+                                  "02.BUNDLE.GOVERNANCE.txt"
+                              ],
+    "compiled_source_count":  7,
+    "compiled_format_version":  "v1",
+    "compiled_content_policy":  "FULL_CONTENT_NO_TRUNCATION",
+    "delivery_files_scope":  "GENERATED_DELIVERY_FILES_ONLY",
+    "delivery_files_note":  "delivery_files lists generated/copied delivery artifacts. The primary IA upload unit is the compiled single-file output while legacy package files continue to coexist.",
+    "bundles":  [
+                    {
+                        "bundle_name":  "CORE",
+                        "delivery_file":  "00.BUNDLE.CORE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\00.BUNDLE.CORE.txt",
+                        "delivery_size_bytes":  49897,
+                        "delivery_size_kb":  48.73,
+                        "delivery_sha256":  "3201D451D4540B55AD8CAC6DC8D3FE111D8A34CAA9304718D29C2D3061F6DC1A",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\06.SKILL.WBS.txt",
+                                                 "version":  "v1.4-DRAFT",
+                                                 "source_sha256":  "7CD87AF849F7EBE63DC449BF6B4F5DF459C96A338F793A7C6A9036693BFABA07"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\07.SKILL.FILE_CONTENT.txt",
+                                                 "version":  "v1.5-DRAFT",
+                                                 "source_sha256":  "051A7875EC3F712A8E284FEA851195F414763F79DFCB2965BBE087A20EA9CB61"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\12.SKILL.DRAG_AND_DROP.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "A29B027BBBEBAD98F2CCA7469D9847168C24B6102524483D7145BAA2E99C3DC3"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt",
+                                                 "version":  "v0.2-DRAFT_READY_FOR_TEST",
+                                                 "source_sha256":  "C46DDA5341D53B3F15A8ED8509C3D93F243539D98C9D47B8225F96552B13CCDC"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "CONTINUITY",
+                        "delivery_file":  "01.BUNDLE.CONTINUITY.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\01.BUNDLE.CONTINUITY.txt",
+                        "delivery_size_bytes":  44331,
+                        "delivery_size_kb":  43.29,
+                        "delivery_sha256":  "A72C0B50325869127875A9DDAEEB39E96202DA317008D91B29775351AC0E0F35",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\10.SKILL.BATON.txt",
+                                                 "version":  "v1.5-DRAFT",
+                                                 "source_sha256":  "186D00F9098AA616E63643BC55FEEC2C888318F0396CF55B57727225E48397D1"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\11.SKILL.HUMAN_README.txt",
+                                                 "version":  "UNKNOWN",
+                                                 "source_sha256":  "40BB16C77F1DAA9574A7D9958A18A53FC6482B5F2525693F572E28A5006E679C"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\23.SKILL.WHOAMI_POLICY.txt",
+                                                 "version":  "v1.2-MB-SM-077D",
+                                                 "source_sha256":  "67E5DA0C3BA13C547846080F8D8D99A3779ADF2EC1F106E9F128ECDA01175CE3"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
+                                                 "version":  "v1.2",
+                                                 "source_sha256":  "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
+                                             }
+                                         ]
+                    },
+                    {
+                        "bundle_name":  "GOVERNANCE",
+                        "delivery_file":  "02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_path":  "C:\\01. GitHub\\Skills\\90.USECASE\\01.NEW_PROJECT\\02.BUNDLE.GOVERNANCE.txt",
+                        "delivery_size_bytes":  182508,
+                        "delivery_size_kb":  178.23,
+                        "delivery_sha256":  "35BD6987AEFBBDF3871733E8413962E2B3000166E6FF3694E1010F5AE7FC1A1B",
+                        "source_files":  [
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\09.SKILL.RADAR.txt",
+                                                 "version":  "v1.6-DRAFT",
+                                                 "source_sha256":  "D9AB9F2C4BE5D0C987131B37D62A500F0AB83A30581A878C86FFCD03C8D1FB1D"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
+                                                 "version":  "v1.3-DRAFT",
+                                                 "source_sha256":  "E11AA0C9B7CE6664F3FB05EEB1DCB9A992D0824FC6AA75F0CE0DE8E245EE29AB"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
+                                                 "version":  "v0.1-DRAFT",
+                                                 "source_sha256":  "29CFB2C02933FC42D3B76DAF5E83BC20B312C5E875AAF6ED1D25A16B014C7E1D"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
+                                                 "version":  "v1.3-DRAFT",
+                                                 "source_sha256":  "E1D7EC0A61FDB674DD4F24F7BAB518151C2D4CBB6B20F025A05EFD9C96979440"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
+                                                 "version":  "v1.6-DRAFT",
+                                                 "source_sha256":  "1E138AB85ACF92CA54F92518CEF1E5A1DED6B49F624B7C55AB3D221190F247EA"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
+                                                 "version":  "v0.1-DRAFT_READY_FOR_TEST",
+                                                 "source_sha256":  "1CCA51C2D05CD484037CF2CA3F3995443E7E951070C2987D492E8573A2F96FD8"
+                                             },
+                                             {
+                                                 "name":  "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\GRCLake\\AA.CONSTITUTION\\05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
+                                                 "version":  "01.00",
+                                                 "source_sha256":  "11EB71797C9E8E8D1DF3964E6C151DFBA8833242E8948A7F311E053FFEA314AB"
+                                             },
+                                             {
+                                                 "name":  "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.DRAGONFLYFOCUS.txt",
+                                                 "version":  "v0.2-DRAFT",
+                                                 "source_sha256":  "DECF90DDD98B8097E127103DCA37B1CB8C04556D74DDB6EF82FBE2AA52C3AAD2"
+                                             },
+                                             {
+                                                 "name":  "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
+                                                 "version":  "v0.3-DRAFT_READY_FOR_TEST",
+                                                 "source_sha256":  "51043DF111871291DA804CF5E07843FBE292BC91DB9435E9D4EC2AD7600C828E"
+                                             },
+                                             {
+                                                 "name":  "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\SkillsLake\\01.SKILLS\\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt",
+                                                 "version":  "v1.2",
+                                                 "source_sha256":  "87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9"
+                                             },
+                                             {
+                                                 "name":  "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
+                                                 "source_path":  "C:\\01. GitHub\\Skills\\GRCLake\\01.CONTROLS\\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt",
+                                                 "version":  "v1.3",
+                                                 "source_sha256":  "2BFE9CC45F33A91BFA93E6CFAE1C569F13C454F79901112611D36FA6C031EAE8"
+                                             }
+                                         ]
+                    }
+                ],
+    "validation":  {
+                       "missing_files":  [
+
+                                         ],
+                       "delivery_file_count":  6,
+                       "max_delivery_files_allowed":  9,
+                       "status":  "OK"
+                   },
+    "source_of_truth":  "90.USECASE/BUILD.ps1 + source registries/manifests",
+    "regeneration_contract":  "Re-run 90.USECASE/BUILD.ps1 from C:\\01. GitHub\\Skills",
+    "generated_output_only":  true,
+    "do_not_edit_manually":  true
 }

@@ -7,8 +7,8 @@ NOMBRE............: Repository Temporary Artifact Management
 TIPO..............: Skill operativo
 DOMINIO...........: Repository hygiene / Temporary files / Backups / AI artifacts
 ESTADO............: ACTIVE
-VERSION...........: 1.2
-FECHA.............: 2026-08-16
+VERSION...........: 1.4
+FECHA.............: 2026-08-19
 ORIGEN............: Cleanup after OpenCode trial and SkillsLake migration; improved from OPP-CR-076A-01
 
 ----------
@@ -337,13 +337,22 @@ Durable continuity and baseline live in DURABLE_CANONICAL_STORAGE, not in dispos
 Related but distinct:
 - SKILL.COMPACT_UPLOAD_PACK_EXECUTION = how to pack disposable Temp for upload.
 - 03.SKILL.SANDBOX_BOUNDARY = authorised execution root and task read/write sets.
+- SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt = where Temp directory roles sit in the project tree.
 - This skill = how to classify temp artifacts and their authority.
+This Skill does not own DIRECTORY_ARCHITECTURE.
 
 ANTI-PATTERN:
 Using upload/staging Temp contents as the baseline that a dependent minibattle must start from.
 Treating EXECUTION_SANDBOX_TEMP as either AI-exchange Temp or as canonical project state.
 
 CHANGELOG:
+2026-08-19, v1.4
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Directory-role placement owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+2026-08-19, v1.3
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Directory-role placement deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.4).
+- TEMP class authority unchanged.
 2026-08-16, v1.2
 - MB-SM-GRAPH-003: add EXECUTION_SANDBOX_TEMP as a distinct class from AI-exchange Temp and durable canon.
 - Distinguish DURABLE_CANONICAL_STORAGE / AI_EXCHANGE_TEMP / EXECUTION_SANDBOX_TEMP.

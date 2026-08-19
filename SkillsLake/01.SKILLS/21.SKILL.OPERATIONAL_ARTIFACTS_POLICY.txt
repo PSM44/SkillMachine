@@ -4,9 +4,9 @@
 
 ID_UNICO..........: SKILL.OPERATIONAL.ARTIFACTS.POLICY.01.00
 NOMBRE_SUGERIDO...: 21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-VERSION...........: v1.1-DRAFT
-FECHA.............: 2026-04-21
-HORA..............: HH:MM
+VERSION...........: v1.3-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Santiago, Chile
 UBICACION_SISTEMA.: \Skills\
 AUTOR_HUMANO......: PABLO
@@ -18,7 +18,9 @@ Establece precedencia, responsabilidades, sincronización y reglas de uso.
 
 NO_CUBRE..........:
 No define contenido interno de cada artefacto (ver skills específicos).
-No define arquitectura técnica del sistema.
+No define DIRECTORY_ARCHITECTURE ni placement de archivos en el árbol.
+Placement is owned by SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+This Skill retains artifact class, precedence HUMAN>SKILLS>BATON>RADAR, and sync rules.
 No define lógica de negocio de proyectos.
 
 DEPENDENCIAS......:
@@ -28,6 +30,8 @@ DEPENDENCIAS......:
 09.SKILL.RADAR.txt
 10.SKILL.BATON.txt
 11.SKILL.HUMAN_README.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
 
 TAGS_OPERATIVOS...: RUNTIME_CRITICAL, GOVERNANCE, ARTIFACT_POLICY
 
@@ -284,6 +288,15 @@ IA propone acción que viola SKILL
 ========== 
 10.00_CHANGELOG
 ==========
+
+2026-08-19, v1.3-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Placement owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.2-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Placement deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.3).
+- Class/precedence contract unchanged.
 
 2026-04-21, v1.0-DRAFT
 - Creación del modelo de gobernanza de artefactos

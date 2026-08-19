@@ -1954,3 +1954,25 @@ RETAINED=4 compiled usecase files (01-04) + 4 USECASE.MANIFEST.json (compiled SH
 RESTORED=90.USECASE/05.SKILLSMACHINE_UPDATE/SUPPORT_PACKAGE.MANIFEST.json (formatting-only; compiled SHA256 unchanged)
 UNEXPECTED_SEMANTIC_CHANGE_COUNT=0
 ========== END_MB-SM-077D_GENERATED_SYNC_STATUS_LINK ==========
+
+========== CAND-SM-PIA-NAMING-PATH-ID-001 ==========
+CANDIDATE_ID=CAND-SM-PIA-NAMING-PATH-ID-001
+FECHA=2026-08-19
+ORIGEN=20260819.152636.SM-PIA-RADAR-DRAFT-ADOPTION-FORWARD-VALIDATION-COMMIT-001
+IDEA=POLICY.NAMING.PATH_ID remains an empty placeholder (TO_BE_DEFINED). PIA currently operates with live naming/path rules in SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt, SKILL.MANIFEST.PATH_SEMANTICS.txt, and related consumers. A future dedicated policy should own PATH_ID construction, uniqueness, portability, and physical-path mapping without blocking this PIA DRAFT.
+DOMINIO_AFECTADO=PROJECT_INFORMATION_ARCHITECTURE; NAMING; PATH_ID
+ARTEFACTO_RECTOR_AFECTADO=GRCLake/00.POLICIES/POLICY.NAMING.PATH_ID.txt
+TIPO_DE_CAMBIO=IMPROVE_EXISTING
+PRIORITY_PROPOSED=P2
+PRIORITY_PROPOSED_LABEL=PROPOSAL_ONLY_NOT_AUTHORIZED_PRIORITY
+DECISION=DEFER_DO_NOT_IMPLEMENT_IN_THIS_DRAFT
+ESTADO=CANDIDATE
+MOTIVO=Human disposition POLICY_NAMING_PATH_ID_DISPOSITION=BACKLOG. Policy file is empty. PIA DRAFT is operable with current live naming rules. This item must not block DRAFT commit.
+PROXIMO_PASO=Human owner assignment, then specify PATH_ID grammar, uniqueness, portability, and PIA consumer contract. Do not create a new GRC or Skill in this task.
+APROBACION_HUMANA=PENDING
+OWNER_PENDING=YES
+ACCEPTANCE_CRITERIA=Policy is non-empty; PIA consumers reference it without duplicating the catalog; validators exist; no SkillsMachine-only PATH_ID invented as a silent default.
+DEPENDENCY=SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt v0.1-DRAFT (or later CANON); SKILL.MANIFEST.PATH_SEMANTICS.txt
+DOES_NOT_BLOCK_PIA_DRAFT=YES
+DO_NOT_IMPLEMENT_NOW=YES
+========== END_CAND-SM-PIA-NAMING-PATH-ID-001 ==========

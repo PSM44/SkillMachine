@@ -1,6 +1,6 @@
 {
   "version": "v1.0-CANON",
-  "generated_at": "2026-06-03 16:36:40",
+  "generated_at": "2026-08-19 15:10:00",
   "source_root": "C:\\01. GitHub\\Skills",
   "skills": [
     {
@@ -29,11 +29,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-      "version": "v1.2-DRAFT"
+      "version": "v1.4-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-      "version": "v1.3-DRAFT"
+      "version": "v1.5-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt",
@@ -41,11 +41,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-      "version": "v1.5-DRAFT"
+      "version": "v1.6-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-      "version": "UNKNOWN"
+      "version": "v1.5-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
@@ -73,15 +73,15 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-      "version": "v1.1-CANON"
+      "version": "v1.3-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-      "version": "v1.1-DRAFT"
+      "version": "v1.3-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-      "version": "v1.4-CANON"
+      "version": "v1.6-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt",
@@ -125,7 +125,11 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.MANIFEST.PATH_SEMANTICS.txt",
-      "version": "v1.0-CANON"
+      "version": "1.2"
+    },
+    {
+      "file": "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
+      "version": "v0.1-DRAFT"
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.POWERSHELL.INTERACTIVE_SAFETY.txt",
@@ -137,7 +141,7 @@
     },
     {
       "file": "SkillsLake/01.SKILLS/SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt",
-      "version": "v1.2-CANON"
+      "version": "1.4"
     },
     {
       "file": "SkillsLake/01.SKILLS/29.SKILL.CRITICAL_FEEDBACK.txt",

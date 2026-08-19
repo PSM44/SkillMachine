@@ -1,0 +1,753 @@
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+ID_UNICO..........: SKILL.PROJECT_INFORMATION_ARCHITECTURE.01.00
+NOMBRE_SUGERIDO...: SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
+VERSION...........: v0.1-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
+CIUDAD............: Santiago, Chile
+UBICACION_SISTEMA.: \Skills\
+AUTOR_HUMANO......: PABLO
+SOURCE_TASK.......: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+OWNER_CONTRACT....: DIRECTORY_ARCHITECTURE + ARTIFACT_ARCHITECTURE
+DOMAIN............: PROJECT_INFORMATION_ARCHITECTURE
+STATUS............: DRAFT (HUMAN promotion to CANON pending)
+PHYSICAL_NUMBER...: NONE (filename has no invented sequential prefix)
+
+==========
+00.05_ACTIVATION
+==========
+
+QUE_RESUELVE......:
+How-to owner of evolutionary project information architecture: logical maximum
+tree, physical minimum, folder/file roles, profiles, materialization, growth,
+contraction, access layer, operational I/O, modules, and architectural validation.
+
+CUANDO_SE_ACTIVA..:
+- Creating or repairing a project structure
+- Deciding whether a directory/role may materialize
+- Resolving RADAR_ROOT, HUMAN path, SKILLS path, ACCESS, SYS.INPUT/OUTPUT
+- Composing project profiles
+- Promoting, retiring, or mapping aliases of directory/artifact roles
+
+QUE_NO_RESUELVE...:
+Bootstrap execution order (20.SKILL.PROJECT_BOOTSTRAP_POLICY).
+WBS/ID_FS construction (06.SKILL.WBS).
+Inner file format (07.SKILL.FILE_CONTENT).
+RADAR output schema and scan procedure (09.SKILL.RADAR).
+BATON inner content (10.SKILL.BATON).
+Session open/execute/close (22.SKILL.PROJECT_LIFECYCLE_POLICY).
+Artifact class/precedence engine (21.SKILL.OPERATIONAL_ARTIFACTS_POLICY).
+TEMP class authority (SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT).
+Manifest field semantics (SKILL.MANIFEST.PATH_SEMANTICS).
+SkillsMachine-local lakes enforcement (POLICY.REPOSITORY.ARCHITECTURE).
+HUMAN meaning (HUMAN documents). Does not replace HUMAN with CONSTITUTION.
+
+CONSUMIDORES......:
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt
+09.SKILL.RADAR.txt
+06.SKILL.WBS.txt
+07.SKILL.FILE_CONTENT.txt
+10.SKILL.BATON.txt
+21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
+22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
+SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt
+SKILL.MANIFEST.PATH_SEMANTICS.txt
+POLICY.REPOSITORY.ARCHITECTURE.txt (SkillsMachine-specific GRC; consumes transversal doctrine)
+
+LIMITES_DE_AUTORIDAD:
+How-to only. Not GRC enforcement. Not HUMAN. Not a Skill-per-folder catalog.
+Do not silently move project content. Do not auto-materialize the logical maximum.
+
+==========
+MB-SM-077D_WHOAMI_DISPOSITION
+==========
+WHOAMI_ACTIVE_CANON=NO
+WHOAMI_ROLE=OPTIONAL_HISTORICAL_REFERENCE_ONLY
+WHOAMI_REQUIRED_FOR_OPERABILITY=NO
+Useful human-context content belongs in HUMAN_AUTHORITY artifacts.
+Do not recreate WhoAmI as competing product-canon or continuity surface.
+==========
+FIN_MB-SM-077D_WHOAMI_DISPOSITION
+==========
+
+ALCANCE...........:
+Single how-to owner of DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE for
+projects in this ecosystem.
+
+NO_CUBRE..........:
+See QUE_NO_RESUELVE. No new GRC. No project migration. No empty-tree materialization.
+
+DEPENDENCIAS......:
+06.SKILL.WBS.txt (physical-name constraints only; this Skill does not own ID_FS)
+11.SKILL.HUMAN_README.txt (HUMAN document contract exists)
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt is a CONSUMER, not a dependency of this Skill.
+
+==========
+00.10_INDICE_GENERAL_WBS
+==========
+
+00.00 Metadatos
+00.05 Activation
+00.10 Índice
+01.00 Authority
+02.00 Two coordinated contracts
+03.00 Four types of order
+04.00 Role identity
+05.00 Logical maximum versus physical minimum
+06.00 Materialization lifecycle
+07.00 Project profiles
+08.00 DIRECTORY_ARCHITECTURE
+09.00 HUMAN authority model
+10.00 Governance separation
+11.00 Human access layer and Windows links
+12.00 SYS.INPUT and SYS.OUTPUT
+13.00 Skills, tools, modules
+14.00 Ideas, backlogs, roadmap
+15.00 Sessions and agents
+16.00 Quality, tests, security, evidence
+17.00 ARTIFACT_ARCHITECTURE
+18.00 Three-artifact rule
+19.00 Promotion and collapse
+20.00 Source, generated, temp, legacy
+21.00 Physical paths and portability
+22.00 Validation contract
+23.00 Forward-test profiles (declarative)
+24.00 Exclusions
+25.00 Changelog
+
+==========
+01.00_AUTHORITY
+==========
+
+AUTHORITY_ORDER (do not mix with folder numbers or ACCESS shortcuts):
+
+1) HUMAN / ROLE_ID=HUMAN_AUTHORITY
+2) GRC (enforceable controls, when present)
+3) THIS SKILL (how-to owner of DIRECTORY_ARCHITECTURE + ARTIFACT_ARCHITECTURE)
+4) Specialized Skills (bootstrap, WBS, FILE_CONTENT, RADAR, BATON, TEMP, lifecycle, path semantics)
+5) ENGINE / TOOLS
+6) OUTPUTS
+7) TEMP
+
+Compatible with live canon: HUMAN > GRC > SKILLS > ENGINE > TOOLS > OUTPUTS > TEMP.
+
+SINGLE_OWNER=YES
+This file is the only how-to owner of complete evolutionary project information architecture.
+
+20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt owns birth/bootstrap procedure only and MUST consume this Skill.
+
+POLICY.REPOSITORY.ARCHITECTURE remains SkillsMachine-repository GRC (APLICA_A=C:\01. GitHub\Skills).
+It must not silently redefine transversal project layout.
+
+Other Skills must reference this owner, keep only specialized procedure, and must not
+repeat the complete directory tree or silently redefine paths.
+
+==========
+02.00_TWO_COORDINATED_CONTRACTS
+==========
+
+DIRECTORY_ARCHITECTURE
+- roles, hierarchy, parents, children, materialization, profiles, triggers, retirement
+
+ARTIFACT_ARCHITECTURE
+- canonical files, producers/consumers, SOT, editable vs generated, upload, retention
+
+They remain separate contracts under this one owner.
+Do not create a Skill per folder, role, artifact, or tree name.
+
+==========
+03.00_FOUR_TYPES_OF_ORDER
+==========
+
+Do not assume one numeric prefix solves all four:
+
+FUNCTIONAL_ORDER       parent/child purpose in the logical tree (HIERARCHICAL)
+LIFECYCLE_ORDER        bootstrap then later materialization (TEMPORAL_CREATION)
+AUTHORITY_ORDER        HUMAN > GRC > this Skill > specialized Skills > tools > outputs > temp
+HUMAN_ACCESS_ORDER     00_ACCESS / display prefixes / launchers (not identity)
+
+DISPLAY_ORDER (numeric prefixes) is a visual aid for HUMAN_ACCESS_ORDER only.
+It does not define semantic identity or authority.
+ROLE_ID is identity. PHYSICAL_NAME is an alias.
+
+==========
+04.00_ROLE_IDENTITY
+==========
+
+Each relevant element distinguishes:
+
+ROLE_ID
+PHYSICAL_NAME
+DISPLAY_NAME
+PURPOSE
+AUTHORITY
+OWNER
+MATERIALIZATION_TRIGGER
+ALLOWED_CONTENT
+FORBIDDEN_CONTENT
+RETENTION_OR_DISPOSITION
+PROFILE_APPLICABILITY
+
+Physical names are not semantic identity.
+Observed aliases (HUMAN, 00.HUMAN, 000.HUMAN, 01.HUMAN, human) map to
+ROLE_ID=HUMAN_AUTHORITY unless the project mapping says otherwise.
+
+A project SHOULD publish ROLE_ID → physical relative path (in BATON or a project
+architecture note) when aliases diverge. If absent, prefer the recommended
+PHYSICAL_NAME only when materializing a new folder.
+
+==========
+05.00_LOGICAL_MAXIMUM_VERSUS_PHYSICAL_MINIMUM
+==========
+
+LOGICAL_MAXIMUM              complete known role catalog in this Skill
+PHYSICAL_MINIMUM             only materialized folders/files justified now
+MATERIALIZED_STRUCTURE       what exists on disk with governed purpose
+PLANNED_GROWTH               selected by profile, not yet on disk
+ARCHIVED_OR_RETIRED_STRUCTURE RETIRED/LEGACY/ARCHIVE per 20.00
+
+The complete architecture MUST be known without physically creating the complete tree.
+Empty cosmetic folders are prohibited by default.
+
+==========
+06.00_MATERIALIZATION_LIFECYCLE
+==========
+
+KNOWN
+PLANNED
+MATERIALIZATION_READY
+MATERIALIZED
+RETIRED
+PROHIBITED
+
+KNOWN = documented here.
+PLANNED = selected for a project profile but not yet on disk.
+MATERIALIZATION_READY = trigger fired; promotion plan exists; not yet moved/created.
+MATERIALIZED = exists on disk with governed purpose.
+RETIRED = closed; content migrated or archived per policy.
+PROHIBITED = must not be created (example: standalone active WhoAmI as canon).
+
+A planned directory does not require a physical empty directory.
+Who can change state: HUMAN (or approved GRC process). Specialized Skills propose; they do not silently mutate.
+
+==========
+07.00_PROJECT_PROFILES
+==========
+
+Profiles are composable. Not mutually exclusive unless a conflict is explicit.
+
+Every project in this ecosystem includes AI integration.
+Not every project is an executable SYSTEM_PRODUCT.
+
+BASE_AI_PROJECT
+  Always present conceptually. Activates bootstrap artifacts HUMAN+BATON+RADAR_INDEX
+  and knowledge of baseline roles. Does not create all baseline folders.
+
+GIT_REPOSITORY
+  Versioning surfaces (.git, ignore, optional license). Not a substitute for HUMAN.
+
+RESEARCH
+  Source/working/analysis evidence; tests = reproducibility/peer review.
+
+LEARNING
+  Curriculum/progress; tests = assessments/progress validation.
+
+KNOWLEDGE_MEMORY
+  Memory/registers with provenance; tests = retrieval/integrity.
+
+SOFTWARE
+  src/tests/build as justified; tests = unit/integration/system/regression.
+
+AUTOMATION
+  Durable scripts/runbooks as justified under 60_TOOLS; not a dump of TEMP.
+
+DOCUMENT_TRANSACTION
+  Domain packets as project-local extensions. Not transversal defaults.
+
+SYSTEM_PRODUCT
+  Activates SYS.INPUT and SYS.OUTPUT. Other profiles MUST NOT auto-activate them.
+
+INTEGRATION
+  Activates 81_PRODUCT_MODULES when an external product boundary is real.
+
+PRODUCTION_OPERATIONS
+  Runbooks, incidents, observability as justified.
+
+CORPORATE
+  Adds charter/acceptance/governance packets under HUMAN_AUTHORITY / 02_GOVERNANCE
+  when those artifacts exist. Does not auto-create empty governance folders.
+
+REGULATED
+  Evidence, classification, retention, and security boundaries become HARD exceptions.
+
+MATERIAL_EVIDENCE
+  52_EVIDENCE required for material operations, validations, decisions, or deliveries.
+
+ACADEMIC
+  Citation/reproducibility packets.
+
+SKILLS_ECOSYSTEM
+  This SkillsMachine repo. Consumes POLICY.REPOSITORY.ARCHITECTURE for local lakes.
+
+DATA / AI_ML remain valid composable specializations of SOFTWARE/RESEARCH/SYSTEM_PRODUCT.
+
+==========
+08.00_DIRECTORY_ARCHITECTURE
+==========
+
+08.10_BASELINE_ROLES (known; materialize only when justified)
+
+ROLE_ID              DISPLAY  PHYSICAL_RECOMMENDED     PURPOSE
+ACCESS_LAYER         00       00_ACCESS                Non-canonical human navigation
+HUMAN_AUTHORITY      01       01_HUMAN                 Human/product meaning home
+GOVERNANCE           02       02_GOVERNANCE            GRC/policies/controls if present
+PROJECT_IDENTITY     03       03_PROJECT               ABOUT.PROJECT / PROJECT packet
+BACKLOGS             04       04_BACKLOGS              Master and specialized backlogs
+IDEAS                13       13_IDEAS                 Ideas; DEV.PATH; NON.RELATED
+QUALITY              50       50_QUALITY               Minimum quality / security-quality
+EVIDENCE             52       52_EVIDENCE              Evidence of execution and quality
+AI_COLLAB            62       62_AI                    AI collaboration surfaces (not Skill copies)
+PROJECT_SKILLS       63       63_SKILLS                Project-available skills
+SESSIONS             90       90_SESSIONS              Session packs; ORCHESTRATOR/EXECUTOR
+BATON_HOME           91       91_BATON                 Cold-start continuity home
+RADAR_HOME           92       92_RADAR                 RADAR_ROOT
+
+Compatibility aliases: 00_ACCESS, 01_HUMAN, 63_SKILLS, 90_SESSIONS remain valid
+PHYSICAL_NAME / ROLE_ID strings. HUMAN_AUTHORITY is the semantic identity of 01_HUMAN.
+
+08.20_CONDITIONAL_ROLES
+
+TESTS                51       51_TESTS                 Profile-dependent tests
+TOOLS                60       60_TOOLS                 Durable tools (left TEMP)
+PRODUCT_MODULES      81       81_PRODUCT_MODULES       SKILLSMACHINE, WINGS, HIA, BRAINY, others
+LEGACY               97       97_LEGACY                Retired governed structure
+AI_HISTORY           98       98_AI_HISTORY            AI.History class; NEVER_AUTO_LOAD
+DEV_INPUTS           20       20_INPUTS                Development/project inputs
+DELIVERABLES         40       40_DELIVERABLES          Approved delivery results
+SYS_INPUT                     SYS.INPUT                SYSTEM_PRODUCT operational input
+SYS_OUTPUT                    SYS.OUTPUT               SYSTEM_PRODUCT operational output
+
+08.30_ORCHESTRATOR_AND_EXECUTOR
+
+Belong under SESSIONS (90_SESSIONS).
+They are not independent root domains.
+
+08.40_SKILLSMACHINE_REPO_EXCEPTION
+
+For profile SKILLS_ECOSYSTEM, physical lakes HUMAN\, GRCLake\, SkillsLake\,
+90.USECASE\, SyS\ remain as required by POLICY.REPOSITORY.ARCHITECTURE.
+That is project-local-to-SkillsMachine, not the default tree for other projects.
+
+==========
+09.00_HUMAN_AUTHORITY_MODEL
+==========
+
+ROLE_ID=HUMAN_AUTHORITY
+PHYSICAL_NAME recommended = 01_HUMAN
+Do not automatically rename HUMAN to CONSTITUTION.
+
+Conceptual artifacts (do not create empty files indiscriminately):
+
+HUMAN.PROJECT
+  Context, intention, and human particularities of this project.
+
+PROJECT.CHARTER
+  Purpose, scope, objectives, limits, and value.
+
+CONSTITUTION
+  Non-negotiable principles/rules approved by HUMAN.
+  Subordinate component of HUMAN_AUTHORITY. Not a replacement of HUMAN.
+  Changes only by human decision or HUMAN-approved governance process.
+
+USER.WORKING_PROFILE
+  Personal collaboration preferences. Not generic product canon.
+
+ACCEPTANCE.AUTHORITY
+  Authority to accept, reject, promote, or change canon.
+
+SkillsMachine GRCLake\AA.CONSTITUTION\ is a repo-local constitution pack for
+IT-delivery operating briefs. It does not replace project HUMAN_AUTHORITY and
+must not be copied as the generic project HUMAN folder.
+
+==========
+10.00_GOVERNANCE_SEPARATION
+==========
+
+Distinguish:
+
+HUMAN_AUTHORITY     meaning, limits, acceptance
+PROJECT.CHARTER     scope/value statement (HUMAN artifact)
+CONSTITUTION        HUMAN-approved non-negotiables (HUMAN artifact)
+GOVERNANCE          project control home (02_GOVERNANCE) when materialized
+GRC                 enforceable policy/control/evidence (when the project has GRC)
+Skills              how-to capabilities
+Agent instructions  session/runtime prompts (not canon)
+Defaults/heuristics advisory only
+
+CONSTITUTION does not insert a new rank above HUMAN.
+If approved, it operates as a HUMAN artifact (or as GRC only when a project
+explicitly promotes a control). Do not create two sources of truth.
+
+==========
+11.00_HUMAN_ACCESS_LAYER_AND_WINDOWS_LINKS
+==========
+
+ACCESS_LAYER / 00_ACCESS is a non-canonical navigation surface.
+
+MAY contain: instructions; shortcuts; symlinks; junctions; views; indexes;
+launchers; explicitly disposable copies only when no better alternative exists.
+
+MUST NOT contain: editable copies that compete with SOT; secrets;
+system-required state; uncontrolled duplicates.
+
+Prefer navigation or shortcuts over copies.
+
+Link handling (default for RADAR and other scanners):
+
+DETECT type before opening: symlink, junction, mount point, other reparse, hardlink, shortcut (.lnk).
+FOLLOW reparse targets from 00_ACCESS: NO.
+FOLLOW reparse targets elsewhere: NO by default (list in INDEX with TARGET_RUTA / TARGET_ESTADO).
+HARDLINK: same file identity; count once; do not treat as a second tree.
+CYCLES: detect by visited-id (file-id / reparse key); stop; record.
+DOUBLE COUNT: skip target content already indexed via canonical path.
+BROKEN LINKS: list; do not repair silently; TARGET_ESTADO=BROKEN.
+RADAR must not re-ingest shortcut/symlink/junction targets originating under 00_ACCESS.
+
+==========
+12.00_SYS_INPUT_AND_SYS_OUTPUT
+==========
+
+Only SYSTEM_PRODUCT (or an explicit equivalent executable-system profile) activates
+these operational boundaries.
+
+20_INPUTS / DEV_INPUTS = development and project inputs
+SYS.INPUT              = operational material submitted for system processing
+SYS.OUTPUT             = traceable result produced by the system
+40_DELIVERABLES        = approved result prepared for delivery
+52_EVIDENCE            = evidence proving execution and quality
+
+They are not the same as working files, generic generated outputs, or approved deliverables.
+
+Every operational run MUST use a stable JOB_ID and preserve input-to-output lineage.
+
+Conceptual proof (ParserMakerMachine; do not materialize here):
+- SYS.INPUT: PDF or other document for a job
+- SYS.OUTPUT candidates: images, tables, text, metadata, styles, candidate Skills
+- Distinguish intermediate / final / derived / rejected / evidence
+- Lineage: JOB_ID binds input → transform → outputs
+- Project antecedents stay in 20_INPUTS; approved client packets in 40_DELIVERABLES
+
+Other profiles do not automatically activate SYS.INPUT/SYS.OUTPUT.
+
+==========
+13.00_SKILLS_TOOLS_MODULES
+==========
+
+Reusable Skill              PROJECT_SKILLS / 63_SKILLS
+Executable tool             TOOLS / 60_TOOLS
+Internal module             decomposition inside THIS project
+Product module              PRODUCT_MODULES / 81_PRODUCT_MODULES
+Adapter/integration         inbound/outbound boundary inside a product module
+External product            lives outside; module must not contain an uncontrolled copy
+Other-repo reference        mapping/receipt, not a clone
+
+63_SKILLS is separate from 81_PRODUCT_MODULES\SKILLSMACHINE.
+
+Project Skills surfaces (when 63 materializes):
+LOCAL, IMPORTED, PROJECT_SPECIFIC, OVERRIDES, DEPENDENCIES, PROFILES,
+TESTS, EVIDENCE, RECEIPTS, HISTORY, CANDIDATES
+
+Imported Skills require provenance, version and hash.
+
+A product module may contain only:
+contracts; configuration; inbound/outbound boundaries; packages; receipts;
+mappings; local integration state; evidence; history.
+
+Known product names (examples, not a Skill-per-product):
+SKILLSMACHINE, WINGS, HIA, BRAINY — only when an integration boundary is real.
+
+==========
+14.00_IDEAS_BACKLOGS_ROADMAP
+==========
+
+13_IDEAS may contain ABOUT.PROJECT, PROJECT notes, DEV.PATH, NON.RELATED.
+Ideas do not automatically become backlog.
+DEV.PATH is not ROADMAP.
+Master backlog (04_BACKLOGS) remains authoritative for active work.
+Specialized backlogs must declare they are NOT the product master backlog.
+Roadmap, if present, is a planning view, not DEV.PATH and not the master backlog.
+
+Promotion (reconciled; do not invent a second canon if a project already names these):
+
+IDEA -> EVALUATED_IDEA -> BACKLOG_ITEM -> ROADMAP_COMMITMENT -> EXECUTION
+
+Equivalences: ABOUT.PROJECT may feed CHARTER; DEV.PATH is exploratory sequence,
+not commitment.
+
+NON.RELATED is not a permanent dump. It requires retention, review, or disposition
+(move to IDEAS, BACKLOG, LEGACY, or delete under HUMAN/GRC rules).
+
+==========
+15.00_SESSIONS_AND_AGENTS
+==========
+
+SESSION         warm pack under 90_SESSIONS; lifecycle owned by 22.SKILL.PROJECT_LIFECYCLE_POLICY
+ORCHESTRATOR    session role under 90_SESSIONS; not a root domain
+EXECUTOR        session role under 90_SESSIONS; not a root domain
+AI_HISTORY      98_AI_HISTORY; CANON=NO; NEVER_AUTO_LOAD; not current authority
+
+Continuity in cold start = BATON (Skill 10), not SESSION and not AI_HISTORY.
+Dynamic state = session pack; handoff = BATON + session close procedure (Skill 22).
+Execution evidence = 52_EVIDENCE and/or session receipts — not AI_HISTORY as SOT.
+
+No new SESSION Skill. Gap, if any, is documented here: Skill 22 remains operational owner.
+
+==========
+16.00_QUALITY_TESTS_SECURITY_EVIDENCE
+==========
+
+Do not treat these as synonyms.
+
+QUALITY (50)  = bootstrap minimum quality, including security baseline when operation is material.
+              Do not create an empty QUALITY folder without need.
+TESTS (51)    = profile-dependent. Not created by default for every project.
+SECURITY      = baseline at bootstrap (access, secrets, classification, privacy, personal data,
+              credentials, AI upload, DO_NOT_UPLOAD, incidents, redaction/exclusion,
+              secrets in apparently textual CORE/FULL content).
+              May live under 50_QUALITY until a security boundary exception justifies a directory.
+EVIDENCE (52) = required for material operations, validations, decisions, or deliveries that need traceability.
+
+Tests adapt to project nature:
+software: unit/integration/system/regression
+parser: fixtures/extraction/reconstruction/regression
+research: reproducibility/peer review
+learning: assessments/progress validation
+knowledge: provenance/retrieval/integrity
+documents: completeness/classification/traceability
+AI: evaluations/adversarial cases/human review/safety
+automation: run fixtures/idempotence/rollback
+
+Do not embed real secrets in fixtures, examples, bundles, or outputs.
+
+==========
+17.00_ARTIFACT_ARCHITECTURE
+==========
+
+17.10_BOOTSTRAP_MANDATORY (physical minimum files; consumed by Skill 20)
+
+HUMAN document (HUMAN_AUTHORITY) — SOT HUMAN — editable by human — upload YES
+BATON snapshot (BATON_HOME) — derived — human-validated edit — upload YES
+RADAR_INDEX (RADAR_HOME) — generated by RADAR — not manual — upload INDEX/LITE as needed
+
+These are artifacts, not an obligation to create all baseline folders.
+
+17.20_CONDITIONAL_LATER
+
+RADAR_LITE/CORE/FULL/MANIFEST — generated — RADAR Skill owns format
+First valid RADAR run also generates CORE, FULL, FULL.HUMAN, FULL.SKILLS per 09.SKILL.RADAR
+FULL.SKILLS MUST NOT ingest DO_NOT_UPLOAD content
+Skill/GRC files — only when 63_SKILLS materializes
+Manifests — BUILD or packager; generated JSON not hand-edited as SOT
+00.SOURCE_DO_NOT_UPLOAD — NEVER upload
+Compact upload pack — TEMP class EXTERNAL_AI_EXCHANGE — FLAT — <=10 files
+
+17.30_WHOAMI
+
+PROHIBITED as active canon, bootstrap dependency, or BATON substitute.
+OPTIONAL historical file only.
+
+17.40_HUMAN_ARTIFACTS (conceptual; three-artifact / hard-boundary still apply)
+
+HUMAN.PROJECT, PROJECT.CHARTER, CONSTITUTION, USER.WORKING_PROFILE, ACCEPTANCE.AUTHORITY
+
+17.50_CLASSES (class engine remains Skill 21)
+
+CANONICAL_SOURCE
+GENERATED_OUTPUT
+EVIDENCE
+LOCAL_CONFIG
+
+This Skill owns placement of those classes into directory roles.
+
+==========
+18.00_THREE_ARTIFACT_DIRECTORY_RULE
+==========
+
+Default:
+Do not automatically materialize a functional directory without a reasonable
+expectation of at least three related, durable, relevant direct artifacts.
+
+What COUNTS as an artifact:
+- current relevant durable files that belong to the role
+- approved near-term artifacts (named, accepted, not hypothetical)
+
+What does NOT count:
+.gitkeep; cosmetic README; empty placeholders; shortcuts; temporary files;
+caches; locks; copied previews; segments; hidden system files unless they are
+the governed content; files created only to justify the directory.
+
+Generated files COUNT only if they are durable role outputs (not caches).
+Manifests COUNT when they are the role's real contract (not a stub).
+Links/shortcuts do NOT count.
+Placeholders do NOT count.
+
+HARD exceptions (directory allowed with fewer than three):
+authority boundary; security boundary; permissions boundary; operational interface;
+external platform requirement; source/generated separation; independent lifecycle;
+independent ownership; exact integration contract; mandatory bootstrap role.
+
+DIRECTORY_CREATION_ALLOWED =
+    HARD_BOUNDARY_REQUIRED
+    OR RELEVANT_DURABLE_ARTIFACT_COUNT >= 3
+    OR APPROVED_NEAR_TERM_ARTIFACT_COUNT >= 3
+    OR PARENT_CONGESTION_REQUIRES_GROUPING
+
+PARENT_CONGESTION_THRESHOLD=12 (default, configurable per project)
+Verified as the live default from the approved architecture decision; not a universal law.
+Projects MAY set another integer in BATON/project mapping; scanners MUST read the project value
+when present, else 12.
+
+Fewer than three files do not automatically create subfolders.
+Never automatically collapse a directory because its count later falls below three.
+Contraction/retirement uses an explicit promotion/retirement plan (19.00).
+
+==========
+19.00_PROMOTION_AND_COLLAPSE
+==========
+
+When a category reaches the creation threshold, produce a controlled promotion plan:
+
+files to move; references; manifests; imports; scripts; shortcuts;
+Git impact; rollback; validation; RADAR refresh.
+
+Do not silently move existing project content.
+Collapse is never automatic. Retirement uses RETIRED lifecycle + plan.
+Preserve references to retired identities as aliases where consumers still resolve them.
+
+==========
+20.00_SOURCE_GENERATED_TEMP_LEGACY
+==========
+
+States (do not merge):
+ACTIVE, HISTORICAL, ARCHIVED, LEGACY, DEPRECATED, RETIRED, TEMPORARY, GENERATED, CANDIDATE
+
+SOURCE ≠ GENERATED.
+LEGACY is not automatic trash or deletion. Do not duplicate ACTIVE content inside LEGACY.
+
+TEMP classes remain those of SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT:
+DURABLE_CANONICAL_STORAGE
+REPO_INTERNAL_TEMP
+EXTERNAL_AI_EXCHANGE_TEMP (FLAT; no subfolders)
+INTERNAL_RUNTIME_SCRATCH
+EXECUTION_SANDBOX_TEMP (may nest)
+
+History distinctions:
+LEGACY (97) = retired governed structure
+ARCHIVE = packed retention
+LOCAL_HISTORY = git / project history
+AI_HISTORY (98) = IA.History/AI.History; CANON=NO; NEVER_AUTO_LOAD
+
+This Skill places those classes; TEMP Skill classifies Temp authority.
+
+==========
+21.00_PHYSICAL_PATHS_AND_PORTABILITY
+==========
+
+Define paths by rules and variables, not by one machine's Windows path as universal law.
+
+LOGICAL_ROOT     project identity root
+PHYSICAL_ROOT    actual filesystem root (may differ: clone, worktree, sandbox)
+REPO_RELATIVE    path from PHYSICAL_ROOT
+EXTERNAL_PATH    outside the repo; declare, do not silently ingest
+USER_PATH        human home/OneDrive/profile; not canon
+TEMP_PATH        TEMP class locations
+GENERATED_PATH   BUILD/RADAR/tool output
+ACCESS_PATH      00_ACCESS entries (non-canonical)
+HISTORICAL_PATH  retired/alias paths kept for resolution
+
+Portability:
+Windows is first-class here; it is not the only possible project OS.
+Separators: store repo-relative paths with a documented convention; do not mix
+unquoted raw "C:\..." as the generic standard for all projects.
+Case: Windows case-insensitive default; do not rely on case as identity.
+Forbidden characters: follow 06.SKILL.WBS / Windows rules for PHYSICAL_NAME.
+Long paths: avoid deep cosmetic nesting; respect MAX_PATH risk.
+OneDrive / network / reparse: detect; do not follow ACCESS reparse; record TARGET_ESTADO.
+Hardlinks: identity by file-id; count once.
+
+SkillsMachine repo physical root C:\01. GitHub\Skills is an instance, not a universal project root.
+
+==========
+22.00_VALIDATION_CONTRACT
+==========
+
+Architecture gate (this DRAFT; not a new GRC):
+- one owner: this Skill
+- Skill 20 is bootstrap consumer, not complete architecture owner
+- no Skill-per-folder
+- HUMAN not replaced by CONSTITUTION
+- WhoAmI not active canon
+- CONSTITUTION subordinated to HUMAN_AUTHORITY
+- logical maximum not auto-materialized
+- three-artifact rule defined
+- 00_ACCESS is not SOT
+- scanners do not follow reparse targets by default
+- SYS.INPUT/SYS.OUTPUT are profile-dependent
+- QUALITY, TESTS, SECURITY, EVIDENCE are distinct
+- no complete canon duplicated in consumers
+- live pointers resolve to this file (not Skill 20 as architecture owner)
+- historical "PENDIENTE" changelog lines are not current state
+
+Official repo gate remains Validate-System.ps1 plus
+Validate-ProjectInformationArchitecture.ps1
+
+==========
+23.00_FORWARD_TEST_PROFILES_DECLARATIVE
+==========
+
+Declarative only. Do not materialize these trees in external roots.
+
+SCENARIO                 PROFILES                                      MIN_PHYSICAL                         NOT_AUTO                     SYS_IO
+RESEARCH_SMALL           BASE_AI_PROJECT+RESEARCH                      HUMAN,BATON,RADAR_INDEX              empty RESEARCH taxonomy      NO
+LEARNING                 BASE_AI_PROJECT+LEARNING                      HUMAN,BATON,RADAR_INDEX              empty curriculum tree        NO
+KNOWLEDGE_MEMORY         BASE_AI_PROJECT+KNOWLEDGE_MEMORY              HUMAN,BATON,RADAR_INDEX              empty memory lakes           NO
+SOFTWARE_APP             BASE_AI_PROJECT+SOFTWARE+GIT_REPOSITORY       HUMAN,BATON,RADAR_INDEX (+src if 3+) empty 51_TESTS                NO
+PARSERMAKERMACHINE       BASE_AI_PROJECT+SYSTEM_PRODUCT+SOFTWARE       HUMAN,BATON,RADAR_INDEX+SYS.I/O when product runs  JOB_ID lineage YES
+CORPORATE_AI             BASE_AI_PROJECT+CORPORATE                     HUMAN,BATON,RADAR_INDEX              empty 02_GOVERNANCE          NO
+REGULATED                BASE_AI_PROJECT+REGULATED+MATERIAL_EVIDENCE   HUMAN,BATON,RADAR_INDEX; EVIDENCE/SECURITY as HARD  empty max tree YES_IF_SYSTEM_PRODUCT
+MULTI_PRODUCT            BASE_AI_PROJECT+INTEGRATION                   HUMAN,BATON,RADAR_INDEX              empty 81 until real boundary NO
+LARGE_REPO               BASE_AI_PROJECT+GIT_REPOSITORY(+SOFTWARE)     existing tree mapped; no rewrite     no ACCESS SOT copies         depends
+MIN_THEN_GROW            BASE_AI_PROJECT then add profiles             triad only at birth                  planned roles stay metadata  later if SYSTEM_PRODUCT
+
+Authority always HUMAN_AUTHORITY. WhoAmI never required. 00_ACCESS optional, never SOT.
+
+==========
+24.00_EXCLUSIONS
+==========
+
+This Skill does not:
+- replace HUMAN authority
+- rename HUMAN to CONSTITUTION
+- enforce SkillsMachine lakes on generic projects
+- auto-materialize baseline folders
+- auto-collapse folders
+- define WBS/ID_FS, file inner format, RADAR schema, BATON content, session-close protocol
+- create a Skill per folder/product
+- create a GRC
+- migrate other repositories
+- restore WhoAmI as canon
+
+==========
+25.00_CHANGELOG
+==========
+
+2026-08-19, v0.1-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Created as exclusive how-to owner of PROJECT_INFORMATION_ARCHITECTURE.
+- Extracted evolutionary DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE from
+  20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt v1.2-DRAFT and expanded required contracts.
+- Filename unnumbered (no invented sequential prefix). Status DRAFT.
+- HUMAN_AUTHORITY / CONSTITUTION subordination / WhoAmI disposition recorded.

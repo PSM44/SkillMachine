@@ -9,14 +9,14 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CORE
-GENERATED_AT: 2026-07-13 16:02:31
+GENERATED_AT: 2026-08-19 15:13:39
 ==============================
 
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/06.SKILL.WBS.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\06.SKILL.WBS.txt
-VERSION    : v1.2-DRAFT
-SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
+VERSION    : v1.4-DRAFT
+SHA256     : 7CD87AF849F7EBE63DC449BF6B4F5DF459C96A338F793A7C6A9036693BFABA07
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -24,9 +24,9 @@ SHA256     : 84A349C06DAF031E6714D748DD718E372C2182A10BE0936404D52FF9FBA5A1B5
 
 ID_UNICO..........: SKILL.WBS_ID.01.01
 NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
-VERSION...........: v1.2-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.4-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
@@ -45,6 +45,11 @@ Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
 
 Este SKILL es transversal: ningún frame debe redefinir por su cuenta el formato de WBS e IDs.
 
+NO_CUBRE_LAYOUT....:
+No define DIRECTORY_ARCHITECTURE ni placement de artefactos.
+Layout, materialization, profiles and RADAR_ROOT are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill keeps ID_FS/ID_DB/WBS naming.
+
 Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
 
 MEJORA_CLAVE_v1.2:
@@ -57,6 +62,7 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.SKILL.FILE_CONTENT.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (layout owner; this Skill does not own tree)
 09.SKILL.RADAR.txt (recomendado)
 10.SKILL.BATON.txt (recomendado)
 
@@ -596,6 +602,15 @@ EXCEPCION_ID_FS...: SI (justificada)
 12.00_HISTORIAL_DE_CAMBIOS
 ==========
 
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Layout/directory architecture owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.3-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Layout/directory architecture deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.4).
+- This Skill retains ID_FS / ID_DB / WBS naming only.
+
 2026-02-26, v1.2-DRAFT
 - Agregado: catálogo FRM recomendado.
 - Agregado: validación operativa (regex + checks) para agentes y tooling.
@@ -606,8 +621,8 @@ EXCEPCION_ID_FS...: SI (justificada)
 --------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\07.SKILL.FILE_CONTENT.txt
-VERSION    : v1.3-DRAFT
-SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
+VERSION    : v1.5-DRAFT
+SHA256     : 051A7875EC3F712A8E284FEA851195F414763F79DFCB2965BBE087A20EA9CB61
 --------------------------------------------------
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
@@ -615,9 +630,9 @@ SHA256     : 44A20FD3C0DCD9EFE611B6C87B78D8CF6E4001E32EB7F2B5B36506B37D3BF417
 
 ID_UNICO..........: SKILL.FILE_CONTENT.01.01
 NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.5-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -643,7 +658,9 @@ Forma de entrega IA->humano (bloques reemplazables, copy/paste).
 
 NO_CUBRE..........:
 
-No define arquitectura de carpetas ni naming del filesystem (eso vive en WBS/ID y en taxonomía del proyecto).
+No define arquitectura de carpetas ni naming del filesystem.
+DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE placement are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. Naming/ID_FS remains 06.SKILL.WBS.txt.
 
 No define estándares de estilo de código línea-a-línea (eso vive en CODE standards).
 
@@ -654,6 +671,7 @@ No define modelos IA ni routing/costos (eso vive en skills de orquestación si e
 DEPENDENCIAS......:
 
 06.SKILL.WBS.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 (Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
 
 NOTA_IMPORTANTE...:
@@ -1244,6 +1262,15 @@ Informes/outputs serios
 ==========
 08.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Path/layout owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Path/layout deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.5).
+- Inner-file content contract unchanged.
 
 2026-02-26, v1.3-DRAFT
 - Agregado: 02.15 TAGS_OPERATIVOS para runtime-critical.

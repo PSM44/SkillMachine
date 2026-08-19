@@ -4,9 +4,9 @@
 
 ID_UNICO..........: SKILL.FILE_CONTENT.01.01
 NOMBRE_SUGERIDO...: 07.SKILL.FILE_CONTENT.txt
-VERSION...........: v1.3-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.5-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del ecosistema)
@@ -32,7 +32,9 @@ Forma de entrega IA->humano (bloques reemplazables, copy/paste).
 
 NO_CUBRE..........:
 
-No define arquitectura de carpetas ni naming del filesystem (eso vive en WBS/ID y en taxonomía del proyecto).
+No define arquitectura de carpetas ni naming del filesystem.
+DIRECTORY_ARCHITECTURE and ARTIFACT_ARCHITECTURE placement are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. Naming/ID_FS remains 06.SKILL.WBS.txt.
 
 No define estándares de estilo de código línea-a-línea (eso vive en CODE standards).
 
@@ -43,6 +45,7 @@ No define modelos IA ni routing/costos (eso vive en skills de orquestación si e
 DEPENDENCIAS......:
 
 06.SKILL.WBS.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt
 (Además, se recomienda que el ecosistema tenga skills complementarios: DELIVERY, CODE, IA_INTERACTION, etc.)
 
 NOTA_IMPORTANTE...:
@@ -633,6 +636,15 @@ Informes/outputs serios
 ==========
 08.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.5-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Path/layout owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Path/layout deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.5).
+- Inner-file content contract unchanged.
 
 2026-02-26, v1.3-DRAFT
 - Agregado: 02.15 TAGS_OPERATIVOS para runtime-critical.

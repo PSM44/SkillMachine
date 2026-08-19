@@ -4,9 +4,9 @@
 
 ID_UNICO..........: SKILL.WBS_ID.01.01
 NOMBRE_SUGERIDO...: 06.SKILL.WBS.txt
-VERSION...........: v1.2-DRAFT
-FECHA.............: 2026-02-26
-HORA..............: HH:MM (actualizar al guardar)
+VERSION...........: v1.4-DRAFT
+FECHA.............: 2026-08-19
+HORA..............: 15:10
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: Carpeta estándar de SKILLS del ecosistema
 AUTOR_HUMANO......: ADMIN (propietario del sistema de SKILLS)
@@ -25,6 +25,11 @@ Aplica a todos los sistemas (PFUNDATIONS, EVA, WINGS, proyectos, etc.).
 
 Este SKILL es transversal: ningún frame debe redefinir por su cuenta el formato de WBS e IDs.
 
+NO_CUBRE_LAYOUT....:
+No define DIRECTORY_ARCHITECTURE ni placement de artefactos.
+Layout, materialization, profiles and RADAR_ROOT are owned by
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt. This Skill keeps ID_FS/ID_DB/WBS naming.
+
 Cuando un frame necesite una excepción, debe documentarla explícitamente y justificarla.
 
 MEJORA_CLAVE_v1.2:
@@ -37,6 +42,7 @@ MEJORA_CLAVE_v1.2:
 DEPENDENCIAS......:
 
 07.SKILL.FILE_CONTENT.txt
+SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt (layout owner; this Skill does not own tree)
 09.SKILL.RADAR.txt (recomendado)
 10.SKILL.BATON.txt (recomendado)
 
@@ -575,6 +581,15 @@ EXCEPCION_ID_FS...: SI (justificada)
 ==========
 12.00_HISTORIAL_DE_CAMBIOS
 ==========
+
+2026-08-19, v1.4-DRAFT
+SOURCE_TASK: 20260819.141239.SM-EVOLUTIONARY-PROJECT-INFORMATION-ARCHITECTURE-IMPLEMENTATION-001
+- Layout/directory architecture owner transferred to SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+
+2026-08-19, v1.3-DRAFT
+SOURCE_TASK: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
+- Layout/directory architecture deferred to 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt (superseded by v1.4).
+- This Skill retains ID_FS / ID_DB / WBS naming only.
 
 2026-02-26, v1.2-DRAFT
 - Agregado: catálogo FRM recomendado.

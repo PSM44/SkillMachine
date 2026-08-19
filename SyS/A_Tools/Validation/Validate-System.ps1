@@ -211,6 +211,14 @@ if ([int]$compilerTestSummary.TestsFailed -ne 0) {
     exit 1
 }
 
+Write-Host "VALIDATION: project information architecture owner"
+powershell -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "Validate-ProjectInformationArchitecture.ps1")
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
+Write-Host "VALIDATION: project information architecture functional forward tests"
+powershell -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "Test-ProjectInformationArchitectureForward.ps1")
+if ($LASTEXITCODE -ne 0) { exit 1 }
+
 Write-Host "OK: system pre-commit validation passed"
 exit 0
 
