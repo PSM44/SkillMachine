@@ -51,8 +51,8 @@ SOURCE_SHA256=90FC200F1DD7CD4D087908D60421A7D3F9E139A3C339DFF53E9AA3039954ED1E
 
 SOURCE_INDEX=5
 SOURCE_PATH=00.SKILL.MENU.ACTIVE.txt
-SOURCE_BYTES=17551
-SOURCE_SHA256=B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896
+SOURCE_BYTES=18565
+SOURCE_SHA256=F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB
 
 SOURCE_INDEX=6
 SOURCE_PATH=00.BUNDLE.CORE.txt
@@ -61,13 +61,13 @@ SOURCE_SHA256=91F84A7AC80C30DD595992FC45D97E35C9994D81653E9CA03BFFC9AA3FB3F3BA
 
 SOURCE_INDEX=7
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=44331
-SOURCE_SHA256=FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5
+SOURCE_BYTES=39144
+SOURCE_SHA256=5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32
 
 SOURCE_INDEX=8
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=156770
-SOURCE_SHA256=54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315
+SOURCE_BYTES=144937
+SOURCE_SHA256=ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061
 
 ================================================================================
 03. OPERATIONAL INSTRUCTIONS
@@ -646,12 +646,12 @@ actualizar continuidad y dejar trazabilidad consistente.
 - SESSION.LEARNING.REVIEW.ACTIVE.txt
 ========== CONTENT_END 004 90FC200F1DD7CD4D087908D60421A7D3F9E139A3C339DFF53E9AA3039954ED1E ==========
 ========== END_SOURCE_FILE 004 90FC200F1DD7CD4D087908D60421A7D3F9E139A3C339DFF53E9AA3039954ED1E ==========
-========== BEGIN_SOURCE_FILE 005 B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896 ==========
+========== BEGIN_SOURCE_FILE 005 F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB ==========
 SOURCE_INDEX=5
 SOURCE_PATH=00.SKILL.MENU.ACTIVE.txt
-SOURCE_BYTES=17551
-SOURCE_SHA256=B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896
-========== CONTENT_START 005 B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896 ==========
+SOURCE_BYTES=18565
+SOURCE_SHA256=F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB
+========== CONTENT_START 005 F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB ==========
 ==========
 00.00_METADATOS_DEL_DOCUMENTO
 ==========
@@ -747,7 +747,9 @@ Por defecto, la IA debería considerar como críticos, salvo que el caso no apli
 - 09.SKILL.RADAR.txt
 - 10.SKILL.BATON.txt
 - 11.SKILL.HUMAN_README.txt
-- 23.SKILL.WHOAMI_POLICY.txt
+
+Do not treat 23.SKILL.WHOAMI_POLICY.txt as default-critical.
+WHOAMI_ACTIVE_CANON=NO. Human/operator context lives in HUMAN, not WhoAmI.
 
 ==========
 04.00_CATALOGO_ACTIVO
@@ -869,9 +871,9 @@ PURPOSE...........: Define inicio, ejecución y cierre de sesión.
 
 SKILL_ID..........: SKILL_WHOAMI_POLICY
 FILE..............: 23.SKILL.WHOAMI_POLICY.txt
-STATUS............: ACTIVE
+STATUS............: HISTORICAL_ABSORBED
 CATEGORY..........: CONTINUITY
-PURPOSE...........: Define continuidad humana operacional resumida.
+PURPOSE...........: Historical reference only. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. Not a required consumer. Do not load wholesale.
 
 ----------
 05.30
@@ -1246,8 +1248,27 @@ FECHA.............: 2026-08-19
 SOURCE_TASK.......: 20260819.134950.SM-EVOLUTIONARY-PROJECT-ARCHITECTURE-OWNER-RECONCILIATION-001
 MOTIVO............: PURPOSE de 20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt actualizado a owner de bootstrap plus DIRECTORY_ARCHITECTURE y ARTIFACT_ARCHITECTURE. Sin Skill nuevo. VERSION del menu permanece v1.0-CANON.
 
-========== CONTENT_END 005 B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896 ==========
-========== END_SOURCE_FILE 005 B312DC1EC5D281917A88BE66981B1B1F06BCFBD1FF8AF7C780459ADEE83F0896 ==========
+==========
+15.00_PATCH_20260819_WHOAMI_CATALOG_ABSORPTION
+==========
+
+FECHA.............: 2026-08-19
+SOURCE_TASK.......: 20260819.172000.SM-SKILLSLAKE-USECASE-REVIEW-REFINE-REDUNDANCY-001
+MOTIVO............: Catalog 05.20 no longer presents WhoAmI as active continuity. Section 03.00 default-critical list no longer includes 23.SKILL.WHOAMI_POLICY.txt. Live STATUS=HISTORICAL_ABSORBED. VERSION del menu permanece v1.0-CANON.
+
+----------
+15.10
+----------
+
+SKILL_ID..........: SKILL_WHOAMI_POLICY
+FILE..............: 23.SKILL.WHOAMI_POLICY.txt
+VERSION...........: v1.2-MB-SM-077D
+STATUS............: HISTORICAL_ABSORBED
+CATEGORY..........: CONTINUITY
+PURPOSE...........: Historical reference only. WHOAMI_ACTIVE_CANON=NO. HUMAN is the authoritative home. WHOAMI_REQUIRED_CONSUMER_COUNT=0.
+
+========== CONTENT_END 005 F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB ==========
+========== END_SOURCE_FILE 005 F80409B08B4AD8BCCCF5550FD109C0205CE87600105FB366DF38133F5A960DFB ==========
 ========== BEGIN_SOURCE_FILE 006 91F84A7AC80C30DD595992FC45D97E35C9994D81653E9CA03BFFC9AA3FB3F3BA ==========
 SOURCE_INDEX=6
 SOURCE_PATH=00.BUNDLE.CORE.txt
@@ -2840,12 +2861,12 @@ E4) Tandas desordenadas:
 - Base operacional del skill.
 ========== CONTENT_END 006 91F84A7AC80C30DD595992FC45D97E35C9994D81653E9CA03BFFC9AA3FB3F3BA ==========
 ========== END_SOURCE_FILE 006 91F84A7AC80C30DD595992FC45D97E35C9994D81653E9CA03BFFC9AA3FB3F3BA ==========
-========== BEGIN_SOURCE_FILE 007 FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5 ==========
+========== BEGIN_SOURCE_FILE 007 5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32 ==========
 SOURCE_INDEX=7
 SOURCE_PATH=01.BUNDLE.CONTINUITY.txt
-SOURCE_BYTES=44331
-SOURCE_SHA256=FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5
-========== CONTENT_START 007 FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5 ==========
+SOURCE_BYTES=39144
+SOURCE_SHA256=5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32
+========== CONTENT_START 007 5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -2857,7 +2878,7 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: CONTINUITY
-GENERATED_AT: 2026-08-19 15:13:40
+GENERATED_AT: 2026-08-19 17:54:59
 ==============================
 
 --------------------------------------------------
@@ -3727,224 +3748,10 @@ No debe:
 - Versión base del skill HUMAN.README.
 
 --------------------------------------------------
-SOURCE_FILE: SkillsLake/01.SKILLS/23.SKILL.WHOAMI_POLICY.txt
-SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\23.SKILL.WHOAMI_POLICY.txt
-VERSION    : v1.2-MB-SM-077D
-SHA256     : 67E5DA0C3BA13C547846080F8D8D99A3779ADF2EC1F106E9F128ECDA01175CE3
---------------------------------------------------
-==========
-00.00_METADATOS_DEL_DOCUMENTO
-==========
-
-ID_UNICO..........: SKILL.WHOAMI.POLICY.01.00
-NOMBRE_SUGERIDO...: 23.SKILL.WHOAMI_POLICY.txt
-VERSION...........: v1.2-MB-SM-077D
-FECHA.............: 2026-04-21
-HORA..............: HH:MM
-CIUDAD............: Santiago, Chile
-UBICACION_SISTEMA.: \Skills\
-AUTOR_HUMANO......: PABLO
-
-==========
-MB-SM-076A6B_DISPOSITION
-==========
-For PS.SkillsMachine:
-WHOAMI_ACTIVE_CANON=NO
-WHOAMI_ROLE=HISTORICAL_REFERENCE_ONLY
-PRODUCT_CANON=HUMAN
-COLD_START_CONTINUITY=BATON
-WARM_START_CONTINUITY=SESSION_CONTINUE
-Do not treat WHOAMI freshness as a session-close gate.
-Historical sections below remain for reference / project-local patterns.
-==========
-FIN_MB-SM-076A6B_DISPOSITION
-==========
-
-==========
-MB-SM-077D_WHOAMI_ABSORPTION
-==========
-ACTIVE_CANON=NO
-AUTHORITATIVE_HOME=HUMAN
-CONTENT_MIGRATION_STATUS=ABSORBED
-NEW_PROJECT_CREATION=NOT_REQUIRED
-HISTORICAL_REFERENCE_ONLY=YES
-WHOAMI_REQUIRED_FOR_OPERABILITY=NO
-Useful human-context content formerly described by this Skill now belongs in HUMAN.
-Do not create a standalone WhoAmI file as active canon for present or future projects.
-Do not use this Skill as bootstrap, continuity, or profile authority.
-Operator-specific working-profile payload is not this Skill and is not a generic default.
-==========
-FIN_MB-SM-077D_WHOAMI_ABSORPTION
-==========
-
-ALCANCE...........:
-Define qué es WhoAmI como artefacto operativo humano y cómo debe crearse,
-mantenerse y usarse. En SkillsMachine, WHOAMI ya no es autoridad activa de producto
-ni de continuidad (ver disposition 076A6B). Contenido útil absorbido en HUMAN
-(MB-SM-077D). Este Skill no autoriza crear WhoAmI en proyectos nuevos.
-
-NO_CUBRE..........:
-No reemplaza HUMAN.
-No reemplaza BATON.
-No define gobernanza global completa del sistema.
-
-DEPENDENCIAS......:
-06.SKILL.WBS.txt
-07.SKILL.FILE_CONTENT.txt
-11.SKILL.HUMAN_README.txt
-10.SKILL.BATON.txt
-21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt
-22.SKILL.PROJECT_LIFECYCLE_POLICY.txt
-
-TAGS_OPERATIVOS...: HISTORICAL_REFERENCE, HUMAN_ONBOARDING, CONTINUITY_LEGACY
-
-==========
-00.10_INDICE_GENERAL_WBS
-==========
-
-00.00 Metadatos
-00.10 Índice
-
-01.00 Objetivo
-02.00 Qué es WhoAmI
-03.00 Qué no es WhoAmI
-04.00 Contenido mínimo
-05.00 Reglas de actualización
-06.00 Relación con HUMAN y BATON
-07.00 Antipatrones
-08.00 Checklist
-09.00 Changelog
-
-==========
-01.00_OBJETIVO
-==========
-
-Definir un artefacto corto, claro y operativo para que cualquier humano
-pueda entender rápidamente qué es el proyecto, en qué estado está
-y cómo retomar trabajo sin depender de memoria previa.
-
-==========
-02.00_QUE_ES_WHOAMI
-==========
-
-WhoAmI es:
-
-- resumen humano operacional
-- onboarding rápido
-- snapshot entendible
-- puente entre sesiones
-
-Debe responder como mínimo:
-
-- qué es este proyecto
-- qué se logró
-- en qué estado está
-- qué falta
-- cuál es el siguiente paso
-
-==========
-03.00_QUE_NO_ES_WHOAMI
-==========
-
-WhoAmI no es:
-
-- documentación profunda
-- changelog completo
-- reemplazo de HUMAN
-- reemplazo de BATON
-- dump técnico del filesystem
-
-==========
-04.00_CONTENIDO_MINIMO
-==========
-
-Debe incluir como mínimo:
-
-- propósito del proyecto
-- estado actual
-- entregables ya logrados
-- pendientes relevantes
-- siguiente acción sugerida
-- fecha de actualización
-
-==========
-05.00_REGLAS_DE_ACTUALIZACION
-==========
-
-Actualizar WhoAmI cuando:
-
-- cambia el estado humano operacional
-- se cierra una sesión relevante
-- cambia el siguiente paso
-- cambia el foco principal del proyecto
-
-No actualizar WhoAmI para:
-
-- microcambios irrelevantes
-- cambios puramente cosméticos
-- detalle técnico profundo
-
-==========
-06.00_RELACION_CON_HUMAN_Y_BATON
-==========
-
-HUMAN:
-- explicación profunda
-- contexto amplio
-- narrativa y criterio
-
-WhoAmI:
-- resumen rápido para humano
-- continuidad operacional
-
-BATON:
-- snapshot para IA
-- estructura operativa
-
-Regla:
-
-WhoAmI no contradice BATON.
-WhoAmI no reemplaza HUMAN.
-
-==========
-07.00_ANTIPATRONES
-==========
-
-- usar WhoAmI como documentación profunda
-- dejar WhoAmI desactualizado por varias sesiones
-- duplicar texto completo de HUMAN
-- escribirlo con jerga innecesaria
-- omitir siguiente acción
-
-==========
-08.00_CHECKLIST
-==========
-
-[ ] ¿Explica qué es el proyecto?
-[ ] ¿Explica el estado actual?
-[ ] ¿Indica qué falta?
-[ ] ¿Indica siguiente acción?
-[ ] ¿Es entendible por humano no inmerso?
-[ ] ¿No duplica HUMAN completo?
-
-==========
-09.00_CHANGELOG
-==========
-
-2026-08-16, v1.2-MB-SM-077D
-- Absorption: useful human-context content now lives in HUMAN.
-- ACTIVE_CANON=NO; AUTHORITATIVE_HOME=HUMAN; NEW_PROJECT_CREATION=NOT_REQUIRED.
-- Historical sections below remain non-operative.
-
-2026-04-21, v1.0-CANON
-- Creación del skill canónico de WhoAmI
-
-
---------------------------------------------------
 SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
 SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
 VERSION    : v1.2
-SHA256     : 87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9
+SHA256     : E3FBD898B49FDEF72F907257638C734E144F94B950F039F498D2C338D9B3D212
 --------------------------------------------------
 # SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
 
@@ -4001,11 +3808,11 @@ The AI must not invent a TEMP path.
 
 The TEMP path must come from project canon:
 - BATON
-- WHOAMI
 - HUMAN
 - README
 - active usecase instructions
 - explicit user instruction
+Do not treat a historical WhoAmI file as a TEMP path source of truth. WHOAMI_ACTIVE_CANON=NO.
 
 If TEMP path is missing and execution requires it, ask or declare a safe project-local TEMP path before script delivery.
 
@@ -4307,14 +4114,14 @@ objective. Prior authorization for one MB does not carry over to the next.
 
 FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
 ==========
-========== CONTENT_END 007 FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5 ==========
-========== END_SOURCE_FILE 007 FEB25ECA774B123FE43B424103A102E19696A4F5C595058965E7CA921EB416D5 ==========
-========== BEGIN_SOURCE_FILE 008 54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315 ==========
+========== CONTENT_END 007 5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32 ==========
+========== END_SOURCE_FILE 007 5C3EDBD8E364E76C93298EFB651A4F0D1C0508978FF807CBD7133758CCFC1F32 ==========
+========== BEGIN_SOURCE_FILE 008 ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061 ==========
 SOURCE_INDEX=8
 SOURCE_PATH=02.BUNDLE.GOVERNANCE.txt
-SOURCE_BYTES=156770
-SOURCE_SHA256=54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315
-========== CONTENT_START 008 54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315 ==========
+SOURCE_BYTES=144937
+SOURCE_SHA256=ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061
+========== CONTENT_START 008 ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061 ==========
 ========== GENERATED_OUTPUT_POLICY ==========
 GENERATED_OUTPUT_ONLY.......: YES
 DO_NOT_EDIT_MANUALLY........: YES
@@ -4326,7 +4133,7 @@ HUMAN_OVERRIDE_REQUIRED.....: YES, if manual edit is intentional
 
 ==============================
 BUNDLE: GOVERNANCE
-GENERATED_AT: 2026-08-19 16:28:34
+GENERATED_AT: 2026-08-19 17:54:59
 ==============================
 
 --------------------------------------------------
@@ -8458,374 +8265,6 @@ FIN_MB-SM-077D_COMPLETE_DIRTY_STATE_VISIBILITY
 ==========
 
 --------------------------------------------------
-SOURCE_FILE: SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
-SOURCE_PATH: C:\01. GitHub\Skills\SkillsLake\01.SKILLS\SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt
-VERSION    : v1.2
-SHA256     : 87451C9127E7F76B155D9BED99500D5A302172EABFEEB6326699163E1B78ACA9
---------------------------------------------------
-# SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION
-
-MARKER: MB-SM-052A_CROSS_RUNTIME_EXECUTION_CONTRACT
-VERSION: v1.2
-STATUS: ACTIVE
-LAYER: SKILL
-OWNER_DOMAIN: SkillsMachine
-PURPOSE: Define a shell/runtime-agnostic execution method for AI-delivered executable files.
-
-==========
-00.00 PRINCIPLE
-==========
-
-This methodology is not a PowerShell-only method.
-
-It is a human-controlled local execution contract:
-
-AI prepares an executable artifact.
-Human saves it in the project TEMP path.
-Human executes it locally from VS Code or terminal.
-The executable emits AI_TAIL_START / AI_TAIL_END.
-Human returns the AI_TAIL and any relevant TEMP outputs.
-AI interprets evidence and provides the next single action.
-
-PowerShell, Python, Bash, Node, SQL wrappers, Docker wrappers, Excel helpers, and Power Query generators are runtime adapters.
-
-==========
-01.00 DEFAULT WORKFLOW
-==========
-
-A. AI provides the executable file content or downloadable executable artifact:
-   - .ps1
-   - .py
-   - .sh
-   - .js
-   - .sql runner wrapper
-   - other executable/script file
-
-B. Human saves it in the project TEMP path.
-
-C. Human executes the exact command provided by the AI.
-   The command must work from any current directory.
-
-D. Human returns:
-   - AI_TAIL_START through AI_TAIL_END; and/or
-   - specific files created in TEMP that the AI explicitly requested.
-
-==========
-02.00 TEMP PATH RULE
-==========
-
-The AI must not invent a TEMP path.
-
-The TEMP path must come from project canon:
-- BATON
-- WHOAMI
-- HUMAN
-- README
-- active usecase instructions
-- explicit user instruction
-
-If TEMP path is missing and execution requires it, ask or declare a safe project-local TEMP path before script delivery.
-
-Examples:
-- SkillsMachine: C:\01. GitHub\Skills\SyS\Temp
-- CloseReport: C:\01. GitHub\CloseReport\99.TEMP
-
-==========
-03.00 EXECUTION COMMAND RULE
-==========
-
-The AI must provide a command executable from any location.
-
-PowerShell example:
-pwsh.exe -NoProfile -ExecutionPolicy Bypass -File "C:\path\to\temp\script.ps1"
-
-Python example:
-python "C:\path\to\temp\script.py"
-
-Bash example:
-bash "/mnt/c/path/to/temp/script.sh"
-
-The script itself must resolve PROJECT_ROOT and TEMP_PATH explicitly.
-
-==========
-04.00 AI_TAIL RULE
-==========
-
-AI_TAIL is mandatory for every executable artifact unless the runtime cannot support stdout or file output.
-
-Minimum AI_TAIL fields:
-- AI_TAIL_SCHEMA=v1
-- MB_ID or TASK_ID
-- RUNTIME
-- ROOT
-- TEMP_PATH
-- FINAL_STATUS
-- BLOCKER
-- FILES_CREATED
-- FILES_MODIFIED
-- VALIDATION_STATUS
-- COMMIT_PUSH_PERFORMED=NO unless explicitly authorized otherwise
-- NEXT_ACTION
-
-The script must not report success unless the relevant operation actually passed.
-
-==========
-05.00 IF TOOL DOES NOT SUPPORT THE METHOD
-==========
-
-If a tool/runtime cannot produce AI_TAIL, exit code, stdout, or auditable file output, the AI must not pretend compliance.
-
-It must declare:
-- CAN_USE_METHOD_FULLY: NO
-- CAN_USE_METHOD_PARTIALLY: YES/NO
-- MISSING_CAPABILITIES
-- SAFE_ADAPTER
-- RECOMMENDATION
-
-Examples:
-Power Query M cannot emit AI_TAIL directly.
-Recommendation: generate M code with Python or PowerShell and validate outputs externally.
-
-Excel manual operations cannot guarantee exit code.
-Recommendation: use a PowerShell/Python validator around the workbook.
-
-SQL alone may not support the contract.
-Recommendation: execute SQL through Python/PowerShell wrapper that emits AI_TAIL.
-
-==========
-06.00 DELIVERY MODE
-==========
-
-Default delivery mode:
-- AI provides code or a downloadable file.
-- Human saves to TEMP.
-- Human executes locally.
-- Human returns AI_TAIL.
-
-ZIPs or multi-file bundles are allowed only when they reduce token cost or complexity and remain explicit, reviewable, and project-local.
-
-The AI must not rely on invisible tool-side execution for final delivery unless explicitly requested.
-
-==========
-07.00 GIT RULE
-==========
-
-Scripts may inspect Git status and produce commit-ready reports.
-
-Scripts must not commit or push unless the user explicitly delegates that action.
-
-Prohibited by default:
-- git add .
-- git add -A
-- automatic commit
-- automatic push
-- hiding dirty state
-- continuing after unknown dirty worktree
-
-==========
-08.00 ADAPTER MINIMUMS
-==========
-
-PowerShell:
-- Prefer pwsh when available.
-- Use PS 5.1-compatible constructs when Windows PowerShell is expected.
-- Avoid scalar .Count hazards by wrapping collections with @(...).
-- Avoid Write-Host "=" * 60 ambiguity.
-- Use GIT_PAGER=cat.
-- Emit AI_TAIL in controlled final path.
-
-Python:
-- Use pathlib.
-- Use try/except/finally or equivalent tail guarantee.
-- Print AI_TAIL before sys.exit.
-- Explicit encoding for CSV/text.
-- Do not write outside project root or TEMP unless declared.
-
-Bash:
-- Use set -Eeuo pipefail.
-- Use trap for tail.
-- Use printf.
-- Preserve exit code.
-- Use git --no-pager.
-
-Node:
-- Capture uncaughtException and unhandledRejection.
-- Emit tail before process.exit.
-
-Docker:
-- Use wrapper script to build/run/capture logs and emit AI_TAIL.
-
-Power Query / Excel / VBA:
-- Use generator/installer/validator wrapper when direct AI_TAIL is unavailable.
-
-==========
-09.00 COMPLIANCE GATE
-==========
-
-Before delivering executable code, the AI must be able to answer:
-
-EXECUTION_CONTRACT_GATE:
-- PROJECT:
-- PROJECT_ROOT:
-- TEMP_PATH:
-- SCRIPT_NAME:
-- SCRIPT_RUNTIME:
-- TARGET_SHELL:
-- MIN_VERSION:
-- CAN_RUN_FROM_ANY_LOCATION:
-- AI_TAIL_SUPPORTED:
-- EXIT_CODE_SUPPORTED:
-- FILE_OUTPUT_SUPPORTED:
-- GIT_AWARE:
-- AUTO_COMMIT_ALLOWED:
-- USER_EXECUTES_LOCALLY:
-- LIMITATION:
-- RECOMMENDATION:
-- DECISION: PROCEED / ADAPT / BLOCK
-
-If the gate cannot be completed, do not deliver executable code.
-
-==========
-10.00 FAILURE MODE
-==========
-
-If the script fails, the AI must request only:
-- AI_TAIL_START through AI_TAIL_END, if present;
-- otherwise the minimal terminal segment needed to diagnose;
-- specific TEMP outputs if relevant.
-
-Do not ask for broad logs or full repo uploads by default.
-
-==========
-MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
-==========
-DATE_LOCAL........: 2026-07-04
-STATUS............: ACTIVE_RULE
-LAYER.............: HUMAN_CONTROLLED_SCRIPT_EXECUTION
-SOURCE_EVIDENCE...: CloseReport and SkillsMachine runner UX incidents, MB-SM-054A
-PURPOSE...........:
-Align AI-delivered executables with the user's VS Code / terminal workflow and prevent lost evidence.
-
-DELIVERY_PREFERENCE:
-For this workflow, prefer:
-1. a script file saved or downloadable for placement under the project Temp path; or
-2. a VS Code terminal PowerShell code block when the human asks for code directly.
-
-Avoid:
-- .cmd launchers that auto-close;
-- .exe wrappers unless explicitly requested;
-- long paste-only scripts that are unsafe for an interactive prompt;
-- console flows that do not persist AI_TAIL.
-
-VS_CODE_TERMINAL_RULE:
-The executable must run from any current terminal location by using absolute PROJECT_ROOT and TEMP_PATH values.
-
-REQUIRED_RUNNER_BEHAVIOR:
-- clear Temp before generation unless declared repair/split/repack exception applies;
-- set GIT_PAGER=cat and PAGER=cat when using git;
-- use git --no-pager for diagnostics;
-- do not commit or push unless explicitly approved;
-- persist AI_TAIL to Temp;
-- print singular NEXT_ACTION.
-
-DONE_WHEN:
-The human can run the script from VS Code PowerShell without losing terminal evidence or relying on an auto-closing wrapper.
-==========
-FIN_MB-SM-054B_P0_HUMAN_CONTROLLED_SCRIPT_DELIVERY_RULE
-==========
-
-==========
-SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
-==========
-
-UPDATED_AT: 2026-08-17
-SOURCE_MB: MB-SM-055J_CORE_HARDENING_COMPACT_UPLOAD_AND_ACCUMULATED_REGISTERS
-REFINED_MB: MB-SM-077D Slice E
-
-SUPPORTING_RULE:
-Compact/upload packaging is governed by the authoritative pair:
-- GRC.COMPACT_UPLOAD_PACK_ONLY
-- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
-
-Do not restate that pair here. This Skill adds only human-controlled local
-execution method constraints (human runs the artifact; AI interprets
-evidence). Human execution authority is unchanged.
-
-Upload-ready Temp is disposable evidence staging, never durable baseline and
-never product canon. Compact packaging does not change human or canonical
-authority.
-
-RELATED_CORE:
-- SKILL.COMPACT_UPLOAD_PACK_EXECUTION
-- GRC.COMPACT_UPLOAD_PACK_ONLY
-- SKILL.ACCUMULATED_PROJECT_REGISTERS
-- GRC.SESSION_CLOSE_DIRTY_SCOPE_CONTROL
-==========
-FIN_SM-055J-SUPPORTING-COMPACT-UPLOAD-HARDENING
-==========
-
-==========
-MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
-==========
-DATE..............: 2026-07-19
-STATUS............: ACTIVE_RULE
-LAYER.............: HUMAN_CONTROLLED_SCRIPT_EXECUTION
-SOURCE_MB.........: MB-SM-067B-D2_SKILL_GRC_PROMOTION_PATCH
-MERGES............: SKILL.TOVS_SUMMARY_RUNNER_CONTRACT (candidate, partial)
-
-11.00 COMMON MODULE RULE
-For SkillsMachine repository automation, executables should import and use
-SyS/A_Tools/Common/SkillsMachine.Automation.psm1 helpers where applicable
-instead of re-implementing git invocation, JSON parsing, hashing, UTF-8
-writing, or worktree assertions inline.
-
-12.00 DISTINCT EXECUTION STAGES
-Every non-trivial executable must keep four distinct, visibly labeled stages:
-1. PREFLIGHT: context identity, expected branch/HEAD, clean-worktree or
-   authorized-dirty check, input existence.
-2. EXECUTION: the actual mutation or analysis work.
-3. PROBE: at least one representative functional verification of the output
-   (not just "the command exited 0").
-4. POST-VERIFICATION: final state check (git status, diff scope, output
-   hashes) plus TOVS/AI_TAIL emission.
-A stage failure must stop later stages and be reported as the failing stage.
-
-13.00 TOVS/AI_TAIL ATTRIBUTION FIELDS
-The TOVS/AI_TAIL block must attribute the run precisely, including at minimum:
-- EXECUTABLE (exact script path/name);
-- OBJECTIVE (MB_ID or TASK_ID);
-- LAST_STAGE (the stage reached);
-- FINAL_STATUS;
-- NEXT_ACTION (singular).
-Plus runtime/project identity: RUNTIME, PROJECT_ROOT, and, when verifiable,
-branch/HEAD. A report must never attribute execution to an agent or runtime
-that did not actually run (see GRC.CROSS_RUNTIME_EXECUTION_CONTRACT and
-GRC.PROJECT_CONTEXT_IDENTITY).
-
-14.00 GENERATED OUTPUT IS NOT VALIDATED DELIVERY
-Producing an output file is not delivery. Delivery requires the validation
-stage to pass against that output. Scripts must not report delivery-complete
-status based on file creation alone.
-
-15.00 FAIL-CLOSED MANDATORY VALIDATORS
-When a mandatory validator or gate artifact is missing, the run must FAIL,
-not warn-and-skip. Missing validator = broken contract. (Evidence:
-MB-SM-067B-D1-R1 converted the automation gate in Validate-System.ps1 from
-warn-and-skip to fail-closed.)
-
-16.00 FLAT TEMP UPLOAD PACKAGE
-Evidence for human upload must be consolidated into flat files directly under
-the project TEMP path (no nested folders), with unique objective/timestamp
-prefixes, following GRC.SCRIPT_EXECUTION_STAGING and COMPACT_UPLOAD_PACK rules.
-
-17.00 COMMIT/PUSH AUTHORIZATION BOUNDARY
-No commit and no push without explicit human authorization for the specific
-objective. Prior authorization for one MB does not carry over to the next.
-
-FIN_MB-SM-067B-D2_EXECUTION_STAGES_AND_FAIL_CLOSED_VALIDATION
-==========
-
---------------------------------------------------
 SOURCE_FILE: GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
 SOURCE_PATH: C:\01. GitHub\Skills\GRCLake\01.CONTROLS\GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt
 VERSION    : v1.3
@@ -9173,13 +8612,13 @@ upload, Temp policy, or general shell style.
 ==========
 FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 ==========
-========== CONTENT_END 008 54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315 ==========
-========== END_SOURCE_FILE 008 54AFF1E3DA220880F3572BD82EEF8AD9095C1986F4C2DEF85C8295524DF0E315 ==========
+========== CONTENT_END 008 ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061 ==========
+========== END_SOURCE_FILE 008 ED8ED5E776CFB6758DAFA261D5223C1AF27094CE2F69950E3E250F3FCA20C061 ==========
 ================================================================================
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=8
-SOURCE_TOTAL_BYTES=274824
+SOURCE_TOTAL_BYTES=258818
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0
