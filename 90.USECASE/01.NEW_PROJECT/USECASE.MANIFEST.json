@@ -1,7 +1,7 @@
 {
   "usecase": "01.NEW_PROJECT",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-08-19 18:44:59",
+  "generated_at": "2026-08-19 19:44:12",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
   "primary_upload_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
-  "compiled_output_sha256": "989A504DBDD25E11F934677FC40AD50742E3548DEB073B37C15B5A5B34AFEEA7",
+  "compiled_output_sha256": "15A57968EF44D3829E5C0726C9F39FB3AADC744D2C9E3D6ACB8244180DED033A",
   "compiled_source_order": [
     "README.UPLOAD_THIS_USECASE.txt",
     "PROMPT.NEW_PROJECT.txt",

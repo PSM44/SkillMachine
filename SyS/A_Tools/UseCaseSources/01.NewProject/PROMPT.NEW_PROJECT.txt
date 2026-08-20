@@ -36,13 +36,17 @@ MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
 ==========
 
 REGLA:
-La carpeta del usecase es el paquete operativo de subida a la IA.
+PRIMARY_UPLOAD_MODEL=SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED=FALSE
+The compiled usecase file is the operational upload unit.
 
-CARPETA_A_SUBIR:
-C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT
+ARCHIVO_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\01.NEW_PROJECT\USECASE.01.NEW_PROJECT.COMPILED.txt
 
 REGLAS:
-- Subir el contenido completo de la carpeta del usecase correspondiente.
+- Upload the compiled single-file artifact by default.
+- Do not upload the entire usecase folder by default.
+- Exact-path fallback only if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.

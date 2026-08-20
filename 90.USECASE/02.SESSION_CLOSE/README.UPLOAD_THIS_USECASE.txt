@@ -5,31 +5,30 @@ README.UPLOAD_THIS_USECASE
 USECASE............: 02.SESSION_CLOSE
 PURPOSE............: Cerrar sesión, consolidar continuidad, ejecutar learning review y preparar próximo handoff.
 STATUS.............: ACTIVE
-PACKAGE_MODEL......: SELF_CONTAINED_USECASE_FOLDER
+PACKAGE_MODEL......: SINGLE_COMPILED_FILE
 
 ==========
 01.00_QUE_SUBIR_A_LA_IA
 ==========
 
-Subir el contenido completo de esta carpeta:
+PRIMARY_UPLOAD_MODEL: SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED: FALSE
 
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+Default: upload this compiled single-file artifact:
 
-Esto incluye, según corresponda:
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.02.SESSION_CLOSE.COMPILED.txt
 
-- 00.SKILL.MENU.ACTIVE.txt
-- 00.BUNDLE.CORE.txt
-- 01.BUNDLE.CONTINUITY.txt
-- 02.BUNDLE.GOVERNANCE.txt
-- SKILL_SET.MANIFEST.txt
-- USECASE.MANIFEST.json
-- prompt/runbook/docs del usecase
+That file already contains this README, the usecase prompt, skill-set, menu and bundles.
+
+Do not upload the entire usecase folder by default.
+
+Exact-path fallback (not default): if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it, upload that exact path only. Whole-folder upload is not the normal procedure.
 
 ==========
 02.00_REGLAS
 ==========
 
-- Esta carpeta es el paquete operativo de subida del usecase.
+- The compiled single-file artifact is the operational upload unit.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, la IA debe pedir paths exactos adicionales.
@@ -44,21 +43,21 @@ Esto incluye, según corresponda:
 Hoy es [fecha/hora local], Santiago Chile.
 
 Estoy trabajando con SkillsMachine.
-Adjunto el contenido de:
+Adjunto el archivo compilado:
 
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.02.SESSION_CLOSE.COMPILED.txt
 
 Objetivo:
 Ejecutar el usecase 02.SESSION_CLOSE.
 
 Instrucciones:
-1. Lee primero README.UPLOAD_THIS_USECASE.txt.
-2. Lee USECASE.MANIFEST.json y SKILL_SET.MANIFEST.txt si existen.
-3. Lee el prompt principal: PROMPT.SESSION_CLOSE.txt.
-4. Usa los bundles adjuntos como contexto operativo.
+1. Treat the compiled file as the primary package.
+2. Identify README, prompt, skill-set, menu and bundles inside it.
+3. Lee el prompt principal: PROMPT.SESSION_CLOSE.txt (already included in the compiled file).
+4. Usa los bundles incluidos como contexto operativo.
 5. No asumas que tienes todo el repo.
 6. Si falta contexto, pide paths exactos adicionales.
-7. No pidas el repo completo.
+7. No pidas el repo completo ni la carpeta completa del usecase por defecto.
 8. No modifiques canon automáticamente.
 9. Responde en formato WBS.
 

@@ -1,7 +1,7 @@
 {
   "usecase": "02.SESSION_CLOSE",
   "usecase_version": "v3.0-BUNDLES",
-  "generated_at": "2026-08-19 18:45:00",
+  "generated_at": "2026-08-19 19:44:12",
   "source_root": "C:\\01. GitHub\\Skills",
   "delivery_files": [
     "00.BUNDLE.CORE.txt",
@@ -19,7 +19,7 @@
   "primary_upload_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
   "compiled_output_enabled": true,
   "compiled_output_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
-  "compiled_output_sha256": "02555A6305F045EE67235DEE7396554B14D45A1C8F41CD1C95429B8F621B04E9",
+  "compiled_output_sha256": "CB9D4F60B98F54CB95301B6A5FE14251D20CEA310A4159F2E3153851CF54F7E7",
   "compiled_source_order": [
     "README.UPLOAD_THIS_USECASE.txt",
     "PROMPT.SESSION_CLOSE.txt",

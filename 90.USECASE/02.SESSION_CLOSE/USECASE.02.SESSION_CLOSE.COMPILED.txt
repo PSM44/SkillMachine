@@ -31,13 +31,13 @@ DO_NOT_EDIT_MANUALLY=YES
 ================================================================================
 SOURCE_INDEX=1
 SOURCE_PATH=README.UPLOAD_THIS_USECASE.txt
-SOURCE_BYTES=3763
-SOURCE_SHA256=925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD
+SOURCE_BYTES=4166
+SOURCE_SHA256=C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB
 
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CLOSE.txt
-SOURCE_BYTES=4466
-SOURCE_SHA256=44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF
+SOURCE_BYTES=4750
+SOURCE_SHA256=0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C
 
 SOURCE_INDEX=3
 SOURCE_PATH=RUNBOOK.SESSION_CLOSE.HARDENED.txt
@@ -79,12 +79,12 @@ The canonical source-of-truth remains outside 90.USECASE; regenerate instead of 
 ================================================================================
 04. COMPLETE SOURCE CONTENT
 ================================================================================
-========== BEGIN_SOURCE_FILE 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
+========== BEGIN_SOURCE_FILE 001 C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB ==========
 SOURCE_INDEX=1
 SOURCE_PATH=README.UPLOAD_THIS_USECASE.txt
-SOURCE_BYTES=3763
-SOURCE_SHA256=925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD
-========== CONTENT_START 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
+SOURCE_BYTES=4166
+SOURCE_SHA256=C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB
+========== CONTENT_START 001 C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB ==========
 ==========
 README.UPLOAD_THIS_USECASE
 ==========
@@ -92,31 +92,30 @@ README.UPLOAD_THIS_USECASE
 USECASE............: 02.SESSION_CLOSE
 PURPOSE............: Cerrar sesión, consolidar continuidad, ejecutar learning review y preparar próximo handoff.
 STATUS.............: ACTIVE
-PACKAGE_MODEL......: SELF_CONTAINED_USECASE_FOLDER
+PACKAGE_MODEL......: SINGLE_COMPILED_FILE
 
 ==========
 01.00_QUE_SUBIR_A_LA_IA
 ==========
 
-Subir el contenido completo de esta carpeta:
+PRIMARY_UPLOAD_MODEL: SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED: FALSE
 
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+Default: upload this compiled single-file artifact:
 
-Esto incluye, según corresponda:
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.02.SESSION_CLOSE.COMPILED.txt
 
-- 00.SKILL.MENU.ACTIVE.txt
-- 00.BUNDLE.CORE.txt
-- 01.BUNDLE.CONTINUITY.txt
-- 02.BUNDLE.GOVERNANCE.txt
-- SKILL_SET.MANIFEST.txt
-- USECASE.MANIFEST.json
-- prompt/runbook/docs del usecase
+That file already contains this README, the usecase prompt, skill-set, menu and bundles.
+
+Do not upload the entire usecase folder by default.
+
+Exact-path fallback (not default): if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it, upload that exact path only. Whole-folder upload is not the normal procedure.
 
 ==========
 02.00_REGLAS
 ==========
 
-- Esta carpeta es el paquete operativo de subida del usecase.
+- The compiled single-file artifact is the operational upload unit.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, la IA debe pedir paths exactos adicionales.
@@ -131,21 +130,21 @@ Esto incluye, según corresponda:
 Hoy es [fecha/hora local], Santiago Chile.
 
 Estoy trabajando con SkillsMachine.
-Adjunto el contenido de:
+Adjunto el archivo compilado:
 
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.02.SESSION_CLOSE.COMPILED.txt
 
 Objetivo:
 Ejecutar el usecase 02.SESSION_CLOSE.
 
 Instrucciones:
-1. Lee primero README.UPLOAD_THIS_USECASE.txt.
-2. Lee USECASE.MANIFEST.json y SKILL_SET.MANIFEST.txt si existen.
-3. Lee el prompt principal: PROMPT.SESSION_CLOSE.txt.
-4. Usa los bundles adjuntos como contexto operativo.
+1. Treat the compiled file as the primary package.
+2. Identify README, prompt, skill-set, menu and bundles inside it.
+3. Lee el prompt principal: PROMPT.SESSION_CLOSE.txt (already included in the compiled file).
+4. Usa los bundles incluidos como contexto operativo.
 5. No asumas que tienes todo el repo.
 6. Si falta contexto, pide paths exactos adicionales.
-7. No pidas el repo completo.
+7. No pidas el repo completo ni la carpeta completa del usecase por defecto.
 8. No modifiques canon automáticamente.
 9. Responde en formato WBS.
 
@@ -204,14 +203,14 @@ what context is missing, and the next minimal reversible action.
 ==========
 FIN_MB-GRC-033F_USECASE_UPLOAD_FOCUS_GATE
 ==========
-========== CONTENT_END 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
-========== END_SOURCE_FILE 001 925AD326BB06BFC51161DB5B446E61905AB36852E1B686A6A077203BD5EADAFD ==========
-========== BEGIN_SOURCE_FILE 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
+========== CONTENT_END 001 C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB ==========
+========== END_SOURCE_FILE 001 C9DBA0884D124CF112A531ADD700733CFE33AABBD8DD5A1047BEC1AAA5F9B6CB ==========
+========== BEGIN_SOURCE_FILE 002 0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C ==========
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CLOSE.txt
-SOURCE_BYTES=4466
-SOURCE_SHA256=44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF
-========== CONTENT_START 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
+SOURCE_BYTES=4750
+SOURCE_SHA256=0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C
+========== CONTENT_START 002 0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C ==========
 PROYECTO: Session Close
 
 OBJETIVO:
@@ -358,19 +357,23 @@ MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
 ==========
 
 REGLA:
-La carpeta del usecase es el paquete operativo de subida a la IA.
+PRIMARY_UPLOAD_MODEL=SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED=FALSE
+The compiled usecase file is the operational upload unit.
 
-CARPETA_A_SUBIR:
-C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE
+ARCHIVO_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\02.SESSION_CLOSE\USECASE.02.SESSION_CLOSE.COMPILED.txt
 
 REGLAS:
-- Subir el contenido completo de la carpeta del usecase correspondiente.
+- Upload the compiled single-file artifact by default.
+- Do not upload the entire usecase folder by default.
+- Exact-path fallback only if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
 - Si se detecta oportunidad de crear o mejorar Skill/GRC, registrarla como candidato; no crear canon automaticamente.
-========== CONTENT_END 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
-========== END_SOURCE_FILE 002 44DD97BB8262A32DC662EC8E9C79A50985682BC2D830702E13BA2CF2E11031DF ==========
+========== CONTENT_END 002 0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C ==========
+========== END_SOURCE_FILE 002 0D6F0CB9C352593C5035FE9BBD548903CA1D436F1582D72A73A9BF2BD2A7B29C ==========
 ========== BEGIN_SOURCE_FILE 003 D37A9FC934651BF17664CFF2A557502FDBF7C2A4F1D1354F595EFA1F8573FC7A ==========
 SOURCE_INDEX=3
 SOURCE_PATH=RUNBOOK.SESSION_CLOSE.HARDENED.txt
@@ -8606,7 +8609,7 @@ FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=8
-SOURCE_TOTAL_BYTES=258458
+SOURCE_TOTAL_BYTES=259145
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0

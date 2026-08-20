@@ -31,13 +31,13 @@ DO_NOT_EDIT_MANUALLY=YES
 ================================================================================
 SOURCE_INDEX=1
 SOURCE_PATH=README.UPLOAD_THIS_USECASE.txt
-SOURCE_BYTES=5703
-SOURCE_SHA256=60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2
+SOURCE_BYTES=6113
+SOURCE_SHA256=CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D
 
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CONTINUE.txt
-SOURCE_BYTES=10969
-SOURCE_SHA256=008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8
+SOURCE_BYTES=11252
+SOURCE_SHA256=523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A
 
 SOURCE_INDEX=3
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
@@ -74,12 +74,12 @@ The canonical source-of-truth remains outside 90.USECASE; regenerate instead of 
 ================================================================================
 04. COMPLETE SOURCE CONTENT
 ================================================================================
-========== BEGIN_SOURCE_FILE 001 60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2 ==========
+========== BEGIN_SOURCE_FILE 001 CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D ==========
 SOURCE_INDEX=1
 SOURCE_PATH=README.UPLOAD_THIS_USECASE.txt
-SOURCE_BYTES=5703
-SOURCE_SHA256=60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2
-========== CONTENT_START 001 60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2 ==========
+SOURCE_BYTES=6113
+SOURCE_SHA256=CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D
+========== CONTENT_START 001 CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D ==========
 ==========
 README.UPLOAD_THIS_USECASE
 ==========
@@ -87,31 +87,30 @@ README.UPLOAD_THIS_USECASE
 USECASE............: 03.SESSION_CONTINUE
 PURPOSE............: Continuar una sesión operativa sin inventar estado y con contexto vigente.
 STATUS.............: ACTIVE
-PACKAGE_MODEL......: SELF_CONTAINED_USECASE_FOLDER
+PACKAGE_MODEL......: SINGLE_COMPILED_FILE
 
 ==========
 01.00_QUE_SUBIR_A_LA_IA
 ==========
 
-Subir el contenido completo de esta carpeta:
+PRIMARY_UPLOAD_MODEL: SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED: FALSE
 
-C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+Default: upload this compiled single-file artifact:
 
-Esto incluye, según corresponda:
+C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE\USECASE.03.SESSION_CONTINUE.COMPILED.txt
 
-- 00.SKILL.MENU.ACTIVE.txt
-- 00.BUNDLE.CORE.txt
-- 01.BUNDLE.CONTINUITY.txt
-- 02.BUNDLE.GOVERNANCE.txt
-- SKILL_SET.MANIFEST.txt
-- USECASE.MANIFEST.json
-- prompt/runbook/docs del usecase
+That file already contains this README, the usecase prompt, skill-set, menu and bundles.
+
+Do not upload the entire usecase folder by default.
+
+Exact-path fallback (not default): if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it, upload that exact path only. Whole-folder upload is not the normal procedure.
 
 ==========
 02.00_REGLAS
 ==========
 
-- Esta carpeta es el paquete operativo de subida del usecase.
+- The compiled single-file artifact is the operational upload unit.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, la IA debe pedir paths exactos adicionales.
@@ -131,21 +130,21 @@ Esto incluye, según corresponda:
 Hoy es [fecha/hora local], Santiago Chile.
 
 Estoy trabajando con SkillsMachine.
-Adjunto el contenido de:
+Adjunto el archivo compilado:
 
-C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE\USECASE.03.SESSION_CONTINUE.COMPILED.txt
 
 Objetivo:
 Ejecutar el usecase 03.SESSION_CONTINUE.
 
 Instrucciones:
-1. Lee primero README.UPLOAD_THIS_USECASE.txt.
-2. Lee USECASE.MANIFEST.json y SKILL_SET.MANIFEST.txt si existen.
-3. Lee el prompt principal: PROMPT.SESSION_CONTINUE.txt.
-4. Usa los bundles adjuntos como contexto operativo.
+1. Treat the compiled file as the primary package.
+2. Identify README, prompt, skill-set, menu and bundles inside it.
+3. Lee el prompt principal: PROMPT.SESSION_CONTINUE.txt (already included in the compiled file).
+4. Usa los bundles incluidos como contexto operativo.
 5. No asumas que tienes todo el repo.
 6. Si falta contexto, pide paths exactos adicionales.
-7. No pidas el repo completo.
+7. No pidas el repo completo ni la carpeta completa del usecase por defecto.
 8. No modifiques canon automáticamente.
 9. Responde en formato WBS.
 
@@ -235,14 +234,14 @@ ADDITIONAL_PROMPT_REQUIRED_FOR_SESSION_START=NO when the package is sufficient.
 ==========
 FIN_MB-SM-076A7_SESSION_START_GATE_README
 ==========
-========== CONTENT_END 001 60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2 ==========
-========== END_SOURCE_FILE 001 60E83184E62CF22786CFEAC09C8AF8F4657953BC5D30FCAA974C74CD1F68EBC2 ==========
-========== BEGIN_SOURCE_FILE 002 008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8 ==========
+========== CONTENT_END 001 CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D ==========
+========== END_SOURCE_FILE 001 CE5E6DBC0FAC95935431A983B60C5AED23CDC52E70FC2EE9C4CAC3C47237549D ==========
+========== BEGIN_SOURCE_FILE 002 523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A ==========
 SOURCE_INDEX=2
 SOURCE_PATH=PROMPT.SESSION_CONTINUE.txt
-SOURCE_BYTES=10969
-SOURCE_SHA256=008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8
-========== CONTENT_START 002 008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8 ==========
+SOURCE_BYTES=11252
+SOURCE_SHA256=523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A
+========== CONTENT_START 002 523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A ==========
 ==========
 00.00_PROMPT_SESSION_CONTINUE
 ==========
@@ -326,13 +325,17 @@ MB-GRC-026I_USECASE_FOLDER_UPLOAD_PACKAGE
 ==========
 
 REGLA:
-La carpeta del usecase es el paquete operativo de subida a la IA.
+PRIMARY_UPLOAD_MODEL=SINGLE_COMPILED_FILE
+FOLDER_UPLOAD_REQUIRED=FALSE
+The compiled usecase file is the operational upload unit.
 
-CARPETA_A_SUBIR:
-C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE
+ARCHIVO_A_SUBIR:
+C:\01. GitHub\Skills\90.USECASE\03.SESSION_CONTINUE\USECASE.03.SESSION_CONTINUE.COMPILED.txt
 
 REGLAS:
-- Subir el contenido completo de la carpeta del usecase correspondiente.
+- Upload the compiled single-file artifact by default.
+- Do not upload the entire usecase folder by default.
+- Exact-path fallback only if the compiled file is missing, unreadable, truncated, or the IA requests a named missing source after reading it.
 - No usar SyS\Temp\TO_UPLOAD_TO_IA.
 - No pedir el repo completo por defecto.
 - Si falta contexto, pedir paths exactos adicionales desde SkillsLake, GRCLake, 00.CATALOG, SyS u otra ruta necesaria.
@@ -511,8 +514,8 @@ Embed the canonical payload file contents in the continuation package. Do not co
 ==========
 FIN_MB-SM-076A7_USER_WORKING_PROFILE_AND_C1_CONTINUITY
 ==========
-========== CONTENT_END 002 008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8 ==========
-========== END_SOURCE_FILE 002 008B8BEB78A8AEE8B104A460A8ECDE2B49FD0458539859E0482EDC1870B776D8 ==========
+========== CONTENT_END 002 523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A ==========
+========== END_SOURCE_FILE 002 523A2386AC40D801AEF83EB899303B69B6C5E1F4BE67B47C7EADE729DFC9BC4A ==========
 ========== BEGIN_SOURCE_FILE 003 622A06646FB6E78139156231873BA3CF2778AF4061F44642AB67541BB8CECD05 ==========
 SOURCE_INDEX=3
 SOURCE_PATH=SKILL_SET.MANIFEST.txt
@@ -8191,7 +8194,7 @@ FIN_MB-SM-077D_PATH_QUOTING_AND_LITERAL_PATH_SAFETY
 05. INTEGRITY SUMMARY
 ================================================================================
 SOURCE_FILE_COUNT=7
-SOURCE_TOTAL_BYTES=247227
+SOURCE_TOTAL_BYTES=247920
 ALL_SOURCES_INCLUDED=YES
 TRUNCATION_DETECTED=NO
 DUPLICATE_SOURCE_PATH_COUNT=0
