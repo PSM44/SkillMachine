@@ -119,9 +119,9 @@ function Assert-UseCaseCompiledDelimiterSafe {
 function New-UseCaseCompiledSourceRecord {
     param(
         [Parameter(Mandatory = $true)][string]$ProjectRoot,
-        [Parameter(Mandatory = $true)][string]$TargetDirectory,
         [Parameter(Mandatory = $true)][string]$OutputFileName,
         [Parameter(Mandatory = $true)][string]$SourcePath,
+        [Parameter(Mandatory = $true)][string[]]$SourceLabels,
         [Parameter(Mandatory = $true)][int]$SourceIndex
     )
 
@@ -129,13 +129,9 @@ function New-UseCaseCompiledSourceRecord {
         throw "COMPILED_SOURCE_PATH_BLANK"
     }
 
-    if ([System.IO.Path]::IsPathRooted($SourcePath)) {
-        throw "COMPILED_SOURCE_PATH_MUST_BE_TARGET_RELATIVE"
-    }
-
     $normalizedRelativePath = $SourcePath.Replace('/', '\')
-    $fullSourcePath = [System.IO.Path]::GetFullPath((Join-Path $TargetDirectory $normalizedRelativePath))
-    $fullOutputPath = [System.IO.Path]::GetFullPath((Join-Path $TargetDirectory $OutputFileName))
+    $fullSourcePath = [System.IO.Path]::GetFullPath((Join-Path $ProjectRoot $normalizedRelativePath))
+    $fullOutputPath = [System.IO.Path]::GetFullPath((Join-Path $ProjectRoot $OutputFileName))
 
     if (-not (Test-UseCasePathUnderRoot -CandidatePath $fullSourcePath -ProjectRoot $ProjectRoot)) {
         throw "COMPILED_SOURCE_OUTSIDE_PROJECT_ROOT"
@@ -164,6 +160,7 @@ function New-UseCaseCompiledSourceRecord {
         SourceSha256      = $sourceSha256
         SourceContent     = $sourceText
         DelimiterSet      = $delimiterSet
+        SourceLabels      = @($SourceLabels)
         RelativeToProject = Get-UseCaseCompiledRelativePath -BaseDirectory $ProjectRoot -FullPath $fullSourcePath
     }
 }
@@ -176,13 +173,13 @@ function New-UseCaseCompiledFile {
         [Parameter(Mandatory = $true)][string]$ProjectRoot,
         [Parameter(Mandatory = $true)][string]$TargetDirectory,
         [Parameter(Mandatory = $true)][string]$OutputFileName,
-        [Parameter(Mandatory = $true)][string[]]$SourceFiles,
+        [Parameter(Mandatory = $true)][object[]]$SourceEntries,
         [Parameter(Mandatory = $true)][string]$FormatVersion,
         [AllowNull()][string]$GeneratedAt,
         [switch]$WriteOutput
     )
 
-    if ($FormatVersion -ne 'v1') {
+    if (@('v1','v2') -notcontains $FormatVersion) {
         throw "COMPILED_FORMAT_VERSION_UNSUPPORTED"
     }
 
@@ -217,38 +214,28 @@ function New-UseCaseCompiledFile {
     if (-not (Test-UseCasePathUnderRoot -CandidatePath $fullTargetDirectory -ProjectRoot $fullProjectRoot)) {
         throw "COMPILED_TARGET_OUTSIDE_PROJECT_ROOT"
     }
-
     if (-not (Test-UseCasePathUnderRoot -CandidatePath $fullOutputPath -ProjectRoot $fullProjectRoot)) {
         throw "COMPILED_OUTPUT_OUTSIDE_PROJECT_ROOT"
     }
 
-    $normalizedSourceFiles = @($SourceFiles | ForEach-Object { [string]$_ })
-    if ($normalizedSourceFiles.Count -eq 0) {
+    $normalizedSourceEntries = @($SourceEntries)
+    if ($normalizedSourceEntries.Count -eq 0) {
         throw "COMPILED_SOURCE_ORDER_EMPTY"
     }
 
-    $duplicateGroups = @(
-        $normalizedSourceFiles |
-            ForEach-Object { $_.Replace('/', '\') } |
-            Group-Object |
-            Where-Object { $_.Count -gt 1 }
-    )
-    if ($duplicateGroups.Count -gt 0) {
-        throw "COMPILED_DUPLICATE_SOURCE_PATH"
-    }
-
     $sourceRecords = [System.Collections.Generic.List[object]]::new()
-    $sourceIndex = 1
-    foreach ($sourcePath in $normalizedSourceFiles) {
-        [void]$sourceRecords.Add(
-            (New-UseCaseCompiledSourceRecord `
-                -ProjectRoot $fullProjectRoot `
-                -TargetDirectory $fullTargetDirectory `
-                -OutputFileName $OutputFileName `
-                -SourcePath $sourcePath `
-                -SourceIndex $sourceIndex)
-        )
-        $sourceIndex++
+    $seenSourcePaths = @{}
+    for ($i = 0; $i -lt $normalizedSourceEntries.Count; $i++) {
+        $entry = $normalizedSourceEntries[$i]
+        $sourcePath = [string]$entry.source_path
+        $labels = @($entry.source_labels | ForEach-Object { [string]$_ })
+        $norm = $sourcePath.Replace('/', '\').ToUpperInvariant()
+        if ($seenSourcePaths.ContainsKey($norm)) {
+            throw "COMPILED_DUPLICATE_SOURCE_PATH"
+        }
+        $seenSourcePaths[$norm] = $true
+        $record = New-UseCaseCompiledSourceRecord -ProjectRoot $fullProjectRoot -OutputFileName $OutputFileName -SourcePath $sourcePath -SourceLabels $labels -SourceIndex ($i + 1)
+        [void]$sourceRecords.Add($record)
     }
 
     $headerLines = [System.Collections.Generic.List[string]]::new()
@@ -274,10 +261,16 @@ function New-UseCaseCompiledFile {
     [void]$headerLines.Add("PACKAGE_VERSION=$PackageVersion")
     [void]$headerLines.Add("COMPILED_OUTPUT_FILE=$OutputFileName")
     [void]$headerLines.Add("COMPILED_FORMAT_VERSION=$FormatVersion")
+    [void]$headerLines.Add('BUILD_TOOL_VERSION=COMPILE_USECASE_SINGLE_FILE')
     [void]$headerLines.Add('CONTENT_POLICY=FULL_CONTENT_NO_TRUNCATION')
     [void]$headerLines.Add('SOURCE_ORDER_POLICY=REGISTRY_DECLARED')
     [void]$headerLines.Add('ENCODING=UTF-8_NO_BOM')
     [void]$headerLines.Add('GENERATED_OUTPUT_ONLY=YES')
+    [void]$headerLines.Add('INDEPENDENT_CANON=NO')
+    [void]$headerLines.Add('SKILLSMACHINE_RUNTIME_DEPENDENCY=NO')
+    [void]$headerLines.Add('SOURCE_PROVENANCE_EMBEDDED=YES')
+    [void]$headerLines.Add('SOURCE_HASHES_EMBEDDED=YES')
+    [void]$headerLines.Add('SEPARATE_TARGET_MANIFEST_REQUIRED=NO')
     [void]$headerLines.Add('DO_NOT_EDIT_MANUALLY=YES')
     if (-not [string]::IsNullOrWhiteSpace($GeneratedAt)) {
         [void]$headerLines.Add("GENERATED_AT_POLICY=$GeneratedAt")
@@ -290,8 +283,11 @@ function New-UseCaseCompiledFile {
     foreach ($record in @($sourceRecords)) {
         [void]$headerLines.Add("SOURCE_INDEX=$($record.SourceIndex)")
         [void]$headerLines.Add("SOURCE_PATH=$($record.SourcePath)")
+        [void]$headerLines.Add("SOURCE_LABELS=$([string]::Join(';', @($record.SourceLabels)))")
         [void]$headerLines.Add("SOURCE_BYTES=$($record.SourceBytes)")
         [void]$headerLines.Add("SOURCE_SHA256=$($record.SourceSha256)")
+        $normalizedPayloadSha256 = Get-UseCaseCompiledSha256Hex -Bytes ([System.Text.UTF8Encoding]::new($false).GetBytes((($record.SourceContent -replace "`r`n", "`n").TrimEnd("`n") + "`n")))
+        [void]$headerLines.Add("NORMALIZED_PAYLOAD_SHA256=$normalizedPayloadSha256")
         [void]$headerLines.Add('')
     }
 
@@ -317,9 +313,14 @@ function New-UseCaseCompiledFile {
         $null = $builder.Append("`r`n")
         $null = $builder.Append("SOURCE_PATH=$($record.SourcePath)")
         $null = $builder.Append("`r`n")
+        $null = $builder.Append("SOURCE_LABELS=$([string]::Join(';', @($record.SourceLabels)))")
+        $null = $builder.Append("`r`n")
         $null = $builder.Append("SOURCE_BYTES=$($record.SourceBytes)")
         $null = $builder.Append("`r`n")
         $null = $builder.Append("SOURCE_SHA256=$($record.SourceSha256)")
+        $null = $builder.Append("`r`n")
+        $normalizedPayloadSha256 = Get-UseCaseCompiledSha256Hex -Bytes ([System.Text.UTF8Encoding]::new($false).GetBytes((($record.SourceContent -replace "`r`n", "`n").TrimEnd("`n") + "`n")))
+        $null = $builder.Append("NORMALIZED_PAYLOAD_SHA256=$normalizedPayloadSha256")
         $null = $builder.Append("`r`n")
         $null = $builder.Append([string]$record.DelimiterSet.ContentStart)
         $null = $builder.Append("`r`n")
@@ -379,7 +380,9 @@ function New-UseCaseCompiledFile {
         SourceOrderPolicy   = 'REGISTRY_DECLARED'
         Encoding            = 'UTF-8_NO_BOM'
         GeneratedOutputOnly = $true
+
     }
+
 }
 
 function Invoke-UseCaseCompiledFileSelfTests {
@@ -421,6 +424,18 @@ function Invoke-UseCaseCompiledFileSelfTests {
         return $path
     }
 
+    function New-CompilerSourceEntry {
+        param(
+            [Parameter(Mandatory = $true)][string]$SourcePath,
+            [string[]]$SourceLabels = @('SELFTEST')
+        )
+
+        return [pscustomobject]@{
+            source_path   = $SourcePath
+            source_labels = @($SourceLabels)
+        }
+    }
+
     function Remove-CompilerScratchFiles {
         foreach ($path in @($createdPaths)) {
             if (Test-Path -LiteralPath $path) {
@@ -446,8 +461,12 @@ function Invoke-UseCaseCompiledFileSelfTests {
         $collisionSource = New-CompilerScratchFile -Name '05_collision.txt' -Content "before`r`n========== BEGIN_SOURCE_FILE collision ==========`r`nafter"
         $outputName = $prefix + '_PACKAGE.COMPILED.txt'
 
-        $record1 = New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceFiles @((Split-Path -Leaf $source1), (Split-Path -Leaf $source2)) -FormatVersion 'v1'
-        $record2 = New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceFiles @((Split-Path -Leaf $source1), (Split-Path -Leaf $source2)) -FormatVersion 'v1'
+        $record1SourceEntries = @(
+            (New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $source1)),
+            (New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $source2))
+        )
+        $record1 = New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceEntries $record1SourceEntries -FormatVersion 'v1'
+        $record2 = New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceEntries $record1SourceEntries -FormatVersion 'v1'
 
         Add-CompilerTestResult -Name 'T01_PARSEABLE_IMPORT_SIDE_EFFECT_FREE' -Passed $true -Detail 'Script was imported without top-level side effects.'
         Add-CompilerTestResult -Name 'T02_TWO_SOURCES_PRESERVE_ORDER' -Passed (($record1.SourceFiles[0] -eq (Split-Path -Leaf $source1)) -and ($record1.SourceFiles[1] -eq (Split-Path -Leaf $source2))) -Detail 'Source order should match registry declaration.'
@@ -455,7 +474,7 @@ function Invoke-UseCaseCompiledFileSelfTests {
         Add-CompilerTestResult -Name 'T04_SHA256_RECORDED_CORRECTLY' -Passed ($record1.SourceManifest[0].SourceSha256 -eq (Get-UseCaseCompiledSha256Hex -Bytes ([System.IO.File]::ReadAllBytes($source1)))) -Detail 'Source SHA256 should match bytes.'
 
         $outputPath = Join-Path $ScratchRoot $outputName
-        [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceFiles @((Split-Path -Leaf $source1), (Split-Path -Leaf $source2)) -FormatVersion 'v1' -WriteOutput)
+        [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName $outputName -SourceEntries $record1SourceEntries -FormatVersion 'v1' -WriteOutput)
         [void]$createdPaths.Add($outputPath)
         $writtenBytes = [System.IO.File]::ReadAllBytes($outputPath)
         $utf8Bom = @(0xEF, 0xBB, 0xBF)
@@ -464,7 +483,7 @@ function Invoke-UseCaseCompiledFileSelfTests {
 
         $missingPathPassed = $false
         try {
-            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_MISSING.COMPILED.txt') -SourceFiles @('missing.txt') -FormatVersion 'v1')
+            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_MISSING.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath 'missing.txt')) -FormatVersion 'v1')
         }
         catch {
             $missingPathPassed = ($_.Exception.Message -eq 'COMPILED_SOURCE_MISSING')
@@ -473,7 +492,10 @@ function Invoke-UseCaseCompiledFileSelfTests {
 
         $duplicatePathPassed = $false
         try {
-            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_DUP.COMPILED.txt') -SourceFiles @((Split-Path -Leaf $source1), (Split-Path -Leaf $source1)) -FormatVersion 'v1')
+            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_DUP.COMPILED.txt') -SourceEntries @(
+                (New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $source1)),
+                (New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $source1))
+            ) -FormatVersion 'v1')
         }
         catch {
             $duplicatePathPassed = ($_.Exception.Message -eq 'COMPILED_DUPLICATE_SOURCE_PATH')
@@ -482,7 +504,7 @@ function Invoke-UseCaseCompiledFileSelfTests {
 
         $outsideRootPassed = $false
         try {
-            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_OUTSIDE.COMPILED.txt') -SourceFiles @('..\outside.txt') -FormatVersion 'v1')
+            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_OUTSIDE.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath '..\outside.txt')) -FormatVersion 'v1')
         }
         catch {
             $outsideRootPassed = ($_.Exception.Message -eq 'COMPILED_SOURCE_OUTSIDE_PROJECT_ROOT')
@@ -491,7 +513,7 @@ function Invoke-UseCaseCompiledFileSelfTests {
 
         $selfSourcePassed = $false
         try {
-            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_SELF.COMPILED.txt') -SourceFiles @($prefix + '_SELF.COMPILED.txt') -FormatVersion 'v1')
+            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_SELF.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath ($prefix + '_SELF.COMPILED.txt'))) -FormatVersion 'v1')
         }
         catch {
             $selfSourcePassed = ($_.Exception.Message -eq 'COMPILED_OUTPUT_INCLUDED_AS_SOURCE')
@@ -500,7 +522,7 @@ function Invoke-UseCaseCompiledFileSelfTests {
 
         $collisionPassed = $false
         try {
-            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_COLLISION.COMPILED.txt') -SourceFiles @((Split-Path -Leaf $collisionSource)) -FormatVersion 'v1')
+            [void](New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_COLLISION.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $collisionSource))) -FormatVersion 'v1')
         }
         catch {
             $collisionPassed = ($_.Exception.Message -eq 'COMPILED_SEPARATOR_COLLISION')
@@ -508,8 +530,8 @@ function Invoke-UseCaseCompiledFileSelfTests {
         Add-CompilerTestResult -Name 'T10_SEPARATOR_COLLISION_FAILS' -Passed $collisionPassed -Detail 'Delimiter collision must fail closed.'
 
         Add-CompilerTestResult -Name 'T11_DOUBLE_EXECUTION_IDENTICAL_BYTES' -Passed ($record1.OutputSha256 -eq $record2.OutputSha256) -Detail 'Repeated compilation with same inputs must be byte-identical.'
-        Add-CompilerTestResult -Name 'T12_MARKDOWN_AND_MERMAID_PRESERVED' -Passed ((New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_MARKDOWN.COMPILED.txt') -SourceFiles @((Split-Path -Leaf $source3)) -FormatVersion 'v1').OutputText.Contains('```mermaid')) -Detail 'Markdown fences and Mermaid content must be preserved.'
-        Add-CompilerTestResult -Name 'T13_EMPTY_CONTENT_SUPPORTED' -Passed ((New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_EMPTY.COMPILED.txt') -SourceFiles @((Split-Path -Leaf $emptySource)) -FormatVersion 'v1').SourceManifest[0].SourceBytes -eq 0) -Detail 'Empty source files must compile correctly.'
+        Add-CompilerTestResult -Name 'T12_MARKDOWN_AND_MERMAID_PRESERVED' -Passed ((New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_MARKDOWN.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $source3))) -FormatVersion 'v1').OutputText.Contains('```mermaid')) -Detail 'Markdown fences and Mermaid content must be preserved.'
+        Add-CompilerTestResult -Name 'T13_EMPTY_CONTENT_SUPPORTED' -Passed ((New-UseCaseCompiledFile -PackageName 'TEST' -PackageType 'USECASE' -PackageVersion 'v1' -ProjectRoot $ScratchRoot -TargetDirectory $ScratchRoot -OutputFileName ($prefix + '_EMPTY.COMPILED.txt') -SourceEntries @((New-CompilerSourceEntry -SourcePath (Split-Path -Leaf $emptySource))) -FormatVersion 'v1').SourceManifest[0].SourceBytes -eq 0) -Detail 'Empty source files must compile correctly.'
         Add-CompilerTestResult -Name 'T14_PATHS_WITH_SPACES_SUPPORTED' -Passed ($record1.SourceFiles[1] -eq (Split-Path -Leaf $source2)) -Detail 'Source file names with spaces must work.'
         Add-CompilerTestResult -Name 'T15_REPARSEABLE_OUTPUT_STRUCTURE' -Passed ($record1.OutputText.Contains('05. INTEGRITY SUMMARY') -and $record1.OutputText.Contains('SOURCE_FILE_COUNT=2')) -Detail 'Compiled output must include structural sections for reparsing.'
     }

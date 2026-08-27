@@ -199,19 +199,29 @@ function Clear-GeneratedFiles {
         [Parameter(Mandatory = $true)]$PreserveFiles
     )
 
-    $preserve = @(@(Normalize-ToArray $PreserveFiles) + @("USECASE.MANIFEST.json", "SKILL_SET.MANIFEST.txt", "README.UPLOAD_THIS_USECASE.txt"))
+    $preserve = @(@(Normalize-ToArray $PreserveFiles))
 
-    $toRemove = @(
+    $toRemoveFiles = @(
         Get-ChildItem -Path $FolderPath -File -ErrorAction SilentlyContinue | Where-Object {
             $_.Name -notin $preserve
         }
     )
 
-    if (@($toRemove).Count -gt 0) {
-        @($toRemove) | Remove-Item -Force
+    $toRemoveDirs = @(
+        Get-ChildItem -Path $FolderPath -Directory -Force -ErrorAction SilentlyContinue | Where-Object {
+            $_.Name -notin $preserve
+        }
+    )
+
+    if (@($toRemoveFiles).Count -gt 0) {
+        @($toRemoveFiles) | Remove-Item -Force
     }
 
-    return @($toRemove)
+    if (@($toRemoveDirs).Count -gt 0) {
+        @($toRemoveDirs) | Remove-Item -Recurse -Force
+    }
+
+    return @(@($toRemoveFiles) + @($toRemoveDirs))
 }
 
 function Validate-UseCaseOutput {
@@ -273,6 +283,35 @@ function Get-UseCaseSourceDirectoryPath {
     return (Join-Path $SkillsRoot $sourceDirectory)
 }
 
+function Resolve-DirectSourceEntries {
+    param(
+        [Parameter(Mandatory = $true)]$Package
+    )
+
+    $entries = @(Normalize-ToArray $(if ($Package.PSObject.Properties['source_entries']) { $Package.source_entries } else { @() }))
+    if ($entries.Count -eq 0) {
+        throw "Direct source_entries missing"
+    }
+
+    $normalized = @()
+    foreach ($entry in @($entries)) {
+        $path = [string]$entry.source_path
+        $labels = @(Normalize-ToArray $entry.source_labels | ForEach-Object { [string]$_ })
+        if ([string]::IsNullOrWhiteSpace($path)) {
+            throw "Direct source entry path blank"
+        }
+        if ($labels.Count -eq 0) {
+            throw "Direct source entry labels missing: $path"
+        }
+        $normalized += [ordered]@{
+            source_path = $path
+            source_labels = @($labels)
+        }
+    }
+
+    return @($normalized)
+}
+
 function Get-UseCaseCopiedFiles {
     param(
         [Parameter(Mandatory = $true)]$UseCase
@@ -302,7 +341,7 @@ function Get-CompiledOutputContract {
         $formatVersion = [string]$Package.compiled_format_version
     }
 
-    $sourceOrder = @(Safe-GetArray $Package "compiled_source_order" | ForEach-Object { [string]$_ })
+    $sourceEntries = @(Safe-GetArray $Package "source_entries")
 
     $uploadPackageModel = ''
     if (Has-Property $Package "upload_package_model") {
@@ -316,8 +355,8 @@ function Get-CompiledOutputContract {
         if ([string]::IsNullOrWhiteSpace($formatVersion)) {
             throw "Compiled output contract missing format version for '$PackageName'"
         }
-        if (@($sourceOrder).Count -eq 0) {
-            throw "Compiled output contract missing source order for '$PackageName'"
+        if (@($sourceEntries).Count -eq 0) {
+            throw "Compiled output contract missing source_entries for '$PackageName'"
         }
     }
 
@@ -325,9 +364,29 @@ function Get-CompiledOutputContract {
         Enabled            = $enabled
         OutputFile         = $outputFile
         FormatVersion      = $formatVersion
-        SourceOrder        = @($sourceOrder)
+        SourceEntryCount   = @($sourceEntries).Count
         UploadPackageModel = $uploadPackageModel
     }
+}
+
+function Test-IsSingleCompiledFromSourceEntries {
+    param(
+        [Parameter(Mandatory = $true)]$Package,
+        [Parameter(Mandatory = $true)][string]$PackageName,
+        [Parameter(Mandatory = $true)][string]$PackageKind
+    )
+
+    $contract = Get-CompiledOutputContract -Package $Package -PackageName $PackageName
+    if ($contract.Enabled -ne $true) { return $false }
+    if ([string]$contract.UploadPackageModel -ne 'SINGLE_COMPILED_FILE') { return $false }
+    if ([int]$contract.SourceEntryCount -le 0) { return $false }
+    if ([string]::IsNullOrWhiteSpace([string]$contract.OutputFile)) { return $false }
+
+    if ($PackageKind -eq 'SUPPORT_PACKAGE') {
+        return ([string]$PackageName -eq '05.SKILLSMACHINE_UPDATE')
+    }
+
+    return $true
 }
 
 function Invoke-CompiledOutputBuild {
@@ -337,7 +396,8 @@ function Invoke-CompiledOutputBuild {
         [Parameter(Mandatory = $true)][string]$PackageType,
         [Parameter(Mandatory = $true)][string]$PackageVersion,
         [Parameter(Mandatory = $true)][string]$ProjectRoot,
-        [Parameter(Mandatory = $true)][string]$TargetDirectory
+        [Parameter(Mandatory = $true)][string]$TargetDirectory,
+        [Parameter(Mandatory = $true)][object[]]$DirectSourceEntries
     )
 
     $contract = Get-CompiledOutputContract -Package $Package -PackageName $PackageName
@@ -352,7 +412,7 @@ function Invoke-CompiledOutputBuild {
         -ProjectRoot $ProjectRoot `
         -TargetDirectory $TargetDirectory `
         -OutputFileName $contract.OutputFile `
-        -SourceFiles @($contract.SourceOrder) `
+        -SourceEntries @($DirectSourceEntries) `
         -FormatVersion $contract.FormatVersion `
         -WriteOutput)
 }
@@ -617,6 +677,7 @@ function Invoke-SupportPackagePreflight {
     $declaredDeliveryFiles = @(Safe-GetArray $SupportPackage "delivery_files")
     $bundleDefinitions = @(Safe-GetArray $SupportPackage "bundle_definitions")
     $compiledContract = Get-CompiledOutputContract -Package $SupportPackage -PackageName $name
+    $isSingleCompiledFromSourceEntries = Test-IsSingleCompiledFromSourceEntries -Package $SupportPackage -PackageName $name -PackageKind 'SUPPORT_PACKAGE'
 
     if ([string]::IsNullOrWhiteSpace($sourceDirectory)) {
         throw "Support package '$name' missing source_directory"
@@ -624,13 +685,6 @@ function Invoke-SupportPackagePreflight {
     if ([string]::IsNullOrWhiteSpace($targetDirectory)) {
         throw "Support package '$name' missing target_directory"
     }
-    if ($copiedFiles.Count -eq 0) {
-        throw "Support package '$name' missing copied_files"
-    }
-    if ($bundleDefinitions.Count -eq 0) {
-        throw "Support package '$name' missing bundle_definitions"
-    }
-
     $sourceDir = Join-Path $SkillsRoot $sourceDirectory
     $targetDir = Join-Path $SkillsRoot $targetDirectory
     if (!(Test-Path -LiteralPath $sourceDir -PathType Container)) {
@@ -640,38 +694,57 @@ function Invoke-SupportPackagePreflight {
         throw "Support package target directory missing: $targetDir"
     }
 
-    foreach ($fileName in @($copiedFiles)) {
-        $sourcePath = Join-Path $sourceDir ([string]$fileName)
-        if (!(Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
-            throw "Support package copied file missing: $sourcePath"
+    if ($isSingleCompiledFromSourceEntries) {
+        $resolvedSourceEntries = @(Resolve-DirectSourceEntries -Package $SupportPackage)
+        foreach ($entry in @($resolvedSourceEntries)) {
+            $sourcePath = Join-Path $SkillsRoot (([string]$entry.source_path) -replace '/', '\\')
+            if (!(Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+                throw "Support package direct source entry missing: $sourcePath"
+            }
         }
     }
 
-    $expectedDeliveryFiles = @(
-        @($copiedFiles | ForEach-Object { [string]$_ }) +
-        @($bundleDefinitions | ForEach-Object { [string]$_.output_file }) +
-        @($(if ($compiledContract.Enabled) { [string]$compiledContract.OutputFile } else { @() })) +
-        @("SUPPORT_PACKAGE.MANIFEST.json")
-    ) | Sort-Object -Unique
-
-    if (@($expectedDeliveryFiles).Count -gt $MaxDeliveryFiles) {
-        throw "Support package '$name' exceeds max delivery files ($(@($expectedDeliveryFiles).Count) > $MaxDeliveryFiles)"
-    }
-
-    $declaredSorted = @($declaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
-    if (($expectedDeliveryFiles -join '|') -ne ($declaredSorted -join '|')) {
-        throw "Support package '$name' delivery_files contract mismatch"
-    }
-
-    foreach ($bundleDef in @($bundleDefinitions)) {
-        $sourceFiles = @(Normalize-ToArray $bundleDef.source_files)
-        if ($sourceFiles.Count -eq 0) {
-            throw "Support package '$name' bundle '$($bundleDef.name)' missing source_files"
+    else {
+        if ($copiedFiles.Count -eq 0) {
+            throw "Support package '$name' missing copied_files"
+        }
+        if ($bundleDefinitions.Count -eq 0) {
+            throw "Support package '$name' missing bundle_definitions"
         }
 
-        foreach ($sourceFile in @($sourceFiles)) {
-            [void](Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
-            [void](Get-TrackedSourceInfo -VersionRegistry $VersionRegistry -FileName ([string]$sourceFile))
+        foreach ($fileName in @($copiedFiles)) {
+            $sourcePath = Join-Path $sourceDir ([string]$fileName)
+            if (!(Test-Path -LiteralPath $sourcePath -PathType Leaf)) {
+                throw "Support package copied file missing: $sourcePath"
+            }
+        }
+
+        $expectedDeliveryFiles = @(
+            @($copiedFiles | ForEach-Object { [string]$_ }) +
+            @($bundleDefinitions | ForEach-Object { [string]$_.output_file }) +
+            @($(if ($compiledContract.Enabled) { [string]$compiledContract.OutputFile } else { @() })) +
+            @("SUPPORT_PACKAGE.MANIFEST.json")
+        ) | Sort-Object -Unique
+
+        if (@($expectedDeliveryFiles).Count -gt $MaxDeliveryFiles) {
+            throw "Support package '$name' exceeds max delivery files ($(@($expectedDeliveryFiles).Count) > $MaxDeliveryFiles)"
+        }
+
+        $declaredSorted = @($declaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+        if (($expectedDeliveryFiles -join '|') -ne ($declaredSorted -join '|')) {
+            throw "Support package '$name' delivery_files contract mismatch"
+        }
+
+        foreach ($bundleDef in @($bundleDefinitions)) {
+            $sourceFiles = @(Normalize-ToArray $bundleDef.source_files)
+            if ($sourceFiles.Count -eq 0) {
+                throw "Support package '$name' bundle '$($bundleDef.name)' missing source_files"
+            }
+
+            foreach ($sourceFile in @($sourceFiles)) {
+                [void](Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
+                [void](Get-TrackedSourceInfo -VersionRegistry $VersionRegistry -FileName ([string]$sourceFile))
+            }
         }
     }
 }
@@ -799,6 +872,8 @@ function Invoke-BuildPreflight {
         $targetDir = Join-Path $UseCaseRoot $useCaseName
         $sourceDir = Get-UseCaseSourceDirectoryPath -UseCase $uc -SkillsRoot $SkillsRoot
         $copiedFiles = @(Get-UseCaseCopiedFiles -UseCase $uc)
+        $compiledContract = Get-CompiledOutputContract -Package $uc -PackageName $useCaseName
+        $isSingleCompiledFromSourceEntries = Test-IsSingleCompiledFromSourceEntries -Package $uc -PackageName $useCaseName -PackageKind 'USECASE'
         if (!(Test-Path -LiteralPath $targetDir -PathType Container)) {
             throw "PREFLIGHT: carpeta de use case no existe: $targetDir"
         }
@@ -812,14 +887,29 @@ function Invoke-BuildPreflight {
                 throw "PREFLIGHT: source_directory faltante en '$useCaseName': $sourceDir"
             }
 
-            if ($copiedFiles.Count -eq 0) {
-                throw "PREFLIGHT: copied_files faltante en '$useCaseName'"
-            }
+            if ($isSingleCompiledFromSourceEntries) {
+                if ([string]::IsNullOrWhiteSpace([string]$compiledContract.OutputFile)) {
+                    throw "PREFLIGHT: compiled_output_file faltante en '$useCaseName'"
+                }
 
-            foreach ($copiedFile in @($copiedFiles)) {
-                $copiedSourcePath = Join-Path $sourceDir $copiedFile
-                if (!(Test-Path -LiteralPath $copiedSourcePath -PathType Leaf)) {
-                    throw "PREFLIGHT: copied_file faltante en '$useCaseName': $copiedSourcePath"
+                $resolvedSourceEntries = @(Resolve-DirectSourceEntries -Package $uc)
+                foreach ($entry in @($resolvedSourceEntries)) {
+                    $directSourcePath = Join-Path $SkillsRoot (([string]$entry.source_path) -replace '/', '\')
+                    if (!(Test-Path -LiteralPath $directSourcePath -PathType Leaf)) {
+                        throw "PREFLIGHT: source_entry faltante en '$useCaseName': $directSourcePath"
+                    }
+                }
+            }
+            else {
+                if ($copiedFiles.Count -eq 0) {
+                    throw "PREFLIGHT: copied_files faltante en '$useCaseName'"
+                }
+
+                foreach ($copiedFile in @($copiedFiles)) {
+                    $copiedSourcePath = Join-Path $sourceDir $copiedFile
+                    if (!(Test-Path -LiteralPath $copiedSourcePath -PathType Leaf)) {
+                        throw "PREFLIGHT: copied_file faltante en '$useCaseName': $copiedSourcePath"
+                    }
                 }
             }
         }
@@ -861,12 +951,22 @@ function Invoke-BuildPreflight {
             continue
         }
 
+        $supportPackageName = [string]$sp.name
+        $isSingleCompiledFromSourceEntries = Test-IsSingleCompiledFromSourceEntries -Package $sp -PackageName $supportPackageName -PackageKind 'SUPPORT_PACKAGE'
+        $maxDeliveryFiles = 0
+        if ($Registry.build_policy.PSObject.Properties['max_delivery_files_per_usecase']) {
+            $maxDeliveryFiles = [int]$Registry.build_policy.max_delivery_files_per_usecase
+        }
+        elseif ($isSingleCompiledFromSourceEntries -ne $true) {
+            throw "PREFLIGHT: build_policy.max_delivery_files_per_usecase faltante para soporte legacy '$supportPackageName'"
+        }
+
         Invoke-SupportPackagePreflight `
             -SupportPackage $sp `
             -SkillsRoot $SkillsRoot `
             -VersionRegistry $VersionRegistry `
             -ExcludedRoots $ExcludedRoots `
-            -MaxDeliveryFiles ([int]$Registry.build_policy.max_delivery_files_per_usecase)
+            -MaxDeliveryFiles $maxDeliveryFiles
     }
 }
 
@@ -946,47 +1046,24 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             throw "Carpeta de use case no existe: $TargetDir"
         }
 
-        if ($registry.build_policy.generate_bundles -ne $true) {
-            throw "build_policy.generate_bundles debe ser true en BUILD v3"
+        if ([string]$registry.build_policy.output_model -ne 'SINGLE_COMPILED_FILE') {
+            throw "build_policy.output_model debe ser SINGLE_COMPILED_FILE"
         }
 
-        if (@($BundleDefinitions).Count -eq 0) {
-            throw "Use case '$UseCaseName' no define bundle_definitions"
+        if (-not $uc.PSObject.Properties['source_entries'] -or @($uc.source_entries).Count -eq 0) {
+            throw "Use case '$UseCaseName' no define source_entries"
         }
 
-        foreach ($p in @($PromptFiles)) {
-            if (($null -ne $SourceDir) -and ([string]$p -in $CopiedFiles)) {
-                if (!(Test-Path -LiteralPath (Join-Path $SourceDir ([string]$p)) -PathType Leaf)) {
-                    throw "Prompt source faltante en use case: $p"
-                }
-            }
-            elseif (!(Test-Path -LiteralPath (Join-Path $TargetDir $p) -PathType Leaf)) {
-                throw "Prompt faltante en use case: $p"
-            }
-        }
-
-        $preserveFiles = @($PromptFiles)
-        # Preserve current delivery candidates so idempotent comparison can reuse existing files.
-        $preserveFiles += @($MenuFiles | ForEach-Object { Split-Path -Leaf ([string]$_) })
-        $preserveFiles += @($BundleDefinitions | ForEach-Object { [string]$_.output_file })
+        $preserveFiles = @()
         if ($CompiledContract.Enabled) { $preserveFiles += [string]$CompiledContract.OutputFile }
 
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
-            # OPTION_B_MERGE_PRESERVE_FOR_CLEAR
-            # Ensure Clear-GeneratedFiles preserves UC04 rich artifacts (avoid deleting SKILL.md etc.).
             $preserveFiles = @($preserveFiles)
-            if ($UC_PreserveFiles -and @($UC_PreserveFiles).Count -gt 0) { $preserveFiles += @($UC_PreserveFiles) }
-            if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) { $preserveFiles += @($UC_DeliveryFilesExtra) }
             $preserveFiles = @($preserveFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
             $txn = Start-UseCaseTransactionBackup -UseCaseName $UseCaseName -TargetDir $TargetDir -PreserveFiles $preserveFiles -TransactionRoot $BuildTxnRoot
             $txnBackupRoot = [string]$txn.BackupRoot
             $txnBackedUpFiles = @(Normalize-ToArray $txn.BackedUpFiles)
             $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
-            # OPTION_B_UC04_PRESERVE_EXCLUDE
-            # Defensive: if preserve_files exist, do not count/remove them as cleanup targets.
-            if ($UC_PreserveFiles -and @($UC_PreserveFiles).Count -gt 0 -and $removed) {
-                $removed = @($removed | Where-Object { $UC_PreserveFiles -notcontains $_ })
-            }
             Write-Host "LIMPIEZA: archivos eliminados = $(@($removed).Count)"
             foreach ($f in @($removed)) {
                 Write-Host ("  - removed: {0}" -f $f.Name)
@@ -994,117 +1071,7 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
         }
 
         $deliveryFiles = @()
-        # Keep optional UC extras from registry. Under StrictMode these properties may be absent,
-        # so Safe-GetArray normalizes to empty arrays without throwing.
-        $PreserveFiles = @(Safe-GetArray $uc "preserve_files")
-        $DeliveryFilesExtra = @(Safe-GetArray $uc "delivery_files_extra")
-        # OPTION_B_UC04_DELIVERY_EXTRA
-        # If registry provides delivery_files_extra, include them as delivery artifacts (rich usecase packaging).
-        if ($DeliveryFilesExtra -and @($DeliveryFilesExtra).Count -gt 0) {
-            $deliveryFiles += @($DeliveryFilesExtra)
-        }
         $bundleManifest = @()
-
-        if ($null -ne $SourceDir) {
-            foreach ($copiedFile in @($CopiedFiles)) {
-                $sourcePath = Join-Path $SourceDir $copiedFile
-                $targetPath = Join-Path $TargetDir $copiedFile
-                $targetParent = Split-Path -Parent $targetPath
-                if (-not (Test-Path -LiteralPath $targetParent -PathType Container)) {
-                    New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
-                }
-                Copy-Item -LiteralPath $sourcePath -Destination $targetPath -Force
-
-                if (!(Test-Path -LiteralPath $targetPath -PathType Leaf)) {
-                    throw "No se pudo copiar copied_file '$copiedFile' a '$targetPath'"
-                }
-
-                Write-Host ("COPIED SOURCE: {0} -> {1}" -f $sourcePath, $copiedFile)
-            }
-        }
-
-        foreach ($menuFile in @($MenuFiles)) {
-            $menuMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName $menuFile -ExcludedRoots $ExcludedRoots)
-            $menuSource = $menuMatches[0]
-                        # MB-GRC-020F_MENU_DESTINATION_LEAF
-            # Menu files may be declared as repo-relative paths such as:
-            #   SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt
-            # but the usecase delivery expects the local leaf file under TargetDir.
-            $menuDestName = Split-Path -Leaf ([string]$menuFile)
-            $menuDest = Join-Path $TargetDir $menuDestName
-            Copy-Item -Path $menuSource.FullName -Destination $menuDest -Force
-
-            if (!(Test-Path -LiteralPath $menuDest -PathType Leaf)) {
-                throw "No se pudo copiar menu_file '$menuFile' a '$menuDest'"
-            }
-
-            Write-Host ("COPIED MENU: {0} -> {1}" -f $menuFile, $menuDestName)
-            $deliveryFiles += $menuDestName
-        }
-
-        foreach ($bundleDef in @($BundleDefinitions)) {
-            $bundleName = [string]$bundleDef.name
-            $bundleOutput = [string]$bundleDef.output_file
-            $bundleSourceFiles = @(Normalize-ToArray $bundleDef.source_files)
-
-            if ([string]::IsNullOrWhiteSpace($bundleName) -or [string]::IsNullOrWhiteSpace($bundleOutput)) {
-                throw "bundle_definitions inválido en '$UseCaseName' (name/output_file requeridos)"
-            }
-
-            if (@($bundleSourceFiles).Count -eq 0) {
-                throw "Bundle '$bundleName' en '$UseCaseName' no define source_files"
-            }
-
-            $sourceEntries = @()
-
-            foreach ($sourceFile in @($bundleSourceFiles)) {
-                $sourceMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
-                $source = $sourceMatches[0]
-                $tracked = Get-TrackedSourceInfo -VersionRegistry $versionRegistry -FileName ([string]$sourceFile)
-                $sourceHash = Get-Sha256Safe -Path $source.FullName
-
-                $sourceEntries += [ordered]@{
-                    name = [string]$sourceFile
-                    source_path = $source.FullName
-                    version = [string]$tracked.version
-                    source_sha256 = [string]$sourceHash
-                }
-            }
-
-            $bundlePath = Join-Path $TargetDir $bundleOutput
-            New-BundleFile -BundlePath $bundlePath -BundleName $bundleName -SourceEntries $sourceEntries
-
-            if (!(Test-Path -LiteralPath $bundlePath -PathType Leaf)) {
-                throw "Bundle no fue generado: $bundlePath"
-            }
-
-            $bundleInfo = Get-Item -LiteralPath $bundlePath
-            $bundleSizeKb = [math]::Round(([double]$bundleInfo.Length / 1KB), 2)
-
-            if ($bundleSizeKb -gt [double]$registry.build_policy.max_bundle_size_kb) {
-                throw "Bundle '$bundleOutput' excede max_bundle_size_kb ($bundleSizeKb KB > $($registry.build_policy.max_bundle_size_kb) KB)"
-            }
-
-            $bundleHash = Get-Sha256Safe -Path $bundlePath
-
-            Write-Host ("BUNDLE GENERATED: {0} ({1} KB)" -f $bundleOutput, $bundleSizeKb)
-
-            $bundleManifest += [ordered]@{
-                bundle_name = $bundleName
-                delivery_file = $bundleOutput
-                delivery_path = $bundlePath
-                delivery_size_bytes = [int64]$bundleInfo.Length
-                delivery_size_kb = [double]$bundleSizeKb
-                delivery_sha256 = [string]$bundleHash
-                source_files = @($sourceEntries)
-            }
-
-            $deliveryFiles += $bundleOutput
-        }
-
-        foreach ($p in @($PromptFiles)) {
-            $deliveryFiles += $p
-        }
 
         $compiledOutputResult = Invoke-CompiledOutputBuild `
             -Package $uc `
@@ -1112,66 +1079,17 @@ foreach ($uc in @(Normalize-ToArray $registry.usecases)) {
             -PackageType "USECASE" `
             -PackageVersion $UseCaseVersion `
             -ProjectRoot $SkillsRoot `
-            -TargetDirectory $TargetDir
+            -TargetDirectory $TargetDir `
+            -DirectSourceEntries (Resolve-DirectSourceEntries -Package $uc)
         if ($null -ne $compiledOutputResult) {
             $deliveryFiles += [string]$compiledOutputResult.OutputFileName
         }
-
-        # OPTION_B_UC04_DELIVERY_EXTRA_BEFORE_FINALIZE
-        # Ensure delivery_files_extra survive later rebuild/finalize of $deliveryFiles.
-        if ($UC_DeliveryFilesExtra -and @($UC_DeliveryFilesExtra).Count -gt 0) {
-            $deliveryFiles += @($UC_DeliveryFilesExtra)
-        }
         $deliveryFiles = @($deliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
 
-        if (@($deliveryFiles).Count -gt [int]$registry.build_policy.max_delivery_files_per_usecase) {
-            throw "Use case '$UseCaseName' excede max_delivery_files_per_usecase ($(@($deliveryFiles).Count) > $($registry.build_policy.max_delivery_files_per_usecase))"
-        }
-
-        $validationMissing = @(Validate-UseCaseOutput -TargetDir $TargetDir -PromptFiles $PromptFiles -DeliveryFiles $deliveryFiles)
+        $validationMissing = @(Validate-UseCaseOutput -TargetDir $TargetDir -PromptFiles @() -DeliveryFiles $deliveryFiles)
         if (@($validationMissing).Count -gt 0) {
             throw "Validación de salida falló en '$UseCaseName'. Faltantes: $($validationMissing -join ', ')"
         }
-
-        $manifest = [ordered]@{
-            usecase = $UseCaseName
-            usecase_version = $UseCaseVersion
-            generated_at = (Get-Date).ToString("yyyy-MM-dd HH:mm:ss")
-            source_root = $SkillsRoot
-            delivery_files = @($deliveryFiles)
-            upload_package_model = [string]$uc.upload_package_model
-            upload_package_root = $TargetDir
-            upload_instruction_file = "README.UPLOAD_THIS_USECASE.txt"
-            upload_package_scope = "PRIMARY_SINGLE_FILE_WITH_COEXISTING_LEGACY_OUTPUTS"
-            folder_upload_required = $false
-            primary_upload_file = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputFileName } else { "README.UPLOAD_THIS_USECASE.txt" })
-            compiled_output_enabled = ($null -ne $compiledOutputResult)
-            compiled_output_file = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputFileName } else { "" })
-            compiled_output_sha256 = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.OutputSha256 } else { "" })
-            compiled_source_order = $(if ($null -ne $compiledOutputResult) { @($compiledOutputResult.SourceFiles) } else { @() })
-            compiled_source_count = $(if ($null -ne $compiledOutputResult) { [int]$compiledOutputResult.SourceCount } else { 0 })
-            compiled_format_version = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.FormatVersion } else { "" })
-            compiled_content_policy = $(if ($null -ne $compiledOutputResult) { [string]$compiledOutputResult.ContentPolicy } else { "" })
-            delivery_files_scope = "GENERATED_DELIVERY_FILES_ONLY"
-            delivery_files_note = "delivery_files lists generated/copied delivery artifacts. The primary IA upload unit is the compiled single-file output while legacy package files continue to coexist."
-            # MB-GRC-030E_UPLOAD_PACKAGE_MANIFEST_SEMANTICS
-            bundles = @($bundleManifest)
-            validation = [ordered]@{
-                missing_files = @($validationMissing)
-                delivery_file_count = @($deliveryFiles).Count
-                max_delivery_files_allowed = [int]$registry.build_policy.max_delivery_files_per_usecase
-                status = "OK"
-            }
-            generated_output_only = $true
-            do_not_edit_manually = $true
-            source_of_truth = "90.USECASE/BUILD.ps1 + source registries/manifests"
-            regeneration_contract = "Re-run 90.USECASE/BUILD.ps1 from C:\01. GitHub\Skills"
-        }
-
-        $manifestPath = Join-Path $TargetDir "USECASE.MANIFEST.json"
-        $manifest = Write-ManifestIfChanged -ManifestPath $manifestPath -ManifestObject $manifest
-
-        Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -DeliveryFiles $deliveryFiles -TargetDir $TargetDir
 
         $results += [pscustomobject]@{
             usecase = $UseCaseName
@@ -1216,9 +1134,8 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
     $SupportPackageName = [string]$sp.name
     $SourceDir = Join-Path $SkillsRoot ([string]$sp.source_directory)
     $TargetDir = Join-Path $SkillsRoot ([string]$sp.target_directory)
-    $CopiedFiles = @(Safe-GetArray $sp "copied_files")
-    $DeclaredDeliveryFiles = @(Safe-GetArray $sp "delivery_files")
-    $BundleDefinitions = @(Safe-GetArray $sp "bundle_definitions")
+    $DeclaredDeliveryFiles = @()
+    $BundleDefinitions = @()
     $CompiledContract = Get-CompiledOutputContract -Package $sp -PackageName $SupportPackageName
 
     Write-Host ""
@@ -1228,11 +1145,9 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
 
     try {
         $preserveFiles = @(
-            @($CopiedFiles | ForEach-Object { [string]$_ }) +
-            @($BundleDefinitions | ForEach-Object { [string]$_.output_file }) +
-            @($(if ($CompiledContract.Enabled) { [string]$CompiledContract.OutputFile } else { @() })) +
-            @("SUPPORT_PACKAGE.MANIFEST.json")
+            @($(if ($CompiledContract.Enabled) { [string]$CompiledContract.OutputFile } else { @() }))
         ) | Sort-Object -Unique
+        $bundleManifest = @()
 
         if ($registry.build_policy.clean_generated_files_first -eq $true) {
             $removed = @(Clear-GeneratedFiles -FolderPath $TargetDir -PreserveFiles $preserveFiles)
@@ -1242,83 +1157,20 @@ foreach ($sp in @(Normalize-ToArray $registry.support_packages)) {
             }
         }
 
-        foreach ($fileName in @($CopiedFiles)) {
-            $sourcePath = Join-Path $SourceDir ([string]$fileName)
-            $targetPath = Join-Path $TargetDir ([string]$fileName)
-            $targetParent = Split-Path -Parent $targetPath
-            if (-not (Test-Path -LiteralPath $targetParent -PathType Container)) {
-                New-Item -ItemType Directory -Path $targetParent -Force | Out-Null
-            }
-            Copy-Item -LiteralPath $sourcePath -Destination $targetPath -Force
-            Write-Host ("COPIED FILE: {0}" -f $fileName)
-        }
-
-        $bundleManifest = @()
-        foreach ($bundleDef in @($BundleDefinitions)) {
-            $bundleName = [string]$bundleDef.name
-            $bundleOutput = [string]$bundleDef.output_file
-            $bundleSourceFiles = @(Normalize-ToArray $bundleDef.source_files)
-            $sourceEntries = @()
-
-            foreach ($sourceFile in @($bundleSourceFiles)) {
-                $sourceMatches = @(Find-CanonicalFile -Root $SkillsRoot -FileName ([string]$sourceFile) -ExcludedRoots $ExcludedRoots)
-                $source = $sourceMatches[0]
-                $tracked = Get-TrackedSourceInfo -VersionRegistry $versionRegistry -FileName ([string]$sourceFile)
-                $sourceHash = Get-Sha256Safe -Path $source.FullName
-
-                $sourceEntries += [ordered]@{
-                    name = [string]$sourceFile
-                    source_path = $source.FullName
-                    version = [string]$tracked.version
-                    source_sha256 = [string]$sourceHash
-                }
-            }
-
-            $bundlePath = Join-Path $TargetDir $bundleOutput
-            New-BundleFile -BundlePath $bundlePath -BundleName $bundleName -SourceEntries $sourceEntries
-            $bundleInfo = Get-Item -LiteralPath $bundlePath
-            $bundleSizeKb = [math]::Round(([double]$bundleInfo.Length / 1KB), 2)
-            if ($bundleSizeKb -gt [double]$registry.build_policy.max_bundle_size_kb) {
-                throw "Bundle '$bundleOutput' excede max_bundle_size_kb ($bundleSizeKb KB > $($registry.build_policy.max_bundle_size_kb) KB)"
-            }
-
-            $bundleManifest += [ordered]@{
-                bundle_name = $bundleName
-                delivery_file = $bundleOutput
-                delivery_path = $bundlePath
-                delivery_size_bytes = [int64]$bundleInfo.Length
-                delivery_size_kb = [double]$bundleSizeKb
-                delivery_sha256 = (Get-Sha256Safe -Path $bundlePath)
-                source_files = @($sourceEntries)
-            }
-
-            Write-Host ("BUNDLE GENERATED: {0} ({1} KB)" -f $bundleOutput, $bundleSizeKb)
-        }
-
         $compiledOutputResult = Invoke-CompiledOutputBuild `
             -Package $sp `
             -PackageName $SupportPackageName `
             -PackageType "SUPPORT_PACKAGE" `
             -PackageVersion ([string]$sp.lifecycle_status) `
             -ProjectRoot $SkillsRoot `
-            -TargetDirectory $TargetDir
+            -TargetDirectory $TargetDir `
+            -DirectSourceEntries (Resolve-DirectSourceEntries -Package $sp)
 
-        $deliveryFiles = @($DeclaredDeliveryFiles | ForEach-Object { [string]$_ } | Sort-Object -Unique)
+        $deliveryFiles = @([string]$compiledOutputResult.OutputFileName)
         $validationMissing = @(Validate-SupportPackageOutput -TargetDir $TargetDir -DeliveryFiles $deliveryFiles)
         if (@($validationMissing).Count -gt 0) {
             throw "Validación de salida falló en '$SupportPackageName'. Faltantes: $($validationMissing -join ', ')"
         }
-
-        $manifestPath = Join-Path $TargetDir "SUPPORT_PACKAGE.MANIFEST.json"
-        $manifest = Build-SupportPackageManifest `
-            -SupportPackage $sp `
-            -SkillsRoot $SkillsRoot `
-            -TargetDir $TargetDir `
-            -DeliveryFiles $deliveryFiles `
-            -BundleManifest $bundleManifest `
-            -CompiledOutputResult $compiledOutputResult
-        $manifest = Write-ManifestIfChanged -ManifestPath $manifestPath -ManifestObject $manifest
-        Validate-ManifestIntegrity -ManifestPath $manifestPath -ManifestObject $manifest -DeliveryFiles $deliveryFiles -TargetDir $TargetDir
 
         $results += [pscustomobject]@{
             usecase = $SupportPackageName

@@ -8,78 +8,44 @@
   ],
   "build_policy": {
     "clean_generated_files_first": true,
-    "preserve_prompt_files": true,
-    "generate_manifest": true,
     "fail_on_missing_file": true,
     "fail_on_duplicate_file": true,
-    "generate_bundles": true,
-    "max_delivery_files_per_usecase": 9,
-    "max_bundle_size_kb": 1024
+    "output_model": "SINGLE_COMPILED_FILE",
+    "target_subdirectories_allowed": false,
+    "target_other_files_allowed": false,
+    "direct_source_entries_required": true,
+    "embedded_manifest_required": true
   },
   "usecases": [
     {
       "name": "01.NEW_PROJECT",
       "version": "v3.0-BUNDLES",
       "description": "Bootstrap de proyecto nuevo con continuidad humana e IA desde el día 0.",
-      "copied_files": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "SKILL_SET.MANIFEST.txt",
-        "PROMPT.NEW_PROJECT.txt"
-      ],
-      "prompt_files": [
-        "PROMPT.NEW_PROJECT.txt"
-      ],
-      "menu_files": [
-        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
-      ],
-      "bundle_definitions": [
-        {
-          "name": "CORE",
-          "output_file": "00.BUNDLE.CORE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-            "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt"
-          ]
-        },
-        {
-          "name": "CONTINUITY",
-          "output_file": "01.BUNDLE.CONTINUITY.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
-          ]
-        },
-        {
-          "name": "GOVERNANCE",
-          "output_file": "02.BUNDLE.GOVERNANCE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-            "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt",
-            "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
-            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-            "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
-            "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
-          ]
-        }
-      ],
       "compiled_output_enabled": true,
       "compiled_output_file": "USECASE.01.NEW_PROJECT.COMPILED.txt",
-      "compiled_format_version": "v1",
-      "compiled_source_order": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "PROMPT.NEW_PROJECT.txt",
-        "SKILL_SET.MANIFEST.txt",
-        "00.SKILL.MENU.ACTIVE.txt",
-        "00.BUNDLE.CORE.txt",
-        "01.BUNDLE.CONTINUITY.txt",
-        "02.BUNDLE.GOVERNANCE.txt"
+      "compiled_format_version": "v2",
+      "source_entries": [
+        { "source_path": "SyS/A_Tools/UseCaseSources/01.NewProject/README.UPLOAD_THIS_USECASE.txt", "source_labels": ["README.UPLOAD_THIS_USECASE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/01.NewProject/PROMPT.NEW_PROJECT.txt", "source_labels": ["PROMPT.NEW_PROJECT.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/01.NewProject/SKILL_SET.MANIFEST.txt", "source_labels": ["SKILL_SET.MANIFEST.txt"] },
+        { "source_path": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt", "source_labels": ["SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt","00.SKILL.MENU.ACTIVE.txt"] },
+        { "source_path": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/20.SKILL.PROJECT_BOOTSTRAP_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt", "source_labels": ["GOVERNANCE"] }
       ],
       "upload_package_model": "SINGLE_COMPILED_FILE",
       "source_directory": "SyS/A_Tools/UseCaseSources/01.NewProject"
@@ -88,65 +54,30 @@
       "name": "02.SESSION_CLOSE",
       "version": "v3.0-BUNDLES",
       "description": "Cierre de sesión, continuidad humana operacional y actualización de artefactos.",
-      "copied_files": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
-        "SKILL_SET.MANIFEST.txt",
-        "PROMPT.SESSION_CLOSE.txt"
-      ],
-      "prompt_files": [
-        "PROMPT.SESSION_CLOSE.txt"
-      ],
-      "menu_files": [
-        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
-      ],
-      "bundle_definitions": [
-        {
-          "name": "CORE",
-          "output_file": "00.BUNDLE.CORE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt"
-          ]
-        },
-        {
-          "name": "CONTINUITY",
-          "output_file": "01.BUNDLE.CONTINUITY.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
-          ]
-        },
-        {
-          "name": "GOVERNANCE",
-          "output_file": "02.BUNDLE.GOVERNANCE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt",
-            "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt",
-            "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt",
-            "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
-          ]
-        }
-      ],
       "compiled_output_enabled": true,
       "compiled_output_file": "USECASE.02.SESSION_CLOSE.COMPILED.txt",
-      "compiled_format_version": "v1",
-      "compiled_source_order": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "PROMPT.SESSION_CLOSE.txt",
-        "RUNBOOK.SESSION_CLOSE.HARDENED.txt",
-        "SKILL_SET.MANIFEST.txt",
-        "00.SKILL.MENU.ACTIVE.txt",
-        "00.BUNDLE.CORE.txt",
-        "01.BUNDLE.CONTINUITY.txt",
-        "02.BUNDLE.GOVERNANCE.txt"
+      "compiled_format_version": "v2",
+      "source_entries": [
+        { "source_path": "SyS/A_Tools/UseCaseSources/02.SessionClose/README.UPLOAD_THIS_USECASE.txt", "source_labels": ["README.UPLOAD_THIS_USECASE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/02.SessionClose/PROMPT.SESSION_CLOSE.txt", "source_labels": ["PROMPT.SESSION_CLOSE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/02.SessionClose/RUNBOOK.SESSION_CLOSE.HARDENED.txt", "source_labels": ["RUNBOOK.SESSION_CLOSE.HARDENED.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/02.SessionClose/SKILL_SET.MANIFEST.txt", "source_labels": ["SKILL_SET.MANIFEST.txt"] },
+        { "source_path": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt", "source_labels": ["SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt","00.SKILL.MENU.ACTIVE.txt"] },
+        { "source_path": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.SCRIPT_EXECUTION_STAGING.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt", "source_labels": ["GOVERNANCE"] }
       ],
       "upload_package_model": "SINGLE_COMPILED_FILE",
       "source_directory": "SyS/A_Tools/UseCaseSources/02.SessionClose"
@@ -154,136 +85,66 @@
     {
       "name": "03.SESSION_CONTINUE",
       "version": "v3.0-BUNDLES",
-      "description": "Continuidad de sesión para retomar ejecución con contexto operativo vigente.",
-      "source_directory": "SyS/A_Tools/UseCaseSources/03.SessionContinue",
-      "copied_files": [
-        "PROMPT.SESSION_CONTINUE.txt",
-        "README.UPLOAD_THIS_USECASE.txt",
-        "SKILL_SET.MANIFEST.txt"
-      ],
-      "prompt_files": [
-        "PROMPT.SESSION_CONTINUE.txt"
-      ],
-      "menu_files": [
-        "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt"
-      ],
-      "bundle_definitions": [
-        {
-          "name": "CORE",
-          "output_file": "00.BUNDLE.CORE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-            "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt"
-          ]
-        },
-        {
-          "name": "CONTINUITY",
-          "output_file": "01.BUNDLE.CONTINUITY.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
-          ]
-        },
-        {
-          "name": "GOVERNANCE",
-          "output_file": "02.BUNDLE.GOVERNANCE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-            "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
-          ]
-        }
-      ],
+      "description": "Continuar un proyecto ya iniciado.",
       "compiled_output_enabled": true,
       "compiled_output_file": "USECASE.03.SESSION_CONTINUE.COMPILED.txt",
-      "compiled_format_version": "v1",
-      "compiled_source_order": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "PROMPT.SESSION_CONTINUE.txt",
-        "SKILL_SET.MANIFEST.txt",
-        "00.SKILL.MENU.ACTIVE.txt",
-        "00.BUNDLE.CORE.txt",
-        "01.BUNDLE.CONTINUITY.txt",
-        "02.BUNDLE.GOVERNANCE.txt"
+      "compiled_format_version": "v2",
+      "source_entries": [
+        { "source_path": "SyS/A_Tools/UseCaseSources/03.SessionContinue/README.UPLOAD_THIS_USECASE.txt", "source_labels": ["README.UPLOAD_THIS_USECASE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/03.SessionContinue/PROMPT.SESSION_CONTINUE.txt", "source_labels": ["PROMPT.SESSION_CONTINUE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/03.SessionContinue/SKILL_SET.MANIFEST.txt", "source_labels": ["SKILL_SET.MANIFEST.txt"] },
+        { "source_path": "SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt", "source_labels": ["SkillsLake/00.MENU/00.SKILL.MENU.ACTIVE.txt","00.SKILL.MENU.ACTIVE.txt"] },
+        { "source_path": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt", "source_labels": ["GOVERNANCE"] }
       ],
-      "upload_package_model": "SINGLE_COMPILED_FILE"
+      "upload_package_model": "SINGLE_COMPILED_FILE",
+      "source_directory": "SyS/A_Tools/UseCaseSources/03.SessionContinue"
     },
     {
       "name": "04.REPOSITORY_STRUCTURE_REPAIR",
       "version": "v3.0-BUNDLES",
-      "source_directory": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair",
-      "copied_files": [
-        "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
-        "README.EXECUTION.txt",
-        "README.UPLOAD_THIS_USECASE.txt",
-        "SKILL.md",
-        "SKILL_SET.MANIFEST.txt",
-        "EXAMPLES/EXAMPLE.REPO_REPAIR.txt"
-      ],
-      "prompt_files": [],
-      "bundle_definitions": [
-        {
-          "name": "CORE",
-          "output_file": "00.BUNDLE.CORE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/06.SKILL.WBS.txt",
-            "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt",
-            "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt",
-            "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt"
-          ]
-        },
-        {
-          "name": "CONTINUITY",
-          "output_file": "01.BUNDLE.CONTINUITY.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/10.SKILL.BATON.txt",
-            "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt",
-            "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt"
-          ]
-        },
-        {
-          "name": "GOVERNANCE",
-          "output_file": "02.BUNDLE.GOVERNANCE.txt",
-          "source_files": [
-            "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt",
-            "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt",
-            "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt",
-            "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt",
-            "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt",
-            "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt",
-            "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt",
-            "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt",
-            "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt"
-          ]
-        }
-      ],
-      "menu_files": [],
-      "delivery_files_extra": [
-        "USECASE.MANIFEST.json",
-        "SKILL.md"
-      ],
+      "description": "Adaptar/reparar un proyecto que no nació bajo criterio SkillsMachine.",
       "compiled_output_enabled": true,
       "compiled_output_file": "USECASE.04.REPOSITORY_STRUCTURE_REPAIR.COMPILED.txt",
-      "compiled_format_version": "v1",
-      "compiled_source_order": [
-        "README.UPLOAD_THIS_USECASE.txt",
-        "README.EXECUTION.txt",
-        "HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt",
-        "SKILL.md",
-        "SKILL_SET.MANIFEST.txt",
-        "EXAMPLES/EXAMPLE.REPO_REPAIR.txt",
-        "00.BUNDLE.CORE.txt",
-        "01.BUNDLE.CONTINUITY.txt",
-        "02.BUNDLE.GOVERNANCE.txt"
+      "compiled_format_version": "v2",
+      "source_entries": [
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/README.UPLOAD_THIS_USECASE.txt", "source_labels": ["README.UPLOAD_THIS_USECASE.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/README.EXECUTION.txt", "source_labels": ["README.EXECUTION.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt", "source_labels": ["HUMAN.REPOSITORY_STRUCTURE_REPAIR.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/SKILL.md", "source_labels": ["SKILL.md"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/SKILL_SET.MANIFEST.txt", "source_labels": ["SKILL_SET.MANIFEST.txt"] },
+        { "source_path": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair/EXAMPLES/EXAMPLE.REPO_REPAIR.txt", "source_labels": ["EXAMPLES/EXAMPLE.REPO_REPAIR.txt"] },
+        { "source_path": "SkillsLake/01.SKILLS/06.SKILL.WBS.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/07.SKILL.FILE_CONTENT.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/12.SKILL.DRAG_AND_DROP.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/31.SKILL.MARKDOWN_FILE_CREATION_SAFETY.txt", "source_labels": ["CORE"] },
+        { "source_path": "SkillsLake/01.SKILLS/10.SKILL.BATON.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/11.SKILL.HUMAN_README.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt", "source_labels": ["CONTINUITY"] },
+        { "source_path": "SkillsLake/01.SKILLS/09.SKILL.RADAR.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/22.SKILL.PROJECT_LIFECYCLE_POLICY.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "SkillsLake/01.SKILLS/30.SKILL.PROMPT_ENGINEERING_DISCOVERY_CHALLENGE.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/AA.CONSTITUTION/05.CONSTITUTION.OPERATING_BRIEF.AI.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.DRAGONFLYFOCUS.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.USECASE_TEMP_UPLOAD_STAGING.txt", "source_labels": ["GOVERNANCE"] },
+        { "source_path": "GRCLake/01.CONTROLS/GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt", "source_labels": ["GOVERNANCE"] }
       ],
-      "upload_package_model": "SINGLE_COMPILED_FILE"
+      "upload_package_model": "SINGLE_COMPILED_FILE",
+      "source_directory": "SyS/A_Tools/UseCaseSources/04.RepositoryStructureRepair"
     }
   ],
   "support_packages": [
@@ -297,61 +158,19 @@
       "source_of_truth": "CORE_ONLY",
       "source_directory": "SyS/A_Tools/Update/SupportPackage",
       "target_directory": "90.USECASE/05.SKILLSMACHINE_UPDATE",
-      "copied_files": [
-        "README.UPLOAD_THIS_PACKAGE.txt",
-        "PROMPT.SKILLSMACHINE_UPDATE.txt",
-        "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
-        "UPDATE.EXAMPLE.MANIFEST.json"
-      ],
-      "delivery_files": [
-        "00.BUNDLE.UPDATE_CONTEXT.txt",
-        "01.BUNDLE.UPDATE_METHOD.txt",
-        "02.BUNDLE.UPDATE_GOVERNANCE.txt",
-        "PROMPT.SKILLSMACHINE_UPDATE.txt",
-        "README.UPLOAD_THIS_PACKAGE.txt",
-        "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
-        "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
-        "SUPPORT_PACKAGE.MANIFEST.json",
-        "UPDATE.EXAMPLE.MANIFEST.json"
-      ],
-      "bundle_definitions": [
-        {
-          "name": "UPDATE_CONTEXT",
-          "output_file": "00.BUNDLE.UPDATE_CONTEXT.txt",
-          "source_files": [
-            "SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt",
-            "SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json"
-          ]
-        },
-        {
-          "name": "UPDATE_METHOD",
-          "output_file": "01.BUNDLE.UPDATE_METHOD.txt",
-          "source_files": [
-            "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1",
-            "SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1"
-          ]
-        },
-        {
-          "name": "UPDATE_GOVERNANCE",
-          "output_file": "02.BUNDLE.UPDATE_GOVERNANCE.txt",
-          "source_files": [
-            "SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json",
-            "SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt",
-            "SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt"
-          ]
-        }
-      ],
       "compiled_output_enabled": true,
       "compiled_output_file": "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
-      "compiled_format_version": "v1",
-      "compiled_source_order": [
-        "README.UPLOAD_THIS_PACKAGE.txt",
-        "PROMPT.SKILLSMACHINE_UPDATE.txt",
-        "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
-        "UPDATE.EXAMPLE.MANIFEST.json",
-        "00.BUNDLE.UPDATE_CONTEXT.txt",
-        "01.BUNDLE.UPDATE_METHOD.txt",
-        "02.BUNDLE.UPDATE_GOVERNANCE.txt"
+      "compiled_format_version": "v2",
+      "source_entries": [
+        { "source_path": "SyS/A_Tools/Update/SupportPackage/README.UPLOAD_THIS_PACKAGE.txt", "source_labels": ["README.UPLOAD_THIS_PACKAGE.txt"] },
+        { "source_path": "SyS/A_Tools/Update/SupportPackage/PROMPT.SKILLSMACHINE_UPDATE.txt", "source_labels": ["PROMPT.SKILLSMACHINE_UPDATE.txt"] },
+        { "source_path": "SyS/A_Tools/Update/SupportPackage/RUNBOOK.SKILLSMACHINE_UPDATE.txt", "source_labels": ["RUNBOOK.SKILLSMACHINE_UPDATE.txt"] },
+        { "source_path": "SyS/A_Tools/Update/SupportPackage/UPDATE.EXAMPLE.MANIFEST.json", "source_labels": ["UPDATE.EXAMPLE.MANIFEST.json"] },
+        { "source_path": "SyS/A_Tools/Update/README.SKILLSMACHINE.UPDATE.txt", "source_labels": ["UPDATE_CONTEXT"] },
+        { "source_path": "SyS/A_Tools/Update/SKILLSMACHINE.PROJECT.BASELINE.schema.json", "source_labels": ["UPDATE_CONTEXT"] },
+        { "source_path": "SyS/A_Tools/Update/Invoke-SkillsMachineUpdate.ps1", "source_labels": ["UPDATE_METHOD"] },
+        { "source_path": "SyS/A_Tools/Update/Test-SkillsMachineUpdate.ps1", "source_labels": ["UPDATE_METHOD"] },
+        { "source_path": "SyS/A_Tools/Update/SKILLSMACHINE.UPDATE.MANIFEST.schema.json", "source_labels": ["UPDATE_GOVERNANCE"] }
       ],
       "upload_package_model": "SINGLE_COMPILED_FILE",
       "description": "Paquete de soporte generado desde core para actualizar una instalación SkillsMachine existente. No es un quinto use case primario."
