@@ -80,7 +80,7 @@ INSTANCE_SURFACE=SkillsMachine-side relationship state only; not a project mirro
 
 INSTANCES=
   WINGS4=PRESENT via SyS/A_Tools/W4C (messenger-only; AUTHORITY=Wings4.0)
-  CLOSEREPORT=PRESENT_SM_SIDE via ProjectOps enrolment proposal/registry (NOT_ENROLLED until human decision)
+  CLOSEREPORT=PRESENT_SM_SIDE via ProjectOps registry (ENROLLED; SkillsMachine-side only; CloseReport remains a separate project; enrolment ≠ mutation; no CloseReport filesystem mutation without CloseReport-local authorization)
   BRAINY=NOT_INSTANTIATED
   HIA=NOT_INSTANTIATED
 
@@ -97,7 +97,7 @@ PROJECT_REGISTRY_FIXTURE=SyS/A_Tools/VerticalSlice/v0.1/Fixtures/projects/* (TES
 PRODUCT_BACKLOG=SyS/PROJECT.BACKLOG.ACTIVE.txt (AUTHORITATIVE_FOR=ACTIVE_PRODUCT_BACKLOG)
 SKILLSLAKE_BACKLOG=SkillsLake/05.BACKLOG (capability/candidate lifecycle register; NOT product backlog SoT)
 TECH_DEBT=SyS/TECHNICAL.DEBT.ACTIVE.txt (when present)
-ROADMAP=SyS/PROJECT.ROADMAP.ACTIVE.txt (when present)
+ROADMAP=SyS/PROJECT.ROADMAP.ACTIVE.md (when present)
 
 ================================================================================
 07 RADAR VS AUDIT

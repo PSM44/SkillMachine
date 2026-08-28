@@ -95,7 +95,8 @@ NEXT_ACTION=MB-SM-069B_CANDIDATE_TO_CANON_DECISION_MATRIX
 ENTRY_ID=BL-PROD-008_TERMINOLOGY_ALIGNMENT
 PRIORITY=P2
 STATUS=DEFERRED
-TITLE=Map HUMAN, BATON, WHOAMI and backlog terms to industry terminology.
+TITLE=Map HUMAN, BATON and backlog terms to industry terminology.
+NOTE=WhoAmI is retired and physically deleted; do not map it as a live product term.
 NEXT_ACTION=Reassess after beta readiness.
 
 ENTRY_ID=BL-PROD-009_LIGHTWEIGHT_PROJECT_SCAFFOLD
@@ -104,6 +105,26 @@ STATUS=DEFERRED
 TITLE=Evaluate whether the current project scaffold is too heavy.
 NEXT_ACTION=Reassess after real-project evidence.
 
+ENTRY_ID=BL-PROD-012_SESSION_CONTINUITY_EXECUTION_HANDOFF_IMPROVEMENT
+PRIORITY=P2
+STATUS=DEFERRED
+DISPOSITION=DEFERRED_FOR_OWNER_AND_REUSE_ASSESSMENT
+IMPLEMENT_NOW=NO
+NEW_SKILL_APPROVED=NO
+NEW_SKILL_REQUIRED_NOW=NO
+OWNER_RESOLUTION_REQUIRED=YES
+ROADMAP_PROMOTION=NO
+SOURCE_PROJECT=Eval.Machine
+SOURCE_CLASS=EXTERNAL_PROJECT_IMPROVEMENT_FLOW
+TITLE=Session Continuity and Execution Handoff Improvement
+DETAIL=Avoidable HUMAN relay, repeated evidence re-audits, prompt addenda, recursive gates, and unnecessary reopening of bounded decisions. Register for owner/reuse assessment only. Do not implement now. Do not create a new Skill now. Eval.Machine-local owners remain Eval.Machine facts, not SkillsMachine proof of a missing owner.
+CANDIDATE_CONCEPTS=PACKAGE_STATE_MODEL;ANTI_REOPEN_CONTRACT;INTERACTION_BUDGET;PROMPT_SUPERSESSION;OUTCOME_BASED_AUTHORIZATION;HUMAN_RELAY_MINIMIZATION;PROPORTIONAL_GIT_TRANSACTION;CONTINUATION_VALIDATION
+CANDIDATE_PATH=SkillsLake/99.CANDIDATES/SKILL.SESSION_CONTINUITY_AND_EXECUTION_HANDOFF.CANDIDATE.txt
+SOURCE_EVIDENCE=Eval.Machine proposal EVALMACHINE_SESSION_CONTINUITY_AND_SKILLS_IMPROVEMENT_PROPOSAL.txt SHA256=48D8E2C32355803FB687DBDC02BA10C9AA5EBE439FAEEF7BF5269FB9CBD4BB77 plus bounded private initial commit prompt evidence.
+DESIGN_CAUTION=High-risk initial-baseline git controls must not automatically become the universal minimum for every Git change. Evaluate LOW_RISK / MEDIUM_RISK / HIGH_RISK_OR_INITIAL_BASELINE later. AVOID_RECREATING_OVERCONTROL_AS_THE_DEFAULT. Not canonized in this intake.
+REVIEW_TRIGGER_ANY=next substantive change to project/session lifecycle; next redesign of SESSION_CONTINUE; next redesign of ORCHESTRATOR to EXECUTOR handoff; repeated HUMAN relay or prompt-addendum failure is observed; continuity validation is redesigned; a second independent project reports the same failure pattern
+NEXT_ACTION=HUMAN/ORCHESTRATOR review owner map and decide whether to update existing Skills/GRC or keep deferred. Do not promote to ROADMAP in this intake.
+
 ============================================================================
 05.00_SESSION_UPDATE_MB-SM-073A_SESSION_CLOSE_20260731
 ============================================================================
@@ -111,11 +132,11 @@ NEXT_ACTION=Reassess after real-project evidence.
 ENTRY_ID=BL-PROD-010_RECONCILE_CURRENT_DIRTY_WORKTREE
 PRIORITY=P0
 STATUS=IN_PROGRESS
-TITLE=Review and disposition the two current uncommitted modifications without mixing scopes.
-DETAIL=DocumentConsistencyAudit has a preexisting change; Test-SkillsMachineUpdate has an unapproved 153-line SMDI-002 candidate extension. Review, keep/rework/discard and validate each independently.
+TITLE=Review and disposition current uncommitted work without mixing scopes.
+DETAIL=073A-era two-file description is stale. Current inherited dirt includes Batch A Skill 02 / sequential GRC, HUMAN files, backlog, untracked HUMAN.AI.WORKFLOW, candidates, ImproveOp snapshot, and this 20260821 recovery allowlist. Review, keep/rework/discard and validate each independently. Do not mix commit scopes.
 DEPENDENCIES=NONE
 SUCCESS_GATE=Each file has an explicit disposition, focused validation and isolated commit decision.
-NEXT_ACTION=MB-SM-073B_RECONCILE_CURRENT_DIRTY_WORKTREE
+NEXT_ACTION=Human authorize commit groups separately. Not authorized in the 20260821 governance recovery.
 
 SESSION_UPDATE:
 - BL-PROD-003 remains IN_PROGRESS and resumes after BL-PROD-010.
@@ -147,3 +168,53 @@ ENTRY_ID=BL-PROD-011_VERTICAL_SLICE_V0_1
 STATUS=COMMIT_READY_MANIFESTS_PREPARED
 NEXT=Human authorize GROUP_01..08 commits; then MB-SM-076A_CLOSEREPORT_PILOT_PREREQS with explicit auth.
 ==========
+
+==========
+MB-SM-GOVERNANCE-RECOVERY-20260821
+==========
+ENTRY_ID=BL-PROD-013_WHOAMI_PHYSICAL_RESIDUAL_CLOSEOUT
+PRIORITY=P0
+STATUS=DONE
+AUTHORIZATION=20260821.090511 AUTHORIZE_REVISED_ALLOWLIST=YES
+TITLE=Delete WhoAmI physical residuals after absorption proof.
+ACCEPTANCE=SyS\WhoAmI gone; SyS\01_WHOAMI_SKILLMACHINE.txt gone; no active WhoAmI path pointers in approved source/generated RUNBOOK; HUMAN remains sole identity authority.
+OWNER=HUMAN / Executor apply
+NEXT_ACTION=None. Historical WhoAmI wording may remain when classified historical.
+
+ENTRY_ID=BL-PROD-014_BATCH_A_COMMIT_PUSH_GATE
+PRIORITY=P0
+STATUS=OPEN
+AUTHORIZATION=NO
+BATCH_A_ALIGNMENT_STATE=ACTIVE
+BATCH_A_DURABILITY_STATE=ACTIVE_IN_WORKTREE_UNCOMMITTED
+BATCH_A_COMMITTED=NO
+BATCH_A_PUSHED=NO
+TITLE=Human commit/push decision for Batch A Skill 02 and sequential GRC.
+DEPENDENCIES=HUMAN review
+SUCCESS_GATE=Explicit Human authorize for staging/commit/push. Not authorized by governance recovery.
+NEXT_ACTION=Wait for Human commit-group authorization.
+
+ENTRY_ID=BL-PROD-015_AI_WORKFLOW_BATCH_B1
+PRIORITY=P1
+STATUS=DEFERRED
+AUTHORIZATION=NO
+TITLE=Batch B1 runtime-safety how-to (heartbeat/timeout/cancel contracts).
+DETAIL=Batch B research complete. B1 not authorized. LangGraph not authorized.
+NEXT_ACTION=Do not start until Human authorizes B1.
+
+ENTRY_ID=BL-PROD-016_USECASE_FULL_BUILD_REFRESH
+PRIORITY=P1
+STATUS=DEFERRED
+AUTHORIZATION=NO
+TITLE=Full 90.USECASE BUILD to fold Batch A and remaining generated lag into compiled packages.
+DETAIL=20260821 recovery synchronized only SESSION_CLOSE RUNBOOK source-to-derived. Full BUILD forbidden in that slice.
+NEXT_ACTION=Human authorize full BUILD separately.
+
+ENTRY_ID=BL-PROD-017_TRANSITIONAL_ROUTING_OPTION_R1
+PRIORITY=P0
+STATUS=DONE
+AUTHORIZATION=AUTHORIZE_TRANSITIONAL_ROUTING_OPTION_R1=YES
+TITLE=Record OPTION_R1 phased single-process routing as the transitional model.
+DETAIL=ROLE_PHASE COORDINATOR → HUMAN_GATE → EXECUTOR → COORDINATOR_ACCEPTANCE → ORCHESTRATOR_PRESENTATION → HUMAN. Executor must not report directly to Orchestrator.
+OWNER=Roadmap + this backlog
+NEXT_ACTION=Use R1 in operational prompts. Do not implement a Coordinator runtime in this item.
