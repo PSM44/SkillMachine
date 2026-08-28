@@ -27,6 +27,22 @@ function Normalize-ToArray($Value) {
     return @($Value)
 }
 
+function Test-ExactLineToken {
+    param(
+        [Parameter(Mandatory = $true)][string]$Path,
+        [Parameter(Mandatory = $true)][string]$Pattern
+    )
+
+    $lines = @(Get-Content -LiteralPath $Path -Encoding UTF8)
+    foreach ($line in $lines) {
+        if ($line -match $Pattern) {
+            return $true
+        }
+    }
+
+    return $false
+}
+
 Write-Host "VALIDATION: structure"
 
 $registryPath = "90.USECASE\USECASE.REGISTRY.json"
@@ -83,58 +99,26 @@ foreach ($dir in $unregisteredNumberedDirs) {
 }
 
 foreach ($dir in $usecaseDirs) {
-    $manifestPath = Join-Path $dir.FullName "USECASE.MANIFEST.json"
-    Test-JsonFile $manifestPath
-
-    $manifest = Get-Content -Raw -LiteralPath $manifestPath | ConvertFrom-Json
-
-    if (-not $manifest.usecase) {
-        Fail "Missing usecase field in manifest: $manifestPath"
+    $files = @(Get-ChildItem -LiteralPath $dir.FullName -File -Force)
+    $subdirs = @(Get-ChildItem -LiteralPath $dir.FullName -Directory -Force)
+    if ($subdirs.Count -ne 0) {
+        Fail "Usecase directory must be flat with no subdirectories: $($dir.FullName)"
     }
-
-    if (-not $manifest.delivery_files) {
-        Fail "Missing delivery_files in manifest: $manifestPath"
+    if ($files.Count -ne 1) {
+        Fail "Usecase directory must contain exactly one compiled file: $($dir.FullName)"
     }
-
-    foreach ($file in $manifest.delivery_files) {
-        $deliveryPath = Join-Path $dir.FullName $file
-        if (-not (Test-Path -LiteralPath $deliveryPath)) {
-            Fail "Declared delivery file missing: $deliveryPath"
-        }
+    if ($files[0].Name -notmatch '^USECASE\..*\.COMPILED\.txt$') {
+        Fail "Usecase directory single file must be compiled output: $($files[0].FullName)"
     }
-
-    if (-not $manifest.bundles) {
-        Fail "Missing bundles array in manifest: $manifestPath"
+    $compiled = Get-Content -Raw -LiteralPath $files[0].FullName -Encoding UTF8
+    if (-not (Test-ExactLineToken -Path $files[0].FullName -Pattern '^SOURCE_FILE_COUNT=\d+$')) {
+        Fail "Compiled package missing SOURCE_FILE_COUNT: $($files[0].FullName)"
     }
-
-    foreach ($bundle in $manifest.bundles) {
-        if (-not $bundle.bundle_name) {
-            Fail "Bundle missing bundle_name in: $manifestPath"
-        }
-
-        if (-not $bundle.delivery_file) {
-            Fail "Bundle missing delivery_file in: $manifestPath"
-        }
-
-        $bundlePath = Join-Path $dir.FullName $bundle.delivery_file
-        if (-not (Test-Path -LiteralPath $bundlePath)) {
-            Fail "Bundle delivery file missing: $bundlePath"
-        }
-
-        if (-not $bundle.source_files) {
-            Fail "Bundle missing source_files: $($bundle.bundle_name)"
-        }
-
-        foreach ($source in $bundle.source_files) {
-            if (-not $source.name) {
-                Fail "Source file missing name in bundle: $($bundle.bundle_name)"
-            }
-
-            $sourcePath = Join-Path (Resolve-Path ".") $source.name
-            if (-not (Test-Path -LiteralPath $sourcePath)) {
-                Fail "Source file referenced by manifest does not exist: $($source.name)"
-            }
-        }
+    if ($compiled -notmatch 'SOURCE_PROVENANCE_EMBEDDED=YES') {
+        Fail "Compiled package missing SOURCE_PROVENANCE_EMBEDDED=YES: $($files[0].FullName)"
+    }
+    if ($compiled -notmatch 'SEPARATE_TARGET_MANIFEST_REQUIRED=NO') {
+        Fail "Compiled package missing SEPARATE_TARGET_MANIFEST_REQUIRED=NO: $($files[0].FullName)"
     }
 }
 
@@ -243,25 +227,14 @@ Write-Host "OK: updater core structure validated (7 files)"
 
 $supportPackageName = "05.SKILLSMACHINE_UPDATE"
 $supportDir = Join-Path "90.USECASE" $supportPackageName
-$supportManifestPath = Join-Path $supportDir "SUPPORT_PACKAGE.MANIFEST.json"
 $expectedSupportFiles = @(
-    "00.BUNDLE.UPDATE_CONTEXT.txt",
-    "01.BUNDLE.UPDATE_METHOD.txt",
-    "02.BUNDLE.UPDATE_GOVERNANCE.txt",
-    "PROMPT.SKILLSMACHINE_UPDATE.txt",
-    "README.UPLOAD_THIS_PACKAGE.txt",
-    "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
-    "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt",
-    "SUPPORT_PACKAGE.MANIFEST.json",
-    "UPDATE.EXAMPLE.MANIFEST.json"
+    "USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt"
 ) | Sort-Object
 
 if (-not (Test-Path -LiteralPath $supportDir -PathType Container)) {
     throw "Support package folder missing: $supportDir"
 }
 
-Test-JsonFile $supportManifestPath
-$supportManifest = Get-Content -Raw -LiteralPath $supportManifestPath | ConvertFrom-Json
 $actualSupportFiles = @(
     Get-ChildItem -LiteralPath $supportDir -File -Force |
         Select-Object -ExpandProperty Name |
@@ -277,35 +250,19 @@ if ($missingSupportFiles.Count -gt 0) {
 if ($unexpectedSupportFiles.Count -gt 0) {
     throw "Unexpected support package files: $($unexpectedSupportFiles -join ', ')"
 }
-if ($actualSupportFiles.Count -ne 9) {
-    throw "Support package file count must be exactly 9; actual=$($actualSupportFiles.Count)"
+if ($actualSupportFiles.Count -ne 1) {
+    throw "Support package file count must be exactly 1; actual=$($actualSupportFiles.Count)"
 }
 
-$supportSourceRoot = Join-Path $skillsMachineRootForUpdater "SyS\A_Tools\Update\SupportPackage"
-$expectedSupportSourceFiles = @(
-    "PROMPT.SKILLSMACHINE_UPDATE.txt",
-    "README.UPLOAD_THIS_PACKAGE.txt",
-    "RUNBOOK.SKILLSMACHINE_UPDATE.txt",
-    "UPDATE.EXAMPLE.MANIFEST.json"
-) | Sort-Object
-$actualSupportSourceFiles = @(
-    Get-ChildItem -LiteralPath $supportSourceRoot -File -Force |
-        Select-Object -ExpandProperty Name |
-        Sort-Object
-)
-if (($expectedSupportSourceFiles -join "|") -ne ($actualSupportSourceFiles -join "|")) {
-    throw "Support package source folder mismatch"
+$compiledSupport = Join-Path $supportDir 'USECASE.05.SKILLSMACHINE_UPDATE.COMPILED.txt'
+$compiledSupportText = Get-Content -Raw -LiteralPath $compiledSupport -Encoding UTF8
+foreach ($token in @('SOURCE_PROVENANCE_EMBEDDED=YES','SEPARATE_TARGET_MANIFEST_REQUIRED=NO','SKILLSMACHINE_RUNTIME_DEPENDENCY=NO')) {
+    if (-not $compiledSupportText.Contains($token)) {
+        throw "Support compiled package missing token: $token"
+    }
 }
 
-if (-not $supportManifest.delivery_files) {
-    throw "Support package manifest missing delivery_files: $supportManifestPath"
-}
-$supportDeliveryFiles = @($supportManifest.delivery_files | ForEach-Object { [string]$_ } | Sort-Object)
-if (($supportDeliveryFiles -join "|") -ne ($expectedSupportFiles -join "|")) {
-    throw "Support package manifest delivery_files mismatch"
-}
-
-Write-Host "OK: support package structure validated (9 files)"
+Write-Host "OK: support package structure validated (1 file)"
 
 
 Write-Host "OK: structure validation passed"

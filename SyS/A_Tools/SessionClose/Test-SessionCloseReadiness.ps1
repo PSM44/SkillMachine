@@ -8,19 +8,26 @@ PURPOSE:
 USAGE:
   From repository root:
     powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1"
+  Optional sandbox redirect (does not change default operator outputs):
+    powershell -ExecutionPolicy Bypass -File ".\SyS\A_Tools\SessionClose\Test-SessionCloseReadiness.ps1" -OutputDirectory "<directory>"
 
 OUTPUTS:
-  SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt
-  SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
+  Default:
+    SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.txt
+    SyS\A_Tools\SessionClose\SESSION_CLOSE.READINESS.ACTIVE.json
+  If -OutputDirectory is supplied, the same two filenames are written there instead.
 
 CONTRACT:
   - OK only when Git is clean, Validate-System.ps1 exits 0, required continuity artifacts exist,
     BATON is version-fresh against HEAD, and RADAR runtime output is fresh against HEAD.
-  - WHOAMI is historical/reference only (MB-SM-076A6B): reported for evidence, never blocks readiness.
+  - WHOAMI physical residual is deleted/closed (MB-SM-076A6B / 20260821 closeout): reported as
+    WHOAMI_ROLE=DELETED_CLOSED. Existence is expected false. Never FAIL/WARN on WhoAmI absence.
   - WARN when validation passes but Git has pending changes or BATON/RADAR continuity freshness is stale.
   - FAIL when validation fails or required artifacts (RADAR manifest, BATON) are missing.
 
 CHANGELOG:
+  2026-08-21, WhoAmI closeout
+  - WHOAMI_ROLE=DELETED_CLOSED. File expected absent. Optional -OutputDirectory for sandbox redirect.
   2026-08-12, MB-SM-076A6B
   - Removes WHOAMI freshness and WHOAMI existence as readiness blockers.
   - WHOAMI remains optional historical/reference evidence in the report.
@@ -34,6 +41,11 @@ CHANGELOG:
   - Adds freshness checks for RADAR, BATON and WHOAMI against HEAD commit date.
   - Keeps Windows PowerShell 5.1-compatible native command execution.
 #>
+
+[CmdletBinding()]
+param(
+  [string]$OutputDirectory = ""
+)
 
 Set-StrictMode -Version Latest
 $ErrorActionPreference = "Stop"
@@ -187,7 +199,11 @@ function Get-RadarGeneratedDateOffset {
 
 $Root = Get-RepoRoot
 $Now = Get-Date -Format "yyyy-MM-dd HH:mm:ss"
-$OutDir = Join-Path $Root "SyS\A_Tools\SessionClose"
+if ([string]::IsNullOrWhiteSpace($OutputDirectory)) {
+  $OutDir = Join-Path $Root "SyS\A_Tools\SessionClose"
+} else {
+  $OutDir = [System.IO.Path]::GetFullPath($OutputDirectory)
+}
 $TxtOut = Join-Path $OutDir "SESSION_CLOSE.READINESS.ACTIVE.txt"
 $JsonOut = Join-Path $OutDir "SESSION_CLOSE.READINESS.ACTIVE.json"
 
@@ -317,8 +333,8 @@ if (-not $batonExists) {
   [void]$issues.Add("BATON not found.")
 }
 
-# MB-SM-076A6B: WHOAMI is historical/reference only — never FAIL/WARN readiness.
-# Existence and freshness are reported as informational evidence only.
+# MB-SM-076A6B / 20260821: WHOAMI residual deleted — never FAIL/WARN readiness.
+# Existence and freshness are reported as informational evidence only. Expected exists=false.
 
 if ($gitDirty -and $status -eq "OK") {
   $status = "WARN"
@@ -360,7 +376,7 @@ $artifactMeta = [pscustomobject]@{
   whoami_last_commit_date = if ($whoamiLastCommitDate) { $whoamiLastCommitDate.ToString("yyyy-MM-dd HH:mm:ss zzz") } else { "" }
   whoami_fresh_against_head = $whoamiFreshAgainstHead
   whoami_freshness_required = $false
-  whoami_role = "HISTORICAL_REFERENCE_ONLY"
+  whoami_role = "DELETED_CLOSED"
 }
 
 $result = [pscustomobject]@{
