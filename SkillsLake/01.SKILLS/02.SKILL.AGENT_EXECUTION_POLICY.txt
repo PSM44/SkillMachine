@@ -46,6 +46,8 @@ DEPENDENCIAS......:
 10.00 Manejo de incidentes (TROUBLE/INCIDENT)
 11.00 Checklist rápido
 12.00 CHANGELOG
+13.00 SM-AI-WORKFLOW-BATCH-A alignment (ACTIVE; ALIGNMENT_ACTIVE=YES)
+
 
 ==========
 00.20_CONTEXTO
@@ -386,4 +388,368 @@ RULES:
 8. If a script creates outputs for upload, those outputs belong in SyS\Temp.
 9. If a script scans many files, it must use Write-Progress.
 10. If a script produces terminal output for AI continuation, it must end with the standard AI_TAIL block.
+==========
+
+==========
+13.00_SM_AI_WORKFLOW_BATCH_A_ALIGNMENT
+==========
+
+ALIGNMENT_ID=SM-AI-WORKFLOW-BATCH-A
+SOURCE_AUTHORITY=HUMAN\HUMAN.AI.WORKFLOW.txt
+SOURCE_AUTHORITY_STATUS=ACTIVE_CANONICAL_CONCEPTUAL_OWNER
+ALIGNMENT_STATUS=ACTIVE
+ALIGNMENT_ACTIVE=YES
+HUMAN_REVIEW_REQUIRED=NO
+CURRENT_ALIGNMENT_STATE=ACTIVE_IN_WORKTREE_UNCOMMITTED
+FRAMEWORK_NEUTRAL=YES
+FRAMEWORK_IS_NOT_AUTHORITY=YES
+ADAPTER_CANNOT_PROMOTE_CANON=YES
+SKILL_ALIGNMENT_STATUS=ACTIVE_IN_WORKTREE_UNCOMMITTED
+DATE=2026-08-20
+ACTIVATION_DATE=2026-08-21
+TASK_ID=20260820.193910_SM-AI-WORKFLOW-BATCH-A-CORE-ALIGNMENT-EXECUTOR-001
+ACTIVATION_TASK_ID=20260821.005541_SM-AI-WORKFLOW-BATCH-A-ACTIVATION-EXECUTOR-001
+
+This block is how-to (procedimiento reutilizable). It does not replace GRCLake controls.
+It does not rename or delete Planner, Proposal worker, or Executor.
+CURRENT_ALIGNMENT_STATE=ACTIVE. Do not claim that current sessions or runtimes already implement Coordinator, heartbeat, timeout, or cancellation.
+
+==========
+13.10_ROLE_CROSSWALK
+==========
+
+HUMAN:
+- conceptual and material authority;
+- not an execution worker.
+
+ORCHESTRATOR:
+- Human interface;
+- frames objective and decision packages;
+- records Human authorization;
+- does not execute Work Units (unidades de trabajo).
+
+COORDINATOR:
+- translates authorized objectives into an execution plan;
+- defines Work Units, paths, dependencies, budgets, isolation requirements, and acceptance criteria;
+- evaluates results and recommends;
+- does not mutate canon.
+
+EXECUTOR:
+- validates plan, identity, scope, permissions, and worktree;
+- supervises Work Units;
+- consolidates evidence mechanically;
+- performs Executor Apply Phase (fase de aplicación canónica) only when explicitly authorized;
+- does not bypass Coordinator to communicate directly with Orchestrator.
+
+WORK_UNIT:
+- bounded execution mechanism;
+- returns isolated non-canonical results;
+- does not own canonical authority.
+
+Existing-role crosswalk (do not delete existing names):
+
+PLANNER=subset_or_planning_capability_of_COORDINATOR
+PROPOSAL_WORKER=subtype_or_capability_of_WORK_UNIT
+SKILL02_EXECUTOR=EXECUTOR_SUPERVISION_PLUS_AUTHORIZED_APPLY_PHASE
+SESSION_ORCHESTRATOR_IS_NOT_COORDINATOR=YES
+SESSION_EXECUTOR_IS_NOT_EVERY_WORKER=YES
+
+See also 01.10 Planner, 01.20 Executor, 01.30 Proposal worker, 01.40 single-owner.
+
+==========
+13.20_EXECUTOR_SUPERVISION_VERSUS_APPLY_PHASE
+==========
+
+EXECUTOR_SUPERVISION:
+- validate;
+- run or supervise;
+- collect;
+- mechanically consolidate;
+- return to Coordinator.
+
+EXECUTOR_APPLY_PHASE:
+- privileged canonical mutation;
+- not a Work Unit;
+- begins only after Human authorization and approved Apply Plan;
+- exact allowlist required (never git add -A / git add .);
+- single canonical applier;
+- validation and evidence required;
+- no framework may invoke it autonomously.
+
+APPLY_PHASE_IS_NOT_WORK_UNIT=YES
+PROPOSAL_IS_NOT_CANON=YES
+RECOMMENDATION_IS_NOT_AUTHORIZATION=YES
+GRAPH_RUNTIME_CANNOT_ENTER_APPLY_PATH_BY_ITSELF=YES
+
+==========
+13.30_WORK_UNIT_CONTRACT
+==========
+
+WORK_UNIT_TYPES:
+- DIRECT
+- AGENT
+- LOOP
+- GRAPH
+- TOOL
+
+Required common fields:
+
+- WU_ID
+- WU_TYPE
+- PARENT_PLAN_ID
+- OBJECTIVE
+- INPUTS
+- READ_SCOPE
+- WRITE_SCOPE
+- ISOLATION_BOUNDARY
+- DEPENDENCIES
+- ACCEPTANCE_CRITERIA
+- STOP_CONDITION
+- EVIDENCE_REQUIREMENTS
+- RESULT_STATUS
+- TIME_BUDGET_FIELD
+- CANCEL_HOOK_FIELD
+
+TIME_BUDGET_FIELD and CANCEL_HOOK_FIELD are contract placeholders only.
+RUNTIME_IMPLEMENTATION_STATUS=DEFERRED
+
+Do not claim that runtime timeout, cancellation, hard process termination, or heartbeat already exist.
+
+==========
+13.40_DIRECT_AND_TOOL
+==========
+
+DIRECT:
+- one bounded deterministic step;
+- no autonomous reasoning;
+- may invoke an authorized script or deterministic function.
+
+TOOL:
+- one authorized deterministic capability;
+- may be called by Executor or an authorized Agent/Graph node;
+- does not inherit canonical authority.
+
+Do not add vendor-specific tool implementation in this Skill.
+
+==========
+13.50_AGENT
+==========
+
+AGENT:
+- one AI model plus authorized tools;
+- bounded objective;
+- declared isolation;
+- no autonomous creation of additional agents;
+- no autonomous cross-agent delegation;
+- no canonical promotion.
+
+Existing Proposal worker (01.30) remains the closest isolated proposal capability.
+
+==========
+13.60_LOOP
+==========
+
+LOOP (bucle acotado):
+- bounded repetition of one objective;
+- LOOP_ID;
+- iteration counter;
+- stop predicate;
+- equivalent-failure test;
+- isolated iteration outputs;
+- explicit terminal state.
+
+MAX_CONSECUTIVE_EQUIVALENT_FAILURES=3
+The active mandatory three-equivalent-failure rule remains governed by GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt for mutating agent tasks (sections 12.00-12.10). Generalized LOOP object alignment in this block is ACTIVE how-to. Six iterations remain HUMAN guidance only, not GRC enforcement.
+
+HUMAN guidance (not GRC enforcement in this batch):
+- proposed default ceiling six iterations;
+- project may set lower or higher with justification;
+- unbounded loops require Human authorization;
+- iterations are not paths (caminos de exploración).
+
+Do not treat PROPOSED_DEFAULT_MAX_ITERATIONS_PER_LOOP=6 as active Skill or GRC enforcement.
+
+==========
+13.70_GRAPH
+==========
+
+GRAPH (grafo de ejecución):
+- node-and-edge execution mechanism;
+- used for material branching, dependencies, fan-out/fan-in, computational joins, checkpoints, interruption/resume, or durable Human-in-the-Loop (HITL, intervención humana);
+- not a role;
+- not automatically parallel;
+- not automatically justified.
+
+Eligibility:
+- use the lightest safe mechanism;
+- graph required only when a simpler mechanism is insufficient;
+- speed alone is insufficient (SPEED_ALONE_IS_INSUFFICIENT);
+- isolation must be proven before concurrent proposal branches.
+
+READ_ONLY_PARALLEL_DISCOVERY_DEFAULT=YES_FOR_BROAD_DISCOVERY
+BATCH_GATE_PREPARATION_DEFAULT=YES_WHEN_MUTATION_NOT_AUTHORIZED
+SHARED_STATE_MUTATION_SERIALIZED=YES
+AI_EFFICIENCY_SELF_REVIEW_REQUIRED=EVERY_5_OPERATIONAL_PROMPTS_OR_EARLIER_IF_OBVIOUS
+If actionable inefficiency is found, the AI must propose a faster safe operating model, exact gate batching, or better tool/read/test order.
+
+Lifecycle:
+
+DESIGNED
+→ ELIGIBILITY_CHECKED
+→ ARMED
+→ RUNNING
+→ INTERRUPTED | PARTIAL | FAILED | COMPLETED
+→ CONSOLIDATED
+→ RECOMMENDED | DISCARDED
+
+Recommendation exit:
+
+RECOMMENDED
+→ RESULT_PATH
+→ COORDINATOR_RECOMMENDATION
+→ ORCHESTRATOR_DECISION_PACKAGE
+→ HUMAN_DECISION
+
+Only HUMAN_DECISION=AUTHORIZED may start Apply Path.
+
+A GRAPH may contain DIRECT, TOOL, AGENT, or LOOP nodes. The controlling mechanism is GRAPH; nested types do not become authority roles.
+
+==========
+13.80_PATH
+==========
+
+PATH:
+- a materially distinct hypothesis;
+- not a loop iteration;
+- not a mandatory set of six;
+- selected only when divergent exploration materially helps.
+
+When paths are used:
+- at least two materially distinct paths;
+- maximum remains HUMAN guidance, not GRC enforcement;
+- every path declares hypothesis, distinctness, scope, risk, expected value, success criteria, and stop condition;
+- stop redundant or dominated paths;
+- negative results include evidence and Root Cause Analysis (RCA, análisis de causa raíz).
+
+Executor consolidates mechanically.
+Coordinator evaluates and recommends.
+Human decides material alternatives through Orchestrator.
+
+Executor may auto-select only when PREAUTHORIZED_DETERMINISTIC_SELECTION_RULE=YES.
+
+==========
+13.90_COMPUTATIONAL_JOIN
+==========
+
+COMPUTATIONAL_JOIN (unión computacional):
+- gathers technical branch outputs;
+- may occur inside a graph;
+- does not choose canon.
+
+AUTHORITY_CONSOLIDATION (consolidación de autoridad):
+- Executor verifies and packages evidence;
+- does not make the Human decision.
+
+DECISION:
+- Coordinator recommends;
+- Orchestrator presents;
+- Human authorizes material selection.
+
+==========
+13.100_COMMAND_RESULT_APPLY_PATHS
+==========
+
+COMMAND_PATH:
+HUMAN → ORCHESTRATOR → COORDINATOR → EXECUTOR → WORK_UNITS
+
+RESULT_PATH:
+WORK_UNITS → EXECUTOR → COORDINATOR → ORCHESTRATOR → HUMAN
+
+APPLY_PATH:
+HUMAN_AUTHORIZATION
+→ ORCHESTRATOR_AUTHORIZATION_RECORD
+→ COORDINATOR_APPLY_PLAN
+→ EXECUTOR_APPLY_PHASE
+→ COORDINATOR_ACCEPTANCE_CHECK
+→ ORCHESTRATOR_RESULT
+→ HUMAN
+
+SKILL_ALIGNMENT_STATUS=ACTIVE
+
+Do not assert that every current session already implements Coordinator.
+
+Prohibited shortcuts (how-to; GRC live HARD_STOP enforcement is in GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt section 13.00):
+- WORK_UNIT → HUMAN
+- WORK_UNIT → ORCHESTRATOR
+- WORK_UNIT → COORDINATOR unless routed by Executor
+- EXECUTOR → ORCHESTRATOR
+
+==========
+13.110_EVIDENCE_AND_RESULT_CONTRACT
+==========
+
+Work Unit results include:
+
+- WU_ID
+- STATUS
+- ARTIFACTS
+- EVIDENCE
+- PROVENANCE
+- CONFIDENCE
+- GAPS
+- DECISIONS_NEEDED
+
+Current enforceable statuses remain those already owned by GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt:
+PASS, PASS_WITH_WARNINGS, BLOCKED, FAILED, SKIPPED_DEPENDENCY_BLOCKED.
+
+Do not promote TIMEOUT or CANCELLED into mandatory GRC result classes in this batch.
+
+Executor output to Coordinator:
+
+CONSOLIDATED_REPORT:
+- PLAN_ID
+- WU_RESULTS
+- EVIDENCE_PACK
+- GAPS
+- DECISIONS_NEEDED
+- READY_FOR_COORDINATOR_REVIEW
+
+Do not use READY_TO_APPLY unless Apply Path authorization has already been recorded.
+
+==========
+13.120_PROPORTIONAL_HUMAN_GATES
+==========
+
+ALWAYS_EXPLICIT_HUMAN_AUTHORIZATION:
+- commit
+- push
+- canonical promotion
+- destructive action
+- package/framework installation
+- scope expansion
+
+AUTHORIZED_WITHIN_APPROVED_SCOPE:
+- build
+- test
+- validation
+- formatting
+- authorized sandbox execution
+- bounded prototype steps already included in the approved plan
+
+A stricter GRC may tighten these Gates (condiciones obligatorias de avance).
+Definition of Done (DoD, definición de terminado) for a run still includes session close rules in 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt. This block does not replace them.
+
+==========
+13.130_FRAMEWORK_BOUNDARY
+==========
+
+FRAMEWORK_NEUTRAL=YES
+FRAMEWORK_IS_NOT_AUTHORITY=YES
+ADAPTER_CANNOT_PROMOTE_CANON=YES
+
+No vendor framework is required by this Skill.
+Adapters cannot promote canon or open Apply Path.
+
+==========
+FIN_13.00_SM_AI_WORKFLOW_BATCH_A_ALIGNMENT
 ==========

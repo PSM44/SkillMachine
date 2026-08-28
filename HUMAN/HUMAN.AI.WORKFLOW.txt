@@ -1,0 +1,931 @@
+==========================================
+HUMAN — AI-ASSISTED WORKFLOW METHODOLOGY
+==========================================
+
+ARTIFACT_ID=HUMAN.AI.WORKFLOW
+FILENAME=HUMAN.AI.WORKFLOW.txt
+LAYER=HUMAN_AUTHORITY
+ARTIFACT_CLASS=HUMAN_CONCEPTUAL_OPERATING_METHODOLOGY
+INITIAL_STATUS_AT_CREATION=DRAFT_FOR_HUMAN_REVIEW
+STATUS=ACTIVE
+LIFECYCLE_STATUS=CANONICAL
+AUTHORITY_STATUS=CANONICAL_CONCEPTUAL_OWNER
+TARGET_STATUS=CANONICAL_CONCEPTUAL_OWNER
+CURRENT_STATUS_BASIS=Human accepted under ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001
+PURPOSE=AI_WORKFLOW_INTENT_AND_OPERATING_MODEL
+NORMATIVE_EXECUTION_OWNER=SKILLS
+MANDATORY_CONTROL_OWNER=GRCLake
+TECHNICAL_IMPLEMENTATION_OWNER=TOOLS_AND_FRAMEWORK_ADAPTERS
+PROJECT_VALUES_OWNER=PROJECT_CONFIGURATION
+HUMAN_APPROVAL_REQUIRED_FOR_ACTIVATION=YES
+HUMAN_APPROVAL_FOR_ACTIVATION=RECORDED
+ACTIVE_CANON=YES
+ACTIVATED_AT=2026-08-20
+ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001
+DATE=2026-08-20
+AUTHOR_HUMAN=PABLO
+LOCATION=HUMAN\
+RELATION_TO_HUMAN_ROOT=HUMAN hijo under HUMAN.README.txt (conceptual contract)
+RELATION_TO_OPERATING_MODEL=Does not replace HUMAN.OPERATING.MODEL.txt
+DIAGRAM_FORMAT=MERMAID_SOURCE
+RENDERING_DEPENDS_ON_VIEWER=YES
+TEXT_REMAINS_AUTHORITATIVE_IF_NOT_RENDERED=YES
+
+This file is ACTIVE. LIFECYCLE_STATUS=CANONICAL. AUTHORITY_STATUS=CANONICAL_CONCEPTUAL_OWNER.
+It is the canonical conceptual owner for SkillsMachine AI workflow intent and operating methodology.
+Skills remain owners of reusable execution procedures.
+GRCLake remains owner of mandatory controls.
+Tools and adapters remain implementation mechanisms.
+Project configuration remains owner of project-specific paths and values.
+Provenance: initially DRAFT_FOR_HUMAN_REVIEW. Human accepted it under ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001.
+
+==========
+00. STATUS VOCABULARY
+==========
+
+ACTIVE_EXISTING = already owned and enforced by current HUMAN, Skill, or GRC.
+PARTIAL_EXISTING = partially covered by current owners.
+CANONICAL_DIRECTION_PENDING_ALIGNMENT = Human-approved conceptual direction that is canonical at the HUMAN layer but not yet implemented or enforced by the corresponding Skills/GRCs.
+CANDIDATE = not approved as canon.
+PLANNED = approved for design or future testing, not implemented.
+OPTIONAL_ADAPTER = possible implementation that is not required by canon.
+EXAMPLE_ONLY = illustrative and non-normative.
+UNKNOWN = evidence is insufficient.
+
+Do not treat Target State as currently enforced by Skills or GRCs. The HUMAN conceptual direction is canonical; corresponding Skills/GRCs still require alignment.
+
+The capability-by-capability CURRENT VERSUS TARGET STATE matrix lives in subsection 29.01.
+
+==========
+01. EXECUTIVE INTENT
+==========
+
+SkillsMachine exists so that a Human can work with AI under explicit authority, without losing control of meaning, structure, or canonical state (estado canónico: the authorized project truth).
+
+The AI-assisted workflow is the operating model (modelo operativo) that turns Human intent into planned work, isolated execution, evidence, and—only when authorized—canonical application (aplicación canónica).
+
+It is not an informal chat substitute. It is not a framework. It is not a Skill and not a GRC (governance, risk, and compliance; gobierno, riesgo y cumplimiento).
+
+This document explains intent and collaboration. Skills remain the Single Source of Truth (SSOT, fuente única de verdad) for reusable how-to. GRCLake remains the SSOT for mandatory controls and fail-closed Gates (condiciones obligatorias de avance).
+
+==========
+02. DESIRED OUTCOME
+==========
+
+A new Human operator or a newly initialized AI who reads this file, then the referenced Skills/GRCs, should be able to:
+
+1. State who may speak to whom.
+2. Distinguish a role from a Work Unit (unidad de trabajo).
+3. Keep proposals (propuestas) out of canon until the Apply Path completes.
+4. Choose sequential execution as the safe default for shared-state mutation.
+5. Use graphs, loops, and alternative paths only when they are justified.
+6. Return evidence that a Coordinator can accept and an Orchestrator can present to Human.
+
+CURRENT_STATE_SUMMARY:
+SkillsMachine currently has Human authority, sequential mutation, proposal isolation, and canonical-applier controls. Coordinator, typed Work Units, graph/loop/path lifecycles, heartbeat, timeout, and cancellation remain partial, candidate, or absent.
+
+TARGET_STATE_SUMMARY:
+The target workflow formalizes those missing capabilities while preserving Human authority, framework neutrality, and one authorized canonical applier.
+
+Definition of Done (DoD, definición de terminado) for this conceptual artifact, after recorded Human review: the workflow is understood; Skills/GRCs remain owners of procedure and control; no framework is treated as mandatory.
+
+==========
+03. SCOPE AND BOUNDARIES
+==========
+
+IN SCOPE:
+- Human–AI workflow intent, roles, paths, Work Unit types, sandbox classes by name, promotion rules, diagrams, glossary.
+- Mapping to existing Skills/GRCs.
+- Honest labels for what is already enforced versus planned or candidate.
+
+OUT OF SCOPE:
+- Full Skill or GRC bodies.
+- Project-specific sandbox filesystem paths.
+- Framework installation, Proof of Concept (PoC, prueba de concepto) execution, or adapter code.
+- Session-pack layout (ORCHESTRATOR/EXECUTOR packs live under SESSIONS per Project Information Architecture).
+- Operator-specific working-profile payload (not product doctrine; see HUMAN.OPERATING.MODEL.txt).
+
+This file does not authorize mutation, installation, commit, or push.
+
+==========
+04. CORE PRINCIPLES
+==========
+
+1. HUMAN authority prevails. Human owns final semantic and material authority.
+2. GRC enforces. Skills explain how. Tools and adapters implement optionally.
+3. Command Path and Result Path are opposite directions. Direct Executor-to-Orchestrator communication is prohibited.
+4. ROLE_IS_NOT_WORK_UNIT. AGENT_IS_NOT_GRAPH. LOOP_IS_NOT_GRAPH. PATH_IS_NOT_LOOP. GRAPH_NODE_IS_NOT_AUTHORITY_ROLE. ADAPTER_IS_NOT_CANON.
+5. PROPOSAL != CANON. Sandbox output is a proposal until authorized promotion.
+6. Canonical shared-state mutation is sequential and single-owner unless a stronger explicit model is authorized.
+7. Workers produce isolated non-canonical proposals only.
+8. SPEED_ALONE_IS_INSUFFICIENT. Parallelism requires proven independence, isolation, disjoint writes, deterministic consolidation, and single-applier protection.
+9. Sequential execution remains the safe default for shared or canonical mutation. ACTIVE_EXISTING in GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt.
+10. Do not manufacture six alternative paths. Six is a ceiling when paths are justified, not a target.
+
+==========
+05. AUTHORITY MODEL
+==========
+
+HUMAN — ACTIVE_EXISTING in HUMAN.README.txt, HUMAN.OPERATING.MODEL.txt, 25.SKILL.GRC.HUMAN_AI_COLLAB.txt, sequential GRC human-commit rule.
+- Owns final semantic and material authority.
+- Defines intent and accepts outcomes.
+- Authorizes canonical structural change, installation, destructive action, commit, and push unless explicitly delegated.
+
+ORCHESTRATOR — PARTIAL_EXISTING (named in HUMAN.OPERATING.MODEL.txt as sequencing and gated prompts; session role under SESSIONS in SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt). Detailed Command Path is CANONICAL_DIRECTION_PENDING_ALIGNMENT.
+- Interfaces with HUMAN.
+- Frames objectives and decision packages.
+- Records Human authorization.
+- Does not execute Work Units.
+- Does not silently replace Human authority.
+
+COORDINATOR — CANDIDATE as a first-class lake ROLE_ID. Described here as conceptual direction. Skills currently use Planner / Proposal-worker / Executor in 02.SKILL.AGENT_EXECUTION_POLICY.txt. Those are execution roles, not this Coordinator.
+- Translates authorized objectives into an execution plan.
+- Decomposes work; defines Work Units; selects candidate paths; sets dependency order; determines concurrency eligibility; defines budgets and acceptance criteria.
+- Does not mutate canon.
+
+EXECUTOR — PARTIAL_EXISTING (HUMAN.OPERATING.MODEL.txt technical execution; Skill 02 canonical applier). Apply Phase and Result Path discipline are CANONICAL_DIRECTION_PENDING_ALIGNMENT.
+- Validates identity, scope, permissions, worktree, and plan.
+- Supervises authorized Work Units.
+- Consolidates evidence.
+- Performs the Executor Apply Phase only when explicitly authorized.
+- Returns results to Coordinator.
+- Does not bypass Coordinator to speak to Orchestrator.
+
+WORK_UNIT — PARTIAL_EXISTING as isolated proposal work in Skill 02 and sequential GRC; typed DIRECT/AGENT/LOOP/GRAPH/TOOL model is CANDIDATE/PLANNED.
+- Bounded execution mechanism.
+- Returns isolated results.
+- Does not independently own canonical authority.
+
+==========
+06. END-TO-END OPERATING MODEL
+==========
+
+Global flow:
+
+Human states intent.
+Orchestrator turns intent into an objective package and, when needed, a decision package.
+Coordinator produces a plan: Work Units, path eligibility, isolation proof, acceptance criteria.
+Human authorizes through Orchestrator when the plan is material.
+Executor validates and runs Work Units in authorized perimeters.
+Work Units return isolated results.
+Executor consolidates evidence.
+Coordinator checks acceptance.
+Orchestrator reports to Human.
+If and only if Human authorized canonical application, Executor runs the Apply Phase under an exact allowlist.
+
+Usecase-first focus (ACTIVE_EXISTING, HUMAN.OPERATING.MODEL.txt MB-GRC-033B) still applies: identify the SkillsMachine usecase before tactical development.
+
+==========
+07. ROLES AND RESPONSIBILITIES
+==========
+
+Map, do not collapse:
+
+HUMAN (authority) → Orchestrator (interface) → Coordinator (plan) → Executor (supervise/apply) → Work Units (mechanisms).
+
+Skill 02 map (ACTIVE_EXISTING execution how-to):
+- Planner ≈ read-only planning fragment of Coordinator, not a second Human.
+- Proposal worker ≈ Work Unit producing isolated proposals.
+- Executor / canonical applier ≈ this document’s Executor Apply Phase.
+
+Do not treat a graph node, an agent, or a loop as an Orchestrator.
+
+==========
+08. COMMAND, RESULT, AND APPLY PATHS
+==========
+
+COMMAND_PATH (CANONICAL_DIRECTION_PENDING_ALIGNMENT):
+HUMAN → ORCHESTRATOR → COORDINATOR → EXECUTOR → WORK_UNITS
+
+RESULT_PATH (CANONICAL_DIRECTION_PENDING_ALIGNMENT):
+WORK_UNITS → EXECUTOR → COORDINATOR → ORCHESTRATOR → HUMAN
+
+APPLY_PATH (CANONICAL_DIRECTION_PENDING_ALIGNMENT; human commit Gate is ACTIVE_EXISTING):
+HUMAN_AUTHORIZATION
+→ ORCHESTRATOR_AUTHORIZATION_RECORD
+→ COORDINATOR_APPLY_PLAN
+→ EXECUTOR_APPLY_PHASE
+→ COORDINATOR_ACCEPTANCE_CHECK
+→ ORCHESTRATOR_RESULT
+→ HUMAN
+
+The Apply Phase is not a Work Unit type.
+
+Prohibited shortcuts:
+- WORK_UNIT → HUMAN
+- WORK_UNIT → ORCHESTRATOR
+- WORK_UNIT → COORDINATOR unless routed by Executor
+- EXECUTOR → ORCHESTRATOR
+- framework → canonical promotion
+- worker → canonical mutation
+- autonomous creation of unplanned workers
+
+D1 purpose: authority and communication overview. Only adjacent levels may communicate. D2 separates Command, Result, and Apply Paths.
+
+```mermaid
+flowchart TD
+  subgraph CMD[COMMAND]
+    H1[HUMAN] --> O1[ORCHESTRATOR]
+    O1 --> C1[COORDINATOR]
+    C1 --> E1[EXECUTOR]
+    E1 --> W1[WORK_UNITS]
+  end
+  subgraph RES[RESULT]
+    W2[WORK_UNITS] --> E2[EXECUTOR]
+    E2 --> C2[COORDINATOR]
+    C2 --> O2[ORCHESTRATOR]
+    O2 --> H2[HUMAN]
+  end
+```
+
+D2 purpose: Command, Result, and Apply are three paths, not one informal chat.
+DIAGRAM_FORMAT=MERMAID_SOURCE. RENDERING_DEPENDS_ON_VIEWER=YES. TEXT_REMAINS_AUTHORITATIVE_IF_NOT_RENDERED=YES.
+
+```mermaid
+flowchart TD
+  subgraph CMD[Command Path]
+    H1[HUMAN] --> O1[ORCH]
+    O1 --> C1[COORD]
+    C1 --> E1[EXEC]
+    E1 --> W1[WU]
+  end
+  subgraph RES[Result Path]
+    W2[WU] --> E2[EXEC]
+    E2 --> C2[COORD]
+    C2 --> O2[ORCH]
+    O2 --> H2[HUMAN]
+  end
+  subgraph APP[Apply Path]
+    HA[HUMAN auth] --> OR[ORCH record]
+    OR --> CP[COORD plan]
+    CP --> EA[EXEC apply]
+    EA --> AC[COORD accept]
+    AC --> ORes[ORCH result]
+    ORes --> H3[HUMAN]
+  end
+```
+
+==========
+09. WORK UNIT MODEL
+==========
+
+A Work Unit is a bounded mechanism with identity, isolation boundary, timeout policy, retry policy, and acceptance reference.
+
+Types:
+
+DIRECT — deterministic execution without autonomous agent reasoning.
+AGENT — an AI model with instructions and authorized tools performing a bounded task.
+LOOP — bounded repetition with explicit stop conditions.
+GRAPH — node-and-edge structure for dependencies, branching, joins, state, checkpoints, or Human-in-the-Loop (HITL, intervención humana dentro del flujo).
+TOOL — a single authorized deterministic capability.
+
+ROLE_IS_NOT_WORK_UNIT=YES
+AGENT_IS_NOT_GRAPH=YES
+LOOP_IS_NOT_GRAPH=YES
+PATH_IS_NOT_LOOP=YES
+GRAPH_NODE_IS_NOT_AUTHORITY_ROLE=YES
+ADAPTER_IS_NOT_CANON=YES
+
+Status: typed WU model = CANDIDATE/PLANNED as lake objects. Isolated proposal work = ACTIVE_EXISTING in Skill 02 and sequential GRC.
+
+D3 purpose: choose the lightest safe controlling mechanism.
+
+```mermaid
+flowchart TD
+  T[TASK]
+  T --> D{IS_THIS_ONE_BOUNDED_DETERMINISTIC_STEP?}
+  D -->|YES| DT[DIRECT_OR_TOOL]
+  D -->|NO| B{NEEDS_BRANCHING_DEPENDENCIES_FANOUT_JOIN_OR_DURABLE_HITL?}
+  B -->|YES| G[GRAPH]
+  B -->|NO| L{NEEDS_BOUNDED_REPETITION?}
+  L -->|YES| LP[LOOP]
+  L -->|NO| A[AGENT]
+```
+
+A GRAPH may contain DIRECT, TOOL, AGENT, or LOOP nodes.
+The diagram selects the controlling mechanism, not every nested implementation detail.
+
+==========
+10. DIRECT EXECUTION
+==========
+
+Use DIRECT when the step is a function, script, or deterministic transform with no autonomous reasoning.
+
+Status: ACTIVE_EXISTING as ordinary authorized script/tool execution under GRC.CROSS_RUNTIME_EXECUTION_CONTRACT.txt and SKILL.HUMAN_CONTROLLED_SCRIPT_EXECUTION.txt (cite; this file does not own them).
+
+Do not wrap DIRECT work in a graph for appearance.
+
+==========
+11. AGENT WORK
+==========
+
+An AGENT Work Unit is one model plus authorized tools, a bounded objective, and an isolation perimeter.
+
+It is not a crew that delegates itself to other agents. Sequential GRC: no autonomous cross-agent delegation. ACTIVE_EXISTING prohibition.
+
+Skill 02 Proposal worker is the closest ACTIVE_EXISTING analogue: produces candidates; never auto-promotes to canon.
+
+==========
+12. BOUNDED LOOPS
+==========
+
+A LOOP is a repetition object with LOOP_ID, stop predicate, and isolated outputs per iteration.
+
+Proposed generalized LOOP object (CANDIDATE / CANONICAL_DIRECTION_PENDING_ALIGNMENT; not transversal active canon):
+
+PROPOSED_DEFAULT_MAX_ITERATIONS_PER_LOOP=6
+PROJECT_MAY_DEFINE_A_LOWER_OR_HIGHER_LIMIT_WITH_JUSTIFICATION=YES
+HUMAN_AUTHORIZATION_REQUIRED_FOR_UNBOUNDED_LOOP=YES
+
+MAX_CONSECUTIVE_EQUIVALENT_FAILURES=3
+This three-failure rule is ACTIVE_EXISTING for mutating agent tasks through GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt.
+For a generalized named LOOP object in the lakes, the same ceiling is proposed, not yet a distinct lake contract.
+
+Clarifications:
+- Six is a proposed default ceiling, not mandatory consumption and not an active transversal HUMAN default.
+- Iterations are not alternative paths. A loop repeats one bounded attempt; a path is a distinct hypothesis under one decision.
+- Three equivalent consecutive failures cause hard stop under the sequential GRC for mutating agent tasks.
+- No fourth equivalent attempt without Human authorization.
+- Retries remain inside the same isolation boundary.
+- Autonomous delegation is not a retry strategy.
+
+A named LOOP object in lakes remains PARTIAL_EXISTING / CANDIDATE. HybridGraphExec tooling is not this methodology’s SSOT.
+
+D5 purpose: how a loop evaluates stop conditions and reaches a terminal state.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Armed
+  Armed --> Iterating
+  Iterating --> EvaluateStop: EVALUATE_STOP_CONDITION
+  EvaluateStop --> Iterating: CONTINUE
+  EvaluateStop --> Completed: SUCCESS
+  EvaluateStop --> MaxIter: LIMIT_REACHED
+  EvaluateStop --> EquivFail: EQUIVALENT_FAILURE_LIMIT
+  EvaluateStop --> Cancelled: CANCEL
+  EvaluateStop --> TimedOut: TIMEOUT
+  EvaluateStop --> Stopped: HUMAN_STOP
+```
+
+==========
+13. GRAPH WORK
+==========
+
+A GRAPH is justified when the work needs material branching, independent fan-out, dependency ordering, computational joins, checkpoints (puntos de recuperación), interruption and resume, bounded iterative state, or durable HITL.
+
+A GRAPH is not justified for simple deterministic tasks, single-file transforms, work that can safely run sequentially, cosmetic path diversity, parallelism only because it looks faster, or shared canonical mutation without isolation.
+
+SPEED_ALONE_IS_INSUFFICIENT.
+
+Parallelism may improve speed only after independence, isolation, resource availability, disjoint write boundaries, deterministic consolidation, and single canonical-applier protection have been proven. Sequential GRC already forbids parallelism merely for speed. ACTIVE_EXISTING.
+
+DEVELOPMENT_EFFICIENCY_OWNER=AI
+EFFICIENCY_REVIEW_CADENCE=EVERY_5_OPERATIONAL_PROMPTS
+EFFICIENCY_REVIEW_OUTPUT=ONLY_IF_ACTIONABLE
+EFFICIENCY_REVIEW_SCOPE=parallel_discovery;gate_batching;mutation_serialization;temp_consolidation;baton_readiness;commit_grouping;test_strategy;tooling_readiness;security_quality;technical_debt
+EFFICIENCY_REVIEW_QUESTION=Are we working as fast, safely and intelligently as possible, or are we serializing work that could safely run in parallel?
+The AI owns the responsibility to proactively seek, propose and improve development speed, efficiency, certainty and safety.
+Pablo should not have to rediscover that the workflow can be faster, more parallel, or more evidence-efficient.
+Massive read-only discovery, dependency mapping, graph fan-out, gate batching, and portfolio sprinting are the default for broad discovery when isolation is proven.
+Shared-state mutation, HUMAN edits, deletes, builds, installs, staging, commit and push remain serialized and gated.
+Safety controls exist to enable intelligent throughput, not to force one-task-at-a-time bureaucracy where safe parallel discovery is available.
+
+Graph lifecycle (CANDIDATE / CANONICAL_DIRECTION_PENDING_ALIGNMENT; no lake graph-worker contract yet):
+
+DESIGNED
+→ ELIGIBILITY_CHECKED
+→ ARMED
+→ RUNNING
+
+From RUNNING:
+- INTERRUPTED → RESUMED → RUNNING
+- PARTIAL → CONSOLIDATED
+- FAILED → REPLAN_OR_DISCARD
+- COMPLETED → CONSOLIDATED
+
+From CONSOLIDATED:
+- RECOMMENDED
+- DISCARDED
+
+RECOMMENDED must leave the graph runtime through the Result Path. It must not enter the Apply Path automatically.
+
+Required sequence:
+
+CONSOLIDATED
+→ RECOMMENDED
+→ RESULT_PATH
+→ COORDINATOR_RECOMMENDATION
+→ ORCHESTRATOR_DECISION_PACKAGE
+→ HUMAN_DECISION
+
+From HUMAN_DECISION:
+- AUTHORIZED → APPLY_PATH
+- REJECTED → DISCARDED
+- REVISION_REQUIRED → AUTHORIZED_REPLAN
+
+RECOMMENDATION_IS_NOT_AUTHORIZATION=YES
+GRAPH_RUNTIME_CANNOT_ENTER_APPLY_PATH_BY_ITSELF=YES
+
+A graph does not promote itself to canon.
+
+LangGraph is OPTIONAL_ADAPTER / EXAMPLE_ONLY. See section 24.
+
+D4 purpose: graph states. Recommendation is not authorization. Promotion requires Human decision, then Apply Path.
+
+```mermaid
+stateDiagram-v2
+  [*] --> Designed
+  Designed --> EligibilityChecked
+  EligibilityChecked --> Armed: justified
+  EligibilityChecked --> Sequential: not justified
+  Armed --> Running
+  Running --> Interrupted
+  Interrupted --> Resumed
+  Resumed --> Running
+  Running --> Partial
+  Partial --> Consolidated
+  Running --> Failed
+  Failed --> ReplanOrDiscard
+  Running --> Completed
+  Completed --> Consolidated
+  Consolidated --> Recommended
+  Consolidated --> Discarded
+  Recommended --> ResultPath
+  ResultPath --> CoordRec
+  CoordRec --> OrchPkg
+  OrchPkg --> HumanDecision
+  HumanDecision --> ApplyPath: AUTHORIZED
+  HumanDecision --> Discarded: REJECTED
+  HumanDecision --> AuthorizedReplan: REVISION_REQUIRED
+```
+
+==========
+14. ALTERNATIVE PATHS
+==========
+
+A Path (camino de exploración) is a materially distinct hypothesis under one decision. It is not a loop iteration and not a mandatory set of six.
+
+Policy:
+- Use alternative paths only when divergent exploration materially improves a decision.
+- When used, define at least two materially distinct paths.
+- Default ceiling: six paths per decision, not per graph.
+- Stop when additional paths are redundant, dominated, immaterial, unsafe, or unsupported.
+- Every path declares hypothesis, distinctness, scope, risk, expected value, success criteria, and stop condition.
+- Negative results include evidence and Root Cause Analysis (RCA, análisis de causa raíz) classification.
+- Executor consolidates mechanically.
+- Coordinator evaluates and recommends.
+- Human decides material alternatives through Orchestrator.
+- Executor may auto-select only when a deterministic selection rule was explicitly pre-authorized.
+
+Status: CANDIDATE as a lake object. Do not invent six dummy paths.
+
+==========
+15. SANDBOX AND NON-INTERFERENCE
+==========
+
+TEMP classes (ACTIVE_EXISTING, SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt — referenced, not copied):
+
+- DURABLE_CANONICAL_STORAGE
+- REPO_INTERNAL_TEMP
+- EXTERNAL_AI_EXCHANGE_TEMP (flat AI exchange; purge before write)
+- INTERNAL_RUNTIME_SCRATCH
+- EXECUTION_SANDBOX_TEMP (subdirectories allowed and required when isolation needs them; not an upload pack; not canon)
+
+Graph Sandbox is an EXECUTION_SANDBOX_TEMP instance. It isolates non-canonical outputs from the project root. Folder isolation does not itself enforce operating-system permissions. Skill 03 (SANDBOX_BOUNDARY) owns authorized execution roots and allow/deny lists. ACTIVE_EXISTING how-to.
+
+Each project declares its own governed sandbox path in project configuration. This transversal HUMAN file does not hard-code any project’s literal sandbox path.
+
+Sandbox output is always a proposal until authorized promotion.
+
+D7 purpose: temp class versus canon. No filesystem literals.
+
+```mermaid
+flowchart TD
+  Canon[DURABLE_CANONICAL_STORAGE]
+  RepoT[REPO_INTERNAL_TEMP]
+  Exch[EXTERNAL_AI_EXCHANGE_TEMP]
+  Scr[INTERNAL_RUNTIME_SCRATCH]
+  Sand[EXECUTION_SANDBOX_TEMP]
+  Sand -->|proposal only| Exec[Executor Apply Path]
+  Exec -->|authorized allowlist| Canon
+```
+
+==========
+16. SHARED STATE AND CANONICAL APPLICATION
+==========
+
+PROPOSAL != CANON
+
+Shared-state mutation concurrency is RESTRICTED. Canonical mutation is SINGLE_OWNER_OR_EXPLICITLY_SEQUENCED. Isolated non-canonical proposal concurrency is CONDITIONALLY_ALLOWED when isolation is proven. ACTIVE_EXISTING in GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt and Skill 02.
+
+COMPUTATIONAL_JOIN: a technical graph operation that gathers branch outputs. It must not select canon.
+AUTHORITY_CONSOLIDATION: Executor validation and evidence packaging under the approved plan.
+DECISION: Coordinator recommendation and Human material authorization through Orchestrator.
+
+Only the authorized Executor may perform the Executor Apply Phase after:
+- Human authorization
+- Orchestrator authorization record
+- Coordinator apply plan
+- exact allowlist (never git add -A)
+- project identity validation (GRC.PROJECT_CONTEXT_IDENTITY.txt)
+- worktree classification (GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt and sequential GRC)
+- acceptance criteria
+- rollback readiness (16.SKILL.CHECKPOINT_ROLLBACK.txt)
+
+Unknown worktree → HARD_STOP until classified. ACTIVE_EXISTING / DRAFT_READY_FOR_TEST as GRC status.
+
+D6 purpose: proposal becomes canon only on the Apply Path.
+
+```mermaid
+flowchart TD
+  P[Isolated proposal] --> V[Executor validate]
+  V --> C[Coordinator accept]
+  C --> O[Orchestrator record]
+  O --> H{Human auth?}
+  H -->|No| D[Remain proposal]
+  H -->|Yes| A[Executor Apply Phase]
+  A --> Canon[Canon]
+```
+
+==========
+17. HEARTBEAT, TIMEOUT, AND CANCELLATION
+==========
+
+Heartbeat (latido operativo: periodic progress signal), Timeout (tiempo máximo de ejecución), and cancellation are proposed requirements for long unattended runs. They are not currently enforced as lake objects.
+
+Status: ABSENT as named lake contracts. 15.SKILL.LOGGING_AUDIT.txt describes task_id/run_id logging; live wiring in SkillsMachine runtime is UNKNOWN. Skill 04 cost hard-stop is doctrine; live gate wiring is UNKNOWN.
+
+Until a Skill/GRC owns these objects, treat heartbeat/timeout/cancellation as CANDIDATE. Do not run unattended graphs as if they were enforced.
+
+Executor owns the cancel token conceptually. Synchronous in-process Python cannot always be preempted; hard cancel may require process isolation. That is an implementation note, not an adapter mandate.
+
+==========
+18. FAILURE, RETRY, ESCALATION, AND ROLLBACK
+==========
+
+Retry stays inside the same Work Unit isolation boundary.
+
+ACTIVE_EXISTING: sequential GRC third equivalent failure hard stop; no fourth without Human. Skill 08 PROBLEM_TROUBLE_INCIDENTS owns PROBLEM/TROUBLE/INCIDENT vocabulary. Skill 16 owns checkpoint/rollback how-to; Git commit remains Human-gated unless explicitly delegated.
+
+Partial success: a graph may finish with mixed path statuses. Overall PASS only if acceptance criteria are met. Failed paths do not write canon.
+
+D8 purpose: failure does not become a new unofficial agent.
+
+```mermaid
+flowchart TD
+  F[WU failure] --> R{Retry in isolation?}
+  R -->|Under ceiling| T[Retry same WU]
+  R -->|3 equivalent| HS[HARD_STOP]
+  HS --> H[Human via ORCH]
+  H --> RB[Rollback if mutated]
+  H --> N[New authorized plan]
+```
+
+==========
+19. EVIDENCE, PROVENANCE, AND ACCEPTANCE
+==========
+
+Every Work Unit returns STATUS plus artifacts, evidence, provenance, and confidence.
+
+Valid classifications aligned with sequential GRC (ACTIVE_EXISTING): PASS, PASS_WITH_WARNINGS, BLOCKED, FAILED, SKIPPED_DEPENDENCY_BLOCKED. Conceptual additions CANCELLED and TIMEOUT are CANDIDATE until GRC alignment.
+
+Executor consolidates. Coordinator accepts against the plan. Orchestrator presents INFORMATION_ONLY, DECISION_REQUIRED, or READY_TO_EXECUTE packages to Human. Those package-state names are CANDIDATE. They are not SkillsMachine canon.
+
+External exchange packaging: SKILL.COMPACT_UPLOAD_PACK_EXECUTION.txt and GRC.COMPACT_UPLOAD_PACK_ONLY.txt. ACTIVE_CANDIDATE_CORE operationally treated as mandatory in AGENTS.md. Cite, do not duplicate.
+
+RADAR maps the filesystem; it does not orchestrate. Skill 21: HUMAN > SKILLS > BATON > RADAR.
+
+==========
+20. HUMAN-IN-THE-LOOP GATES
+==========
+
+ALWAYS_EXPLICIT_HUMAN_AUTHORIZATION:
+- commit
+- push
+- canonical promotion
+- destructive action
+- package/framework installation
+- scope expansion
+
+AUTHORIZED_WITHIN_APPROVED_SCOPE (no extra Human turn required if already in the approved plan, unless a stricter GRC applies):
+- build
+- test
+- validation
+- formatting
+- authorized sandbox execution
+- bounded prototype steps already included in the approved plan
+
+Risk-tier or repository-specific GRCs may impose stricter Gates (condiciones obligatorias de avance). A project may require Human confirmation for build or validation even when this methodology would allow those steps inside an approved scope.
+
+HITL inside a graph (interrupt/resume) is CANDIDATE as a lake object. Tool-approval HITL in vendor SDKs is OPTIONAL_ADAPTER behavior, not canon.
+
+25.SKILL.GRC.HUMAN_AI_COLLAB.txt: Human controls structure; AI proposes and executes within bounds. ACTIVE_EXISTING howto. Enforcement remains GRCLake.
+
+==========
+21. DEFINITION OF DONE
+==========
+
+CURRENT_ENFORCEABLE_DOD (relies only on active current owners; not the full target architecture):
+
+1. Human authorization was obtained for commit, push, canonical promotion, destructive action, package/framework installation, and any scope expansion.
+2. Build, test, validation, formatting, sandbox execution, and bounded prototype steps stayed inside the approved plan, or a stricter GRC required an extra Gate.
+3. Isolated proposal work respected Skill 02 and sequential GRC: no worker self-promotion, no autonomous cross-agent delegation, sequential default for shared or canonical mutation.
+4. Project identity and worktree classification Gates were respected (GRC.PROJECT_CONTEXT_IDENTITY.txt, GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt).
+5. Evidence is traceable under Skill 15 how-to and compact-pack Skill/GRC where an external exchange occurred.
+6. Session close, if claimed, meets 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt.
+7. Checkpoint/rollback readiness is known per 16.SKILL.CHECKPOINT_ROLLBACK.txt; Git commit remains Human-gated unless explicitly delegated.
+
+This current DoD does not require a first-class Coordinator, typed GRAPH/LOOP lake objects, heartbeat, timeout, or cancellation contracts.
+
+TARGET_WORKFLOW_DOD (CANONICAL_DIRECTION_PENDING_ALIGNMENT — not currently enforceable as a whole):
+
+1. The Command Path was followed.
+2. Work Units stayed inside declared isolation.
+3. Evidence is consolidated and traceable.
+4. Coordinator acceptance is recorded against stated criteria.
+5. Human has the Result Path package.
+6. If canon changed, the Apply Path was authorized and allowlisted.
+7. If blocked or failed, HARD_STOP semantics were respected and rollback readiness is known.
+
+Session close DoD remains 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt. ACTIVE_EXISTING for sessions.
+
+==========
+22. FRAMEWORK-NEUTRAL CANON
+==========
+
+Canon at HUMAN/Skill/GRC layer does not name a required engine.
+
+ACTIVE_EXECUTOR_HOST=CLINE
+CURSOR_ACTIVE_EXECUTOR_STATUS=SUPERSEDED
+HISTORICAL_CURSOR_EVIDENCE=PRESERVE
+FRAMEWORK_NEUTRAL_CANON=YES
+LANGGRAPH_CANONICAL_AUTHORITY=NO
+LANGGRAPH_RUNTIME_ADAPTER_STATUS=SELECTED_PENDING_VERIFIED_ACTIVATION
+LANGGRAPH_PRODUCT_RUNTIME_STATUS=ABSENT
+LANGGRAPH_INSTALLED=NO
+LANGGRAPH_INTEGRATED=NO
+LANGGRAPH_TESTED=NO
+LANGGRAPH_RUNTIME_ACTIVE=NO
+LANGGRAPH_POC_EXECUTED=NO
+LANGGRAPH_FINAL_ADOPTION=NOT_DECIDED
+LANGSMITH_REQUIRED=NO
+OPTION_R1_REMAINS_ACTIVE_UNTIL_SEPARATELY_AUTHORIZED_AND_PROVEN_ROUTING_MODEL=YES
+
+Cline is the selected host of EXECUTOR, not a new role or authority. Cursor is superseded only as the active executor host; preserve historical Cursor evidence as historical evidence. LangGraph is selected only as an intended runtime adapter pending verified activation. Selection does not authorize installation, integration, testing, activation, repository mutation, or product-runtime use.
+
+LangGraph cannot become HUMAN, ORCHESTRATOR, COORDINATOR, a Human Gate, a Skill, a GRC, or independent mutation authority. It cannot bypass Command Path, Result Path, isolated Work Units, or serialized Apply Path. A computational graph join cannot make a Human decision.
+
+Microsoft Agent Framework, OpenAI Agents SDK, CrewAI, and similar products are OPTIONAL_ADAPTER or EXAMPLE_ONLY. Provider packs belong under 95.AI_MODULES per POLICY.REPOSITORY.ARCHITECTURE.txt. AI_CORE is provider-neutral (HUMAN.OPERATING.MODEL.txt / OPTION_D).
+
+Do not copy vendor vocabulary into Skills as mandatory doctrine.
+
+==========
+23. SKILLS AND GRCS REFERENCE MAP
+==========
+
+D9 purpose: which layer owns intent, how-to, control, and implementation. Tools do not own HUMAN.
+
+```mermaid
+flowchart TD
+  R[HUMAN.README]
+  OM[HUMAN.OPERATING.MODEL]
+  WF[HUMAN.AI.WORKFLOW intent]
+  SK[Skills execution alignment]
+  GRC[GRC mandatory-control alignment]
+  AD[Tools adapters conform]
+  R --> WF
+  OM --> WF
+  WF --> SK
+  WF --> GRC
+  SK --> AD
+  GRC --> AD
+```
+
+Skills and GRC requirements flow downward: tools and adapters must conform.
+Tools and adapters must not point upward as authority over HUMAN.
+Implementation evidence may inform a later Human-authorized change; it does not self-promote.
+
+Verified references (do not duplicate bodies):
+
+- HUMAN\HUMAN.README.txt — HUMAN root meaning
+- HUMAN\HUMAN.OPERATING.MODEL.txt — product doctrine, usecase-first, ORCH/EXE seed
+- SkillsLake\01.SKILLS\02.SKILL.AGENT_EXECUTION_POLICY.txt — Planner / proposal worker / canonical applier
+- SkillsLake\01.SKILLS\03.SKILL.SANDBOX_BOUNDARY.txt — authorized execution root
+- SkillsLake\01.SKILLS\08.SKILL.PROBLEM_TROUBLE_INCIDENTS.txt — PROBLEM/TROUBLE/INCIDENT
+- SkillsLake\01.SKILLS\15.SKILL.LOGGING_AUDIT.txt — logging howto; live wiring UNKNOWN
+- SkillsLake\01.SKILLS\16.SKILL.CHECKPOINT_ROLLBACK.txt — checkpoint/rollback howto
+- SkillsLake\01.SKILLS\21.SKILL.OPERATIONAL_ARTIFACTS_POLICY.txt — HUMAN>SKILLS>BATON>RADAR
+- SkillsLake\01.SKILLS\22.SKILL.PROJECT_LIFECYCLE_POLICY.txt — session lifecycle
+- SkillsLake\01.SKILLS\25.SKILL.GRC.HUMAN_AI_COLLAB.txt — collab howto (not GRCLake control)
+- SkillsLake\01.SKILLS\SKILL.REPO.TEMP_ARTIFACT_MANAGEMENT.txt — TEMP classes
+- SkillsLake\01.SKILLS\SKILL.COMPACT_UPLOAD_PACK_EXECUTION.txt — DETU / GPT.Upload.Lock howto
+- SkillsLake\01.SKILLS\SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt — placement; ORCH/EXE under SESSIONS
+- GRCLake\01.CONTROLS\GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt — sequential default; isolation; 3-failure
+- GRCLake\01.CONTROLS\GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt — unknown worktree HARD_STOP
+- GRCLake\01.CONTROLS\GRC.PROJECT_CONTEXT_IDENTITY.txt — wrong-project HARD_STOP
+- GRCLake\01.CONTROLS\GRC.COMPACT_UPLOAD_PACK_ONLY.txt — compact pack control
+- GRCLake\00.POLICIES\POLICY.REPOSITORY.ARCHITECTURE.txt — lakes; 95.AI_MODULES ingest
+
+Known conflicts (not resolved here):
+- Skill 05 ROUTING_POLICY vs Skill 27 MODEL_ROUTING_POLICY (two matrices).
+- 25/26 filenames contain GRC while declaring NOT_GRCLAKE_CONTROL.
+- Sequential GRC 04.00 overlaps GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.
+- Several GRC STATUS=DRAFT_READY_FOR_TEST while operationally used.
+- Skill 02 roles vs this Coordinator role: map, do not pretend they are identical.
+
+==========
+24. OPTIONAL TOOLS AND ADAPTERS
+==========
+
+SyS tools (for example HybridGraphExec) are technical implementations. They are not Skills, not GRCs, and not this methodology’s SSOT.
+
+LangGraph open-source core may be used later as an OPTIONAL_ADAPTER behind a contract. It is not installed, not executed, and not decided by this file.
+
+Do not treat Crew-style autonomous multi-agent conversation as the SkillsMachine Coordinator.
+
+==========
+25. PROJECT-SPECIFIC CONFIGURATION
+==========
+
+Each project must declare, in its own configuration—not in this transversal file:
+
+- EXECUTION_SANDBOX_TEMP instance path (Graph Sandbox)
+- exchange temp if it differs from the SkillsMachine operator convention already recorded in HUMAN.OPERATING.MODEL.txt
+- model/provider choices
+- loop ceilings if a project justifies a lower or higher limit than the proposed default in section 12; unbounded loops require Human authorization
+
+Do not promote one project’s sandbox path into SkillsMachine HUMAN canon.
+
+==========
+26. END-TO-END EXAMPLES
+==========
+
+EXAMPLE_ONLY. Not a runbook.
+
+Example A — sequential canon edit:
+Human asks to perfect one HUMAN pointer. Orchestrator records a bounded objective. Coordinator plans one DIRECT/AGENT Work Unit on an allowlist of two files. Executor validates identity and clean allowlist scope, edits, returns evidence. Human commits. No graph.
+
+Example B — isolated exploration:
+Coordinator justifies two distinct paths for a design choice. Executor runs two isolated proposal Work Units under EXECUTION_SANDBOX_TEMP. Computational join gathers diffs. Coordinator recommends. Human decides. Apply Path updates canon once.
+
+Example C — unjustified graph:
+A single-file rename. Graph is not used. SPEED_ALONE_IS_INSUFFICIENT.
+
+==========
+27. ANTIPATTERNS
+==========
+
+- Executor reporting directly to Orchestrator.
+- Treating an agent, loop, and graph as synonyms.
+- Six dummy paths per graph.
+- Interpreting PROPOSED_DEFAULT_MAX_ITERATIONS_PER_LOOP as a mandatory path count or as already-enforced transversal HUMAN canon.
+- Parallelism only for speed on shared canon.
+- Worker self-promotion to canon.
+- Autonomous cross-agent delegation as retry.
+- Copying a Skill/GRC into HUMAN.
+- Making LangGraph or any adapter mandatory.
+- Hard-coding another project’s sandbox path here.
+- Treating folder isolation as a complete OS sandbox.
+- Loading 90.USECASE or generated packs as canon.
+- Creating a standalone WhoAmI as product meaning (HUMAN.OPERATING.MODEL.txt MB-SM-077D).
+
+==========
+28. GLOSSARY
+==========
+
+Apply Phase — authorized canonical mutation performed only by Executor after the Apply Path. Not a Work Unit type.
+Canonical apply (aplicación canónica) — writing durable project truth after Human authorization; proposals are not canon.
+Checkpoint (punto de recuperación) — restore point used before risky mutation; Skill 16 owns how-to; Git remains Human-gated unless delegated.
+Coordinator (coordinador) — planner of Work Units and acceptance criteria; CANDIDATE as lake ROLE_ID; does not mutate canon.
+Definition of Done (DoD, definición de terminado) — explicit done criteria. This file separates CURRENT_ENFORCEABLE_DOD from TARGET_WORKFLOW_DOD.
+Executor (ejecutor) — supervisor of authorized Work Units and sole canonical applier when the Apply Path is authorized; does not speak directly to Orchestrator.
+Gate (condición obligatoria de avance) — a condition that must pass before proceeding; risk-tier GRCs may add stricter Gates.
+Graph (grafo de ejecución) — node-and-edge Work Unit for branching, joins, checkpoints, or durable HITL; not a role and not self-promoting canon.
+Handoff (transferencia controlada) — authorized transfer of a package between roles along Command or Result Path.
+Heartbeat — periodic progress signal for long unattended runs; CANDIDATE as a lake object; not currently enforced.
+Human-in-the-Loop (HITL, intervención humana dentro del flujo) — a required Human decision or confirmation inserted into a run so material choices are not completed autonomously.
+Loop (bucle acotado) — bounded repetition of one attempt with explicit stop conditions; iterations are not alternative paths.
+Orchestrator (orquestador) — Human interface that frames packages and records authorization; does not run Work Units.
+Path (camino de exploración) — a materially distinct hypothesis under one decision; default ceiling six per decision when paths are justified, not per graph.
+Proof of Concept (PoC, prueba de concepto) — a bounded test of feasibility. It is not canon, not an adoption decision, and not a framework mandate.
+Proposal (propuesta no canónica) — isolated non-canon output that remains a proposal until the Apply Path completes.
+Rollback (reversión controlada) — restoring a known prior state after failed, blocked, or unauthorized mutation. Skill 16 owns how-to; Git commit remains Human-gated unless delegated.
+Root Cause Analysis (RCA, análisis de causa raíz) — classifying why a path or iteration failed so the next attempt is not a cosmetic repeat of the same defect.
+Sandbox (entorno aislado de ejecución) — an EXECUTION_SANDBOX_TEMP instance plus Skill 03 root rules. Folder isolation is not complete operating-system sandboxing.
+Single Source of Truth (SSOT, fuente única de verdad) — the one owner for a class of rule: this file for workflow intent, Skills for reusable how-to, GRCLake for mandatory controls.
+Timeout (tiempo máximo de ejecución) — the maximum allowed run time for a Work Unit. Expiry is a terminal stop, not a license to retry outside policy. CANDIDATE as a lake object.
+Work Breakdown Structure (WBS, estructura de desglose del trabajo) — the ordered sectioning of this methodology from intent to references, and the Coordinator’s later decomposition of authorized work into Work Units.
+Work Unit (unidad de trabajo) — a bounded mechanism: DIRECT, AGENT, LOOP, GRAPH, or TOOL. A role is not a Work Unit.
+
+==========
+29. CHANGE AND EVOLUTION MODEL
+==========
+
+This file changes only by Human authorization (HUMAN.README.txt controlled change).
+
+Activation recorded: Human accepted this file as CANONICAL_CONCEPTUAL_OWNER under ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001. Skill/GRC alignment remains a separate future Human-authorized stage. This file does not self-promote implementations.
+
+If Skills/GRCs later add Coordinator, graph lifecycle, or heartbeat objects, update section 23 status labels. Do not fork those rules into this file.
+
+==========
+29.01 CURRENT-TO-TARGET ALIGNMENT MATRIX
+==========
+
+CURRENT VERSUS TARGET STATE (global-to-detail). HUMAN conceptual Target State is canonical. Do not treat Target State as currently enforced by Skills/GRCs.
+
+CAPABILITY=HUMAN
+CURRENT_STATE=Owns final semantic and material authority through HUMAN.README.txt, HUMAN.OPERATING.MODEL.txt, 25.SKILL.GRC.HUMAN_AI_COLLAB.txt, and sequential GRC Human-commit rule.
+TARGET_STATE=Same: Human remains the authority that defines intent and accepts outcomes.
+NORMATIVE_OWNER=HUMAN
+IMPLEMENTATION_STATUS=ACTIVE_EXISTING
+ALIGNMENT_ACTION=None for core authority. Keep this file as a HUMAN hijo, not a replacement of the operating model.
+
+CAPABILITY=ORCHESTRATOR
+CURRENT_STATE=Named in HUMAN.OPERATING.MODEL.txt as sequencing and gated prompts; session role under SESSIONS in SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt.
+TARGET_STATE=Human interface that frames objective and decision packages, records authorization, and does not execute Work Units.
+NORMATIVE_OWNER=HUMAN conceptual intent; Skills for session-pack how-to after activation.
+IMPLEMENTATION_STATUS=PARTIAL_EXISTING. Detailed Command Path = CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=After Human activation, align session packs and Skills so Orchestrator does not execute Work Units and does not replace Human authority.
+
+CAPABILITY=COORDINATOR
+CURRENT_STATE=Not a first-class lake ROLE_ID. Skill 02 uses Planner / Proposal-worker / Executor as execution roles.
+TARGET_STATE=Translates authorized objectives into a plan: Work Units, path eligibility, dependency order, concurrency eligibility, budgets, and acceptance criteria. Does not mutate canon.
+NORMATIVE_OWNER=HUMAN conceptual intent; Skills/GRC after authorized alignment.
+IMPLEMENTATION_STATUS=CANDIDATE as lake ROLE_ID. Direction in this file = CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=Map Skill 02 Planner to a planning fragment. Do not pretend it is this Coordinator until Human authorizes lake alignment.
+
+CAPABILITY=EXECUTOR
+CURRENT_STATE=Technical execution role in HUMAN.OPERATING.MODEL.txt and canonical applier in Skill 02.
+TARGET_STATE=Validates identity, scope, permissions, worktree, and plan; supervises Work Units; consolidates evidence; performs Apply Phase only when authorized; returns results to Coordinator; never bypasses Coordinator to Orchestrator.
+NORMATIVE_OWNER=HUMAN conceptual intent; Skill 02 how-to; GRCLake mutation Gates.
+IMPLEMENTATION_STATUS=PARTIAL_EXISTING. Apply Phase and Result Path discipline = CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=After activation, keep Skill 02 applier mapped to Apply Phase. Do not treat every worker as Executor.
+
+CAPABILITY=WORK_UNITS
+CURRENT_STATE=Isolated proposal work is ACTIVE_EXISTING in Skill 02 and sequential GRC. Typed DIRECT/AGENT/LOOP/GRAPH/TOOL objects are not lake canon.
+TARGET_STATE=Bounded mechanisms with identity, isolation, timeout policy, retry policy, and acceptance reference. Types: DIRECT, AGENT, LOOP, GRAPH, TOOL.
+NORMATIVE_OWNER=HUMAN conceptual intent; Skills for how-to; GRCLake for isolation and mutation controls.
+IMPLEMENTATION_STATUS=PARTIAL_EXISTING for isolated proposals. Typed model = CANDIDATE / PLANNED / CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=Do not create unplanned workers. Introduce typed Work Unit objects only after Human-authorized Skill/GRC work.
+
+CAPABILITY=GRAPH_LIFECYCLE
+CURRENT_STATE=No lake graph-worker contract. Sequential GRC forbids unjustified parallelism. HybridGraphExec is a tool, not SSOT.
+TARGET_STATE=DESIGNED → ELIGIBILITY_CHECKED → ARMED → RUNNING, then INTERRUPTED/RESUMED, PARTIAL, FAILED, or COMPLETED, then CONSOLIDATED → RECOMMENDED or DISCARDED. RECOMMENDED leaves the graph runtime through Result Path to Coordinator recommendation, Orchestrator decision package, and Human decision. Apply Path starts only if Human authorizes. RECOMMENDATION_IS_NOT_AUTHORIZATION=YES. GRAPH_RUNTIME_CANNOT_ENTER_APPLY_PATH_BY_ITSELF=YES.
+NORMATIVE_OWNER=HUMAN conceptual intent; future Skill/GRC if authorized.
+IMPLEMENTATION_STATUS=CANDIDATE / CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=Do not treat a graph as self-promoting canon. Do not install a graph framework as a substitute for this lifecycle.
+
+CAPABILITY=LOOP_LIFECYCLE
+CURRENT_STATE=Sequential GRC three-equivalent-failure hard stop is ACTIVE_EXISTING for mutating agent tasks. A named LOOP object is not lake canon.
+TARGET_STATE=ARMED → ITERATING → EVALUATE_STOP_CONDITION, then CONTINUE, SUCCESS, LIMIT_REACHED, EQUIVALENT_FAILURE_LIMIT, CANCEL, TIMEOUT, or HUMAN_STOP, each with a visible terminal or resume outcome.
+NORMATIVE_OWNER=HUMAN conceptual intent; sequential GRC for the active three-failure rule; future Skill for the named LOOP object.
+IMPLEMENTATION_STATUS=PARTIAL_EXISTING (three-failure). Named LOOP lifecycle = CANDIDATE / CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=Keep iterations distinct from alternative paths. Do not treat six as a mandatory consumption target.
+
+CAPABILITY=PATH_LIFECYCLE
+CURRENT_STATE=No lake Path object. Operational practice may explore alternatives informally.
+TARGET_STATE=Use alternative paths only when divergent exploration materially improves a decision; at least two distinct paths when used; ceiling six per decision; each path declares hypothesis, distinctness, scope, risk, expected value, success criteria, and stop condition.
+NORMATIVE_OWNER=HUMAN conceptual intent; Coordinator evaluates; Human decides material alternatives through Orchestrator.
+IMPLEMENTATION_STATUS=CANDIDATE / CANONICAL_DIRECTION_PENDING_ALIGNMENT
+ALIGNMENT_ACTION=Do not invent six dummy paths. Do not equate a path with a loop iteration.
+
+CAPABILITY=HEARTBEAT
+CURRENT_STATE=No named lake contract. Skill 15 describes task_id/run_id logging; live runtime wiring is UNKNOWN.
+TARGET_STATE=Periodic progress signal for long unattended runs, owned conceptually by Executor supervision.
+NORMATIVE_OWNER=Future Skill/GRC if Human authorizes; this file states intent only.
+IMPLEMENTATION_STATUS=CANDIDATE
+ALIGNMENT_ACTION=Do not run unattended graphs as if heartbeat were already enforced.
+
+CAPABILITY=TIMEOUT
+CURRENT_STATE=No named lake timeout object. Cost hard-stop doctrine exists in Skill 04; live gate wiring is UNKNOWN.
+TARGET_STATE=Maximum execution time per Work Unit; expiry is a terminal stop, not a retry license.
+NORMATIVE_OWNER=Future Skill/GRC if Human authorizes.
+IMPLEMENTATION_STATUS=CANDIDATE
+ALIGNMENT_ACTION=Do not assume vendor SDK timeouts are SkillsMachine canon.
+
+CAPABILITY=CANCELLATION
+CURRENT_STATE=No named lake cancel-token contract. Synchronous in-process work cannot always be preempted.
+TARGET_STATE=Executor-owned cancel token; hard cancel may require process isolation.
+NORMATIVE_OWNER=Future Skill/GRC if Human authorizes.
+IMPLEMENTATION_STATUS=CANDIDATE
+ALIGNMENT_ACTION=Treat cancellation as proposed. Implementation notes are not adapter mandates.
+
+CAPABILITY=LANGGRAPH
+CURRENT_STATE=Not in SkillsMachine canon. Not installed. No Proof of Concept (PoC, prueba de concepto) executed. Final adoption not decided. LangSmith not required.
+TARGET_STATE=May exist later only as OPTIONAL_ADAPTER or EXAMPLE_ONLY behind a framework-neutral contract.
+NORMATIVE_OWNER=HUMAN for adoption decision; tools/adapters must conform to Skills/GRC; adapters do not own HUMAN.
+IMPLEMENTATION_STATUS=OPTIONAL_ADAPTER / PLANNED. LANGGRAPH_IN_SKILLSMACHINE_CANON=NO
+ALIGNMENT_ACTION=Do not install, import, execute, or treat LangGraph as mandatory. Implementation evidence may inform a later Human-authorized change; it does not self-promote.
+
+==========
+30. AUTHORITATIVE REFERENCES
+==========
+
+Primary: this file (canonical conceptual owner; initially drafted for Human review), HUMAN.README.txt, HUMAN.OPERATING.MODEL.txt.
+Execution how-to: Skills listed in section 23.
+Mandatory controls: GRCLake files listed in section 23.
+Placement: SKILL.PROJECT_INFORMATION_ARCHITECTURE.txt; POLICY.REPOSITORY.ARCHITECTURE.txt.
+Baseline input: SM_AI_HUMAN_METHODOLOGY_BASELINE.txt (discovery; not canon).
+Human decision: this HUMAN hijo is ACTIVE as CANONICAL_CONCEPTUAL_OWNER under ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001; it does not silently override the operating model.
+
+END OF HUMAN.AI.WORKFLOW ACTIVE CANONICAL_CONCEPTUAL_OWNER

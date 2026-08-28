@@ -110,6 +110,10 @@ If an unexpected file, change, dependency, local tool config, generated artifact
 
 Unknown worktree state must be classified before the agent proceeds.
 
+UNKNOWN_WORKTREE_STATE = HARD_STOP until classified.
+Classification details remain governed by GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt.
+This section is the sequential-workflow trigger. That GRC is the classification SSOT.
+
 The agent must not:
 
 - stage it;
@@ -212,10 +216,8 @@ GRCLake\01.CONTROLS\GRC.SCRIPT_EXECUTION_STAGING.txt
 GRCLake\01.CONTROLS\GRC.USECASE_TEMP_UPLOAD_STAGING.txt
 - Governs upload-ready context packaging and SyS\Temp context bundles.
 
-Candidate future control:
-
 GRCLake\01.CONTROLS\GRC.UNKNOWN_WORKTREE_STATE_HARD_STOP.txt
-- Should govern unknown worktree state in more detail if promoted.
+- Governs unknown-worktree classification detail. Section 04.00 of this GRC is the HARD_STOP trigger.
 
 ==========
 09.00 FAILURE CONDITIONS
@@ -357,4 +359,158 @@ remains conditionally allowed; canonical mutation remains single-owner or
 explicitly sequenced.
 ==========
 FIN_MB-SM-077D_EXACT_AUTHORITY_AND_CANDIDATE_BEFORE_CANON
+==========
+
+==========
+13.00_SM_AI_WORKFLOW_BATCH_A_ALIGNMENT
+==========
+
+ALIGNMENT_ID=SM-AI-WORKFLOW-BATCH-A
+SOURCE_AUTHORITY=HUMAN\HUMAN.AI.WORKFLOW.txt
+SOURCE_AUTHORITY_STATUS=ACTIVE_CANONICAL_CONCEPTUAL_OWNER
+ALIGNMENT_STATUS=ACTIVE
+ALIGNMENT_ACTIVE=YES
+HUMAN_REVIEW_REQUIRED=NO
+FRAMEWORK_NEUTRAL=YES
+FRAMEWORK_IS_NOT_AUTHORITY=YES
+ADAPTER_CANNOT_PROMOTE_CANON=YES
+CURRENT_ALIGNMENT_STATE=ACTIVE_IN_WORKTREE_UNCOMMITTED
+PROTOCOL_VIOLATION_ENFORCEMENT=ACTIVE_HARD_STOP
+DATE=2026-08-20
+ACTIVATION_DATE=2026-08-21
+TASK_ID=20260820.193910_SM-AI-WORKFLOW-BATCH-A-CORE-ALIGNMENT-EXECUTOR-001
+ACTIVATION_TASK_ID=20260821.005541_SM-AI-WORKFLOW-BATCH-A-ACTIVATION-EXECUTOR-001
+
+This block is ACTIVE mandatory-control language.
+It is not a graph how-to manual. How-to lives in 02.SKILL.AGENT_EXECUTION_POLICY.txt section 13.00.
+Existing ACTIVE_RULE MB blocks (12.00-12.80) remain as they were. This alignment is independently ACTIVE; it does not rely on those MBs for its own activation.
+
+The clauses below are live HARD_STOP / fail-closed controls unless a later Human decision narrows them.
+
+==========
+13.10_AUTHORITY_PATH_CONTROL
+==========
+
+- Work Units cannot bypass Executor.
+- Executor cannot bypass Coordinator to report directly to Orchestrator.
+- Coordinator cannot replace Human authorization.
+- Frameworks cannot create authority shortcuts.
+
+PROTOCOL_VIOLATION_ENFORCEMENT=ACTIVE_HARD_STOP
+
+If Coordinator is unavailable:
+- fail closed;
+- record the blocker;
+- do not bypass Coordinator;
+- do not mutate canon;
+- return BLOCKED through the authorized reporting mechanism when available.
+
+These communication clauses are live HARD_STOP controls.
+
+==========
+13.20_CANONICAL_APPLY_CONTROL
+==========
+
+- only one authorized Executor Apply Phase (fase de aplicación canónica);
+- Apply Phase is not a Work Unit (unidad de trabajo);
+- proposal is not canon;
+- recommendation is not authorization (RECOMMENDATION_IS_NOT_AUTHORIZATION=YES);
+- computational join (unión computacional) cannot choose canon;
+- graph runtime cannot enter Apply Path (GRAPH_RUNTIME_CANNOT_ENTER_APPLY_PATH_BY_ITSELF=YES);
+- canonical mutation requires exact authorization and allowlist (never git add -A / git add . unless Human explicitly instructs otherwise, per 03.00).
+
+==========
+13.30_PARALLELISM_CONTROL
+==========
+
+Existing 02.00 remains the live layered concurrency rule.
+
+This ACTIVE block restates and completes:
+
+- SPEED_ALONE_IS_INSUFFICIENT;
+- isolated proposal parallelism requires proven independence;
+- disjoint write boundaries;
+- no shared Git index across concurrent proposal writers;
+- deterministic consolidation;
+- no canonical mutation by workers;
+- sequential fallback when isolation is uncertain.
+
+SAFE_THROUGHPUT_OPTIMIZATION=REQUIRED
+UNSAFE_SPEED=PROHIBITED
+PARALLEL_READ_ONLY_DISCOVERY=ALLOWED_WHEN_ISOLATION_PROVEN
+PARALLEL_SHARED_STATE_MUTATION=FORBIDDEN_UNLESS_EXPLICITLY_SEQUENCED_AND_AUTHORIZED
+FIVE_PROMPT_EFFICIENCY_REVIEW=REQUIRED_WHEN_ACTIONABLE
+Speed alone remains insufficient; however, avoid unnecessary serialization of independent discovery, analysis, and decision-package drafting.
+
+==========
+13.40_LOOP_AND_RETRY_CONTROL
+==========
+
+Preserve the active three-equivalent-failure hard stop in 12.00-12.10 for mutating agent tasks:
+
+MAX_CONSECUTIVE_EQUIVALENT_FAILURES=3
+No fourth equivalent attempt without Human.
+Retries remain inside isolation.
+Iterations are not paths.
+No autonomous delegation as retry (12.20 remains ACTIVE_RULE).
+
+Do not turn PROPOSED_DEFAULT_MAX_ITERATIONS_PER_LOOP=6 into GRC enforcement in this batch.
+
+==========
+13.50_GRAPH_NON_PROMOTION_CONTROL
+==========
+
+- graph output is proposal;
+- recommendation exits through Result Path (ruta de resultado);
+- Human decision precedes Apply Path;
+- failed/partial branches cannot write canon;
+- a graph cannot authorize itself.
+
+RECOMMENDED → RESULT_PATH → COORDINATOR_RECOMMENDATION → ORCHESTRATOR_DECISION_PACKAGE → HUMAN_DECISION
+Only HUMAN_DECISION=AUTHORIZED may start Apply Path.
+
+==========
+13.60_FRAMEWORK_BOUNDARY
+==========
+
+FRAMEWORK_NEUTRAL=YES
+FRAMEWORK_IS_NOT_AUTHORITY=YES
+ADAPTER_CANNOT_PROMOTE_CANON=YES
+
+No vendor framework is required by this GRC.
+
+==========
+13.70_LIVE_HARD_STOPS
+==========
+
+LIVE_HARD_STOPS:
+- Work Unit bypassing Executor
+- Executor bypassing Coordinator to communicate directly with Orchestrator
+- Coordinator replacing Human authorization
+- unauthorized Apply Path
+- graph runtime entering Apply Path by itself
+- computational join selecting canon
+- graph self-authorization
+- unsafe concurrent proposal writers sharing a Git index when isolation is not proven
+
+These HARD_STOPS are ACTIVE.
+
+Section cross-reference:
+- 13.10 authority-path shortcuts
+- 13.20 Apply Path without Human authorization / allowlist
+- 13.20 graph runtime entering Apply Path
+- 13.20 computational join selecting canon
+- 13.50 graph self-authorization
+- 13.30 shared Git index across concurrent proposal writers (when isolation unproven)
+
+REMAIN_AS_ALREADY_ACTIVE (independent of this alignment):
+- 02.00 sequential default and isolation conditions
+- 03.00 human commit ownership
+- 04.00 unknown worktree HARD_STOP trigger
+- 12.00-12.10 three-equivalent-failure
+- 12.20 no autonomous cross-agent delegation
+- 12.70 exact Human authority for sensitive mutation
+
+==========
+FIN_13.00_SM_AI_WORKFLOW_BATCH_A_ALIGNMENT
 ==========

@@ -3,8 +3,10 @@ HUMAN — OPERATING MODEL (HUMAN > GRC > SKILLS)
 ==========================================
 
 ID_UNICO..........: HUMAN.OPERATING.MODEL.0001
-VERSION...........: v0.1-DRAFT
-FECHA.............: 2026-04-30
+VERSION...........: v0.2
+STATUS_GENERAL....: ACTIVE_PRODUCT_DOCTRINE
+PROVENANCE........: Initial artifact created as v0.1-DRAFT on 2026-04-30; absorbed MB blocks may declare their own STATUS; detailed AI-workflow conceptual ownership lives in HUMAN.AI.WORKFLOW.txt.
+FECHA.............: 2026-08-23
 AUTOR_HUMANO......: PABLO
 
 JERARQUIA..........:
@@ -50,6 +52,28 @@ REGLA_DE_CAPAS....:
 - SyS contiene tooling, continuidad, validación y evidencia operacional.
 - 90.USECASE contiene outputs generados o compilados para facilitar upload del usuario a una IA.
 - 90.USECASE no es canon primario y puede regenerarse.
+
+==========
+90.USECASE_DISTRIBUTION_CONTRACT
+==========
+USECASE_90_LAYER=GENERATED_UPLOAD_DISTRIBUTION
+USECASE_90_CANONICAL=NO
+USECASE_90_INDEPENDENT_SOURCE_OF_TRUTH=NO
+USECASE_90_SKILLSMACHINE_RUNTIME_DEPENDENCY=NO
+USECASE_90_SKILLSMACHINE_OPERATION_DEPENDENCY=NO
+USECASE_90_AUTHORITATIVE_EDIT_LOCATION=CORE_SOURCE_OWNERS
+USECASE_90_CASE_FOLDER_MODEL=FLAT
+USECASE_90_PRIMARY_ARTIFACT_MODEL=SINGLE_SELF_CONTAINED_COMPILED_FILE
+USECASE_90_DISAGGREGATED_OUTPUTS_ALLOWED=NO
+USECASE_90_SUBDIRECTORIES_ALLOWED=NO
+USECASE_90_SOURCE_PROVENANCE_EMBEDDED=YES
+USECASE_90_SEPARATE_TARGET_MANIFEST_REQUIRED=NO
+USECASE_90_GENERATED_FILES_HAND_EDITABLE=NO
+
+90.USECASE is an independent distribution and upload layer. It is not a second source of truth and is not required to load, bootstrap, run, continue, validate, or operate SkillsMachine. Authoritative edits occur only in Core source owners; generated 90.USECASE files are regenerated, never hand-edited as a repair. Each target case folder remains present and flat and contains exactly one self-contained compiled artifact. Required package identity, source provenance, source hashes, payload integrity evidence and generated-output warning belong inside that compiled artifact, not in a separate target manifest. Builder and validators must enforce this contract. A compiled package is an upload unit, not a Human, Skill, GRC, runtime authority or mutation authority.
+==========
+FIN_90.USECASE_DISTRIBUTION_CONTRACT
+==========
 
 FOCUS_GATE........:
 Antes de proponer desarrollo, scripts, patches, ramas, commits, refactors o cambios de arquitectura,
@@ -236,8 +260,8 @@ CONTINUITY_ROLES..:
 - BATON = cold-start continuity (blank AI context). Operational state only. Not product meaning.
 - SESSION_CONTINUE = warm-start continuity (same AI Project/workspace already has broad context).
   Not product meaning. Do not merge BATON and SESSION_CONTINUE.
-- WHOAMI_ACTIVE_CANON = NO. WHOAMI may remain as historical reference after selective absorption.
-  Stable product identity and boundaries live only in HUMAN.
+- WHOAMI_ACTIVE_CANON = NO. Standalone WhoAmI physical residuals are deleted.
+  Do not recreate. Stable product identity and boundaries live only in HUMAN.
 
 TEMP_FOR_AI_EXCHANGE:
 Disposable AI send/receive staging is:
@@ -320,6 +344,8 @@ CONTINUATION_MUST_PRESERVE_RELEVANT_HUMAN_PROFILE=YES
 OPERATOR_SPECIFIC_PAYLOAD_IS_NOT_GENERIC_DEFAULT=YES
 AUTHORITATIVE_HOME=HUMAN
 CONTENT_MIGRATION_STATUS=ABSORBED
+WHOAMI_PHYSICAL_RESIDUAL_STATE=DELETED
+WHOAMI_CLOSEOUT_STATE=COMPLETED
 
 WHAT_BELONGS_IN_HUMAN:
 HUMAN is the home for human/operator context and product meaning, including:
@@ -377,4 +403,34 @@ Do not hard-code one operator's personal working-profile as a generic default
 for other users or projects.
 ==========
 FIN_MB-SM-077D_HUMAN_HOME_FOR_HUMAN_CONTEXT
+==========
+
+==========
+MB-SM-AI-WORKFLOW_RELATIONSHIP
+==========
+
+DATE..............: 2026-08-20
+STATUS............: POINTER_ONLY
+TARGET_ARTIFACT...: HUMAN\HUMAN.AI.WORKFLOW.txt
+TARGET_STATUS.....: CANONICAL_CONCEPTUAL_OWNER
+TARGET_ACTIVE_CANON=YES
+ACTIVATION_DECISION_ID=20260820.190905_SM-HUMAN-AI-WORKFLOW-ACTIVATE-EXECUTOR-001
+LAYER.............: HUMAN_OPERATING_MODEL
+
+RELATIONSHIP......:
+HUMAN.OPERATING.MODEL retains general SkillsMachine authority and product doctrine:
+usecase-first focus, enrolment, continuity roles, Human-home rules, and the
+HUMAN > GRC > SKILLS hierarchy.
+
+HUMAN.AI.WORKFLOW is active conceptual canon. It owns detailed AI-workflow intent
+and methodology: roles, Command/Result/Apply Paths, Work Units, graphs, loops,
+sandbox versus canon, and diagrams. It does not replace this operating model.
+
+Skills/GRC Batch A alignment is ACTIVE_IN_WORKTREE_UNCOMMITTED
+(02.SKILL.AGENT_EXECUTION_POLICY.txt and GRC.AI_CODE_AGENT_SEQUENTIAL_WORKFLOW.txt).
+BATCH_A_COMMITTED=NO. BATCH_A_PUSHED=NO.
+LangGraph remains an optional adapter. It is not installed and not executed.
+Physical WhoAmI residuals are deleted after absorption proof. Do not recreate.
+==========
+FIN_MB-SM-AI-WORKFLOW_RELATIONSHIP
 ==========

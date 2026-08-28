@@ -25,6 +25,8 @@ SALIDA_ESPERADA....:
 - Una IA en blanco puede entender qué es este repo y cómo operar sin inventar.
 
 CHANGELOG..........:
+2026-08-21, v0.1-DRAFT
+- WhoAmI physical residuals deleted after absorption proof (SyS\WhoAmI and SyS\01_WHOAMI_SKILLMACHINE.txt). Do not recreate.
 2026-08-19, v0.1-DRAFT
 - Standalone WhoAmI retired from active canon; short-context checklist absorbed in HUMAN.OPERATING.MODEL MB-SM-077D.
 2026-04-30, v0.1-DRAFT
@@ -42,7 +44,8 @@ Standalone WhoAmI is retired from active canon; useful human/operator context is
 MB-SM-076A6_NOTE
 ==========
 WHOAMI_ACTIVE_CANON=NO.
-HUMAN is the sole top product canon. SyS/01_WHOAMI_SKILLMACHINE.txt is historical reference only.
+HUMAN is the sole top product canon.
+Standalone WhoAmI physical residuals were deleted after absorption proof (2026-08-21). Do not recreate. Do not load a WhoAmI file as product canon.
 Cold-start continuity = BATON. Warm-start continuity = SESSION_CONTINUE. Neither replaces HUMAN.
 External AI exchange temp = C:\Users\aazcl\Downloads\T.AI.SkillMachine (flat).
 Details: HUMAN.OPERATING.MODEL.txt (MB-SM-076A6 block) and SyS/OPTION_D.INFORMATION_ARCHITECTURE.V0.1.txt.
@@ -72,4 +75,12 @@ including the short-context checklist (purpose/state/deliverables/open items/nex
 Live operational values stay in BATON or SESSION_CONTINUE, not in HUMAN.
 Do not create a competing identity file. Do not load a standalone WhoAmI as product canon.
 Operator-specific working-profile payload remains operator-specific, not a generic default.
+==========
+
+==========
+MB-SM-AI-WORKFLOW_NOTE
+==========
+HUMAN.AI.WORKFLOW.txt is ACTIVE. It is the CANONICAL_CONCEPTUAL_OWNER for Human–AI workflow intent and operating methodology.
+Skills own reusable execution procedures. GRCLake owns mandatory controls.
+The artifact does not itself install or require a framework.
 ==========
