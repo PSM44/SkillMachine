@@ -11,8 +11,12 @@ DO_NOT_TRUST_EMBEDDED_HEAD_BLINDLY=YES
 VERIFY_AT_COLD_START=git rev-parse HEAD; git rev-parse origin/main; git status --short --untracked-files=all
 RECORDED_AT=2026-08-29
 BRANCH=main
-EMBEDDED_HEAD_AT_WRITE=27ff6fdcfb6b2e4498785c55809a0f07ebe5ea51
-ORIGIN_MAIN_AT_WRITE=27ff6fdcfb6b2e4498785c55809a0f07ebe5ea51
+EMBEDDED_HEAD_AT_WRITE=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+ORIGIN_MAIN_AT_WRITE=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+GROUP_E_LANDED=YES
+GROUP_E_COMMIT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+HEAD_CURRENT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+ORIGIN_MAIN_CURRENT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
 HUMAN_IS_SEMANTIC_AUTHORITY=YES
 BATON_IS_CONTINUATION_HANDOFF_ONLY=YES
 GOVERNED_PROJECTS=SM-LAB-004;CloseReport
@@ -32,7 +36,7 @@ TEMP_ROLE=disposable AI exchange; never authoritative baseline
 PRODUCT_BACKLOG=SyS/PROJECT.BACKLOG.ACTIVE.txt
 SKILL_GRC_LEDGER=SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
 INHERITED_DIRT=DEFER transcript candidate; EXCLUDE SessionClose 073A txt
-NEXT_SEQUENCE=Group E closeout in progress: stage WhoAmI deletion plus BATON refresh, commit, push, write consolidated report
+NEXT_SEQUENCE=Hygiene policy formalized (POLICY.OPERATIONAL_ARTIFACT_RETENTION_AND_HYGIENE); read-only hygiene inventory next; 90.USECASE build frozen until explicit authorization
 ==========
 FIN_MB-SM-077C_BATON_CURRENT_STATE
 ==========
@@ -63,6 +67,27 @@ HUMAN_DECISIONS_CAPTURED=ACTIVE (do not ask again unless contradiction found aft
 - D-H-006: Historical/useful artifacts: if useful, preserve in core regardless of age; if only record/evidence, keep one month, then delete only through authorized cleanup.
 - D-H-007: Improvement opportunities must use the existing Improvement Flow storage/system.
 - D-H-008: WhoAmI is absorbed by HUMAN and must not remain active canon or be recreated.
+==========
+
+==========
+MB-SM-079A_POLICY_CONTINUATION_FIX_AND_HYGIENE_FORMALIZATION_20260829
+==========
+CLASS=EXECUTOR_POLICY_AND_CONTINUATION_REFRESH
+DATE=2026-08-29
+AUTHORIZATION=20260829.173000_SM_EXECUTOR_150MIN_CONTINUATION_FIX_AND_HYGIENE_POLICY_FORMALIZATION_BATCH_001
+GROUP_E_LANDED=YES
+GROUP_E_COMMIT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+HEAD_CURRENT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+ORIGIN_MAIN_CURRENT=ce68a5f5f7071c2f9773db0205bb0692994bdeaf
+
+Q_PROD_DECISIONS=RESOLVED (active; do not ask again unless contradiction found after reviewing HUMAN/BATON/Q&A)
+- Q-PROD-001=A: first deploy means minimum usable end-to-end flow.
+- Q-PROD-002=A: blank IA startup package = BATON + roadmap + dirty state + next action.
+- Q-PROD-003=A: 90.USECASE remains frozen until explicit build authorization.
+- Q-PROD-004=A: hygiene/retention policy belongs in dedicated GRC/Policy artifact (POLICY.OPERATIONAL_ARTIFACT_RETENTION_AND_HYGIENE).
+- Q-PROD-005=A: hygiene priority is read-only inventory first; no immediate cleanup.
+
+NEXT_ACTION=Read-only hygiene inventory + first-deploy scope definition; 90.USECASE build frozen until explicit authorization; cold-start continuation sufficient.
 ==========
 
 ==========

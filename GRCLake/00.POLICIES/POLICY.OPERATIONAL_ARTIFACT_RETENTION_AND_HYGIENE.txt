@@ -1,0 +1,138 @@
+==========================================
+GRC POLICY — OPERATIONAL ARTIFACT RETENTION AND HYGIENE
+==========================================
+
+==========
+00.00_METADATOS_DEL_DOCUMENTO
+==========
+
+GRC_ID............: GRC.POLICY.OPERATIONAL_ARTIFACT_RETENTION_AND_HYGIENE.0001
+TIPO..............: POLICY
+DOMINIO...........: OPERATIONAL_ARTIFACTS
+NOMBRE_CORTO......: ARTIFACT_RETENTION_AND_HYGIENE
+TITULO............: Politica canonica de retencion y saneamiento (hygiene) de artefactos operativos SkillsMachine
+
+OWNER.............: HUMAN (PABLO)
+STAKEHOLDERS......: PABLO (Developer, Owner)
+APLICA_A..........: GLOBAL (C:\01. GitHub\Skills)
+
+SEVERIDAD.........: FAIL
+RACIONAL_SEVERIDAD.: Sin politica de retencion, el repo acumula drift, evidencia no clasificada y borrado no autorizado que rompe trazabilidad.
+
+VERSION...........: v0.1-DRAFT
+FECHA_CREACION....: 2026-08-29
+FECHA_MODIFICACION: 2026-08-29
+ESTADO............: DRAFT
+
+TRACE_TO_HUMAN....:
+- HUMAN_REF_PATH..: C:\01. GitHub\Skills\HUMAN\HUMAN.OPERATING.MODEL.txt
+- HUMAN_SECTION...: JERARQUIA / REGLA_CANONICA / CAMBIO_CONTROLADO
+- HUMAN_INTENT....: HUMAN manda; cambios canonicos solo los autoriza el humano; sin drift silencioso.
+- HUMAN_NON_GOALS.: No impone un barrido/limpieza inmediato; prioriza inventario read-only primero.
+
+SOURCE_DECISIONS..:
+- D-H-006: Historical/useful artifacts: if useful, preserve in core regardless of age; if only record/evidence, keep one month, then delete only through authorized cleanup.
+- Q-PROD-003=A: 90.USECASE remains frozen until explicit build authorization.
+- Q-PROD-004=A: hygiene/retention policy belongs in dedicated GRC/Policy artifact.
+- Q-PROD-005=A: hygiene priority is read-only inventory first; no immediate cleanup.
+
+TAGS_OPERATIVOS...: GOVERNANCE, RETENTION, HYGIENE, EVIDENCE, CLEANUP_CONTROL
+
+==========
+00.10_OBJETIVO
+==========
+
+Formalizar como se clasifica, retiene y (solo con autorizacion explicita) elimina el material
+operativo del repositorio, de modo que:
+
+- el material util permanezca en core sin importar su antiguedad;
+- el material que es solo registro/evidencia tenga una retencion acotada (1 mes);
+- ningun borrado ocurra sin autorizacion humana explicita;
+- el inventario read-only preceda a cualquier disposicion o limpieza;
+- los outputs generados de 90.USECASE permanezcan congelados hasta autorizacion de build.
+
+Esta politica es GRC, no sugerencia. Si se viola: se bloquea avance (STOP THE LINE).
+
+==========
+01.00_CLASES_DE_DISPOSICION
+==========
+
+Las siguientes clases son las unicas categorias validas para clasificar material operativo:
+
+CORE_USEFUL
+- Material activo util para el funcionamiento, gobernanza o continuidad del producto.
+- Se conserva en core independientemente de la antiguedad.
+- No requiere accion de limpieza. Es la clase por defecto para Skills/GRC/registers activos.
+
+EVIDENCE_30D
+- Material que es solo registro o evidencia (no activo, no autoritativo).
+- Puede retenerse por un maximo de un (1) mes.
+- Pasado el mes, la eliminacion requiere limpieza autorizada; no se borra automaticamente.
+
+LEGACY_REFERENCE
+- Material de referencia historica que no es autoridad activa.
+- Se conserva como referencia consultable, fuera de los canales activos de decision.
+- No es canon y no debe promoverse sin autorizacion humana.
+
+DELETE_AFTER_AUTH
+- Material cuya eliminacion esta justificada pero SOLO puede ejecutarse con autorizacion
+  humana explicita y evidencia de la autorizacion.
+- Sin autorizacion: permanece intacto (no se borra, no se mueve).
+
+UNKNOWN_REQUIRES_HUMAN_REVIEW
+- Material sin clasificacion clara.
+- No se elimina ni se mueve; se lista en el inventario para revision humana.
+
+==========
+02.00_REGLAS_MANDATORIAS
+==========
+
+R1. HYGIENE_INVENTORY_FIRST=YES
+- Ninguna disposicion o limpieza se ejecuta antes de completar un inventario read-only
+  que clasifique cada ruta residual en las clases de la seccion 01.00.
+
+R2. CLEANUP_WITHOUT_AUTH=NO
+- Ningun borrado de archivos/carpetas se ejecuta sin autorizacion humana explicita.
+- La autorizacion debe quedar registrada (evidencia).
+
+R3. 90_USECASE_BUILD_REFRESH_REQUIRES_AUTH=YES
+- Los outputs generados y eliminaciones de 90.USECASE permanecen CONGELADOS.
+- Ningun build/refresh de 90.USECASE se ejecuta sin autorizacion explicita de build.
+
+R4. IMPROVEMENT_FLOW_SYSTEM=YES
+- Las oportunidades de mejora se almacenan en el sistema/flujo de Improvement Flow existente
+  (SyS\ImproveOp\ y/o ProjectOps ImprovementFlow), no en archivos sueltos no gobernados.
+
+R5. EVIDENCE_30D_RETENTION_WINDOW=1_MONTH
+- Material clasificado EVIDENCE_30D puede retenerse hasta un mes; luego su eliminacion
+  requiere limpieza autorizada.
+
+R6. TRACEABILITY_ON_CONFLICT
+- La trazabilidad se muestra solo cuando hay conflicto, siempre que no se degrade continuidad,
+  memoria o registros (D-H-002).
+
+==========
+03.00_ALCANCE_DE_INVENTARIO (READ-ONLY)
+==========
+
+El inventario de higiene (read-only, sin limpieza) debe clasificar al menos:
+- SyS/ImproveOp/**
+- 90.USECASE/CASES/**
+- **/__pycache__/**
+- SkillsLake/99.CANDIDATES/**
+- Archivos de evidencia de SessionClose
+- Carpetas vacias o residuales (por ejemplo SyS\ImproveOp\New folder)
+
+Este inventario se ejecuta solo con autorizacion de "read-only hygiene inventory".
+
+==========
+04.00_CHANGELOG
+==========
+
+2026-08-29, v0.1-DRAFT
+- Creacion de la politica GRC de retencion e higiene de artefactos operativos.
+- Fuente: decisiones humanas D-H-006 y Q-PROD-003/004/005.
+
+==========
+FIN_GRC.POLICY.OPERATIONAL_ARTIFACT_RETENTION_AND_HYGIENE.0001
+==========
