@@ -9,10 +9,12 @@ PRODUCT_CANON=HUMAN
 VERIFY_LIVE_GIT=YES
 DO_NOT_TRUST_EMBEDDED_HEAD_BLINDLY=YES
 VERIFY_AT_COLD_START=git rev-parse HEAD; git rev-parse origin/main; git status --short --untracked-files=all
-RECORDED_AT=2026-08-15
+RECORDED_AT=2026-08-29
 BRANCH=main
-EMBEDDED_HEAD_AT_WRITE=c0f37e5bbf42e67504a2fe86a9c10daa8ae1eb28
-ORIGIN_MAIN_AT_WRITE=c0f37e5bbf42e67504a2fe86a9c10daa8ae1eb28
+EMBEDDED_HEAD_AT_WRITE=27ff6fdcfb6b2e4498785c55809a0f07ebe5ea51
+ORIGIN_MAIN_AT_WRITE=27ff6fdcfb6b2e4498785c55809a0f07ebe5ea51
+HUMAN_IS_SEMANTIC_AUTHORITY=YES
+BATON_IS_CONTINUATION_HANDOFF_ONLY=YES
 GOVERNED_PROJECTS=SM-LAB-004;CloseReport
 CLOSEREPORT_ENROLMENT=ENROLLED
 PROJECT_SYNC_STATUS=CURRENT
@@ -30,9 +32,37 @@ TEMP_ROLE=disposable AI exchange; never authoritative baseline
 PRODUCT_BACKLOG=SyS/PROJECT.BACKLOG.ACTIVE.txt
 SKILL_GRC_LEDGER=SkillsLake/05.BACKLOG/SKILL_GRC.CANDIDATES.ACTIVE.txt
 INHERITED_DIRT=DEFER transcript candidate; EXCLUDE SessionClose 073A txt
-NEXT_SEQUENCE=MB-SM-077D Skill/GRC differential absorption
+NEXT_SEQUENCE=Group E closeout in progress: stage WhoAmI deletion plus BATON refresh, commit, push, write consolidated report
 ==========
 FIN_MB-SM-077C_BATON_CURRENT_STATE
+==========
+
+==========
+MB-SM-078A_GROUP_E_WHOAMI_BATON_CLOSEOUT_HUMAN_DECISIONS_20260829
+==========
+CLASS=EXECUTOR_GROUP_E_CONTINUITY_REFRESH
+DATE=2026-08-29
+AUTHORIZATION=20260829.000500_SM_EXECUTOR_GROUP_E_WHOAMI_BATON_CLOSEOUT_AND_HUMAN_DECISION_CAPTURE_BATCH_001
+HEAD_BASELINE_BEFORE_COMMIT=27ff6fdcfb6b2e4498785c55809a0f07ebe5ea51
+BRANCH=main
+
+WHOAMI_ACTIVE_CANON=NO
+HUMAN_IS_SEMANTIC_AUTHORITY=YES
+BATON_IS_CONTINUATION_HANDOFF_ONLY=YES
+WhoAmI useful content was absorbed by HUMAN (MB-SM-077D). Group E retires the physical WhoAmI artifacts; do not recreate them.
+
+LANDED_SEQUENCE=A0;GROUP_A;GROUP_C;GROUP_D
+NEXT_SEQUENCE_AFTER_GROUP_E=Orchestrator continuation package; later human-gated review of remaining commit-group order
+
+HUMAN_DECISIONS_CAPTURED=ACTIVE (do not ask again unless contradiction found after reviewing HUMAN and consolidated prior Q&A)
+- D-H-001: ORCHESTRATOR initial view must show state + risks + next action.
+- D-H-002: Traceability is visible only when there is conflict, provided continuity, memory, and records are not degraded.
+- D-H-003: Before asking human questions, review HUMAN and consolidated prior Q&A to avoid duplicates.
+- D-H-004: BATON must contain what is necessary for a blank IA to continue without memory/context loss.
+- D-H-005: First deploy priority is a usable and governed flow, not perfect architecture or full cleanup.
+- D-H-006: Historical/useful artifacts: if useful, preserve in core regardless of age; if only record/evidence, keep one month, then delete only through authorized cleanup.
+- D-H-007: Improvement opportunities must use the existing Improvement Flow storage/system.
+- D-H-008: WhoAmI is absorbed by HUMAN and must not remain active canon or be recreated.
 ==========
 
 ==========
@@ -2697,7 +2727,7 @@ STATUS=APPLIED_PENDING_VALIDATION_AND_HUMAN_REVIEW
 SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
 ACTIVE_PRODUCT_BACKLOG=SyS\PROJECT.BACKLOG.ACTIVE.txt
 ACTIVE_TECHNICAL_DEBT=SyS\TECHNICAL.DEBT.ACTIVE.txt
-ACTIVE_ROADMAP=SyS\PROJECT.ROADMAP.ACTIVE.txt
+ACTIVE_ROADMAP=SyS\PROJECT.ROADMAP.ACTIVE.md
 CLOSED_SUPERSEDED_REGISTER=SyS\CLOSED.SUPERSEDED.REGISTER.txt
 HISTORICAL_LAB_REGISTERS=EVIDENCE_ONLY
 GENERATED_90_USECASE_OUTPUTS=NONCANONICAL
