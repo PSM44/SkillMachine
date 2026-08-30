@@ -6,12 +6,12 @@
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
 | Última verificación | 29 de agosto de 2026 |
-| Fase actual | First deploy: readiness package declarado (mínimo flujo interno gobernado usable) |
-| Rama / HEAD verificado | `main` / `b35a6faa6f2b6eb836e2a1c40d368520f13d2870` |
-| Staging, commit y push | Realizados hasta first-deploy readiness (BATON + roadmap) |
+| Fase actual | First deploy V1 CONFIRMADO (mínimo flujo interno gobernado usable) |
+| Rama / HEAD verificado | `main` / `823f7b17de06a26b358b19a3b5dffdcc3da5fedf` |
+| Staging, commit y push | Realizados hasta first-deploy V1 closeout (BATON + roadmap) |
 | Autoridad de identidad y significado | HUMAN |
-| Próxima decisión | Confirmar first deploy y elegir track post-first-deploy (higiene, 90.USECASE, candidatos, smoke) |
-| Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY landed) |
+| Próxima decisión | Ejecutar backlog post-deploy (sesión close doc fix, higiene, 90.USECASE build, candidatos, Improvement Flow, uso real) |
+| Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY + FIRST_DEPLOY_V1) |
 
 ## 1. Resumen ejecutivo
 
