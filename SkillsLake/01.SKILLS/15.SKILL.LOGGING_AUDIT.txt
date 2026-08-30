@@ -239,5 +239,26 @@ and any earlier PASS line must be superseded by the final FINAL_STATUS. A log
 whose last status line is PASS while a mandatory stage failed violates this
 skill (see anti-false-DONE in 08.SKILL.PROBLEM_TROUBLE_INCIDENTS).
 
+12.60_POLICY_GUARD_TEST_RESULT_TRACEABILITY (IF4)
+Each guard/test that enforces a policy or control maps to an explicit result,
+never a silent pass and never an UNKNOWN counted as PASS.
+
+Result vocabulary per guard/test:
+- ACCEPT: the guard/test passed and its evidence is present (no unresolved gap).
+- REJECT: the guard/test failed; record the failing condition and the evidence.
+- UNKNOWN: evidence insufficient to decide; MUST be surfaced, MUST NOT be treated
+  as PASS, and MUST block completion until resolved or explicitly accepted by the human.
+
+Traceability record (KEY=VALUE or structured), for every enforceable guard/test:
+- GUARD_ID=<id or guard/test name>
+- GUARD_POLICY=<policy/control it enforces, or pointer>
+- GUARD_RESULT=<ACCEPT|REJECT|UNKNOWN>
+- GUARD_EVIDENCE=<evidence pointer or summary>
+- GUARD_OWNER=<result owner / who closes the result>
+No silent pass: a guard/test with no recorded result is implied UNKNOWN -> block.
+No unresolved UNKNOWN as PASS: an UNKNOWN left open may not be reported as final PASS.
+
 FIN_MB-SM-067B-D2_OPERATIONAL_SUMMARY_AND_STATE_ATTRIBUTION
+==========
+FIN_MB-SM-IF4_POLICY_GUARD_TEST_RESULT_TRACEABILITY
 ==========
