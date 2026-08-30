@@ -38,6 +38,7 @@ DEPENDENCIAS......:
 02.00 Permisos y límites (FS, ocupación concurrente)
 02.40 Containment canónico de paths (SK-04 / Cline)
 02.50 Admisión determinística (SK-03 / Cline, FAIL_CLOSED)
+02.60 Emisión de work units (IF5 / Cline)
 03.00 Operaciones permitidas (Create/Edit/Delete/Rename/Move)
 04.00 Operaciones prohibidas
 05.00 Contrato de rollback (Git + snapshot)
@@ -140,6 +141,27 @@ Nota:
 - FAIL_CLOSED=YES: ante cualquier ambigüedad o falta de autoridad, la admisión falla cerrada (no ejecuta).
 - El runtime mode (Plan/Act, provider, model, graph state, tool permissions) NUNCA es autoridad por sí mismo
   (alineado con GRC-06 runtime mode is not authority).
+
+02.60_EMISION_DE_WORK_UNITS (IF5 / Cline)
+- La emisión de una work unit separa campos HUMAN-required de los derivados por sistema:
+  HUMAN_REQUIRED:
+  - autorización / identidad;
+  - fuente de autoridad (AUTHORITY_SOURCE);
+  - objetivo (objective);
+  - operación (operation);
+  - target (write/read scope cuando no es mecánicamente exacto);
+  - criterios de aceptación (acceptance).
+  SYSTEM_DERIVED:
+  - project ID cuando es fijo;
+  - runtime;
+  - return schema / contrato de resultado;
+  - IDs de correlación WU/TASK.
+  EXECUTOR_RETURN:
+  - resultado consolidado (WU_ID / STATUS / ARTIFACTS / EVIDENCE / PROVENANCE / CONFIDENCE / GAPS / DECISIONS_NEEDED).
+- AUTORIZACION_BOUNDARY: el alcance de la WU es inmutable para esa WU; el ejecutor no lo reinterprete ni amplíe.
+- RECOMENDACION_NO_ES_AUTORIZACION=YES: ninguna recomendación otorga autoridad de mutación.
+- MUTACION_CON_ALLOWLIST_EXACTO: cualquier mutación exige allowlist exacto (nunca git add . / git add -A)
+  sin autorización humana explícita.
 
 ==========
 03.00_OPERACIONES_PERMITIDAS
@@ -313,6 +335,9 @@ En OK/FAIL, registrar:
 12.00_CHANGELOG
 ==========
 
+2026-08-30, v1.4-DRAFT
+- MB-SM-IF5 (Improvement Flow): 02.60 Emisión de work units (campos human/system-derived/executor-return,
+  autorización inmutable, recomendación != autorización, allowlist exacto).
 2026-08-30, v1.3-DRAFT
 - MB-SM-IF-ITEM1 (Improvement Flow, evidencia 20260821_Cline.md): absorbidas
   - 02.40 Containment canónico de paths (SK-04): canonicalización + bloqueo de `..` y sibling-prefix.
