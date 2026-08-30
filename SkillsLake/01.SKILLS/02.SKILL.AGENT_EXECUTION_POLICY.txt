@@ -36,6 +36,8 @@ DEPENDENCIAS......:
 
 01.00 Roles del agente (Planner vs Executor vs Proposal worker)
 02.00 Permisos y límites (FS, ocupación concurrente)
+02.40 Containment canónico de paths (SK-04 / Cline)
+02.50 Admisión determinística (SK-03 / Cline, FAIL_CLOSED)
 03.00 Operaciones permitidas (Create/Edit/Delete/Rename/Move)
 04.00 Operaciones prohibidas
 05.00 Contrato de rollback (Git + snapshot)
@@ -112,6 +114,32 @@ Nota:
 - Objetivos de mutación superpuestos no pueden ser owned de forma concurrente por mutadores/proposers distintos cuando eso puede producir conflicto físico.
 - Los algoritmos concretos de colisión por span de líneas son específicos de tooling y NO forman doctrina genérica de este Skill.
 - Ante interferencia de estado compartido: volver a secuenciación / single-owner.
+
+02.40_CONTAINMENT_CANONICO_DE_PATHS (SK-04 / Cline)
+- El chequeo de contención por prefijo de string es INSUFICIENTE. No basta "path empieza con root".
+- Secuencia obligatoria antes de admitir cualquier target:
+  1. canonizar el target solicitado;
+  2. canonizar el root autorizado;
+  3. probar relación de descendencia (descendant) entre ambos;
+  4. bloquear traversal `..`;
+  5. bloquear colisiones de prefijo-hermano (ej: `allowed-evil` vs `allowed`);
+  6. aplicar cheques de root prohibido DESPUÉS de la normalización, nunca antes.
+- Cualquier target que no pruebe descendencia canónica => FAIL inmediato (no se escribe).
+
+02.50_ADMISION_DETERMINISTICA (SK-03 / Cline, FAIL_CLOSED)
+- Toda work unit / operación se valida ANTES de ejecutarse contra una lista checkpointable y determinística:
+  - identidad de proyecto y runtime;
+  - autoridad respaldada por humano (no "recomendación" ni estado de sesión);
+  - delegación inmutable;
+  - operation allowlist;
+  - allowed-read / allowed-write containment;
+  - prohibited paths;
+  - HUMAN deny-default (lo no explícitamente permitido => denegado);
+  - defensa de traversal / sibling-prefix;
+  - rechazo de operación no soportada.
+- FAIL_CLOSED=YES: ante cualquier ambigüedad o falta de autoridad, la admisión falla cerrada (no ejecuta).
+- El runtime mode (Plan/Act, provider, model, graph state, tool permissions) NUNCA es autoridad por sí mismo
+  (alineado con GRC-06 runtime mode is not authority).
 
 ==========
 03.00_OPERACIONES_PERMITIDAS
@@ -285,6 +313,10 @@ En OK/FAIL, registrar:
 12.00_CHANGELOG
 ==========
 
+2026-08-30, v1.3-DRAFT
+- MB-SM-IF-ITEM1 (Improvement Flow, evidencia 20260821_Cline.md): absorbidas
+  - 02.40 Containment canónico de paths (SK-04): canonicalización + bloqueo de `..` y sibling-prefix.
+  - 02.50 Admisión determinística (SK-03): FAIL_CLOSED=YES, HUMAN deny-default, runtime mode != authority.
 2026-08-16, v1.2-DRAFT
 - MB-SM-GRAPH-003: distingue Proposal worker de Executor (mutador canónico).
 - Absorción: ocupación concurrente de recursos y conflicto de write-targets; algoritmos de línea quedan en tooling.
