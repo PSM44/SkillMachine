@@ -5,13 +5,13 @@
 | Campo | Estado |
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
-| Última verificación | 21 de agosto de 2026 |
-| Fase actual | Recuperación de gobernanza aplicada, pendiente de commit |
-| Rama / HEAD verificado | `main` / `066a37ff95d8f876b70351d04565adaccae4c8c0` |
-| Staging, commit y push | No realizados |
+| Última verificación | 29 de agosto de 2026 |
+| Fase actual | First deploy: readiness package declarado (mínimo flujo interno gobernado usable) |
+| Rama / HEAD verificado | `main` / `b35a6faa6f2b6eb836e2a1c40d368520f13d2870` |
+| Staging, commit y push | Realizados hasta first-deploy readiness (BATON + roadmap) |
 | Autoridad de identidad y significado | HUMAN |
-| Próxima decisión | Revisar este estado y decidir el grupo de commit |
-| Durabilidad Batch A | `ACTIVE_IN_WORKTREE_UNCOMMITTED` (`COMMITTED=NO`, `PUSHED=NO`) |
+| Próxima decisión | Confirmar first deploy y elegir track post-first-deploy (higiene, 90.USECASE, candidatos, smoke) |
+| Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY landed) |
 
 ## 1. Resumen ejecutivo
 
