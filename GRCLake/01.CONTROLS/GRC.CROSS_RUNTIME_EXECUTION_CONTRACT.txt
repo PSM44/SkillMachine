@@ -67,6 +67,18 @@ Allowed decisions:
 - BLOCK: unsafe or insufficient context.
 
 ==========
+02.10 EXECUTION_CONTRACT_HANDOFF
+==========
+
+Cross-runtime Work Unit handoff follows the execution contract above and adds:
+
+- WORK_UNIT_HANDOFF: A WU received by a downstream runtime must carry the originating authorization and must not be re-invented or re-scoped at handoff.
+- IMMUTABLE_DELEGATION: The delegated authority handed with a WU is immutable for that WU's authorized scope. A runtime may not broaden the delegated read/write scope.
+- RESULT_CONTRACT: Results returned across runtimes follow the Result contract (WU_ID / STATUS / ARTIFACTS / EVIDENCE / PROVENANCE / CONFIDENCE / GAPS / DECISIONS_NEEDED as owned by the Work Unit result contract; see also 02.SKILL.AGENT_EXECUTION_POLICY 13.00).
+- NO_AUTHORITY_REINTERPRETATION: An executor must not reinterpret delegation authority as broader authorization. Recommendation is not authorization (RECOMMENDATION_IS_NOT_AUTHORIZATION=YES).
+- TRACEABILITY_TO_ORIGIN: Every received WU must remain traceable to the originating Human authorization (authorization source, WU/TASK id, acceptance), even across runtime boundaries. No delegation breaks the chain of accountability.
+
+==========
 03.00 HARD FAIL CONDITIONS
 ==========
 
