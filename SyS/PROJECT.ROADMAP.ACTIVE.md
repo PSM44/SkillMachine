@@ -5,13 +5,13 @@
 | Campo | Estado |
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
-| Última verificación | 29 de agosto de 2026 |
-| Fase actual | First deploy V1 CONFIRMADO (mínimo flujo interno gobernado usable) |
-| Rama / HEAD verificado | `main` / `823f7b17de06a26b358b19a3b5dffdcc3da5fedf` |
-| Staging, commit y push | Realizados hasta first-deploy V1 closeout (BATON + roadmap) |
+| Última verificación | 30 de agosto de 2026 |
+| Fase actual | First deploy V1 CONFIRMADO (mínimo flujo interno gobernado usable); post-deploy IF3/IF4/IF5 landed |
+| Rama / HEAD verificado | `main` / `ca5d8771208e4d91fa8247d3ac47fd6534a4f42b` |
+| Staging, commit y push | Realizados hasta post-deploy IF4/IF5 (roadmap refresh) |
 | Autoridad de identidad y significado | HUMAN |
-| Próxima decisión | Ejecutar backlog post-deploy (sesión close doc fix, higiene, 90.USECASE build, candidatos, Improvement Flow, uso real) |
-| Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY + FIRST_DEPLOY_V1) |
+| Próxima decisión | Preparar y ejecutar el primer deploy usage loop en un proyecto externo/real (Brainy o NightShift) |
+| Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY + FIRST_DEPLOY_V1 + IF1..IF5) |
 
 ## 1. Resumen ejecutivo
 
