@@ -5,12 +5,12 @@
 | Campo | Estado |
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
-| Última verificación | 30 de agosto de 2026 |
-| Fase actual | First deploy V1 CONFIRMADO (mínimo flujo interno gobernado usable); post-deploy IF3/IF4/IF5 landed |
-| Rama / HEAD verificado | `main` / `ca5d8771208e4d91fa8247d3ac47fd6534a4f42b` |
-| Staging, commit y push | Realizados hasta post-deploy IF4/IF5 (roadmap refresh) |
+| Última verificación | 31 de agosto de 2026 |
+| Fase actual | FIRST_DEPLOY_V1 closed; post-deploy reconciliation landed; NightShift pilot/backlog findings landed |
+| Rama / HEAD verificado | `main` / `55abe0302229a0beac0aa53d8c5b27f2e0144976` |
+| Staging, commit y push | Realizados hasta NightShift backlog governance pilot findings |
 | Autoridad de identidad y significado | HUMAN |
-| Próxima decisión | Preparar y ejecutar el primer deploy usage loop en un proyecto externo/real (Brainy o NightShift) |
+| Próxima decisión | Nuevo ORCHESTRATOR: iniciar con propuesta read-only de NS-BL-0002; diferir piloto repo externo hasta un paso adicional validado en NightShift |
 | Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY + FIRST_DEPLOY_V1 + IF1..IF5) |
 
 ## 1. Resumen ejecutivo
@@ -21,13 +21,14 @@ PS.SkillsMachine es el producto gobernado para administrar, distribuir y perfecc
 
 - ✅ **WhoAmI fue absorbido por HUMAN y eliminado físicamente.** No quedan dependencias ni punteros activos.
 - ✅ **`HUMAN.AI.WORKFLOW` es el dueño conceptual canónico** de la metodología de trabajo humano–IA.
-- 🟡 **Batch A está activo en el worktree**, pero todavía no tiene commit ni push.
-- 🟡 **El roadmap, backlog y registro de cerrados ya fueron reconciliados**, también sin commit.
+- ✅ **FIRST_DEPLOY_V1 quedó cerrado.** No reabrir readiness salvo nuevo blocker confirmado.
+- ✅ **Los cambios post-deploy ya aterrizaron en `main` con commit y push.** Incluyen refresh compilado de `90.USECASE`, closeout de eliminación de fuentes superseded, IF1/IF3/IF4/IF5 y refresh de roadmap.
+- ✅ **NightShift sigue siendo `LAB_ONLY`**, pero su piloto controlado y backlog findings ya quedaron documentados como evidencia, sin promoción a canon.
 - ⛔ **Batch B1 no está autorizado.** La investigación de runtime safety (seguridad en tiempo de ejecución) terminó, pero la implementación no comenzó.
 - ⏸️ **LangGraph permanece como adaptador opcional.** No está instalado ni ejecutado y no define la arquitectura canónica.
 - ⏸️ **El BUILD completo de `90.USECASE` está diferido.** Solo se sincronizó el RUNBOOK de `SESSION_CLOSE`.
 
-> **Usted está aquí:** revisión humana del resultado de recuperación y decisión separada sobre el grupo de commit.
+> **Usted está aquí:** preparar un nuevo arranque de ORCHESTRATOR con continuidad post-deploy completa y sin reabrir readiness.
 
 ## 2. Mapa del programa
 
@@ -316,9 +317,9 @@ REVISION_TASK_ID=20260821.090511_SM_G55_ALLOWLIST_REVISION_AND_SECOND_GATE_001
 
 ## 14. Próxima acción única
 
-**HUMAN revisa esta superficie y, mediante una autorización separada, decide si se crea el grupo de commit.**
+**Nuevo ORCHESTRATOR toma esta superficie como cold-start y comienza por el board post-deploy; recomendación: NS-BL-0002 como propuesta read-only.**
 
-No ejecutar por inferencia: commit, push, Batch B1, instalación de LangGraph ni BUILD completo de `90.USECASE`.
+No ejecutar por inferencia: HUMAN mutations, promoción de candidatos, promoción de NightShift, instalación de LangGraph ni BUILD adicional de `90.USECASE`.
 
 ## 15. Apéndice técnico preservado del `.txt`
 
