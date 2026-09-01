@@ -797,6 +797,32 @@ A stricter GRC may tighten these Gates (condiciones obligatorias de avance).
 Definition of Done (DoD, definición de terminado) for a run still includes session close rules in 22.SKILL.PROJECT_LIFECYCLE_POLICY.txt. This block does not replace them.
 
 ==========
+13.140_OPERATIONAL_PROMPT_AND_TIMESTAMP_STANDARD
+==========
+
+WORK_CODE_STANDARD:
+- Pattern: `<ProjectShort>.R<RoadmapNode>.<WorkStream>.<PromptSequence>`
+- Example: `SM.R3.7.A.002`
+- Field semantics:
+  - `ProjectShort`: short project identifier (e.g. `SM` for SkillsMachine).
+  - `RoadmapNode`: owning roadmap node resolved from live canonical roadmap (e.g. `R3.7`). Never invent roadmap numbers.
+  - `WorkStream`: sub-workstream letter/identifier inside that roadmap node (e.g. `A`).
+  - `PromptSequence`: 3-digit monotonically increasing correlative number within the workstream (e.g. `001`, `002`). Resets to `001` on workstream transition.
+- Mandatory enclosing lines:
+  - Every operational work prompt MUST place the exact `WORK_CODE` on its FIRST LINE and LAST LINE.
+  - Every structured execution response (ORCHESTRATOR / COORDINATOR / EXECUTOR) MUST place the exact `WORK_CODE` on its FIRST LINE and LAST LINE.
+- Separation: `WORK_CODE` identifies the roadmap workstream/prompt sequence; `TASK_ID` remains the separate unique technical execution identifier.
+
+TIMESTAMP_STANDARD:
+- Standard timezone: `TIMEZONE=America/Santiago`
+- Format: `YYYYMMDD.HHMMSS`
+- Execution timestamps must reflect actual America/Santiago local time. Never silently use UTC without explicit labeling.
+
+SCOPE_AND_AUTHORITY:
+- Applies across `ORCHESTRATOR`, `COORDINATOR`, and `EXECUTOR` operational interactions.
+- `WORK_CODE` and `TASK_ID` provide traceability and structure; they do NOT confer mutation or semantic authority.
+
+==========
 13.130_FRAMEWORK_BOUNDARY
 ==========
 

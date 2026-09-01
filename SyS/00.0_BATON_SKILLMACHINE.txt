@@ -1,4 +1,33 @@
 ==========
+MB-SM-080B_WORK_CODE_AND_TIMESTAMP_GOVERNANCE_FORMALIZATION_20260901
+==========
+CLASS=GOVERNANCE_WORK_CODE_AND_TIMESTAMP_FORMALIZATION
+DATE=2026-09-01
+AUTHORIZATION=20260901.160300_DSH_SM_EXECUTOR_FORMALIZE_WORKCODE_AND_PREPARE_ORCHESTRATOR_HANDOFF_001
+HEAD_CURRENT=9ee9f0adc83781bd8dd13973279e4d9df570c0fe
+ORIGIN_MAIN_CURRENT=9ee9f0adc83781bd8dd13973279e4d9df570c0fe
+BRANCH=main
+
+WORK_CODE_STANDARD_CONFIRMED:
+- Structure: `<ProjectShort>.R<RoadmapNode>.<WorkStream>.<PromptSequence>` (e.g. `SM.R3.7.A.002`).
+- First and last line of every operational prompt and structured response MUST contain the exact `WORK_CODE`.
+- Roadmap nodes MUST be live-resolved from `SyS/PROJECT.ROADMAP.ACTIVE.md`.
+- Timezone standard: `TIMEZONE=America/Santiago` (`YYYYMMDD.HHMMSS`).
+- Normative policy owner: `SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt`.
+- Discovery pointer: `AGENTS.md`.
+
+ROLE_RECOVERY_ORCHESTRATOR_READY:
+- Role: ORCHESTRATOR (WHAT / WHY, contract definition, roadmap priority, presentation to HUMAN).
+- Cold-start input: `AGENTS.md` + `SyS/00.0_BATON_SKILLMACHINE.txt` + `HUMAN/HUMAN.AI.WORKFLOW.txt`.
+- Operational package: `SyS/A_Tools/SessionContinue/New-SessionContinuePackage.ps1 -PackageRole ORCHESTRATOR`.
+- Unresolved decision board:
+  1. Sandbox Hygiene: `T.AI.SkillMachine.Sandbox` (~2.3 GB stale/reproducible scratch) pending authorized cleanup.
+  2. NightShift NS-BL-0002: Lab-only proposal ready for read-only review; revalidate live NightShift first.
+  3. Ambient Untracked Scope: Historical candidates and logs preserved read-only.
+- Recommended Next First Action: New blank AI loads ORCHESTRATOR continuity and reviews post-deploy decision board.
+==========
+
+==========
 MB-SM-080A_DSH_EXECUTOR_RUNTIME_INTEGRATION_AND_ROLE_RECONCILIATION_20260901
 ==========
 CLASS=EXECUTOR_DSH_RUNTIME_INTEGRATION_AND_ROLE_RECONCILIATION

@@ -20,6 +20,7 @@ WORK_UNITS
 - **BATON (`SyS/00.0_BATON_SKILLMACHINE.txt`)**: Authoritative recovery context for a **blank AI** to cold-start into any assigned role (`ORCHESTRATOR`, `COORDINATOR`, `EXECUTOR`).
 - **SESSION Continuity (`SyS/A_Tools/SessionContinue/`)**: Role-aware operational continuity for active sessions.
 - **EXECUTOR Runtime**: DeepSeek Harness (DSH) in WSL2 operates strictly as an execution/tooling mechanism with zero semantic authority.
+- **WORK_CODE & Timestamps**: Operational prompts and structured responses MUST place `<ProjectShort>.R<RoadmapNode>.<WorkStream>.<NNN>` on the FIRST and LAST line, reporting execution timestamps in `TIMEZONE=America/Santiago` (`YYYYMMDD.HHMMSS`) per `SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt`.
 
 ```
 ### DETU is the default when uploads are available
