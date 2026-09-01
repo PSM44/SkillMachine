@@ -1,4 +1,39 @@
 ==========
+MB-SM-080A_DSH_EXECUTOR_RUNTIME_INTEGRATION_AND_ROLE_RECONCILIATION_20260901
+==========
+CLASS=EXECUTOR_DSH_RUNTIME_INTEGRATION_AND_ROLE_RECONCILIATION
+DATE=2026-09-01
+AUTHORIZATION=20260901.151500_DSH_SM_EXECUTOR_RECONCILE_AND_UPGRADE_FULL_ROLE_SYSTEM_001
+HEAD_CURRENT=c36e8325338511b2c24fa4b091ca70890bdf9308
+ORIGIN_MAIN_CURRENT=c36e8325338511b2c24fa4b091ca70890bdf9308
+BRANCH=main
+
+EXECUTOR_RUNTIME=DEEPSEEK_HARNESS
+DSH_VERSION=0.1.1-rc.2
+DSH_ROLE=EXECUTOR_TOOLING_AND_RUNTIME_ONLY (No semantic authority)
+OMNIROUTE_ENDPOINT=http://127.0.0.1:20128/v1
+OBSOLETE_PROXY_20129=REMOVED
+PARA_DSH_MAXTOKENS=32768
+LAUNCHER_SCRIPT=DSH-- (generic, local, owner-executable, credentials preserved outside repo)
+CREDENTIAL_VALUE_RECORDED=NO
+FIRST_DEPLOY_V1_STATUS=CLOSED (Do not reopen)
+NIGHTSHIFT_STATUS=LAB_ONLY (No semantic promotion)
+
+ROLE_BOUNDARIES_CONFIRMED:
+- HUMAN: Absolute semantic and decisional authority.
+- ORCHESTRATOR: Intent interpretation, WHAT / WHY, work-unit contract definition, no semantic delegation to DSH.
+- COORDINATOR: Decomposition, sequencing, execution graphs, evidence aggregation.
+- EXECUTOR: Exact mechanical execution, live state reconciliation, validation, no semantic invention.
+
+ROLE_BOOTSTRAP_POINTERS:
+- ORCHESTRATOR: Load `HUMAN/HUMAN.AI.WORKFLOW.txt`, verify roadmap `SyS/PROJECT.ROADMAP.ACTIVE.md`, load session package via `SyS/A_Tools/SessionContinue/New-SessionContinuePackage.ps1 -PackageRole ORCHESTRATOR`.
+- COORDINATOR: Load `HUMAN/HUMAN.AI.WORKFLOW.txt`, sequence DAG work units, verify file allowlists, coordinate parallel read-only nodes.
+- EXECUTOR: Load `SkillsLake/01.SKILLS/02.SKILL.AGENT_EXECUTION_POLICY.txt`, verify live git state, execute exact mechanical work, validate and report evidence.
+
+NEXT_SEQUENCE=Human review of unstaged modifications (README.md, SyS/00.0_BATON_SKILLMACHINE.txt, SyS/PROJECT.BACKLOG.ACTIVE.txt, SyS/PROJECT.ROADMAP.ACTIVE.md, AGENTS.md, SyS/A_Tools/SessionContinue/*); then new ORCHESTRATOR starts post-deploy board with NS-BL-0002 read-only proposal.
+==========
+
+==========
 MB-SM-077C_BATON_CURRENT_STATE
 ==========
 CURRENT_COLD_START_BLOCK=MB-SM-077C_BATON_CURRENT_STATE

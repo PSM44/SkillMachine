@@ -3,6 +3,24 @@
 This repository is governed by human-controlled execution. AI agents must follow these rules before modifying files, running builds, committing, pushing, promoting canon, or requesting evidence.
 ```
 ## 1. Operating modes
+
+### Role-Aware Continuity and Hierarchy
+This repository enforces an explicit authority and role hierarchy:
+```text
+HUMAN (Absolute Semantic Authority)
+  >
+ORCHESTRATOR (WHAT / WHY & Contract Definition)
+  >
+COORDINATOR (Decomposition, Sequencing & Verification)
+  >
+EXECUTOR (Mechanical Execution, Validation & Rollback Readiness)
+  >
+WORK_UNITS
+```
+- **BATON (`SyS/00.0_BATON_SKILLMACHINE.txt`)**: Authoritative recovery context for a **blank AI** to cold-start into any assigned role (`ORCHESTRATOR`, `COORDINATOR`, `EXECUTOR`).
+- **SESSION Continuity (`SyS/A_Tools/SessionContinue/`)**: Role-aware operational continuity for active sessions.
+- **EXECUTOR Runtime**: DeepSeek Harness (DSH) in WSL2 operates strictly as an execution/tooling mechanism with zero semantic authority.
+
 ```
 ### DETU is the default when uploads are available
 ```

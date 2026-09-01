@@ -47,6 +47,7 @@ Assert-True ($profileText.Contains('USER_WORKING_PROFILE_AND_C1_CONTINUITY')) 'P
 Assert-True ($profileText -match 'DEFAULT_INTERACTION_LANGUAGE=English') 'Profile default English'
 Assert-True ($profileText -match 'NOT_PRODUCT_DOCTRINE=YES') 'Profile declares it is not product doctrine'
 Assert-True ($profileText -match 'ROLE=ORCHESTRATOR') 'Profile has ORCHESTRATOR role'
+Assert-True ($profileText -match 'ROLE=COORDINATOR') 'Profile has COORDINATOR role'
 Assert-True ($profileText -match 'ROLE=EXECUTOR') 'Profile has EXECUTOR role'
 Assert-True ($profileText -match 'T\.AI\.SkillMachine') 'Profile has temp policy'
 Assert-True ($profileText -match 'human = final authority') 'Profile has authority model'

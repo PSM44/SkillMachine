@@ -1,13 +1,13 @@
 #Requires -Version 5.1
 <#
 .SYNOPSIS
-  Build ORCHESTRATOR or EXECUTOR SESSION_CONTINUE packages with mandatory working-profile gate.
+  Build ORCHESTRATOR, COORDINATOR or EXECUTOR SESSION_CONTINUE packages with mandatory working-profile gate.
 .NOTES
   Repository read-only. Writes only to -TempRoot.
 #>
 [CmdletBinding()]
 param(
-    [ValidateSet('ORCHESTRATOR', 'EXECUTOR')]
+    [ValidateSet('ORCHESTRATOR', 'COORDINATOR', 'EXECUTOR')]
     [string]$PackageRole = 'ORCHESTRATOR',
     [string]$RepoRoot = 'C:\01. GitHub\Skills',
     [string]$TempRoot = 'C:\Users\aazcl\Downloads\T.AI.SkillMachine',
@@ -425,6 +425,23 @@ if ($unexpectedDirt.Count -gt 0) {
 [void]$sb.AppendLine('NEXT_GENUINE_GATE=NEXT_REAL_CLOSEREPORT_CONTINUITY_DEPENDENT_EVENT')
 [void]$sb.AppendLine('NEXT_HUMAN_GATE=NEXT_REAL_CLOSEREPORT_CONTINUITY_DEPENDENT_EVENT')
 [void]$sb.AppendLine(('NEXT_ACTION=Start as {0} from this package; apply working profile; verify Git baseline; keep Stage 14 PARTIAL until qualifying CloseReport evidence arrives; do not run ProjectOps mutation as the first act.' -f $PackageRole))
+[void]$sb.AppendLine('')
+[void]$sb.AppendLine('09. ROLE RESPONSIBILITIES AND BOUNDARIES')
+[void]$sb.AppendLine('HUMAN_AUTHORITY=ABSOLUTE (Semantic and decisional authority)')
+switch ($PackageRole) {
+    'ORCHESTRATOR' {
+        [void]$sb.AppendLine('ACTIVE_ROLE_RESPONSIBILITY=Objective interpretation, WHAT/WHY determination, contract definition, gate evaluation, presentation to HUMAN.')
+        [void]$sb.AppendLine('FORBIDDEN_ROLE_ESCALATION=Do not bypass HUMAN gates; do not delegate semantic authority to AI runtimes (DSH/OmniRoute); do not execute raw mechanical mutations directly.')
+    }
+    'COORDINATOR' {
+        [void]$sb.AppendLine('ACTIVE_ROLE_RESPONSIBILITY=Work breakdown, DAG/sequence planning, dependency resolution, parallel read-only node coordination, evidence aggregation and acceptance check.')
+        [void]$sb.AppendLine('FORBIDDEN_ROLE_ESCALATION=Do not change semantic objectives or contracts; do not bypass EXECUTOR isolation; do not decide HUMAN acceptance unilaterally.')
+    }
+    'EXECUTOR' {
+        [void]$sb.AppendLine('ACTIVE_ROLE_RESPONSIBILITY=Strict mechanical execution within authorized scope, live state reconciliation, validation execution, evidence recording, rollback readiness.')
+        [void]$sb.AppendLine('FORBIDDEN_ROLE_ESCALATION=Do not invent semantic policy; do not broaden scope; do not commit/push without explicit authorization.')
+    }
+}
 [void]$sb.AppendLine('')
 [void]$sb.AppendLine('USER_WORKING_PROFILE_AND_C1_CONTINUITY')
 [void]$sb.AppendLine($profileText)

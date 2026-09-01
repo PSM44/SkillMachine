@@ -105,6 +105,14 @@ STATUS=DEFERRED
 TITLE=Evaluate whether the current project scaffold is too heavy.
 NEXT_ACTION=Reassess after real-project evidence.
 
+ENTRY_ID=BL-PROD-018_DSH_OMNIROUTE_RUNTIME_INTEGRATION_AND_ROLE_RECONCILIATION
+PRIORITY=P0
+STATUS=DONE_LOCAL_UNCOMMITTED
+TITLE=Formal integration of DeepSeek Harness as EXECUTOR runtime and operational role system reconciliation.
+DETAIL=Post-FIRST_DEPLOY evolution: record DSH (0.1.1-rc.2) as WSL2 EXECUTOR runtime; document OmniRoute (:20128/v1) and generic launcher ($HOME/bin/DSH--); record Para_DSH token limit conservative correction (32768); obsolete diagnostic proxy :20129 removed; reconcile ORCHESTRATOR / COORDINATOR / EXECUTOR role boundaries preserving HUMAN semantic authority.
+OWNER=Roadmap + README + Backlog
+NEXT_ACTION=Human review and commit gate.
+
 ENTRY_ID=BL-PROD-012_SESSION_CONTINUITY_EXECUTION_HANDOFF_IMPROVEMENT
 PRIORITY=P2
 STATUS=DEFERRED

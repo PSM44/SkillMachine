@@ -1,27 +1,27 @@
 # SkillMachine
 
-## README — arquitectura Cline + OmniRoute
+## README — arquitectura DSH / Cline + OmniRoute
 
 Este repositorio usa una arquitectura por capas donde la autoridad humana, la gobernanza, la lógica de ejecución y los adaptadores de IA están separados.
 
 En ese marco:
 
-- **Cline** se entiende como la **interfaz/canal operativo** desde el IDE para trabajar con un agente de código.
+- **DeepSeek Harness (DSH)** es el **entorno de ejecución activo (EXECUTOR runtime)** en WSL2, operando de forma desacoplada y neutral al proyecto. (Nota: Cline se mantiene como interfaz/canal IDE documentado históricamente).
 - **OmniRoute** se entiende como la **capa de routing/orquestación de modelos** que decide cómo enviar una tarea al modelo, proveedor o adapter correcto.
 - **SkillsMachine Core** sigue siendo el dueño de las reglas del sistema: intención humana, gobernanza, contexto, límites, trazabilidad y contratos.
 
-Importante: este README describe una arquitectura objetivo compatible con el canon actual del repo. No convierte a Cline ni a OmniRoute en autoridad canónica del producto. Son mecanismos de acceso y ejecución.
+Importante: este README describe una arquitectura objetivo compatible con el canon actual del repo. No convierte a DSH, Cline ni a OmniRoute en autoridad canónica del producto. Son mecanismos de acceso y ejecución.
 
 ---
 
 ## 1. Resumen ejecutivo
 
-La arquitectura **Cline + OmniRoute** propone separar claramente cinco responsabilidades:
+La arquitectura **DSH / Cline + OmniRoute** propone separar claramente cinco responsabilidades:
 
 1. **HUMAN** define intención, autoridad y criterio final.
 2. **GRCLake** define controles obligatorios y límites fail-closed.
 3. **SkillsLake** define cómo operar: routing, ejecución, validación, sandbox, costo y trazabilidad.
-4. **Cline** actúa como front-end operativo para planificar y ejecutar tareas desde el IDE.
+4. **EXECUTOR Runtime (DSH / Cline)** actúa como front-end operativo para planificar y ejecutar tareas autorizadas.
 5. **OmniRoute** actúa como backplane de routing para seleccionar modelo, proveedor, modo y contexto según el tipo de trabajo.
 
 El resultado es un sistema donde el agente puede ser útil y rápido, pero sin mezclar:
@@ -37,11 +37,11 @@ El resultado es un sistema donde el agente puede ser útil y rápido, pero sin m
 
 La idea principal es:
 
-**Cline no debe ser la autoridad del sistema. OmniRoute tampoco.**
+**Ni DSH ni Cline ni OmniRoute son la autoridad del sistema.**
 
-Ambos son capas operativas.
+Son capas operativas y de tooling/runtime.
 
-- **Cline** resuelve la interacción diaria con el usuario dentro del IDE.
+- **DSH / Cline** resuelven la interacción y ejecución técnica dentro del workspace autorizado.
 - **OmniRoute** resuelve a qué modelo se manda una tarea, con qué contexto y bajo qué política.
 - **SkillsMachine** conserva la semántica del producto y las reglas de operación.
 
@@ -273,9 +273,9 @@ Si se invierte esta relación y Cline decide todo sin una capa clara de routing,
 
 ## 8. Riesgos y antipatrones
 
-### Antipatrón 1 — Cline como autoridad
+### Antipatrón 1 — DSH / Cline como autoridad
 
-Error: asumir que porque Cline ejecuta, entonces puede decidir significado, prioridad o canon.
+Error: asumir que porque DSH o Cline ejecutan, entonces pueden decidir significado, prioridad o canon.
 
 Corrección: la autoridad sigue en HUMAN + GRC + Skills.
 
@@ -302,18 +302,24 @@ Corrección: mantener separación explícita entre planificación, ejecución y 
 ## 9. Propuesta de diagrama simple
 
 ```text
-HUMAN
+HUMAN (Semantic & Decisional Authority)
   |
   v
-Cline (IDE agent / operational interface)
+ORCHESTRATOR (WHAT / WHY & Contract Definition)
+  |
+  v
+COORDINATOR (Decomposition & Execution Sequencing)
+  |
+  v
+EXECUTOR Runtime: DSH / Cline (Tooling / Mechanics / Applied Phase)
   |
   +--> Skills policies (routing, execution, validation, sandbox)
   |
   +--> GRCLake controls (hard gates, authorization, fail-closed rules)
   |
-  +--> OmniRoute (model/provider/context router)
+  +--> OmniRoute (model/provider/context router: http://127.0.0.1:20128/v1)
           |
-          +--> Local models
+          +--> Local models (e.g. Para_DSH maxTokens=32768)
           +--> Cloud models
           +--> Provider adapters in 95.AI_MODULES
   |
@@ -325,16 +331,28 @@ Workspace changes + evidence + validation results
 
 ## 10. Conclusión
 
-La arquitectura **Cline + OmniRoute** funciona bien en este repositorio si se respeta esta premisa:
+La arquitectura **DSH / Cline + OmniRoute** funciona bien en este repositorio si se respeta esta premisa:
 
-> **Cline opera, OmniRoute enruta, Skills definen el procedimiento, GRC restringe, y HUMAN manda.**
+> **DSH/Cline operan, OmniRoute enruta, Skills definen el procedimiento, GRC restringe, y HUMAN manda.**
 
 Ese diseño permite:
 
-- aprovechar agentes modernos desde el IDE,
+- aprovechar runtimes agentic modernos (DeepSeek Harness) en WSL2 o IDE,
 - cambiar de proveedor sin rehacer el producto,
 - mantener control humano real,
 - y sostener un workflow auditable y gobernado.
+
+---
+
+## 11. Lecciones operativas y runtime configuration (DSH + OmniRoute)
+
+- **EXECUTOR Runtime**: DeepSeek Harness (DSH v0.1.1-rc.2, binary `/usr/local/bin/dsh`, config `/home/aazcl/.dsh`, web `http://127.0.0.1:3080`).
+- **Routing Backplane**: OmniRoute (binary `/usr/local/bin/omniroute`, server `http://127.0.0.1:20128`, API `http://127.0.0.1:20128/v1`, dashboard `http://127.0.0.1:20128/home`).
+- **Proxy Obsoleto**: El puerto 20129 fue un proxy de captura de diagnóstico temporal durante el bootstrap y **NO** forma parte del runtime normal. DSH conecta directamente a `:20128/v1`.
+- **Apertura de navegador**: Tanto DSH como OmniRoute deben arrancarse con `--no-open` para evitar pestañas duplicadas; el launcher (`$HOME/bin/DSH--`) es el único responsable de abrir la UI en el navegador.
+- **Límites de tokens (Para_DSH)**: DSH no debe emitir límites incompatibles (ej. 384000); el target conservador y verificado en bootstrap para `Para_DSH` es `maxTokens: 32768` (contextWindow 1000000).
+- **Protección de Credenciales**: Las credenciales de OmniRoute se inyectan en el entorno de ejecución mediante el launcher local con permisos restringidos (`chmod 700`) y **nunca** se versionan ni persisten en el repositorio.
+- **Procesos y Healthchecks**: OmniRoute puede desacoplar su PID padre del PID listener en `:20128`; los checks de puerto y `/health` son evidencia superior a la inspección de PID.
 
 ---
 

@@ -6,8 +6,8 @@
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
 | Última verificación | 31 de agosto de 2026 |
-| Fase actual | FIRST_DEPLOY_V1 closed; post-deploy reconciliation landed; NightShift pilot/backlog findings landed |
-| Rama / HEAD verificado | `main` / `55abe0302229a0beac0aa53d8c5b27f2e0144976` |
+| Fase actual | FIRST_DEPLOY_V1 closed; post-deploy reconciliation landed; DSH + OmniRoute runtime bootstrap PASS (0.1.1-rc.2) |
+| Rama / HEAD verificado | `main` / `c36e8325338511b2c24fa4b091ca70890bdf9308` |
 | Staging, commit y push | Realizados hasta NightShift backlog governance pilot findings |
 | Autoridad de identidad y significado | HUMAN |
 | Próxima decisión | Nuevo ORCHESTRATOR: iniciar con propuesta read-only de NS-BL-0002; diferir piloto repo externo hasta un paso adicional validado en NightShift |
@@ -23,6 +23,7 @@ PS.SkillsMachine es el producto gobernado para administrar, distribuir y perfecc
 - ✅ **`HUMAN.AI.WORKFLOW` es el dueño conceptual canónico** de la metodología de trabajo humano–IA.
 - ✅ **FIRST_DEPLOY_V1 quedó cerrado.** No reabrir readiness salvo nuevo blocker confirmado.
 - ✅ **Los cambios post-deploy ya aterrizaron en `main` con commit y push.** Incluyen refresh compilado de `90.USECASE`, closeout de eliminación de fuentes superseded, IF1/IF3/IF4/IF5 y refresh de roadmap.
+- ✅ **Integración de EXECUTOR Runtime con DeepSeek Harness (DSH) + OmniRoute completada.** Bootstrap alcanzó estado operativo PASS (DSH 0.1.1-rc.2, OmniRoute en `:20128/v1`, modelo local `Para_DSH` corregido a `maxTokens: 32768`, proxy temporal `:20129` eliminado, browser auto-open centralizado en launcher generic `$HOME/bin/DSH--`). DSH y OmniRoute operan estrictamente como capas de tooling y runtime sin autoridad semántica.
 - ✅ **NightShift sigue siendo `LAB_ONLY`**, pero su piloto controlado y backlog findings ya quedaron documentados como evidencia, sin promoción a canon.
 - ⛔ **Batch B1 no está autorizado.** La investigación de runtime safety (seguridad en tiempo de ejecución) terminó, pero la implementación no comenzó.
 - ⏸️ **LangGraph permanece como adaptador opcional.** No está instalado ni ejecutado y no define la arquitectura canónica.
@@ -279,7 +280,7 @@ No se solicita ahora instalar LangGraph. WhoAmI ya está cerrado. Option R1 ya e
 SCHEMA_VERSION=2.0-HUMAN-MARKDOWN
 PROJECT=PS.SkillsMachine
 CREATED_AT=2026-07-17 23:03:49 -04:00
-UPDATED_AT=2026-08-21
+UPDATED_AT=2026-09-01
 SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
 AUTHORITATIVE_FOR=PRODUCT_EXECUTION_PATH
 ROADMAP_IS_CANONICAL=YES
@@ -289,11 +290,11 @@ BACKLOG=SyS\PROJECT.BACKLOG.ACTIVE.txt
 CLOSED_REGISTER=SyS\CLOSED.SUPERSEDED.REGISTER.txt
 DOES_NOT_DUPLICATE_FULL_BACKLOG=YES
 SOURCE_TXT_SHA256=6fb9bcf0814a7137d936dae5c091576def2365965b47ee4c3f480f87550c7147
-PHASE=GOVERNANCE_RECOVERY_APPLIED_UNCOMMITTED
+PHASE=POST_FIRST_DEPLOY_DSH_RUNTIME_RECONCILED
 BATCH_A_ALIGNMENT_STATE=ACTIVE
-BATCH_A_DURABILITY_STATE=ACTIVE_IN_WORKTREE_UNCOMMITTED
-BATCH_A_COMMITTED=NO
-BATCH_A_PUSHED=NO
+BATCH_A_DURABILITY_STATE=COMMITTED_AND_PUSHED
+BATCH_A_COMMITTED=YES
+BATCH_A_PUSHED=YES
 BATCH_B_RESEARCH=COMPLETED
 BATCH_B_COMPLETION_GATE=NOT_PASSED
 BATCH_B1_AUTHORIZATION=NO
@@ -303,9 +304,13 @@ WHOAMI_CLOSEOUT_STATE=COMPLETED
 WHOAMI_ACTIVE_DEPENDENCIES=0
 HUMAN_SOLE_IDENTITY_AUTHORITY=YES
 OPTION_R1=AUTHORIZED
+EXECUTOR_RUNTIME=DEEPSEEK_HARNESS
+DSH_VERSION=0.1.1-rc.2
+OMNIROUTE_BASEURL=http://127.0.0.1:20128/v1
+PARA_DSH_MAXTOKENS=32768
 FULL_90_USECASE_BUILD=NO
-LAST_VERIFIED=2026-08-21
-HEAD_AT_VERIFY=066a37ff95d8f876b70351d04565adaccae4c8c0
+LAST_VERIFIED=2026-09-01
+HEAD_AT_VERIFY=c36e8325338511b2c24fa4b091ca70890bdf9308
 BRANCH=main
 STAGING=NO
 COMMIT=NO
