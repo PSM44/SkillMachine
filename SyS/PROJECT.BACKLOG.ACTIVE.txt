@@ -47,9 +47,10 @@ TITLE=Create the human operator runbook and recover UX.
 DETAIL=Document preflight, dry-run, approval fingerprint, apply, ALREADY_APPLIED, rollback, recover, concurrency block and interrupted-update recovery.
 DEPENDENCIES=MB-SM-065A_DONE
 SUCCESS_GATE=Nontechnical operator can execute and recover without interpreting source code.
-CURRENT_MB=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
-SESSION_PROGRESS=Current-state discovery completed; operator-contract source discovery still pending after one parser failure and controlled R2 preparation.
-NEXT_ACTION=MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN
+CURRENT_MB=SM.R3.7.B.027_B027R_REPAIRED_AND_VERIFIED
+SESSION_PROGRESS=Sections 01-12 HUMAN_REVIEWED_REPAIRED_ACCEPTED; DOCUMENT_USABILITY_GATE=PASS_WITH_MINOR_FRICTION; sections A-D remain PENDING_REAL_PROJECT_EVIDENCE; PRODUCTION_READY=NO; FULL_SUCCESS_GATE=NOT_YET_PASS.
+PROJECT_SELECTION_STATUS=DEFERRED_BY_HUMAN
+NEXT_ACTION=ORCHESTRATOR decide next authorized non-roadmap action without reopening project selection; real-project A-D evidence remains blocked until HUMAN authorizes project selection/dry-run/apply/rollback.
 
 ENTRY_ID=BL-PROD-004_REAL_UPDATE_PACKAGE_PIPELINE
 PRIORITY=P0

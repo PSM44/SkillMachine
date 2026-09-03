@@ -1,0 +1,586 @@
+BL-PROD-003_OPERATOR_RUNBOOK_DRAFT_V0
+SCHEMA_VERSION=1.0
+STATUS=DRAFT_V0
+NOT_PRODUCTION_READY=YES
+PROJECT=PS.SkillsMachine
+CREATED_AT=2026-09-01 19:18:48 -04:00
+SOURCE_DECISION=MB-SM-067A_UPDATER_HUMAN_RUNBOOK_AND_OPERATOR_UX
+BASIS=MB-SM-067A-B_OPERATOR_CONTRACT_DISCOVERY_AND_RUNBOOK_DESIGN
+
+============================================================================
+01.00_PURPOSE_AND_OPERATOR_SCOPE
+============================================================================
+
+PURPOSE:
+Guide a human operator through pre-apply validation, approval, evidence capture,
+safe execution boundaries and recovery escalation for a SkillsMachine update
+package on a target Git repository without requiring the operator to interpret
+SkillsMachine source code.
+
+DRAFT SAFETY STATUS:
+- This runbook remains DRAFT_V0 and NOT_PRODUCTION_READY.
+- Sections 01.00 through 12.00 define the controlled operator model after HUMAN
+  review repair.
+- Section 13.00 A-D remains PENDING_REAL_PROJECT_EVIDENCE and must not be
+  treated as tested apply, already-applied, rollback or real-project guidance.
+- Any statement about runtime behavior that lacks real-project evidence is
+  conceptual, intended, or requires verification before production use.
+
+OPERATOR PROFILE:
+- Understands basic Git facts: repository, branch, HEAD, remote, status, commit
+  and push.
+- Can run PowerShell commands and preserve console output as evidence.
+- Can follow deterministic STOP / GO / ESCALATE gates.
+- Does not modify or review SkillsMachine automation code.
+
+AUTHORITY HIERARCHY:
+- HUMAN remains the absolute semantic authority.
+- ORCHESTRATOR/COORDINATOR define the approved execution contract when delegated.
+- EXECUTOR or operator performs only the authorized mechanical steps.
+- The operator does not expand scope, select a different project, change the
+  update package, invent recovery, or override a HUMAN NO_GO.
+
+AUTHORITY MODES:
+- HUMAN_DIRECT: HUMAN explicitly approves the exact package/target state.
+- DELEGATED_OPERATOR: HUMAN or ORCHESTRATOR delegates bounded GO/NO_GO authority
+  in the execution contract.
+- DUAL_APPROVAL: both operator and HUMAN/ORCHESTRATOR approval are required.
+
+OPERATOR AUTHORITY:
+- May proceed only inside the approved execution contract.
+- May approve APPLY only when authority mode permits and all required evidence
+  gates are GO.
+- Must STOP, PRESERVE, CAPTURE EVIDENCE and ESCALATE on unknown, changed,
+  conflicting or unauthorized state.
+- Has no authority to perform destructive Git recovery unless explicitly
+  preauthorized for exact state, command and target.
+
+============================================================================
+02.00_PRECONDITIONS_AND_EXECUTION_CONTRACT
+============================================================================
+
+CLEAN_REQUIRED DEFAULT:
+- Target working tree must be clean before dry-run and before apply.
+- Any dirty state requires explicit preauthorization tied to exact paths, Git
+  state and reason.
+- If dirty state exists without that preauthorization: STOP.
+
+EXECUTION CONTRACT:
+Before preflight, the operator must possess or derive a per-update execution
+contract. Fields may come from package metadata, HUMAN authorization,
+ORCHESTRATOR instruction, or preflight evidence; they do not all need manual
+entry if already authoritative.
+
+Minimum fields:
+- UPDATE_ID
+- TARGET_PROJECT
+- TARGET_ROOT
+- TARGET_BRANCH
+- EXPECTED_HEAD
+- EXPECTED_REMOTE
+- PACKAGE_ID
+- PACKAGE_SHA256
+- RISK_CLASS
+- AUTHORITY_MODE
+- EXPECTED_CHANGE_SET
+- DRY_RUN_COMMAND
+- APPLY_COMMAND
+- VERIFY_COMMAND
+- ROLLBACK_MODE
+- PUSH_ALLOWED
+- FORCE_PUSH_ALLOWED
+- EVIDENCE_PATH
+
+FIELD AUTHORITY:
+- TARGET_ROOT, TARGET_BRANCH, EXPECTED_HEAD and EXPECTED_REMOTE are confirmed by
+  live Git preflight.
+- PACKAGE_ID, PACKAGE_SHA256 and EXPECTED_CHANGE_SET are confirmed from package
+  manifest or release evidence.
+- AUTHORITY_MODE, PUSH_ALLOWED, FORCE_PUSH_ALLOWED and ROLLBACK_MODE come from
+  HUMAN/ORCHESTRATOR authorization or governing policy.
+- Exact DRY_RUN/APPLY/VERIFY commands must come from the package or automation
+  documentation. If absent, the operator must not invent commands.
+
+ENVIRONMENT:
+- Windows PowerShell 5.1 or PowerShell 7+ is the primary operator shell.
+- Git for Windows is available in PATH.
+- Network access to the expected remote is available if push or remote
+  verification is part of the contract.
+- Evidence path exists or can be created without mutating the target project.
+
+PACKAGE SAFETY:
+- Package identity and SHA256 are recorded before dry-run.
+- Package source/provenance is trusted under the applicable release process.
+- If trusted-release provenance is unclear, record dependency on TD-012 and
+  escalate before mutating a target repository.
+
+============================================================================
+03.00_HUMAN_INITIATION
+============================================================================
+
+OPERATOR RECEIVES:
+1. Execution contract or authoritative source for each required field.
+2. Update package identifier, SHA256 and brief description.
+3. Target repository path, target branch and expected HEAD.
+4. Approval authority mode: HUMAN_DIRECT, DELEGATED_OPERATOR or DUAL_APPROVAL.
+5. Risk assessment and whether push is allowed.
+6. Evidence path and escalation contact.
+
+OPERATOR VERIFIES:
+- The target repository, branch and package match the authorization.
+- The run is for the authorized project only.
+- Project selection has not been reopened or changed.
+- APPLY, ALREADY_APPLIED, REAL_PROJECT_ROLLBACK and REAL_PROJECT_EXAMPLE remain
+  pending unless real-project evidence is later supplied.
+
+INITIATION RESULT:
+- GO_TO_PREFLIGHT only when the execution contract is complete enough to run
+  read-only validation.
+- STOP_AND_ESCALATE if the target, package, authority, branch or command source
+  is missing, ambiguous or contradictory.
+
+============================================================================
+04.00_PREFLIGHT_READ_ONLY
+============================================================================
+
+PREFLIGHT OBJECTIVE:
+Collect facts without changing the target repository.
+
+PowerShell primary commands, run from TARGET_ROOT:
+1. Repository root:
+   git rev-parse --show-toplevel
+2. Working tree and staged state:
+   git status --short --branch --untracked-files=all
+3. Current branch:
+   git branch --show-current
+4. HEAD:
+   git rev-parse HEAD
+5. Expected remote URL:
+   git remote get-url origin
+6. Remote target branch, if remote validation is required:
+   git ls-remote --heads origin <TARGET_BRANCH>
+7. Recent local history for evidence:
+   git --no-pager log --oneline -5
+8. Repository root listing, if needed for operator orientation:
+   Get-ChildItem -Force
+
+PREFLIGHT VALIDATION CHECKLIST:
+- [ ] Repository root equals TARGET_ROOT.
+- [ ] Current branch equals TARGET_BRANCH.
+- [ ] HEAD equals EXPECTED_HEAD unless the contract explicitly allows a newer
+      HEAD and defines reapproval criteria.
+- [ ] Working tree is clean, or dirty state exactly matches preauthorized paths.
+- [ ] No staged changes exist unless explicitly preauthorized.
+- [ ] Origin URL equals EXPECTED_REMOTE.
+- [ ] Remote branch evidence is captured when required.
+- [ ] Package ID and SHA256 match the execution contract.
+- [ ] No concurrent Git or updater operation is in progress.
+
+PREFLIGHT RESULT:
+- GO_TO_DRY_RUN if every checklist item is PASS.
+- STOP_PRESERVE_CAPTURE_ESCALATE if any item fails, is unknown, or requires
+  judgement not defined by the contract.
+
+UNAUTHORIZED DIRTY STATE:
+Do not run git stash, git checkout, git restore, git clean, git reset or manual
+file edits as default recovery. Preserve the state, capture preflight evidence
+and escalate.
+
+============================================================================
+05.00_READINESS_DRY_RUN
+============================================================================
+
+DRY_RUN OBJECTIVE:
+Run the package's documented dry-run command to observe intended changes before
+any apply step. The exact command must come from the execution contract.
+
+NO COMMAND INVENTION:
+If DRY_RUN_COMMAND is missing or ambiguous, STOP and request the authoritative
+command. Do not substitute a guessed SkillsMachine command.
+
+DRY_RUN EXPECTED EVIDENCE:
+- Command line used.
+- Package ID and SHA256.
+- Target repository, branch and HEAD.
+- Intended add/modify/delete list if emitted.
+- Warnings, conflicts, skipped items and unsupported conditions.
+- Exit state or summary emitted by the updater.
+
+CLAIM STATUS:
+The no-write dry-run guarantee is not production-proven in this draft. Treat it
+as REQUIRED_BEHAVIOR_PENDING_REAL_PROJECT_EVIDENCE until Section 13 evidence is
+completed. Use a backup/test copy when risk class or authority requires it.
+
+DRY_RUN REVIEW GATE:
+Proceed only if the output deterministically matches all of the following:
+- Package identity matches the approved package.
+- Target repository, branch and HEAD match preflight evidence.
+- Change list matches EXPECTED_CHANGE_SET or documented allowed variance.
+- No unsupported file paths, repository internals, secrets or unrelated project
+  areas are targeted.
+- Exit state classification is OK, or WARN with explicit approval path under
+  section 06.00.
+
+DOCUMENT_USABILITY_GATE:
+Sections 01.00-12.00 may be reviewed for clarity before real-project execution.
+This is separate from REAL_PROJECT_OPERATIONAL_VALIDATION_GATE, which remains
+blocked until Section 13 A-D evidence exists.
+
+============================================================================
+06.00_OK_WARN_FAIL_INTERPRETATION
+============================================================================
+
+The updater may emit OK/WARN/FAIL or another structured result. Exact runtime
+code mapping is PENDING_REAL_PROJECT_EVIDENCE unless package documentation
+provides it.
+
+OK POLICY:
+- Meaning: all documented preconditions passed and dry-run/apply output matches
+  expected scope.
+- Operator action: may proceed to the next authorized gate.
+
+WARN POLICY MATRIX:
+- SAFE_INFORMATIONAL_WARNING:
+  Criteria: warning is read-only or informational, names no failed target file,
+  changes no scope, and package documentation says it does not affect outcome.
+  Action: record warning; proceed only if authority mode permits.
+- HUMAN_APPROVAL_REQUIRED_WARNING:
+  Criteria: warning affects interpretation, skipped optional content, timing,
+  remote verification, evidence completeness, or any condition the operator
+  cannot classify mechanically.
+  Action: STOP before apply; preserve evidence; obtain required approval.
+- NO_GO_WARNING:
+  Criteria: warning mentions conflict, unauthorized path, package mismatch,
+  branch/HEAD mismatch, dirty state, partial write, rollback uncertainty,
+  unknown updater state, security concern, or unsupported command behavior.
+  Action: NO_GO; do not apply; escalate.
+
+FAIL POLICY:
+- Meaning: a precondition failed, an operation did not complete, or state is
+  incompatible/unknown.
+- Action: STOP_PRESERVE_CAPTURE_ESCALATE. Do not retry mutating steps unless a
+  deterministic retry is explicitly classified SAFE_TO_RETRY.
+
+RETRY CLASSIFICATION:
+- SAFE_TO_RETRY: read-only commands and documented idempotent checks where no
+  target files or Git state were changed.
+- NOT_SAFE_TO_RETRY: apply, rollback, push, commit, reset, clean, restore,
+  checkout, stash, rebase or any command after partial mutation evidence.
+- UNKNOWN_STOP_AND_ESCALATE: any case not explicitly classified.
+
+============================================================================
+07.00_HUMAN_APPROVAL_POINT_AND_PRE_APPLY_REVALIDATION
+============================================================================
+
+APPROVAL EVIDENCE BINDING:
+Before APPLY, record at minimum:
+- APPROVAL_DECISION
+- APPROVED_BY
+- APPROVED_AT
+- AUTHORITY_MODE
+- TARGET_REPOSITORY
+- TARGET_BRANCH
+- TARGET_HEAD
+- TARGET_REMOTE
+- PACKAGE_ID
+- PACKAGE_SHA256
+- DRY_RUN_EVIDENCE_REFERENCE
+- EXPECTED_CHANGE_SET_REFERENCE
+- PUSH_ALLOWED
+- FORCE_PUSH_ALLOWED
+
+APPROVAL OPTIONS:
+- APPROVE: proceed only after pre-apply revalidation passes.
+- DEFER: pause without mutation and request missing evidence or authority.
+- REJECT: do not apply; preserve evidence and close as NO_GO.
+
+PRE_APPLY_REVALIDATION:
+Immediately before APPLY, repeat read-only checks for:
+- target repository root;
+- target branch;
+- HEAD;
+- working-tree and staged state;
+- package identity and SHA256;
+- relevant remote state when required by the contract.
+
+APPROVAL_INVALIDATED:
+If any approved state changed, or if remote state changed in a way the contract
+requires to be stable, approval is invalid. STOP. Repeat preflight and dry-run
+and obtain a new approval before apply.
+
+APPLY COMMAND:
+The exact APPLY_COMMAND remains Section 13 A. PENDING_REAL_PROJECT_EVIDENCE for
+this draft unless supplied by a future validated package. Do not invent it.
+
+============================================================================
+08.00_FAILURE_HANDLING_AND_STATE_MODEL
+============================================================================
+
+DEFAULT FAILURE RULE:
+STOP, PRESERVE CURRENT STATE, CAPTURE EVIDENCE, ESCALATE. Do not improvise Git
+repair or rerun mutating commands.
+
+EXECUTION / RECOVERY STATES:
+- PRE_APPLY_NO_MUTATION: only read-only preflight/dry-run evidence exists.
+- APPLY_LOCAL_UNCOMMITTED: apply may have changed files without a commit.
+- APPLY_LOCAL_COMMITTED: local commit exists after apply.
+- PUSH_NOT_ATTEMPTED: no push command has been run.
+- PUSH_FAILED: local state may differ from remote after failed push.
+- PUSH_SUCCEEDED: remote accepted pushed commit(s), pending independent verify.
+- FAIL_NO_MUTATION: failure occurred before target mutation evidence.
+- FAIL_AUTO_ROLLED_BACK: updater reports rollback completed; mapping pending
+  real-project evidence.
+- FAIL_PARTIAL_STATE: some changes may remain in working tree, index or commits.
+- RECOVERY_REQUIRED: deterministic recovery path is not complete or authorized.
+- UNKNOWN_STATE: evidence is insufficient to classify repository state.
+
+PREFLIGHT OR DRY_RUN FAILURE:
+- Capture command, output, package identity and Git status.
+- Do not manually fix by stash/checkout/restore/reset.
+- Escalate with evidence unless the contract provides a precise non-mutating
+  correction such as choosing the documented target root.
+
+APPLY FAILURE:
+- Capture updater output and Git evidence with read-only commands.
+- Classify state using the model above if possible.
+- If state is FAIL_PARTIAL_STATE, RECOVERY_REQUIRED or UNKNOWN_STATE, stop all
+  further mutating actions until HUMAN/ORCHESTRATOR provides explicit recovery.
+
+PUSH FAILURE:
+- Preserve local repository state.
+- Capture status, log and remote evidence.
+- Do not force push. Escalate unless the contract contains a preauthorized,
+  deterministic retry for the same push and no remote divergence is detected.
+
+============================================================================
+09.00_RECOVERY_GUIDANCE
+============================================================================
+
+NONTECHNICAL OPERATOR DEFAULT:
+Recovery is evidence capture and escalation, not destructive self-service Git.
+
+ALLOWED SELF-SERVICE RECOVERY:
+Only perform a recovery command when all are true:
+- The execution contract preauthorizes that exact command and state.
+- The operator has classified the current state with evidence.
+- The command is non-destructive or explicitly approved for the exact target.
+- The rollback/recovery mode is documented by package evidence.
+
+SHARED REMOTE HISTORY:
+Prefer git revert for already-pushed shared history when a rollback commit is
+appropriate and authorized. Exact rollback commands and tested outcomes remain
+Section 13 C. PENDING_REAL_PROJECT_EVIDENCE.
+
+ESCALATION_ONLY / EXPERT_RECOVERY:
+The following are not normal nontechnical operator self-service recovery:
+- git reset --hard
+- git push --force or git push --force-with-lease
+- git clean
+- git rebase
+- manual deletion of unknown files
+They require explicit HUMAN authorization, expert recovery ownership and exact
+state evidence.
+
+EVIDENCE COMMANDS FOR ESCALATION:
+PowerShell primary, read-only from TARGET_ROOT:
+- git status --short --branch --untracked-files=all
+- git --no-pager diff --stat
+- git --no-pager diff --cached --stat
+- git --no-pager log --oneline -10
+- git branch --show-current
+- git remote get-url origin
+
+============================================================================
+10.00_CONCURRENCY_AND_INTERRUPTION_CONTROLS
+============================================================================
+
+CONCURRENCY CONSTRAINT:
+Do not run multiple SkillsMachine update operations on the same repository at
+the same time. If another operation may be active, STOP and capture evidence.
+
+IMPLEMENTATION CLAIM STATUS:
+Claims about project-scoped mutex, transaction journal, recovery flag,
+automatic rollback and resume behavior are not guaranteed operator behavior in
+this draft unless validated by implementation evidence and real-project run.
+Treat them as DESIGN_INTENT_OR_PENDING_EVIDENCE.
+
+INTERRUPTION DURING PRE_APPLY_NO_MUTATION:
+- Read-only commands may be rerun if no mutation occurred.
+- Preserve partial logs.
+
+INTERRUPTION DURING APPLY OR UNKNOWN STATE:
+- Do not rerun apply by default.
+- Capture read-only Git evidence.
+- Classify as UNKNOWN_STATE or FAIL_PARTIAL_STATE unless the updater provides
+  evidenced state mapping.
+- Escalate for recovery instructions.
+
+NETWORK INTERRUPTION / REMOTE DRIFT:
+- If push was not attempted, classify PUSH_NOT_ATTEMPTED.
+- If push failed, classify PUSH_FAILED and preserve local state.
+- If remote branch changed after approval, approval is invalidated where remote
+  stability is part of the contract; repeat preflight/dry-run/approval.
+
+============================================================================
+11.00_EVIDENCE_RETENTION
+============================================================================
+
+RAW_EVIDENCE TO PRESERVE:
+1. Execution contract and authority mode.
+2. Package ID, SHA256 and manifest/reference.
+3. Preflight command output.
+4. Dry-run command output and summary.
+5. Approval decision, authority, timestamp and approved state binding.
+6. Pre-apply revalidation output.
+7. Apply output and summary if apply is later authorized and executed.
+8. Post-apply verification output if applicable.
+9. Push output and remote verification if applicable.
+10. Any WARN/FAIL/UNKNOWN evidence.
+11. Recovery decision and execution evidence if applicable.
+
+EVIDENCE CLASSES:
+- RAW_EVIDENCE: direct console output, logs, hashes and Git facts.
+- VALIDATED_CASE: reviewed evidence accepted as a known scenario.
+- TRAINING_EXAMPLE: sanitized material prepared for operator education.
+
+EVIDENCE FORMAT:
+- Save text output to timestamped files under EVIDENCE_PATH.
+- Use Git commands with --no-pager when capturing logs or diffs.
+- Record before/after SHAs and package SHA256.
+- Keep evidence flat or manifest-indexed if the package process requires upload.
+
+RETENTION PERIOD:
+A unified retention duration is unresolved. TD-009 remains OPEN for evidence,
+ZIPs, one-shot backups and logs. Until policy is defined, do not delete material
+run evidence without HUMAN/ORCHESTRATOR authorization.
+
+============================================================================
+12.00_KNOWN_LIMITATIONS_AND_WORKAROUNDS
+============================================================================
+
+LIMITATION 1: PowerShell Parser and Script Reliability (TD-013)
+TD-013 records repeated parser, native-argument and post-verification defects in
+one-shot automation. If a script emits a cryptic PowerShell or output-handling
+failure:
+- Preserve the exact command and error.
+- Do not retry mutating operations by default.
+- Retry only read-only checks or commands explicitly classified SAFE_TO_RETRY.
+- Escalate persistent or mutating-step failures with evidence.
+
+LIMITATION 2: Git Status Classification
+Tracked/untracked and staged/unstaged classification can be mishandled by
+one-shot automation. Operator verification must use PowerShell-compatible Git
+commands:
+- git status --short --branch --untracked-files=all
+- git --no-pager diff --stat
+- git --no-pager diff --cached --stat
+If updater output and Git output disagree, STOP and escalate.
+
+LIMITATION 3: Post-Push Verification
+Post-push verification is not guaranteed by this draft. If push is authorized in
+a future validated flow, verify remote state explicitly:
+- git ls-remote --heads origin <TARGET_BRANCH>
+- git fetch origin
+- git --no-pager log origin/<TARGET_BRANCH> --oneline -3
+Do not assume origin/main; use TARGET_BRANCH from the execution contract.
+
+LIMITATION 4: Runtime Feature Claims Pending Evidence
+The following require implementation and real-project evidence before they can
+be treated as guaranteed operator behavior:
+- mutex behavior;
+- transaction journal;
+- recovery flag;
+- automatic rollback;
+- already-applied/idempotency detection;
+- exact apply and rollback commands;
+- dry-run no-write guarantee.
+
+WORKFLOW DEFECTS RECORDED FOR FOLLOW-UP:
+- Evidence metadata inconsistency in prior materialization flow: lines/bytes/SHA
+  reporting must be kept consistent.
+- Script/output contracts should include explicit AI_START/AI_END tail markers
+  where an AI-facing runner is expected to return machine-readable evidence.
+These are workflow/technical-debt observations and do not expand the roadmap.
+
+============================================================================
+13.00_PENDING_REAL_PROJECT_EVIDENCE
+============================================================================
+
+SECTIONS THAT REMAIN INCOMPLETE (draft limitations):
+The following sections require evidence from a real-project dry-run and apply:
+
+A. APPLY
+- Exact command and parameters for apply step.
+- Expected runtime duration.
+- Expected resource usage (CPU, memory, disk).
+- Conditions that trigger automatic rollback vs manual decision.
+
+B. ALREADY_APPLIED
+- How to detect if an update has already been applied to a repository.
+- How to safely re-run the updater if ALREADY_APPLIED is detected.
+- Skip logic and idempotency guarantees.
+
+C. REAL_PROJECT_ROLLBACK
+- Exact rollback command(s) tested on a real project.
+- Expected state after rollback.
+- Known rollback edge cases.
+- Rollback failure scenarios and recovery.
+
+D. REAL_PROJECT_EXAMPLE
+- Detailed walk-through of a real update (sanitized for public consumption).
+- Actual console output from each step.
+- Operator decisions made at each gate.
+- Actual recovery (if needed).
+
+STATUS:
+These sections will be completed after MB-SM-067A-B completes real-project
+discovery. Until then, this runbook is DRAFT_V0 and NOT_PRODUCTION_READY.
+
+============================================================================
+14.00_DRAFT_STATUS_AND_NEXT_STEPS
+============================================================================
+
+DRAFT_V0 HUMAN REVIEW REPAIR STATUS:
+Sections 01.00 through 12.00 have been repaired after HUMAN review to remove
+unsafe Git recovery defaults, bind approval to exact state, add pre-apply
+revalidation, add deterministic WARN/retry policy, define an execution contract,
+make PowerShell the primary operator path, and qualify unproven updater claims.
+
+DRAFT_V0 LIMITATION:
+This draft is still NOT_PRODUCTION_READY. The repaired sections are suitable for
+operator/usability review only; production operation still requires real-project
+evidence.
+
+SECTIONS STILL PENDING REAL-PROJECT EVIDENCE:
+Section 13.00 A-D remain PENDING_REAL_PROJECT_EVIDENCE:
+- A. APPLY
+- B. ALREADY_APPLIED
+- C. REAL_PROJECT_ROLLBACK
+- D. REAL_PROJECT_EXAMPLE
+
+NOT_PRODUCTION_READY REASONS:
+1. No real-project apply and rollback have been executed.
+2. Exact apply, already-applied and rollback commands remain to be discovered.
+3. Runtime mappings for mutex, transaction journal, recovery flag, automatic
+   rollback, dry-run no-write behavior and exit-state semantics remain pending
+   operational evidence.
+4. Operator training and acceptance are not yet complete.
+
+NEXT_ACTIONS (without changing roadmap):
+1. HUMAN/ORCHESTRATOR review this repaired DRAFT_V0.
+2. Preserve A-D as pending until authorized real-project dry-run/apply/rollback
+   evidence exists.
+3. When authorized after first deploy constraints are satisfied, capture real
+   output and update a future draft with validated operational evidence.
+4. Do not promote to production/canonical acceptance until real-project evidence
+   and operator acceptance gates pass.
+
+OPERATOR FEEDBACK REQUESTED:
+- Are the STOP/GO/ESCALATE gates deterministic enough?
+- Is the execution contract complete enough for a nontechnical operator?
+- Are approval binding and pre-apply revalidation clear?
+- Are recovery escalation boundaries safe and actionable?
+
+============================================================================
+FIN_BL-PROD-003_OPERATOR_RUNBOOK_DRAFT_V0
+============================================================================
