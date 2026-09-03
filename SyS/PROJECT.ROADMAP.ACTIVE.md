@@ -5,12 +5,12 @@
 | Campo | Estado |
 |---|---|
 | Ruta canónica | `SyS/PROJECT.ROADMAP.ACTIVE.md` |
-| Última verificación | 31 de agosto de 2026 |
+| Última verificación | 2 de septiembre de 2026 |
 | Fase actual | FIRST_DEPLOY_V1 closed; post-deploy reconciliation landed; DSH + OmniRoute runtime bootstrap PASS (0.1.1-rc.2) |
-| Rama / HEAD verificado | `main` / `c36e8325338511b2c24fa4b091ca70890bdf9308` |
-| Staging, commit y push | Realizados hasta NightShift backlog governance pilot findings |
+| Rama / HEAD verificado | `main` / `888ff11bf9988a5c1825d94214a26da36f7abb81` |
+| Staging, commit y push | Realizados hasta cierre B.027/B.027R/B.028 del runbook BL-PROD-003; quedan cambios heredados no relacionados en worktree |
 | Autoridad de identidad y significado | HUMAN |
-| Próxima decisión | Nuevo ORCHESTRATOR: iniciar con propuesta read-only de NS-BL-0002; diferir piloto repo externo hasta un paso adicional validado en NightShift |
+| Próxima decisión | Nuevo ORCHESTRATOR: preservar PROJECT_SELECTION diferido y pedir una decisión humana acotada para el siguiente grupo de cambios heredados; no ejecutar dry-run/apply/rollback real sin autorización |
 | Durabilidad Batch A | `COMMITTED` / `PUSHED` (A0/A/C/D/E + POLICY + FIRST_DEPLOY_V1 + IF1..IF5) |
 
 ## 1. Resumen ejecutivo
@@ -29,7 +29,7 @@ PS.SkillsMachine es el producto gobernado para administrar, distribuir y perfecc
 - ⏸️ **LangGraph permanece como adaptador opcional.** No está instalado ni ejecutado y no define la arquitectura canónica.
 - ⏸️ **El BUILD completo de `90.USECASE` está diferido.** Solo se sincronizó el RUNBOOK de `SESSION_CLOSE`.
 
-> **Usted está aquí:** preparar un nuevo arranque de ORCHESTRATOR con continuidad post-deploy completa y sin reabrir readiness.
+> **Usted está aquí:** B.027/B.027R/B.028 quedaron cerrados y empujados; el nuevo ORCHESTRATOR debe preservar PROJECT_SELECTION diferido y decidir el siguiente gate acotado sin reabrir readiness.
 
 ## 2. Mapa del programa
 
@@ -229,7 +229,7 @@ flowchart TD
 
 | Prioridad | Riesgo o bloqueo | Consecuencia | Tratamiento recomendado |
 |---|---|---|---|
-| Alta | Cambios activos sin commit/push | El estado existe solo en el worktree | Revisar y autorizar un grupo de commit explícito. |
+| Alta | Cambios heredados activos sin commit/push | Parte del estado aún existe solo en el worktree; B.027/B.027R/B.028 ya quedó empujado | Revisar y autorizar el siguiente grupo de commit explícito, sin mezclar scopes. |
 | Alta | Prompts antiguos envían Executor → Orchestrator | Contradicen Option R1 | Actualizar routing (enrutamiento) en un lote controlado. |
 | Media | `HUMAN.AI.WORKFLOW` conserva etiquetas `CANDIDATE` | El texto conceptual no refleja por completo Batch A | Ejecutar limpieza B7. |
 | Media | Skill 02 y GRC secuencial conservan headers `DRAFT` | Estado documental contradictorio | Alinear nombres/headers en un lote separado. |
@@ -239,8 +239,8 @@ flowchart TD
 
 En este orden:
 
-1. **Aceptar o pedir correcciones a este roadmap humano.**
-2. **Autorizar o diferir el grupo de commit** de la recuperación, `HUMAN.AI.WORKFLOW` y Batch A.
+1. **Aceptar o pedir correcciones a este roadmap reconciliado.**
+2. **Autorizar o diferir el siguiente grupo de commit** de cambios heredados aún no cerrados, sin mezclarlo con B.027/B.027R/B.028 ya empujado.
 3. **Autorizar o diferir el BUILD completo** de `90.USECASE`.
 4. **Autorizar o diferir Batch B1.**
 
@@ -280,7 +280,7 @@ No se solicita ahora instalar LangGraph. WhoAmI ya está cerrado. Option R1 ya e
 SCHEMA_VERSION=2.0-HUMAN-MARKDOWN
 PROJECT=PS.SkillsMachine
 CREATED_AT=2026-07-17 23:03:49 -04:00
-UPDATED_AT=2026-09-01
+UPDATED_AT=2026-09-02
 SOURCE_DECISION=MB-SM-066A_RECONCILE_PRODUCT_BACKLOG_TECH_DEBT_AND_ROADMAP
 AUTHORITATIVE_FOR=PRODUCT_EXECUTION_PATH
 ROADMAP_IS_CANONICAL=YES
@@ -310,11 +310,18 @@ OMNIROUTE_BASEURL=http://127.0.0.1:20128/v1
 PARA_DSH_MAXTOKENS=32768
 FULL_90_USECASE_BUILD=NO
 LAST_VERIFIED=2026-09-01
-HEAD_AT_VERIFY=c36e8325338511b2c24fa4b091ca70890bdf9308
+HEAD_AT_VERIFY=888ff11bf9988a5c1825d94214a26da36f7abb81
 BRANCH=main
 STAGING=NO
 COMMIT=NO
 PUSH=NO
+B027=COMPLETE
+B027R=COMPLETE
+B028=CLOSED_AND_PUSHED
+BL_PROD_003_SECTIONS_01_12=HUMAN_REVIEWED_REPAIRED_ACCEPTED
+BL_PROD_003_SECTIONS_A_D=PENDING_REAL_PROJECT_EVIDENCE
+PROJECT_SELECTION=DEFERRED_BY_HUMAN
+REAL_PROJECT_DRY_RUN_APPLY_ROLLBACK=NOT_AUTHORIZED
 MIGRATION_TASK_ID=20260821.112000_SM_ROADMAP_MARKDOWN_CANONICAL_MIGRATION_GRAPH_001
 TASK_ID=20260821.084729_SM_AI_WORKFLOW_GOVERNANCE_RECOVERY_ROADMAP_WHOAMI_AND_RUNTIME_ALIGNMENT_001
 REVISION_TASK_ID=20260821.090511_SM_G55_ALLOWLIST_REVISION_AND_SECOND_GATE_001
@@ -322,7 +329,7 @@ REVISION_TASK_ID=20260821.090511_SM_G55_ALLOWLIST_REVISION_AND_SECOND_GATE_001
 
 ## 14. Próxima acción única
 
-**Nuevo ORCHESTRATOR toma esta superficie como cold-start y comienza por el board post-deploy; recomendación: NS-BL-0002 como propuesta read-only.**
+**Nuevo ORCHESTRATOR toma esta superficie como cold-start, preserva PROJECT_SELECTION diferido y presenta una decisión humana acotada para el siguiente grupo de cambios heredados, sin reabrir dry-run/apply/rollback real.**
 
 No ejecutar por inferencia: HUMAN mutations, promoción de candidatos, promoción de NightShift, instalación de LangGraph ni BUILD adicional de `90.USECASE`.
 
@@ -503,4 +510,4 @@ REVISION_TASK_ID=20260821.090511_SM_G55_ALLOWLIST_REVISION_AND_SECOND_GATE_001
 MIGRATION_TASK_ID=20260821.112000_SM_ROADMAP_MARKDOWN_CANONICAL_MIGRATION_GRAPH_001
 NON_CANONICAL_TEMP_EVIDENCE=YES
 NOT_REQUIRED_TO_UNDERSTAND_CURRENT_STATE=YES
-SINGLE_NEXT_ACTION=HUMAN_REVIEW_OF_GOVERNANCE_RECOVERY_EVIDENCE_THEN_SEPARATE_COMMIT_GROUP_DECISION
+SINGLE_NEXT_ACTION=ORCHESTRATOR_PRESENT_NEXT_BOUNDED_HUMAN_GATE_FOR_REMAINING_INHERITED_DIRTY_STATE_WITHOUT_REOPENING_PROJECT_SELECTION
