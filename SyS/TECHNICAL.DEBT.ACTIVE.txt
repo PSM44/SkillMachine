@@ -87,6 +87,16 @@ SOURCE=MB-SM-066C;MB-SM-066D;MB-SM-067A;SM.R3.7.B.027;SM.R3.7.B.027R
 B027R_APPEND=DSH/TEMP handoff defects observed: model return can diverge from physical TEMP handoff; bytes/line/SHA metadata must bind to the exact same physical artifact; AI_START/AI_END tail enforcement is required for AI-facing runners. Covered here as output-object/evidence-contract reliability, no duplicate debt item opened.
 RECORDED_AT=2026-07-18 12:31:14 -04:00
 
+ENTRY_ID=TD-021_DSH_SESSION_CONTEXT_BOUNDEDNESS_AND_ROLLOVER
+PRIORITY=P1
+STATUS=OPEN
+TITLE=DSH session accumulated context exceeds configurable token limits without forcing rollover.
+DETAIL=Observed: old-session request reached 210005 tokens against Claude Haiku 200000-token target maximum. Fresh session succeeded. DSH token meter and compaction exist but do not prevent request token overflow. output maxTokens does not bound accumulated input/history. TD-007 covers heartbeat/budget only partially.
+RISK=Session context loss, unexplained rollover behavior, unclear max-token semantics for accumulated history vs fresh requests, operator confusion during long-running tasks.
+EVIDENCE=MB-SM-080B_WORK_CODE_AND_TIMESTAMP_GOVERNANCE_FORMALIZATION_20260901; prior session context (200K+ observed); fresh-session recovery succeeded.
+NEXT_ACTION=Define DSH token-metering contract for session rollover, clarify accumulated-context limits vs output-maxTokens, document operator expectations for long-running workflows.
+RECORDED_AT=2026-09-01 19:18:48 -04:00
+
 ============================================================================
 02.00_CLOSED_OR_LIMITED
 ============================================================================
