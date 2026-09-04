@@ -138,3 +138,49 @@ HISTORICAL_FUNCTION=Preserved duplicate-runbook analysis, TD-021 status evidence
 USEFUL_EVIDENCE=Line-numbered accumulator/category-mix analysis, partition challenge, duplicate-runbook deletion criteria, and no-implementation/no-new-registers proof.
 SUPERSEDED_ASSERTIONS=Any deletion wording, new-register partition proposal, stale HEAD/status counts, and TD-021 pre-commit state are not authorization or live state.
 RECOMMENDED_DISPOSITION=CANONICALIZE_SUMMARY_THEN_ARCHIVE_SOURCE
+
+ITEM_ID=HIST-EVIDENCE-REMAINING-NONCANONICAL-LINEAGES-20260904
+DISPOSITION=NONCANONICAL_DEFERRED_EVIDENCE_INDEX_ONLY
+SOURCE_AUDIT_TASK=20260904_SM_DSH_AUDIT_REMAINING_UNTRACKED_READONLY_001
+POLICY=Historical, noncanonical, or deferred evidence only. Canon overrides these artifacts. Do not use source artifacts as live state. Do not promote to backlog, Skill, or GRC without separate HUMAN authorization. No deletion, move, physical archive, cleanup, backlog creation, Skill/GRC promotion, staging, commit, or push is authorized by this entry.
+SCOPE=Four remaining lineages; 45 artifacts.
+
+LINEAGE=AI_PERSONALITY
+MEANING=AI_PERSONALITY is noncanonical distribution/usecase material about how an AI should collaborate with Pablo in SkillsMachine.
+ARTIFACT_COUNT=1
+SOURCE_PATHS=90.USECASE/CASES/AI_PERSONALITY/00.AI_PERSONALITY.COMPLETE.txt
+CURRENT_VALIDITY=Valid noncanonical 90.USECASE distribution guide; not primary product canon.
+EVIDENCE_VALUE=Useful collaboration-style guidance: authority, evidence discipline, anti-sycophancy, uncertainty handling, and 90.USECASE boundary.
+RISK_IF_LIVE_STATE=Mistaken for HUMAN, Skill, GRC, or product doctrine.
+WARNING=Canon overrides; do not use as live state or authority.
+RECOMMENDED_DISPOSITION=CANONICALIZE_SUMMARY_THEN_PRESERVE_SOURCE
+
+LINEAGE=Skill candidate intake
+MEANING=Skill candidate intake contains candidate files that may become formal Skills only after validation, deduplication, and HUMAN authorization.
+ARTIFACT_COUNT=2
+SOURCE_PATHS=SkillsLake/99.CANDIDATES/SKILL.SESSION_CONTINUITY_AND_EXECUTION_HANDOFF.CANDIDATE.txt;SkillsLake/99.CANDIDATES/SKILL.TRANSCRIPT_CONSOLIDATION_EXECUTIVE_RECONSTRUCTION.CANDIDATE.md
+CURRENT_VALIDITY=Deferred candidate material; no Skill promotion approved.
+EVIDENCE_VALUE=Session Continuity/Handoff preserves Eval.Machine improvement evidence already linked to BL-PROD-012; Transcript Consolidation preserves a standalone meeting-transcript consolidation method candidate.
+RISK_IF_LIVE_STATE=Could be mistaken for approved Skills or for authority to redesign SessionContinue/handoff or add transcript tooling to the critical path.
+WARNING=Do not promote, implement, or treat as canon without separate HUMAN authorization.
+RECOMMENDED_DISPOSITION=RETAIN_FOR_FUTURE_REVIEW
+
+LINEAGE=ImproveOp 20260817
+MEANING=ImproveOp 20260817 is a historical improvement-opportunity pack/snapshot for SkillsLake and GRCLake review; not live canon by default.
+ARTIFACT_COUNT=41
+SOURCE_PATHS=SyS/ImproveOp/20260817/**
+CURRENT_VALIDITY=Historical/noncanonical opportunity evidence; many assertions predate later commits and require revalidation before action.
+EVIDENCE_VALUE=Contains useful P0/P1 findings on WHOAMI absorption, broken dependencies, missing menu, routing/cost boundaries, registry gaps, and tombstoning superseded candidates, plus local source copies for review.
+RISK_IF_LIVE_STATE=Source copies or stale findings could be mistaken for current canon or authorization to patch many Skills/GRCs.
+WARNING=Canon overrides; revalidate every finding before any separate HUMAN-authorized action.
+RECOMMENDED_DISPOSITION=CANONICALIZE_SUMMARY_THEN_PRESERVE_SOURCE
+
+LINEAGE=Cline 20260821
+MEANING=Cline 20260821 is Cline-derived opportunity intake for future Skill/GRC owner mapping; not approved backlog by default.
+ARTIFACT_COUNT=1
+SOURCE_PATHS=SyS/ImproveOp/20260821_Cline.md
+CURRENT_VALIDITY=Future-review opportunity intake; broad and not immediately executable.
+EVIDENCE_VALUE=Maps Work Unit, authority, guard, verifier, retry, TEMP, provenance, and traceability patterns to possible existing owners.
+RISK_IF_LIVE_STATE=Could be mistaken for authorization to create many Skills/GRCs or reopen runtime/topology work.
+WARNING=Do not create backlog, Skills, or GRCs from this intake without separate HUMAN authorization and owner mapping.
+RECOMMENDED_DISPOSITION=PROMOTE_TO_BACKLOG_CANDIDATE_REQUIRES_SEPARATE_AUTHORIZATION
