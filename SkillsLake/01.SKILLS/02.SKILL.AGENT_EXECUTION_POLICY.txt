@@ -4,8 +4,8 @@
 
 ID_UNICO..........: SKILL.AI.ORCH.EXEC_POLICY.01.10
 NOMBRE_SUGERIDO...: 02.SKILL.AGENT_EXECUTION_POLICY.txt
-VERSION...........: v1.2-DRAFT
-FECHA.............: 2026-08-16
+VERSION...........: v1.3-DRAFT (ECB integrated, final promotion pending)
+FECHA.............: 2026-09-02 (SM.R3.7.B.021: EXECUTION_CONVERGENCE_BARRIER canonicalized; SM.R3.7.B.022: lifecycle reconciled)
 HORA..............: HH:MM (America/Santiago)
 CIUDAD............: Maria Luisa, Chile
 UBICACION_SISTEMA.: \AI_ORCH\01_SKILLS
@@ -821,6 +821,175 @@ TIMESTAMP_STANDARD:
 SCOPE_AND_AUTHORITY:
 - Applies across `ORCHESTRATOR`, `COORDINATOR`, and `EXECUTOR` operational interactions.
 - `WORK_CODE` and `TASK_ID` provide traceability and structure; they do NOT confer mutation or semantic authority.
+
+==========
+13.110_EXECUTION_CONVERGENCE_BARRIER
+==========
+
+EXECUTION_CONVERGENCE_BARRIER=MANDATORY
+
+Abbreviation: ECB
+Related policy: POST_CONVERGENCE_REPORTING
+ECB_SCOPE=CURRENT_WORK_UNIT (only execution units belonging to current WorkCode)
+
+Core Invariant:
+EXECUTE FIRST
+CONVERGE SECOND
+REPORT THIRD
+
+The ORCHESTRATOR-facing final report is strictly POST-EXECUTION.
+
+Scope (CURRENT_WORK_UNIT only):
+- EXECUTOR work
+- COORDINATOR reconciliation
+- agents
+- subagents
+- parallel graphs
+- DAG branches
+- loops
+- background jobs
+- tool tasks
+- explicit task/todo lists tracked by the active runtime
+- ORCHESTRATOR-directed handoffs
+- OCC (ORCHESTRATOR_CONTINUITY_CHECKPOINT) generation
+
+Convergence Count Rule:
+Count only tasks, todos, graphs, agents, subagents, jobs belonging to CURRENT_WORK_UNIT.
+Historical execution units from earlier WorkCodes remain HISTORICAL_EVIDENCE only.
+Do not inflate convergence metrics by including prior WorkCode results.
+
+Forbidden Report Generation Conditions:
+- while any graph is running;
+- while any DAG branch is running;
+- while any loop remains active;
+- while any agent/subagent remains active;
+- while any background job is pending/running;
+- while any tool operation relevant to the work unit is incomplete;
+- while any runtime-visible todo/task for the work unit remains pending, in_progress, queued, or waiting;
+- before cross-graph reconciliation;
+- before material findings are frozen;
+- before convergence barrier passes.
+
+Required Convergence State:
+- ALL_PRIMARY_TASKS_TERMINAL=YES
+- ALL_LOOPS_TERMINAL=YES
+- ALL_GRAPHS_TERMINAL=YES
+- ALL_DAG_BRANCHES_TERMINAL=YES
+- ALL_AGENTS_TERMINAL=YES
+- ALL_SUBAGENTS_TERMINAL=YES
+- ALL_BACKGROUND_JOBS_TERMINAL=YES
+- ALL_MATERIAL_TOOL_OPERATIONS_TERMINAL=YES
+- ALL_RUNTIME_TODOS_TERMINAL=YES
+- RUNNING_COUNT=0
+- PENDING_COUNT=0
+- WAITING_COUNT=0
+- ALL_RESULTS_COLLECTED=YES
+- PARENT_CROSS_GRAPH_RECONCILIATION=COMPLETE
+- CROSS_GRAPH_CONFLICT_SCAN=COMPLETE
+- MATERIAL_FINDINGS_FROZEN=YES
+
+Terminal States (allowed):
+- COMPLETE
+- PASS
+- FAIL
+- BLOCKED
+- CANCELLED
+- NOT_EXECUTED_WITH_REASON
+- STOPPED_BY_HUMAN_GATE
+- STOPPED_BY_MUTATION_BOUNDARY
+- STOPPED_NO_NEW_EVIDENCE
+
+Non-Terminal States (prohibited):
+- RUNNING
+- IN_PROGRESS
+- PENDING
+- QUEUED
+- WAITING
+- BACKGROUND
+- PARTIAL
+- PRELIMINARY
+- UNKNOWN
+
+Convergence Barrier Result:
+If all conditions met:
+EXECUTION_CONVERGENCE_BARRIER=PASS
+
+If any condition is false:
+EXECUTION_CONVERGENCE_BARRIER=FAIL
+ORCHESTRATOR_REPORT_GENERATION=FORBIDDEN
+
+Late Result Invalidation:
+If any material result arrives after final report generation begins:
+- REPORT_INVALIDATED=YES
+- Required: stop delivery, collect result, reopen reconciliation, rerun conflict scan, refreeze MATERIAL_FINDINGS_SET, regenerate report, rerun readback validation.
+- Incremental console-only append is forbidden.
+
+Material Findings Coverage:
+Before handoff build, freeze MATERIAL_FINDINGS_SET including all findings that can affect:
+- live state
+- roadmap
+- backlog
+- technical debt
+- product state
+- dependencies
+- blockers
+- HUMAN decisions
+- risks
+- safety
+- mutation accounting
+- failures
+- conflicts
+- next product node
+- next mutation scope
+- next WORK_CODE
+- deferred work
+- DO_NOT_REOPEN state
+
+Every material finding must be represented in final handoff by:
+- HANDOFF_INLINE=YES or
+- HANDOFF_EVIDENCE_POINTER=YES
+
+Required: HANDOFF_COVERAGE_PERCENT=100
+
+Final Readback:
+After handoff is physically written to HANDOFF_ROOT:
+- HANDOFF_FILE_EXISTS=YES
+- HANDOFF_FILE_READABLE=YES
+- HANDOFF_ROOT_FILE_COUNT=1
+- HANDOFF_ROOT_SUBDIR_COUNT=0
+- Read back from destination and compare against MATERIAL_FINDINGS_SET
+- Required: HANDOFF_READBACK_SEMANTIC_MATCH=PASS
+
+Completion Semantics:
+Separate: EXECUTION_COMPLETE and REPORT_COMPLETE
+
+STATUS=COMPLETE only when:
+- EXECUTION_COMPLETE=YES
+- EXECUTION_CONVERGENCE_BARRIER=PASS
+- HANDOFF_COVERAGE_PERCENT=100
+- HANDOFF_DELIVERY_STATUS=PASS
+- HANDOFF_READBACK_SEMANTIC_MATCH=PASS
+
+Alternative accurate non-COMPLETE statuses:
+- EXECUTION_COMPLETE_REPORT_FAILED
+- INVALID_PREMATURE_REPORT
+- REPORT_INVALIDATED_BY_LATE_RESULT
+
+OCC Integration:
+Permanent ordering:
+LAST_WORK_UNIT
+→ ECB PASS
+→ POST_CONVERGENCE_REPORT
+→ CANONICALIZE_FIRST (if required)
+→ OCC_TRIGGER
+→ OCC_GENERATION
+
+Requirement: OCC_GENERATION_PRECONDITION = LAST_RELEVANT_WU_ECB_PASS
+
+If previous work unit does not have valid converged result:
+OCC_GENERATION=FORBIDDEN
+
+OCC must never freeze partial EXECUTOR state.
 
 ==========
 13.130_FRAMEWORK_BOUNDARY
