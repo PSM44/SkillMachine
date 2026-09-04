@@ -83,3 +83,58 @@ ITEM_ID=AI_WORKFLOW_ROUTING_EXECUTOR_TO_ORCHESTRATOR_SHORTCUT
 DISPOSITION=SUPERSEDED_BY_OPTION_R1_PHASED_SINGLE_PROCESS
 REPLACED_BY=HUMAN\HUMAN.AI.WORKFLOW.txt Result Path; SyS\PROJECT.ROADMAP.ACTIVE.md
 EVIDENCE=Human AUTHORIZE_TRANSITIONAL_ROUTING_OPTION_R1=YES on 2026-08-21. Executor must not report directly to Orchestrator.
+
+============================================================================
+04.00_HISTORICAL_EVIDENCE_INDEX
+============================================================================
+POLICY=Historical evidence only. Canonical active registers and current Git state override these artifacts. Do not use listed artifacts as live state, current HEAD, current dirty scope, current authorization, or current next action.
+SOURCE_AUDIT_TASK=20260904_SM_DSH_AUDIT_SESSIONCLOSE_OCC_GRAPH_B017_B018_READONLY_001
+
+ITEM_ID=HIST-EVIDENCE-SESSIONCLOSE-OCC-GRAPH-B017-B018-20260904
+DISPOSITION=HISTORICAL_EVIDENCE_INDEX_ONLY
+SCOPE=Five audited lineages; eight artifacts; no deletion, move, archive execution, roadmap update, backlog update, debt update, staging, commit, or push authorized by this entry.
+
+LINEAGE=MB-SM-073A SessionClose
+MEANING=SessionClose is a session-end continuity/checkpoint artifact used to preserve state for later work.
+ARTIFACT_COUNT=1
+SOURCE_PATHS=SyS/A_Tools/SessionClose/SESSION_CLOSE.MB-SM-073A.20260731_183856.txt
+HISTORICAL_FUNCTION=Preserved 2026-07-31 session close state and origin context for TD-015..TD-017 and BL-PROD-010 dirty-worktree reconciliation.
+USEFUL_EVIDENCE=Explains scope drift, wrapper reliability lessons, and why historical session-recovery debt/backlog entries exist.
+SUPERSEDED_ASSERTIONS=Historical HEAD, two-file dirty-scope, WHOAMI/BATON update state, and next action are not current live state.
+RECOMMENDED_DISPOSITION=ARCHIVE_AS_HISTORICAL_EVIDENCE
+
+LINEAGE=OCC B.023/B.024
+MEANING=OCC means ORCHESTRATOR continuity/checkpoint package used to continue orchestration without losing non-derivable state.
+ARTIFACT_COUNT=2
+SOURCE_PATHS=SyS/A_Tools/SessionClose/SM_ORCHESTRATOR_CONTINUITY_CHECKPOINT.txt;SyS/A_Tools/SessionClose/SM_ORCHESTRATOR_CONTINUITY_CHECKPOINT_PATCHED.txt
+HISTORICAL_FUNCTION=Captured and then patched B.020-B.024 orchestration continuity, ECB scope, project-selection deferral, BL-PROD-003 parallel-safe work, and checkpoint correction rationale.
+USEFUL_EVIDENCE=Preserves why CURRENT_GATE, blocker semantics, mutation semantics, untracked count, ECB pointer, operator feedback evidence, next action, expected scope, and sandbox paths were corrected.
+SUPERSEDED_ASSERTIONS=HEAD/origin 09e5302, pending TD-021 tracked mutation, exact untracked counts, and B.023/B.024 next actions are superseded by current canon and Git state.
+RECOMMENDED_DISPOSITION=MARK_SUPERSEDED_DO_NOT_DELETE
+
+LINEAGE=OCC FINAL B.026
+MEANING=OCC FINAL is a later ORCHESTRATOR continuity checkpoint after B.025/B.026.
+ARTIFACT_COUNT=1
+SOURCE_PATHS=SyS/A_Tools/SessionClose/SM_ORCHESTRATOR_CONTINUITY_CHECKPOINT_FINAL.txt
+HISTORICAL_FUNCTION=Captured B.026 final continuity state, operator review gate framing, BL-PROD-003 sections 1-12 readiness, and do-not-reopen guidance.
+USEFUL_EVIDENCE=Preserves operator-review questions and final OCC coverage after B.025/B.026.
+SUPERSEDED_ASSERTIONS=HEAD/origin 09e5302, TD-021 pending state, exact untracked count, and next-work-code references are historical only.
+RECOMMENDED_DISPOSITION=MARK_SUPERSEDED_DO_NOT_DELETE
+
+LINEAGE=Handoff B.025
+MEANING=Handoff is a role-continuity package used to transfer the current reasoning state to later work.
+ARTIFACT_COUNT=1
+SOURCE_PATHS=SyS/A_Tools/SessionClose/SM_ORCHESTRATOR_HANDOFF_B025.txt
+HISTORICAL_FUNCTION=Reconstructed product DAG and recommended BL-PROD-003 operator-runbook review as the highest-value independent increment while project selection remained deferred.
+USEFUL_EVIDENCE=Preserves BL-PROD-003 section inventory, sections A-D real-project evidence blocker, and anti-tunnel reasoning.
+SUPERSEDED_ASSERTIONS=HEAD/origin 09e5302, untracked count 52, and B.025-specific next action are not current live state.
+RECOMMENDED_DISPOSITION=ARCHIVE_AS_HISTORICAL_EVIDENCE
+
+LINEAGE=GRAPH B.017/B.018 reconciliation
+MEANING=GRAPH B.017/B.018 are graph-reconciliation evidence artifacts from earlier workstreams; B.017 analyzed accumulator/register category mix, and B.018 challenged/classified B.017 findings against canon.
+ARTIFACT_COUNT=3
+SOURCE_PATHS=SyS/GRAPH_A_ROOT_RECONCILIATION_SM.R3.7.B.018.txt;SyS/GRAPH_B_ACCUMULATOR_RECONCILIATION_SM.R3.7.B.017.txt;SyS/GRAPH_B_CANONICAL_ACCUMULATORS_RECONCILIATION_SM.R3.7.B.018.txt
+HISTORICAL_FUNCTION=Preserved duplicate-runbook analysis, TD-021 status evidence, untracked classification, candidate-register accumulation findings, partition proposal, and later proof that partitioning needs HUMAN authorization.
+USEFUL_EVIDENCE=Line-numbered accumulator/category-mix analysis, partition challenge, duplicate-runbook deletion criteria, and no-implementation/no-new-registers proof.
+SUPERSEDED_ASSERTIONS=Any deletion wording, new-register partition proposal, stale HEAD/status counts, and TD-021 pre-commit state are not authorization or live state.
+RECOMMENDED_DISPOSITION=CANONICALIZE_SUMMARY_THEN_ARCHIVE_SOURCE
